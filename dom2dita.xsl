@@ -103,7 +103,7 @@
 		<xsl:result-document href="{$outPath}" doctype-public="-//OASIS//DTD DITA Topic//EN" doctype-system="topic.dtd" indent="yes">
 			
 			<topic id="{$classdefID}">
-				<title><keyword><xsl:value-of select="$className"/></keyword></title>
+				<title><keyword><xsl:value-of select="px:fixSUI($className)"/></keyword></title>
 				<body>
 					<p><indexterm><xsl:value-of select="$className"/></indexterm><xsl:value-of select="shortdesc"/></p>
 					<!--Generating Method Quicklinks-->
@@ -264,6 +264,7 @@
 					</xsl:choose>
 
 					<!--Creating Links to Properties with this object-->
+					<xsl:if test="key('properties', $className)">
 					<section>
 						<title>Object of</title>
 						<xsl:for-each select="key('properties', $className)">
@@ -276,8 +277,10 @@
 							</p>
 						</xsl:for-each>
 					</section>
+					</xsl:if>
 					
 					<!--Creating Links to Methods with this object-->
+					<xsl:if test="key('retunrValues', $className)">
 					<section>
 						<title>Return</title>
 						<xsl:for-each select="key('retunrValues', $className)">
@@ -288,13 +291,14 @@
 									<xsl:with-param name="createShortcut" select="false()"/>
 								</xsl:call-template>
 								<xsl:text>.</xsl:text>
-								<xref href="{concat('#', $destinationClassdef, '.dita#', generate-id(.))}">
+								<xref href="{concat($destinationClassdef, '.dita#', generate-id(.))}">
 									<xsl:value-of select="@name"/>
 								</xref>
 								<xsl:text>()</xsl:text>
 							</p>
 					</xsl:for-each>
 					</section>
+					</xsl:if>
 				</body>
 			</topic>
 		</xsl:result-document>
@@ -538,5 +542,10 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+	
+	<xsl:function name="px:fixSUI">
+		<xsl:param name="text"></xsl:param>
+		<xsl:value-of select="replace($text,'SUI$',' (SUI)')"/>
+	</xsl:function>
 
 </xsl:stylesheet>

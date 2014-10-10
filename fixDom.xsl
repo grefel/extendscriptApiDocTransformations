@@ -17,6 +17,24 @@
 		</xsl:copy>
 	</xsl:template>	
 
+	<xsl:template match="@href">
+		<xsl:attribute name="href">
+			<xsl:value-of select="replace(., '[#/]','')"/>
+			<xsl:if test="ancestor::sui">
+				<xsl:text>SUI</xsl:text>
+			</xsl:if>
+		</xsl:attribute>
+	</xsl:template>
+	
+	<xsl:template match="classdef/@name">
+		<xsl:attribute name="name">
+			<xsl:value-of select="."/>
+			<xsl:if test="ancestor::sui">
+				<xsl:text>SUI</xsl:text>
+			</xsl:if>
+		</xsl:attribute>
+	</xsl:template>
+
 	<!-- Fix inconsistent Dom Structure -->
 	<xsl:template match="datatype">
 		<xsl:variable name="array" select="array"/>
@@ -57,7 +75,7 @@
 								<xsl:if test="replace(., '\s', '') != ''">								
 									<datatype>
 										<type>
-											<xsl:value-of select="px:cleanTypeName(.)"/>
+											<xsl:value-of select="px:cleanTypeName(., $datatypeNode)"/>
 										</type>								
 										<xsl:choose>
 											<xsl:when test="$array">
@@ -81,7 +99,7 @@
 	
 	<!-- Fix parent Datatypes and rwAccess	-->
 	<xsl:template match="property">
-		
+		<xsl:variable name="propertyNode" select="."/>
 		<xsl:choose>
 			<xsl:when test="@name='parent'">
 				<property name="parent">
@@ -102,7 +120,7 @@
 								<xsl:sort/>
 								<datatype>
 									<type>
-										<xsl:value-of select="px:cleanTypeName(.)"/>
+										<xsl:value-of select="px:cleanTypeName(., $propertyNode)"/>
 									</type>
 								</datatype>									
 							</xsl:for-each>
@@ -141,19 +159,20 @@
 	
 	<xsl:template match="type">
 		<type>
-			<xsl:value-of select="px:cleanTypeName(.)"/>
+			<xsl:value-of select="px:cleanTypeName(text(), .)"/>
 		</type>
 	</xsl:template>
 
-	<xsl:template match="@href">
-		<xsl:attribute name="href" select="replace(., '[#/]','')"></xsl:attribute>
-	</xsl:template>
-	
-
 	<!-- Fix Type Names -->	
 	<xsl:function name="px:cleanTypeName">		
-		<xsl:param name="text"/>		
-		<xsl:variable name="clean0" select="$text"/>
+		<xsl:param name="text"/>
+		<xsl:param name="context"/>			
+		<xsl:variable name="clean0">
+			<xsl:value-of select="$text"/>
+			<xsl:if test="$context/ancestor::sui and not(matches($text, '(object|string|bool|number|array|function|file|folder)', 'i'))">
+				<xsl:text>SUI</xsl:text>
+			</xsl:if>
+		</xsl:variable>
 		
 		<xsl:choose>
 			<xsl:when test="matches($clean0, 'Array')">
@@ -170,7 +189,6 @@
 				<xsl:variable name="clean99" select="replace($clean98, 'Bool', 'Boolean')"/>
 				<xsl:variable name="clean100" select="replace($clean99, 'Booleanean', 'Boolean')"/>
 				<xsl:variable name="clean101" select="replace($clean100, 'SpecialCharacterss', 'SpecialCharacters')"/>
-				
 				<xsl:value-of select="$clean101"/>						
 			</xsl:otherwise>
 		</xsl:choose>
@@ -182,8 +200,6 @@
 		<xsl:variable name="clean0" select="$text"/>
 		<xsl:variable name="clean1" select="replace($clean0, ' or ', ',')"/>
 		<xsl:variable name="clean2" select="replace($clean1, 'Can also accept:', ',')"/>
-		
-		
 		<xsl:value-of select="$clean2"/>		
 	</xsl:function>
 	

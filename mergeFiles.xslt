@@ -10,10 +10,9 @@
 	
 	<xsl:output method="xml" indent="yes"/>
 	
-	
-	<xsl:param name="indesign.xml">indesign.xml</xsl:param>
-	<xsl:param name="javascript.xml">javascript.xml</xsl:param>
-	<xsl:param name="scriptui.xml">scriptui.xml</xsl:param>
+	<xsl:param name="indesign.xml">sourceXML/indesign.xml</xsl:param>
+	<xsl:param name="javascript.xml">sourceXML/javascript.xml</xsl:param>
+	<xsl:param name="scriptui.xml">sourceXML/scriptui.xml</xsl:param>
 	
 	
 	<!-- Gathering Required Files -->
@@ -30,9 +29,9 @@
 			<js>
 				<xsl:apply-templates select="document($javascript.xml)"/>
 			</js>
-			<!--<sui>
+			<sui>
 				<xsl:apply-templates select="document($scriptui.xml)"/>
-			</sui>-->
+			</sui>
 			<indd>
 				<xsl:apply-templates select="document($indesign.xml)"/>
 			</indd>
