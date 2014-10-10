@@ -7,7 +7,7 @@ If you want to use the documentation you can find an online version [here](http:
 ## Prerequisites
 
   - Java and XSLT 2.0 Processor. For example [Saxon XSLT Processor](http://www.saxonica.com/welcome/welcome.xml)
-  - Adobe InDesign and ExtendScript Toolkit for XML source files in Folder `sourceXML`
+  - Put the Adobe InDesign and ExtendScript Toolkit  source files in Folder `sourceXML`
 
 ### XML file locations
 
@@ -24,13 +24,11 @@ On Windows the Files are located at:
 ## XSLT Transformation
 This basically a three step process:
 
-
-
 1. Merge the Source files and get rid of namespace bugs with `mergeFiles.xslt`
-2. Fix DOM Structure for further processing with `mergeFiles.xslt`
-3. Transform DOM Structure to DITA Topics and create a DITA Map with `dom2dita.xsl`
+2. Fix DOM Structure for further processing with `fixDom.xsl`
+3. Transform DOM Structure to DITA Topics and create a DITA Map with `dom2dita.xsl` You'll find the results in domOut
 
-
+Please note: For a readable output format you've to set up an [DITA-OT Transformation](http://dita-ot.github.io/).
 
 # License
 
