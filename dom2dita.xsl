@@ -23,7 +23,7 @@
 			<xsl:element name="map">
 				<title>InDesign ExtendScript API</title>
 				<topichead navtitle="About">
-					<topicref href="../about.dita"/>						
+					<topicref href="about.dita"/>						
 				</topichead>
 				<topichead>
 					<xsl:attribute name="navtitle" select="/domRoot/indd/dictionary/map/@title"/>
@@ -146,7 +146,7 @@
 					<!-- Link to Superclass -->					
 					<xsl:if test="superclass">
 						<section>
-						<title>uperclass:</title>
+						<title>Superclass:</title>
 						<p>
 							<xsl:call-template name="linkToClassName">
 								<xsl:with-param name="typeName" select="superclass"/>
@@ -268,6 +268,7 @@
 					<section>
 						<title>Object of</title>
 						<xsl:for-each select="key('properties', $className)">
+							<xsl:sort/>
 							<p>
 								<xsl:call-template name="generatClassLink">
 									<xsl:with-param name="typeName" select="parent::elements/parent::classdef/@name"/> 
@@ -284,6 +285,7 @@
 					<section>
 						<title>Return</title>
 						<xsl:for-each select="key('retunrValues', $className)">
+							<xsl:sort/>
 							<xsl:variable name="destinationClassdef" select="parent::elements/parent::classdef/@name"></xsl:variable>
 							<p>
 								<xsl:call-template name="generatClassLink">
