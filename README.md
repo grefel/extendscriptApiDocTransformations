@@ -5,10 +5,10 @@ You can set up your own [DITA-OT Transformation](http://dita-ot.github.io/) to p
 
 If you want to use the documentation you can find an online version [here](http://www.indesignjs.de/extendscriptAPI). 
 
-You can find an alternative node.js approach [at](https://github.com/yearbookmachine/extendscript-api-documentation). There is also a HTML compilation from [jongware](http://www.jongware.com/idjshelp.html).
+There is also an alternative node.js approach on [github](https://github.com/yearbookmachine/extendscript-api-documentation) and a HTML compilation from [jongware](http://www.jongware.com/idjshelp.html).
 
 
-### Prerequisites
+### Before you start
 
   - Java and XSLT 2.0 Processor. For example [Saxon XSLT Processor](http://www.saxonica.com/welcome/welcome.xml)
   - Put the Adobe InDesign and ExtendScript Toolkit  source files in Folder `sourceXML`
@@ -28,6 +28,7 @@ On Windows the Files are located at:
 The copyright of the original Files is by <a href="http://www.adobe.com">Adobe Systems Incorporated</a>.
 
 ## XSLT Transformation
+
 This basically a three step process:
 
 1. Merge the Source files and get rid of namespace bugs with `mergeFiles.xslt`.  This transformation works with a named template (Saxon Option is '-it mergeDOMFiles'). You can change the path params in the file, or call the transformation with the path to indesign.xml, javascript.xml scriptui.xml.

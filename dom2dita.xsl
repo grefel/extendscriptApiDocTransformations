@@ -107,11 +107,11 @@
 				<body>
 					<p><indexterm><xsl:value-of select="$className"/></indexterm><xsl:value-of select="shortdesc"/></p>
 					<!--Generating Method Quicklinks-->
-					<xsl:if test="elements[@type='instance']/method">
+					<xsl:if test="elements/method">
 						<section>
 						<title>Methods:</title>
 						<p>
-							<xsl:for-each select="elements[@type='instance']/method">
+							<xsl:for-each select="elements/method">
 								<xsl:text> </xsl:text>
 								<xref href="{concat('#', $classdefID, '/', generate-id(.))}">
 									<xsl:value-of select="@name"/>
@@ -245,7 +245,7 @@
 								</section>
 							</xsl:if>
 
-							<xsl:if test="elements[@type='instance']/method">
+							<xsl:if test="elements/method">
 								<section>
 									<title>Methods</title>
 									<xsl:for-each select="elements[@type='constructor']/method">
@@ -253,7 +253,7 @@
 										<p><b>Constructor</b></p>
 										<xsl:apply-templates select="."/>
 									</xsl:for-each>
-									<xsl:for-each select="elements[@type='instance']/method">
+									<xsl:for-each select="elements[not(@type='constructor')]/method">
 										<xsl:sort select="@name"/>
 										<xsl:apply-templates select="."/>
 									</xsl:for-each>
@@ -291,7 +291,7 @@
 									<xsl:with-param name="createShortcut" select="false()"/>
 								</xsl:call-template>
 								<xsl:text>.</xsl:text>
-								<xref href="{concat($destinationClassdef, '.dita#', generate-id(.))}">
+								<xref href="{concat($destinationClassdef, '.dita#', generate-id(key('className', $destinationClassdef)) ,'/',generate-id(.))}">
 									<xsl:value-of select="@name"/>
 								</xref>
 								<xsl:text>()</xsl:text>
