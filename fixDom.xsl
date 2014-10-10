@@ -77,7 +77,8 @@
 									<datatype>
 										<type>
 											<xsl:value-of select="px:cleanTypeName(., $datatypeNode)"/>
-										</type>								
+										</type>						
+										<xsl:if test="not(starts-with(px:cleanTypeName(., $datatypeNode), 'NothingEnum'))">
 										<xsl:choose>
 											<xsl:when test="$array">
 												<xsl:copy-of select="$array"/>		
@@ -86,7 +87,7 @@
 												<array/>
 											</xsl:when>
 										</xsl:choose>
-										
+										</xsl:if>										
 										<xsl:call-template name="checkForRange">
 											<xsl:with-param name="datatypeNode" select="$datatypeNode"/>
 										</xsl:call-template>

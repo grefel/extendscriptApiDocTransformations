@@ -107,15 +107,17 @@
 				<body>
 					<xsl:apply-templates select="description | shortdesc"/>
 					<p outputclass="quicklinks"><indexterm><xsl:value-of select="$className"/></indexterm>
-						<xsl:text>Go to </xsl:text>
-						<xsl:if test="elements/property">
-							<b><xref href="{concat('#', $classdefID, '/iProps')}">Property List</xref></b>	
-						</xsl:if>
-						<xsl:if test="elements/method and elements/property">
-							<xsl:text> | </xsl:text>
-						</xsl:if>						
-						<xsl:if test="elements/method">
-							<b><xref href="{concat('#', $classdefID, '/iMethods')}">Method List</xref></b>					
+						<xsl:if test="not(@enumeration='true')">
+							<xsl:text>Go to </xsl:text>
+							<xsl:if test="elements/property">
+								<b><xref href="{concat('#', $classdefID, '/iProps')}">Property Listing</xref></b>	
+							</xsl:if>
+							<xsl:if test="elements/method and elements/property">
+								<xsl:text> | </xsl:text>
+							</xsl:if>						
+							<xsl:if test="elements/method">
+								<b><xref href="{concat('#', $classdefID, '/iMethods')}">Method Listing</xref></b>					
+							</xsl:if>
 						</xsl:if>
 					</p>
 					<!--Generating Method Quicklinks-->
@@ -213,13 +215,13 @@
 						<xsl:otherwise>
 							<xsl:if test="elements[@type='instance']/property">
 								<section id="iProps">
-									<title>Properties</title>
+									<title>Property Listing</title>
 									<table frame="all" rowsep="1" colsep="1">
 										<tgroup cols="4">
 											<colspec colname="c1" colnum="1" colwidth="0.2*"/>
-											<colspec colname="c2" colnum="2" colwidth="0.2*"/>
+											<colspec colname="c2" colnum="2" colwidth="0.1*"/>
 											<colspec colname="c3" colnum="3" colwidth="0.1*"/>
-											<colspec colname="c4" colnum="4" colwidth="0.5*"/>
+											<colspec colname="c4" colnum="4" colwidth="0.6*"/>
 											<thead>
 												<row>
 													<entry><p>Property</p></entry>
@@ -241,7 +243,14 @@
 
 							<xsl:if test="elements[@type='class']/property">
 								<section>
-									<title>Constants/Events</title>
+									<xsl:choose>
+										<xsl:when test="ancestor::sui">
+											<title>Property Listing</title>											
+										</xsl:when>
+										<xsl:otherwise>
+											<title>Constants/Events</title>
+										</xsl:otherwise>
+									</xsl:choose>
 									<table frame="all" rowsep="1" colsep="1">
 										<tgroup cols="4">
 											<colspec colname="c1" colnum="1" colwidth="0.2*"/>
@@ -269,7 +278,7 @@
 
 							<xsl:if test="elements/method">
 								<section id="iMethods">
-									<title>Methods</title>
+									<title>Method Listing</title>
 									<xsl:for-each select="elements[@type='constructor']/method">
 										<xsl:sort select="@name"/>
 										<p outputclass="noMargin"><b>Constructor</b></p>
@@ -465,13 +474,17 @@
 					<xsl:value-of select="."/>
 				</xsl:comment>
 			</xsl:if>
+		<xsl:if test="not(preceding-sibling::datatype/type = type)">
 			<xsl:if test="not(type='Varies' and count(following-sibling::datatype) > 0)">
 				
 				<xsl:for-each select="type">
 					<xsl:variable name="typeName" select="."/>
-					<p>					
-						<xsl:call-template name="generatClassLink"/>
-					</p>
+					
+					<xsl:if test="$typeName != 'NothingEnum'">
+						<p>					
+							<xsl:call-template name="generatClassLink"/>
+						</p>
+					</xsl:if>
 							
 					<!-- Resolcve Enum Values in property Table-->
 					<xsl:if test="key('className', $typeName)/@enumeration = 'true'">
@@ -497,7 +510,7 @@
 		
 				</xsl:for-each>
 			</xsl:if>
-		
+		</xsl:if>		
 	</xsl:template>
 
 	<xsl:template name="generatClassLink">
