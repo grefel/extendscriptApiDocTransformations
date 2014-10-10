@@ -15,7 +15,10 @@
 			>DITA OT</xref> included in <xref href="http://www.oxygenxml.com" format="html"
 			scope="external"
 			>oXygen XML Editor</xref> to this WebHelp. If you feel familiar with the structure and layout from Jongware files, this is not by chance, because I'm totally used to it. </p>
-		<p>Feel free to browse the documentation, download a copy for offline usage (Unfortunately the offline search function will not work in Chrome). The sources of the Transformation can be found on <xref
+		<p>Feel free to browse the documentation, <xref
+			href="http://www.indesignjs.de/extendscriptAPI/indesign10.zip" format="zip"
+			scope="external"
+			>download</xref> a copy for offline usage (Unfortunately the offline search function will not work in Chrome). The sources of the Transformation can be found on <xref
 			href="https://github.com/grefel/extendscriptApiDoc" format="html" scope="external"
 			>github</xref>.</p>
 		<p>The copyright of the original Files is by <xref href="http://www.adobe.com" format="html"

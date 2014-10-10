@@ -10,7 +10,7 @@
 	
 	<xsl:output method="xml" indent="yes"/>
 	
-	<xsl:param name="indesign.xml">sourceXML/indesign.xml</xsl:param>
+	<xsl:param name="indesign.xml">sourceXML/indesign8.xml</xsl:param>
 	<xsl:param name="javascript.xml">sourceXML/javascript.xml</xsl:param>
 	<xsl:param name="scriptui.xml">sourceXML/scriptui.xml</xsl:param>
 	

@@ -244,7 +244,7 @@
 							<xsl:if test="elements[@type='class']/property">
 								<section>
 									<xsl:choose>
-										<xsl:when test="ancestor::sui">
+										<xsl:when test="ancestor::sui or ancestor::js">
 											<title>Property Listing</title>											
 										</xsl:when>
 										<xsl:otherwise>
