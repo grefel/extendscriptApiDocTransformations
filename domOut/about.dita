@@ -13,7 +13,8 @@
 			>DITA</xref> Format, these Files where rendered with the <xref
 			href="https://dita-ot.github.io/" format="html" scope="external"
 			>DITA OT</xref> included in <xref href="http://www.oxygenxml.com" format="html"
-			scope="external">oXygen XML Editor</xref> to this WebHelp.</p>
+			scope="external"
+			>oXygen XML Editor</xref> to this WebHelp. If you feel familiar with the structure and layout from Jongware files, this is not by chance, because I'm totally used to it. </p>
 		<p>Feel free to browse the documentation, download a copy for offline usage (Unfortunately the offline search function will not work in Chrome). The sources of the Transformation can be found on <xref
 			href="https://github.com/grefel/extendscriptApiDoc" format="html" scope="external"
 			>github</xref>.</p>
@@ -25,6 +26,6 @@
 			<p outputclass="marginTop"><b>Acknowledgements</b></p>
 			<p>This project ist based on the fantastic ExtendScript API HTML from <xref
 			href="http://www.jongware.com/idjshelp.html" format="html" scope="external"
-			>Theunis de Jong</xref> aka <b>Jongware</b>. Without his efforts and inspiration I would not have realized it. Thank You!</p>
+			>Theunis de Jong</xref> aka <b>Jongware</b>. Without his efforts and inspiration I would not have realized it. Thank You! </p>
   </body>
 </topic>
