@@ -8,12 +8,12 @@ If you want to use the documentation you can find an online version [here](http:
 You can find an alternative node.js approach [at](https://github.com/yearbookmachine/extendscript-api-documentation). There is also a HTML compilation from [jongware](http://www.jongware.com/idjshelp.html).
 
 
-## Prerequisites
+### Prerequisites
 
   - Java and XSLT 2.0 Processor. For example [Saxon XSLT Processor](http://www.saxonica.com/welcome/welcome.xml)
   - Put the Adobe InDesign and ExtendScript Toolkit  source files in Folder `sourceXML`
 
-### XML file locations
+#### XML file locations
 
 The XML source files can be found in the following locations on Mac OS X. 
 
@@ -36,9 +36,9 @@ This basically a three step process:
 
 Please note: For a readable output format you've to set up an [DITA-OT Transformation](http://dita-ot.github.io/).
 
-# License
+### License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ExtendScriptAPI</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.publishingx.de/" property="cc:attributionName" rel="cc:attributionURL">Gregor Fellenz</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://www.adobe.com/" rel="dct:source">http://www.adobe.com/</a>.
 
-# Acknowledgements
+### Acknowledgements
 This project ist based on the fantastic ExtendScript API HTML from <a href="http://www.jongware.com/idjshelp.html">Theunis de Jong</a> aka Jongware. Without his efforts and inspiration I would not have realized it. Thank you!
