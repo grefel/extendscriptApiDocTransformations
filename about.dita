@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="topic_il1_z1v_rp">
+  <title>About</title>
+  <body>
+    <p>This is an alternative documentation for Adobe <b>ExtendScript API</b> and the <b>InDesign Object Model</b>. I don't like the representation in the Object Model Viewer provided by the Adobe ExtendScript Toolkit and hence used the <xref
+			href="http://www.jongware.com/idjshelp.html" format="html" scope="external"
+			>HTML Version</xref> from Jongware on a daily basis. However these files are only up to InDesign CS6 and not searchable. So I started to convert them on my own. I started my journey with a <xref
+			href="http://www.w3.org/standards/xml/transformation" format="html" scope="external"
+			>XSLT</xref> Transformation to <xref
+			href="https://en.wikipedia.org/wiki/Darwin_Information_Typing_Architecture"
+			format="html" scope="external"
+			>DITA</xref> Format, these Files where rendered with the <xref
+			href="https://dita-ot.github.io/" format="html" scope="external"
+			>DITA OT</xref> included in <xref href="http://www.oxygenxml.com" format="html"
+			scope="external">oXygen XML Editor</xref> to this WebHelp.</p>
+		<p>Feel free to browse the documentation, download a copy for offline usage (Unfortunately the offline search function will not work in Chrome).</p>
+		<p>The copyright of the original Files is by <xref href="http://www.adobe.com" format="html"
+			scope="external">Adobe Systems Incorporated</xref>.</p>
+		<p>I'm happy about Feedback and Bug reports at <xref href="mailto:gregor@publishingx.de"
+			format="de" scope="external"
+			>gregor@publishingx.de</xref>. Keep in mind that the doucmentation sources are written by Adobe and I can only corret transformation errors!</p>
+			<p><b>Acknowledgements</b></p>
+			<p>This project ist based on the fantastic ExtendScript API HTML from <xref
+			href="http://www.jongware.com/idjshelp.html" format="html" scope="external"
+			>Theunis de Jong</xref> aka <b>Jongware</b>. Without his efforts and inspiration I would not have realized it. Thank You!</p>
+  </body>
+</topic>

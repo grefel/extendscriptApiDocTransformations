@@ -1,11 +1,13 @@
 # Adobe ExtendScript API Documentation 
 
-This project contains the XSLT transformation files for creating a readabel documentation for the Adobe ExtendScript APIs. The files are optimizesd for the InDesign DOM but should work for other programs as well. If you want to use the documentation you can find an online version 
-[here](http://www.indesignjs.de/extendscriptAPI).
+This project contains the XSLT transformation files for creating a readabel documentation for the Adobe ExtendScript APIs. The files are optimizesd for the InDesign DOM but should work for other programs as well. The files are transformed to [DITA](http://en.wikipedia.org/wiki/Darwin_Information_Typing_Architecture), for further processing. You can set up your own [DITA-OT Transformation](http://dita-ot.github.io/). I rendered a WebHelp Documentation with [oXygen DITA-OT Webhelp](http://www.oxygenxml.com/)
+
+If you want to use the documentation you can find an online version [here](http://www.indesignjs.de/extendscriptAPI).
 
 ## Prerequisites
 
-  - Adobe InDesign and ExtendScript Toolkit for XML source files
+  - Java and XSLT 2.0 Processor. For example [Saxon XSLT Processor](http://www.saxonica.com/welcome/welcome.xml)
+  - Adobe InDesign and ExtendScript Toolkit for XML source files in Folder `sourceXML`
 
 ### XML file locations
 
@@ -22,6 +24,11 @@ On Windows the Files are located at:
 ## XSLT Transformation
 This basically a three step process:
 
+
+
+1. Merge the Source files and get rid of namespace bugs with `mergeFiles.xslt`
+2. Fix DOM Structure for further processing with `mergeFiles.xslt`
+3. Transform DOM Structure to DITA Topics and create a DITA Map with `dom2dita.xsl`
 
 
 
