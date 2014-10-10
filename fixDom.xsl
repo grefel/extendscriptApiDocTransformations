@@ -35,6 +35,7 @@
 		</xsl:attribute>
 	</xsl:template>
 
+	
 	<!-- Fix inconsistent Dom Structure -->
 	<xsl:template match="datatype">
 		<xsl:variable name="array" select="array"/>
@@ -104,9 +105,7 @@
 			<xsl:when test="@name='parent'">
 				<property name="parent">
 					<xsl:attribute name="rwaccess">readonly</xsl:attribute>
-					<shortdesc>
-						<xsl:apply-templates select="shortdesc"></xsl:apply-templates>
-					</shortdesc>
+					<xsl:apply-templates select="shortdesc"></xsl:apply-templates>
 					
 										
 					<xsl:analyze-string select="shortdesc" regex="^The parent.+?\(a (.+?)\)">

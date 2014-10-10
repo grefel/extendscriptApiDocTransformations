@@ -22,7 +22,7 @@
 		<p>I'm happy about Feedback and Bug reports at <xref href="mailto:gregor@publishingx.de"
 			format="de" scope="external"
 			>gregor@publishingx.de</xref>. Keep in mind that the doucmentation sources are written by Adobe and I can only corret transformation errors!</p>
-			<p><b>Acknowledgements</b></p>
+			<p outputclass="marginTop"><b>Acknowledgements</b></p>
 			<p>This project ist based on the fantastic ExtendScript API HTML from <xref
 			href="http://www.jongware.com/idjshelp.html" format="html" scope="external"
 			>Theunis de Jong</xref> aka <b>Jongware</b>. Without his efforts and inspiration I would not have realized it. Thank You!</p>

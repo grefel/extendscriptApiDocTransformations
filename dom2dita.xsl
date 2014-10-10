@@ -105,7 +105,17 @@
 			<topic id="{$classdefID}">
 				<title><keyword><xsl:value-of select="px:fixSUI($className)"/></keyword></title>
 				<body>
-					<p><indexterm><xsl:value-of select="$className"/></indexterm><xsl:value-of select="shortdesc"/></p>
+					<xsl:apply-templates select="description | shortdesc"/>
+					<p outputclass="quicklinks"><indexterm><xsl:value-of select="$className"/></indexterm>
+						<xsl:text>Go to </xsl:text>
+						<xsl:if test="elements/property">
+							<xref href="{concat('#', $classdefID, 'iProps')}">Property List</xref>	
+						</xsl:if>
+						<xsl:if test="elements/method">
+							<xsl:text> </xsl:text>
+							<xref href="{concat('#', $classdefID, 'iMethods')}">Method List</xref>					
+							</xsl:if>
+					</p>
 					<!--Generating Method Quicklinks-->
 					<xsl:if test="elements/method">
 						<section>
@@ -116,12 +126,15 @@
 								<xref href="{concat('#', $classdefID, '/', generate-id(.))}">
 									<xsl:value-of select="@name"/>
 								</xref>
+								<xsl:if test="position() != last()">
+									<xsl:text>, </xsl:text>
+								</xsl:if>
 							</xsl:for-each>
 						</p>
 						</section>
 					</xsl:if>
 					<!--Generating Object Quicklinks-->
-					<xsl:if test="elements[@type='instance']/property">
+					<xsl:if test="elements[@type='instance']/property and not(px:isCollection($className))">
 						<section>
 						<title>Objects:</title>
 						<p>
@@ -137,7 +150,9 @@
 										<xsl:with-param name="writeFails" select="$debug"/>
 										<xsl:with-param name="typeName" select="current-group()[1]/type"/>									
 									</xsl:call-template>
-									<xsl:text> </xsl:text>									
+								</xsl:if>
+								<xsl:if test="position() != last()">
+									<xsl:text>, </xsl:text>
 								</xsl:if>
 							</xsl:for-each-group>
 						</p>
@@ -159,7 +174,7 @@
 					<xsl:choose>
 						<!--Eumeration-->
 						<xsl:when test="@enumeration='true'">
-							<section>
+							<section id="{concat($classdefID, 'iProps')}">
 								<title>Values</title>
 								<table frame="all" rowsep="1" colsep="1">
 									<tgroup cols="3">
@@ -178,7 +193,9 @@
 												<xsl:sort select="@name"/>
 												<row>
 													<entry><p><xsl:value-of select="@name"/></p></entry>
-													<entry><p><xsl:value-of select="shortdesc"/></p></entry>
+													<entry>
+														<xsl:apply-templates select="description | shortdesc"/>														
+													</entry>
 													<entry><p><xsl:value-of select="datatype/value"/></p></entry>
 												</row>
 											</xsl:for-each>
@@ -190,7 +207,7 @@
 						<!--Class Properties--> 
 						<xsl:otherwise>
 							<xsl:if test="elements[@type='instance']/property">
-								<section>
+								<section id="{concat($classdefID, 'iProps')}">
 									<title>Properties</title>
 									<table frame="all" rowsep="1" colsep="1">
 										<tgroup cols="4">
@@ -246,7 +263,7 @@
 							</xsl:if>
 
 							<xsl:if test="elements/method">
-								<section>
+								<section id="{$classdefID}iMethods">
 									<title>Methods</title>
 									<xsl:for-each select="elements[@type='constructor']/method">
 										<xsl:sort select="@name"/>
@@ -269,7 +286,7 @@
 						<title>Object of</title>
 						<xsl:for-each select="key('properties', $className)">
 							<xsl:sort/>
-							<p>
+							<p outputclass="noMargin">
 								<xsl:call-template name="generatClassLink">
 									<xsl:with-param name="typeName" select="parent::elements/parent::classdef/@name"/> 
 								</xsl:call-template>
@@ -287,7 +304,7 @@
 						<xsl:for-each select="key('retunrValues', $className)">
 							<xsl:sort/>
 							<xsl:variable name="destinationClassdef" select="parent::elements/parent::classdef/@name"></xsl:variable>
-							<p>
+							<p outputclass="noMargin">
 								<xsl:call-template name="generatClassLink">
 									<xsl:with-param name="typeName" select="$destinationClassdef"/>
 									<xsl:with-param name="createShortcut" select="false()"/>
@@ -314,7 +331,8 @@
 				<xsl:apply-templates select="datatype"/>
 			</entry>
 			<entry><p>readonly</p></entry>
-			<entry><p><xsl:value-of select="shortdesc"/></p>
+			<entry>
+				<xsl:apply-templates select="description | shortdesc"/>
 			</entry>
 		</row>
 
@@ -334,9 +352,7 @@
 				</p>
 			</entry>
 			<entry>
-				<p>
-					<xsl:value-of select="shortdesc"/>
-				</p>
+				<xsl:apply-templates select="description | shortdesc"/>
 			</entry>
 		</xsl:element>
 	</xsl:template>
@@ -344,10 +360,12 @@
 	<xsl:template match="method">
 		<p outputclass="methodName" id="{generate-id(.)}">
 			<!-- Return value -->
+			
 			<xsl:choose>
 				<xsl:when test="datatype">
 					<xsl:call-template name="generatClassLink">
-						<xsl:with-param name="typeName" select="type"></xsl:with-param>
+						<xsl:with-param name="typeName" select="datatype/type/text()"/>
+						<xsl:with-param name="createShortcut" select="false()"></xsl:with-param>
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>
@@ -386,9 +404,7 @@
 			<xsl:text>)</xsl:text>
 		</p>
 
-		<p>
-			<xsl:value-of select="shortdesc"/>
-		</p>
+		<xsl:apply-templates select="description | shortdesc"/>
 
 		<xsl:if test="parameters/parameter">
 			<table frame="all" rowsep="1" colsep="1">
@@ -419,18 +435,23 @@
 				<xsl:apply-templates select="datatype"/>
 			</entry>
 			<entry>
-				<p>
-					<xsl:value-of select="shortdesc"/>
+				<xsl:apply-templates select="description | shortdesc"/>
 					<xsl:if test="datatype/value">
-						<xsl:text> (default: </xsl:text>
-						<xsl:value-of select="datatype/value"/>
-						<xsl:text>)</xsl:text>
+						<p>					
+							<xsl:text> (default: </xsl:text>
+							<xsl:value-of select="datatype/value"/>
+							<xsl:text>)</xsl:text>
+						</p>
 					</xsl:if>
-				</p>
 			</entry>
 		</row>
 	</xsl:template>
 
+	<xsl:template match="shortdesc | description">
+		<p outputclass="description">
+			<xsl:apply-templates/>
+		</p>
+	</xsl:template>
 
 	<!-- Processing Types -> Link to Class -->
 	<xsl:template match="datatype">
@@ -457,7 +478,7 @@
 								<!-- Do not resolve -->
 							</xsl:when>
 							<xsl:otherwise>
-								<p outputclass="enumInPTableTitle">Enumeration</p>
+								<!--<p outputclass="enumInPTableTitle">Enumeration</p>-->
 								<xsl:for-each select="key('className', $typeName)/elements[@type='class']/property">
 									<p outputclass="enumInPTable">
 										<xsl:value-of select="$typeName"/>
@@ -504,15 +525,16 @@
 			<xsl:value-of select="is"/>
 		</xsl:if>
 		
-		<xsl:if test="$createShortcut and ends-with($typeName, 's') and not(ends-with($typeName, 'preferences') or ends-with($typeName, 'options') or ends-with($typeName, 'Varies'))">
+		<xsl:if test="$createShortcut and px:isCollection($typeName)">
 			<xsl:variable name="shortType" select="replace(replace($typeName,'(ies$)','y'), 's$','')"/>
 			<xsl:variable name="id" select="generate-id(key('className',$shortType))"/>
 			<xsl:if test="$id">
-				<i><xsl:text> Shortcut </xsl:text></i>
+				<i>
 				<xsl:variable name="ref" select="concat($shortType, '.dita#', $id)"/>
 				<xsl:element name="xref">
 					<xsl:attribute name="href" select="$ref"/>
 				</xsl:element>
+				</i>
 			</xsl:if>
 		</xsl:if>
 
@@ -548,6 +570,19 @@
 	<xsl:function name="px:fixSUI">
 		<xsl:param name="text"></xsl:param>
 		<xsl:value-of select="replace($text,'SUI$',' (SUI)')"/>
+	</xsl:function>
+	
+	<xsl:function name="px:isCollection">
+		<xsl:param name="typeName"/>
+		<xsl:choose>
+			<xsl:when test="ends-with($typeName, 's') and not(ends-with($typeName, 'preferences') or ends-with($typeName, 'options') or ends-with($typeName, 'Varies'))">
+				<xsl:value-of select="true()"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="false()"/>
+			</xsl:otherwise>
+		</xsl:choose>
+		
 	</xsl:function>
 
 </xsl:stylesheet>
