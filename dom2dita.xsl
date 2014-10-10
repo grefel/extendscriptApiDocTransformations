@@ -109,13 +109,13 @@
 					<p outputclass="quicklinks"><indexterm><xsl:value-of select="$className"/></indexterm>
 						<xsl:text>Go to </xsl:text>
 						<xsl:if test="elements/property">
-							<b><xref href="{concat('#', $classdefID, 'iProps')}">Property List</xref></b>	
+							<b><xref href="{concat('#', $classdefID, '/iProps')}">Property List</xref></b>	
 						</xsl:if>
 						<xsl:if test="elements/method and elements/property">
 							<xsl:text> | </xsl:text>
 						</xsl:if>						
 						<xsl:if test="elements/method">
-							<b><xref href="{concat('#', $classdefID, 'iMethods')}">Method List</xref></b>					
+							<b><xref href="{concat('#', $classdefID, '/iMethods')}">Method List</xref></b>					
 						</xsl:if>
 					</p>
 					<!--Generating Method Quicklinks-->
@@ -150,12 +150,15 @@
 								<xsl:if test="current-group()[1]/type != 'Varies'">
 									<xsl:call-template name="linkToClassName">
 										<xsl:with-param name="writeFails" select="$debug"/>
-										<xsl:with-param name="typeName" select="current-group()[1]/type"/>									
+										<xsl:with-param name="typeName" select="current-group()[1]/type"/>
+										<xsl:with-param name="writeSeparator">
+											<xsl:if test="position() != last()">
+												<xsl:value-of select="true()"></xsl:value-of>
+											</xsl:if>
+										</xsl:with-param>
 									</xsl:call-template>
 								</xsl:if>
-								<xsl:if test="position() != last()">
-									<xsl:text>, </xsl:text>
-								</xsl:if>
+								
 							</xsl:for-each-group>
 						</p>
 						</section>
@@ -176,7 +179,7 @@
 					<xsl:choose>
 						<!--Eumeration-->
 						<xsl:when test="@enumeration='true'">
-							<section id="{concat($classdefID, 'iProps')}">
+							<section id="iProps">
 								<title>Values</title>
 								<table frame="all" rowsep="1" colsep="1">
 									<tgroup cols="3">
@@ -209,7 +212,7 @@
 						<!--Class Properties--> 
 						<xsl:otherwise>
 							<xsl:if test="elements[@type='instance']/property">
-								<section id="{concat($classdefID, 'iProps')}">
+								<section id="iProps">
 									<title>Properties</title>
 									<table frame="all" rowsep="1" colsep="1">
 										<tgroup cols="4">
@@ -265,7 +268,7 @@
 							</xsl:if>
 
 							<xsl:if test="elements/method">
-								<section id="{$classdefID}iMethods">
+								<section id="iMethods">
 									<title>Methods</title>
 									<xsl:for-each select="elements[@type='constructor']/method">
 										<xsl:sort select="@name"/>
@@ -553,6 +556,7 @@
 	<xsl:template name="linkToClassName">
 		<xsl:param name="typeName"/>
 		<xsl:param name="writeFails" select="true()"/>
+		<xsl:param name="writeSeparator" select="false()"></xsl:param>
 		<xsl:variable name="id" select="/generate-id(key('className',$typeName))"/>
 		<xsl:choose>
 			<xsl:when test="$id">
@@ -560,6 +564,7 @@
 				<xsl:element name="xref">
 					<xsl:attribute name="href" select="$ref"/>
 				</xsl:element>
+				<xsl:if test="$writeSeparator">, </xsl:if>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:if test="$writeFails">
