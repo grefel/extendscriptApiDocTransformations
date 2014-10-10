@@ -109,12 +109,14 @@
 					<p outputclass="quicklinks"><indexterm><xsl:value-of select="$className"/></indexterm>
 						<xsl:text>Go to </xsl:text>
 						<xsl:if test="elements/property">
-							<xref href="{concat('#', $classdefID, 'iProps')}">Property List</xref>	
+							<b><xref href="{concat('#', $classdefID, 'iProps')}">Property List</xref></b>	
 						</xsl:if>
+						<xsl:if test="elements/method and elements/property">
+							<xsl:text> | </xsl:text>
+						</xsl:if>						
 						<xsl:if test="elements/method">
-							<xsl:text> </xsl:text>
-							<xref href="{concat('#', $classdefID, 'iMethods')}">Method List</xref>					
-							</xsl:if>
+							<b><xref href="{concat('#', $classdefID, 'iMethods')}">Method List</xref></b>					
+						</xsl:if>
 					</p>
 					<!--Generating Method Quicklinks-->
 					<xsl:if test="elements/method">
@@ -267,7 +269,7 @@
 									<title>Methods</title>
 									<xsl:for-each select="elements[@type='constructor']/method">
 										<xsl:sort select="@name"/>
-										<p><b>Constructor</b></p>
+										<p outputclass="noMargin"><b>Constructor</b></p>
 										<xsl:apply-templates select="."/>
 									</xsl:for-each>
 									<xsl:for-each select="elements[not(@type='constructor')]/method">
@@ -407,7 +409,7 @@
 		<xsl:apply-templates select="description | shortdesc"/>
 
 		<xsl:if test="parameters/parameter">
-			<table frame="all" rowsep="1" colsep="1">
+			<table frame="all" rowsep="1" colsep="1" outputclass="parameterTable">
 				<tgroup cols="3">
 					<colspec colname="c1" colnum="1" colwidth="0.3*"/>
 					<colspec colname="c2" colnum="2" colwidth="0.1*"/>
@@ -525,7 +527,7 @@
 			<xsl:value-of select="is"/>
 		</xsl:if>
 		
-		<xsl:if test="$createShortcut and px:isCollection($typeName)">
+		<xsl:if test="px:isCollection($typeName) and $createShortcut">
 			<xsl:variable name="shortType" select="replace(replace($typeName,'(ies$)','y'), 's$','')"/>
 			<xsl:variable name="id" select="generate-id(key('className',$shortType))"/>
 			<xsl:if test="$id">
@@ -567,12 +569,14 @@
 		</xsl:choose>
 	</xsl:template>
 	
-	<xsl:function name="px:fixSUI">
+	<!-- Fix writing of SUI Classes -->
+	<xsl:function name="px:fixSUI" as="xs:string">
 		<xsl:param name="text"></xsl:param>
 		<xsl:value-of select="replace($text,'SUI$',' (SUI)')"/>
 	</xsl:function>
 	
-	<xsl:function name="px:isCollection">
+	<!--Check if Classname is a Collection-->
+	<xsl:function name="px:isCollection" as="xs:boolean">
 		<xsl:param name="typeName"/>
 		<xsl:choose>
 			<xsl:when test="ends-with($typeName, 's') and not(ends-with($typeName, 'preferences') or ends-with($typeName, 'options') or ends-with($typeName, 'Varies'))">
