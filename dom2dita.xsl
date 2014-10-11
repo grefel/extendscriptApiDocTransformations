@@ -21,7 +21,7 @@
 		<xsl:result-document href="{$outPath}" doctype-public="-//OASIS//DTD DITA Map//EN"
 			doctype-system="map.dtd" indent="yes">
 			<xsl:element name="map">
-				<title>InDesign ExtendScript API</title>
+				<title>InDesign ExtendScript API <xsl:value-of select="replace(/domRoot/indd/dictionary/map/@title, '.*?(\(\d+\.\d+\)).*', '$1')"></xsl:value-of></title>
 				<topichead navtitle="About">
 					<topicref href="about.dita"/>						
 				</topichead>
@@ -281,7 +281,7 @@
 									<title>Method Listing</title>
 									<xsl:for-each select="elements[@type='constructor']/method">
 										<xsl:sort select="@name"/>
-										<p outputclass="noMargin"><b>Constructor</b></p>
+										<p outputclass="noMarginConstructor"><b>Constructor</b></p>
 										<xsl:apply-templates select="."/>
 									</xsl:for-each>
 									<xsl:for-each select="elements[not(@type='constructor')]/method">
@@ -295,7 +295,7 @@
 					</xsl:choose>
 
 					<!--Creating Links to Properties with this object-->
-					<xsl:if test="key('properties', $className)">
+					<xsl:if test="key('properties', $className) and not(matches($className, '^(object|string|bool|number|array|function|file|folder|date|reflection)', 'i'))">
 					<section>
 						<title>Object of</title>
 						<xsl:for-each select="key('properties', $className)">
@@ -312,7 +312,7 @@
 					</xsl:if>
 					
 					<!--Creating Links to Methods with this object-->
-					<xsl:if test="key('retunrValues', $className)">
+					<xsl:if test="key('retunrValues', $className) and not(matches($className, '^(object|string|bool|number|array|function|file|folder|date|reflection)', 'i'))">
 					<section>
 						<title>Return</title>
 						<xsl:for-each select="key('retunrValues', $className)">
