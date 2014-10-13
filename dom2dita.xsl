@@ -133,6 +133,7 @@
 								<xsl:if test="position() != last()">
 									<xsl:text>, </xsl:text>
 								</xsl:if>
+								
 							</xsl:for-each>
 						</p>
 						</section>
@@ -154,13 +155,17 @@
 										<xsl:with-param name="writeFails" select="$debug"/>
 										<xsl:with-param name="typeName" select="current-group()[1]/type"/>
 										<xsl:with-param name="writeSeparator">
-											<xsl:if test="position() != last()">
-												<xsl:value-of select="true()"></xsl:value-of>
-											</xsl:if>
+											<xsl:choose>
+												<xsl:when test="position() != last()">
+													<xsl:value-of select="true()"></xsl:value-of>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:value-of select="false()"></xsl:value-of>
+												</xsl:otherwise>
+											</xsl:choose>
 										</xsl:with-param>
 									</xsl:call-template>
 								</xsl:if>
-								
 							</xsl:for-each-group>
 						</p>
 						</section>
@@ -568,8 +573,8 @@
 	<!-- Create an xref Link to Class if possible	-->
 	<xsl:template name="linkToClassName">
 		<xsl:param name="typeName"/>
-		<xsl:param name="writeFails" select="true()"/>
-		<xsl:param name="writeSeparator" select="false()"></xsl:param>
+		<xsl:param name="writeFails" select="true()" as="xs:boolean"/>
+		<xsl:param name="writeSeparator" select="false()" as="xs:boolean"/>
 		<xsl:variable name="id" select="/generate-id(key('className',$typeName))"/>
 		<xsl:choose>
 			<xsl:when test="$id">
