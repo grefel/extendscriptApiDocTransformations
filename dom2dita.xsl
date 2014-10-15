@@ -150,7 +150,7 @@
 										<xsl:value-of select="concat('|',datatype/type/text(),'|')"/>
 									</xsl:comment>
 								</xsl:if>
-								<xsl:if test="current-group()[1]/type != 'Varies'">
+								<xsl:if test="current-group()[1]/type != 'Varies' and current-group()[1]/parent::property/@name != 'parent'">
 									<xsl:call-template name="linkToClassName">
 										<xsl:with-param name="writeFails" select="$debug"/>
 										<xsl:with-param name="typeName" select="current-group()[1]/type"/>
@@ -204,7 +204,11 @@
 											<xsl:for-each select="elements[@type='class']/property">
 												<xsl:sort select="@name"/>
 												<row>
-													<entry><p><xsl:value-of select="@name"/></p></entry>
+													<entry><p>
+														<xsl:value-of select="$className"/>
+														<xsl:text>.</xsl:text>
+														<xsl:value-of select="@name"/></p>
+													</entry>
 													<entry>
 														<xsl:apply-templates select="description | shortdesc"/>														
 													</entry>
