@@ -190,8 +190,8 @@
 								<title>Values</title>
 								<table frame="all" rowsep="1" colsep="1">
 									<tgroup cols="3">
-										<colspec colname="c1" colnum="1" colwidth="0.2*"/>
-										<colspec colname="c2" colnum="2" colwidth="0.7*"/>
+										<colspec colname="c1" colnum="1" colwidth="0.3*"/>
+										<colspec colname="c2" colnum="2" colwidth="0.6*"/>
 										<colspec colname="c3" colnum="3" colwidth="0.1*"/>
 										<thead>
 											<row>
@@ -204,10 +204,12 @@
 											<xsl:for-each select="elements[@type='class']/property">
 												<xsl:sort select="@name"/>
 												<row>
-													<entry><p>
-														<xsl:value-of select="$className"/>
-														<xsl:text>.</xsl:text>
-														<xsl:value-of select="@name"/></p>
+													<entry>
+														<p outputclass="clip_button" base="{$className}.{@name}">
+															<xsl:value-of select="$className"/>
+															<xsl:text>.</xsl:text>
+															<xsl:value-of select="@name"/>
+														</p>
 													</entry>
 													<entry>
 														<xsl:apply-templates select="description | shortdesc"/>														
@@ -262,10 +264,10 @@
 									</xsl:choose>
 									<table frame="all" rowsep="1" colsep="1">
 										<tgroup cols="4">
-											<colspec colname="c1" colnum="1" colwidth="0.2*"/>
+											<colspec colname="c1" colnum="1" colwidth="0.3*"/>
 											<colspec colname="c2" colnum="2" colwidth="0.1*"/>
 											<colspec colname="c3" colnum="3" colwidth="0.1*"/>
-											<colspec colname="c4" colnum="4" colwidth="0.6*"/>
+											<colspec colname="c4" colnum="4" colwidth="0.5*"/>
 											<thead>
 												<row>
 													<entry><p>Name</p></entry>
@@ -349,7 +351,7 @@
 	<!-- Processing Events and Constants	-->
 	<xsl:template match="property" mode="Constant">
 		<row>
-			<entry><p><xsl:value-of select="@name"/></p></entry>
+			<entry><p outputclass="clip_button" base=".{@name}"><xsl:value-of select="@name"/></p></entry>
 			<entry>
 				<xsl:apply-templates select="datatype"/>
 			</entry>
@@ -364,7 +366,7 @@
 	<xsl:template match="property" mode="Property">
 		<xsl:element name="row">
 			<entry>
-				<p><xsl:value-of select="@name"/></p>
+				<p outputclass="clip_button" base=".{@name}"><xsl:value-of select="@name"/></p>
 			</entry>
 			<entry>
 				<xsl:apply-templates select="datatype"/>
@@ -401,7 +403,7 @@
 			<xsl:if test="$debug">
 				<xsl:message select="@name"/>
 			</xsl:if>
-			<b><xsl:apply-templates select="@name"/></b>
+			<b outputclass="clip_button" base=".{@name}"><xsl:apply-templates select="@name"/></b>
 
 			<!-- Parameters -->
 			<xsl:text> (</xsl:text>
@@ -498,8 +500,8 @@
 					<!-- Resolcve Enum Values in property Table-->
 					<xsl:if test="key('className', $typeName)/@enumeration = 'true'">
 						<xsl:choose>
-							<xsl:when test="$typeName = 'NothingEnum'">
-								<p outputclass="enumInPTable">NothingEnum.NOTHING</p>
+							<xsl:when test="$typeName = 'NothingEnum'">								
+								<p outputclass="enumInPTable clip_button" base="NothingEnum.NOTHING">NothingEnum.NOTHING</p>
 							</xsl:when>
 							<xsl:when test="$typeName = 'InCopyUIColors' or $typeName = 'UIColors'">
 								<!-- Do not resolve -->
@@ -507,7 +509,7 @@
 							<xsl:otherwise>
 								<!--<p outputclass="enumInPTableTitle">Enumeration</p>-->
 								<xsl:for-each select="key('className', $typeName)/elements[@type='class']/property">
-									<p outputclass="enumInPTable">
+									<p outputclass="enumInPTable clip_button" base="{$typeName}.{@name}">
 										<xsl:value-of select="$typeName"/>
 										<xsl:text>.</xsl:text>
 										<xsl:value-of select="@name"/>
