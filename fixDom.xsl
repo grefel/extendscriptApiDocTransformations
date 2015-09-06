@@ -23,6 +23,9 @@
 			<xsl:if test="ancestor::sui">
 				<xsl:text>SUI</xsl:text>
 			</xsl:if>
+			<xsl:if test="replace(., '[#/]','') = 'Index'">
+				<xsl:text>_</xsl:text>
+			</xsl:if>
 		</xsl:attribute>
 	</xsl:template>
 	
@@ -31,6 +34,9 @@
 			<xsl:value-of select="."/>
 			<xsl:if test="ancestor::sui">
 				<xsl:text>SUI</xsl:text>
+			</xsl:if>
+			<xsl:if test=". = 'Index'">
+				<xsl:text>_</xsl:text>
 			</xsl:if>
 		</xsl:attribute>
 	</xsl:template>
@@ -171,6 +177,9 @@
 			<xsl:value-of select="$text"/>
 			<xsl:if test="$context/ancestor::sui and not(matches($text, '(object|string|bool|number|array|function|file|folder)', 'i'))">
 				<xsl:text>SUI</xsl:text>
+			</xsl:if>
+			<xsl:if test="$text = 'Index'">
+				<xsl:text>_</xsl:text>
 			</xsl:if>
 		</xsl:variable>
 		
