@@ -510,8 +510,20 @@
 	<xsl:template match="property" mode="Constant">
 		<row>
 			<entry>
-				<p outputclass="clip_button"
-					base="{parent::elements/parent::classdef/@name}.{@name}">
+				<p outputclass="clip_button">
+					<xsl:attribute name="base">
+						<xsl:choose>
+							<xsl:when test="ancestor::js">
+								<xsl:text>.</xsl:text>
+								<xsl:value-of select="@name"/>							
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="parent::elements/parent::classdef/@name"/>
+								<xsl:text>.</xsl:text>
+								<xsl:value-of select="@name"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
 					<xsl:value-of select="@name"/>
 				</p>
 			</entry>
