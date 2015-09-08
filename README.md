@@ -1,4 +1,4 @@
-# Adobe ExtendScript API Documentation 
+# Transformations for the Adobe ExtendScript API Documentation 
 
 This project contains the XSLT transformation files for creating a readable documentation of the Adobe ExtendScript APIs. The transformation is optimised for the InDesign DOM, but should work for other Adobe Extendscript DOMs as well. The files are transformed to [DITA](http://en.wikipedia.org/wiki/Darwin_Information_Typing_Architecture) XML data model. I found the intermediate format particularly helpful for validating all references. It could also used to add more help information via DITA Topics by your own. 
 You can set up your own [DITA-OT Transformation](http://dita-ot.github.io/) to publish an output format of your like. I rendered a WebHelp Documentation with [oXygen DITA-OT Webhelp](http://www.oxygenxml.com/).
