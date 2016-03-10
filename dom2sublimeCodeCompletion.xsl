@@ -12,7 +12,15 @@
           <method name="add"> -->
       <xsl:for-each select="//elements/method/@name">
         <xsl:element name="node">
-          <xsl:value-of select="."/>
+          <xsl:choose>
+            <xsl:when test="parent::method/parent::elements/parent::classdef/@name = '$'">
+              <xsl:text>$.</xsl:text>
+              <xsl:value-of select="."/>              
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="."/>
+            </xsl:otherwise>
+          </xsl:choose>
           <xsl:text>()</xsl:text>
         </xsl:element>
       </xsl:for-each>
