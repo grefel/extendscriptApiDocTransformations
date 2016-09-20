@@ -40,7 +40,9 @@ The idea is, to create a merged and fixed DOM/API XML file. From this file sever
 2. Please note: For a readable output format you've to set up an [DITA-OT Transformation](http://dita-ot.github.io/).
 
 ### Create Sublime Text Code Completions 
-1. Transform DOM Structure to DITA Topics to Sublime Text Code Completionswith `dom2sublimeCodeCompletion.xsl`
+1. Transform DOM Structure to DITA Topics to Sublime Text Code Completions with `dom2sublimeCodeCompletion.xsl`. Use the result from `fixDom.xsl`. Create a `jsx.sublime-completions` file and put this into your Sublime Text Packages folder 
+On Windows: `\Users\[Username]\AppData\Roaming\Sublime Text 3\Packages`
+On MacOS: ``/Library/Application Support/Sublime Text 3/Packages`
 
 
 ### License
