@@ -58,13 +58,13 @@
 			doctype-system="map.dtd" indent="yes">
 			<xsl:element name="map">
 				<title>InDesign ExtendScript API <xsl:value-of
-						select="replace(/domRoot/indd/dictionary/map/@title, '.*?(\(\d+\.\d+\)).*', '$1')"
+						select="replace(/domRoot/product/dictionary/map/@title, '.*?(\(\d+\.\d+\)).*', '$1')"
 					/></title>
 				<topichead navtitle="About">
 					<topicref href="about.dita"/>
 				</topichead>
 				<topichead>
-					<xsl:attribute name="navtitle" select="/domRoot/indd/dictionary/map/@title"/>
+					<xsl:attribute name="navtitle" select="/domRoot/product/dictionary/map/@title"/>
 
 					<!-- Mini Hierarchy-->
 					<topicref href="Application.dita">
@@ -101,7 +101,7 @@
 					</topicref>
 
 					<xsl:if test="$allOut">
-						<xsl:apply-templates select="/domRoot/indd/dictionary/map"/>
+						<xsl:apply-templates select="/domRoot/product/dictionary/map"/>
 					</xsl:if>
 				</topichead>
 

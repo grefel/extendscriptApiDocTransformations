@@ -10,16 +10,16 @@
 	
 	<xsl:output method="xml" indent="yes"/>
 	
-	<xsl:param name="indesign.xml">sourceXML/indesign.xml</xsl:param>
+	<xsl:param name="product.xml">sourceXML/indesign.xml</xsl:param>
 	<xsl:param name="javascript.xml">sourceXML/javascript.xml</xsl:param>
 	<xsl:param name="scriptui.xml">sourceXML/scriptui.xml</xsl:param>
 	
 	
 	<!-- Gathering Required Files -->
 	<xsl:template name="mergeDOMFiles">
-		<xsl:if test="not(doc-available($javascript.xml) or doc-available($indesign.xml) or doc-available($scriptui.xml))">
+		<xsl:if test="not(doc-available($javascript.xml) or doc-available($product.xml) or doc-available($scriptui.xml))">
 			<xsl:message><xsl:text>[Caution] Not all Files are available! </xsl:text>
-				<xsl:value-of select="$indesign.xml"/> <xsl:text>, </xsl:text>
+				<xsl:value-of select="$product.xml"/> <xsl:text>, </xsl:text>
 				<xsl:value-of select="$javascript.xml"/> <xsl:text>, </xsl:text>
 				<xsl:value-of select="$scriptui.xml"/> 
 			</xsl:message>
@@ -32,9 +32,9 @@
 			<sui>
 				<xsl:apply-templates select="document($scriptui.xml)"/>
 			</sui>
-			<indd>
-				<xsl:apply-templates select="document($indesign.xml)"/>
-			</indd>
+			<product>
+				<xsl:apply-templates select="document($product.xml)"/>
+			</product>
 		</domRoot>
 		
 	</xsl:template>
