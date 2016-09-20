@@ -32,7 +32,7 @@ The copyright of the original Files is by <a href="http://www.adobe.com">Adobe S
 The idea is, to create a merged and fixed DOM/API XML file. From this file several formats can be achieved. In this repository the XSLT for DITA (as used in the [webhelp](http://www.indesignjs.de/extendscriptAPI) anbd [Sublime Text](http://www.sublimetext.com/) Code Completions are included. 
 
 ### Create a merged and fixed DOM-File
-1. Merge the Source files and get rid of namespace bugs with `mergeFiles.xslt`.  This transformation works with a named template (Saxon Option is '-it mergeDOMFiles'). You can change the path params in the file, or call the transformation with the path to indesign.xml, javascript.xml scriptui.xml.
+1. Merge the Source files and get rid of namespace bugs with `mergeFiles.xslt`.  This transformation works with a named template (Saxon Option is '-it mergeDOMFiles'). You can change the path params in the file (Line 13 for the Product XML), or call the transformation with the path to indesign.xml, javascript.xml scriptui.xml.
 2. Fix DOM Structure for further processing with `fixDom.xsl`. All ScriptUI classes are postfixed with `(SUI)`. Please note: There are some ugly hacks, basically replace() to get it working, probably some unrecognized bugs wil be produced. This file could also serve as a nice datasource for  Sublimetext Code Completion Files. 
 
 ### Create DITA Topics
