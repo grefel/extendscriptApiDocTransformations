@@ -32,7 +32,7 @@ The copyright of the original Files is by <a href="http://www.adobe.com">Adobe S
 The idea is, to create a merged and fixed DOM/API XML file. From this file several formats can be achieved. In this repository the XSLT for DITA (as used in the [webhelp](http://www.indesignjs.de/extendscriptAPI) anbd [Sublime Text](http://www.sublimetext.com/) Code Completions are included. 
 
 ### Create a merged and fixed DOM-File
-1. Merge the Source files and get rid of namespace bugs with `mergeFiles.xslt`.  This transformation works with a named template (Saxon Option is '-it mergeDOMFiles'). You can change the path params in the file, or call the transformation with the path to indesign.xml, javascript.xml scriptui.xml.
+1. Merge the Source files and get rid of namespace bugs with `mergeFiles.xslt`.  This transformation works with a named template (Saxon Option is '-it mergeDOMFiles'). You can change the path params in the file (Line 13 for the Product XML), or call the transformation with the path to indesign.xml, javascript.xml scriptui.xml.
 2. Fix DOM Structure for further processing with `fixDom.xsl`. All ScriptUI classes are postfixed with `(SUI)`. Please note: There are some ugly hacks, basically replace() to get it working, probably some unrecognized bugs wil be produced. This file could also serve as a nice datasource for  Sublimetext Code Completion Files. 
 
 ### Create DITA Topics
@@ -40,8 +40,12 @@ The idea is, to create a merged and fixed DOM/API XML file. From this file sever
 2. Please note: For a readable output format you've to set up an [DITA-OT Transformation](http://dita-ot.github.io/).
 
 ### Create Sublime Text Code Completions 
-1. Transform DOM Structure to DITA Topics to Sublime Text Code Completionswith `dom2sublimeCodeCompletion.xsl`
+1. Transform DOM Structure to DITA Topics to Sublime Text Code Completions with `dom2sublimeCodeCompletion.xsl`. Use the result from `fixDom.xsl`. Create a `jsx.sublime-completions` file and put this into your Sublime Text Packages folder 
+On Windows: `\Users\[Username]\AppData\Roaming\Sublime Text 3\Packages`
+On MacOS: ``/Library/Application Support/Sublime Text 3/Packages`
 
+## Other than InDesign
+The transformation was adapted for Photoshop. The `dom2dita.xsl` has still a lot of "InDesign" Strings and the mini hierarchy won't work. 
 
 ### License
 
