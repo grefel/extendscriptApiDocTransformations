@@ -44,6 +44,8 @@ The idea is, to create a merged and fixed DOM/API XML file. From this file sever
 On Windows: `\Users\[Username]\AppData\Roaming\Sublime Text 3\Packages`
 On MacOS: ``/Library/Application Support/Sublime Text 3/Packages`
 
+## Other than InDesign
+The transformation was adapted for Photoshop. The `dom2dita.xsl` has still a lot of "InDesign" Strings and the mini hierarchy won't work. 
 
 ### License
 
