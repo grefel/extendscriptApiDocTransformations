@@ -4,12 +4,12 @@
 <topic id="topic_about_xhk_1cp_gt">
    <title>About</title>
    <body>
-      <p>This is an alternative documentation for Adobe <b>ExtendScript API</b> and the <b>InDesign Object Model</b>. I don't like the representation in the Object Model Viewer provided by the Adobe ExtendScript Toolkit and hence used the <xref href="http://www.jongware.com/idjshelp.html" format="html">HTML Version</xref> from Jongware on a daily basis. However these files are only up to InDesign CS6 and not searchable – so I started to convert them on my own. As intermediate format I choosed <xref href="https://en.wikipedia.org/wiki/Darwin_Information_Typing_Architecture"
+      <p>This is an alternative documentation for Adobe <b>ExtendScript API</b> and the <b>InDesign Object Model</b>. I don't like the representation in the Object Model Viewer provided by the Adobe ExtendScript Toolkit and hence used the <xref href="http://www.jongware.com/idjshelp.html" format="html">HTML Version</xref> from Jongware on a daily basis. However these files are only up to InDesign CS6 and not searchable – so I started to convert them on my own. As intermediate format I chose <xref href="https://en.wikipedia.org/wiki/Darwin_Information_Typing_Architecture"
                format="html">DITA</xref> which is transformed with <xref format="html" href="http://www.w3.org/standards/xml/transformation">XSLT</xref> from the original Adobe sources. The DITA results where rendered with the <xref format="html" href="https://dita-ot.github.io/">DITA OT</xref> included in <xref href="http://www.oxygenxml.com/" format="html">oXygen XML Editor</xref> to this WebHelp. If you feel familiar with the structure and layout from Jongware files, this is not by chance, because I'm totally used to it. </p>
       <p>Feel free to browse the documentation, <xref format="html"
                href="http://www.indesignjs.de/extendscriptAPI/indesign11.zip">download</xref> a copy for offline usage (Unfortunately the offline search function will not work in Chrome). The sources of the Transformation can be found on <xref href="https://github.com/grefel/extendscriptApiDoc" format="html">github</xref>.</p>
       <p>The copyright of the original Files is by <xref format="html" href="http://www.adobe.com/">Adobe Systems Incorporated</xref>.</p>
-      <p>I'm happy about Feedback and Bug reports at <xref format="html" href="mailto:gregor@publishingx.de">gregor@publishingx.de</xref>. Keep in mind that the doucmentation sources are written by Adobe and I can only corret transformation errors!</p>
+      <p>I'm happy about Feedback and Bug reports at <xref format="html" href="mailto:gregor@publishingx.de">gregor@publishingx.de</xref>. Keep in mind that the documentation sources are written by Adobe and I can only corret transformation errors!</p>
       <p>
          <b>Acknowledgements</b>
       </p>
