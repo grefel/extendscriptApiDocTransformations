@@ -27,6 +27,40 @@
 		</xsl:attribute>
 	</xsl:template>
 
+	<!-- Sorting -->
+	<xsl:template match="topicref[child::topicref]">
+		<xsl:copy exclude-result-prefixes="#all" inherit-namespaces="no" copy-namespaces="no">
+			<xsl:apply-templates select="topicref | @*">
+				<xsl:sort select="@navtitle"/>
+			</xsl:apply-templates>
+		</xsl:copy>
+	</xsl:template>
+
+	<!-- Sort Properties, Methods -> there are only property and methode elements distinct-values(//elements/*/name())-->
+	<xsl:template match="elements[child::property or child::method]" priority="-1">
+		<xsl:copy exclude-result-prefixes="#all" inherit-namespaces="no" copy-namespaces="no">
+			<xsl:apply-templates select="property | @*">
+				<xsl:sort select="@name"/>
+			</xsl:apply-templates>
+		</xsl:copy>
+		<xsl:copy exclude-result-prefixes="#all" inherit-namespaces="no" copy-namespaces="no">
+			<xsl:apply-templates select="method | @*">
+				<xsl:sort select="@name"/>
+			</xsl:apply-templates>
+		</xsl:copy>
+
+	</xsl:template>
+	<xsl:template match="parameters">
+		<xsl:copy exclude-result-prefixes="#all" inherit-namespaces="no" copy-namespaces="no">
+			<xsl:apply-templates select="parameter | @*">
+				<xsl:sort select="@name"/>
+			</xsl:apply-templates>
+		</xsl:copy>
+	</xsl:template>
+
+
+
+
 	<!-- Fix doubled Class Names from ScriptUI -->
 	<xsl:template match="classdef/@name">
 		<xsl:attribute name="name">
@@ -86,8 +120,8 @@
 			</xsl:otherwise>
 		</xsl:choose>
 		<xsl:if test="preceding-sibling::shortdesc">
-			<xsl:analyze-string select="preceding-sibling::shortdesc"
-				regex="(Can also accept:|Can return:)(.*)$">
+			<xsl:analyze-string select="replace(preceding-sibling::shortdesc, '\(Optional\)', '')"
+				regex="(Can also accept:|Can return:|Can accept:)(.*)$">
 				<xsl:matching-substring>
 					<xsl:if test="$debug">
 						<xsl:comment>
@@ -238,6 +272,8 @@
 		<xsl:variable name="clean0" select="$text"/>
 		<xsl:variable name="clean1" select="replace($clean0, ' or ', ',')"/>
 		<xsl:variable name="clean2" select="replace($clean1, 'Can also accept:', ',')"/>
+		<xsl:variable name="clean2" select="replace($clean1, 'Can accept:', ',')"/>
+
 		<xsl:value-of select="$clean2"/>
 	</xsl:function>
 

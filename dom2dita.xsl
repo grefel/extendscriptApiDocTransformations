@@ -69,12 +69,19 @@
 					<!-- Mini Hierarchy-->
 					<topicref href="Application.dita">
 						<topicref href="Document.dita">
+
+							<topicref href="MasterSpread.dita"/>
+							<topicref href="Spread.dita"/>
 							<topicref href="Page.dita">
+
 								<topicref href="PageItem.dita">
 									<topicref href="Graphic.dita">
 										<!--...-->
 									</topicref>
+									<topicref href="Image.dita"/>
 								</topicref>
+								<topicref href="Group.dita"/>
+
 								<topicref href="TextFrame.dita">
 									<topicref href="Story.dita">
 										<topicref href="Paragraph.dita">
@@ -94,10 +101,28 @@
 									</topicref>
 								</topicref>
 							</topicref>
-							<topicref href="Link.dita">
-								<!--...-->
+							<topicref href="Link.dita"/>
+							<topicref href="Story.dita">
+								<topicref href="Paragraph.dita"/>
+								<topicref href="Text.dita">
+									<topicref href="Table.dita">
+										<topicref href="Row.dita"/>
+										<topicref href="Column.dita"/>
+										<topicref href="Cell.dita"/>
+									</topicref>
+								</topicref>
+
 							</topicref>
+							<topicref href="Swatch.dita"/>
+							<topicref href="Tint.dita"/>
+							<topicref href="Color.dita"/>
+
 						</topicref>
+						<topicref href="Book.dita"/>
+						<topicref href="FindGrepPreference.dita"/>
+						<topicref href="ChangeGrepPreference.dita"/>
+						<topicref href="ScriptPreference.dita"/>
+						<topicref href="Font.dita"/>
 					</topicref>
 
 					<xsl:if test="$allOut">
@@ -515,7 +540,7 @@
 						<xsl:choose>
 							<xsl:when test="ancestor::js">
 								<xsl:text>.</xsl:text>
-								<xsl:value-of select="@name"/>							
+								<xsl:value-of select="@name"/>
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="parent::elements/parent::classdef/@name"/>
