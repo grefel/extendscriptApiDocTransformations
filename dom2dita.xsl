@@ -42,7 +42,7 @@
 							href="http://www.adobe.com/">Adobe Systems Incorporated</xref>.</p>
 					<p>I'm happy about Feedback and Bug reports at <xref format="html"
 							href="mailto:gregor@publishingx.de"
-						>gregor@publishingx.de</xref>. Keep in mind that the doucmentation sources are written by Adobe and I can only corret transformation errors!</p>
+						>gregor@publishingx.de</xref>. Keep in mind that the documentation sources are written by Adobe and I can only corrcet transformation errors!</p>
 					<p>
 						<b>Acknowledgements</b>
 					</p>
