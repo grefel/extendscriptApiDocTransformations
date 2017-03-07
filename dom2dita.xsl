@@ -203,6 +203,7 @@
 							<title>Methods:</title>
 							<p>
 								<xsl:for-each select="elements/method">
+									<xsl:sort select="@name"></xsl:sort>
 									<xsl:text> </xsl:text>
 									<xref href="{concat('#', $classdefID, '/', generate-id(.))}">
 										<xsl:value-of select="@name"/>

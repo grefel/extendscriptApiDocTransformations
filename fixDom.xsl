@@ -52,9 +52,7 @@
 	</xsl:template>
 	<xsl:template match="parameters">
 		<xsl:copy exclude-result-prefixes="#all" inherit-namespaces="no" copy-namespaces="no">
-			<xsl:apply-templates select="parameter | @*">
-				<xsl:sort select="@name"/>
-			</xsl:apply-templates>
+			<xsl:apply-templates select="parameter | @*"/>
 		</xsl:copy>
 	</xsl:template>
 
