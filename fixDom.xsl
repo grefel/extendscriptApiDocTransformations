@@ -9,7 +9,7 @@
 	<xsl:output method="xml" indent="yes"/>
 
 	<!-- Copy all -->
-	<xsl:template match="node() | @*" priority="-1">
+	<xsl:template match="node() | @*" priority="-2">
 		<xsl:copy exclude-result-prefixes="#all" inherit-namespaces="no" copy-namespaces="no">
 			<xsl:apply-templates select="node() | @*"/>
 		</xsl:copy>
@@ -71,6 +71,22 @@
 			</xsl:if>
 		</xsl:attribute>
 	</xsl:template>
+
+	<!--Add AppleScript to Windows DOM -->
+	<xsl:template match="elements[@type = 'class'][parent::classdef[@name = 'ScriptLanguage']]" priority="2">
+		<xsl:copy>
+			<xsl:copy-of select="@*"/>
+			<xsl:apply-templates/>
+			<property name="APPLESCRIPT_LANGUAGE" rwaccess="readonly">
+				<shortdesc>The AppleScript language.</shortdesc>
+				<datatype>
+					<type>number</type>
+					<value>1095978087</value>
+				</datatype>
+			</property>
+		</xsl:copy>
+	</xsl:template>
+
 	<!-- delete doubled global Object in photoshop.xml -->
 	<xsl:template match="classdef[@name = 'global'][ancestor::product]"/>
 
