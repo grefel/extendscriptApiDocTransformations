@@ -10,12 +10,14 @@
     "check": "node build/check-site.js",
     "verify": "node build/verify-model.js",
     "serve": "node build/serve.js",
-    "verify:prepare": "node build/prepare-xslt.js"
+    "verify:prepare": "node build/prepare-xslt.js",
+    "check:types": "node build/check-types.js"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.9.12"
   },
   "devDependencies": {
-    "playwright": "^1.49.0"
+    "playwright": "^1.49.0",
+    "typescript": "^7.0.2"
   }
 }

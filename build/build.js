@@ -17,6 +17,7 @@ const path = require('path');
 const { build, derive } = require('./model');
 const { make, esc, pageOf, splitVersion, THEME_BOOT } = require('./render');
 const products = require('./products');
+const agents = require('./agents');
 
 const ROOT = path.join(__dirname, '..');
 const OUT = process.env.OUT_DIR || path.join(ROOT, 'site');
@@ -85,6 +86,7 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
 
 let bytes = 0, pages = 0;
+const typeStats = [];
 const write = (rel, content) => {
   const f = path.join(OUT, rel);
   fs.mkdirSync(path.dirname(f), { recursive: true });
@@ -130,13 +132,56 @@ for (const t of targets) {
   }
   write(t.slug + '/search.js', 'window.__SEARCH=' + JSON.stringify(index) + ';');
 
+  /* ---------- maschinenlesbare Zwillinge ----------
+     Markdown je Objekt unter derselben URL wie die Seite, dazu api.json und
+     eine TypeScript-Deklaration. Siehe build/agents.js. */
+  const kindOf = c => c.enum ? 'Enumeration' : d.isCollection(c) ? 'Collection' : 'Object';
+  const elementOf = c => d.isCollection(c) ? d.elementOf(c) : null;
+  const T = agents.makeTypeMapper(new Set(
+    /* Die Typabbildung kennt auch die gemeinsamen Bibliotheken: File und
+       WindowSUI kommen in Produkttypen vor, stehen aber nicht im Produkt. */
+    [...t.names, ...js.names, ...sui.names]));
+
+  for (const c of t.data.classes)
+    write(t.slug + '/' + pageOf(c.n).replace(/\.html$/, '.md'),
+      agents.markdown(c, {
+        kind: kindOf(c), element: elementOf(c), T, target: t, version: t.data.version
+      }));
+
+  write(t.slug + '/api.json', agents.apiJson(t, t.data.classes, {
+    kindOf, elementOf, T, version: t.data.version, generated: t.data.generated
+  }));
+
+  /* Die .d.ts ist in sich geschlossen: ein Produkt plus beide gemeinsamen
+     Bibliotheken. Eine Datei ins Projekt legen und fertig — Verweise auf
+     Nachbardateien waeren beim Herunterladen nur eine Fehlerquelle. */
+  const forTypes = t.kind === 'Product'
+    ? t.data.classes.concat(js.data.classes, sui.data.classes)
+    : t.data.classes;
+  write(t.slug + '/' + t.slug + '.d.ts', agents.buildTypes(
+    forTypes.map(c => Object.assign({}, c, { element: elementOf(c) }))
+      .sort((a, b) => a.n < b.n ? -1 : a.n > b.n ? 1 : 0),
+    T, {
+      title: t.label + ' — ' + t.data.version,
+      generated: t.data.generated,
+      home: 'https://www.indesignjs.de/extendscriptAPI/' + t.slug + '/'
+    }));
+  write(t.slug + '/llms.txt', agents.llmsProduct(t, t.data.classes, kindOf));
+  typeStats.push([t.slug, T.stats()]);
+
   console.log('  ' + t.slug.padEnd(17) + String(t.data.classes.length).padStart(5) + ' Seiten');
 }
 
 /* ---------- Startseite ---------- */
 write('index.html', homePage(targets, models[0].data.generated));
+write('llms.txt', agents.llmsRoot(targets, models[0].data.generated));
 for (const f of ['site.css', 'site.js'])
   write('assets/' + f, fs.readFileSync(path.join(__dirname, 'assets', f)));
+
+for (const [slug, st] of typeStats)
+  if (st.unknown)
+    console.log('  ' + slug.padEnd(17) + st.unknown + ' Typangaben ohne Entsprechung → any' +
+      (st.top.length ? '  (' + st.top.map(x => x[0] + '×' + x[1]).slice(0, 3).join(', ') + ')' : ''));
 
 console.log('gesamt   ' + pages + ' Seiten, ' + (bytes / 1048576).toFixed(1) + ' MB in ' +
   (Date.now() - started) + ' ms → ' + path.relative(ROOT, OUT));
@@ -177,6 +222,11 @@ function homePage(targets, generated) {
     <ul class="cards">${prods.map(card).join('')}</ul></section>
   <section><h2 class="sechead">Shared libraries <b>${libs.length}</b></h2>
     <ul class="cards">${libs.map(card).join('')}</ul></section>
+  <section class="machine"><h2 class="sechead" id="for-tools">For editors and AI agents</h2>
+    <p class="lede">Every target ships TypeScript declarations, a JSON model and a
+    Markdown twin of each page at the same path. Point an agent at
+    <a href="llms.txt">llms.txt</a>, or open a target above and look under
+    <i>For editors and AI agents</i>.</p></section>
   <footer>
     <p class="legal">Generated with AI assistance from Adobe’s original sources — descriptive texts
     are Adobe’s, transformation errors are ours. Copyright of the original files, and the trademarks

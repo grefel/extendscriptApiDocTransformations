@@ -193,6 +193,22 @@ function make(data, d, ctx) {
     let h = `<div class="kind">${esc(target.kind || 'Reference')}</div><h1>${esc(target.label)}</h1>
       <p class="lede">${esc(data.version)}${v.build ? '' : ''}. ${own.length} entries.</p>`;
     if (target.note) h += `<p class="note">${esc(target.note)}</p>`;
+
+    /* Maschinenlesbare Ausgaben. Bewusst hier und nicht in der Kopfzeile: das
+       holt man einmal je Projekt, nicht dutzendfach je Stunde — und der Kopf
+       ist voll. Erzeugt von build/agents.js. */
+    h += `<section class="machine"><h2 class="sechead" id="for-tools">For editors and AI agents</h2>
+      <ul class="dl">
+        <li><a href="${esc(target.slug)}.d.ts" download><b>${esc(target.slug)}.d.ts</b>
+          <span>TypeScript declarations, self-contained. Drop it into a project and
+          the editor answers without a lookup.</span></a></li>
+        <li><a href="llms.txt"><b>llms.txt</b>
+          <span>Where everything lives, for an AI agent. Every object also has a
+          Markdown twin at the same path as its page.</span></a></li>
+        <li><a href="api.json" download><b>api.json</b>
+          <span>The whole model as JSON, for your own tooling. Large.</span></a></li>
+      </ul></section>`;
+
     for (const [name, list] of groups) {
       h += `<section><h2 class="sechead" id="${name.toLowerCase()}">${name} <b>${list.length}</b></h2>
         <ul class="grid">` + list.map(c =>

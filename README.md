@@ -39,6 +39,18 @@ On Windows:
   - `\Users\[Username]\AppData\Roaming\Adobe\ExtendScript Toolkit\4.0\omv$indesign-10.064$10.0.xml`
   - `C:\Program Files (x86)\Common Files\Adobe\Scripting Dictionaries CC\CommonFiles\`
 
+## For editors and AI agents
+
+Every target ships more than the pages:
+
+- `<target>/<target>.d.ts` — self-contained TypeScript declarations with Adobe’s
+  descriptions as JSDoc. Compile with `"lib": ["es5"]` and without `dom`.
+  `npm run check:types` translates every one of them with the real compiler.
+- `<target>/<Object>.md` — a Markdown twin of each page at the same path, for
+  agents that fetch rather than browse. Roughly a third of the tokens.
+- `<target>/api.json` — the whole model as JSON.
+- `llms.txt` at the root and per target — the entry point that names all of it.
+
 ## Sublime Text code completions
 
 Separate output, still on the XSLT route: transform a merged and fixed DOM file with

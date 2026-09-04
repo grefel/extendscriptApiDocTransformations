@@ -73,6 +73,56 @@ ergänzt nur Bedienelemente; die sind im HTML als `[hidden]` markiert und werden
 erst durch das Skript eingeschaltet. `check-site.js` prüft das mit abgeschaltetem
 JavaScript mit.
 
+## Für Editoren und KI-Agenten
+
+`build/agents.js` erzeugt aus demselben Modell wie das HTML vier weitere
+Ausgaben. Nichts davon wird aus der fertigen Seite zurückgelesen.
+
+| Ausgabe | wofür | Größe (InDesign) |
+|---|---|---|
+| `<slug>/<slug>.d.ts` | beim **Schreiben** von Code: liegt im Projekt, der Sprachserver antwortet ohne Abruf | 4,5 MB |
+| `<slug>/<Object>.md` | beim **Nachschlagen**: gleiche URL wie die Seite, ohne Markup | 40 KB statt 137 KB |
+| `<slug>/api.json` | eigenes Werkzeug | 7 MB |
+| `llms.txt` (Wurzel und je Ziel) | der Einstieg, der auf all das zeigt | 1,8 KB / 151 KB |
+
+Die `.d.ts` ist **in sich geschlossen**: ein Produkt plus Core JavaScript und
+ScriptUI. Eine Datei ins Projekt legen und fertig — Verweise auf Nachbardateien
+wären beim Herunterladen nur eine Fehlerquelle.
+
+`llms.txt` ist eine Konvention, kein Standard; nichts findet sie von allein. Ihr
+Wert liegt darin, dass man sagen kann „richte deinen Agenten auf diese URL".
+
+### Was beim Übersetzen schiefging
+
+**`npm run check:types` übersetzt jede Deklaration mit dem echten Compiler.**
+Ohne diesen Lauf wäre die Zusage „hier sind Typen" ungedeckt — beim ersten
+Versuch scheiterten alle sieben Dateien an **719 Fehlern**, alle mit derselben
+Ursache: Adobe benutzt reservierte Wörter als Parameternamen
+(`findKeyStrings(for)`, `prompt(…, default, …)`, `rotate(with)`). In einer
+Deklarationsdatei ist der Parametername reine Dokumentation, deshalb trägt er
+jetzt einen Unterstrich (`for_`, `default_`).
+
+Übersetzt wird mit `--lib es5` und **ohne `dom`**: ExtendScript ist kein Browser,
+und mit den DOM-Definitionen kollidieren `Document` und `Event`.
+
+### Typabbildung
+
+Adobes Typangaben sind teils Prosa; 116 der vorkommenden Namen bezeichnen keine
+Klasse. Die Regeln in `agents.js` fangen das Meiste ab — `Int`/`LongInteger`/
+`Unit` → `number`, `3 Reals (0 - 255)` → `number[]`, `NothingEnums` →
+`NothingEnum[]`, `Index` → `Index_`.
+
+Zwei Sonderwege:
+
+- Ein **sauberer Bezeichner, den Adobe nie definiert** (`ElementPlacement`,
+  `MatrixContent`) behält seinen Namen und bekommt am Kopf der Datei ein
+  `type X = any`. Das ist ehrlicher als ein nacktes `any` und lässt erkennen,
+  was gemeint war.
+- Ein **Doppelpunkt im Typnamen** ist immer ein Adobe-Datenfehler
+  (`Orderedarraycontainingkey:String`) und wird zu `any`. Der Build meldet je
+  Produkt, wie oft das passiert: 856 bei InDesign, davon allein 528 aus zwei
+  kaputten Angaben.
+
 ## Schmales Fenster
 
 Sauber bis hinunter zu **650 px** Fensterbreite, ohne waagerechtes Scrollen.
