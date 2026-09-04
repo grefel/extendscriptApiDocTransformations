@@ -323,10 +323,25 @@ const check = (name, got, want) => {
   await page.locator('.trail a').first().click();
   await page.waitForTimeout(300);
   check('Spur fuehrt zum Ziel', await page.locator('h1').innerText(), 'Polygon');
-  /* Eigene Liste je Produkt: sonst stuende hier ein InDesign-Objekt. */
-  await page.goto(url('bridge/index.html'));
-  await page.waitForTimeout(200);
-  check('Spur ist je Produkt eigen', await page.locator('.trail a').count(), 0);
+  check('Spur im eigenen Modell ohne Kuerzel',
+    await page.locator('.trail a em').count(), 0);
+
+  /* Eine Spur ueber alle Objektmodelle: der Weg von einem Produkt in die
+     gemeinsamen Bibliotheken (Document → String) soll auch zurueckfuehren.
+     Fremde Eintraege tragen das Kuerzel ihres Modells, sonst waeren
+     InDesigns und Illustrators Document nicht zu unterscheiden. */
+  await page.goto(url('javascript/String.html'));
+  await page.waitForTimeout(250);
+  check('Spur reicht ueber das Objektmodell hinaus',
+    await page.locator('.trail a').first().getAttribute('href'),
+    '../indesign/Polygon.html');
+  check('fremder Eintrag traegt sein Kuerzel',
+    await page.locator('.trail a em').first().textContent(), 'id');
+  await page.locator('.trail a').first().click();
+  await page.waitForTimeout(400);
+  check('Spur fuehrt ins andere Modell',
+    await page.evaluate(() => document.body.dataset.target), 'indesign');
+  check('und auf das richtige Objekt', await page.locator('h1').innerText(), 'Polygon');
 
   /* Startseite */
   await page.goto(url('index.html'));
