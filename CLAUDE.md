@@ -173,10 +173,11 @@ man Template-Literale aus dem Quelltext mit.
 | `sourceXML/` | Adobe-Originale je Produkt/Version, **nicht** versioniert |
 | `site/` | erzeugte Website, gitignored |
 | `design/` | eingefrorene Prototypen der Designphase (Konzepte A, B, C) |
-| `temp/`, `domOut/`, `skinAndInfo/` | Reste der alten Strecke, gitignored |
+| `temp/` | nur für `npm run verify`; `prepare-xslt.js` legt den Ordner selbst an |
 
-Die Zips im Wurzelverzeichnis und alles unter `sourceXML/`, `skinAndInfo/` und `domOut/`
-sind **nicht in der Git-Historie**. Vor dem Löschen dort immer rückfragen.
+`domOut/`, `skinAndInfo/` und die Download-Zips sind mit der DITA-Strecke weg.
+Der Inhalt von `sourceXML/` ist **nicht in der Git-Historie** — vor dem Löschen dort
+immer rückfragen.
 
 ---
 

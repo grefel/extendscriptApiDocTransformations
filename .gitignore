@@ -44,15 +44,11 @@ Temporary Items
 .apdisk
 
 
-skinAndInfo/
-domOut/
+# Download-Pakete der Website, je Produktversion
+*.zip
 
-extendScriptAPI.xpr
-bridge2021.zip
-illustrator25.zip
-illustrator27.zip
-illustrator28.zip
-indesign18.zip
+# Gegenprobe gegen die alte XSLT-Strecke; prepare-xslt.js legt den Ordner an
+temp/
 
 # Design-Phase: aus fixedDOM.xml generierte Prototyp-Daten, nicht versionieren
 design/api.json
