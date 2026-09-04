@@ -74,6 +74,28 @@
     }));
   }
 
+  /* ---------- Zuletzt besucht ----------
+     Die drei zuvor geoeffneten Objekte, neuestes zuerst. Je Produkt eine eigene
+     Liste: sonst stuende nach einem Produktwechsel ein fremdes "Document" neben
+     dem eigenen, ohne dass man die beiden auseinanderhalten koennte.
+     Die aktuelle Seite steht nicht in der Spur — sie ist ja schon offen. */
+  const trail = $('[data-enhance="trail"]');
+  if (trail) {
+    const KEY = 'recent:' + (document.body.dataset.target || '');
+    let seen;
+    try { seen = JSON.parse(store.get(KEY, '[]')); } catch (e) { seen = null; }
+    if (!Array.isArray(seen)) seen = [];
+    seen = seen.filter(n => typeof n === 'string' && n !== CURRENT);
+
+    if (CURRENT) store.set(KEY, JSON.stringify([CURRENT].concat(seen).slice(0, 12)));
+    const prev = seen.slice(0, 3);
+    if (prev.length) {
+      trail.innerHTML = '<span class="h">Recent</span>' + prev.map(n =>
+        `<a href="${page(n)}" title="${esc(n)}">${esc(n)}</a>`).join('');
+      trail.hidden = false;
+    }
+  }
+
   /* ---------- Zwischenablage ----------
      Member auf Klassenebene werden qualifiziert kopiert (CopyrightStatus.YES),
      Instanz-Properties nackt, Methoden mit (). Das steckt bereits in data-cp. */

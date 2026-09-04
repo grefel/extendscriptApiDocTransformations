@@ -60,6 +60,18 @@ a:hover{text-decoration:underline}
 .prodmenu a.on{background:var(--accent-soft);color:var(--accent)}
 .prodmenu a i{font-style:normal;font:10.5px var(--mono);color:var(--dim)}
 .prodmenu a.on i{color:var(--accent);opacity:.8}
+/* Zuletzt besucht. Eine Recency-Spur, keine Hierarchie — ohne die Beschriftung
+   liest sich die Reihe wie ein Breadcrumb und behauptet damit etwas Falsches.
+   min-width:0 ist noetig, damit die Flexbox sie vor dem Suchfeld kuerzt. */
+.trail{display:flex;align-items:baseline;gap:9px;min-width:0;overflow:hidden}
+.trail .h{flex:none;font:600 10px/1 var(--sans);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--dim);opacity:.7}
+/* flex:0 1 auto mit min-width:0 laesst die Namen erst kuerzen, wenn der Kopf
+   eng wird — statt sie immer auf eine feste Breite zu stutzen. Das Suchfeld
+   hat Vorrang: es haelt seine min-width, die Spur gibt zuerst nach. */
+.trail a{flex:0 1 auto;min-width:0;max-width:21ch;font:11.5px/1 var(--mono);
+  color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trail a:hover{color:var(--accent);text-decoration:none}
 .kbtn{margin-left:auto;display:flex;align-items:center;gap:9px;border:1px solid var(--line);
   background:var(--panel);color:var(--dim);border-radius:7px;padding:6px 11px;cursor:pointer;
   font:12px/1 var(--sans);min-width:265px}
@@ -237,6 +249,10 @@ footer .by .sep{opacity:.45;margin:0 4px}
 .palfoot{display:flex;gap:14px;padding:8px 18px;border-top:1px solid var(--line);
   font:10.5px var(--sans);color:var(--dim)}
 
+/* Der Kopf ist ab hier zu voll fuer die Spur; das Suchfeld hat Vorrang. */
+@media (max-width:1280px){
+  .trail{display:none}
+}
 @media (max-width:1100px){
   .grid{grid-template-columns:200px minmax(0,1fr)}
   .rail2{display:none}

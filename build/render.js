@@ -241,6 +241,7 @@ function shell({ title, description, body, current, target, targets, data, isInd
     <button type="button" data-r="es" class="on">ExtendScript</button>
     <button type="button" data-r="uxp">UXP</button>
   </div>` : ''}
+  <nav class="trail" hidden data-enhance="trail" aria-label="Recently visited"></nav>
   <button class="kbtn" type="button" hidden data-enhance="search">
     <span>Search ${esc(target.label)}…</span><span class="keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></button>
   <button class="tg" type="button" hidden data-enhance="theme"></button>
