@@ -253,6 +253,16 @@ td.d{color:var(--dim)}
   gap:1px 16px;list-style:none;padding:0;margin:10px 0 0;min-height:0}
 ul.grid li{font:12.5px var(--mono)}
 
+/* Maschinenlesbare Ausgaben auf der Produktseite. Kein Blickfang: wer sie
+   sucht, sucht gezielt. */
+.machine .dl{list-style:none;padding:0;margin:10px 0 0;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:9px}
+.machine .dl a{display:block;padding:11px 13px;border:1px solid var(--line);
+  border-radius:9px;background:var(--panel);color:var(--ink)}
+.machine .dl a:hover{border-color:var(--accent);text-decoration:none}
+.machine .dl b{display:block;font:12.5px var(--mono);color:var(--accent);font-weight:600}
+.machine .dl span{display:block;margin-top:5px;font-size:12px;color:var(--dim);line-height:1.45}
+
 /* ---------- Fussbereich ---------- */
 /* Bewusst ruhig: eine Textfarbe, keine Rahmen, kein Fettdruck. */
 footer{border-top:1px solid var(--line);margin-top:40px;padding:18px 0 8px;

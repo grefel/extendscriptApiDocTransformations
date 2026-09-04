@@ -365,6 +365,35 @@ const check = (name, got, want) => {
   check('Startseite weist auf veraltete Photoshop-Daten hin',
     (await page.locator('ul.cards .note').count()) >= 1, true);
 
+  /* --- Maschinenlesbare Ausgaben ---
+     Nur Vorhandensein und Verweise; ob die Deklarationen uebersetzen, prueft
+     "npm run check:types" mit dem echten Compiler. */
+  const exists = f => fs.existsSync(path.join(SITE, f));
+  for (const f of ['llms.txt', 'indesign/llms.txt', 'indesign/api.json',
+    'indesign/indesign.d.ts', 'indesign/Rectangle.md', 'scriptui/scriptui.d.ts'])
+    check('erzeugt: ' + f, exists(f), true);
+  /* Der Markdown-Zwilling liegt unter derselben URL wie die Seite — nur so
+     kann ein Agent von einem gefundenen Link auf die guenstigere Fassung
+     schliessen. */
+  check('Markdown-Zwilling zu jeder Seite',
+    fs.readdirSync(path.join(SITE, 'indesign')).filter(f => f.endsWith('.md')).length,
+    1097);
+  const md = fs.readFileSync(path.join(SITE, 'indesign/Rectangle.md'), 'utf8');
+  check('Markdown nennt Art und Version', /^# Rectangle\n\n> Object · InDesign/.test(md), true);
+  check('Markdown ist deutlich kleiner als die Seite',
+    Buffer.byteLength(md) * 2 < fs.statSync(path.join(SITE, 'indesign/Rectangle.html')).size,
+    true);
+  await page.goto(url('indesign/index.html'));
+  await page.waitForTimeout(250);
+  check('Produktseite verlinkt die Typen',
+    await page.locator('.machine a[href="indesign.d.ts"]').count(), 1);
+  check('Produktseite verlinkt llms.txt',
+    await page.locator('.machine a[href="llms.txt"]').count(), 1);
+  await page.goto(url('index.html'));
+  await page.waitForTimeout(200);
+  check('Startseite verweist auf llms.txt',
+    await page.locator('.machine a[href="llms.txt"]').count(), 1);
+
   /* --- Schmales Fenster: nichts darf seitlich herauslaufen ---
      Die Tabellen laufen mit table-layout:fixed. Deren Kehrseite: eine zu schmal
      deklarierte Spalte schiebt ihren Inhalt in die Nachbarspalte, statt die

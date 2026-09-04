@@ -70,8 +70,8 @@ hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
 4. Umgang mit kaputten Adobe-Typangaben (siehe unten).
 5. `fixDom.xsl` benennt die Klasse `Index` in `Index_` um — ein Workaround aus der
    DITA-Zeit. Im HTML-Pfad vermutlich unnötig, wird derzeit aber mit angezeigt.
-6. **Aufbereitung für KI-Coding-Agenten.** Geplant, noch nicht gebaut: `.md`-Zwillinge
-   je Seite, `llms.txt`, `api.json` je Produkt, später `.d.ts` je Produkt.
+6. Wie tief soll die Typabbildung gehen? 856 Typangaben je InDesign-Modell sind
+   Adobe-Prosa und landen als `any` — siehe build/README.md.
 
 ---
 
@@ -131,6 +131,7 @@ npm install
 npm run build      # sourceXML/*.xml → site/
 npm run serve      # http://localhost:8080
 npm run check      # Browsertest der fertigen Website (Playwright)
+npm run check:types # jede erzeugte .d.ts mit dem echten TypeScript-Compiler
 npm run verify     # Portierung gegen die alte XSLT-Strecke halten
 ```
 
@@ -169,7 +170,7 @@ man Template-Literale aus dem Quelltext mit.
 
 | Pfad | Inhalt |
 |---|---|
-| `build/` | die Pipeline — Modell, Rendering, Tests |
+| `build/` | die Pipeline — Modell, Rendering, Tests, agents.js |
 | `sourceXML/` | Adobe-Originale je Produkt/Version, **nicht** versioniert |
 | `site/` | erzeugte Website, gitignored |
 | `design/` | eingefrorene Prototypen der Designphase (Konzepte A, B, C) |
