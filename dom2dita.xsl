@@ -45,6 +45,390 @@
 			</topic>
 		</xsl:result-document>
 
+		<!-- Changelog-Topic ("What's New"). Dateiname darf NICHT "changes" lauten, das kollidiert unter Windows mit der generierten Klasse "Changes". Inhalt ist releasespezifisch (Diff 21.0 -> 21.5) und muss
+		     bei einer neuen InDesign-Version neu erzeugt werden. -->
+		<xsl:result-document href="whatsnew.dita" doctype-public="-//OASIS//DTD DITA Topic//EN"
+			doctype-system="topic.dtd" indent="yes">
+			<topic id="topic_whatsnew_21_5">
+				<title>What's New (AI generated) TODO</title>
+				<body>
+					<p>This page lists what changed in the <b>Adobe InDesign 2026 (21.5)</b> ExtendScript API compared with <b>Adobe InDesign 2026 (21.0)</b>. It was produced by diffing the documented API surface of both builds – every property, method and enumerator value – so it should be complete for anything Adobe actually documents.</p>
+					<p><b>122 members were added, none were removed.</b> The object model grew from 42,516 to 42,638 documented members, and six new classes and enumerations appeared: <xref href="ColumnTypes.dita">ColumnTypes</xref>, <xref href="EpubAriaLabelSourceType.dita">EpubAriaLabelSourceType</xref>, <xref href="HeaderColumnsPositionTypes.dita">HeaderColumnsPositionTypes</xref>, <xref href="Html5ExportPreference.dita">Html5ExportPreference</xref>, <xref href="TableCaptionPositionOptions.dita">TableCaptionPositionOptions</xref> and <xref href="TextExportFormatEnum.dita">TextExportFormatEnum</xref>.</p>
+
+					<section>
+						<title>Table accessibility (PDF/UA)</title>
+						<p>The largest addition. Tables can now carry header columns and designated caption paragraphs, both of which are exported as real structure to tagged PDF.</p>
+						<table frame="all" rowsep="1" colsep="1">
+							<tgroup cols="4">
+								<colspec colname="c1" colnum="1" colwidth="0.18*"/>
+								<colspec colname="c2" colnum="2" colwidth="0.22*"/>
+								<colspec colname="c3" colnum="3" colwidth="0.18*"/>
+								<colspec colname="c4" colnum="4" colwidth="0.42*"/>
+								<thead>
+									<row>
+										<entry><p>Class</p></entry>
+										<entry><p>Member</p></entry>
+										<entry><p>Type</p></entry>
+										<entry><p>Description</p></entry>
+									</row>
+								</thead>
+								<tbody>
+									<row>
+										<entry><p><xref href="Table.dita">Table</xref></p></entry>
+										<entry><p>numHeaderColumns</p></entry>
+										<entry><p>Number</p></entry>
+										<entry><p outputclass="description">The number of header columns in the table.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="Table.dita">Table</xref></p></entry>
+										<entry><p>headerColumnsPosition</p></entry>
+										<entry><p><xref href="HeaderColumnsPositionTypes.dita">HeaderColumnsPositionTypes</xref></p></entry>
+										<entry><p outputclass="description">The position (left or right) of the header columns in the table.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="Table.dita">Table</xref></p></entry>
+										<entry><p>captionParagraphCount</p></entry>
+										<entry><p>Number</p></entry>
+										<entry><p outputclass="description">The number of paragraphs adjacent to the table that are designated as a table caption for PDF/UA export. Use 0 to disable.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="Table.dita">Table</xref></p></entry>
+										<entry><p>captionPosition</p></entry>
+										<entry><p><xref href="TableCaptionPositionOptions.dita">TableCaptionPositionOptions</xref></p></entry>
+										<entry><p outputclass="description">Whether the caption paragraphs come before or after the table.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="TableStyle.dita">TableStyle</xref></p></entry>
+										<entry><p>headerColumnCellStyle</p></entry>
+										<entry><p><xref href="CellStyle.dita">CellStyle</xref></p></entry>
+										<entry><p outputclass="description">The cell style of the header column. Can also accept: String.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="TableStyle.dita">TableStyle</xref></p></entry>
+										<entry><p>captionParagraphCount</p></entry>
+										<entry><p>Number</p></entry>
+										<entry><p outputclass="description">The number of paragraphs adjacent to the table that are designated as a table caption for PDF/UA export. Use 0 to disable.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="TableStyle.dita">TableStyle</xref></p></entry>
+										<entry><p>captionPosition</p></entry>
+										<entry><p><xref href="TableCaptionPositionOptions.dita">TableCaptionPositionOptions</xref></p></entry>
+										<entry><p outputclass="description">Whether the caption paragraphs come before or after the table.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="Cell.dita">Cell</xref>, <xref href="Column.dita">Column</xref></p></entry>
+										<entry><p>columnType</p></entry>
+										<entry><p><xref href="ColumnTypes.dita">ColumnTypes</xref></p></entry>
+										<entry><p outputclass="description">The column type.</p></entry>
+									</row>
+								</tbody>
+							</tgroup>
+						</table>
+						<p>Three new enumerations back these properties:</p>
+						<table frame="all" rowsep="1" colsep="1">
+							<tgroup cols="3">
+								<colspec colname="c1" colnum="1" colwidth="0.3*"/>
+								<colspec colname="c2" colnum="2" colwidth="0.28*"/>
+								<colspec colname="c3" colnum="3" colwidth="0.42*"/>
+								<thead>
+									<row>
+										<entry><p>Enumerator</p></entry>
+										<entry><p>Value</p></entry>
+										<entry><p>Description</p></entry>
+									</row>
+								</thead>
+								<tbody>
+									<row>
+										<entry><p><xref href="ColumnTypes.dita">ColumnTypes</xref></p></entry>
+										<entry><p>BODY_COLUMN</p></entry>
+										<entry><p outputclass="description">A regular body column.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="ColumnTypes.dita">ColumnTypes</xref></p></entry>
+										<entry><p>HEADER_COLUMN</p></entry>
+										<entry><p outputclass="description">A header column. Note: When setting column type as header column, the column must be flush with the left or right edge of the table, or adjacent to an existing header column on the same side.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="HeaderColumnsPositionTypes.dita">HeaderColumnsPositionTypes</xref></p></entry>
+										<entry><p>HEADER_COLUMNS_LEFT</p></entry>
+										<entry><p outputclass="description">Header columns are the leftmost columns.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="HeaderColumnsPositionTypes.dita">HeaderColumnsPositionTypes</xref></p></entry>
+										<entry><p>HEADER_COLUMNS_RIGHT</p></entry>
+										<entry><p outputclass="description">Header columns are the rightmost columns.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="TableCaptionPositionOptions.dita">TableCaptionPositionOptions</xref></p></entry>
+										<entry><p>BEFORE_TABLE</p></entry>
+										<entry><p outputclass="description">Caption paragraphs precede the table.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="TableCaptionPositionOptions.dita">TableCaptionPositionOptions</xref></p></entry>
+										<entry><p>AFTER_TABLE</p></entry>
+										<entry><p outputclass="description">Caption paragraphs follow the table.</p></entry>
+									</row>
+								</tbody>
+							</tgroup>
+						</table>
+					</section>
+
+					<section>
+						<title>HTML5 export</title>
+						<p>A completely new export target with its own preference object. <b>ExportFormat.HTML5</b> ("Exports to HTML5 format.") is now offered as a parameter value by the <i>exportFile()</i> method of 45 classes.</p>
+						<table frame="all" rowsep="1" colsep="1">
+							<tgroup cols="4">
+								<colspec colname="c1" colnum="1" colwidth="0.18*"/>
+								<colspec colname="c2" colnum="2" colwidth="0.22*"/>
+								<colspec colname="c3" colnum="3" colwidth="0.18*"/>
+								<colspec colname="c4" colnum="4" colwidth="0.42*"/>
+								<thead>
+									<row>
+										<entry><p>Class</p></entry>
+										<entry><p>Member</p></entry>
+										<entry><p>Type</p></entry>
+										<entry><p>Description</p></entry>
+									</row>
+								</thead>
+								<tbody>
+									<row>
+										<entry><p><xref href="Document.dita">Document</xref></p></entry>
+										<entry><p>html5ExportPreferences</p></entry>
+										<entry><p><xref href="Html5ExportPreference.dita">Html5ExportPreference</xref></p></entry>
+										<entry><p outputclass="description">HTML5 Export preference settings.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="Html5ExportPreference.dita">Html5ExportPreference</xref></p></entry>
+										<entry><p>copyFonts</p></entry>
+										<entry><p>Boolean</p></entry>
+										<entry><p outputclass="description">Copy fonts during export.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="Html5ExportPreference.dita">Html5ExportPreference</xref></p></entry>
+										<entry><p>textExportFormat</p></entry>
+										<entry><p><xref href="TextExportFormatEnum.dita">TextExportFormatEnum</xref></p></entry>
+										<entry><p outputclass="description">The format of text to export (HTML or SVG). Values: HTML_TAG (text with HTML tags), SVG_TAG (text with SVG tags).</p></entry>
+									</row>
+								</tbody>
+							</tgroup>
+						</table>
+						<p>Besides those two properties, <xref href="Html5ExportPreference.dita">Html5ExportPreference</xref> carries the usual boilerplate: <i>parent</i>, <i>properties</i>, <i>isValid</i>, <i>events</i>, <i>eventListeners</i>, <i>addEventListener()</i>, <i>removeEventListener()</i>, <i>getElements()</i>, <i>toSource()</i> and <i>toSpecifier()</i>.</p>
+					</section>
+
+					<section>
+						<title>EPUB accessibility and ARIA</title>
+						<table frame="all" rowsep="1" colsep="1">
+							<tgroup cols="4">
+								<colspec colname="c1" colnum="1" colwidth="0.18*"/>
+								<colspec colname="c2" colnum="2" colwidth="0.22*"/>
+								<colspec colname="c3" colnum="3" colwidth="0.18*"/>
+								<colspec colname="c4" colnum="4" colwidth="0.42*"/>
+								<thead>
+									<row>
+										<entry><p>Class</p></entry>
+										<entry><p>Member</p></entry>
+										<entry><p>Type</p></entry>
+										<entry><p>Description</p></entry>
+									</row>
+								</thead>
+								<tbody>
+									<row>
+										<entry><p><xref href="ObjectExportOption.dita">ObjectExportOption</xref>, <xref href="ObjectStyle.dita">ObjectStyle</xref></p></entry>
+										<entry><p>epubAriaLabel</p></entry>
+										<entry><p>String</p></entry>
+										<entry><p outputclass="description">The epub aria label as recommended by IDPF.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="ObjectExportOption.dita">ObjectExportOption</xref>, <xref href="ObjectStyle.dita">ObjectStyle</xref></p></entry>
+										<entry><p>epubAriaLabelSourceType</p></entry>
+										<entry><p><xref href="EpubAriaLabelSourceType.dita">EpubAriaLabelSourceType</xref></p></entry>
+										<entry><p outputclass="description">The source to use when generating the aria-label during EPUB export. Values: AUTOMATIC_ARIA_LABEL (automatically derive the aria-label), CUSTOM_ARIA_LABEL (use the custom aria-label string), NONE_ARIA_LABEL (do not emit an aria-label).</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="Hyperlink.dita">Hyperlink</xref></p></entry>
+										<entry><p>epubAriaRole</p></entry>
+										<entry><p>String</p></entry>
+										<entry><p outputclass="description">The epub aria role as recommended by IDPF.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="Hyperlink.dita">Hyperlink</xref></p></entry>
+										<entry><p>hypherlinkAltText</p></entry>
+										<entry><p>String</p></entry>
+										<entry><p outputclass="description">The hypherlink alt text. The misspelling is Adobe's and is part of the actual property name.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="ImageSizeOption.dita">ImageSizeOption</xref></p></entry>
+										<entry><p>SIZE_NONE</p></entry>
+										<entry><p>enumerator</p></entry>
+										<entry><p outputclass="description">CSS size to be used is none. Now accepted by <xref href="EPubExportPreference.dita">EPubExportPreference</xref> and <xref href="HTMLExportPreference.dita">HTMLExportPreference</xref>.</p></entry>
+									</row>
+								</tbody>
+							</tgroup>
+						</table>
+					</section>
+
+					<section>
+						<title>Generated alternative text</title>
+						<table frame="all" rowsep="1" colsep="1">
+							<tgroup cols="4">
+								<colspec colname="c1" colnum="1" colwidth="0.18*"/>
+								<colspec colname="c2" colnum="2" colwidth="0.22*"/>
+								<colspec colname="c3" colnum="3" colwidth="0.18*"/>
+								<colspec colname="c4" colnum="4" colwidth="0.42*"/>
+								<thead>
+									<row>
+										<entry><p>Class</p></entry>
+										<entry><p>Member</p></entry>
+										<entry><p>Type</p></entry>
+										<entry><p>Description</p></entry>
+									</row>
+								</thead>
+								<tbody>
+									<row>
+										<entry><p><xref href="GeneralPreference.dita">GeneralPreference</xref></p></entry>
+										<entry><p>autoGenerateAltText</p></entry>
+										<entry><p>Boolean</p></entry>
+										<entry><p outputclass="description">If true, alt text for images are auto generated when imported.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="GeneralPreference.dita">GeneralPreference</xref></p></entry>
+										<entry><p>addAITagToAltText</p></entry>
+										<entry><p>Boolean</p></entry>
+										<entry><p outputclass="description">If true, alt text for images are appended with generated by AI tag.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="ObjectExportOption.dita">ObjectExportOption</xref></p></entry>
+										<entry><p>altTextGenerationError</p></entry>
+										<entry><p>Boolean</p></entry>
+										<entry><p outputclass="description">If true, GenAI alt text generation failed for this object; the UI may show Generate again.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="ObjectExportOption.dita">ObjectExportOption</xref></p></entry>
+										<entry><p>altTextCropSyncRect</p></entry>
+										<entry><p>String</p></entry>
+										<entry><p outputclass="description">Comma-separated left,top,right,bottom in image inner coordinates at last successful GenAI alt sync; empty clears.</p></entry>
+									</row>
+								</tbody>
+							</tgroup>
+						</table>
+					</section>
+
+					<section>
+						<title>Contour options</title>
+						<p>Four read/write Numbers on <xref href="ContourOption.dita">ContourOption</xref> expose settings that previously could only be reached through the user interface:</p>
+						<table frame="all" rowsep="1" colsep="1">
+							<tgroup cols="2">
+								<colspec colname="c1" colnum="1" colwidth="0.3*"/>
+								<colspec colname="c2" colnum="2" colwidth="0.7*"/>
+								<thead>
+									<row>
+										<entry><p>Member</p></entry>
+										<entry><p>Description</p></entry>
+									</row>
+								</thead>
+								<tbody>
+									<row>
+										<entry><p>contourPathIndex</p></entry>
+										<entry><p outputclass="description">The embedded path index used by contour options.</p></entry>
+									</row>
+									<row>
+										<entry><p>contourAlphaIndex</p></entry>
+										<entry><p outputclass="description">The alpha index used by contour options.</p></entry>
+									</row>
+									<row>
+										<entry><p>contourThreshold</p></entry>
+										<entry><p outputclass="description">The contour threshold.</p></entry>
+									</row>
+									<row>
+										<entry><p>contourTolerance</p></entry>
+										<entry><p outputclass="description">The contour tolerance.</p></entry>
+									</row>
+								</tbody>
+							</tgroup>
+						</table>
+					</section>
+
+					<section>
+						<title>Scripting events</title>
+						<p>Two new event types on <xref href="Event.dita">Event</xref> and <xref href="Application.dita">Application</xref>:</p>
+						<table frame="all" rowsep="1" colsep="1">
+							<tgroup cols="2">
+								<colspec colname="c1" colnum="1" colwidth="0.3*"/>
+								<colspec colname="c2" colnum="2" colwidth="0.7*"/>
+								<thead>
+									<row>
+										<entry><p>Value</p></entry>
+										<entry><p>Description</p></entry>
+									</row>
+								</thead>
+								<tbody>
+									<row>
+										<entry><p>BEFORE_SCRIPT_METHOD</p></entry>
+										<entry><p outputclass="description">Dispatched before a script method is invoked. This event bubbles. This event is not cancelable.</p></entry>
+									</row>
+									<row>
+										<entry><p>AFTER_SCRIPT_METHOD</p></entry>
+										<entry><p outputclass="description">Dispatched after a script method is invoked. This event bubbles. This event is not cancelable.</p></entry>
+									</row>
+								</tbody>
+							</tgroup>
+						</table>
+					</section>
+
+					<section>
+						<title>Other additions</title>
+						<table frame="all" rowsep="1" colsep="1">
+							<tgroup cols="4">
+								<colspec colname="c1" colnum="1" colwidth="0.18*"/>
+								<colspec colname="c2" colnum="2" colwidth="0.22*"/>
+								<colspec colname="c3" colnum="3" colwidth="0.18*"/>
+								<colspec colname="c4" colnum="4" colwidth="0.42*"/>
+								<thead>
+									<row>
+										<entry><p>Class</p></entry>
+										<entry><p>Member</p></entry>
+										<entry><p>Type</p></entry>
+										<entry><p>Description</p></entry>
+									</row>
+								</thead>
+								<tbody>
+									<row>
+										<entry><p><xref href="Document.dita">Document</xref></p></entry>
+										<entry><p>updateTOC()</p></entry>
+										<entry><p>method</p></entry>
+										<entry><p outputclass="description">Updates the table of contents in this document using the currently applied TOC style.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="GeneralPreference.dita">GeneralPreference</xref></p></entry>
+										<entry><p>contextBarVisible</p></entry>
+										<entry><p>Boolean</p></entry>
+										<entry><p outputclass="description">Controls whether or not the context bar (contextual task bar) is visible.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="ViewPreference.dita">ViewPreference</xref></p></entry>
+										<entry><p>showTextThreads</p></entry>
+										<entry><p>Boolean</p></entry>
+										<entry><p outputclass="description">If true, displays text threads.</p></entry>
+									</row>
+									<row>
+										<entry><p><xref href="FlexObject.dita">FlexObject</xref></p></entry>
+										<entry><p>anchoredObjectSettings</p></entry>
+										<entry><p><xref href="AnchoredObjectSetting.dita">AnchoredObjectSetting</xref></p></entry>
+										<entry><p outputclass="description">Anchored object settings.</p></entry>
+									</row>
+								</tbody>
+							</tgroup>
+						</table>
+					</section>
+
+					<section>
+						<title>Changed documentation</title>
+						<p>No member was removed or renamed. Six effect sizes in Find/Change had their documented range widened from <b>144 to 1000 points</b>: <xref href="FindChangeBevelAndEmbossSetting.dita">FindChangeBevelAndEmbossSetting</xref>, <xref href="FindChangeInnerGlowSetting.dita">FindChangeInnerGlowSetting</xref>, <xref href="FindChangeInnerShadowSetting.dita">FindChangeInnerShadowSetting</xref>, <xref href="FindChangeOuterGlowSetting.dita">FindChangeOuterGlowSetting</xref>, <xref href="FindChangeSatinSetting.dita">FindChangeSatinSetting</xref> and <xref href="FindChangeDropShadowSetting.dita">FindChangeDropShadowSetting</xref>.</p>
+					</section>
+				</body>
+			</topic>
+		</xsl:result-document>
+
 		<xsl:variable name="outPath" select="concat('extendScriptAPI', '.ditamap')"/>
 		<xsl:result-document href="{$outPath}" doctype-public="-//OASIS//DTD DITA Map//EN"
 			doctype-system="map.dtd" indent="yes">
@@ -54,6 +438,7 @@
 					/></title>
 				<topichead navtitle="About">
 					<topicref href="about.dita"/>
+					<topicref href="whatsnew.dita"/>
 				</topichead>
 				<topichead>
 					<xsl:attribute name="navtitle" select="/domRoot/product/dictionary/map/@title"/>
