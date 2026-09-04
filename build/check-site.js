@@ -247,10 +247,16 @@ const check = (name, got, want) => {
   /* --- Theme: Beschriftung und kein Aufblitzen beim Navigieren --- */
   check('Themeknopf nennt das Ziel',
     (await page.locator('.tg').innerText()).trim(), 'light mode');
+  /* color-scheme muss mitwandern, sonst zeichnet Chrome helle
+     Systemscrollbalken in die dunkle Seite. */
+  const scheme = () =>
+    page.evaluate(() => getComputedStyle(document.documentElement).colorScheme);
+  check('dunkel: color-scheme dunkel', await scheme(), 'dark');
   await page.click('.tg');
   await page.waitForTimeout(200);
   check('nach dem Umschalten umgekehrt',
     (await page.locator('.tg').innerText()).trim(), 'dark mode');
+  check('hell: color-scheme hell', await scheme(), 'light');
   /* Entscheidend: das Inline-Skript im <head> setzt das Thema vor dem ersten
      Zeichnen. Ohne das erschiene jede Folgeseite kurz dunkel. */
   const boot = await page.evaluate(() => {

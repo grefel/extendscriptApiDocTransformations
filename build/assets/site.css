@@ -1,6 +1,11 @@
 /* Gemeinsames Stylesheet aller Seiten. Wird einmal geladen und ueber alle
    1153 Seiten hinweg gecacht. */
 :root{
+  /* color-scheme faerbt die nativen Bedienelemente mit: ohne das zeichnet
+     Chrome helle Systemscrollbalken in die dunkle Seite. Betrifft auch die
+     Loeschtaste im Suchfeld und die Fokusringe. */
+  color-scheme:dark;
+  --sb:#2f3745; --sb-h:#414c5e;
   --bg:#0f1115; --panel:#151920; --rail:#0c0e12; --ink:#dfe4ec; --dim:#7d8798;
   --line:#232935; --accent:hsl(100, 61%, 37%); --accent-soft:#16283f; --warn:#e0a458;
   --ro:#8b94a6; --rw:hsl(11, 84%, 28%); --enum:#c08cf0; --ev:#f2836b;
@@ -10,11 +15,24 @@
 /* Helle Palette: --dim und --accent erreichen auf allen drei Untergruenden
    (--bg, --panel, --rail) WCAG AA 4.5:1. */
 :root[data-t="light"]{
+  color-scheme:light;
+  --sb:#ccd3de; --sb-h:#aab4c4;
   --bg:#fdfdfe; --panel:#f5f7fa; --rail:#f0f3f7; --ink:#131720; --dim:#5f6878;
   --line:#e0e5ee; --accent:hsl(100, 61%, 27%); --accent-soft:#e4eefc; --warn:#8a5415;
   --ro:#5f6878; --rw:hsl(16, 69%, 20%); --enum:#6a339b; --ev:#a8431f;
 }
 *{box-sizing:border-box}
+/* Schlanke, ruhige Balken. scrollbar-* ist der Standard (Firefox ab 64,
+   Chrome ab 121); die ::-webkit-Regeln decken aeltere WebKit-Staende ab.
+   scrollbar-color wird vererbt, scrollbar-width nicht — daher das Sternchen. */
+*{scrollbar-width:thin}
+:root{scrollbar-color:var(--sb) transparent}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--sb);border-radius:8px;
+  border:3px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-thumb:hover{background:var(--sb-h);background-clip:content-box}
+::-webkit-scrollbar-corner{background:transparent}
 body{margin:0;background:var(--bg);color:var(--ink);font:13.5px/1.5 var(--sans)}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
