@@ -4,7 +4,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { chromium } = require('playwright');
+const { chromium, firefox } = require('playwright');
 
 const ROOT = path.join(__dirname, '..');
 const SITE = process.env.OUT_DIR || path.join(ROOT, 'site');
@@ -294,10 +294,43 @@ const check = (name, got, want) => {
   check('Startseite weist auf veraltete Photoshop-Daten hin',
     (await page.locator('ul.cards .note').count()) >= 1, true);
 
+  await browser.close();
+
+  /* ---------- Gegenprobe in Firefox ----------
+     Alles bis hier lief in Chrome. Was zwischen Seiten Zustand haelt, haengt an
+     localStorage — und dessen Verhalten auf file:// unterscheidet sich je
+     Browser. Deshalb hier gezielt Theme und Spur ueber Seitenwechsel hinweg.
+     Ohne Firefox-Build wird uebersprungen: "npx playwright install firefox". */
+  try {
+    const ff = await firefox.launch();
+    const fc = await ff.newContext({ viewport: { width: 1600, height: 1000 } });
+    const fp = await fc.newPage();
+    const ffErr = [];
+    fp.on('pageerror', e => ffErr.push(String(e)));
+
+    await fp.goto(url('indesign/Rectangle.html'));
+    await fp.waitForTimeout(300);
+    await fp.click('.tg');
+    await fp.waitForTimeout(200);
+    await fp.goto(url('indesign/Document.html'));
+    await fp.waitForTimeout(300);
+    check('Firefox: Theme ueberlebt die Navigation',
+      await fp.evaluate(() => document.documentElement.dataset.t), 'light');
+    check('Firefox: Spur nennt die vorige Seite',
+      (await fp.locator('.trail a').allTextContents())[0], 'Rectangle');
+    await fp.goto(url('indesign/Page.html'));
+    await fp.waitForTimeout(300);
+    check('Firefox: Spur waechst mit',
+      (await fp.locator('.trail a').allTextContents()).join(','), 'Document,Rectangle');
+    check('Firefox: keine Skriptfehler', ffErr.join(' / ') || 'keine', 'keine');
+    await ff.close();
+  } catch (e) {
+    results.push('SKIP Firefox-Gegenprobe: ' + e.message.split('\n')[0]);
+  }
+
   console.log('\n' + results.join('\n'));
   console.log('\nKonsolenfehler: ' + (errors.length ? '\n  ' + errors.join('\n  ') : 'keine'));
   const failed = results.filter(r => r.startsWith('FAIL')).length;
   console.log('\n' + (failed ? failed + ' PRUEFUNG(EN) FEHLGESCHLAGEN' : 'alle Pruefungen bestanden'));
-  await browser.close();
   process.exit(failed || errors.length ? 1 : 0);
 })();
