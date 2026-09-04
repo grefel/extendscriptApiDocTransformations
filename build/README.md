@@ -63,14 +63,42 @@ JavaScript mit.
 
 ## Zwei Browser
 
-Der Hauptlauf nutzt das System-Chrome (`channel: 'chrome'`). Am Ende folgt eine
-kurze **Gegenprobe in Firefox**: Theme und „Recent" halten ihren Zustand über
-`localStorage`, und dessen Verhalten auf `file://` unterscheidet sich je Browser
-— geprüft, nicht angenommen. Firefox hält beides auch dort.
+Der Hauptlauf nutzt das System-Chrome (`channel: 'chrome'`) über `file://`. Am
+Ende folgt eine kurze **Gegenprobe in Firefox über http** — Theme und „Recent"
+halten ihren Zustand in `localStorage`, und das verhält sich je Browser anders.
 
 Der Firefox-Build gehört nicht zum globalen Playwright und wird bei Bedarf mit
 `npx playwright install firefox` geholt; fehlt er, meldet der Lauf `SKIP` statt
 zu scheitern.
+
+### Offline in Firefox: kein Seitenzustand möglich
+
+**Ein ausgeliefertes Firefox gibt jeder lokalen Datei einen eigenen
+Storage-Origin** (`privacy.file_unique_origin`, Standard seit FF 68). Nachgemessen
+an Firefox 152, zwei Seiten desselben Ordners:
+
+```
+storage/default/file++++…+site+indesign+Rectangle.html
+storage/default/file++++…+site+indesign+Document.html
+```
+
+Zwei Ordner, zwei getrennte Speicher. Folge beim Offline-Download:
+
+- Das **Theme** fällt bei jedem Seitenwechsel auf den Standard zurück.
+- **„Recent"** füllt sich nie und bleibt deshalb ausgeblendet.
+
+Es gibt dort keinen Ausweg: `sessionStorage` und IndexedDB unterliegen derselben
+Trennung, Cookies gibt es auf `file://` nicht, und `window.name` — sonst die
+klassische Reserve — wird beim Origin-Wechsel geleert (ebenfalls nachgemessen).
+Bliebe der Zustand in jedem Link, was jede URL verschmutzt.
+
+**Chrome ist nicht betroffen**, es teilt einen Origin über alle lokalen Dateien.
+Über http, also auf dem Server, gibt es ohnehin nur einen Origin — dort
+funktioniert Firefox genauso wie Chrome.
+
+Wichtig für Tests: **Playwrights Firefox bildet das nicht nach**, auch nicht mit
+gesetztem `privacy.file_unique_origin`. Eine `file://`-Zusage wäre dort grün und
+in der Wirklichkeit falsch — deshalb läuft die Gegenprobe über http.
 
 ## Größen
 
