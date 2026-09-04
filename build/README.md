@@ -201,11 +201,11 @@ dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Ind
   Beschriftung: ohne sie liest sich die Reihe als Hierarchie.
   **Eine Liste über alle sieben Ziele** (`recent` in `localStorage`, Einträge als
   `[slug, name]`). Der Weg von `Document` zu `String` führt über die
-  Bibliotheksgrenze, und genau dorthin will man zurück. Einträge aus einem
-  anderen Modell tragen dessen Kürzel — `abbr` in `products.js`, für alle Ziele
-  als `window.__T` in `nav.js` — sonst wären InDesigns und Illustrators
-  `Document` nicht zu unterscheiden. Aussortiert wird nach Ziel **und** Namen,
-  damit beide nebeneinander stehen bleiben.
+  Bibliotheksgrenze, und genau dorthin will man zurück. Aussortiert wird nach
+  Ziel **und** Namen, damit InDesigns und Illustrators `Document` nebeneinander
+  stehen bleiben. Sie werden bewusst **nicht** beschriftet — welches gemeint
+  ist, zeigt die Statusleiste beim Zeigen auf den Link, und drei Einträge
+  vertragen keine zusätzliche Spalte.
   Sie ist der einzige `data-enhance`-Knoten, der auch mit JavaScript verborgen
   bleiben darf — ohne Verlauf gäbe es nur eine leere Beschriftung.
   Die Grenzwerte sind gemessen, nicht geschätzt: bis 1250 px stehen alle drei

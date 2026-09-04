@@ -72,8 +72,6 @@ a:hover{text-decoration:underline}
 .trail a{flex:0 1 auto;min-width:0;max-width:21ch;font:11.5px/1 var(--mono);
   color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .trail a:hover{color:var(--accent);text-decoration:none}
-/* Kuerzel des Herkunftsmodells, nur bei fremden Eintraegen. */
-.trail a em{font-style:normal;opacity:.6;margin-right:5px}
 .kbtn{margin-left:auto;display:flex;align-items:center;gap:9px;border:1px solid var(--line);
   background:var(--panel);color:var(--dim);border-radius:7px;padding:6px 11px;cursor:pointer;
   font:12px/1 var(--sans);min-width:265px}
@@ -140,7 +138,7 @@ h1{margin:5px 0 0;font:600 26px var(--mono)}
 table{width:100%;border-collapse:collapse;margin-top:9px;font-size:13px}
 th{text-align:left;font:600 10px var(--sans);letter-spacing:.08em;text-transform:uppercase;
   color:var(--dim);padding:6px 9px;border-bottom:1px solid var(--line)}
-td{padding:2px 0px;border-bottom:1px solid var(--line);vertical-align:top}
+td{padding:2px 0px 2px 2px;border-bottom:1px solid var(--line);vertical-align:top}
 tr:hover td{background:var(--panel)}
 .c-n{width:20%} .c-t{width:27%} .c-a{width:8%}
 td.n{font:12.5px var(--mono);font-weight:600;white-space:nowrap}
