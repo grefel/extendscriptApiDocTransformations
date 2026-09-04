@@ -145,6 +145,14 @@ dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Ind
 - **Core JavaScript und ScriptUI** gibt es nur unter ExtendScript — UXP nutzt
   eine andere Engine und kennt weder `$` und `File` noch ScriptUI. Im
   Produktumschalter stehen sie als „ExtendScript only".
+- **„Recent" im Kopf ist eine Recency-Spur, kein Breadcrumb** — die drei zuvor
+  geöffneten Objekte, neuestes zuerst, ohne die aktuelle Seite. Je Produkt eine
+  eigene Liste (`recent:<slug>` in `localStorage`), sonst stünde nach einem
+  Produktwechsel ein fremdes `Document` neben dem eigenen. Deshalb auch die
+  Beschriftung: ohne sie liest sich die Reihe als Hierarchie.
+  Sie ist der einzige `data-enhance`-Knoten, der auch mit JavaScript verborgen
+  bleiben darf — ohne Verlauf gäbe es nur eine leere Beschriftung. Unter 1280 px
+  weicht sie dem Suchfeld.
 - Der Footer verlinkt **Impressum** und **Datenschutz** auf publishingx.de.
 
 ## Stufe 2: XSLT vollständig abgelöst

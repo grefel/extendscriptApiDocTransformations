@@ -72,8 +72,12 @@ const check = (name, got, want) => {
   check('mit JS: Objektart sichtbar',
     await page.evaluate(() => Math.round(document.querySelector('.kind').getBoundingClientRect().top) >= 44),
     true);
+  /* Die Spur ist der einzige data-enhance-Knoten, der auch mit JS verborgen
+     bleiben darf: ohne Verlauf gaebe es nur eine leere Beschriftung. */
   check('mit JS: Bedienelemente sichtbar',
-    await page.locator('[data-enhance][hidden]').count(), 0);
+    await page.locator('[data-enhance][hidden]:not(.trail)').count(), 0);
+  check('mit JS: Spur ohne Verlauf bleibt aus',
+    await page.locator('.trail[hidden]').count(), 1);
 
   /* Kopieren */
   check('Property kopiert nackt',
@@ -265,6 +269,23 @@ const check = (name, got, want) => {
       const a = [...document.querySelectorAll('footer .by a')].slice(-3);
       return a.length === 3 && new Set(a.map(x => Math.round(x.getBoundingClientRect().top))).size === 1;
     }), true);
+
+  /* --- Zuletzt besucht --- */
+  await page.goto(url('indesign/Polygon.html'));
+  await page.waitForTimeout(200);
+  await page.goto(url('indesign/GraphicLine.html'));
+  await page.waitForTimeout(200);
+  const seen = await page.locator('.trail a').allTextContents();
+  check('Spur nennt zuerst die vorige Seite', seen[0], 'Polygon');
+  check('Spur laesst die aktuelle Seite aus', seen.includes('GraphicLine'), false);
+  check('Spur zeigt drei Eintraege', seen.length, 3);
+  await page.locator('.trail a').first().click();
+  await page.waitForTimeout(300);
+  check('Spur fuehrt zum Ziel', await page.locator('h1').innerText(), 'Polygon');
+  /* Eigene Liste je Produkt: sonst stuende hier ein InDesign-Objekt. */
+  await page.goto(url('bridge/index.html'));
+  await page.waitForTimeout(200);
+  check('Spur ist je Produkt eigen', await page.locator('.trail a').count(), 0);
 
   /* Startseite */
   await page.goto(url('index.html'));
