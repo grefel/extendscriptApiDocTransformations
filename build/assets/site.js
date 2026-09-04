@@ -155,23 +155,62 @@
   /* ---------- Navigationsliste ----------
      Nicht in jede Seite gerendert: 1153 Eintraege waeren ~70 KB pro Seite. */
   let NAV = null;
+  let navQuery = store.get('navq', '');
   function buildNav() {
     const side = $('.side');
-    if (!side || !NAV) return;
-    const vis = NAV;
+    const list = $('.sidelist');
+    if (!side || !list || !NAV) return;
+    const q = navQuery.trim().toLowerCase();
+    const vis = q ? NAV.filter(([n]) => n.toLowerCase().indexOf(q) !== -1) : NAV;
     const group = (title, kind) => {
-      const list = vis.filter(([, k]) => k === kind);
-      if (!list.length) return '';
-      return `<div class="h">${title} · ${list.length}</div>` + list.map(([n, k, cnt]) =>
-        `<a href="${esc(page(n))}" class="${n === CURRENT ? 'on' : ''}${
-          k === 2 ? ' e' : k === 1 ? ' co' : ''}"><span>${esc(n)}</span><i>${
+      const all = NAV.filter(([, k]) => k === kind);
+      const hit = vis.filter(([, k]) => k === kind);
+      if (!hit.length) return '';
+      /* Beim Filtern beide Zahlen zeigen — eine kurze Liste soll sich
+         selbst erklaeren, ohne dass man das Eingabefeld absucht. */
+      const n = q ? hit.length + ' <span class="of">/ ' + all.length + '</span>' : all.length;
+      return `<div class="h">${title} · ${n}</div>` + hit.map(([nm, k, cnt]) =>
+        `<a href="${esc(page(nm))}" class="${nm === CURRENT ? 'on' : ''}${
+          k === 2 ? ' e' : k === 1 ? ' co' : ''}"><span>${esc(nm)}</span><i>${
           k === 2 ? 'enum' : k === 1 ? 'coll' : cnt}</i></a>`).join('');
     };
-    side.innerHTML = group('Objects', 0) + group('Collections', 1) + group('Enumerations', 2);
+    list.innerHTML = vis.length
+      ? group('Objects', 0) + group('Collections', 1) + group('Enumerations', 2)
+      : '<p class="none">Nothing matches “' + esc(navQuery.trim()) + '”.</p>';
+
+    const allLink = $('.allobjects', side);
+    if (allLink) allLink.hidden = true;   /* die vollstaendige Liste steht jetzt darunter */
+    /* Erst hier einschalten, nicht schon beim Verdrahten: ohne geladene Liste
+       waere das Feld ein Bedienelement ohne Wirkung. */
+    const box = $('[data-enhance="navfilter"]');
+    if (box) box.hidden = false;
+
     /* scrollTop direkt setzen statt scrollIntoView: letzteres scrollt auch das
-       Fenster mit und schiebt die Kopfzeile der Seite unter die Leiste. */
-    const on = $('a.on', side);
-    if (on) side.scrollTop = Math.max(0, on.offsetTop - side.clientHeight / 2);
+       Fenster mit und schiebt die Kopfzeile der Seite unter die Leiste.
+       Beim Filtern nach oben, sonst sucht man den Anfang der Treffer. */
+    const on = $('a.on', list);
+    side.scrollTop = on && !q ? Math.max(0, on.offsetTop - side.clientHeight / 2) : 0;
+  }
+
+  /* ---------- Filter der Objektspalte ----------
+     Wirkt nur auf die linke Liste, nicht auf die Member der Seite — das macht
+     das Feld ueber den Tabellen. Der Begriff bleibt erhalten, damit ein Weg
+     durch mehrere Text*-Objekte nicht bei jedem Klick von vorn beginnt; sichtbar
+     bleibt er im Feld und in der Zahl neben der Ueberschrift. */
+  const nf = $('#nf');
+  if (nf) {
+    nf.value = navQuery;
+    nf.addEventListener('input', () => {
+      navQuery = nf.value;
+      store.set('navq', navQuery);
+      buildNav();
+    });
+    nf.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      e.stopPropagation();          /* nicht die Suchpalette mitschliessen */
+      nf.value = ''; navQuery = ''; store.set('navq', '');
+      buildNav();
+    });
   }
 
   /* ---------- rechte Spalte ---------- */

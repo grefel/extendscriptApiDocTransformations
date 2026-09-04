@@ -97,6 +97,17 @@ kbd{font:10px var(--mono);border:1px solid var(--line);border-bottom-width:2px;b
 .side a.e i{color:var(--enum)}
 .side a.co i{color:var(--warn)}
 .side .allobjects{font:12px var(--sans);color:var(--accent);padding:8px 14px}
+/* Filter der Objektspalte. Klebt oben, weil .side selbst der Scrollbereich ist
+   — sonst waere er nach ein paar Zeilen Liste weggescrollt. */
+.side .sidef{position:sticky;top:-10px;z-index:2;background:var(--rail);
+  padding:4px 11px 8px;border-bottom:1px solid var(--line)}
+.side .sidef input{width:100%;background:var(--panel);border:1px solid var(--line);
+  border-radius:7px;padding:6px 10px;color:var(--ink);font:11.5px var(--mono)}
+.side .sidef input:focus{outline:none;border-color:var(--accent)}
+.side .sidef input::placeholder{color:var(--dim)}
+/* Gefilterte Anzahl neben der Gesamtzahl, damit eine kurze Liste erklaert ist. */
+.side .h .of{opacity:.55;font-weight:400}
+.side .none{padding:14px;font:11.5px var(--sans);color:var(--dim)}
 
 .doc{min-width:0;padding:24px 30px 40px;display:flex;flex-direction:column}
 .dmain{flex:1}

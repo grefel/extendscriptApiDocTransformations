@@ -51,7 +51,19 @@ erst beim ersten Öffnen der Palette nachgeladen.
 **Die Seitenleiste steht nicht im Markup.** 1.153 Einträge wären ~70 KB auf jeder
 der 1.153 Seiten. Sie kommt aus `assets/nav.js`, das der Browser einmal cacht.
 Ohne JavaScript führt stattdessen ein Link auf `index.html`, das alle Objekte
-vollständig auflistet — jede Seite bleibt also navigierbar.
+vollständig auflistet — jede Seite bleibt also navigierbar. Das Skript verbirgt
+diesen Notnagel-Link, sobald die Liste steht; er bleibt im DOM.
+
+**Zwei Filter, die nichts miteinander zu tun haben.** Das Feld über den Tabellen
+filtert die Member der Seite, das Feld in der Seitenleiste nur die Objektliste
+daneben. Letzteres ist reine Teilzeichenkette ohne Rücksicht auf Groß- und
+Kleinschreibung — die unscharfe Suche über alles leistet die Palette (`Strg/Cmd+K`).
+Gefiltert wird in `buildNav()` selbst, deshalb stimmen die Zahlen in den
+Zwischenüberschriften automatisch und zeigen beim Filtern beide Werte
+(`Objects · 31 / 423`). Ein Neuaufbau kostet ~6 ms je Anschlag.
+Der Begriff überlebt den Seitenwechsel (`navq`), damit ein Weg durch mehrere
+`Text*`-Objekte nicht bei jedem Klick von vorn beginnt; sichtbar bleibt er im
+Feld und in den Zahlen. `Esc` leert ihn, ohne die Palette zu öffnen.
 
 ## Ohne JavaScript
 
