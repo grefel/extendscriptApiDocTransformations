@@ -80,12 +80,12 @@
 
      Eine Liste ueber alle Objektmodelle: der Weg von Document zu String fuehrt
      ueber die Bibliotheksgrenze, und genau dorthin will man auch zurueck.
-     Eintraege aus einem anderen Modell tragen dessen Kuerzel (js, ai, ps …),
-     sonst waeren InDesigns und Illustrators Document nicht zu unterscheiden. */
+     Gleichnamige Objekte verschiedener Modelle stehen unbeschriftet
+     nebeneinander — welches gemeint ist, zeigt die Statusleiste beim Zeigen
+     auf den Link. */
   const trail = $('[data-enhance="trail"]');
   if (trail) {
     const HERE = document.body.dataset.target || '';
-    const ABBR = window.__T || {};
     let seen;
     try { seen = JSON.parse(store.get('recent', '[]')); } catch (e) { seen = null; }
     if (!Array.isArray(seen)) seen = [];
@@ -98,11 +98,9 @@
     const prev = seen.slice(0, 3);
     if (prev.length) {
       trail.innerHTML = '<span class="h">Recent</span>' + prev.map(([slug, n]) => {
-        const foreign = slug !== HERE;
-        const href = foreign ? '../' + encodeURIComponent(slug) + '/' + page(n) : page(n);
-        const tag = foreign ? `<em>${esc(ABBR[slug] || slug)}</em>` : '';
-        return `<a href="${href}" title="${esc(foreign ? (ABBR[slug] || slug) + ' · ' + n : n)}">${
-          tag}${esc(n)}</a>`;
+        const href = slug === HERE ? page(n)
+          : '../' + encodeURIComponent(slug) + '/' + page(n);
+        return `<a href="${href}" title="${esc(n)}">${esc(n)}</a>`;
       }).join('');
       trail.hidden = false;
     }

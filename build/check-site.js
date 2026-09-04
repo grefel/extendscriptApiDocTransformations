@@ -323,25 +323,34 @@ const check = (name, got, want) => {
   await page.locator('.trail a').first().click();
   await page.waitForTimeout(300);
   check('Spur fuehrt zum Ziel', await page.locator('h1').innerText(), 'Polygon');
-  check('Spur im eigenen Modell ohne Kuerzel',
-    await page.locator('.trail a em').count(), 0);
-
   /* Eine Spur ueber alle Objektmodelle: der Weg von einem Produkt in die
-     gemeinsamen Bibliotheken (Document → String) soll auch zurueckfuehren.
-     Fremde Eintraege tragen das Kuerzel ihres Modells, sonst waeren
-     InDesigns und Illustrators Document nicht zu unterscheiden. */
+     gemeinsamen Bibliotheken (Document → String) soll auch zurueckfuehren. */
   await page.goto(url('javascript/String.html'));
   await page.waitForTimeout(250);
   check('Spur reicht ueber das Objektmodell hinaus',
     await page.locator('.trail a').first().getAttribute('href'),
     '../indesign/Polygon.html');
-  check('fremder Eintrag traegt sein Kuerzel',
-    await page.locator('.trail a em').first().textContent(), 'id');
   await page.locator('.trail a').first().click();
   await page.waitForTimeout(400);
   check('Spur fuehrt ins andere Modell',
     await page.evaluate(() => document.body.dataset.target), 'indesign');
   check('und auf das richtige Objekt', await page.locator('h1').innerText(), 'Polygon');
+  /* Gleichnamige Objekte zweier Modelle stehen nebeneinander, statt sich
+     gegenseitig zu verdraengen. */
+  await page.goto(url('indesign/Document.html'));
+  await page.waitForTimeout(250);
+  await page.goto(url('illustrator/Document.html'));
+  await page.waitForTimeout(250);
+  await page.goto(url('photoshop/Document.html'));
+  await page.waitForTimeout(250);
+  const hrefs = await page.locator('.trail a')
+    .evaluateAll(as => as.map(a => a.getAttribute('href')));
+  check('gleichnamige Objekte zweier Modelle bleiben beide stehen',
+    hrefs.filter(h => /\/Document\.html$/.test(h)).length, 2);
+  /* Ueber die href pruefen, nicht ueber den Text: gleichnamige Eintraege
+     verschiedener Modelle sehen im Kopf gleich aus. */
+  check('die aktuelle Seite bleibt trotzdem draussen',
+    hrefs.includes('Document.html'), false);
 
   /* Startseite */
   await page.goto(url('index.html'));
