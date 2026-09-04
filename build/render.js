@@ -55,8 +55,11 @@ function make(data, d, ctx) {
       const c = d.byName.get(t);
       if (c && isCollection(c)) {
         const el = elementOf(c);
+        /* <wbr> gibt der Typspalte eine saubere Trennstelle: aus
+           EventListeners<EventListener> wird bei Platzmangel ein Umbruch vor
+           der Klammer statt mitten im Bezeichner. */
         if (el && known(el))
-          out += `<span class="gen">&lt;</span>${link(el)}<span class="gen">&gt;</span>`;
+          out += `<wbr><span class="gen">&lt;</span>${link(el)}<span class="gen">&gt;</span>`;
       }
       return out;
     }).join(' <span class="or">|</span> ');
@@ -133,7 +136,7 @@ function make(data, d, ctx) {
           p.st ? '<span class="stat">static</span>' : ''}</td>
           <td class="t">${typeList(p.t, p.arr) || '<span class="none">—</span>'}${
             p.v ? ` <span class="lit">= ${esc(p.v)}</span>` : ''}${extras(p)}${inlineEnum(p.t)}</td>
-          <td class="a ${p.rw === 'readonly' ? 'ro' : 'rw'}">${esc(p.rw)}</td>
+          <td class="a ${p.rw === 'readonly' ? 'ro' : 'rw'}" title="${esc(p.rw)}">${esc(p.rw)}</td>
           <td class="d">${esc(p.d)}</td></tr>`;
       }
       h += '</tbody></table></section>';

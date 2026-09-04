@@ -359,6 +359,42 @@ const check = (name, got, want) => {
   check('Startseite weist auf veraltete Photoshop-Daten hin',
     (await page.locator('ul.cards .note').count()) >= 1, true);
 
+  /* --- Schmales Fenster: nichts darf seitlich herauslaufen ---
+     Die Tabellen laufen mit table-layout:fixed. Deren Kehrseite: eine zu schmal
+     deklarierte Spalte schiebt ihren Inhalt in die Nachbarspalte, statt die
+     Tabelle zu verbreitern. Deshalb beides pruefen — Seitenueberhang UND
+     Zellen, deren Inhalt breiter ist als die Zelle. */
+  const overflowAt = async (w, file) => {
+    await page.setViewportSize({ width: w, height: 1000 });
+    await page.goto(url(file));
+    await page.waitForTimeout(220);
+    return page.evaluate(() => ({
+      page: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      cells: [...document.querySelectorAll('td,th')]
+        .filter(e => e.scrollWidth > e.clientWidth + 1).length
+    }));
+  };
+  /* Rectangle traegt viele Methoden mit Parametern, AssignedStory eine
+     Collection-Typangabe — zusammen decken sie beide Engpaesse ab. */
+  for (const w of [1600, 1300, 1150, 1000, 900, 800, 700]) {
+    for (const f of ['indesign/Rectangle.html', 'indesign/AssignedStory.html']) {
+      const o = await overflowAt(w, f);
+      const tag = w + 'px ' + f.replace('indesign/', '').replace('.html', '');
+      check(tag + ': kein Ueberhang', o.page, 0);
+      check(tag + ': keine Zelle laeuft aus', o.cells, 0);
+    }
+  }
+  /* Zugriffsspalte: voller Wortlaut solange er passt, darunter abgekuerzt. */
+  await overflowAt(1300, 'indesign/AssignedStory.html');
+  check('breit: Zugriff ausgeschrieben',
+    await page.evaluate(() => getComputedStyle(document.querySelector('td.a')).fontSize),
+    '10.5px');
+  await overflowAt(900, 'indesign/AssignedStory.html');
+  check('schmal: Zugriff abgekuerzt',
+    await page.evaluate(() =>
+      getComputedStyle(document.querySelector('td.a'), '::after').content), '"ro"');
+  await page.setViewportSize({ width: 1600, height: 1000 });
+
   await browser.close();
 
   /* ---------- Gegenprobe in Firefox, ueber http ----------

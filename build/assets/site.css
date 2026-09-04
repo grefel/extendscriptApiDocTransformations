@@ -91,9 +91,11 @@ kbd{font:10px var(--mono);border:1px solid var(--line);border-bottom-width:2px;b
   text-transform:uppercase;color:var(--dim)}
 .side a{display:flex;justify-content:space-between;gap:6px;padding:3px 14px;
   font:12px var(--mono);color:var(--ink)}
+/* Lange Namen kuerzen statt am Rand abschneiden; die Zahl rechts bleibt stehen. */
+.side a>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .side a:hover{background:var(--panel);text-decoration:none}
 .side a.on{background:var(--accent-soft);color:var(--accent);box-shadow:inset 2px 0 0 var(--accent)}
-.side a i{font-style:normal;color:var(--dim);font-size:10px}
+.side a i{flex:none;font-style:normal;color:var(--dim);font-size:10px}
 .side a.e i{color:var(--enum)}
 .side a.co i{color:var(--warn)}
 .side .allobjects{font:12px var(--sans);color:var(--accent);padding:8px 14px}
@@ -135,15 +137,25 @@ h1{margin:5px 0 0;font:600 26px var(--mono)}
 .hint{color:var(--dim);font-size:12px;margin:5px 0 0}
 
 /* ---------- Tabellen ---------- */
-table{width:100%;border-collapse:collapse;margin-top:9px;font-size:13px}
+/* table-layout:fixed haelt die deklarierten Spaltenbreiten ein. Ohne das
+   bestimmt der laengste Bezeichner die Namensspalte: allowFontSizeAndLeading-
+   Adjustment erzwang 229 px, und bei schmalem Fenster blieb der Beschreibung
+   nichts mehr — die Seite lief seitlich ueber. Bezeichner duerfen dafuer
+   umbrechen (siehe td.n). Breiten aus den Laengen im Modell: Name p90 = 23,
+   Typ p90 = 22 Zeichen. */
+table{table-layout:fixed;width:100%;border-collapse:collapse;margin-top:9px;font-size:13px}
 th{text-align:left;font:600 10px var(--sans);letter-spacing:.08em;text-transform:uppercase;
   color:var(--dim);padding:6px 9px;border-bottom:1px solid var(--line)}
-td{padding:2px 0px 2px 2px;border-bottom:1px solid var(--line);vertical-align:top}
+td{padding:2px 0px 2px 6px;border-bottom:1px solid var(--line);vertical-align:top}
 tr:hover td{background:var(--panel)}
-.c-n{width:20%} .c-t{width:27%} .c-a{width:8%}
-td.n{font:12.5px var(--mono);font-weight:600;white-space:nowrap}
+.c-n{width:22%} .c-t{width:24%}
+/* Feste Breite, keine Prozente: "read/write" braucht immer dieselben ~63px,
+   und mit table-layout:fixed liefe es sonst bei mittlerer Fensterbreite in die
+   Beschreibung hinein. Der Kopf "ACCESS" braucht mit Polsterung noch mehr. */
+.c-a{width:78px}
+td.n{font:12.5px var(--mono);font-weight:600;overflow-wrap:anywhere}
 td.n.ev{color:var(--ev)}
-td.t{font:11.5px var(--mono)}
+td.t{font:11.5px var(--mono);overflow-wrap:anywhere}
 td.t .arr{color:var(--warn)}
 td.t .or{opacity:.4}
 td.t .none{opacity:.45}
@@ -154,7 +166,7 @@ td.t .lit{opacity:.55}
 /* Aus fixDom.xsl abgeleitet: Wertebereich und "auch als Masseinheit schreibbar". */
 .rngv{color:var(--rw);white-space:nowrap}
 .muv{color:var(--warn);cursor:help}
-td.a{font:10.5px var(--mono)}
+td.a{font:10.5px var(--mono);overflow-wrap:anywhere}
 td.a.ro{color:var(--ro)} td.a.rw{color:var(--rw)}
 td.d{color:var(--dim)}
 .stat{font:9.5px var(--mono);color:var(--warn);border:1px solid var(--warn);
@@ -270,6 +282,35 @@ footer .by .sep{opacity:.45;margin:0 4px}
   .grid{grid-template-columns:200px minmax(0,1fr)}
   .rail2{display:none}
   .trail{display:none}
+  /* Der Beschreibung mehr Raum geben, sie traegt hier die meiste Last. */
+  .c-n{width:26%} .c-t{width:22%} .c-a{width:46px}
+  /* Zugriff abgekuerzt statt gestrichen: 41% der Properties sind readonly,
+     die Angabe traegt zu viel, um sie wegzulassen. Der volle Wortlaut steht
+     weiter im title und in der Spaltenueberschrift. */
+  td.a,.c-a{font-size:0}
+  td.a::after{font-size:10.5px}
+  .c-a::after{content:"ACC";font-size:10px}
+  td.a.ro::after{content:"ro"}
+  td.a.rw::after{content:"rw"}
+}
+/* Unterhalb dieser Breite sprengte die Kopfzeile das Fenster — nicht die
+   Tabelle: das Suchfeld hielt seine min-width von 265 px. Es darf jetzt
+   schrumpfen, Tastenkuerzel und API-Version treten ab. */
+@media (max-width:900px){
+  /* Parameter untereinander statt in drei Spalten: die beiden auto-Spalten
+     richten sich am breitesten Namen und Typ aus und drueckten die Seite sonst
+     ueber den Rand. Gefluchtete Spalten sind hier weniger wert als eine
+     Beschreibung, die man lesen kann. */
+  .args{display:block}
+  .arg{display:block;margin-bottom:7px}
+  .arg .an,.arg .at{display:inline;margin-right:9px}
+  .arg .at{max-width:none}
+  .arg .ad{display:block}
+  .bar{flex-wrap:wrap}
+  .bar input{min-width:140px}
+  .kbtn{min-width:0;overflow:hidden}
+  .kbtn>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .kbtn .keys,.apiver{display:none}
 }
 @media print{
   .top,.side,.rail2,.bar,.scrim{display:none}

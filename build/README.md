@@ -73,6 +73,36 @@ ergänzt nur Bedienelemente; die sind im HTML als `[hidden]` markiert und werden
 erst durch das Skript eingeschaltet. `check-site.js` prüft das mit abgeschaltetem
 JavaScript mit.
 
+## Schmales Fenster
+
+Sauber bis hinunter zu **650 px** Fensterbreite, ohne waagerechtes Scrollen.
+`check-site.js` misst das bei sieben Breiten auf zwei Seiten nach.
+
+Die Tabellen laufen mit **`table-layout:fixed`**. Vorher bestimmte der längste
+Bezeichner die Namensspalte — `allowFontSizeAndLeadingAdjustment` erzwang 229 px,
+und bei schmalem Fenster blieb der Beschreibung nichts mehr. Die Kehrseite: eine
+zu schmal deklarierte Spalte schiebt ihren Inhalt jetzt in die Nachbarspalte,
+statt die Tabelle zu verbreitern. Deshalb prüft `check-site.js` **beides** —
+Seitenüberhang *und* Zellen, deren Inhalt breiter ist als die Zelle.
+
+Genau daran ist die Zugriffsspalte zuerst gescheitert: als Prozentwert war sie
+bei mittlerer Fensterbreite zu schmal für „read/write", und der Text lief in die
+Beschreibung. Sie hat jetzt eine **feste Breite** — der Wortlaut ist fest, der
+Platzbedarf also auch.
+
+| Breite | Verhalten |
+|---|---|
+| ab 1250 px | „Recent" mit drei Einträgen |
+| ab 1100 px | rechte Spalte, Zugriff ausgeschrieben (78 px) |
+| unter 1100 px | rechte Spalte weg, Zugriff als `ro`/`rw` (46 px, Kopf „ACC"), Beschreibung bekommt den Platz |
+| unter 900 px | Kopfzeile schrumpft (Tastenkürzel und API-Version treten ab), Parameter stehen untereinander statt in drei Spalten |
+
+Zwei Stellen brauchen eine saubere Trennstelle statt eines harten Umbruchs:
+`td.n` und `td.t` bekommen `overflow-wrap:anywhere` als letzte Reserve, und die
+Collection-Notation trägt ein `<wbr>` vor der Klammer — aus
+`EventListeners<EventListener>` wird so ein Umbruch **vor** `<EventListener>`
+statt mitten im Bezeichner.
+
 ## Zwei Browser
 
 Der Hauptlauf nutzt das System-Chrome (`channel: 'chrome'`) über `file://`. Am
