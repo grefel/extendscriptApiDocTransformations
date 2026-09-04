@@ -47,16 +47,16 @@ const subset = (data, origin, version) => ({
 const targets = [
   ...models.map(m => ({
     slug: m.product.slug, label: m.product.label, note: m.product.note,
-    uxp: m.product.uxp, kind: 'Product',
+    abbr: m.product.abbr, uxp: m.product.uxp, kind: 'Product',
     data: subset(m.data, 'p', m.data.version)
   })),
   /* Beide Bibliotheken gibt es nur unter ExtendScript — UXP nutzt eine andere
      Engine und kennt weder $ und File noch ScriptUI. */
   { slug: 'javascript', label: 'Core JavaScript', kind: 'Shared library',
-    shortVersion: 'ExtendScript only', esOnly: true,
+    shortVersion: 'ExtendScript only', esOnly: true, abbr: 'js',
     data: subset(shared, 'js', 'Core JavaScript Classes') },
   { slug: 'scriptui', label: 'ScriptUI', kind: 'Shared library',
-    shortVersion: 'ExtendScript only', esOnly: true,
+    shortVersion: 'ExtendScript only', esOnly: true, abbr: 'sui',
     data: subset(shared, 'sui', 'ScriptUI Classes') }
 ];
 
@@ -116,10 +116,13 @@ for (const t of targets) {
   for (const c of t.data.classes) { write(t.slug + '/' + pageOf(c.n), r.page(c)); pages++; }
   write(t.slug + '/index.html', r.indexPage()); pages++;
 
+  /* __T bezeichnet die Ziele fuer die Recent-Spur: die sammelt ueber alle
+     Objektmodelle hinweg und muss einen fremden Eintrag kenntlich machen. */
   write(t.slug + '/nav.js', 'window.__NAV=' + JSON.stringify(t.data.classes.map(c => [
     c.n, c.enum ? 2 : d.isCollection(c) ? 1 : 0,
     c.enum ? 0 : c.p.length + c.ev.length + c.m.length
-  ])) + ';');
+  ])) + ';window.__T=' + JSON.stringify(
+    Object.fromEntries(targets.map(x => [x.slug, x.abbr]))) + ';');
 
   const index = [];
   for (const c of t.data.classes) {

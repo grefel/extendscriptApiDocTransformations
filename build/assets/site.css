@@ -72,6 +72,8 @@ a:hover{text-decoration:underline}
 .trail a{flex:0 1 auto;min-width:0;max-width:21ch;font:11.5px/1 var(--mono);
   color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .trail a:hover{color:var(--accent);text-decoration:none}
+/* Kuerzel des Herkunftsmodells, nur bei fremden Eintraegen. */
+.trail a em{font-style:normal;opacity:.6;margin-right:5px}
 .kbtn{margin-left:auto;display:flex;align-items:center;gap:9px;border:1px solid var(--line);
   background:var(--panel);color:var(--dim);border-radius:7px;padding:6px 11px;cursor:pointer;
   font:12px/1 var(--sans);min-width:265px}

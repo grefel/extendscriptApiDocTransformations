@@ -75,23 +75,35 @@
   }
 
   /* ---------- Zuletzt besucht ----------
-     Die drei zuvor geoeffneten Objekte, neuestes zuerst. Je Produkt eine eigene
-     Liste: sonst stuende nach einem Produktwechsel ein fremdes "Document" neben
-     dem eigenen, ohne dass man die beiden auseinanderhalten koennte.
-     Die aktuelle Seite steht nicht in der Spur — sie ist ja schon offen. */
+     Die drei zuvor geoeffneten Objekte, neuestes zuerst; die aktuelle Seite
+     steht nicht darin, sie ist ja schon offen.
+
+     Eine Liste ueber alle Objektmodelle: der Weg von Document zu String fuehrt
+     ueber die Bibliotheksgrenze, und genau dorthin will man auch zurueck.
+     Eintraege aus einem anderen Modell tragen dessen Kuerzel (js, ai, ps …),
+     sonst waeren InDesigns und Illustrators Document nicht zu unterscheiden. */
   const trail = $('[data-enhance="trail"]');
   if (trail) {
-    const KEY = 'recent:' + (document.body.dataset.target || '');
+    const HERE = document.body.dataset.target || '';
+    const ABBR = window.__T || {};
     let seen;
-    try { seen = JSON.parse(store.get(KEY, '[]')); } catch (e) { seen = null; }
+    try { seen = JSON.parse(store.get('recent', '[]')); } catch (e) { seen = null; }
     if (!Array.isArray(seen)) seen = [];
-    seen = seen.filter(n => typeof n === 'string' && n !== CURRENT);
+    /* Gespeichert wird [slug, name]; nach Ziel UND Name aussortieren, damit
+       gleichnamige Objekte verschiedener Modelle nebeneinander bestehen. */
+    seen = seen.filter(e => Array.isArray(e) && typeof e[0] === 'string' &&
+      typeof e[1] === 'string' && !(e[0] === HERE && e[1] === CURRENT));
 
-    if (CURRENT) store.set(KEY, JSON.stringify([CURRENT].concat(seen).slice(0, 12)));
+    if (CURRENT) store.set('recent', JSON.stringify([[HERE, CURRENT]].concat(seen).slice(0, 12)));
     const prev = seen.slice(0, 3);
     if (prev.length) {
-      trail.innerHTML = '<span class="h">Recent</span>' + prev.map(n =>
-        `<a href="${page(n)}" title="${esc(n)}">${esc(n)}</a>`).join('');
+      trail.innerHTML = '<span class="h">Recent</span>' + prev.map(([slug, n]) => {
+        const foreign = slug !== HERE;
+        const href = foreign ? '../' + encodeURIComponent(slug) + '/' + page(n) : page(n);
+        const tag = foreign ? `<em>${esc(ABBR[slug] || slug)}</em>` : '';
+        return `<a href="${href}" title="${esc(foreign ? (ABBR[slug] || slug) + ' · ' + n : n)}">${
+          tag}${esc(n)}</a>`;
+      }).join('');
       trail.hidden = false;
     }
   }

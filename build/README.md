@@ -197,10 +197,15 @@ dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Ind
   eine andere Engine und kennt weder `$` und `File` noch ScriptUI. Im
   Produktumschalter stehen sie als „ExtendScript only".
 - **„Recent" im Kopf ist eine Recency-Spur, kein Breadcrumb** — die drei zuvor
-  geöffneten Objekte, neuestes zuerst, ohne die aktuelle Seite. Je Produkt eine
-  eigene Liste (`recent:<slug>` in `localStorage`), sonst stünde nach einem
-  Produktwechsel ein fremdes `Document` neben dem eigenen. Deshalb auch die
+  geöffneten Objekte, neuestes zuerst, ohne die aktuelle Seite. Deshalb auch die
   Beschriftung: ohne sie liest sich die Reihe als Hierarchie.
+  **Eine Liste über alle sieben Ziele** (`recent` in `localStorage`, Einträge als
+  `[slug, name]`). Der Weg von `Document` zu `String` führt über die
+  Bibliotheksgrenze, und genau dorthin will man zurück. Einträge aus einem
+  anderen Modell tragen dessen Kürzel — `abbr` in `products.js`, für alle Ziele
+  als `window.__T` in `nav.js` — sonst wären InDesigns und Illustrators
+  `Document` nicht zu unterscheiden. Aussortiert wird nach Ziel **und** Namen,
+  damit beide nebeneinander stehen bleiben.
   Sie ist der einzige `data-enhance`-Knoten, der auch mit JavaScript verborgen
   bleiben darf — ohne Verlauf gäbe es nur eine leere Beschriftung.
   Die Grenzwerte sind gemessen, nicht geschätzt: bis 1250 px stehen alle drei
