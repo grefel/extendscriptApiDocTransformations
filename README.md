@@ -1,56 +1,75 @@
-# Transformations for the Adobe ExtendScript API Documentation 
+# Adobe ExtendScript API documentation
 
-This project contains the XSLT transformation files for creating a readable documentation of the Adobe ExtendScript APIs. The transformation is optimised for the InDesign DOM, but should work for other Adobe Extendscript DOMs as well. The files are transformed to [DITA](http://en.wikipedia.org/wiki/Darwin_Information_Typing_Architecture) XML data model. I found the intermediate format particularly helpful for validating all references. It could also used to add more help information via DITA Topics by your own. 
-You can set up your own [DITA-OT Transformation](http://dita-ot.github.io/) to publish an output format of your like. I rendered a WebHelp Documentation with [oXygen DITA-OT Webhelp](http://www.oxygenxml.com/).
+Generates a readable, searchable reference for the Adobe ExtendScript object models
+from Adobe's own OMV exports. Published at
+<https://www.indesignjs.de/extendscriptAPI/>.
 
-If you want to use the documentation you can find the most recent CC (Version 10) API on my site [www.indesignjs.de](http://www.indesignjs.de/extendscriptAPI/indesign10). For InDesign CS6 [goto](http://www.indesignjs.de/extendscriptAPI/indesign8).
+Covered: InDesign, InDesign Server, Illustrator, Photoshop and Bridge, plus ScriptUI
+and the core JavaScript classes — the latter two shared by every application and
+therefore documented once.
 
-There is also an alternative node.js approach on [github](https://github.com/yearbookmachine/extendscript-api-documentation) and a HTML compilation from [jongware](http://www.jongware.com/idjshelp.html).
+## Build
 
+```sh
+npm install
+npm run build      # sourceXML/*.xml → site/          2,681 pages, ~7 s
+npm run serve      # http://localhost:8080
+npm run check      # browser test suite (needs Playwright)
+```
 
-### Before you start
+One runtime dependency: [`@xmldom/xmldom`](https://www.npmjs.com/package/@xmldom/xmldom)
+(no transitive dependencies). No Java, no XSLT processor, no DITA-OT, no oXygen.
+**The generated site itself has no dependencies at all** — no framework, no CDN, no
+build step in the browser, and every page is complete without JavaScript.
 
-  - Java and XSLT 2.0 Processor. For example [Saxon XSLT Processor](http://www.saxonica.com/welcome/welcome.xml)
-  - Put the Adobe InDesign and ExtendScript Toolkit  source files in Folder `sourceXML`
+`build/products.js` lists the applications and their source XML.
+Details in [build/README.md](build/README.md).
 
-#### XML file locations
+## Source files
 
-The XML source files can be found in the following locations on Mac OS X. 
+Put Adobe's OMV exports into `sourceXML/`. They are not redistributed here.
+
+On macOS:
 
   - `/Library/Application Support/Adobe/Scripting Dictionaries CC/CommonFiles`
   - `~/Library/Preferences/ExtendScript Toolkit/4.0/omv$indesign-9.064$9.0.xml`
 
-On Windows the Files are located at:
+On Windows:
 
   - `\Users\[Username]\AppData\Roaming\Adobe\ExtendScript Toolkit\4.0\omv$indesign-10.064$10.0.xml`
   - `C:\Program Files (x86)\Common Files\Adobe\Scripting Dictionaries CC\CommonFiles\`
- 
-The copyright of the original Files is by <a href="http://www.adobe.com">Adobe Systems Incorporated</a>.
 
-## XSLT Transformations
+## Sublime Text code completions
 
-The idea is, to create a merged and fixed DOM/API XML file. From this file several formats can be achieved. In this repository the XSLT for DITA (as used in the [webhelp](http://www.indesignjs.de/extendscriptAPI) anbd [Sublime Text](http://www.sublimetext.com/) Code Completions are included. 
+Separate output, still on the XSLT route: transform a merged and fixed DOM file with
+`dom2sublimeCodeCompletion.xsl` and drop the resulting `jsx.sublime-completions` into
+your Sublime Text `Packages` folder.
 
-### Create a merged and fixed DOM-File
-1. Merge the Source files and get rid of namespace bugs with `mergeFiles.xslt`.  This transformation works with a named template (Saxon Option is '-it mergeDOMFiles'). You can change the path params in the file (Line 13 for the Product XML), or call the transformation with the path to indesign.xml, javascript.xml scriptui.xml.
-2. Fix DOM Structure for further processing with `fixDom.xsl`. All ScriptUI classes are postfixed with `(SUI)`. Please note: There are some ugly hacks, basically replace() to get it working, probably some unrecognized bugs wil be produced. This file could also serve as a nice datasource for  Sublimetext Code Completion Files. 
+## Verifying the port
 
-### Create DITA Topics
-1. Transform DOM Structure to DITA Topics and create a DITA Map with `dom2dita.xsl` You'll find the results in folder `domOut`
-2. Please note: For a readable output format you've to set up an [DITA-OT Transformation](http://dita-ot.github.io/).
+The pipeline used to be `mergeFiles.xslt` → `fixDom.xsl` → `dom2dita.xsl` → DITA-OT.
+The first two are ported to `build/fixdom.js`; `npm run verify` holds the port against
+the original XSLT chain and reports zero real differences. That comparison needs Java
+and Saxon and is the only thing `mergeFiles.xslt` and `fixDom.xsl` are still kept for:
 
-### Create Sublime Text Code Completions 
-1. Transform DOM Structure to DITA Topics to Sublime Text Code Completions with `dom2sublimeCodeCompletion.xsl`. Use the result from `fixDom.xsl`. Create a `jsx.sublime-completions` file and put this into your Sublime Text Packages folder 
-On Windows: `\Users\[Username]\AppData\Roaming\Sublime Text 3\Packages`
-On MacOS: ``/Library/Application Support/Sublime Text 3/Packages`
+```sh
+npm run verify:prepare   # temp/fixedDOM-<slug>.xml via Saxon
+npm run verify
+```
 
-## Other than InDesign
-The transformation was adapted for Photoshop. The `dom2dita.xsl` has still a lot of "InDesign" Strings and the mini hierarchy won't work. 
-
-### License
+## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">extendscriptApiDocTransformations
-</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.publishingx.de/" property="cc:attributionName" rel="cc:attributionURL">Gregor Fellenz</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://www.adobe.com/" rel="dct:source">http://www.adobe.com/</a>.
+</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://www.publishingx.de/" property="cc:attributionName" rel="cc:attributionURL">Gregor Fellenz</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://www.adobe.com/" rel="dct:source">https://www.adobe.com/</a>.
 
-### Acknowledgements
-This project ist based on the fantastic ExtendScript API HTML from <a href="http://www.jongware.com/idjshelp.html">Theunis de Jong</a> aka Jongware. Without his efforts and inspiration I would not have realized it. Thank you!
+The copyright of the original object model files and the trademarks InDesign,
+Photoshop, Illustrator, ExtendScript and ScriptUI are held by
+[Adobe Inc.](https://www.adobe.com/) The descriptive texts are Adobe's;
+transformation errors are ours.
+
+## Acknowledgements
+
+This project is based on the fantastic ExtendScript API HTML by
+[Theunis de Jong](https://web.archive.org/web/20170106130344/http://www.jongware.com/idjshelp.html)
+a.k.a. **Jongware** († 2020). Without his efforts and inspiration I would not have
+realized it. Thank you!
