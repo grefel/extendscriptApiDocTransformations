@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API redesign — three concepts</title>
+<style>
+:root{
+  --bg:#fafafa; --card:#fff; --ink:#16181d; --dim:#646c78; --line:#e4e7ec; --accent:#1f6feb;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace; --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0f1114; --card:#171a1f; --ink:#e7eaef; --dim:#8b939f; --line:#252a31; --accent:#589bff;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--sans);padding:44px 22px 80px}
+.w{max-width:1180px;margin:0 auto}
+h1{font-size:29px;margin:0 0 6px;letter-spacing:-.02em}
+.sub{color:var(--dim);margin:0 0 8px;max-width:74ch}
+.facts{display:flex;gap:20px;flex-wrap:wrap;font:12px var(--mono);color:var(--dim);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0;margin:22px 0 30px}
+.facts b{color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;
+  display:flex;flex-direction:column}
+.card h2{margin:0;font-size:19px;letter-spacing:-.01em}
+.card h2 span{font:11px var(--mono);color:var(--dim);display:block;text-transform:uppercase;
+  letter-spacing:.1em;margin-bottom:5px}
+.card .pitch{color:var(--dim);font-size:13.5px;margin:9px 0 0;min-height:66px}
+.card ul{margin:15px 0 0;padding-left:17px;font-size:13.5px}
+.card li{margin-bottom:5px}
+.card .risk{margin-top:auto;padding-top:15px;font-size:12.5px;color:var(--dim);
+  border-top:1px solid var(--line);margin-bottom:15px}
+.card .risk b{color:var(--ink)}
+.open{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
+  padding:9px 17px;border-radius:8px;font-size:14px;font-weight:500;text-align:center}
+.open:hover{filter:brightness(1.1)}
+.matrix{margin-top:42px;width:100%;border-collapse:collapse;font-size:13.5px}
+.matrix th,.matrix td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.matrix th{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.matrix td:first-child{color:var(--dim);white-space:nowrap}
+.matrix code{font:12px var(--mono)}
+.warn{margin-top:34px;border-left:3px solid #d97706;background:rgba(217,119,6,.09);
+  padding:13px 17px;border-radius:0 8px 8px 0;font-size:13.5px}
+.warn b{display:block;margin-bottom:3px}
+</style>
+</head>
+<body>
+<div class="w">
+  <h1>ExtendScript API — three representation concepts</h1>
+  <p class="sub">All three are working prototypes driven by the <b>real, complete object model</b> extracted from
+     <code>temp/fixedDOM.xml</code>. No frameworks, no CDN, no build step — plain HTML, CSS and vanilla JS,
+     which is what the new XML→HTML transformation would emit.</p>
+
+  <div class="facts">
+    <span><b>1,153</b> classes</span>
+    <span><b>721</b> real classes · <b>432</b> enumerations</span>
+    <span><b>19,590</b> properties</span>
+    <span><b>211</b> events</span>
+    <span><b>8,841</b> methods</span>
+    <span><b>28,642</b> members</span>
+    <span>data <b>4.9 MB</b> → <b>706 KB</b> gzipped</span>
+    <span>parse <b>~150 ms</b> · search <b>~5 ms</b></span>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h2><span>Concept A</span>Codex</h2>
+      <p class="pitch">The familiar Jongware model, done properly. One class at a time, dense tables,
+         nothing new to learn. A veteran user is productive in the first second.</p>
+      <ul>
+        <li>Filterable class rail, grouped A–Z</li>
+        <li>Sticky in-page member filter with live count</li>
+        <li>Copy <code>.member</code> to clipboard on hover</li>
+        <li>Type names link to their class or enum</li>
+        <li>Warm light theme + dark mode</li>
+      </ul>
+      <p class="risk"><b>Trade-off.</b> Safest and fastest to build, but it does not solve
+         “which class has <code>geometricBounds</code>?” — search stays scoped to one class.</p>
+      <a class="open" href="concept-a-codex.html">Open Concept A</a>
+    </div>
+
+    <div class="card">
+      <h2><span>Concept B</span>Console</h2>
+      <p class="pitch">Keyboard-first, three panes, dark by default. A command palette searches all
+         28,642 members at once — the answer to the question the current site cannot answer.</p>
+      <ul>
+        <li><code>Ctrl/Cmd+K</code> palette over every class, property, event and method</li>
+        <li><b>ExtendScript / UXP switch</b> — UXP hides the 242 <code>[]</code> collection
+            accessors plus <code>$</code> and all 34 ScriptUI (<code>…SUI</code>) classes</li>
+        <li>Properties, <b>events</b> and methods each as their own table with own count</li>
+        <li>Clickable return types on every method</li>
+        <li>Enum values sit in the <b>Type</b> column, next to the type they belong to</li>
+        <li>Copy-to-clipboard on hover for every member</li>
+        <li><b>Object of</b> and <b>Return</b> reverse lookups</li>
+        <li>Full inheritance chain (<code>PageItem › SplineItem › Rectangle</code>)</li>
+        <li>Runtime and theme survive a reload; the URL carries the mode (<code>#Pages!uxp</code>)</li>
+      </ul>
+      <p class="risk"><b>Trade-off.</b> The most conventional “modern docs” answer, and the strongest
+         everyday lookup. Slightly denser UI; the palette must be discoverable for non-keyboard users.</p>
+      <a class="open" href="concept-b-console.html">Open Concept B</a>
+    </div>
+
+    <div class="card">
+      <h2><span>Concept C</span>Atlas</h2>
+      <p class="pitch">One search box drives everything, and you can pin two or three classes side by side.
+         Members that exist in only one pane are flagged — the object model becomes explorable.</p>
+      <ul>
+        <li>Single global input, scoped by chips (all / classes / props / methods)</li>
+        <li>Compare 2–3 classes; unique members marked in the margin</li>
+        <li>No page loads at all — every click is instant</li>
+        <li>Works offline as one folder, no server</li>
+        <li>Try <code>Rectangle</code> vs <code>TextFrame</code>: 19 / 36 unique members</li>
+      </ul>
+      <p class="risk"><b>Trade-off.</b> The most useful for exploring and for questions like “what does
+         Story have that Paragraph doesn’t”. But it is app-like: deep links and printing need extra work.</p>
+      <a class="open" href="concept-c-atlas.html">Open Concept C</a>
+    </div>
+  </div>
+
+  <table class="matrix">
+    <thead><tr><th></th><th>A — Codex</th><th>B — Console</th><th>C — Atlas</th></tr></thead>
+    <tbody>
+      <tr><td>Mental model</td><td>Today, refined</td><td>Modern docs site</td><td>Explorer app</td></tr>
+      <tr><td>Search scope</td><td>Within one class</td><td>All members, palette</td><td>All members, always visible</td></tr>
+      <tr><td>Output shape</td><td>1,153 static pages</td><td>1,153 pages + index</td><td>1 page + data file</td></tr>
+      <tr><td>Deep links</td><td>Native</td><td>Native</td><td>Needs hash routing</td></tr>
+      <tr><td>Works without JS</td><td>Yes, if pre-rendered</td><td>Yes, if pre-rendered</td><td>No</td></tr>
+      <tr><td>Offline zip</td><td>Good</td><td>Good</td><td>Best — one folder</td></tr>
+      <tr><td>Build effort</td><td>Low</td><td>Medium</td><td>Medium</td></tr>
+      <tr><td>Answers “who has <code>fill</code>?”</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <b>Concept B is the picked direction</b>
+    B now carries the agreed additions: runtime switch, events as their own table, clickable return types,
+    inline enum values, the two reverse lookups and the footer. A and C are kept as they were, for reference.
+    The data extraction (<code>extract-json.xsl</code>) is throwaway scaffolding for this phase.
+  </div>
+
+  <div class="warn" style="border-left-color:#0ea5e9;background:rgba(14,165,233,.09)">
+    <b>Open question for the transformation</b>
+    The runtime switch currently shows the same content in both modes, with one real difference —
+    UXP drops the 242 <code>[]</code> collection accessors. Which further ExtendScript/UXP differences
+    belong in the data still needs to be decided.
+  </div>
+</div>
+</body>
+</html>

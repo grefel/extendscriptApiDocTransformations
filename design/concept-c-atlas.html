@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept C — Atlas</title>
+<style>
+:root{
+  --bg:#ffffff; --sunk:#f6f7f9; --ink:#101418; --dim:#646e7b; --line:#e6e9ee;
+  --accent:#0b7285; --accent-soft:#e0f2f5; --hot:#c2410c;
+  --ro:#8a94a2; --rw:#0f7a52; --enum:#7c3aed;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-t="light"]){
+  --bg:#101317; --sunk:#171b21; --ink:#e6eaf0; --dim:#8b95a4; --line:#242a33;
+  --accent:#3fbfd6; --accent-soft:#10333b; --hot:#f08a52; --ro:#8b95a4; --rw:#4fc48f; --enum:#b18aff;
+}}
+:root[data-t="dark"]{
+  --bg:#101317; --sunk:#171b21; --ink:#e6eaf0; --dim:#8b95a4; --line:#242a33;
+  --accent:#3fbfd6; --accent-soft:#10333b; --hot:#f08a52; --ro:#8b95a4; --rw:#4fc48f; --enum:#b18aff;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13.5px/1.5 var(--sans);
+  height:100vh;display:flex;flex-direction:column;overflow:hidden}
+a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+
+/* one global input drives everything */
+.hero{padding:13px 20px 0;border-bottom:1px solid var(--line);background:var(--sunk)}
+.hrow{display:flex;align-items:center;gap:12px}
+.mark{font:600 12px var(--mono);color:var(--dim);letter-spacing:.05em;white-space:nowrap}
+.mark b{color:var(--accent)}
+.qbox{flex:1;position:relative}
+.qbox input{width:100%;padding:11px 15px 11px 38px;border:1.5px solid var(--line);border-radius:9px;
+  background:var(--bg);color:var(--ink);font:14px var(--mono)}
+.qbox input:focus{outline:none;border-color:var(--accent)}
+.qbox svg{position:absolute;left:13px;top:12px;opacity:.45}
+.tg{border:1px solid var(--line);background:var(--bg);color:var(--dim);border-radius:7px;
+  padding:7px 12px;font:11.5px var(--sans);cursor:pointer;white-space:nowrap}
+.scopes{display:flex;gap:5px;padding:11px 0 10px}
+.scope{border:1px solid var(--line);background:var(--bg);color:var(--dim);border-radius:99px;
+  padding:4px 13px;font:11.5px var(--sans);cursor:pointer}
+.scope.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.scope i{font-style:normal;opacity:.65;margin-left:5px}
+
+/* results overlay the panes while typing */
+.body{flex:1;min-height:0;display:flex;position:relative}
+.hitlist{position:absolute;inset:0;background:var(--bg);z-index:6;overflow-y:auto;display:none}
+.hitlist.on{display:block}
+.hit{display:grid;grid-template-columns:60px minmax(260px,1.1fr) 150px minmax(0,2fr);
+  gap:14px;align-items:baseline;padding:8px 20px;border-bottom:1px solid var(--line);cursor:pointer}
+.hit:hover{background:var(--sunk)}
+.hit .kind{font:10px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--dim)}
+.hit .kind.p{color:var(--rw)} .hit .kind.m{color:var(--accent)} .hit .kind.c{color:var(--enum)}
+.hit .path{font:12.5px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hit .path em{color:var(--dim);font-style:normal}
+.hit .path b{color:var(--hot);font-weight:600}
+.hit .ty{font:11.5px var(--mono);color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hit .de{color:var(--dim);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hitmeta{padding:9px 20px;color:var(--dim);font:11.5px var(--mono);
+  border-bottom:1px solid var(--line);background:var(--sunk);position:sticky;top:0}
+
+/* the compare panes */
+.panes{flex:1;display:flex;min-height:0;overflow-x:auto}
+.pane{flex:1 1 0;min-width:400px;border-right:1px solid var(--line);display:flex;
+  flex-direction:column;min-height:0}
+.pane:last-child{border-right:0}
+.phead{padding:12px 18px;border-bottom:1px solid var(--line);background:var(--sunk);
+  display:flex;align-items:center;gap:10px}
+.phead .nm{font:600 17px var(--mono)}
+.phead .sub{font:11px var(--mono);color:var(--dim)}
+.phead .x{margin-left:auto;border:0;background:transparent;color:var(--dim);cursor:pointer;font:15px var(--sans)}
+.phead .x:hover{color:var(--hot)}
+.pbody{overflow-y:auto;flex:1;min-height:0;padding:0 0 60px}
+.plede{padding:12px 18px 0;color:var(--dim);font-size:13px}
+.pmeta{padding:9px 18px 12px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{font:10.5px var(--mono);border:1px solid var(--line);border-radius:99px;padding:2px 9px;color:var(--dim)}
+.tag.a{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+.grp{padding:9px 18px 4px;font:600 10px var(--sans);letter-spacing:.11em;text-transform:uppercase;
+  color:var(--dim);background:var(--bg);position:sticky;top:0;border-bottom:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:6px 18px;
+  border-bottom:1px solid var(--line);align-items:baseline}
+.row:hover{background:var(--sunk)}
+.row.uniq{box-shadow:inset 3px 0 0 var(--hot)}
+.row .n{font:12.5px var(--mono);font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.row .n s{color:var(--dim);font-weight:400;text-decoration:none}
+.row .n u{color:var(--dim);font-weight:400;text-decoration:none;font-size:11.5px}
+.row .t{font:11px var(--mono);color:var(--dim);white-space:nowrap}
+.row .t a{color:var(--accent)}
+.row .d{grid-column:1/-1;color:var(--dim);font-size:12px;margin-top:1px}
+.addpane{flex:none;width:52px;display:flex;align-items:center;justify-content:center;
+  border-left:1px dashed var(--line);cursor:pointer;color:var(--dim);font-size:22px;background:var(--sunk)}
+.addpane:hover{color:var(--accent);background:var(--accent-soft)}
+.hintbar{padding:6px 20px;border-top:1px solid var(--line);background:var(--sunk);
+  font:11px var(--sans);color:var(--dim);display:flex;gap:18px}
+kbd{font:10px var(--mono);border:1px solid var(--line);border-bottom-width:2px;
+  border-radius:4px;padding:0 4px;color:var(--dim);background:var(--bg)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hrow">
+    <div class="mark">indesign<b>js</b></div>
+    <div class="qbox">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+        <circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input id="q" placeholder="geometricBounds, exportFile, Rectangle …  everything at once" spellcheck="false" autocomplete="off">
+    </div>
+    <button class="tg" id="tbtn">theme</button>
+  </div>
+  <div class="scopes" id="scopes">
+    <button class="scope on" data-s="all">everything <i id="n-all"></i></button>
+    <button class="scope" data-s="c">classes <i id="n-c"></i></button>
+    <button class="scope" data-s="p">properties <i id="n-p"></i></button>
+    <button class="scope" data-s="m">methods <i id="n-m"></i></button>
+  </div>
+</div>
+
+<div class="body">
+  <div class="hitlist" id="hitlist"></div>
+  <div class="panes" id="panes"></div>
+  <div class="addpane" id="addpane" title="Add a pane to compare">+</div>
+</div>
+
+<div class="hintbar">
+  <span><kbd>/</kbd> search</span>
+  <span><kbd>esc</kbd> back to panes</span>
+  <span>click a result to load it into the active pane</span>
+  <span style="margin-left:auto"><b id="stat"></b></span>
+</div>
+
+<script src="api-data.js"></script>
+<script>
+const D = window.API, byName = new Map(D.classes.map(c => [c.n, c]));
+
+const IDX = [];
+for (const c of D.classes){
+  IDX.push({k:'c', c:c.n, n:c.n, d:c.d, t:c.enum?['enumeration']:(c.sup?['extends '+c.sup]:[]), l:c.n.toLowerCase()});
+  for (const p of c.p) IDX.push({k:'p', c:c.n, n:p.n, d:p.d, t:p.t, rw:p.rw, l:p.n.toLowerCase()});
+  for (const m of c.m) IDX.push({k:'m', c:c.n, n:m.n, d:m.d, t:m.r, a:m.a, l:m.n.toLowerCase()});
+}
+const N = {all:IDX.length, c:D.classes.length,
+  p:IDX.filter(e=>e.k==='p').length, m:IDX.filter(e=>e.k==='m').length};
+for (const k in N) document.getElementById('n-'+k).textContent = N[k].toLocaleString();
+document.getElementById('stat').textContent =
+  `${D.classes.length} classes · ${N.p.toLocaleString()} properties · ${N.m.toLocaleString()} methods`;
+
+/* ---------- panes: 1..3 classes side by side ---------- */
+let panes = ['Rectangle', 'TextFrame'], active = 0;
+
+const tl = ts => (!ts||!ts.length) ? '' :
+  ts.map(t => byName.has(t) ? `<a href="javascript:void 0" data-goto="${t}">${t}</a>` : t).join(' | ');
+
+function drawPanes(){
+  /* members unique to one pane get a marker — that is the point of comparing */
+  const sets = panes.map(n => {
+    const c = byName.get(n); if (!c) return new Set();
+    return new Set([...c.p.map(p=>'p'+p.n), ...c.m.map(m=>'m'+m.n)]);
+  });
+
+  document.getElementById('panes').innerHTML = panes.map((n, i) => {
+    const c = byName.get(n); if (!c) return '';
+    const others = sets.filter((_,j) => j!==i);
+    const uniq = key => panes.length > 1 && others.every(s => !s.has(key));
+
+    const prop = p => `<div class="row ${uniq('p'+p.n)?'uniq':''}">
+      <div class="n"><s>.</s>${p.n}</div>
+      <div class="t">${tl(p.t)} <span style="color:var(--${p.rw==='readonly'?'ro':'rw'})">${
+        p.rw==='readonly'?'ro':'rw'}</span></div>
+      <div class="d">${p.d||''}</div></div>`;
+    const meth = m => `<div class="row ${uniq('m'+m.n)?'uniq':''}">
+      <div class="n"><s>.</s>${m.n}<u>(${m.a.map(a=>a.o?a.n+'?':a.n).join(', ')})</u></div>
+      <div class="t">${tl(m.r)||'void'}</div>
+      <div class="d">${m.d||''}</div></div>`;
+
+    return `<section class="pane" data-i="${i}">
+      <div class="phead">
+        <span class="nm">${c.n}</span>
+        <span class="sub">${c.enum?'enum':'class'} · ${c.p.length+c.m.length}</span>
+        ${panes.length>1?`<button class="x" data-close="${i}" title="Close pane">✕</button>`:''}
+      </div>
+      <div class="pbody">
+        <div class="plede">${c.d||''}</div>
+        <div class="pmeta">
+          ${c.sup?`<span class="tag">extends <a href="javascript:void 0" data-goto="${c.sup}">${c.sup}</a></span>`:''}
+          <span class="tag a">${c.p.length} ${c.enum?'values':'props'}</span>
+          ${c.m.length?`<span class="tag a">${c.m.length} methods</span>`:''}
+          ${panes.length>1?`<span class="tag" style="color:var(--hot)">▌ only here</span>`:''}
+        </div>
+        ${c.p.length?`<div class="grp">${c.enum?'Values':'Properties'}</div>`+c.p.map(prop).join(''):''}
+        ${c.m.length?`<div class="grp">Methods</div>`+c.m.map(meth).join(''):''}
+      </div></section>`;
+  }).join('');
+
+  document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => {
+    panes.splice(+b.dataset.close, 1); active = 0; drawPanes();
+  }));
+  document.querySelectorAll('[data-goto]').forEach(a => a.addEventListener('click', () => {
+    panes[active] = a.dataset.goto; drawPanes();
+  }));
+  document.querySelectorAll('.pane').forEach(p =>
+    p.addEventListener('mousedown', () => { active = +p.dataset.i; }));
+  document.getElementById('addpane').style.display = panes.length >= 3 ? 'none' : 'flex';
+}
+
+/* ---------- the single global search ---------- */
+const qEl = document.getElementById('q'), hl = document.getElementById('hitlist');
+let scope = 'all';
+
+function search(){
+  const q = qEl.value.trim().toLowerCase();
+  if (!q){ hl.classList.remove('on'); return; }
+  const pool = scope==='all' ? IDX : IDX.filter(e => e.k===scope);
+  const scored = [];
+  for (const e of pool){
+    const i = e.l.indexOf(q);
+    if (i < 0) continue;
+    scored.push([(i===0?0:200) + e.n.length + i, e]);
+  }
+  scored.sort((a,b) => a[0]-b[0]);
+  const hits = scored.slice(0, 300).map(x => x[1]);
+
+  hl.innerHTML = `<div class="hitmeta">${scored.length.toLocaleString()} matches${
+    scored.length>300?' · showing first 300':''} — click to open in pane ${active+1}</div>`
+   + hits.map((e,i) => {
+      const at = e.l.indexOf(q);
+      const nm = e.n.slice(0,at)+'<b>'+e.n.slice(at,at+q.length)+'</b>'+e.n.slice(at+q.length);
+      return `<div class="hit" data-i="${i}">
+        <span class="kind ${e.k}">${e.k==='c'?'class':e.k==='p'?'prop':'method'}</span>
+        <span class="path">${e.k==='c'?nm:`<em>${e.c}.</em>${nm}${e.k==='m'?'()':''}`}</span>
+        <span class="ty">${(e.t||[]).join(' | ')}</span>
+        <span class="de">${e.d||''}</span></div>`;
+    }).join('');
+  hl.classList.add('on');
+  hl.querySelectorAll('.hit').forEach(r => r.addEventListener('click', () => {
+    panes[active] = hits[+r.dataset.i].c; qEl.value=''; hl.classList.remove('on'); drawPanes();
+  }));
+}
+qEl.addEventListener('input', search);
+document.querySelectorAll('.scope').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.scope').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); scope = b.dataset.s; search();
+}));
+document.getElementById('addpane').addEventListener('click', () => {
+  if (panes.length < 3){ panes.push('Document'); active = panes.length-1; drawPanes(); }
+});
+addEventListener('keydown', e => {
+  if (e.key === '/' && e.target !== qEl){ e.preventDefault(); qEl.focus(); qEl.select(); }
+  if (e.key === 'Escape'){ qEl.value=''; hl.classList.remove('on'); qEl.blur(); }
+});
+document.getElementById('tbtn').addEventListener('click', () => {
+  document.documentElement.dataset.t = document.documentElement.dataset.t==='dark' ? 'light' : 'dark';
+});
+
+drawPanes();
+</script>
+</body>
+</html>

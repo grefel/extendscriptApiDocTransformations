@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept B — Console</title>
+<style>
+:root{
+  --bg:#0f1115; --panel:#151920; --rail:#0c0e12; --ink:#dfe4ec; --dim:#7d8798;
+  --line:#232935; --accent:#5aa9ff; --accent-soft:#16283f; --warn:#e0a458;
+  --ro:#8b94a6; --rw:#57c99a; --enum:#c08cf0; --ev:#f2836b;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+/* Helle Palette: --dim und --accent sind so gewaehlt, dass sie auf allen drei
+   Untergruenden (--bg, --panel, --rail) WCAG AA 4.5:1 erreichen. */
+:root[data-t="light"]{
+  --bg:#fdfdfe; --panel:#f5f7fa; --rail:#f0f3f7; --ink:#131720; --dim:#5f6878;
+  --line:#e0e5ee; --accent:#1862bd; --accent-soft:#e4eefc; --warn:#8a5415;
+  --ro:#5f6878; --rw:#166647; --enum:#6a339b; --ev:#a8431f;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13.5px/1.5 var(--sans);overflow:hidden}
+a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+
+/* baseline statt center: bei 16px Wortmarke neben 11px Steuerelementen zentriert
+   "center" nur die Boxen, die Textgrundlinien laufen dann um ~2px auseinander. */
+.top{height:44px;display:flex;align-items:baseline;gap:12px;padding:0 14px;
+  border-bottom:1px solid var(--line);background:var(--rail)}
+/* Baseline-Ausrichtung setzt die Gruppe an den oberen Rand; der gleiche Versatz
+   auf alle Kinder zentriert sie wieder, ohne die Grundlinien zu verschieben.
+   line-height:1 ueberall, sonst zieht die font-Kurzschreibweise sie auseinander. */
+.top>*{position:relative;top:8px;line-height:1}
+.top .logo{font:600 16px/1 var(--mono);letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
+.top .logo b{color:var(--accent);font-weight:600}
+/* Laufzeit-Umschalter: bewusst zurueckhaltend, er ist eine Ansichtsoption
+   und nicht die Hauptnavigation. Aktiv = angehobenes Feld, kein Farbblock. */
+.rt{display:flex;gap:2px;background:var(--panel);border:1px solid var(--line);
+  border-radius:7px;padding:2px}
+.rt button{border:0;background:transparent;color:var(--dim);font:11px/1 var(--sans);
+  padding:5px 10px;cursor:pointer;border-radius:5px;white-space:nowrap}
+.rt button:hover{color:var(--ink)}
+.rt button.on{background:var(--accent);color:#fff;font-weight:600}
+/* API-Version des zugrunde liegenden Objektmodells */
+.apiver{font:11px/1 var(--mono);color:var(--dim);white-space:nowrap;
+  padding:5px 10px;border:1px solid var(--line);border-radius:99px}
+.apiver b{color:var(--ink);font-weight:600}
+.kbtn{margin-left:auto;display:flex;align-items:center;gap:9px;border:1px solid var(--line);
+  background:var(--panel);color:var(--dim);border-radius:7px;padding:6px 11px;cursor:pointer;
+  font:12px/1 var(--sans);min-width:265px}
+.kbtn:hover{border-color:var(--accent)}
+kbd{font:10px var(--mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;
+  padding:1px 5px;color:var(--dim);background:var(--bg)}
+.tg{border:1px solid var(--line);background:var(--panel);color:var(--dim);border-radius:6px;
+  padding:6px 10px;font:11px/1 var(--sans);cursor:pointer}
+
+.grid{display:grid;grid-template-columns:230px 1fr 210px;height:calc(100vh - 44px)}
+.side{background:var(--rail);border-right:1px solid var(--line);overflow-y:auto;padding:10px 0;min-height:0}
+.side .h{padding:10px 14px 5px;font:600 10px var(--sans);letter-spacing:.11em;text-transform:uppercase;color:var(--dim)}
+.side a{display:flex;justify-content:space-between;gap:6px;padding:3px 14px;font:12px var(--mono);color:var(--ink)}
+.side a:hover{background:var(--panel);text-decoration:none}
+.side a.on{background:var(--accent-soft);color:var(--accent);box-shadow:inset 2px 0 0 var(--accent)}
+.side a i{font-style:normal;color:var(--dim);font-size:10px}
+.side a.e i{color:var(--enum)}
+.side a.co i{color:var(--warn)}
+
+.doc{overflow-y:auto;min-height:0;padding:24px 30px 40px;display:flex;flex-direction:column}
+.dmain{flex:1}
+.doc .kind{font:11px var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.doc h1{margin:5px 0 0;font:600 26px var(--mono)}
+.doc .lede{color:var(--dim);margin:8px 0 0;max-width:70ch}
+.chain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:13px;font:11.5px var(--mono);color:var(--dim)}
+.chain span{opacity:.5}
+
+.bar{position:sticky;top:0;z-index:4;display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  background:var(--bg);padding:15px 0 11px;margin-top:20px;border-bottom:1px solid var(--line)}
+.bar input{flex:1;min-width:200px;background:var(--panel);border:1px solid var(--line);border-radius:7px;
+  padding:8px 12px;color:var(--ink);font:12.5px var(--mono)}
+.bar input:focus{outline:none;border-color:var(--accent)}
+.pill{border:1px solid var(--line);background:var(--panel);color:var(--dim);border-radius:99px;
+  padding:5px 12px;font:11.5px var(--sans);cursor:pointer;white-space:nowrap}
+.pill.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.sechead{margin:26px 0 0;font:600 11px var(--sans);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--dim);display:flex;align-items:baseline;gap:8px}
+.sechead b{color:var(--ink);font:600 11px var(--mono)}
+
+/* properties / events as dense tables */
+table{width:100%;border-collapse:collapse;margin-top:9px;font-size:13px}
+th{text-align:left;font:600 10px var(--sans);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--dim);padding:6px 9px;border-bottom:1px solid var(--line)}
+td{padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:hover td{background:var(--panel)}
+td.n{font:12.5px var(--mono);font-weight:600;white-space:nowrap}
+td.t{font:11.5px var(--mono)}
+td.t .arr{color:var(--warn)}
+/* Spitze Klammern in derselben Signalfarbe wie die [] der Arrays — beides sagt
+   "hier steckt ein anderer Typ drin". Luft daneben, sonst verschmilzt
+   "AutoCorrectTables<AutoCorrectTable>" optisch zu einem Wort. */
+.gen{color:var(--warn);padding:0 .18em;font-weight:400}
+/* Aus fixDom.xsl abgeleitet: Wertebereich und "auch als Masseinheit schreibbar". */
+.rngv{color:var(--rw);white-space:nowrap}
+.muv{color:var(--warn);cursor:help}
+/* Der Name selbst ist das Kopierziel — kein zusaetzlicher Knopf, der die Tabelle
+   unruhig macht. Gepunktete Linie beim Hovern als Hinweis, dass er etwas tut. */
+.cpx{border:0;background:transparent;padding:0;margin:0;font:inherit;color:inherit;
+  cursor:pointer;text-align:left;border-bottom:1px dotted transparent}
+.cpx:hover{border-bottom-color:currentColor}
+.cpx:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
+.cpx.ok{color:var(--rw);border-bottom-color:transparent}
+td.a{font:10.5px var(--mono)}
+td.a.ro{color:var(--ro)} td.a.rw{color:var(--rw)}
+td.d{color:var(--dim)}
+.vals{margin-top:4px;display:flex;flex-wrap:wrap;gap:4px}
+/* Enum-Werte sind selbst Kopierziele — sie werden qualifiziert abgelegt
+   (UndoModes.AUTO_UNDO), so wie man sie im Skript schreibt. */
+.vals .vchip{font:10.5px var(--mono);background:var(--accent-soft);color:var(--accent);
+  border:1px solid transparent;border-radius:4px;padding:1px 6px;cursor:pointer}
+.vals .vchip:hover{border-color:var(--accent)}
+.vals .vchip.ok{background:var(--rw);color:var(--bg);border-color:var(--rw)}
+.vals .more{font:10.5px var(--mono);color:var(--dim)}
+.stat{font:9.5px var(--mono);color:var(--warn);border:1px solid var(--warn);
+  border-radius:3px;padding:0 3px;margin-left:5px;opacity:.8}
+
+/* methods keep the rich block layout — parameters read better than in a cell */
+.mem{border-bottom:1px solid var(--line);padding:12px 2px}
+.mem .top1{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.mem .id{font:600 13.5px var(--mono)}
+.mem .id .d{color:var(--dim);font-weight:400}
+.mem .rt2{font:11.5px var(--mono);color:var(--dim)}
+.mem .rt2 b{color:var(--ink);font-weight:400}
+/* Keine Leseweiten-Begrenzung: einzelne Adobe-Beschreibungen sind mehrere tausend
+   Zeichen lang (Application.createCustomMiniFolio ist eine Schematabelle als Fliesstext).
+   Bei 72ch wurden daraus 30 Zeilen, waehrend rechts daneben die halbe Spalte leer blieb. */
+.mem .desc{color:var(--dim);margin-top:5px}
+/* Parameterliste als echtes Grid: mit Flex und min-width sprengt ein breiter Typ
+   wie "File | JavaScriptFunction" nur seine eigene Zeile und die Spalten verspringen.
+   Die beiden ersten Spalten richten sich am breitesten Inhalt der Methode aus. */
+.args{margin-top:8px;border-left:2px solid var(--line);padding-left:12px;
+  display:grid;grid-template-columns:auto auto minmax(220px,1fr);
+  column-gap:16px;row-gap:3px;align-items:baseline}
+.arg{display:contents}
+.arg .an{font:12px var(--mono);color:var(--ink);white-space:nowrap}
+.arg .an.o{color:var(--dim)}
+.arg .at{font:11.5px var(--mono);color:var(--warn);max-width:34ch;overflow-wrap:anywhere}
+.arg .ad{color:var(--dim);font-size:12.5px}
+
+/* reverse lookups */
+.rev{margin-top:26px}
+.revbox{display:flex;flex-wrap:wrap;gap:3px 14px;margin-top:8px;
+  max-height:150px;overflow-y:auto;padding:9px 11px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px}
+.revbox a{font:11.5px var(--mono);white-space:nowrap}
+.revbox em{color:var(--dim);font-style:normal}
+
+.rail2{border-left:1px solid var(--line);overflow-y:auto;padding:22px 13px;min-height:0;background:var(--rail)}
+.rail2 .h{font:600 10px var(--sans);letter-spacing:.11em;text-transform:uppercase;color:var(--dim);margin:14px 0 6px}
+.rail2 .h:first-child{margin-top:0}
+.rail2 a{display:block;padding:2px 0;font:11.5px var(--mono);color:var(--dim);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rail2 a:hover{color:var(--accent);text-decoration:none}
+.rail2 .kv{font:11px var(--mono);color:var(--dim);line-height:1.85}
+.rail2 .kv b{color:var(--ink);font-weight:600}
+
+/* Footer bewusst ruhig: eine Textfarbe, keine Rahmen, keine Fettung, ein
+   klares Groessengefaelle von der Signatur zur Versionszeile. */
+footer{border-top:1px solid var(--line);margin-top:40px;padding:18px 0 8px;
+  color:var(--dim);font-size:11.5px;line-height:1.6}
+footer p{margin:0 0 7px}
+footer p:last-child{margin-bottom:0}
+footer .by{font-size:12.5px;color:var(--ink);margin-bottom:10px}
+footer .by .hrt{color:inherit}
+footer .legal{font-size:11px}
+/* erbt Familie und Groesse vom Absatz darueber, damit der Footer eine Schrift hat */
+footer .meta{font-size:11px;margin-top:10px}
+
+/* command palette */
+.scrim{position:fixed;inset:0;background:rgba(4,6,10,.62);display:none;z-index:50;
+  align-items:flex-start;justify-content:center;padding-top:11vh}
+.scrim.on{display:flex}
+.pal{width:min(760px,93vw);background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;box-shadow:0 24px 70px rgba(0,0,0,.5);overflow:hidden}
+.pal input{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;
+  color:var(--ink);font:15px var(--mono);padding:15px 18px}
+.pal input:focus{outline:none}
+.res{max-height:56vh;overflow-y:auto}
+.res .r{display:flex;align-items:center;gap:11px;padding:8px 18px;cursor:pointer;border-left:2px solid transparent}
+.res .r.sel{background:var(--accent-soft);border-left-color:var(--accent)}
+.res .r .t{font:10px var(--mono);color:var(--dim);width:42px;flex:none;text-transform:uppercase}
+.res .r .t.p{color:var(--rw)} .res .r .t.m{color:var(--accent)}
+.res .r .t.c{color:var(--enum)} .res .r .t.e{color:var(--ev)}
+.res .r .n{font:12.5px var(--mono);white-space:nowrap}
+.res .r .n b{color:var(--accent);font-weight:600}
+.res .r .n em{color:var(--dim);font-style:normal}
+.res .r .d{color:var(--dim);font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.palfoot{display:flex;gap:14px;padding:8px 18px;border-top:1px solid var(--line);
+  font:10.5px var(--sans);color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="logo">indesign<b>js</b></div>
+  <div class="rt" id="rt">
+    <button data-r="es" class="on">ExtendScript</button>
+    <button data-r="uxp">UXP</button>
+  </div>
+  <span class="apiver" id="apiver"></span>
+  <button class="kbtn" id="openpal"><span id="palcount">Search…</span>
+    <span style="margin-left:auto"><kbd>Ctrl</kbd> <kbd>K</kbd></span></button>
+  <button class="tg" id="tbtn">theme</button>
+</div>
+<div class="grid">
+  <nav class="side" id="side"></nav>
+  <main class="doc"><div class="dmain" id="doc"></div>
+    <footer>
+      <p class="by">Presented with <span class="hrt">&#9829;</span> by
+        <a href="https://www.linkedin.com/in/gregor-fellenz/" target="_blank" rel="noopener">Gregor Fellenz</a>,
+        <a href="https://www.publishingx.de/" target="_blank" rel="noopener">publishingX</a>.</p>
+      <p class="legal">Generated with AI assistance from Adobe’s original sources — descriptive texts are
+      Adobe’s, transformation errors are ours. Copyright of the original files, and the trademarks InDesign,
+      Photoshop, Illustrator, ExtendScript and ScriptUI, are held by Adobe Inc. In case of doubt, refer to
+      the original files supplied by Adobe.</p>
+      <p class="meta" id="foot-ver"></p>
+    </footer>
+  </main>
+  <aside class="rail2" id="rail2"></aside>
+</div>
+
+<div class="scrim" id="scrim">
+  <div class="pal">
+    <input id="pq" placeholder="Name to jump to — or ? / several words to search descriptions" spellcheck="false" autocomplete="off">
+    <div class="res" id="res"></div>
+    <div class="palfoot"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span>
+      <span><kbd>esc</kbd> close</span>
+      <span><kbd>?</kbd> full text</span>
+      <span style="margin-left:auto" id="rescount"></span></div>
+  </div>
+</div>
+
+<script src="api-data.js"></script>
+<script>
+const D = window.API, byName = new Map(D.classes.map(c => [c.n, c]));
+/* "Adobe InDesign 2026 (21.5.1.73) Object Model" -> Produkt und Build getrennt */
+const vm = /^Adobe\s+(.+?)\s*\(([\d.]+)\)/.exec(D.version);
+document.getElementById('apiver').innerHTML = vm
+  ? `<b>${vm[1]}</b> &middot; API ${vm[2]}`
+  : D.version;
+document.getElementById('foot-ver').textContent =
+  'Generated from ' + D.version + (D.generated ? ' on ' + D.generated : '') + '.';
+
+/* Runtime switch. Same content in both modes, with one real difference:
+   UXP has no index accessor on collections, so the 242 methods literally
+   named "[]" are hidden.
+   Der Modus haengt im Hash ("#Pages!uxp"), damit ein Link den Zustand mitnimmt,
+   und zusaetzlich in localStorage, damit ein Reload ohne Flag ihn behaelt. */
+const store = {
+  get(k, d){ try { return localStorage.getItem(k) || d; } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem(k, v); } catch(e){} }
+};
+const parseHash = () => {
+  const raw = decodeURIComponent(location.hash.slice(1));
+  const [cls, ...flags] = raw.split('!');
+  return { cls, uxp: flags.includes('uxp') };
+};
+let runtime = parseHash().uxp ? 'uxp' : store.get('runtime', 'es');
+const hiddenInUxp = m => runtime === 'uxp' && m.n === '[]';
+/* Collections sind zuverlaessig an "everyItem" erkennbar: alle 242 Klassen mit
+   dieser Methode haben auch "[]", und keine ohne sie. Bewusst nicht ueber "[]"
+   gepruefte, weil das in UXP ausgeblendet wird — die Art der Klasse aendert sich
+   durch die Ansicht nicht. Die Beschreibung taugt nicht: acht Collections sagen
+   nicht "A collection of". */
+const isCollection = c => c.m.some(m => m.n === 'everyItem');
+/* Elementtyp der Collection, z. B. Pages -> Page */
+const elementOf = c => { const b = c.m.find(m => m.n === '[]'); return b && b.r && b.r[0]; };
+/* Hausbegriff ist "Object", nicht "Class" — die Scripting Guides sprechen von
+   Objekten und das Modell heisst Object Model. */
+const kindOf = c => c.enum ? 'Enumeration' : isCollection(c) ? 'Collection' : 'Object';
+
+/* UXP kennt weder das ExtendScript-Debugobjekt $ noch ScriptUI (Klassen auf "SUI"). */
+const esOnly = n => n === '$' || /SUI$/.test(n);
+const hiddenClass = n => runtime === 'uxp' && esOnly(n);
+function writeHash(){
+  const h = current + (runtime === 'uxp' ? '!uxp' : '');
+  if (decodeURIComponent(location.hash.slice(1)) !== h) location.hash = h;
+}
+
+/* ---------- reverse indexes: "Object of" and "Return" ---------- */
+const objectOf = new Map(), returnedBy = new Map(), paramOf = new Map();
+const push = (map, k, v) => { let a = map.get(k); if (!a) map.set(k, a = []); a.push(v); };
+for (const c of D.classes){
+  for (const p of c.p) for (const t of (p.t || [])) if (byName.has(t)) push(objectOf, t, [c.n, p.n, false]);
+  for (const m of c.m){
+    for (const t of (m.r || [])) if (byName.has(t)) push(returnedBy, t, [c.n, m.n, true]);
+    /* Enumerations tauchen meist nur als Parametertyp auf — ExportFormat etwa hat
+       keine einzige Property, aber 88 Parameter. Ohne diesen Index bliebe die
+       Seite solcher Enums leer. */
+    const seen = new Set();
+    for (const a of m.a) for (const t of (a.t || []))
+      if (byName.has(t) && !seen.has(t)){ seen.add(t); push(paramOf, t, [c.n, m.n, true, a.n]); }
+  }
+}
+
+/* ---------- flat search index (classes, props, events, methods) ---------- */
+/* l = Name klein (Namenssuche), f = Klasse + Name + Beschreibung klein (Volltext).
+   Bei Methoden gehen auch Parameternamen und -beschreibungen in den Volltext ein. */
+const IDX = [];
+const add = (k, cls, n, d, extra) => IDX.push({
+  k, c: cls, n, d, l: n.toLowerCase(),
+  f: (cls + ' ' + n + ' ' + (d || '') + (extra || '')).toLowerCase()
+});
+for (const c of D.classes){
+  add('c', c.n, c.n, c.d);
+  for (const p of c.p)  add('p', c.n, p.n, p.d);
+  for (const e of c.ev) add('e', c.n, e.n, e.d);
+  for (const m of c.m)  add('m', c.n, m.n, m.d,
+    m.a.map(a => ' ' + a.n + ' ' + (a.d || '')).join(''));
+}
+document.getElementById('palcount').textContent =
+  'Search ' + IDX.length.toLocaleString() + ' entries…';
+
+let current = 'Document';
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+/* type list -> clickable links; arr adds the [] collection suffix (ExtendScript only).
+   In UXP ausgeblendete Klassen werden genannt, aber nicht mehr verlinkt. */
+function tl(ts, arr){
+  if (!ts || !ts.length) return '';
+  const suffix = (arr && runtime === 'es') ? '<span class="arr">[]</span>' : '';
+  const link = t => byName.has(t) && !hiddenClass(t) ? `<a href="#${t}">${esc(t)}</a>` : esc(t);
+  return ts.map(t => {
+    let out = link(t) + suffix;
+    /* Ist der Typ eine Collection, direkt auch auf das enthaltene Objekt verlinken —
+       sonst braucht man von Document.pages zu Page immer einen Zwischenschritt. */
+    const c = byName.get(t);
+    if (c && isCollection(c)){
+      const el = elementOf(c);
+      if (el && byName.has(el) && !hiddenClass(el))
+        out += `<span class="gen">&lt;</span>${link(el)}<span class="gen">&gt;</span>`;
+    }
+    return out;
+  }).join(' <span style="opacity:.4">|</span> ');
+}
+/* Wertebereich und Masseinheit stammen aus fixDom.xsl, das beides aus den
+   Beschreibungstexten ableitet. Ohne Anzeige ginge die Information verloren. */
+function extras(x){
+  let s = '';
+  if (x.rng) s += ` <span class="rngv">${esc(x.rng[0])}&ndash;${esc(x.rng[1])}</span>`;
+  if (x.mu)  s += ` <span class="muv" title="Measurement unit — may also be written as a string such as &quot;12mm&quot;">unit</span>`;
+  return s;
+}
+/* Enum-Werte stehen in der Typspalte, direkt beim Typ auf den sie sich beziehen. */
+function inlineEnum(ts){
+  for (const t of (ts || [])){
+    const e = byName.get(t);
+    if (e && e.enum && e.p.length){
+      const show = e.p.slice(0, 12).map(v => {
+        const q = e.n + '.' + v.n;
+        return `<button class="vchip" data-cp="${esc(q)}" title="Copy ${esc(q)}">${esc(v.n)}</button>`;
+      }).join('');
+      const rest = e.p.length > 12
+        ? `<a class="more" href="#${e.n}">+${e.p.length-12} more</a>` : '';
+      return `<div class="vals">${show}${rest}</div>`;
+    }
+  }
+  return '';
+}
+/* Macht einen Namen zum Kopierziel. `clip` ist was in die Zwischenablage geht,
+   `label` was zu sehen ist — bei Methoden also "duplicate(to)" anzeigen,
+   aber "duplicate()" kopieren. */
+function copyable(clip, label){
+  return `<button class="cpx" data-cp="${esc(clip)}" title="Copy ${esc(clip)}">${label}</button>`;
+}
+/* Bindet jedes Element mit data-cp: die kleinen "copy"-Knoepfe wechseln ihren Text,
+   die Enum-Chips blinken nur kurz auf, damit ihr Wert lesbar bleibt. */
+function wireCopy(){
+  document.querySelectorAll('[data-cp]').forEach(b => b.addEventListener('click', async e => {
+    e.preventDefault(); e.stopPropagation();
+    const t = b.dataset.cp;
+    try { await navigator.clipboard.writeText(t); }
+    catch (err) {
+      /* Fallback, falls die Clipboard-API im Kontext nicht erlaubt ist */
+      const ta = document.createElement('textarea');
+      ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e2) {}
+      ta.remove();
+    }
+    /* Kein Textwechsel: Chips und Namen muessen lesbar bleiben, das kurze
+       Aufleuchten reicht als Rueckmeldung. */
+    b.classList.add('ok');
+    setTimeout(() => b.classList.remove('ok'), 900);
+  }));
+}
+/* Sprungliste der rechten Spalte, eine Sektion je Membertyp. */
+function jump(label, items, prefix, suffix){
+  if (!items.length) return '';
+  return `<div class="h">${label} <span style="opacity:.6">${items.length}</span></div>`
+    + items.map(x => `<a href="#" data-jump="${esc(prefix + x.n)}">${esc(x.n)}${suffix}</a>`).join('');
+}
+function chain(c){
+  const out = []; let x = c, guard = 0;
+  while (x && guard++ < 12){ out.push(x.n); x = x.sup ? byName.get(x.sup) : null; }
+  return out.reverse().map((n,i) => (i ? '<span>›</span>' : '')
+    + (n === c.n ? `<b>${esc(n)}</b>` : `<a href="#${n}">${esc(n)}</a>`)).join(' ');
+}
+
+/* ---------- left: class tree ---------- */
+function side(){
+  const vis = D.classes.filter(c => !hiddenClass(c.n));
+  const cls = vis.filter(c => !c.enum), en = vis.filter(c => c.enum);
+  const row = c => `<a href="#${c.n}" class="${c.n===current?'on':''}${c.enum?' e':''}${isCollection(c)?' co':''}">`
+    + `<span>${esc(c.n)}</span><i>${c.enum ? 'enum' : isCollection(c) ? 'coll' : c.p.length + c.ev.length + c.m.length}</i></a>`;
+  document.getElementById('side').innerHTML =
+    `<div class="h">Objects · ${cls.length}</div>` + cls.map(row).join('')
+  + `<div class="h">Enumerations · ${en.length}</div>` + en.map(row).join('');
+}
+
+/* ---------- centre ---------- */
+let filt = '', only = 'all';
+
+function doc(){
+  const c = byName.get(current); if (!c) return;
+  const q = filt.toLowerCase();
+  const hit = x => !q || x.n.toLowerCase().includes(q);
+  const ms  = c.m.filter(m => !hiddenInUxp(m));
+  const ps  = (only==='all'||only==='p') ? c.p.filter(hit)  : [];
+  const evs = (only==='all'||only==='e') ? c.ev.filter(hit) : [];
+  const mth = (only==='all'||only==='m') ? ms.filter(hit)   : [];
+  const oo = objectOf.get(c.n) || [], rb = returnedBy.get(c.n) || [], po = paramOf.get(c.n) || [];
+
+  const el = isCollection(c) ? elementOf(c) : null;
+  let h = `<div class="kind">${kindOf(c)}${
+      el && byName.has(el) ? ` <span style="opacity:.6">of</span> <a href="#${el}">${esc(el)}</a>` : ''
+    }</div><h1>${esc(c.n)}</h1>
+    <p class="lede">${esc(c.d||'')}</p>
+    <div class="chain">${chain(c)}</div>
+    <div class="bar">
+      <input id="f" placeholder="Filter members…" value="${esc(filt)}" spellcheck="false">
+      <button class="pill ${only==='all'?'on':''}" data-o="all">all</button>
+      <button class="pill ${only==='p'?'on':''}" data-o="p">${c.enum?'values':'properties'} ${c.p.length}</button>
+      ${c.ev.length?`<button class="pill ${only==='e'?'on':''}" data-o="e">events ${c.ev.length}</button>`:''}
+      ${ms.length?`<button class="pill ${only==='m'?'on':''}" data-o="m">methods ${ms.length}</button>`:''}
+    </div>`;
+
+  /* properties — table, as in the current site */
+  if (ps.length){
+    h += `<div class="sechead">${c.enum?'Values':'Properties'} <b>${ps.length}</b></div>
+      <table><thead><tr><th style="width:20%">Name</th><th style="width:27%">Type</th>
+      <th style="width:8%">Access</th><th>Description</th></tr></thead><tbody>`;
+    for (const p of ps){
+      /* Member auf Klassenebene werden qualifiziert benutzt (CopyrightStatus.YES,
+         $.build), Instanz-Properties haengen an einer eigenen Objektreferenz. */
+      const clip = (c.enum || p.st) ? c.n + '.' + p.n : p.n;
+      h += `<tr id="p-${esc(p.n)}"><td class="n">${copyable(clip, esc(p.n))}${
+        p.st?'<span class="stat">static</span>':''}</td>
+        <td class="t">${tl(p.t, p.arr) || '<span style="opacity:.45">—</span>'}${
+          p.v?` <span style="opacity:.55">= ${esc(p.v)}</span>`:''}${extras(p)}${inlineEnum(p.t)}</td>
+        <td class="a ${p.rw==='readonly'?'ro':'rw'}">${esc(p.rw||'')}</td>
+        <td class="d">${esc(p.d||"")}</td></tr>`;
+    }
+    h += '</tbody></table>';
+  }
+
+  /* events — own table and own count */
+  if (evs.length){
+    h += `<div class="sechead">Events <b>${evs.length}</b></div>
+      <table><thead><tr><th style="width:21%">Name</th><th>Description</th></tr></thead><tbody>`;
+    for (const e of evs){
+      h += `<tr id="e-${esc(e.n)}"><td class="n" style="color:var(--ev)">${
+        copyable(c.n + '.' + e.n, esc(e.n))}</td>
+        <td class="d">${esc(e.d||"")}</td></tr>`;
+    }
+    h += '</tbody></table>';
+  }
+
+  /* methods — blocks, so parameters stay readable */
+  if (mth.length){
+    h += `<div class="sechead">Methods <b>${mth.length}</b></div>`;
+    for (const m of mth){
+      const ret = tl(m.r, m.rarr);
+      h += `<div class="mem" id="m-${esc(m.n)}">
+        <div class="top1"><span class="id">${copyable(m.n + '()', esc(m.n) + '<span class="d">(' +
+          m.a.map(a => a.o ? `<span style="opacity:.6">${esc(a.n)}?</span>` : esc(a.n)).join(', ') +
+          ')</span>')}</span>
+          <span class="rt2">→ ${ret || '<b>void</b>'}</span></div>
+        <div class="desc">${esc(m.d||"")}</div>`;
+      if (m.a.length){
+        h += '<div class="args">' + m.a.map(a => `<div class="arg">
+          <span class="an ${a.o?'o':''}">${esc(a.n)}${a.o?'?':''}</span>
+          <span class="at">${tl(a.t, a.arr) || '—'}${extras(a)}</span>
+          <span class="ad">${esc((a.d||'').replace(/\s*\(Optional\)$/,''))}</span></div>`).join('') + '</div>';
+      }
+      h += '</div>';
+    }
+  }
+  if (!ps.length && !evs.length && !mth.length)
+    h += `<p style="color:var(--dim);padding:26px 0;font-style:italic">Nothing matches “${esc(filt)}”.</p>`;
+
+  /* Object of / Return — the reverse lookups from the original overview */
+  const revList = arr => arr.slice(0, 400).map(([cls, mem, isM, arg]) =>
+    `<a href="#${cls}" title="${esc(cls + '.' + mem + (arg ? '(' + arg + ')' : ''))}"><em>${esc(cls)}.</em>${esc(mem)}${
+      isM ? (arg ? `(<span style="opacity:.7">${esc(arg)}</span>)` : '()') : ''}</a>`).join('');
+  const revSection = (title, arr, hint) => arr.length
+    ? `<div class="rev"><div class="sechead">${title} <b>${arr.length}</b></div>
+       <div style="color:var(--dim);font-size:12px;margin-top:5px">${hint}</div>
+       <div class="revbox">${revList(arr)}</div></div>` : '';
+  const what = c.enum ? `an ${esc(c.n)} value` : `a ${esc(c.n)}`;
+  h += revSection('Object of', oo, `Properties elsewhere that hold ${what}.`);
+  h += revSection('Parameter of', po, `Method parameters that accept ${what}.`);
+  h += revSection('Return', rb, `Methods that return ${what}.`);
+  if (!oo.length && !po.length && !rb.length && c.enum)
+    h += `<div class="rev"><div class="sechead">Used by <b>0</b></div>
+      <div style="color:var(--dim);font-size:12px;margin-top:5px">
+        No documented property, parameter or return value uses ${esc(c.n)}.</div></div>`;
+
+  document.getElementById('doc').innerHTML = h;
+
+  const f = document.getElementById('f');
+  f.addEventListener('input', e => { filt = e.target.value; doc();
+    const n = document.getElementById('f'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); });
+  document.querySelectorAll('.pill').forEach(b => b.addEventListener('click', () => { only = b.dataset.o; doc(); }));
+  wireCopy();
+
+  document.getElementById('rail2').innerHTML =
+    `<div class="kv">
+       <div><b>${c.p.length}</b> ${c.enum?'values':'properties'}</div>
+       ${c.ev.length?`<div><b>${c.ev.length}</b> events</div>`:''}
+       <div><b>${ms.length}</b> methods${runtime==='uxp'&&c.m.length!==ms.length?' <span style="color:var(--warn)">−'+(c.m.length-ms.length)+'</span>':''}</div>
+       ${oo.length?`<div><b>${oo.length}</b> object of</div>`:''}
+       ${po.length?`<div><b>${po.length}</b> parameter of</div>`:''}
+       ${rb.length?`<div><b>${rb.length}</b> returned by</div>`:''}
+       ${c.sup?`<div>extends <a href="#${c.sup}">${esc(c.sup)}</a></div>`:''}
+     </div>
+     ${jump(c.enum ? 'Values' : 'Properties', ps, 'p-', '')}
+     ${jump('Events', evs, 'e-', '')}
+     ${jump('Methods', mth, 'm-', '()')}`;
+
+  /* Sprungziele per JS anfahren statt per href, sonst landen Ankernamen wie
+     "m-[]" im Hash und stoeren das Routing ueber den Klassennamen. */
+  document.querySelectorAll('#rail2 a[data-jump]').forEach(a =>
+    a.addEventListener('click', ev => {
+      ev.preventDefault();
+      document.getElementById(a.dataset.jump)?.scrollIntoView({ block: 'center' });
+    }));
+}
+
+/* ---------- command palette ---------- */
+const scrim = document.getElementById('scrim'), pq = document.getElementById('pq'),
+      res = document.getElementById('res'); let sel = 0, hits = [];
+const KIND = {c:'object', p:'prop', e:'event', m:'method'};
+
+/* Volltext greift, sobald "?" vorangestellt ist oder die Eingabe ein Leerzeichen
+   enthaelt — Bezeichner haben nie eines, mehrere Woerter meinen also immer Prosa. */
+function parseQuery(raw){
+  const s = raw.trim();
+  if (s.startsWith('?')) return { full: true, terms: s.slice(1).trim().toLowerCase().split(/\s+/).filter(Boolean) };
+  const terms = s.toLowerCase().split(/\s+/).filter(Boolean);
+  return { full: terms.length > 1, terms };
+}
+/* Textausschnitt um den ersten Treffer, damit man den Fundort sieht. */
+function snippet(text, term){
+  if (!text) return '';
+  const i = text.toLowerCase().indexOf(term);
+  if (i < 0) return esc(text.slice(0, 120));
+  const from = Math.max(0, i - 45);
+  return (from ? '…' : '') + esc(text.slice(from, i)) + '<b>' + esc(text.substr(i, term.length))
+       + '</b>' + esc(text.slice(i + term.length, i + term.length + 75));
+}
+
+function search(){
+  const { full, terms } = parseQuery(pq.value);
+  const q = terms[0] || '';
+  hits = [];
+  if (terms.length){
+    const scored = [];
+    for (const e of IDX){
+      if (runtime === 'uxp' && (esOnly(e.c) || (e.k === 'm' && e.n === '[]'))) continue;
+      if (full){
+        let ok = true;
+        for (const t of terms) if (!e.f.includes(t)) { ok = false; break; }
+        if (!ok) continue;
+        /* Namenstreffer schlagen reine Beschreibungstreffer */
+        const inName = e.l.includes(q);
+        scored.push([(inName ? 0 : 500) + (e.k === 'c' ? 0 : 10) + e.n.length, e]);
+      } else {
+        const i = e.l.indexOf(q); if (i < 0) continue;
+        scored.push([(i===0?0:100) + (e.k==='c'?0:10) + e.n.length + i, e]);
+      }
+    }
+    scored.sort((a,b) => a[0]-b[0]);
+    hits = scored.slice(0,50).map(x => x[1]);
+    document.getElementById('rescount').textContent =
+      `${scored.length.toLocaleString()} ${full ? 'in descriptions' : 'of ' + IDX.length.toLocaleString()}`;
+  } else document.getElementById('rescount').textContent = '';
+  sel = 0;
+  res.innerHTML = hits.map((e,i) => {
+    const at = e.l.indexOf(q);
+    const nm = at < 0 ? esc(e.n)
+      : esc(e.n.slice(0,at)) + '<b>' + esc(e.n.slice(at,at+q.length)) + '</b>' + esc(e.n.slice(at+q.length));
+    const label = e.k==='c' ? nm : `<em>${esc(e.c)}.</em>${nm}${e.k==='m'?'()':''}`;
+    const desc = full ? snippet(e.d || '', q) : esc(e.d || '');
+    return `<div class="r ${i===sel?'sel':''}" data-i="${i}">
+      <span class="t ${e.k}">${KIND[e.k]}</span>
+      <span class="n">${label}</span><span class="d">${desc}</span></div>`;
+  }).join('');
+  res.querySelectorAll('.r').forEach(r => {
+    r.addEventListener('mouseenter', () => { sel = +r.dataset.i; mark(); });
+    r.addEventListener('click', pick);
+  });
+}
+function mark(){ res.querySelectorAll('.r').forEach((r,i) => r.classList.toggle('sel', i===sel)); }
+function pick(){
+  const e = hits[sel]; if (!e) return;
+  close(); go(e.c);
+  if (e.k === 'm') requestAnimationFrame(() => document.getElementById('m-'+e.n)?.scrollIntoView({block:'center'}));
+  else if (e.k !== 'c') requestAnimationFrame(() => { filt = e.n; doc(); });
+}
+function open(prefill){ scrim.classList.add('on'); pq.value = prefill || ''; search(); pq.focus(); }
+function close(){ scrim.classList.remove('on'); }
+document.getElementById('openpal').addEventListener('click', open);
+scrim.addEventListener('click', e => { if (e.target === scrim) close(); });
+pq.addEventListener('input', search);
+const inField = t => t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA');
+addEventListener('keydown', e => {
+  if ((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); open(); return; }
+  if (!scrim.classList.contains('on') && !inField(e.target)){
+    /* "?" oeffnet die Palette direkt im Volltextmodus, "/" fuer die Namenssuche */
+    if (e.key === '?'){ e.preventDefault(); open('?'); return; }
+    if (e.key === '/'){ e.preventDefault(); open(); return; }
+  }
+  if (!scrim.classList.contains('on')) return;
+  if (e.key==='Escape') close();
+  else if (e.key==='ArrowDown'){ e.preventDefault(); sel=Math.min(sel+1,hits.length-1); mark(); res.children[sel]?.scrollIntoView({block:'nearest'}); }
+  else if (e.key==='ArrowUp'){ e.preventDefault(); sel=Math.max(sel-1,0); mark(); res.children[sel]?.scrollIntoView({block:'nearest'}); }
+  else if (e.key==='Enter'){ e.preventDefault(); pick(); }
+});
+
+function go(n){
+  if (!byName.has(n)) return;
+  current = n; filt=''; only='all'; side(); doc(); writeHash();
+  document.querySelector('.doc').scrollTop = 0;
+  document.querySelector('.side a.on')?.scrollIntoView({block:'nearest'});
+}
+addEventListener('hashchange', () => {
+  const { cls, uxp } = parseHash();
+  const want = uxp ? 'uxp' : runtime;   /* fehlendes Flag setzt den Modus nicht zurueck */
+  const rtChanged = want !== runtime;
+  if (rtChanged){ runtime = want; store.set('runtime', runtime); syncRuntimeButtons(); side(); }
+  /* Ein geteilter Link darf nicht auf einer in UXP ausgeblendeten Klasse landen.
+     Ausdruecklich angefragte, aber ausgeblendete Klassen fuehren auf Document —
+     sonst zeigte die Seite etwas anderes an, als die URL behauptet. */
+  const target = !byName.has(cls) ? (hiddenClass(current) ? 'Document' : current)
+               : hiddenClass(cls)  ? 'Document'
+               : cls;
+  /* writeHash loest selbst ein hashchange aus - ohne Aenderung nichts neu rendern */
+  if (target !== current) go(target);
+  else if (rtChanged) doc();
+});
+
+function syncRuntimeButtons(){
+  document.querySelectorAll('#rt button').forEach(x => x.classList.toggle('on', x.dataset.r === runtime));
+}
+document.querySelectorAll('#rt button').forEach(b => b.addEventListener('click', () => {
+  runtime = b.dataset.r; store.set('runtime', runtime);
+  syncRuntimeButtons();
+  /* Wer gerade auf $ oder einer SUI-Klasse steht, landet in UXP auf Document. */
+  if (hiddenClass(current)) go('Document'); else { side(); writeHash(); doc(); }
+}));
+
+const applyTheme = t => { document.documentElement.dataset.t = t; store.set('theme', t); };
+document.getElementById('tbtn').addEventListener('click', () =>
+  applyTheme(document.documentElement.dataset.t === 'light' ? 'dark' : 'light'));
+const savedTheme = store.get('theme', '');
+if (savedTheme) document.documentElement.dataset.t = savedTheme;
+
+syncRuntimeButtons();
+const start = parseHash().cls;
+go(byName.has(start) && !hiddenClass(start) ? start : 'Document');
+</script>
+</body>
+</html>

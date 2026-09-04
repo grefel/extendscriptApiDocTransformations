@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept A — Codex</title>
+<style>
+:root{
+  --bg:#fbfaf8; --panel:#fff; --rail:#f4f2ee; --ink:#1c1a17; --dim:#6b6560;
+  --line:#e3ded6; --accent:#8a4b1f; --accent-soft:#f3e7dc;
+  --ro:#7a6a55; --rw:#2f6b4f; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-t="light"]){
+  --bg:#171614; --panel:#1e1d1a; --rail:#141312; --ink:#e8e4dd; --dim:#948d84;
+  --line:#302d29; --accent:#d99a63; --accent-soft:#2d2419; --ro:#a8998a; --rw:#6fbf95;
+}}
+:root[data-t="dark"]{
+  --bg:#171614; --panel:#1e1d1a; --rail:#141312; --ink:#e8e4dd; --dim:#948d84;
+  --line:#302d29; --accent:#d99a63; --accent-soft:#2d2419; --ro:#a8998a; --rw:#6fbf95;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 var(--sans)}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.wrap{display:grid;grid-template-columns:270px 1fr;height:100vh}
+.rail{background:var(--rail);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.brand{padding:14px 16px 10px;border-bottom:1px solid var(--line)}
+.brand h1{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.brand .ver{font-size:11px;color:var(--dim);margin-top:3px}
+.railsearch{padding:10px 12px;border-bottom:1px solid var(--line)}
+.railsearch input{width:100%;padding:7px 10px;border:1px solid var(--line);border-radius:6px;
+  background:var(--panel);color:var(--ink);font:13px var(--mono)}
+.railsearch input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.classlist{overflow-y:auto;flex:1;padding:6px 0}
+.classlist .grp{padding:9px 16px 4px;font:600 10px var(--sans);letter-spacing:.1em;color:var(--dim);
+  text-transform:uppercase;position:sticky;top:0;background:var(--rail)}
+.classlist a{display:block;padding:3px 16px;font:12.5px var(--mono);color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.classlist a:hover{background:var(--accent-soft);text-decoration:none}
+.classlist a.on{background:var(--accent);color:#fff}
+.classlist a .e{color:var(--dim);font-size:10px;margin-left:5px}
+.classlist a.on .e{color:#fff;opacity:.75}
+
+main{overflow-y:auto;min-height:0}
+.inner{max-width:1080px;padding:26px 34px 90px}
+.crumb{font:11px var(--mono);color:var(--dim);margin-bottom:6px}
+h2.cls{margin:0;font:600 27px var(--mono);letter-spacing:-.01em}
+.tagline{color:var(--dim);margin:7px 0 0;max-width:66ch;font-size:14.5px}
+.meta{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 0}
+.chip{font:11px var(--mono);padding:2.5px 8px;border:1px solid var(--line);border-radius:99px;color:var(--dim)}
+.chip.k{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+
+.filterbar{position:sticky;top:0;z-index:5;background:var(--bg);padding:16px 0 12px;
+  border-bottom:1px solid var(--line);margin:22px 0 0;display:flex;gap:10px;align-items:center}
+.filterbar input{flex:1;padding:8px 12px;border:1px solid var(--line);border-radius:6px;
+  background:var(--panel);color:var(--ink);font:13px var(--mono)}
+.filterbar input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;background:var(--panel);color:var(--dim);font:12px var(--sans);
+  padding:7px 13px;cursor:pointer;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--accent);color:#fff}
+.count{font:11px var(--mono);color:var(--dim);white-space:nowrap}
+
+h3.sec{margin:30px 0 0;font:600 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13.5px}
+th{text-align:left;font:600 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;
+  color:var(--dim);padding:7px 10px;border-bottom:1px solid var(--line)}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:hover td{background:var(--panel)}
+.nm{font:13px var(--mono);font-weight:600;white-space:nowrap}
+.nm .dot{color:var(--dim);font-weight:400}
+.ty{font:12px var(--mono)}
+.ty a{color:var(--accent)}
+.acc{font:11px var(--mono)}
+.acc.ro{color:var(--ro)} .acc.rw{color:var(--rw)}
+.de{color:var(--dim);max-width:60ch}
+.sig{font:12px var(--mono);color:var(--dim);margin-top:4px}
+.sig .p{color:var(--ink)} .sig .opt{opacity:.65}
+.copy{border:0;background:transparent;color:var(--dim);cursor:pointer;font:11px var(--mono);
+  padding:1px 5px;border-radius:4px;opacity:0;transition:opacity .12s}
+tr:hover .copy{opacity:1}
+.copy:hover{background:var(--accent-soft);color:var(--accent)}
+.empty{color:var(--dim);padding:30px 0;font-style:italic}
+.themebtn{position:fixed;right:16px;bottom:14px;border:1px solid var(--line);background:var(--panel);
+  color:var(--dim);border-radius:99px;padding:6px 13px;font:11px var(--sans);cursor:pointer}
+.note{margin:0 0 18px;padding:9px 13px;border-left:3px solid var(--accent);background:var(--accent-soft);
+  font-size:12.5px;color:var(--ink);border-radius:0 5px 5px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside class="rail">
+    <div class="brand">
+      <h1>ExtendScript API</h1>
+      <div class="ver" id="ver">loading…</div>
+    </div>
+    <div class="railsearch"><input id="q" placeholder="Filter classes…" spellcheck="false"></div>
+    <nav class="classlist" id="list"></nav>
+  </aside>
+  <main><div class="inner" id="main"></div></main>
+</div>
+<button class="themebtn" id="tbtn">theme</button>
+
+<script src="api-data.js"></script>
+<script>
+const D = window.API, byName = new Map(D.classes.map(c => [c.n, c]));
+document.getElementById('ver').textContent = D.version.replace(' Object Model','');
+
+/* ---------- left rail: class list, grouped by initial ---------- */
+const listEl = document.getElementById('list'), qEl = document.getElementById('q');
+let current = 'Document';
+
+function renderList(){
+  const q = qEl.value.toLowerCase();
+  const hits = q ? D.classes.filter(c => c.n.toLowerCase().includes(q)) : D.classes;
+  let html = '', letter = '';
+  for (const c of hits){
+    const L = c.n[0].toUpperCase();
+    if (L !== letter){ letter = L; html += `<div class="grp">${L}</div>`; }
+    html += `<a href="#${c.n}" data-n="${c.n}" class="${c.n===current?'on':''}">${c.n}`
+          + (c.enum ? '<span class="e">enum</span>' : '') + '</a>';
+  }
+  listEl.innerHTML = html || '<div class="grp">no match</div>';
+}
+qEl.addEventListener('input', renderList);
+
+/* ---------- main panel ---------- */
+let mode = 'all', memberQ = '';
+
+function typeLinks(ts){
+  if (!ts || !ts.length) return '<span style="opacity:.5">—</span>';
+  return ts.map(t => byName.has(t) ? `<a href="#${t}">${t}</a>` : t).join(' | ');
+}
+function signature(m){
+  if (!m.a.length) return '()';
+  return '(' + m.a.map(p => `<span class="${p.o?'opt':'p'}">${p.n}${p.o?'?':''}</span>`).join(', ') + ')';
+}
+
+function render(){
+  const c = byName.get(current); if (!c) return;
+  const q = memberQ.toLowerCase();
+  const props = (mode==='m') ? [] : c.p.filter(p => !q || p.n.toLowerCase().includes(q));
+  const meths = (mode==='p') ? [] : c.m.filter(m => !q || m.n.toLowerCase().includes(q));
+  const total = c.p.length + c.m.length, shown = props.length + meths.length;
+
+  let h = `<div class="crumb">${c.enum ? 'Enumeration' : 'Class'}</div>
+    <h2 class="cls">${c.n}</h2>
+    <p class="tagline">${c.d || ''}</p>
+    <div class="meta">
+      ${c.sup ? `<span class="chip">extends <a href="#${c.sup}">${c.sup}</a></span>` : ''}
+      <span class="chip k">${c.p.length} ${c.enum?'values':'properties'}</span>
+      ${c.m.length ? `<span class="chip k">${c.m.length} methods</span>` : ''}
+    </div>
+    <div class="filterbar">
+      <input id="mq" placeholder="Filter members of ${c.n}…" value="${memberQ}" spellcheck="false">
+      <div class="seg">
+        <button data-m="all" class="${mode==='all'?'on':''}">All</button>
+        <button data-m="p" class="${mode==='p'?'on':''}">Props</button>
+        <button data-m="m" class="${mode==='m'?'on':''}">Methods</button>
+      </div>
+      <span class="count">${shown} / ${total}</span>
+    </div>`;
+
+  if (props.length){
+    h += `<h3 class="sec">${c.enum?'Values':'Properties'}</h3><table><thead><tr>
+      <th style="width:22%">Name</th><th style="width:17%">Type</th>
+      <th style="width:9%">Access</th><th>Description</th></tr></thead><tbody>`;
+    for (const p of props){
+      h += `<tr><td class="nm"><span class="dot">.</span>${p.n}
+        <button class="copy" data-c="${c.n}.${p.n}">copy</button></td>
+        <td class="ty">${typeLinks(p.t)}${p.v?` <span style="opacity:.55">= ${p.v}</span>`:''}</td>
+        <td class="acc ${p.rw==='readonly'?'ro':'rw'}">${p.rw||''}</td>
+        <td class="de">${p.d||''}</td></tr>`;
+    }
+    h += '</tbody></table>';
+  }
+  if (meths.length){
+    h += `<h3 class="sec">Methods</h3><table><thead><tr>
+      <th style="width:30%">Signature</th><th style="width:17%">Returns</th>
+      <th>Description</th></tr></thead><tbody>`;
+    for (const m of meths){
+      h += `<tr><td class="nm"><span class="dot">.</span>${m.n}
+        <button class="copy" data-c="${c.n}.${m.n}()">copy</button>
+        <div class="sig">${signature(m)}</div></td>
+        <td class="ty">${typeLinks(m.r)}</td>
+        <td class="de">${m.d||''}</td></tr>`;
+    }
+    h += '</tbody></table>';
+  }
+  if (!shown) h += `<p class="empty">No member of ${c.n} matches “${memberQ}”.</p>`;
+
+  document.getElementById('main').innerHTML = h;
+  const mq = document.getElementById('mq');
+  if (mq){
+    mq.addEventListener('input', e => { memberQ = e.target.value; render();
+      const n = document.getElementById('mq'); n.focus(); n.setSelectionRange(n.value.length,n.value.length); });
+  }
+  document.querySelectorAll('.seg button').forEach(b =>
+    b.addEventListener('click', () => { mode = b.dataset.m; render(); }));
+  document.querySelectorAll('.copy').forEach(b =>
+    b.addEventListener('click', e => { e.preventDefault();
+      navigator.clipboard?.writeText(b.dataset.c); b.textContent='✓';
+      setTimeout(()=>b.textContent='copy',900); }));
+}
+
+function go(name){
+  if (!byName.has(name)) return;
+  current = name; memberQ = ''; mode = 'all';
+  renderList(); render();
+  document.querySelector('main').scrollTop = 0;
+  const on = listEl.querySelector('a.on'); if (on) on.scrollIntoView({block:'nearest'});
+}
+addEventListener('hashchange', () => go(decodeURIComponent(location.hash.slice(1))));
+document.getElementById('tbtn').addEventListener('click', () => {
+  const cur = document.documentElement.dataset.t === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.t = cur;
+});
+addEventListener('keydown', e => {
+  if (e.key === '/' && e.target.tagName !== 'INPUT'){ e.preventDefault(); qEl.focus(); qEl.select(); }
+});
+
+go(decodeURIComponent(location.hash.slice(1)) || 'Document');
+</script>
+</body>
+</html>
