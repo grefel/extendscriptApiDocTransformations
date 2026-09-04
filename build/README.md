@@ -61,6 +61,17 @@ ergänzt nur Bedienelemente; die sind im HTML als `[hidden]` markiert und werden
 erst durch das Skript eingeschaltet. `check-site.js` prüft das mit abgeschaltetem
 JavaScript mit.
 
+## Zwei Browser
+
+Der Hauptlauf nutzt das System-Chrome (`channel: 'chrome'`). Am Ende folgt eine
+kurze **Gegenprobe in Firefox**: Theme und „Recent" halten ihren Zustand über
+`localStorage`, und dessen Verhalten auf `file://` unterscheidet sich je Browser
+— geprüft, nicht angenommen. Firefox hält beides auch dort.
+
+Der Firefox-Build gehört nicht zum globalen Playwright und wird bei Bedarf mit
+`npx playwright install firefox` geholt; fehlt er, meldet der Lauf `SKIP` statt
+zu scheitern.
+
 ## Größen
 
 | | roh | gzip |
@@ -151,8 +162,11 @@ dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Ind
   Produktwechsel ein fremdes `Document` neben dem eigenen. Deshalb auch die
   Beschriftung: ohne sie liest sich die Reihe als Hierarchie.
   Sie ist der einzige `data-enhance`-Knoten, der auch mit JavaScript verborgen
-  bleiben darf — ohne Verlauf gäbe es nur eine leere Beschriftung. Unter 1280 px
-  weicht sie dem Suchfeld.
+  bleiben darf — ohne Verlauf gäbe es nur eine leere Beschriftung.
+  Die Grenzwerte sind gemessen, nicht geschätzt: bis 1250 px stehen alle drei
+  Namen ungekürzt, darunter fällt der älteste weg, unter 1100 px die ganze Spur
+  — dort verschwindet auch die rechte Spalte. Eine erste Fassung blendete schon
+  ab 1280 px aus und war auf einem normalen Laptopfenster nie zu sehen.
 - Der Footer verlinkt **Impressum** und **Datenschutz** auf publishingx.de.
 
 ## Stufe 2: XSLT vollständig abgelöst

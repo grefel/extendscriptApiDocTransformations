@@ -249,13 +249,16 @@ footer .by .sep{opacity:.45;margin:0 4px}
 .palfoot{display:flex;gap:14px;padding:8px 18px;border-top:1px solid var(--line);
   font:10.5px var(--sans);color:var(--dim)}
 
-/* Der Kopf ist ab hier zu voll fuer die Spur; das Suchfeld hat Vorrang. */
-@media (max-width:1280px){
-  .trail{display:none}
+/* Gemessen: bis 1250 px stehen alle drei Namen ungekuerzt, darunter schrumpfen
+   sie. Zwei vollstaendige Namen orientieren besser als drei angeschnittene,
+   deshalb faellt der aelteste vorher weg (.h ist das erste Kind). */
+@media (max-width:1250px){
+  .trail a:nth-child(4){display:none}
 }
 @media (max-width:1100px){
   .grid{grid-template-columns:200px minmax(0,1fr)}
   .rail2{display:none}
+  .trail{display:none}
 }
 @media print{
   .top,.side,.rail2,.bar,.scrim{display:none}
