@@ -216,6 +216,15 @@ dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Ind
   Alternative gewesen, hätte aber jeden Link verschmutzt.
 - Der Themeknopf nennt das **Ziel**, nicht den Zustand: „light mode" schaltet
   nach hell.
+- **`color-scheme` wandert mit dem Theme mit.** Ohne das zeichnet Chrome helle
+  System-Scrollbalken in die dunkle Seite — Firefox ist da von Haus aus
+  zurückhaltender, deshalb fiel es zuerst nur in Chrome auf. Es färbt auch die
+  Löschtaste im Suchfeld und die Fokusringe mit. Zusätzlich `scrollbar-width`
+  und `scrollbar-color` (Standard, Firefox ab 64, Chrome ab 121) sowie
+  `::-webkit-scrollbar` für ältere WebKit-Stände.
+  Zu prüfen ist das nur in einem **echten Fenster**: headless zeichnet Chrome
+  Overlay-Balken, die keinen Platz belegen und im Bildschirmfoto fehlen. Die
+  Prüfung beschränkt sich deshalb auf `color-scheme`.
 - **Den Laufzeit-Umschalter tragen nur InDesign und InDesign Server**
   (`uxp: true` in `products.js`). Nur für sie beschreibt dieses Objektmodell
   zugleich die UXP-Laufzeit. Illustrator und Bridge kennen ohnehin keine Methode
