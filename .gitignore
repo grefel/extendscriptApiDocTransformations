@@ -53,3 +53,14 @@ illustrator25.zip
 illustrator27.zip
 illustrator28.zip
 indesign18.zip
+
+# Design-Phase: aus fixedDOM.xml generierte Prototyp-Daten, nicht versionieren
+design/api.json
+design/api-data.js
+
+# Generierte Website und Node-Abhaengigkeiten
+site/
+node_modules/
+
+# Persoenliche Editor-Einstellungen (u. a. ExtendScript-Debugger-Ziele)
+.vscode/

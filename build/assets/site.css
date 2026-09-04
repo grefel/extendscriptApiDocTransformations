@@ -1,0 +1,262 @@
+/* Gemeinsames Stylesheet aller Seiten. Wird einmal geladen und ueber alle
+   1153 Seiten hinweg gecacht. */
+:root{
+  --bg:#0f1115; --panel:#151920; --rail:#0c0e12; --ink:#dfe4ec; --dim:#7d8798;
+  --line:#232935; --accent:hsl(100, 61%, 37%); --accent-soft:#16283f; --warn:#e0a458;
+  --ro:#8b94a6; --rw:hsl(11, 84%, 28%); --enum:#c08cf0; --ev:#f2836b;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+/* Helle Palette: --dim und --accent erreichen auf allen drei Untergruenden
+   (--bg, --panel, --rail) WCAG AA 4.5:1. */
+:root[data-t="light"]{
+  --bg:#fdfdfe; --panel:#f5f7fa; --rail:#f0f3f7; --ink:#131720; --dim:#5f6878;
+  --line:#e0e5ee; --accent:hsl(100, 61%, 27%); --accent-soft:#e4eefc; --warn:#8a5415;
+  --ro:#5f6878; --rw:hsl(16, 69%, 20%); --enum:#6a339b; --ev:#a8431f;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:13.5px/1.5 var(--sans)}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+[hidden]{display:none !important}
+
+/* ---------- Kopfzeile ---------- */
+/* baseline statt center: bei 16px Wortmarke neben 11px Steuerelementen zentriert
+   "center" nur die Boxen, die Textgrundlinien laufen dann um ~2px auseinander.
+   Der gleiche Versatz auf alle Kinder setzt die Gruppe wieder mittig. */
+.top{height:44px;display:flex;align-items:baseline;gap:12px;padding:0 14px;
+  border-bottom:1px solid var(--line);background:var(--rail);
+  position:sticky;top:0;z-index:20}
+.top>*{position:relative;top:8px;line-height:1}
+.top .logo{font:600 16px/1 var(--mono);letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
+.top .logo:hover{text-decoration:none}
+.top .logo b{color:var(--accent);font-weight:600}
+.rt{display:flex;gap:2px;background:var(--panel);border:1px solid var(--line);
+  border-radius:7px;padding:2px}
+.rt button{border:0;background:transparent;color:var(--dim);font:11px/1 var(--sans);
+  padding:5px 10px;cursor:pointer;border-radius:5px;white-space:nowrap}
+.rt button:hover{color:var(--ink)}
+.rt button.on{background:var(--accent);color:#fff;font-weight:600}
+.apiver{font:11px/1 var(--mono);color:var(--dim);white-space:nowrap;
+  padding:5px 10px;border:1px solid var(--line);border-radius:99px}
+.apiver .sep{opacity:.5}
+
+/* Produktumschalter als <details>: braucht kein Skript und ist per Tastatur
+   bedienbar. Ohne JavaScript klappt er ebenso auf. */
+.prod{position:relative}
+.prod>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:7px;
+  border:1px solid var(--line);background:var(--panel);border-radius:7px;padding:5px 11px;
+  font:11px/1 var(--sans);color:var(--ink);white-space:nowrap}
+.prod>summary::-webkit-details-marker{display:none}
+.prod>summary::after{content:"▾";color:var(--dim);font-size:10px}
+.prod>summary:hover{border-color:var(--accent)}
+.prod .pv{font:10.5px/1 var(--mono);color:var(--dim)}
+.prodmenu{position:absolute;top:calc(100% + 6px);left:0;z-index:30;min-width:230px;
+  background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:5px;
+  box-shadow:0 14px 40px rgba(0,0,0,.45)}
+.prodmenu a{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
+  padding:6px 9px;border-radius:6px;font:12px/1.3 var(--sans);color:var(--ink)}
+.prodmenu a:hover{background:var(--bg);text-decoration:none}
+.prodmenu a.on{background:var(--accent-soft);color:var(--accent)}
+.prodmenu a i{font-style:normal;font:10.5px var(--mono);color:var(--dim)}
+.prodmenu a.on i{color:var(--accent);opacity:.8}
+.kbtn{margin-left:auto;display:flex;align-items:center;gap:9px;border:1px solid var(--line);
+  background:var(--panel);color:var(--dim);border-radius:7px;padding:6px 11px;cursor:pointer;
+  font:12px/1 var(--sans);min-width:265px}
+.kbtn:hover{border-color:var(--accent)}
+.kbtn .keys{margin-left:auto;display:flex;gap:3px}
+kbd{font:10px var(--mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;
+  padding:1px 5px;color:var(--dim);background:var(--bg)}
+.tg{border:1px solid var(--line);background:var(--panel);color:var(--dim);border-radius:6px;
+  padding:6px 10px;font:11px/1 var(--sans);cursor:pointer}
+
+/* ---------- Raster ---------- */
+.grid{display:grid;grid-template-columns:230px minmax(0,1fr) 210px;
+  min-height:calc(100vh - 44px)}
+.side{background:var(--rail);border-right:1px solid var(--line);padding:10px 0;
+  position:sticky;top:44px;height:calc(100vh - 44px);overflow-y:auto}
+.side .h{padding:10px 14px 5px;font:600 10px var(--sans);letter-spacing:.11em;
+  text-transform:uppercase;color:var(--dim)}
+.side a{display:flex;justify-content:space-between;gap:6px;padding:3px 14px;
+  font:12px var(--mono);color:var(--ink)}
+.side a:hover{background:var(--panel);text-decoration:none}
+.side a.on{background:var(--accent-soft);color:var(--accent);box-shadow:inset 2px 0 0 var(--accent)}
+.side a i{font-style:normal;color:var(--dim);font-size:10px}
+.side a.e i{color:var(--enum)}
+.side a.co i{color:var(--warn)}
+.side .allobjects{font:12px var(--sans);color:var(--accent);padding:8px 14px}
+
+.doc{min-width:0;padding:24px 30px 40px;display:flex;flex-direction:column}
+.dmain{flex:1}
+.kind{font:11px var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.kind .of{opacity:.6}
+h1{margin:5px 0 0;font:600 26px var(--mono)}
+.lede{color:var(--dim);margin:8px 0 0;max-width:78ch}
+.chain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:13px;
+  font:11.5px var(--mono);color:var(--dim)}
+.chain .sep{opacity:.5}
+
+.bar{position:sticky;top:44px;z-index:4;display:flex;gap:10px;align-items:center;
+  background:var(--bg);padding:15px 0 11px;margin-top:20px;border-bottom:1px solid var(--line)}
+.bar input{flex:1;min-width:200px;background:var(--panel);border:1px solid var(--line);
+  border-radius:7px;padding:8px 12px;color:var(--ink);font:12.5px var(--mono)}
+.bar input:focus{outline:none;border-color:var(--accent)}
+.pill{border:1px solid var(--line);background:var(--panel);color:var(--dim);
+  border-radius:99px;padding:5px 12px;font:11.5px var(--sans);cursor:pointer;white-space:nowrap}
+.pill:hover{color:var(--ink)}
+.pill.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.sechead{margin:26px 0 0;font:600 11px var(--sans);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--dim);display:flex;align-items:baseline;gap:8px}
+.sechead b{color:var(--ink);font:600 11px var(--mono)}
+.hint{color:var(--dim);font-size:12px;margin:5px 0 0}
+
+/* ---------- Tabellen ---------- */
+table{width:100%;border-collapse:collapse;margin-top:9px;font-size:13px}
+th{text-align:left;font:600 10px var(--sans);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--dim);padding:6px 9px;border-bottom:1px solid var(--line)}
+td{padding:2px 0px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:hover td{background:var(--panel)}
+.c-n{width:20%} .c-t{width:27%} .c-a{width:8%}
+td.n{font:12.5px var(--mono);font-weight:600;white-space:nowrap}
+td.n.ev{color:var(--ev)}
+td.t{font:11.5px var(--mono)}
+td.t .arr{color:var(--warn)}
+td.t .or{opacity:.4}
+td.t .none{opacity:.45}
+td.t .lit{opacity:.55}
+/* Spitze Klammern in derselben Signalfarbe wie die [] der Arrays. Luft daneben,
+   sonst verschmilzt "AutoCorrectTables<AutoCorrectTable>" zu einem Wort. */
+.gen{color:var(--warn);padding:0 .18em;font-weight:400}
+/* Aus fixDom.xsl abgeleitet: Wertebereich und "auch als Masseinheit schreibbar". */
+.rngv{color:var(--rw);white-space:nowrap}
+.muv{color:var(--warn);cursor:help}
+td.a{font:10.5px var(--mono)}
+td.a.ro{color:var(--ro)} td.a.rw{color:var(--rw)}
+td.d{color:var(--dim)}
+.stat{font:9.5px var(--mono);color:var(--warn);border:1px solid var(--warn);
+  border-radius:3px;padding:0 3px;margin-left:5px;opacity:.8}
+
+/* Der Name selbst ist das Kopierziel — kein zusaetzlicher Knopf, der die Tabelle
+   unruhig macht. Gepunktete Linie beim Hovern als Hinweis. */
+.cpx{border:0;background:transparent;padding:0;margin:0;font:inherit;color:inherit;
+  cursor:pointer;text-align:left;border-bottom:1px dotted transparent}
+.cpx:hover{border-bottom-color:currentColor}
+.cpx:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
+.cpx.ok{color:var(--rw);border-bottom-color:transparent}
+
+.vals{margin-top:4px;display:flex;flex-wrap:wrap;gap:4px}
+.vals .vchip{font:10.5px var(--mono);background:var(--accent-soft);color:var(--accent);
+  border:1px solid transparent;border-radius:4px;padding:1px 6px;cursor:pointer}
+.vals .vchip:hover{border-color:var(--accent)}
+.vals .vchip.ok{background:var(--rw);color:var(--bg);border-color:var(--rw)}
+.vals .more{font:10.5px var(--mono);color:var(--dim)}
+
+/* ---------- Methoden ---------- */
+/* Keine Leseweiten-Begrenzung: einzelne Adobe-Beschreibungen sind mehrere tausend
+   Zeichen lang. Bei 72ch wurden daraus 30 Zeilen bei halb leerer Spalte. */
+.mem{border-bottom:1px solid var(--line);padding:12px 2px}
+.mem .top1{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.mem .id{font:600 13.5px var(--mono)}
+.mem .id .d{color:var(--dim);font-weight:400}
+.mem .id .opt{opacity:.6}
+.mem .ret{font:11.5px var(--mono);color:var(--dim)}
+.mem .ret b{color:var(--ink);font-weight:400}
+.mem .desc{color:var(--dim);margin:5px 0 0}
+/* Parameterliste als echtes Grid: mit Flex und min-width sprengt ein breiter Typ
+   wie "File | JavaScriptFunction" nur seine eigene Zeile und die Spalten verspringen. */
+.args{margin-top:8px;border-left:2px solid var(--line);padding-left:12px;
+  display:grid;grid-template-columns:auto auto minmax(220px,1fr);
+  column-gap:16px;row-gap:3px;align-items:baseline}
+.arg{display:contents}
+.arg .an{font:12px var(--mono);color:var(--ink);white-space:nowrap}
+.arg .an.o{color:var(--dim)}
+.arg .at{font:11.5px var(--mono);color:var(--warn);max-width:34ch;overflow-wrap:anywhere}
+.arg .ad{color:var(--dim);font-size:12.5px}
+
+/* ---------- Rueckwaertsverweise ---------- */
+.rev{margin-top:26px}
+.revbox{display:flex;flex-wrap:wrap;gap:3px 14px;margin-top:8px;max-height:150px;
+  overflow-y:auto;padding:9px 11px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px}
+.revbox a{font:11.5px var(--mono);white-space:nowrap}
+.revbox em{color:var(--dim);font-style:normal}
+.revbox .argn{opacity:.7}
+
+/* ---------- rechte Spalte ---------- */
+.rail2{border-left:1px solid var(--line);padding:22px 13px;background:var(--rail);
+  position:sticky;top:44px;height:calc(100vh - 44px);overflow-y:auto}
+.rail2 .h{font:600 10px var(--sans);letter-spacing:.11em;text-transform:uppercase;
+  color:var(--dim);margin:14px 0 6px}
+.rail2 .h:first-child{margin-top:0}
+.rail2 a{display:block;padding:2px 0;font:11.5px var(--mono);color:var(--dim);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rail2 a:hover{color:var(--accent);text-decoration:none}
+.rail2 .kv{font:11px var(--mono);color:var(--dim);line-height:1.85}
+.rail2 .kv b{color:var(--ink);font-weight:600}
+
+/* ---------- Index ---------- */
+.grid ul.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:1px 16px;list-style:none;padding:0;margin:10px 0 0;min-height:0}
+ul.grid li{font:12.5px var(--mono)}
+
+/* ---------- Fussbereich ---------- */
+/* Bewusst ruhig: eine Textfarbe, keine Rahmen, kein Fettdruck. */
+footer{border-top:1px solid var(--line);margin-top:40px;padding:18px 0 8px;
+  color:var(--dim);font-size:11.5px;line-height:1.6}
+footer p{margin:0 0 7px}
+footer p:last-child{margin-bottom:0}
+footer .legal{font-size:11px}
+footer .meta{font-size:11px;margin-top:10px}
+/* Signatur- und Rechtszeile schliessen den Footer ab, in einer Zeile. */
+footer .by{font-size:11px;color:var(--ink);margin-top:10px}
+footer .by .hrt{color:inherit}
+footer .by .sep{opacity:.45;margin:0 4px}
+
+/* ---------- Suchpalette ---------- */
+.scrim{position:fixed;inset:0;background:rgba(4,6,10,.62);display:none;z-index:50;
+  align-items:flex-start;justify-content:center;padding-top:11vh}
+.scrim.on{display:flex}
+.pal{width:min(760px,93vw);background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;box-shadow:0 24px 70px rgba(0,0,0,.5);overflow:hidden}
+.pal input{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;
+  color:var(--ink);font:15px var(--mono);padding:15px 18px}
+.pal input:focus{outline:none}
+.res{max-height:56vh;overflow-y:auto}
+.res .r{display:flex;align-items:center;gap:11px;padding:8px 18px;cursor:pointer;
+  border-left:2px solid transparent}
+.res .r.sel{background:var(--accent-soft);border-left-color:var(--accent)}
+.res .r .t{font:10px var(--mono);color:var(--dim);width:42px;flex:none;text-transform:uppercase}
+.res .r .t.k1{color:var(--rw)} .res .r .t.k3{color:var(--accent)}
+.res .r .t.k0{color:var(--enum)} .res .r .t.k2{color:var(--ev)}
+.res .r .n{font:12.5px var(--mono);white-space:nowrap}
+.res .r .n b{color:var(--accent);font-weight:600}
+.res .r .n em{color:var(--dim);font-style:normal}
+.res .r .d{color:var(--dim);font-size:11.5px;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;flex:1}
+.palfoot{display:flex;gap:14px;padding:8px 18px;border-top:1px solid var(--line);
+  font:10.5px var(--sans);color:var(--dim)}
+
+@media (max-width:1100px){
+  .grid{grid-template-columns:200px minmax(0,1fr)}
+  .rail2{display:none}
+}
+@media print{
+  .top,.side,.rail2,.bar,.scrim{display:none}
+  .grid{display:block}
+  body{background:#fff;color:#000}
+}
+
+/* ---------- Startseite ---------- */
+body.home .doc{max-width:1000px;margin:0 auto;padding:34px 30px 40px}
+body.home .top{position:static}
+ul.cards{list-style:none;padding:0;margin:12px 0 0;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+ul.cards a{display:block;border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+  background:var(--panel);color:var(--ink)}
+ul.cards a:hover{border-color:var(--accent);text-decoration:none}
+ul.cards b{display:block;font:600 15px var(--mono)}
+ul.cards .v{display:block;font:11px var(--mono);color:var(--dim);margin-top:2px}
+ul.cards .c{display:block;font:11px var(--sans);color:var(--dim);margin-top:6px}
+ul.cards .note{display:block;font:11px var(--sans);color:var(--warn);margin-top:8px;line-height:1.45}
+.note{color:var(--warn);font-size:12.5px;margin:10px 0 0}

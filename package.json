@@ -1,0 +1,21 @@
+{
+  "name": "extendscript-api-doc",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generates the ExtendScript API documentation site from the merged Adobe object model XML.",
+  "license": "MIT",
+  "type": "commonjs",
+  "scripts": {
+    "build": "node build/build.js",
+    "check": "node build/check-site.js",
+    "verify": "node build/verify-model.js",
+    "serve": "node build/serve.js",
+    "verify:prepare": "node build/prepare-xslt.js"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.9.12"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0"
+  }
+}
