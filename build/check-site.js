@@ -66,8 +66,12 @@ const check = (name, got, want) => {
   await page.waitForSelector('.side a.on', { timeout: 10000 });
   /* Genau die Objekte des Produkts — ScriptUI und Kern-JavaScript sind eigene
      Bibliotheken und tauchen hier nicht mehr auf. */
+  /* .sidelist, nicht .side: darin steht zusaetzlich der Notnagel-Link
+     "All entries →", den das Skript nur verbirgt. */
   check('mit JS: Seitenleiste nachgeladen',
-    await page.locator('.side a').count(), 1097);
+    await page.locator('.sidelist a').count(), 1097);
+  check('mit JS: Notnagel-Link verborgen',
+    await page.locator('.allobjects').isVisible(), false);
   check('mit JS: aktuelle Seite markiert',
     (await page.locator('.side a.on').innerText()).split(/\s+/).filter(Boolean).join(' '), 'Rectangle 188');
   check('mit JS: rechte Spalte gefuellt',
@@ -275,6 +279,37 @@ const check = (name, got, want) => {
       const a = [...document.querySelectorAll('footer .by a')].slice(-3);
       return a.length === 3 && new Set(a.map(x => Math.round(x.getBoundingClientRect().top))).size === 1;
     }), true);
+
+  /* --- Filter der Objektspalte --- */
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForSelector('.side a.on', { timeout: 10000 });
+  const navAll = await page.locator('.sidelist a').count();
+  check('Objektspalte vollstaendig', navAll, 1097);
+  await page.fill('#nf', 'text');
+  await page.waitForTimeout(200);
+  const navHits = await page.locator('.sidelist a span').allTextContents();
+  check('Filter kuerzt die Spalte', navHits.length < navAll && navHits.length > 0, true);
+  check('nur Treffer in der Spalte',
+    navHits.every(n => n.toLowerCase().includes('text')), true);
+  check('Ueberschrift nennt Treffer und Gesamtzahl',
+    /^Objects · \d+ \/ 423$/.test((await page.locator('.side .h').first().textContent()).trim()),
+    true);
+  /* Der Filter gehoert zur Spalte, nicht zur Seite: die Member bleiben stehen. */
+  check('Filter laesst die Member der Seite unberuehrt',
+    await page.locator('tbody tr[id^="p-"]:not([hidden])').count(), 126);
+  await page.fill('#nf', 'PAGEITEM');
+  await page.waitForTimeout(200);
+  check('Filter ignoriert Gross-/Kleinschreibung',
+    (await page.locator('.sidelist a').count()) > 0, true);
+  await page.fill('#nf', 'zzzz');
+  await page.waitForTimeout(200);
+  check('ohne Treffer eine Meldung statt leerer Spalte',
+    (await page.locator('.sidelist .none').count()), 1);
+  await page.click('#nf');
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(200);
+  check('Escape leert den Filter', await page.locator('.sidelist a').count(), navAll);
+  check('Escape schliesst nicht die Palette', await page.locator('.scrim').isVisible(), false);
 
   /* --- Zuletzt besucht --- */
   await page.goto(url('indesign/Polygon.html'));

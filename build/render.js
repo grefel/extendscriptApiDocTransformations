@@ -247,7 +247,11 @@ function shell({ title, description, body, current, target, targets, data, isInd
   <button class="tg" type="button" hidden data-enhance="theme"></button>
 </header>
 <div class="grid">
-  <nav class="side" aria-label="Objects"><a class="allobjects" href="index.html">All entries →</a></nav>
+  <nav class="side" aria-label="Objects"><a class="allobjects" href="index.html">All entries →</a>
+    <div class="sidef" hidden data-enhance="navfilter">
+      <input id="nf" type="search" placeholder="Filter objects…" spellcheck="false"
+        autocomplete="off" aria-label="Filter the object list"></div>
+    <div class="sidelist"></div></nav>
   <main class="doc"><div class="dmain">${body}</div>
     <footer>
       <p class="legal">Generated with AI assistance from Adobe’s original sources — descriptive texts
