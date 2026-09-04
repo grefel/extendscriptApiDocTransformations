@@ -3,12 +3,18 @@
 'use strict';
 
 const fs = require('fs');
+const http = require('http');
 const path = require('path');
 const { chromium, firefox } = require('playwright');
 
 const ROOT = path.join(__dirname, '..');
 const SITE = process.env.OUT_DIR || path.join(ROOT, 'site');
 const url = f => 'file:///' + path.join(SITE, f).replace(/\\/g, '/');
+const TYPES = {
+  '.html': 'text/html; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8'
+};
 
 const results = [];
 const check = (name, got, want) => {
@@ -296,36 +302,58 @@ const check = (name, got, want) => {
 
   await browser.close();
 
-  /* ---------- Gegenprobe in Firefox ----------
-     Alles bis hier lief in Chrome. Was zwischen Seiten Zustand haelt, haengt an
-     localStorage — und dessen Verhalten auf file:// unterscheidet sich je
-     Browser. Deshalb hier gezielt Theme und Spur ueber Seitenwechsel hinweg.
+  /* ---------- Gegenprobe in Firefox, ueber http ----------
+     Alles bis hier lief in Chrome ueber file://. Theme und Spur halten ihren
+     Zustand in localStorage, und das verhaelt sich je Browser anders.
+
+     Bewusst ueber http und nicht ueber file://: ein ausgeliefertes Firefox gibt
+     jeder lokalen Datei einen eigenen Storage-Origin, dort kann kein
+     Seitenzustand ueberdauern (siehe README, "Offline in Firefox"). Playwrights
+     Firefox bildet das nicht nach — eine file://-Zusage waere hier also gruen
+     und in der Wirklichkeit falsch. Ueber http gibt es einen Origin, und genau
+     das ist der Fall, der auf dem Server zaehlt.
+
      Ohne Firefox-Build wird uebersprungen: "npx playwright install firefox". */
+  let ff = null, srv = null;
   try {
-    const ff = await firefox.launch();
-    const fc = await ff.newContext({ viewport: { width: 1600, height: 1000 } });
-    const fp = await fc.newPage();
+    ff = await firefox.launch();
+    srv = http.createServer((rq, rs) => {
+      const rel = decodeURIComponent(rq.url.split('?')[0]);
+      const f = path.join(SITE, path.normalize(rel === '/' ? '/index.html' : rel)
+        .replace(/^([/\\])+/, ''));
+      fs.readFile(f, (e, d) => {
+        if (e) { rs.writeHead(404).end(); return; }
+        rs.writeHead(200, { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream' });
+        rs.end(d);
+      });
+    });
+    await new Promise(r => srv.listen(0, r));
+    const base = 'http://localhost:' + srv.address().port + '/';
+
+    const fp = await (await ff.newContext({ viewport: { width: 1600, height: 1000 } })).newPage();
     const ffErr = [];
     fp.on('pageerror', e => ffErr.push(String(e)));
 
-    await fp.goto(url('indesign/Rectangle.html'));
+    await fp.goto(base + 'indesign/Rectangle.html');
     await fp.waitForTimeout(300);
     await fp.click('.tg');
     await fp.waitForTimeout(200);
-    await fp.goto(url('indesign/Document.html'));
+    await fp.goto(base + 'indesign/Document.html');
     await fp.waitForTimeout(300);
-    check('Firefox: Theme ueberlebt die Navigation',
+    check('Firefox/http: Theme ueberlebt die Navigation',
       await fp.evaluate(() => document.documentElement.dataset.t), 'light');
-    check('Firefox: Spur nennt die vorige Seite',
+    check('Firefox/http: Spur nennt die vorige Seite',
       (await fp.locator('.trail a').allTextContents())[0], 'Rectangle');
-    await fp.goto(url('indesign/Page.html'));
+    await fp.goto(base + 'indesign/Page.html');
     await fp.waitForTimeout(300);
-    check('Firefox: Spur waechst mit',
+    check('Firefox/http: Spur waechst mit',
       (await fp.locator('.trail a').allTextContents()).join(','), 'Document,Rectangle');
-    check('Firefox: keine Skriptfehler', ffErr.join(' / ') || 'keine', 'keine');
-    await ff.close();
+    check('Firefox/http: keine Skriptfehler', ffErr.join(' / ') || 'keine', 'keine');
   } catch (e) {
     results.push('SKIP Firefox-Gegenprobe: ' + e.message.split('\n')[0]);
+  } finally {
+    if (ff) await ff.close();
+    if (srv) srv.close();
   }
 
   console.log('\n' + results.join('\n'));
