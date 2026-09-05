@@ -71,6 +71,10 @@ function makeTypeMapper(known, toAny) {
 
     if (toAny && toAny.has(name)) return 'any';
     if (SCALAR[name]) return SCALAR[name];
+    /* Object, Function, Date … deklariert TypeScript selbst. Sie stehen in
+       keiner Datei und muessen trotzdem gelten, sonst wuerde aus dem
+       Rueckgabetyp von ScriptUIs add() ein any, ohne dass es jemand merkt. */
+    if (TS_BUILTIN.has(name)) return name;
     if (known.has(name)) return name;
     /* fixDom.xsl benennt die Klasse Index in Index_ um. */
     if (name === 'Index' && known.has('Index_')) return 'Index_';
@@ -391,7 +395,15 @@ function classBodies(classes, T) {
 
     for (const p of c.p) {
       const mods = (p.st ? 'static ' : '') + (p.rw === 'readonly' ? 'readonly ' : '');
-      const t = T.of(p.t, p.arr, p.mu);
+      let t = T.of(p.t, p.arr, p.mu);
+
+      /* Ein readonly Object ist in TypeScript unbrauchbar: auf Object ist jeder
+         Zugriff ein Fehler, und gelesen wird so eine Property immer —
+         evt.target.name, ScriptUI.FontStyle.BOLD. any heisst hier "nicht naeher
+         bestimmt" statt "damit kann man nichts machen". Betrifft 23 Member.
+         Die 435 .properties-Buendel von InDesign bleiben Object: die werden
+         geschrieben, und dort weist der Typ ein Objektliteral nach. */
+      if (t === 'Object' && p.rw === 'readonly') t = 'any';
       const base = inherited(c, 'p', p.n);
       out.push(jsdoc(p.d, [rangeNote(p), unitNote(p)], 2) +
         (base && widens(t, T.peek(base.t, base.arr, base.mu)) ? ignore(c.sup) : '') +
@@ -578,7 +590,7 @@ function apiJson(target, classes, ctx) {
    Deshalb steht hier nicht der Inhalt, sondern der Weg dorthin, samt Groessen —
    das vollstaendige Modell passt in kein Kontextfenster. */
 
-const BASE = 'https://www.indesignjs.de/extendscriptAPI/';
+const BASE = 'https://www.indesignjs.de/indesignapi/';
 
 function llmsProduct(t, classes, kindOf) {
   const n = k => classes.filter(c => kindOf(c) === k).length;

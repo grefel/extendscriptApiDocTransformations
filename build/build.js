@@ -183,7 +183,7 @@ for (const t of targets) {
   write(t.slug + '/' + t.slug + '.d.ts', agents.buildTypes(dtsClasses, Tdts, {
     title: t.label + ' — ' + t.data.version,
     generated: t.data.generated,
-    home: 'https://www.indesignjs.de/extendscriptAPI/' + t.slug + '/'
+    home: 'https://www.indesignjs.de/indesignapi/' + t.slug + '/'
   }));
 
   /* ---------- Produkt und ScriptUI in einer Datei ----------
@@ -202,12 +202,15 @@ for (const t of targets) {
     write(t.slug + '/' + t.slug + '-scriptui.d.ts', agents.buildTypes(withElement(kombi), Tk, {
       title: t.label + ' + ScriptUI — ' + t.data.version,
       generated: t.data.generated,
-      home: 'https://www.indesignjs.de/extendscriptAPI/' + t.slug + '/',
+      home: 'https://www.indesignjs.de/indesignapi/' + t.slug + '/',
       yielded: [...weicht].sort()
     }));
   }
   write(t.slug + '/llms.txt', agents.llmsProduct(t, t.data.classes, kindOf));
-  typeStats.push([t.slug, T.stats()]);
+  /* Gezaehlt wird an der Deklarationsdatei: ein Durchgang ueber jede Klasse
+     des Ziels. Die gemeinsame Abbildung sieht dieselben Typen mehrfach
+     (Markdown und api.json) und meldete entsprechend zu viel. */
+  typeStats.push([t.slug, Tdts.stats()]);
 
   console.log('  ' + t.slug.padEnd(17) + String(t.data.classes.length).padStart(5) + ' Seiten');
 }
@@ -226,7 +229,7 @@ for (const f of ['site.css', 'site.js', 'idskurzreferenz.jpg'])
    nach dem Packen feststeht. Der zweite Durchgang unterscheidet sich nur um
    wenige Bytes; auf ganze MB gerundet ist die Zahl in beiden gleich — auch in
    der Fassung, die im Archiv landet. */
-const ZIP = 'extendscriptAPI.zip';
+const ZIP = 'indesignapi.zip';
 function collect() {
   const out = [];
   (function walk(dir, rel) {
@@ -234,7 +237,10 @@ function collect() {
       (a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)) {
       const p = path.join(dir, e.name), r = rel ? rel + '/' + e.name : e.name;
       if (e.isDirectory()) { walk(p, r); continue; }
-      if (e.name.endsWith('.zip')) continue;      /* nicht sich selbst einpacken */
+      /* Nicht sich selbst einpacken. Ins Auslieferungspaket kommt das Archiv
+         trotzdem — dort wird es unten eigens hinzugefuegt, sonst ginge auf dem
+         Server der Download ins Leere. */
+      if (e.name.endsWith('.zip')) continue;
       out.push({ name: r, data: fs.readFileSync(p) });
     }
   })(OUT, '');
@@ -252,10 +258,33 @@ for (const e of entries) {
     .split('__ZIPMB__').join(String(mb))
     .split('__ZIPPAGES__').join(pages.toLocaleString('en-US')));
 }
-const archive = createZip(collect(), new Date());
+const inhalt = collect();
+const archive = createZip(inhalt, new Date());
 write(ZIP, archive);
 console.log('archiv   ' + ZIP + '  ' + (archive.length / 1048576).toFixed(1) + ' MB aus ' +
   entries.length + ' Dateien in ' + ((Date.now() - zipStart) / 1000).toFixed(1) + ' s');
+
+/* ---------- Auslieferungspaket ----------
+   Der ganze Ordner als ein Zip neben site/, so wie er auf den Server geht:
+   ohne Ordnerpraefix, index.html liegt also gleich oben. Das Offline-Archiv
+   ist mit drin, sonst zeigte der Download auf dem Server ins Leere.
+   Das alte Paket wird vorher geloescht — bricht der Lauf ab, liegt lieber
+   keines da als ein veraltetes, das wie das neue aussieht. */
+const PAKET = path.join(path.dirname(OUT), path.basename(OUT) + '.zip');
+fs.rmSync(PAKET, { force: true });
+if (process.env.NO_PACKAGE) {
+  console.log('paket    uebersprungen (NO_PACKAGE), altes ' +
+    path.basename(PAKET) + ' ist geloescht');
+} else {
+const paketStart = Date.now();
+/* Aus dem, was ohnehin schon im Speicher liegt, plus dem eben gepackten
+   Archiv — statt 120 MB ein zweites Mal von der Platte zu lesen. */
+const paket = createZip([...inhalt, { name: ZIP, data: archive }], new Date());
+fs.writeFileSync(PAKET, paket);
+console.log('paket    ' + path.basename(PAKET) + '  ' +
+  (paket.length / 1048576).toFixed(1) + ' MB in ' +
+  ((Date.now() - paketStart) / 1000).toFixed(1) + ' s → ' + path.dirname(PAKET));
+}
 
 for (const [slug, st] of typeStats)
   if (st.unknown)
@@ -308,7 +337,7 @@ function homePage(targets, generated) {
     <ul class="cards">${libs.map(card).join('')}</ul></section>
   <section class="offline"><h2 class="sechead" id="offline">Offline</h2>
     <ul class="dl">
-      <li><a href="extendscriptAPI.zip" download><b>extendscriptAPI.zip</b>
+      <li><a href="indesignapi.zip" download><b>indesignapi.zip</b>
         <span>The whole site: every application and both shared libraries,
         __ZIPPAGES__ pages. Unpack it and open <code>index.html</code> —
         no server, no internet. About __ZIPMB__ MB.</span></a></li>

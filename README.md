@@ -2,7 +2,7 @@
 
 Generates a readable, searchable reference for the Adobe ExtendScript object models
 from Adobe's own OMV exports. Published at
-<https://www.indesignjs.de/extendscriptAPI/>.
+<https://www.indesignjs.de/indesignapi/>.
 
 Covered: InDesign, InDesign Server, Illustrator, Photoshop and Bridge, plus ScriptUI
 and the core JavaScript classes — the latter two shared by every application and

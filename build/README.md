@@ -11,8 +11,10 @@ sourceXML/*.xml → build/ (Node) → site/   2.681 Seiten
 
 ```sh
 npm install
-npm run build      # site/ neu bauen        ~7 s
+npm run build      # site/ neu bauen, dazu site.zip zum Hochladen   ~90 s
+NO_PACKAGE=1 npm run build   # ohne das Paket, für schnelle Durchläufe
 npm run check      # Website im Browser prüfen (Playwright)
+npm run check:types # jede .d.ts und jedes Beispielskript mit tsc
 npm run serve      # http://localhost:8080
 
 # nur solange die alte Strecke als Gegenprobe dient (braucht Java + Saxon):
@@ -82,7 +84,7 @@ JavaScript mit.
 
 ## Offline: die ganze Website als Archiv
 
-`site/extendscriptAPI.zip` — **16 MB, 5.395 Dateien**, entpacken und
+`site/indesignapi.zip` — **16 MB, 5.395 Dateien**, entpacken und
 `index.html` öffnen. Verlinkt auf der Startseite und jeder Übersichtsseite.
 Es muss wirklich alles hinein: die Typverweise gehen über Produktgrenzen
 hinweg, ein Teilarchiv wäre kaputt.
@@ -100,6 +102,25 @@ Fassung, die im Archiv landet. Kostet rund 10 s der 21 s Bauzeit.
 
 Geprüft wird das Archiv, indem es entpackt und die entpackte Kopie im Browser
 bedient wird: Navigation, Seitenleiste, Volltextsuche.
+
+## Auslieferung: `site.zip`
+
+Der Build legt am Ende **`site.zip` neben `site/`** — den ganzen Ordner in einem
+Archiv, so wie er auf den Server geht: **ohne Ordnerpräfix**, `index.html` liegt
+also gleich oben. Das Offline-Archiv `indesignapi.zip` ist mit drin, sonst zeigte
+der Download auf dem Server ins Leere. 5.401 Dateien, 35,5 MB.
+
+Ein vorhandenes `site.zip` wird **vor** dem Packen gelöscht: bricht der Lauf ab,
+liegt lieber keines da als ein veraltetes, das wie das neue aussieht.
+
+Gepackt wird aus dem, was ohnehin im Speicher liegt, plus dem eben gebauten
+Archiv — kostet 3 s. Es ein zweites Mal von der Platte zu lesen kostete 27.
+`NO_PACKAGE=1 npm run build` lässt das Paket weg (löscht das alte trotzdem);
+für schnelle Durchläufe beim Entwickeln.
+
+Geprüft mit `Expand-Archive`: 5.401 Dateien, Prüfsummen von `index.html`,
+`Rectangle.html`, `indesign.d.ts`, dem JPEG und dem eingebetteten 18-MB-Archiv
+stimmen mit `site/` überein.
 
 ## Kurzreferenz
 
@@ -283,7 +304,7 @@ Zwei Sonderwege:
   was gemeint war.
 - Ein **Doppelpunkt im Typnamen** ist immer ein Adobe-Datenfehler
   (`Orderedarraycontainingkey:String`) und wird zu `any`. Der Build meldet je
-  Produkt, wie oft das passiert: 856 bei InDesign, davon allein 528 aus zwei
+  Produkt, wie oft das passiert: 231 bei InDesign, davon allein 132 aus zwei
   kaputten Angaben.
 
 ## Schmales Fenster

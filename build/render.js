@@ -355,7 +355,7 @@ function make(data, d, ctx) {
        gepackt ist — vorher steht die Groesse nicht fest. */
     h += `<section class="offline"><h2 class="sechead" id="offline">Offline</h2>
       <ul class="dl">
-        <li><a href="../extendscriptAPI.zip" download><b>extendscriptAPI.zip</b>
+        <li><a href="../indesignapi.zip" download><b>indesignapi.zip</b>
           <span>The whole site: every application and both shared libraries,
           __ZIPPAGES__ pages. Unpack it and open <code>index.html</code> —
           no server, no internet. About __ZIPMB__ MB.</span></a></li>
