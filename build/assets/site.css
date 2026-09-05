@@ -8,9 +8,16 @@
    Systemscrollbalken im falschen Ton. Betrifft auch die Loeschtaste im
    Suchfeld und die Fokusringe.
 
-   --fs skaliert saemtliche Schriftgroessen; die Knoepfe A− / A+ im Kopf setzen
-   ihn. Die Groessen stehen deshalb als calc(<px> * var(--fs)) im Stylesheet. */
+   --fs ist der Zoom, den die Knoepfe A− / A+ im Kopf setzen. zoom skaliert die
+   ganze Seite — Schrift, Polsterung, Spaltenbreiten —, genau wie der Zoom des
+   Browsers. Nur die Schrift zu vergroessern reichte nicht: die Objektspalte
+   blieb 230px breit und schnitt die Namen ab.
+
+   Einziger Haken: 100vh rechnet den Zoom nicht mit. Im skalierten
+   Koordinatenraum stehen nur 100vh/--fs zur Verfuegung, deshalb steht das so
+   in .grid, .side und .rail2. */
 :root {
+  zoom: var(--fs);
   color-scheme: light;
   --fs: 1;
   --sb: #ccd3de;
@@ -39,17 +46,17 @@
   color-scheme: dark;
   --sb: #2f3745;
   --sb-h: #414c5e;
-  --bg: #0f1115;
-  --panel: #151920;
-  --rail: #0c0e12;
-  --ink: #dfe4ec;
-  --dim: #7d8798;
+  --bg: #2a2f39;
+  --panel: #21252d;
+  --rail: #232730;
+  --ink: #a6abb4;
+  --dim: #888f9b;
   --line: #232935;
-  --accent: hsl(100, 61%, 37%);
+  --accent: hsl(100deg 35.85% 67.58%);
   --accent-soft: #16283f;
   --warn: #e0a458;
   --ro: #8b94a6;
-  --rw: hsl(11, 84%, 28%);
+  --rw: hsl(11deg 76.24% 61.99%);
   --enum: #c08cf0;
   --ev: #f2836b;
 }
@@ -94,11 +101,16 @@
   background: transparent
 }
 
+/* Container statt Media Query: zoom skaliert das Layout, aber Media Queries
+   sehen weiter die echte Fensterbreite. Bei 150% auf 1000px haette die Seite
+   logisch nur 667px, wuerde aber die Regeln fuer 1000px nehmen. Ein Container
+   misst im skalierten Koordinatenraum und trifft damit das Richtige. */
 body {
+  container: page / inline-size;
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: calc(13.5px * var(--fs))/1.5 var(--sans)
+  font: 13.5px/1.5 var(--sans)
 }
 
 a {
@@ -138,7 +150,7 @@ a:hover {
 }
 
 .top .logo {
-  font: 600 calc(16px * var(--fs))/1 var(--mono);
+  font: 600 16px/1 var(--mono);
   letter-spacing: -.01em;
   color: var(--ink);
   white-space: nowrap
@@ -166,7 +178,7 @@ a:hover {
   border: 0;
   background: transparent;
   color: var(--dim);
-  font: calc(11px * var(--fs))/1 var(--sans);
+  font: 11px/1 var(--sans);
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
@@ -184,7 +196,7 @@ a:hover {
 }
 
 .apiver {
-  font: calc(11px * var(--fs))/1 var(--mono);
+  font: 11px/1 var(--mono);
   color: var(--dim);
   white-space: nowrap;
   padding: 5px 10px;
@@ -212,7 +224,7 @@ a:hover {
   background: var(--panel);
   border-radius: 7px;
   padding: 5px 11px;
-  font: calc(11px * var(--fs))/1 var(--sans);
+  font: 11px/1 var(--sans);
   color: var(--ink);
   white-space: nowrap
 }
@@ -224,7 +236,7 @@ a:hover {
 .prod>summary::after {
   content: "▾";
   color: var(--dim);
-  font-size: calc(10px * var(--fs))
+  font-size: 10px
 }
 
 .prod>summary:hover {
@@ -232,7 +244,7 @@ a:hover {
 }
 
 .prod .pv {
-  font: calc(10.5px * var(--fs))/1 var(--mono);
+  font: 10.5px/1 var(--mono);
   color: var(--dim)
 }
 
@@ -256,7 +268,7 @@ a:hover {
   align-items: baseline;
   padding: 6px 9px;
   border-radius: 6px;
-  font: calc(12px * var(--fs))/1.3 var(--sans);
+  font: 12px/1.3 var(--sans);
   color: var(--ink)
 }
 
@@ -272,7 +284,7 @@ a:hover {
 
 .prodmenu a i {
   font-style: normal;
-  font: calc(10.5px * var(--fs)) var(--mono);
+  font: 10.5px var(--mono);
   color: var(--dim)
 }
 
@@ -294,7 +306,7 @@ a:hover {
 
 .trail .h {
   flex: none;
-  font: 600 calc(10px * var(--fs))/1 var(--sans);
+  font: 600 10px/1 var(--sans);
   letter-spacing: .09em;
   text-transform: uppercase;
   color: var(--dim);
@@ -308,7 +320,7 @@ a:hover {
   flex: 0 1 auto;
   min-width: 0;
   max-width: 21ch;
-  font: calc(11.5px * var(--fs))/1 var(--mono);
+  font: 11.5px/1 var(--mono);
   color: var(--dim);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -331,7 +343,7 @@ a:hover {
   border-radius: 7px;
   padding: 6px 11px;
   cursor: pointer;
-  font: calc(12px * var(--fs))/1 var(--sans);
+  font: 12px/1 var(--sans);
   min-width: 265px
 }
 
@@ -346,7 +358,7 @@ a:hover {
 }
 
 kbd {
-  font: calc(10px * var(--fs)) var(--mono);
+  font: 10px var(--mono);
   border: 1px solid var(--line);
   border-bottom-width: 2px;
   border-radius: 4px;
@@ -361,18 +373,12 @@ kbd {
   color: var(--dim);
   border-radius: 6px;
   padding: 6px 10px;
-  font: calc(11px * var(--fs))/1 var(--sans);
+  font: 11px/1 var(--sans);
   cursor: pointer
 }
 
-/* Schriftgroesse. Die Kopfzeile selbst skaliert NICHT mit: sie ist 44px hoch,
-   und alles darunter haengt an dieser Zahl (.side, .bar, .grid). Waechst der
-   Text im Kopf mit, bricht die Leiste. Skaliert wird, was man liest — Inhalt,
-   Objektspalte, rechte Spalte, Suchpalette. */
-.top {
-  --fs: 1;
-}
-
+/* Knoepfe fuer die Schriftgroesse. Sie skalieren mit allem anderen mit — der
+   Zoom wirkt auf die ganze Seite, siehe :root. */
 .fs {
   display: flex;
   gap: 2px;
@@ -415,7 +421,7 @@ kbd {
 .grid {
   display: grid;
   grid-template-columns: 230px minmax(0, 1fr) 210px;
-  min-height: calc(100vh - 44px)
+  min-height: calc(100vh / var(--fs) - 44px)
 }
 
 .side {
@@ -424,13 +430,13 @@ kbd {
   padding: 10px 0;
   position: sticky;
   top: 44px;
-  height: calc(100vh - 44px);
+  height: calc(100vh / var(--fs) - 44px);
   overflow-y: auto
 }
 
 .side .h {
   padding: 10px 14px 5px;
-  font: 600 calc(10px * var(--fs)) var(--sans);
+  font: 600 10px var(--sans);
   letter-spacing: .11em;
   text-transform: uppercase;
   color: var(--dim)
@@ -441,7 +447,7 @@ kbd {
   justify-content: space-between;
   gap: 6px;
   padding: 3px 14px;
-  font: calc(12px * var(--fs)) var(--mono);
+  font: 12px var(--mono);
   color: var(--ink)
 }
 
@@ -467,7 +473,7 @@ kbd {
   flex: none;
   font-style: normal;
   color: var(--dim);
-  font-size: calc(10px * var(--fs))
+  font-size: 10px
 }
 
 .side a.e i {
@@ -479,7 +485,7 @@ kbd {
 }
 
 .side .allobjects {
-  font: calc(12px * var(--fs)) var(--sans);
+  font: 12px var(--sans);
   color: var(--accent);
   padding: 8px 14px
 }
@@ -502,7 +508,7 @@ kbd {
   border-radius: 7px;
   padding: 6px 10px;
   color: var(--ink);
-  font: calc(11.5px * var(--fs)) var(--mono)
+  font: 11.5px var(--mono)
 }
 
 .side .sidef input:focus {
@@ -522,7 +528,7 @@ kbd {
 
 .side .none {
   padding: 14px;
-  font: calc(11.5px * var(--fs)) var(--sans);
+  font: 11.5px var(--sans);
   color: var(--dim)
 }
 
@@ -538,7 +544,7 @@ kbd {
 }
 
 .kind {
-  font: calc(11px * var(--fs)) var(--mono);
+  font: 11px var(--mono);
   color: var(--dim);
   text-transform: uppercase;
   letter-spacing: .1em
@@ -550,7 +556,7 @@ kbd {
 
 h1 {
   margin: 5px 0 0;
-  font: 600 calc(26px * var(--fs)) var(--mono)
+  font: 600 26px var(--mono)
 }
 
 .lede {
@@ -565,7 +571,7 @@ h1 {
   gap: 6px;
   flex-wrap: wrap;
   margin-top: 13px;
-  font: calc(11.5px * var(--fs)) var(--mono);
+  font: 11.5px var(--mono);
   color: var(--dim)
 }
 
@@ -594,7 +600,7 @@ h1 {
   border-radius: 7px;
   padding: 8px 12px;
   color: var(--ink);
-  font: calc(12.5px * var(--fs)) var(--mono)
+  font: 12.5px var(--mono)
 }
 
 .bar input:focus {
@@ -608,7 +614,7 @@ h1 {
   color: var(--dim);
   border-radius: 99px;
   padding: 5px 12px;
-  font: calc(11.5px * var(--fs)) var(--sans);
+  font: 11.5px var(--sans);
   cursor: pointer;
   white-space: nowrap
 }
@@ -625,7 +631,7 @@ h1 {
 
 .sechead {
   margin: 26px 0 0;
-  font: 600 calc(11px * var(--fs)) var(--sans);
+  font: 600 11px var(--sans);
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--dim);
@@ -636,12 +642,12 @@ h1 {
 
 .sechead b {
   color: var(--ink);
-  font: 600 calc(11px * var(--fs)) var(--mono)
+  font: 600 11px var(--mono)
 }
 
 .hint {
   color: var(--dim);
-  font-size: calc(12px * var(--fs));
+  font-size: 12px;
   margin: 5px 0 0
 }
 
@@ -657,12 +663,12 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 9px;
-  font-size: calc(13px * var(--fs))
+  font-size: 13px
 }
 
 th {
   text-align: left;
-  font: 600 calc(10px * var(--fs)) var(--sans);
+  font: 600 10px var(--sans);
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--dim);
@@ -696,7 +702,7 @@ tr:hover td {
 }
 
 td.n {
-  font: calc(12.5px * var(--fs)) var(--mono);
+  font: 12.5px var(--mono);
   font-weight: 600;
   overflow-wrap: anywhere
 }
@@ -706,7 +712,7 @@ td.n.ev {
 }
 
 td.t {
-  font: calc(11.5px * var(--fs)) var(--mono);
+  font: 11.5px var(--mono);
   overflow-wrap: anywhere
 }
 
@@ -730,7 +736,7 @@ td.t .lit {
    sonst verschmilzt "AutoCorrectTables<AutoCorrectTable>" zu einem Wort. */
 .gen {
   color: var(--warn);
-  padding: 0 .18em;
+  padding-left: 0.18em;
   font-weight: 400
 }
 
@@ -746,7 +752,7 @@ td.t .lit {
 }
 
 td.a {
-  font: calc(10.5px * var(--fs)) var(--mono);
+  font: 10.5px var(--mono);
   overflow-wrap: anywhere
 }
 
@@ -763,7 +769,7 @@ td.d {
 }
 
 .stat {
-  font: calc(9.5px * var(--fs)) var(--mono);
+  font: 9.5px var(--mono);
   color: var(--warn);
   border: 1px solid var(--warn);
   border-radius: 3px;
@@ -808,7 +814,7 @@ td.d {
 }
 
 .vals .vchip {
-  font: calc(10.5px * var(--fs)) var(--mono);
+  font: 10.5px var(--mono);
   background: var(--accent-soft);
   color: var(--accent);
   border: 1px solid transparent;
@@ -828,7 +834,7 @@ td.d {
 }
 
 .vals .more {
-  font: calc(10.5px * var(--fs)) var(--mono);
+  font: 10.5px var(--mono);
   color: var(--dim)
 }
 
@@ -848,7 +854,7 @@ td.d {
 }
 
 .mem .id {
-  font: 600 calc(13.5px * var(--fs)) var(--mono)
+  font: 600 13.5px var(--mono)
 }
 
 .mem .id .d {
@@ -861,7 +867,7 @@ td.d {
 }
 
 .mem .ret {
-  font: calc(11.5px * var(--fs)) var(--mono);
+  font: 11.5px var(--mono);
   color: var(--dim)
 }
 
@@ -897,7 +903,7 @@ td.d {
 }
 
 .arg .an {
-  font: calc(12px * var(--fs)) var(--mono);
+  font: 12px var(--mono);
   color: var(--ink);
   white-space: nowrap
 }
@@ -907,7 +913,7 @@ td.d {
 }
 
 .arg .at {
-  font: calc(11.5px * var(--fs)) var(--mono);
+  font: 11.5px var(--mono);
   color: var(--warn);
   max-width: 34ch;
   overflow-wrap: anywhere
@@ -915,7 +921,7 @@ td.d {
 
 .arg .ad {
   color: var(--dim);
-  font-size: calc(12.5px * var(--fs))
+  font-size: 12.5px
 }
 
 /* ---------- Rueckwaertsverweise ---------- */
@@ -937,7 +943,7 @@ td.d {
 }
 
 .revbox a {
-  font: calc(11.5px * var(--fs)) var(--mono);
+  font: 11.5px var(--mono);
   white-space: nowrap
 }
 
@@ -957,12 +963,12 @@ td.d {
   background: var(--rail);
   position: sticky;
   top: 44px;
-  height: calc(100vh - 44px);
+  height: calc(100vh / var(--fs) - 44px);
   overflow-y: auto
 }
 
 .rail2 .h {
-  font: 600 calc(10px * var(--fs)) var(--sans);
+  font: 600 10px var(--sans);
   letter-spacing: .11em;
   text-transform: uppercase;
   color: var(--dim);
@@ -976,7 +982,7 @@ td.d {
 .rail2 a {
   display: block;
   padding: 2px 0;
-  font: calc(11.5px * var(--fs)) var(--mono);
+  font: 11.5px var(--mono);
   color: var(--dim);
   white-space: nowrap;
   overflow: hidden;
@@ -989,7 +995,7 @@ td.d {
 }
 
 .rail2 .kv {
-  font: calc(11px * var(--fs)) var(--mono);
+  font: 11px var(--mono);
   color: var(--dim);
   line-height: 1.85
 }
@@ -1011,7 +1017,7 @@ td.d {
 }
 
 ul.grid li {
-  font: calc(12.5px * var(--fs)) var(--mono)
+  font: 12.5px var(--mono)
 }
 
 /* Beschreibungen sind Fliesstext, koennen aber einzelne sehr lange Zeichenfolgen
@@ -1053,22 +1059,27 @@ td.d,
 
 .refcard b {
   display: block;
-  font: 600 calc(13px * var(--fs)) var(--sans);
+  font: 600 13px var(--sans);
   color: var(--accent)
 }
 
 .refcard .d {
   display: block;
   margin-top: 6px;
-  font-size: calc(12.5px * var(--fs));
+  font-size: 12.5px;
   color: var(--dim);
   line-height: 1.5;
   max-width: 52ch
 }
 
-@media (max-width: 900px) {
-  .refcard a { flex-direction: column }
-  .refcard img { width: 100% }
+@container page (max-width: 900px) {
+  .refcard a {
+    flex-direction: column
+  }
+
+  .refcard img {
+    width: 100%
+  }
 }
 
 /* Maschinenlesbare Ausgaben auf der Produktseite. Kein Blickfang: wer sie
@@ -1098,7 +1109,7 @@ td.d,
 
 .machine .dl b {
   display: block;
-  font: calc(12.5px * var(--fs)) var(--mono);
+  font: 12.5px var(--mono);
   color: var(--accent);
   font-weight: 600
 }
@@ -1106,7 +1117,7 @@ td.d,
 .machine .dl span {
   display: block;
   margin-top: 5px;
-  font-size: calc(12px * var(--fs));
+  font-size: 12px;
   color: var(--dim);
   line-height: 1.45
 }
@@ -1118,7 +1129,7 @@ footer {
   margin-top: 40px;
   padding: 18px 0 8px;
   color: var(--dim);
-  font-size: calc(11.5px * var(--fs));
+  font-size: 11.5px;
   line-height: 1.6
 }
 
@@ -1131,17 +1142,17 @@ footer p:last-child {
 }
 
 footer .legal {
-  font-size: calc(11px * var(--fs))
+  font-size: 11px
 }
 
 footer .meta {
-  font-size: calc(11px * var(--fs));
+  font-size: 11px;
   margin-top: 10px
 }
 
 /* Signatur- und Rechtszeile schliessen den Footer ab, in einer Zeile. */
 footer .by {
-  font-size: calc(11px * var(--fs));
+  font-size: 11px;
   color: var(--ink);
   margin-top: 10px
 }
@@ -1186,7 +1197,7 @@ footer .by .sep {
   border-bottom: 1px solid var(--line);
   background: transparent;
   color: var(--ink);
-  font: calc(15px * var(--fs)) var(--mono);
+  font: 15px var(--mono);
   padding: 15px 18px
 }
 
@@ -1214,7 +1225,7 @@ footer .by .sep {
 }
 
 .res .r .t {
-  font: calc(10px * var(--fs)) var(--mono);
+  font: 10px var(--mono);
   color: var(--dim);
   width: 42px;
   flex: none;
@@ -1238,7 +1249,7 @@ footer .by .sep {
 }
 
 .res .r .n {
-  font: calc(12.5px * var(--fs)) var(--mono);
+  font: 12.5px var(--mono);
   white-space: nowrap
 }
 
@@ -1254,7 +1265,7 @@ footer .by .sep {
 
 .res .r .d {
   color: var(--dim);
-  font-size: calc(11.5px * var(--fs));
+  font-size: 11.5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1266,20 +1277,20 @@ footer .by .sep {
   gap: 14px;
   padding: 8px 18px;
   border-top: 1px solid var(--line);
-  font: calc(10.5px * var(--fs)) var(--sans);
+  font: 10.5px var(--sans);
   color: var(--dim)
 }
 
 /* Gemessen: bis 1250 px stehen alle drei Namen ungekuerzt, darunter schrumpfen
    sie. Zwei vollstaendige Namen orientieren besser als drei angeschnittene,
    deshalb faellt der aelteste vorher weg (.h ist das erste Kind). */
-@media (max-width:1250px) {
+@container page (max-width: 1250px) {
   .trail a:nth-child(4) {
     display: none
   }
 }
 
-@media (max-width:1100px) {
+@container page (max-width: 1100px) {
   .grid {
     grid-template-columns: 200px minmax(0, 1fr)
   }
@@ -1314,12 +1325,12 @@ footer .by .sep {
   }
 
   td.a::after {
-    font-size: calc(10.5px * var(--fs))
+    font-size: 10.5px
   }
 
   .c-a::after {
     content: "ACC";
-    font-size: calc(10px * var(--fs))
+    font-size: 10px
   }
 
   td.a.ro::after {
@@ -1334,7 +1345,7 @@ footer .by .sep {
 /* Unterhalb dieser Breite sprengte die Kopfzeile das Fenster — nicht die
    Tabelle: das Suchfeld hielt seine min-width von 265 px. Es darf jetzt
    schrumpfen, Tastenkuerzel und API-Version treten ab. */
-@media (max-width:900px) {
+@container page (max-width: 900px) {
 
   /* Parameter untereinander statt in drei Spalten: die beiden auto-Spalten
      richten sich am breitesten Namen und Typ aus und drueckten die Seite sonst
@@ -1444,26 +1455,26 @@ ul.cards a:hover {
 
 ul.cards b {
   display: block;
-  font: 600 calc(15px * var(--fs)) var(--mono)
+  font: 600 15px var(--mono)
 }
 
 ul.cards .v {
   display: block;
-  font: calc(11px * var(--fs)) var(--mono);
+  font: 11px var(--mono);
   color: var(--dim);
   margin-top: 2px
 }
 
 ul.cards .c {
   display: block;
-  font: calc(11px * var(--fs)) var(--sans);
+  font: 11px var(--sans);
   color: var(--dim);
   margin-top: 6px
 }
 
 ul.cards .note {
   display: block;
-  font: calc(11px * var(--fs)) var(--sans);
+  font: 11px var(--sans);
   color: var(--warn);
   margin-top: 8px;
   line-height: 1.45
@@ -1471,6 +1482,6 @@ ul.cards .note {
 
 .note {
   color: var(--warn);
-  font-size: calc(12.5px * var(--fs));
+  font-size: 12.5px;
   margin: 10px 0 0
 }

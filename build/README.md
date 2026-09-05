@@ -149,9 +149,10 @@ Zwei Sonderwege:
 Sauber bis hinunter zu **650 px** Fensterbreite, ohne waagerechtes Scrollen.
 `check-site.js` misst das bei sieben Breiten auf zwei Seiten nach.
 
-Mit **150 % Schriftgröße** liegt die Grenze bei **900 px**. Darunter blieben rund
-25 Zeichen je Zeile im Inhalt; dafür müsste die Seitenleiste einklappen, und das
-ist eigene Arbeit. Zwei Prüfungen halten die Grenze.
+Mit Zoom zählt die **logische** Breite, also Fenster ÷ Zoom — dieselbe Grenze.
+1000 px bei 150 % sind logisch 667 px und damit in Ordnung, 900 px wären 600 px
+und damit darunter. Unterhalb von 650 px müsste die Seitenleiste einklappen; das
+ist eigene Arbeit.
 
 Drei Stellen brauchen deshalb eine Reserve, die bei normaler Schrift nie greift:
 `.args` bekommt `minmax(0,auto)` statt `auto` für die beiden ersten Spalten, und
@@ -291,12 +292,28 @@ dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Ind
 - **Hell ist der Standard.** Ohne gespeicherte Wahl und ohne JavaScript gilt die
   helle Palette — sie steht auf `:root`, die dunkle unter `:root[data-t="dark"]`.
   Es wird also nur gesetzt, wer ausdrücklich dunkel will.
-- **Schriftgröße über A− / A+ im Kopf.** `--fs` skaliert jede Schriftgröße im
-  Stylesheet (`calc(<px> * var(--fs))`), fünf Stufen von 85 % bis 150 %, gemerkt
-  unter `fs`. **Die Kopfzeile skaliert bewusst nicht mit**: sie ist 44 px hoch,
-  und `.side`, `.bar` und `.grid` rechnen mit dieser Zahl — sie setzt `--fs`
-  für sich auf 1 zurück. Skaliert wird, was man liest.
-  Am Anschlag wird der Knopf abgeblendet statt ausgeblendet, sonst springt der Kopf.
+- **Zoom über A− / A+ im Kopf.** Fünf Stufen von 85 % bis 150 %, gemerkt unter
+  `fs`, gesetzt als `zoom: var(--fs)` auf `:root`. Am Anschlag wird der Knopf
+  abgeblendet statt ausgeblendet, sonst springt der Kopf.
+
+  Ein erster Versuch skalierte **nur die Schriftgrößen** und ließ das Layout
+  stehen. Das Ergebnis war eng: die Objektspalte blieb 230 px breit und schnitt
+  die Namen ab, `read/write` brach auf zwei Zeilen um. `zoom` skaliert Schrift,
+  Polsterung und Spaltenbreiten zusammen — wie der Zoom des Browsers.
+
+  Zwei Dinge, die `zoom` mitbringt und die man einmal wissen muss:
+
+  - **`100vh` rechnet den Zoom nicht mit.** Im skalierten Koordinatenraum
+    stehen nur `100vh / var(--fs)` zur Verfügung; ohne die Division ragte die
+    Seitenleiste bei 150 % um 500 px unter das Fenster.
+  - **Media Queries sehen weiter die echte Fensterbreite.** Bei 150 % auf
+    1000 px hat die Seite logisch 667 px, nähme aber die Regeln für 1000 px.
+    Die drei Breiten-Umbrüche sind deshalb **Container Queries** auf `body`
+    (`container: page / inline-size`) — ein Container misst im skalierten Raum.
+    Nur `@media print` ist geblieben.
+
+  Geprüft wird die gerenderte Größe, nicht `getComputedStyle().fontSize`:
+  `zoom` lässt die berechnete Schriftgröße unverändert.
 - **Das Thema setzt ein Inline-Skript im `<head>`**, nicht `site.js`. Letzteres
   läuft mit `defer` und damit erst nach dem Parsen — die Folgeseite erschien
   dadurch beim Navigieren kurz im dunklen Standardthema und klappte dann um.

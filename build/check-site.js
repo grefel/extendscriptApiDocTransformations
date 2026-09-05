@@ -274,23 +274,35 @@ const check = (name, got, want) => {
   check('Theme ueberlebt die Navigation',
     await page.evaluate(() => document.documentElement.dataset.t), 'dark');
 
-  /* --- Schriftgroesse --- */
-  const fsState = () => page.evaluate(() => ({
-    fs: getComputedStyle(document.documentElement).getPropertyValue('--fs').trim(),
-    body: getComputedStyle(document.body).fontSize,
-    head: getComputedStyle(document.querySelector('.top .logo')).fontSize,
-    lvl: document.querySelector('.fs .lvl').textContent
-  }));
+  /* --- Schriftgroesse ---
+     Umgesetzt als zoom auf :root, damit sich das Layout wie beim Zoom des
+     Browsers mitskaliert. Deshalb NICHT ueber getComputedStyle().fontSize
+     pruefen: zoom laesst die berechnete Schriftgroesse unveraendert und
+     wirkt erst beim Zeichnen. Gemessen wird, was auf dem Schirm ankommt. */
+  const fsState = () => page.evaluate(() => {
+    const r = s => Math.round(document.querySelector(s).getBoundingClientRect().width);
+    return {
+      fs: getComputedStyle(document.documentElement).getPropertyValue('--fs').trim(),
+      lvl: document.querySelector('.fs .lvl').textContent,
+      kopf: Math.round(document.querySelector('.top').getBoundingClientRect().height),
+      spalte: r('.side'),
+      /* Die Seitenleiste darf nicht unter das Fenster reichen: 100vh rechnet
+         den Zoom nicht mit, deshalb steht dort 100vh/var(--fs). */
+      unten: Math.round(document.querySelector('.side').getBoundingClientRect().bottom),
+      fenster: window.innerHeight
+    };
+  });
   const fs0 = await fsState();
   check('Schriftgroesse startet bei 100%', fs0.lvl, '100%');
   await page.click('.fs button[data-f="+"]');
   await page.click('.fs button[data-f="+"]');
   await page.waitForTimeout(200);
   const fs2 = await fsState();
-  check('A+ vergroessert den Inhalt', parseFloat(fs2.body) > parseFloat(fs0.body), true);
-  /* Die Kopfzeile ist 44px hoch und .side, .bar und .grid rechnen damit —
-     sie darf nicht mitwachsen. */
-  check('die Kopfzeile bleibt unveraendert', fs2.head, fs0.head);
+  check('A+ vergroessert die Darstellung', fs2.kopf > fs0.kopf, true);
+  /* Der Unterschied zum blossen Vergroessern der Schrift: die Objektspalte
+     waechst mit, sonst schnitte sie die Namen ab. */
+  check('die Objektspalte waechst mit', fs2.spalte > fs0.spalte, true);
+  check('die Seitenleiste endet am Fensterrand', fs2.unten, fs2.fenster);
   await page.goto(url('indesign/Rectangle.html'));
   await page.waitForTimeout(300);
   check('Schriftgroesse ueberlebt die Navigation', (await fsState()).lvl, fs2.lvl);
@@ -479,9 +491,11 @@ const check = (name, got, want) => {
       check(tag + ': keine Zelle laeuft aus', o.cells, 0);
     }
   }
-  /* Grosse Schrift und schmales Fenster zusammen. Grenze: bis 900 px sauber.
-     Darunter waeren es bei 150% noch rund 25 Zeichen je Zeile im Inhalt —
-     dafuer muesste die Seitenleiste einklappen, das ist eigene Arbeit. */
+  /* Zoom und schmales Fenster zusammen. Massgeblich ist die logische Breite,
+     also Fenster ÷ Zoom — dieselbe 650-px-Grenze wie ohne Zoom. 1000 px bei
+     150 % sind logisch 667 px und damit drin; 900 px waeren 600 px und damit
+     darunter, dort fehlt dieselbe Seitenleisten-Faltung wie bei 640 px ohne
+     Zoom. Deshalb hier nur Breiten oberhalb der Grenze. */
   await page.setViewportSize({ width: 1600, height: 1000 });
   await page.goto(url('indesign/Rectangle.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
@@ -489,9 +503,10 @@ const check = (name, got, want) => {
     await page.click('.fs button[data-f="+"]');
     await page.waitForTimeout(90);
   }
-  for (const w of [1000, 900]) {
+  for (const w of [1600, 1200, 1000]) {
     const o = await overflowAt(w, 'indesign/Document.html');
-    check('150% bei ' + w + 'px: kein Ueberhang', o.page, 0);
+    check('150% bei ' + w + 'px (logisch ' + Math.round(w / 1.5) + '): kein Ueberhang',
+      o.page, 0);
     check('150% bei ' + w + 'px: keine Zelle laeuft aus', o.cells, 0);
   }
   await page.setViewportSize({ width: 1600, height: 1000 });
