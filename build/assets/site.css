@@ -784,7 +784,7 @@ td.t .lit {
 
 /* Spitze Klammern in derselben Signalfarbe wie die [] der Arrays. Luft daneben,
    sonst verschmilzt "AutoCorrectTables<AutoCorrectTable>" zu einem Wort. */
-.gen .arr {
+.gen, .arr {
   color: var(--warn);
   padding-left: 0.18em;
   font-weight: 400
@@ -1155,11 +1155,12 @@ td.d,
 
 /* Kurzreferenz: Vorschaubild links, Text rechts; bei schmalem Fenster
    untereinander. Das Bild traegt die Karte, deshalb darf es gross sein. */
+/* Kein eigenes margin-top: den Abstand zur Ueberschrift setzt .startrow fuer
+   beide Spalten. Sonst begann die Karte 11px unter den Blasen. */
 .refcard a {
   display: flex;
   gap: 18px;
   align-items: flex-start;
-  margin-top: 10px;
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: 10px;
