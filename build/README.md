@@ -152,6 +152,62 @@ jetzt einen Unterstrich (`for_`, `default_`).
 Übersetzt wird mit `--lib es5` und **ohne `dom`**: ExtendScript ist kein Browser,
 und mit den DOM-Definitionen kollidieren `Document` und `Event`.
 
+### Warum die Datei allein noch nichts nützt
+
+Alle sieben Dateien übersetzten fehlerfrei — und trotzdem ließ sich mit ihnen
+nicht arbeiten. Gemeldet wurde: `app` unbekannt, und `doc.` bot
+`createElement`, `createCDATASection`, `createRange` an. Nachgestellt und je
+mit dem echten Compiler belegt:
+
+- **Die globalen Namen fehlten.** Adobes Modell fasst sie zur Klasse `global`
+  zusammen (`app`, `alert`, `confirm`, `prompt`, `localize`, `isXMLName`,
+  `uneval`, `setDefaultXMLNamespace`). Als `declare class global { … }` sind
+  sie unerreichbar. Sie stehen jetzt einzeln als `declare const app:
+  Application` und `declare function alert(…)`. Was `lib.es5` selbst
+  mitbringt — `parseInt`, `isNaN`, `encodeURI` … — bleibt weg, sonst gäbe es
+  eine zweite, abweichende Überladung.
+- **Mit geladener DOM-Bibliothek gewinnt der Browser.** `declare class
+  Document` und `interface Document` aus `lib.dom` stehen nebeneinander; mit
+  `skipLibCheck` bleibt der Konflikt stumm, und die Suche landet bei der
+  Browserfassung: `doc.pages` unbekannt, `doc.createElement` erlaubt. Deshalb
+  steht die nötige `jsconfig.json` jetzt im Kopf jeder `.d.ts`, auf der
+  Produktseite als Kopierblock und in `llms.txt`:
+
+  ```json
+  { "compilerOptions": { "lib": ["es5"], "types": [], "checkJs": false },
+    "include": ["**/*.js", "**/*.d.ts"] }
+  ```
+- **`new File("…")` ging nicht.** Den Konstruktor beschreibt Adobe als Methode
+  mit dem Klassennamen — `File(path)`, `Folder(path)`, `XML(text)`, `QName`,
+  `Namespace`, `Socket`. Daraus wird jetzt ein `constructor`.
+- **`$.writeln()` ging nicht.** `$` und `ScriptUI` sind einzelne Objekte, ihre
+  Methoden führt Adobe aber als Instanzmethoden. Beide sind als `SINGLETON`
+  markiert und bekommen `static`. Nicht zu verwechseln mit `XML` oder
+  `RegExp`: dort sind nur die *Properties* statische Schalter. Weil die
+  ScriptUI-Klassen ein Suffix tragen, kommt zusätzlich
+  `declare const ScriptUI: typeof ScriptUISUI` dazu.
+- **`pages.everyItem()` gab `Page[]`.** Adobes Angabe, aber der Sammelverweis
+  ist kein Array: `everyItem().appliedMaster = m` und `everyItem().getElements()`
+  scheiterten beide. Der Rückgabetyp ist jetzt der Elementtyp.
+- **`alert("x")` war ein Aufruf mit zu wenigen Argumenten.** Adobe markiert
+  Pflichtparameter hinter optionalen (`alert(message, title?, errorIcon)`) —
+  in TypeScript verboten (TS1016). Ab dem ersten optionalen gilt jetzt alles
+  Weitere als optional. Betrifft 2 bis 3 Methoden je Produkt.
+- **`Array` ohne Typargument** (4 Stellen) ist jetzt `any[]`.
+
+Zwei Konsequenzen für die Prüfung: `check-types.js` läuft **ohne
+`--skipLibCheck`** — genau der Schalter hatte 66 Fehler *in* der Datei
+verdeckt — und übersetzt zusätzlich `build/fixtures/indesign.js`, ein echtes
+Alltagsskript mit `checkJs`. Dass eine Deklaration übersetzt, heißt eben nicht,
+dass man mit ihr schreiben kann.
+
+Die 66 verdeckten Fehler waren echt: die `FindChange*Setting`-Klassen weiten
+jede geerbte Property um `NothingEnum` aus, was TypeScript verbietet (TS2416).
+Der Typ bleibt stehen wie er ist, darüber steht ein `// @ts-ignore` mit
+Begründung — 114 Zeilen in den beiden InDesign-Dateien, sonst keine. Der
+Kommentar muss unmittelbar über der Deklaration stehen; das JSDoc darüber
+bleibt trotzdem am Member hängen (mit der Compiler-API nachgeprüft).
+
 ### Typabbildung
 
 Adobes Typangaben sind teils Prosa; 116 der vorkommenden Namen bezeichnen keine
@@ -353,6 +409,22 @@ Migrationsanleitung nennt genau diesen Fall, und zwar mit einem
 Enumerationswert als Beispiel — deshalb steht der Hinweis dort und nicht an
 jedem Objekt, wo er nur Rauschen wäre.
 
+### Falsche Typangaben richtigstellen
+
+`additions.js` trägt neben Membern auch **Typkorrekturen**, Schlüssel
+`Klasse.property`. Bisher zwei: `Document.filePath` und `Book.filePath` stehen
+im Export als `File`, liefern aber einen `Folder` — die Datei selbst steht in
+`fullName`. Gilt in beiden Laufzeiten; im UXP-Modus zeigt der Verweis
+entsprechend auf Adobes `folder`-Seite statt auf `file`.
+
+Jeder Eintrag nennt mit `from` die falsche Angabe und greift nur, solange
+genau die dasteht. Schreibt Adobe den Typ eines Tages richtig oder anders,
+greift die Korrektur nicht mehr, statt eine dann falsche zu erzwingen.
+
+Bewusst **nicht** angefasst: `Application.filePath`, `BookContent.filePath`
+und `Library.filePath` tragen denselben Satz im Export. Ob sie ebenso falsch
+sind, ist nicht nachgeprüft — geraten wird hier nicht.
+
 ### Vererbung in beide Richtungen
 
 **Die Vererbungszeile entfällt, wenn es keine Vorfahren gibt.** Bei `CellStyle`
@@ -511,7 +583,7 @@ den Umschalter.
 - **Core JavaScript und ScriptUI** gibt es nur unter ExtendScript — UXP nutzt
   eine andere Engine und kennt weder `$` und `File` noch ScriptUI. Im
   Produktumschalter stehen sie als „ExtendScript only".
-- **„Recent" im Kopf ist eine Recency-Spur, kein Breadcrumb** — die drei zuvor
+- **„Recent" im Kopf ist eine Recency-Spur, kein Breadcrumb** — die fünf zuvor
   geöffneten Objekte, neuestes zuerst, ohne die aktuelle Seite. Deshalb auch die
   Beschriftung: ohne sie liest sich die Reihe als Hierarchie.
   **Eine Liste über alle sieben Ziele** (`recent` in `localStorage`, Einträge als
@@ -519,14 +591,28 @@ den Umschalter.
   Bibliotheksgrenze, und genau dorthin will man zurück. Aussortiert wird nach
   Ziel **und** Namen, damit InDesigns und Illustrators `Document` nebeneinander
   stehen bleiben. Sie werden bewusst **nicht** beschriftet — welches gemeint
-  ist, zeigt die Statusleiste beim Zeigen auf den Link, und drei Einträge
+  ist, zeigt die Statusleiste beim Zeigen auf den Link, und fünf Einträge
   vertragen keine zusätzliche Spalte.
   Sie ist der einzige `data-enhance`-Knoten, der auch mit JavaScript verborgen
   bleiben darf — ohne Verlauf gäbe es nur eine leere Beschriftung.
-  Die Grenzwerte sind gemessen, nicht geschätzt: bis 1250 px stehen alle drei
-  Namen ungekürzt, darunter fällt der älteste weg, unter 1100 px die ganze Spur
-  — dort verschwindet auch die rechte Spalte. Eine erste Fassung blendete schon
-  ab 1280 px aus und war auf einem normalen Laptopfenster nie zu sehen.
+  **Wieviele der fünf zu sehen sind, misst `fitTrail()` in `site.js`**, statt
+  nach Fensterbreite zu schalten: fünfmal `Page` braucht weniger Platz als
+  einmal `AutoCorrectPreference`. Ist ein Name angeschnitten, fällt der älteste
+  weg — ein Eintrag weniger orientiert besser als fünf, aus denen „Pa…" wird.
+  Unter 1100 px verschwindet die Spur ganz, zusammen mit der rechten Spalte.
+
+  Drei Fallstricke steckten darin: die Flexbox **staucht ihre Kinder, statt
+  überzulaufen** — `scrollWidth` der Spur ist deshalb immer gleich
+  `clientWidth`, gefragt werden müssen die Namen. Die Trenner tragen **negative
+  Ränder** (`margin: 0 -3px`), ohne die fiel der fünfte Eintrag grundlos weg.
+  Und `getBoundingClientRect` rechnet den **Zoom** mit ein, `getComputedStyle`
+  nicht — gemischt ergibt das unter A+ falsche Breiten, deshalb durchgehend
+  `offsetWidth`/`scrollWidth`.
+- **`F` springt in den Memberfilter**, `Escape` leert ihn und gibt den Fokus
+  zurück. Das Kürzel steht als `<kbd>` im Feld und verschwindet beim Tippen.
+  Modifikatoren bleiben dem Browser: `Strg+F` ist seine Suche. Damit sind es
+  drei Tastenwege — `Strg+K` oder `/` in die Palette, `?` in die Volltextsuche,
+  `F` in den Filter der offenen Seite.
 - Der Footer verlinkt **Impressum** und **Datenschutz** auf publishingx.de.
 
 ## Stufe 2: XSLT vollständig abgelöst

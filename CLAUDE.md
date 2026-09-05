@@ -100,6 +100,13 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
   stehen.
 - Einzelne Typangaben sind unbrauchbar, z. B. `AnimationSetting.motionPath`
   (`Orderedarraycontainingkey…`). Adobe-Datenfehler, kein Darstellungsproblem.
+- **Einzelne Typangaben sind schlicht falsch.** `Document.filePath` und
+  `Book.filePath` stehen als `File`, liefern aber einen `Folder`. Korrigiert in
+  `build/additions.js` (`types`), abgesichert durch `from`. Die gleichlautenden
+  `Application`/`BookContent`/`Library` sind ungeprüft und bleiben stehen.
+- **Konstruktoren stehen als Methode mit dem Klassennamen** (`File(path)`,
+  `XML(text)`), und die globalen Namen stecken in einer Klasse `global`.
+  Für die `.d.ts` wird beides umgeformt — siehe build/README.md.
 - **`Changes` ist eine echte Klasse.** Dateinamen wie `changes.html` kollidieren unter
   Windows mit der generierten `Changes.html`; in der DITA-Strecke ging sie so einmal
   verloren. `build.js` prüft das jetzt und bricht ab. Beim Anlegen neuer Topics immer

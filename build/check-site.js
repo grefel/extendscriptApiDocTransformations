@@ -105,6 +105,32 @@ const check = (name, got, want) => {
   await page.fill('#f', '');
   await page.waitForTimeout(200);
 
+  /* Tastatur: F springt ins Filterfeld, Escape raeumt es wieder. Strg+F muss
+     die Suche des Browsers bleiben. */
+  const fokus = () => page.evaluate(() => document.activeElement.id);
+  /* Alle Zeilen, also Properties und Events zusammen. */
+  const alleZeilen = await page.locator('tbody tr:not([hidden])').count();
+  await page.locator('h1').click();
+  await page.keyboard.press('f');
+  await page.waitForTimeout(150);
+  check('F springt in den Memberfilter', await fokus(), 'f');
+  await page.keyboard.type('corner');
+  await page.waitForTimeout(200);
+  check('und tippt in das Feld statt in die Seite',
+    (await page.locator('tbody tr:not([hidden])').count()) < alleZeilen, true);
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(200);
+  check('Escape leert den Memberfilter',
+    await page.locator('tbody tr:not([hidden])').count(), alleZeilen);
+  check('und gibt den Fokus zurueck', (await fokus()) === 'f', false);
+  check('Escape hier oeffnet nicht die Palette',
+    await page.locator('.scrim').isVisible(), false);
+  await page.keyboard.press('Control+f');
+  await page.waitForTimeout(150);
+  check('Strg+F bleibt dem Browser', (await fokus()) === 'f', false);
+  check('das Kuerzel steht im Feld',
+    (await page.locator('.fwrap kbd').innerText()).trim(), 'F');
+
   /* Umschalter je Membertyp */
   /* Zahlen stehen nur auf den Pillen, nicht doppelt in den Ueberschriften.
      innerText liefert die Ueberschriften per CSS in Grossbuchstaben zurueck. */
@@ -441,6 +467,44 @@ const check = (name, got, want) => {
   check('Illustrator bekommt kein UXP-Ziel',
     await page.locator('a[data-uxp-href]').count(), 0);
 
+  /* --- Korrigierte Typangaben (build/additions.js) ---
+     Document.filePath und Book.filePath liefern den Ordner, nicht die Datei.
+     Der Eingriff darf nur diese beiden treffen: Application, BookContent und
+     Library tragen im Export denselben falschen Satz und bleiben stehen. */
+  const typeCell = n => page.evaluate(name => {
+    const tr = document.getElementById('p-' + name);
+    if (!tr) return 'keine Zeile';
+    const a = tr.querySelector('td.t a');
+    return a ? a.textContent + ' -> ' + (a.getAttribute('href') || '(abgeschaltet)')
+             : tr.querySelector('td.t').textContent;
+  }, n);
+  for (const [obj, ziel] of [['Document', 'Folder'], ['Book', 'Folder'],
+                             ['Library', 'File'], ['Application', 'File']]) {
+    await page.goto(url('indesign/' + obj + '.html'));
+    await page.waitForSelector('.sidelist a', { timeout: 10000 });
+    check(obj + '.filePath ist ' + ziel,
+      await typeCell('filePath'), ziel + ' -> ../javascript/' + ziel + '.html');
+    await page.click('.rt button[data-r="uxp"]');
+    await page.waitForTimeout(250);
+    check('  und unter UXP auf Adobes ' + ziel.toLowerCase() + '-Seite',
+      (await typeCell('filePath'))
+        .endsWith('persistent-file-storage/' + ziel.toLowerCase()), true);
+    await page.click('.rt button[data-r="es"]');
+    await page.waitForTimeout(200);
+  }
+  /* Der Tooltip an den MDN-Verweisen bleibt kurz. */
+  await page.goto(url('indesign/Book.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(300);
+  check('Tooltip der Kernklassen',
+    await page.evaluate(() => {
+      const a = [...document.querySelectorAll('td.t a')].find(x => x.textContent === 'Object');
+      return a ? a.title : 'kein Object-Link';
+    }), 'UXP uses the standard JavaScript class');
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(200);
+
   /* --- Startseite traegt dieselbe Kopfzeile --- */
   const headGeom = async f => {
     await page.goto(url(f));
@@ -731,19 +795,40 @@ const check = (name, got, want) => {
   check('Escape leert den Filter', await page.locator('.sidelist a').count(), navAll);
   check('Escape schliesst nicht die Palette', await page.locator('.scrim').isVisible(), false);
 
-  /* --- Zuletzt besucht --- */
+  /* --- Zuletzt besucht ---
+     Fuenf Eintraege brauchen Platz. Wieviele davon stehenbleiben, entscheidet
+     site.js nach der wirklichen Breite der Namen — also erst breit machen. */
+  await page.setViewportSize({ width: 2000, height: 1000 });
   await page.goto(url('indesign/Polygon.html'));
   await page.waitForTimeout(200);
   await page.goto(url('indesign/GraphicLine.html'));
-  await page.waitForTimeout(200);
-  const seen = await page.locator('.trail a').allTextContents();
+  await page.waitForTimeout(300);
+  const seen = await page.locator('.trail a:not(.gone)').allTextContents();
   check('Spur nennt zuerst die vorige Seite', seen[0], 'Polygon');
   check('Spur laesst die aktuelle Seite aus', seen.includes('GraphicLine'), false);
-  check('Spur zeigt drei Eintraege', seen.length, 3);
+  check('Spur zeigt fuenf Eintraege', seen.length, 5);
   /* Trenner als eigene Elemente, nicht im Link: sonst gehoerten sie zur
-     Klickflaeche. Bei drei Eintraegen also zwei Striche. */
-  check('Trenner zwischen den Eintraegen', await page.locator('.trail .sep').count(), 2);
+     Klickflaeche. Bei fuenf Eintraegen also vier Striche. */
+  check('Trenner zwischen den Eintraegen',
+    await page.locator('.trail .sep:not(.gone)').count(), 4);
   check('Trenner ist nicht klickbar', await page.locator('.trail a .sep').count(), 0);
+  /* Lieber ein Eintrag weniger als fuenf angeschnittene: aus "Page" wuerde
+     sonst "Pa…". Der Wert ist gemessen, keine Schwelle nach Fensterbreite. */
+  const angeschnitten = () => page.evaluate(() =>
+    [...document.querySelectorAll('.trail a')]
+      .filter(a => a.offsetParent && a.scrollWidth > a.clientWidth + 2).length);
+  check('2000px: kein Name angeschnitten', await angeschnitten(), 0);
+  for (const w of [1700, 1500, 1300]) {
+    await page.setViewportSize({ width: w, height: 1000 });
+    await page.waitForTimeout(300);
+    check(w + 'px: kein Name angeschnitten', await angeschnitten(), 0);
+  }
+  await page.setViewportSize({ width: 2000, height: 1000 });
+  await page.waitForTimeout(300);
+  check('wieder breit: alle fuenf zurueck',
+    (await page.locator('.trail a:not(.gone)').count()), 5);
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  await page.waitForTimeout(300);
   await page.locator('.trail a').first().click();
   await page.waitForTimeout(300);
   check('Spur fuehrt zum Ziel', await page.locator('h1').innerText(), 'Polygon');

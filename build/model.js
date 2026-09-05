@@ -149,6 +149,14 @@ function classModel(cd, origin) {
   if (name === 'global' && origin === 'js' && !o.p.some(p => p.n === 'app'))
     o.p = [Object.assign({}, fix.GLOBAL_APP), ...o.p].sort(byName);
 
+  /* Falsche Typangaben richtigstellen — siehe build/additions.js. */
+  if (origin === 'p') for (const prop of o.p) {
+    const corr = additions.types[name + '.' + prop.n];
+    if (!corr || String(prop.t) !== String(corr.from)) continue;
+    prop.t = corr.t.slice();
+    if (corr.d) prop.d = corr.d;
+  }
+
   o.ev = (isEnum ? [] : classProps.filter(isEvent))
     .map(e => ({ n: attr(e, 'name'), d: desc(e) })).sort(byName);
 

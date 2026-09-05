@@ -44,6 +44,17 @@ function splitVersion(title) {
   return { name, build };
 }
 
+/* Ohne diese Datei laedt der Editor die DOM-Bibliothek mit und Document, Event,
+   Text und Window zeigen auf die Browser-Fassung — die Deklarationen des
+   Objektmodells sind dann unerreichbar. Steht wortgleich auch im Kopf jeder
+   .d.ts (build/agents.js). */
+const JSCONFIG = [
+  '{',
+  '  "compilerOptions": { "lib": ["es5"], "types": [], "checkJs": false },',
+  '  "include": ["**/*.js", "**/*.d.ts"]',
+  '}'
+].join('\n');
+
 /* ctx.resolve(name) -> relativer Pfad oder null. Damit landen Typen wie "File"
    auf der gemeinsamen JavaScript-Bibliothek statt ins Leere zu zeigen. */
 function make(data, d, ctx) {
@@ -228,7 +239,9 @@ function make(data, d, ctx) {
     const pill = (key, text, n) =>
       `<button class="pill" type="button" data-o="${key}">${text} ${n}</button>`;
     h += `<div class="bar" hidden data-enhance="filter">
-      <input id="f" type="search" placeholder="Filter members…" spellcheck="false" autocomplete="off">
+      <label class="fwrap" for="f">
+        <input id="f" type="search" placeholder="Filter members…" spellcheck="false" autocomplete="off">
+        <kbd>F</kbd></label>
       <button class="pill on" type="button" data-o="all">All</button>
       ${c.p.length ? pill('p', label, c.p.length) : ''}
       ${c.ev.length ? pill('e', 'Events', c.ev.length) : ''}
@@ -361,7 +374,15 @@ function make(data, d, ctx) {
           Markdown twin at the same path as its page.</span></a></li>
         <li><a href="api.json" download><b>api.json</b>
           <span>The whole model as JSON, for your own tooling. Large.</span></a></li>
-      </ul></section>`;
+      </ul>
+      <p class="hint">ExtendScript is not a browser. With the DOM library loaded,
+      <code>Document</code>, <code>Event</code>, <code>Text</code> and
+      <code>Window</code> resolve to the browser versions and the declarations
+      below them go unseen — <code>doc.pages</code> unknown,
+      <code>doc.createElement</code> offered instead. Save this next to your
+      scripts as <code>jsconfig.json</code>:</p>
+      <pre class="snip"><button class="cpx" data-cp="${esc(JSCONFIG)}"
+        title="Copy jsconfig.json">${esc(JSCONFIG)}</button></pre></section>`;
 
     for (const [name, list] of groups) {
       h += `<section><h2 class="sechead" id="${name.toLowerCase()}">${name} <b>${list.length}</b></h2>

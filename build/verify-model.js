@@ -89,6 +89,12 @@ const additions = require('./additions');
 const isAddition = (cls, key, name) =>
   key === 'm' && (additions.methods[cls] || []).some(x => x.n === name);
 
+/* 8. Ebenso korrigiert additions.js einzelne Typangaben. Anerkannt wird das
+      nur, wenn sich sonst nichts unterscheidet als Typ und Beschreibung. */
+const bare = o => JSON.stringify(Object.assign({}, o, { t: 0, r: 0, d: 0 }));
+const isCorrection = (cls, key, was, now) => key === 'p' &&
+  additions.types[cls + '.' + now.n] !== undefined && bare(was) === bare(now);
+
 let fatal = 0, totalFixed = 0;
 for (const p of todo) {
   const ref = path.join(ROOT, 'temp', 'fixedDOM-' + p.slug + '.xml');
@@ -134,6 +140,7 @@ for (const p of todo) {
         const verdict = classify(was, now);
         if (verdict === 'same') continue;
         if (verdict === 'fixed') { fixedHere++; continue; }
+        if (isCorrection(c.n, key, was, now)) { fixedHere++; continue; }
         realDiff = true;
       }
       if (before.size) realDiff = true;   /* Member verschwunden */
