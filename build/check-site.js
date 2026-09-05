@@ -874,7 +874,7 @@ const check = (name, got, want) => {
   const exists = f => fs.existsSync(path.join(SITE, f));
   for (const f of ['llms.txt', 'indesign/llms.txt', 'indesign/api.json',
     'indesign/indesign.d.ts', 'indesign/Rectangle.md', 'scriptui/scriptui.d.ts',
-    'extendscriptAPI.zip'])
+    'indesignapi.zip'])
     check('erzeugt: ' + f, exists(f), true);
   /* Das Archiv traegt die ganze Website; die Groesse steht auf den
      Uebersichtsseiten und wird erst nach dem Packen eingesetzt. */

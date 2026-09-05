@@ -1,7 +1,7 @@
 # extendscriptApiDocTransformations — Projektkontext
 
 Transformation der Adobe-ExtendScript-Objektmodell-XMLs in eine lesbare
-API-Dokumentation. Veröffentlicht unter <https://www.indesignjs.de/extendscriptAPI/>.
+API-Dokumentation. Veröffentlicht unter <https://www.indesignjs.de/indesignapi/>.
 
 **Zielgruppe:** InDesign-Scripter. Sie schlagen Klassen, Properties und Methoden nach —
 schnell, oft dutzende Male pro Stunde, häufig offline. Geschwindigkeit und Scanbarkeit
@@ -70,8 +70,10 @@ hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
 4. Umgang mit kaputten Adobe-Typangaben (siehe unten).
 5. `fixDom.xsl` benennt die Klasse `Index` in `Index_` um — ein Workaround aus der
    DITA-Zeit. Im HTML-Pfad vermutlich unnötig, wird derzeit aber mit angezeigt.
-6. Wie tief soll die Typabbildung gehen? 856 Typangaben je InDesign-Modell sind
-   Adobe-Prosa und landen als `any` — siehe build/README.md.
+6. Wie tief soll die Typabbildung gehen? 231 Typangaben je InDesign-Modell sind
+   Adobe-Prosa und landen als `any` — siehe build/README.md. (Die Zahl zählt
+   einen Durchgang über das Modell; früher meldete der Build 856, weil dieselben
+   Typen für Markdown, api.json und `.d.ts` dreifach gezählt wurden.)
 
 ---
 
@@ -146,14 +148,16 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
 
 ```sh
 npm install
-npm run build      # sourceXML/*.xml → site/
+npm run build      # sourceXML/*.xml → site/, dazu site.zip zum Hochladen
 npm run serve      # http://localhost:8080
 npm run check      # Browsertest der fertigen Website (Playwright)
-npm run check:types # jede erzeugte .d.ts mit dem echten TypeScript-Compiler
+npm run check:types # jede .d.ts und jedes Beispielskript mit dem echten Compiler
 npm run verify     # Portierung gegen die alte XSLT-Strecke halten
 ```
 
-Abweichende Pfade über `OUT_DIR`.
+Abweichende Pfade über `OUT_DIR`. `NO_PACKAGE=1` lässt `site.zip` weg
+(~90 s Bauzeit mit Paket, ~85 s ohne — der Löwenanteil ist das Offline-Archiv,
+das zweimal gepackt werden muss).
 
 ### Gegenprobe vorbereiten (braucht Java + Saxon)
 
