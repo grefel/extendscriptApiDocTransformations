@@ -603,6 +603,28 @@ h1 {
   color: var(--dim)
 }
 
+.subs {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-top: 7px;
+  font: 11.5px var(--mono);
+  color: var(--dim)
+}
+
+.subs .h {
+  font: 600 10px var(--sans);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: .75
+}
+
+.subs .sep {
+  opacity: .4
+}
+
 .chain .sep {
   opacity: .5
 }
@@ -834,8 +856,11 @@ td.d {
   border-bottom-color: transparent
 }
 
+/* Gemessen lagen zwischen den Chips und dem Zeilentrenner nur 3 bis 5 px;
+   der letzte Chip sah dadurch aus, als sitze er auf der Linie. Jetzt oben und
+   unten je 6 px, in beiden Richtungen sichtbar getrennt. */
 .vals {
-  margin-top: 4px;
+  margin: 6px 0 6px;
   display: flex;
   flex-wrap: wrap;
   gap: 4px
@@ -1089,15 +1114,16 @@ td.d,
   margin-top: 10px
 }
 
-/* Raster statt Umbruch: mit flex-wrap ergaben die verschieden langen Namen
-   Zeilen zu 4, 4, 5, 4, 2 Blasen, die rechts ausfransten. auto-fill haelt die
-   Spalten in Flucht; 168px ist die Breite des laengsten Namens
-   (ChangeGrepPreference, 20 Zeichen), damit nichts gekuerzt wird. */
+/* Raster mit justify-items:start — beides zugleich: die Spalten fluchten
+   (flex-wrap liess die Zeilen rechts ausfransen), und jede Blase umschliesst
+   nur ihr Wort (ein gestrecktes Raster machte aus "Page" eine 193px breite
+   Blase). 168px ist die Breite des laengsten Namens, ChangeGrepPreference. */
 .quick {
   flex: 0 1 auto;
   max-width: 528px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  justify-items: start;
   gap: 6px;
   align-content: start
 }

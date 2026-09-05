@@ -270,15 +270,26 @@ const check = (name, got, want) => {
     await page.locator('#m-itemByName').count(), 1);
   check('und keinen Hinweis', await page.locator('.warn').count(), 0);
 
-  /* --- NothingEnum erzeugt keine Chips mehr ---
-     NOTHING ist der einzige Wert und sagt nichts aus; er stand unter 1.487
-     Properties und verdeckte in 11 Faellen den echten Enum daneben. */
+  /* --- Wertechips: auch NothingEnum bekommt einen ---
+     NOTHING ist die Kopierhilfe fuer NothingEnum.NOTHING, und genau so
+     schreibt man es im Skript. */
   await page.goto(url('indesign/CellStyle.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   const chips = await page.locator('.vchip').allTextContents();
-  check('kein NOTHING-Chip', chips.filter(t => t === 'NOTHING').length, 0);
-  check('die nuetzlichen Chips bleiben', chips.length > 0, true);
-  check('darunter die Ausrichtungen', chips.includes('CENTER_ALIGN'), true);
+  check('NOTHING ist kopierbar', chips.includes('NOTHING'), true);
+  check('NOTHING kopiert qualifiziert',
+    await page.locator('.vchip', { hasText: /^NOTHING$/ }).first().getAttribute('data-cp'),
+    'NothingEnum.NOTHING');
+  check('die uebrigen Chips auch da', chips.includes('CENTER_ALIGN'), true);
+  /* Gemessen lagen zwischen dem letzten Chip und dem Zeilentrenner nur 3 bis
+     5 px; der Chip sah aus, als sitze er auf der Linie. */
+  const chipAir = await page.evaluate(() => {
+    const tr = document.querySelector('#p-appliedParagraphStyle');
+    const vals = tr.querySelector('.vals');
+    return Math.round(tr.getBoundingClientRect().bottom -
+      vals.getBoundingClientRect().bottom);
+  });
+  check('Chips haben Luft zum Zeilentrenner (' + chipAir + 'px)', chipAir >= 7, true);
 
   /* --- Vererbungszeile nur, wenn es Vorfahren gibt --- */
   check('ohne Vorfahren keine Zeile', await page.locator('.chain').count(), 0);
@@ -287,6 +298,23 @@ const check = (name, got, want) => {
   check('mit Vorfahren schon',
     (await page.locator('.chain').innerText()).split(/\s+/).filter(Boolean).join(' '),
     'PageItem › SplineItem › Rectangle');
+  check('Rectangle hat keine Nachfahren', await page.locator('.subs').count(), 0);
+
+  /* --- Nachfahren: der Weg nach unten, den Adobe nicht liefert --- */
+  await page.goto(url('indesign/PageItem.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  const subs = await page.locator('.subs a').allTextContents();
+  check('PageItem nennt seine Nachfahren', subs.length, 9);
+  check('darunter Graphic und Group',
+    subs.includes('Graphic') && subs.includes('Group'), true);
+  await page.locator('.subs a', { hasText: /^Group$/ }).first().click();
+  await page.waitForTimeout(400);
+  check('Nachfahre ist verlinkt', await page.locator('h1').innerText(), 'Group');
+  await page.goto(url('indesign/SplineItem.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('SplineItem: vier Nachfahren', await page.locator('.subs a').count(), 4);
+  check('und selbst ein Nachfahre von PageItem',
+    /PageItem/.test(await page.locator('.chain').innerText()), true);
 
   /* --- UXP: ein File als Event-Handler gibt es dort nicht ---
      Der Strich muss mit verschwinden, sonst begaenne die Zeile mit "|". */
@@ -563,8 +591,12 @@ const check = (name, got, want) => {
       gekuerzt: as.filter(a => a.scrollWidth > a.clientWidth + 1).length
     };
   });
+  /* Zwei Anforderungen zugleich: die linken Kanten fluchten in Spalten
+     (flex-wrap liess die Zeilen rechts ausfransen), und jede Blase umschliesst
+     nur ihr Wort (ein gestrecktes Raster machte aus "Page" eine 193px breite
+     Blase). Deshalb wenige Spalten, aber viele verschiedene Breiten. */
   check('Blasen stehen in Spalten', quickGeom.spalten <= 3, true);
-  check('alle gleich breit', quickGeom.breiten, 1);
+  check('Blasen umschliessen ihr Wort', quickGeom.breiten > 3, true);
   check('kein Name gekuerzt', quickGeom.gekuerzt, 0);
   await page.locator('.quick a').first().click();
   await page.waitForTimeout(400);
