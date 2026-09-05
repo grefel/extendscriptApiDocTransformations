@@ -294,6 +294,31 @@ const check = (name, got, want) => {
   });
   const fs0 = await fsState();
   check('Schriftgroesse startet bei 100%', fs0.lvl, '100%');
+  /* 100% ist nicht zoom 1: der Standard war zu klein, 1.15 ist die neue
+     Bezugsgroesse — im Stylesheet ebenso, damit es ohne JavaScript stimmt. */
+  check('100% bedeutet zoom 1.15', fs0.fs, '1.15');
+
+  /* Grundlinien: die vier Spalten haben verschiedene Schriftgroessen. Mit
+     vertical-align:top standen die Kaesten buendig und die Schriften versetzt
+     — gemessen 7 px Versatz, mit baseline 1 px. */
+  const rowSpread = await page.evaluate(() => {
+    const row = document.querySelector('tbody tr');
+    const bottoms = [];
+    for (const td of row.cells) {
+      const w = document.createTreeWalker(td, NodeFilter.SHOW_TEXT);
+      let n;
+      while ((n = w.nextNode())) {
+        if (!n.textContent.trim()) continue;
+        const r = document.createRange();
+        r.selectNodeContents(n);
+        const b = r.getBoundingClientRect();
+        if (b.height) bottoms.push(b.bottom);
+        break;
+      }
+    }
+    return Math.max(...bottoms) - Math.min(...bottoms);
+  });
+  check('Zellen sitzen auf einer Grundlinie', rowSpread <= 2, true);
   await page.click('.fs button[data-f="+"]');
   await page.click('.fs button[data-f="+"]');
   await page.waitForTimeout(200);
@@ -442,8 +467,16 @@ const check = (name, got, want) => {
      "npm run check:types" mit dem echten Compiler. */
   const exists = f => fs.existsSync(path.join(SITE, f));
   for (const f of ['llms.txt', 'indesign/llms.txt', 'indesign/api.json',
-    'indesign/indesign.d.ts', 'indesign/Rectangle.md', 'scriptui/scriptui.d.ts'])
+    'indesign/indesign.d.ts', 'indesign/Rectangle.md', 'scriptui/scriptui.d.ts',
+    'extendscriptAPI.zip'])
     check('erzeugt: ' + f, exists(f), true);
+  /* Das Archiv traegt die ganze Website; die Groesse steht auf den
+     Uebersichtsseiten und wird erst nach dem Packen eingesetzt. */
+  check('Archiv nennt seine Groesse',
+    /About \d+ MB/.test(fs.readFileSync(path.join(SITE, 'indesign/index.html'), 'utf8')),
+    true);
+  check('kein Platzhalter uebrig',
+    /__ZIP/.test(fs.readFileSync(path.join(SITE, 'index.html'), 'utf8')), false);
   /* Der Markdown-Zwilling liegt unter derselben URL wie die Seite — nur so
      kann ein Agent von einem gefundenen Link auf die guenstigere Fassung
      schliessen. */
@@ -481,21 +514,25 @@ const check = (name, got, want) => {
         .filter(e => e.scrollWidth > e.clientWidth + 1).length
     }));
   };
-  /* Rectangle traegt viele Methoden mit Parametern, AssignedStory eine
-     Collection-Typangabe — zusammen decken sie beide Engpaesse ab. */
-  for (const w of [1600, 1300, 1150, 1000, 900, 800, 700]) {
+  /* Massgeblich ist die LOGISCHE Breite, also Fenster ÷ Zoom: darauf reagieren
+     die Container-Queries, und dort liegt die 650-px-Grenze. Der Standardzoom
+     ist 1,15, ein 750-px-Fenster sind also logisch 652 px — gerade noch drin.
+     Rectangle traegt viele Methoden mit Parametern, AssignedStory eine
+     Collection-Typangabe; zusammen decken sie beide Engpaesse ab. */
+  const BASE = 1.15;
+  for (const w of [1600, 1300, 1150, 1000, 900, 800, 750]) {
     for (const f of ['indesign/Rectangle.html', 'indesign/AssignedStory.html']) {
       const o = await overflowAt(w, f);
-      const tag = w + 'px ' + f.replace('indesign/', '').replace('.html', '');
+      const tag = w + 'px (logisch ' + Math.round(w / BASE) + ') ' +
+        f.replace('indesign/', '').replace('.html', '');
       check(tag + ': kein Ueberhang', o.page, 0);
       check(tag + ': keine Zelle laeuft aus', o.cells, 0);
     }
   }
-  /* Zoom und schmales Fenster zusammen. Massgeblich ist die logische Breite,
-     also Fenster ÷ Zoom — dieselbe 650-px-Grenze wie ohne Zoom. 1000 px bei
-     150 % sind logisch 667 px und damit drin; 900 px waeren 600 px und damit
-     darunter, dort fehlt dieselbe Seitenleisten-Faltung wie bei 640 px ohne
-     Zoom. Deshalb hier nur Breiten oberhalb der Grenze. */
+  /* Dasselbe bei der groessten Stufe. 150 % heisst zoom 1,725, also braucht es
+     mindestens 650 × 1,725 ≈ 1120 px Fenster. Darunter fehlt dieselbe
+     Seitenleisten-Faltung wie bei 640 px ohne Zoom. */
+  const ZOOM150 = BASE * 1.5;
   await page.setViewportSize({ width: 1600, height: 1000 });
   await page.goto(url('indesign/Rectangle.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
@@ -503,9 +540,9 @@ const check = (name, got, want) => {
     await page.click('.fs button[data-f="+"]');
     await page.waitForTimeout(90);
   }
-  for (const w of [1600, 1200, 1000]) {
+  for (const w of [1600, 1400, 1200]) {
     const o = await overflowAt(w, 'indesign/Document.html');
-    check('150% bei ' + w + 'px (logisch ' + Math.round(w / 1.5) + '): kein Ueberhang',
+    check('150% bei ' + w + 'px (logisch ' + Math.round(w / ZOOM150) + '): kein Ueberhang',
       o.page, 0);
     check('150% bei ' + w + 'px: keine Zelle laeuft aus', o.cells, 0);
   }

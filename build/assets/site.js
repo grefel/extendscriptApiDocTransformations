@@ -47,19 +47,24 @@
      fuer sich auf 1 zurueck: sie ist 44px hoch, und .side, .bar und .grid
      rechnen mit dieser Zahl. Gesetzt wird der Wert schon vom Inline-Skript im
      <head>, hier kommen nur die Knoepfe dazu. */
+  /* BASE ist die 100%-Stufe und steht ebenso als --fs im Stylesheet, damit
+     ohne JavaScript dasselbe gilt. Die Stufen sind relativ dazu, die
+     Beschriftung auch: "100%" bedeutet zoom 1.15. */
+  const BASE = 1.15;
   const STEPS = [0.85, 1, 1.15, 1.3, 1.5];
+  const zoomOf = step => Math.round(BASE * step * 1000) / 1000;
   const fsBox = $('[data-enhance="fontsize"]');
   if (fsBox) {
     const lvl = $('.lvl', fsBox);
     const buttons = $$('button', fsBox);
     /* Auf die naechstgelegene Stufe einrasten, falls jemand einen krummen Wert
-       im Speicher hat. */
-    const stored = parseFloat(store.get('fs', '1'));
+       im Speicher hat — etwa aus einer Fassung mit anderer Basis. */
+    const stored = parseFloat(store.get('fs', String(BASE))) / BASE;
     let i = STEPS.indexOf(STEPS.reduce((a, b) =>
       Math.abs(b - stored) < Math.abs(a - stored) ? b : a, STEPS[1]));
 
     function applyFs() {
-      document.documentElement.style.setProperty('--fs', STEPS[i]);
+      document.documentElement.style.setProperty('--fs', zoomOf(STEPS[i]));
       if (lvl) lvl.textContent = Math.round(STEPS[i] * 100) + '%';
       buttons.forEach(b => {
         b.disabled = b.dataset.f === '-' ? i === 0 : i === STEPS.length - 1;
@@ -68,7 +73,9 @@
     }
     buttons.forEach(b => b.addEventListener('click', () => {
       i = Math.min(STEPS.length - 1, Math.max(0, i + (b.dataset.f === '+' ? 1 : -1)));
-      store.set('fs', String(STEPS[i]));
+      /* Gespeichert wird der wirkliche Zoom, denn genau den setzt das
+         Inline-Skript im <head> beim naechsten Seitenaufruf. */
+      store.set('fs', String(zoomOf(STEPS[i])));
       applyFs();
     }));
     applyFs();

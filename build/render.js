@@ -219,6 +219,16 @@ function make(data, d, ctx) {
           labels, English identifiers. PDF, 288 KB.</span></span></a></section>`;
     }
 
+    /* Die ganze Website als ein Archiv. __ZIPMB__ ersetzt build.js, sobald
+       gepackt ist — vorher steht die Groesse nicht fest. */
+    h += `<section class="offline"><h2 class="sechead" id="offline">Offline</h2>
+      <ul class="dl">
+        <li><a href="../extendscriptAPI.zip" download><b>extendscriptAPI.zip</b>
+          <span>The whole site: every application and both shared libraries,
+          __ZIPPAGES__ pages. Unpack it and open <code>index.html</code> —
+          no server, no internet. About __ZIPMB__ MB.</span></a></li>
+      </ul></section>`;
+
     /* Maschinenlesbare Ausgaben. Bewusst hier und nicht in der Kopfzeile: das
        holt man einmal je Projekt, nicht dutzendfach je Stunde — und der Kopf
        ist voll. Erzeugt von build/agents.js. */

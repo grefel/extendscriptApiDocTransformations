@@ -18,6 +18,7 @@ const { build, derive } = require('./model');
 const { make, esc, pageOf, splitVersion, THEME_BOOT } = require('./render');
 const products = require('./products');
 const agents = require('./agents');
+const { createZip } = require('./zip');
 
 const ROOT = path.join(__dirname, '..');
 const OUT = process.env.OUT_DIR || path.join(ROOT, 'site');
@@ -178,6 +179,45 @@ write('llms.txt', agents.llmsRoot(targets, models[0].data.generated));
 for (const f of ['site.css', 'site.js', 'idskurzreferenz.jpg'])
   write('assets/' + f, fs.readFileSync(path.join(__dirname, 'assets', f)));
 
+/* ---------- die ganze Website als ein Archiv ----------
+   Fuer den Offline-Gebrauch: entpacken, index.html oeffnen, fertig. Deshalb
+   muss wirklich alles hinein, auch die Querverweise zwischen den Produkten.
+
+   Zweimal gepackt, weil die Uebersichtsseiten die Groesse nennen und die erst
+   nach dem Packen feststeht. Der zweite Durchgang unterscheidet sich nur um
+   wenige Bytes; auf ganze MB gerundet ist die Zahl in beiden gleich — auch in
+   der Fassung, die im Archiv landet. */
+const ZIP = 'extendscriptAPI.zip';
+function collect() {
+  const out = [];
+  (function walk(dir, rel) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true }).sort(
+      (a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)) {
+      const p = path.join(dir, e.name), r = rel ? rel + '/' + e.name : e.name;
+      if (e.isDirectory()) { walk(p, r); continue; }
+      if (e.name.endsWith('.zip')) continue;      /* nicht sich selbst einpacken */
+      out.push({ name: r, data: fs.readFileSync(p) });
+    }
+  })(OUT, '');
+  return out;
+}
+
+const zipStart = Date.now();
+let entries = collect();
+const mb = Math.round(createZip(entries, new Date()).length / 1048576);
+for (const e of entries) {
+  if (!/(^|\/)index\.html$/.test(e.name)) continue;
+  const html = e.data.toString('utf8');
+  if (!html.includes('__ZIPMB__')) continue;
+  fs.writeFileSync(path.join(OUT, e.name), html
+    .split('__ZIPMB__').join(String(mb))
+    .split('__ZIPPAGES__').join(pages.toLocaleString('en-US')));
+}
+const archive = createZip(collect(), new Date());
+write(ZIP, archive);
+console.log('archiv   ' + ZIP + '  ' + (archive.length / 1048576).toFixed(1) + ' MB aus ' +
+  entries.length + ' Dateien in ' + ((Date.now() - zipStart) / 1000).toFixed(1) + ' s');
+
 for (const [slug, st] of typeStats)
   if (st.unknown)
     console.log('  ' + slug.padEnd(17) + st.unknown + ' Typangaben ohne Entsprechung → any' +
@@ -222,6 +262,13 @@ function homePage(targets, generated) {
     <ul class="cards">${prods.map(card).join('')}</ul></section>
   <section><h2 class="sechead">Shared libraries <b>${libs.length}</b></h2>
     <ul class="cards">${libs.map(card).join('')}</ul></section>
+  <section class="offline"><h2 class="sechead" id="offline">Offline</h2>
+    <ul class="dl">
+      <li><a href="extendscriptAPI.zip" download><b>extendscriptAPI.zip</b>
+        <span>The whole site: every application and both shared libraries,
+        __ZIPPAGES__ pages. Unpack it and open <code>index.html</code> —
+        no server, no internet. About __ZIPMB__ MB.</span></a></li>
+    </ul></section>
   <section class="machine"><h2 class="sechead" id="for-tools">For editors and AI agents</h2>
     <p class="lede">Every target ships TypeScript declarations, a JSON model and a
     Markdown twin of each page at the same path. Point an agent at

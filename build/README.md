@@ -34,6 +34,8 @@ Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
 | `verify-model.js` | Gegenprobe zur XSLT-Extraktion |
 | `check-site.js` | Browsertest der fertigen Website |
 | `serve.js` | Entwicklungsserver, ohne Abhängigkeit |
+| `zip.js` | minimaler ZIP-Schreiber für das Offline-Archiv |
+| `agents.js` | Markdown, api.json, llms.txt und die TypeScript-Deklarationen |
 
 ## Abhängigkeiten
 
@@ -72,6 +74,27 @@ Methoden mit Parametern, die drei Rückwärtsverweise und der Footer. Das Skript
 ergänzt nur Bedienelemente; die sind im HTML als `[hidden]` markiert und werden
 erst durch das Skript eingeschaltet. `check-site.js` prüft das mit abgeschaltetem
 JavaScript mit.
+
+## Offline: die ganze Website als Archiv
+
+`site/extendscriptAPI.zip` — **16 MB, 5.395 Dateien**, entpacken und
+`index.html` öffnen. Verlinkt auf der Startseite und jeder Übersichtsseite.
+Es muss wirklich alles hinein: die Typverweise gehen über Produktgrenzen
+hinweg, ein Teilarchiv wäre kaputt.
+
+Geschrieben von `build/zip.js`, rund 100 Zeilen über `zlib.deflateRawSync`
+plus CRC-Tabelle. **Keine Abhängigkeit** — ZIP ist ein eingefrorenes Format,
+und die Abhängigkeitsarmut ist hier ein Merkmal. Kein Zip64: bei mehr als
+65.535 Dateien oder 4 GB bricht der Schreiber ab, statt still Falsches zu
+liefern.
+
+**Zweimal gepackt.** Die Übersichtsseiten nennen die Archivgröße, und die steht
+erst nach dem Packen fest. Der zweite Durchgang unterscheidet sich nur um
+wenige Bytes; auf ganze MB gerundet stimmt die Zahl in beiden — auch in der
+Fassung, die im Archiv landet. Kostet rund 10 s der 21 s Bauzeit.
+
+Geprüft wird das Archiv, indem es entpackt und die entpackte Kopie im Browser
+bedient wird: Navigation, Seitenleiste, Volltextsuche.
 
 ## Kurzreferenz
 
@@ -150,6 +173,10 @@ Sauber bis hinunter zu **650 px** Fensterbreite, ohne waagerechtes Scrollen.
 `check-site.js` misst das bei sieben Breiten auf zwei Seiten nach.
 
 Mit Zoom zählt die **logische** Breite, also Fenster ÷ Zoom — dieselbe Grenze.
+Beim Standardzoom 1,15 heißt das: ein 750-px-Fenster ist logisch 652 px und
+gerade noch drin. Der Kopf ist der engste Punkt; gemessen passt er bis 950 px
+logischer Breite, bei 925 px ragt er 11 px heraus. Darum treten Tastenkürzel
+und API-Version ab 950 px ab, nicht erst ab 900.
 1000 px bei 150 % sind logisch 667 px und damit in Ordnung, 900 px wären 600 px
 und damit darunter. Unterhalb von 650 px müsste die Seitenleiste einklappen; das
 ist eigene Arbeit.
@@ -292,6 +319,12 @@ dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Ind
 - **Hell ist der Standard.** Ohne gespeicherte Wahl und ohne JavaScript gilt die
   helle Palette — sie steht auf `:root`, die dunkle unter `:root[data-t="dark"]`.
   Es wird also nur gesetzt, wer ausdrücklich dunkel will.
+- **100 % bedeutet zoom 1,15.** Der ungezoomte Standard war zu klein. Die
+  Bezugsgröße steht als `--fs: 1.15` im Stylesheet, damit ohne JavaScript
+  dasselbe gilt, und die Knöpfe beschriften relativ dazu.
+- **Tabellenzellen sitzen auf einer Grundlinie** (`vertical-align: baseline`).
+  Die vier Spalten haben verschiedene Schriftgrößen; mit `top` standen die
+  Kästen bündig und die Schriften versetzt — gemessen 7 px Versatz, jetzt 1 px.
 - **Zoom über A− / A+ im Kopf.** Fünf Stufen von 85 % bis 150 %, gemerkt unter
   `fs`, gesetzt als `zoom: var(--fs)` auf `:root`. Am Anschlag wird der Knopf
   abgeblendet statt ausgeblendet, sonst springt der Kopf.
