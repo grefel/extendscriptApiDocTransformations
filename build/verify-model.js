@@ -83,6 +83,12 @@ function classify(was, now) {
   return 'diff';
 }
 
+/* 7. build/additions.js ergaenzt Member, die Adobes Export vergisst. Die alte
+      Strecke las nur die Quelle und kann sie nicht kennen. */
+const additions = require('./additions');
+const isAddition = (cls, key, name) =>
+  key === 'm' && (additions.methods[cls] || []).some(x => x.n === name);
+
 let fatal = 0, totalFixed = 0;
 for (const p of todo) {
   const ref = path.join(ROOT, 'temp', 'fixedDOM-' + p.slug + '.xml');
@@ -118,7 +124,13 @@ for (const p of todo) {
       for (const now of (c[key] || [])) {
         const was = before.get(now.n);
         before.delete(now.n);
-        if (!was) { realDiff = true; continue; }
+        /* Member aus build/additions.js gibt es in Adobes Export nicht und
+           damit auch nicht auf der XSLT-Seite. Eine gewollte Abweichung. */
+        if (!was) {
+          if (isAddition(c.n, key, now.n)) { fixedHere++; continue; }
+          realDiff = true;
+          continue;
+        }
         const verdict = classify(was, now);
         if (verdict === 'same') continue;
         if (verdict === 'fixed') { fixedHere++; continue; }

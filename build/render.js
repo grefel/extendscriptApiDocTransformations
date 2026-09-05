@@ -120,8 +120,12 @@ function make(data, d, ctx) {
         (cls === 'EventListeners' && method === 'add'))
       ? ['File'] : null;
 
+  /* NothingEnum hat genau einen Wert, NOTHING, und der sagt nichts aus — er
+     heisst nur "kann auch leer sein". Als Chip stand er unter 1.487 Properties
+     und verdeckte in 11 Faellen den echten Enum daneben. Wird uebersprungen. */
   function inlineEnum(ts) {
     for (const t of ts || []) {
+      if (t === 'NothingEnum') continue;
       const e = d.byName.get(t);
       if (e && e.enum && e.p.length) {
         const shown = e.p.slice(0, 12).map(v =>
@@ -151,9 +155,13 @@ function make(data, d, ctx) {
   const copyable = (clip, label) =>
     `<button class="cpx" data-cp="${esc(clip)}" title="Copy ${esc(clip)}">${label}</button>`;
 
+  /* Leer, wenn es keine Vorfahren gibt: eine Zeile, die nur den Namen der
+     Seite wiederholt, ist keine Information. Betrifft 432 Enumerations und
+     alle Objekte ohne superclass. */
   function chain(c) {
     const out = []; let x = c, guard = 0;
     while (x && guard++ < 12) { out.push(x.n); x = x.sup ? d.byName.get(x.sup) : null; }
+    if (out.length < 2) return '';
     return out.reverse().map((n, i) =>
       (i ? '<span class="sep">›</span>' : '') + (n === c.n ? `<b>${esc(n)}</b>` : link(n))).join(' ');
   }
@@ -180,8 +188,9 @@ function make(data, d, ctx) {
     h += `<div class="kind">${kindOf(c)}${
       el && known(el) ? ` <span class="of">of</span> ${link(el)}` : ''}</div>
       <h1>${esc(c.n)}</h1>
-      <p class="lede">${esc(c.d)}</p>
-      <div class="chain">${chain(c)}</div>`;
+      <p class="lede">${esc(c.d)}</p>`;
+    const anc = chain(c);
+    if (anc) h += `<div class="chain">${anc}</div>`;
 
     /* Erfahrungswerte, die nicht im Objektmodell stehen — siehe build/notes.js.
        Gilt ein Hinweis nur fuer eine Laufzeit, blendet site.js ihn im anderen
@@ -231,7 +240,10 @@ function make(data, d, ctx) {
       for (const m of c.m) {
         const sig = esc(m.n) + '<span class="d">(' +
           m.a.map(a => a.o ? `<span class="opt">${esc(a.n)}?</span>` : esc(a.n)).join(', ') + ')</span>';
-        h += `<article class="mem" id="m-${esc(m.n)}" data-uxp="${m.n === '[]' ? 'hide' : ''}">
+        /* Unter UXP entfaellt der Index-Zugriff "[]" — und alles, was
+           additions.js ausdruecklich als ExtendScript-only eintraegt. */
+        const esOnlyMethod = m.n === '[]' || m.uxp === false;
+        h += `<article class="mem" id="m-${esc(m.n)}" data-uxp="${esOnlyMethod ? 'hide' : ''}">
           <div class="top1"><span class="id">${copyable(m.n + '()', sig)}</span>
             <span class="ret">→ ${typeList(m.r, m.rarr) || '<b>void</b>'}</span></div>
           <p class="desc">${esc(m.d)}</p>`;

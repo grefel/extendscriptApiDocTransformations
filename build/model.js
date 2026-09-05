@@ -10,6 +10,7 @@
 const fs = require('fs');
 const { DOMParser } = require('@xmldom/xmldom');
 const fix = require('./fixdom');
+const additions = require('./additions');
 
 /* ---------- kleine DOM-Helfer ---------- */
 
@@ -152,6 +153,13 @@ function classModel(cd, origin) {
     .map(e => ({ n: attr(e, 'name'), d: desc(e) })).sort(byName);
 
   o.m = methods.map(m => method(m, isSui)).sort(byName);
+
+  /* Member, die Adobes Export vergisst — siehe build/additions.js. Nur wenn
+     sie nicht doch da sind, damit ein spaeterer Adobe-Fix nichts verdoppelt. */
+  const extra = (additions.methods[name] || []).filter(x => !o.m.some(m => m.n === x.n));
+  if (extra.length && origin === 'p')
+    o.m = [...o.m, ...extra.map(x => Object.assign({}, x))].sort(byName);
+
   return o;
 }
 
