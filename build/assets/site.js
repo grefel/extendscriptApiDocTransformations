@@ -105,8 +105,9 @@
       a.setAttribute('href', uxp ? a.dataset.uxpHref : a.dataset.esHref);
       a.title = uxp ? 'UXP: a different API with the same name' : '';
     });
-    /* Hinweise, die nur eine Laufzeit betreffen. */
-    $$('.warn[data-only]').forEach(el => {
+    /* Hinweise, die nur eine Laufzeit betreffen — am Objekt (.warn) wie an
+       einzelnen Zeilen (.mwarn). */
+    $$('[data-only]').forEach(el => {
       el.hidden = el.dataset.only !== runtime;
     });
     /* Die Zahl steht nur noch auf der Pille — in der Ueberschrift war sie

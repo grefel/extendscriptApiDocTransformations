@@ -36,6 +36,7 @@ Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
 | `serve.js` | Entwicklungsserver, ohne Abhängigkeit |
 | `zip.js` | minimaler ZIP-Schreiber für das Offline-Archiv |
 | `notes.js` | Hinweise, die nicht im Objektmodell stehen |
+| `shortcuts.js` | Einstiegspunkte auf der Übersichtsseite |
 | `agents.js` | Markdown, api.json, llms.txt und die TypeScript-Deklarationen |
 
 ## Abhängigkeiten
@@ -322,8 +323,11 @@ Erfahrungswerte stehen in `build/notes.js` und erscheinen als Warnung unter der
 Beschreibung des Objekts. Je Eintrag: auf welche Ziele er passt (`products`),
 optional auf welche Laufzeit (`runtime`), und der Text.
 
-Zwei Sorten: `byName` fuer ein einzelnes Objekt, `byKind` fuer alle Objekte
-einer Art.
+Drei Sorten: `byName` für ein einzelnes Objekt, `byKind` für alle Objekte
+einer Art, `byMember` für eine einzelne Tabellenzeile (Schlüssel
+`Objekt.member`). Der Member-Hinweis steht in der Beschreibungsspalte —
+ein Kasten oben an der Seite wäre für eine von 341 Properties die falsche
+Stelle.
 
 **`XMLElements.itemByName()`**. Die Methode steht gar nicht im
 Objektmodell, obwohl fast jede andere Collection sie hat — der Weg führt über
@@ -336,6 +340,24 @@ mehr stimmt, wäre schlimmer als keiner.
 Migrationsanleitung nennt genau diesen Fall, und zwar mit einem
 Enumerationswert als Beispiel — deshalb steht der Hinweis dort und nicht an
 jedem Objekt, wo er nur Rauschen wäre.
+
+### Einstiegspunkte auf der Übersichtsseite
+
+Die Seitenleiste listet alle 1.097 Objekte — das hilft beim Suchen, nicht beim
+Anfangen. `build/shortcuts.js` hält 19 Blasen, geordnet nach der Hierarchie
+statt alphabetisch: `app → document → spread/page → Rahmen → Text`, dazu
+Bilder, Formate, Tabellen und die GREP-Einstellungen. Sie stehen links neben
+der Kurzreferenz, weil beide dieselbe Frage beantworten.
+
+Nur für InDesign und InDesign Server. `render.js` filtert die Liste gegen das
+jeweilige Modell, damit keine Blase ins Leere zeigt, falls Adobe einmal ein
+Objekt umbenennt — geprüft wird das auch.
+
+### Zwei Hinweise aus Adobes Migrationsanleitung
+
+An `Application.activeScript` (unter UXP nur ein Pfad als String, kein
+File-Objekt) und `Application.scriptArgs` (unter UXP `script.args`). Beide nur
+im UXP-Modus sichtbar.
 
 ### Was unter UXP wegfällt
 

@@ -288,6 +288,23 @@ const check = (name, got, want) => {
   await page.click('.rt button[data-r="es"]');
   await page.waitForTimeout(250);
 
+  /* --- Hinweise an einzelnen Membern (notes.js, byMember) --- */
+  await page.goto(url('indesign/Application.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.waitForTimeout(400);
+  check('unter ExtendScript kein Member-Hinweis',
+    await page.locator('.mwarn:not([hidden])').count(), 0);
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(300);
+  check('unter UXP zwei Member-Hinweise',
+    await page.locator('.mwarn:not([hidden])').count(), 2);
+  check('activeScript nennt den String',
+    /string/.test(await page.locator('tr#p-activeScript .mwarn').innerText()), true);
+  check('scriptArgs nennt script.args',
+    /script\.args/.test(await page.locator('tr#p-scriptArgs .mwarn').innerText()), true);
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(250);
+
   /* --- equals() statt == : nur an Enumerations, nur unter UXP --- */
   await page.goto(url('indesign/PathType.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
@@ -496,6 +513,32 @@ const check = (name, got, want) => {
     await page.locator('.fs button[data-f="-"]').isDisabled(), true);
   await page.click('.fs button[data-f="+"]');
   await page.waitForTimeout(150);
+
+  /* --- Einstiegspunkte neben der Kurzreferenz --- */
+  await page.goto(url('indesign/index.html'));
+  await page.waitForTimeout(400);
+  const quick = await page.locator('.quick a').allTextContents();
+  check('Einstiegspunkte vorhanden', quick.length >= 15, true);
+  for (const n of ['Application', 'Document', 'Page', 'TextFrame', 'Rectangle'])
+    check('  darunter ' + n, quick.includes(n), true);
+  /* Jede Blase muss auch irgendwo hinfuehren. */
+  const deadQuick = await page.evaluate(() =>
+    [...document.querySelectorAll('.quick a')].filter(a => !a.getAttribute('href')).length);
+  check('keine Blase ohne Ziel', deadQuick, 0);
+  await page.locator('.quick a').first().click();
+  await page.waitForTimeout(400);
+  check('Blase fuehrt zum Objekt', await page.locator('h1').innerText(), 'Application');
+  await page.goto(url('indesign/index.html'));
+  await page.waitForTimeout(400);
+  check('Einstiegspunkte links von der Kurzreferenz',
+    await page.evaluate(() => {
+      const q = document.querySelector('.quick').getBoundingClientRect();
+      const r = document.querySelector('.refcard').getBoundingClientRect();
+      return q.right <= r.left + 1;
+    }), true);
+  await page.goto(url('illustrator/index.html'));
+  await page.waitForTimeout(250);
+  check('Illustrator ohne Einstiegspunkte', await page.locator('.quick').count(), 0);
 
   /* --- Kurzreferenz nur bei den beiden InDesign-Zielen --- */
   await page.goto(url('indesign/index.html'));

@@ -41,13 +41,41 @@ const byKind = [
   }
 ];
 
+/* Hinweise an einem einzelnen Member, Schluessel "Objekt.member". Sie stehen
+   in der Beschreibungsspalte der Zeile — ein Kasten oben an der Seite waere
+   fuer eine von 341 Properties die falsche Stelle.
+
+   Quelle fuer beide: Adobes Migrationsanleitung
+   developer.adobe.com/indesign/uxp/resources/migration-guides/extendscript/ */
+const byMember = {
+  'Application.activeScript': {
+    products: ID,
+    runtime: 'uxp',
+    text: 'In UXP this is only the path as a string — not a File object, and ' +
+      'without its properties.'
+  },
+  'Application.scriptArgs': {
+    products: ID,
+    runtime: 'uxp',
+    text: 'In UXP, read arguments from script.args instead of ' +
+      'app.scriptArgs.getValue().'
+  }
+};
+
+const fits = (n, slug) => !n.products || n.products.includes(slug);
+
 /* Alle Hinweise, die auf ein Objekt passen. */
 function notesFor(cls, kind, slug) {
-  const fits = n => !n.products || n.products.includes(slug);
   const out = [];
-  if (byName[cls] && fits(byName[cls])) out.push(byName[cls]);
-  for (const n of byKind) if (n.kind === kind && fits(n)) out.push(n);
+  if (byName[cls] && fits(byName[cls], slug)) out.push(byName[cls]);
+  for (const n of byKind) if (n.kind === kind && fits(n, slug)) out.push(n);
   return out;
 }
 
-module.exports = { notesFor, byName, byKind };
+/* Der Hinweis an einem Member, oder null. */
+function noteForMember(cls, member, slug) {
+  const n = byMember[cls + '.' + member];
+  return n && fits(n, slug) ? n : null;
+}
+
+module.exports = { notesFor, noteForMember, byName, byKind, byMember };
