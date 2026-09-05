@@ -24,6 +24,10 @@
   --fs: 1.15;
   --sb: #ccd3de;
   --sb-h: #aab4c4;
+  /* Rahmen von Eingabefeldern. --line ist fuer Tabellenlinien gedacht und
+     liegt bei 1,1:1 gegen die Leiste — als Umriss eines Bedienelements
+     unsichtbar. WCAG 1.4.11 will dort 3:1, dieser Ton liefert 3,1. */
+  --field: #848b96;
 
   --bg: #fdfdfe;
   --panel: #f5f7fa;
@@ -48,6 +52,7 @@
   color-scheme: dark;
   --sb: #2f3745;
   --sb-h: #414c5e;
+  --field: #6b7381;
   --bg: #2a2f39;
   --panel: #21252d;
   --rail: #232730;
@@ -329,6 +334,16 @@ a:hover {
   white-space: nowrap
 }
 
+/* Trenner zwischen den Eintraegen. Schmaler Abstand als die Flex-Luecke,
+   damit der Strich zu beiden Namen gleich weit steht. */
+.trail .sep {
+  flex: none;
+  color: var(--dim);
+  opacity: .4;
+  margin: 0 -3px;
+  font: 11.5px/1 var(--mono)
+}
+
 .trail a:hover {
   color: var(--accent);
   text-decoration: none
@@ -516,8 +531,8 @@ kbd {
 
 .side .sidef input {
   width: 100%;
-  background: var(--panel);
-  border: 1px solid var(--line);
+  background: var(--bg);
+  border: 1px solid var(--field);
   border-radius: 7px;
   padding: 6px 10px;
   color: var(--ink);
@@ -609,7 +624,7 @@ h1 {
   flex: 1;
   min-width: 200px;
   background: var(--panel);
-  border: 1px solid var(--line);
+  border: 1px solid var(--field);
   border-radius: 7px;
   padding: 8px 12px;
   color: var(--ink);
@@ -722,10 +737,6 @@ td.n {
   font: 12.5px var(--mono);
   font-weight: 600;
   overflow-wrap: anywhere
-}
-
-td.n.ev {
-  color: var(--ev)
 }
 
 td.t {

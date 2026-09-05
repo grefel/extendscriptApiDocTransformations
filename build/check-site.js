@@ -260,6 +260,50 @@ const check = (name, got, want) => {
   check('Hinweis steht nur dort',
     await page.locator('.warn').count(), 0);
 
+  /* --- UXP: ein File als Event-Handler gibt es dort nicht ---
+     Der Strich muss mit verschwinden, sonst begaenne die Zeile mit "|". */
+  await page.goto(url('indesign/Document.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  const handler = () => page.locator('#m-addEventListener .arg').nth(1)
+    .locator('.at').innerText();
+  check('ExtendScript: File oder Funktion',
+    (await handler()).trim(), 'File | JavaScriptFunction');
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(300);
+  check('UXP: nur die Funktion', (await handler()).trim(), 'JavaScriptFunction');
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(250);
+  check('und wieder beides', (await handler()).trim(), 'File | JavaScriptFunction');
+  /* doScript fuehrt eine ExtendScript-Datei auch unter UXP aus — hier darf
+     nichts verschwinden. */
+  await page.goto(url('indesign/Application.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.waitForTimeout(400);
+  const doScriptArg = () => page.locator('#m-doScript .arg').first()
+    .locator('.at').innerText();
+  const before = (await doScriptArg()).trim();
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(300);
+  check('doScript bleibt unberuehrt', (await doScriptArg()).trim(), before);
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(250);
+
+  /* --- equals() statt == : nur an Enumerations, nur unter UXP --- */
+  await page.goto(url('indesign/PathType.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('Enumeration: kein Hinweis unter ExtendScript',
+    await page.locator('.warn').isVisible(), false);
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(300);
+  check('Enumeration: Hinweis unter UXP',
+    /equals\(\)/.test(await page.locator('.warn').innerText()), true);
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(250);
+  /* Nicht an Objekten — dort waere er Rauschen. */
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('kein equals-Hinweis an Objekten', await page.locator('.warn').count(), 0);
+
   /* --- UXP: File und Folder zeigen auf Adobes UXP-Referenz --- */
   await page.goto(url('indesign/Rectangle.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
@@ -382,6 +426,49 @@ const check = (name, got, want) => {
     return Math.max(...bottoms) - Math.min(...bottoms);
   });
   check('Zellen sitzen auf einer Grundlinie', rowSpread <= 2, true);
+
+  /* Event-Namen sind Namen wie alle anderen — die Farbe unterscheidet sie
+     nicht mehr. Kenntlich sind sie durch die eigene Tabelle. */
+  await page.goto(url('indesign/Document.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  const nameColours = await page.evaluate(() => {
+    const c = s => getComputedStyle(document.querySelector(s)).color;
+    return { ev: c('tr[id^="e-"] td.n'), p: c('tr[id^="p-"] td.n') };
+  });
+  check('Event-Namen wie Property-Namen', nameColours.ev, nameColours.p);
+
+  /* Der Rahmen der Eingabefelder muss sich vom Untergrund abheben — WCAG 1.4.11
+     verlangt 3:1. Mit --line lag er bei 1,03:1 und war im dunklen Thema
+     praktisch unsichtbar. */
+  const fieldContrast = () => page.evaluate(() => {
+    const lum = c => {
+      const [r, g, b] = c.match(/[\d.]+/g).slice(0, 3).map(Number).map(x => {
+        x /= 255;
+        return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+    const l1 = lum(getComputedStyle(document.querySelector('#nf')).borderTopColor);
+    const l2 = lum(getComputedStyle(document.querySelector('.side')).backgroundColor);
+    const [hi, lo] = l1 > l2 ? [l1, l2] : [l2, l1];
+    return Math.round((hi + 0.05) / (lo + 0.05) * 100) / 100;
+  });
+  /* Beide Paletten pruefen — beschwert hatte sich das dunkle Thema, aber eine
+     Zusage fuer nur eines der beiden waere die halbe Miete. */
+  const wasDark = await page.evaluate(() => document.documentElement.dataset.t === 'dark');
+  for (const want of ['light', 'dark']) {
+    await page.evaluate(t => {
+      if (t === 'dark') document.documentElement.dataset.t = 'dark';
+      else delete document.documentElement.dataset.t;
+    }, want);
+    await page.waitForTimeout(150);
+    const r = await fieldContrast();
+    check('Filterfeld hebt sich ab, ' + want + ' (' + r + ':1)', r >= 3, true);
+  }
+  await page.evaluate(d => {
+    if (d) document.documentElement.dataset.t = 'dark';
+    else delete document.documentElement.dataset.t;
+  }, wasDark);
   await page.click('.fs button[data-f="+"]');
   await page.click('.fs button[data-f="+"]');
   await page.waitForTimeout(200);
@@ -486,6 +573,10 @@ const check = (name, got, want) => {
   check('Spur nennt zuerst die vorige Seite', seen[0], 'Polygon');
   check('Spur laesst die aktuelle Seite aus', seen.includes('GraphicLine'), false);
   check('Spur zeigt drei Eintraege', seen.length, 3);
+  /* Trenner als eigene Elemente, nicht im Link: sonst gehoerten sie zur
+     Klickflaeche. Bei drei Eintraegen also zwei Striche. */
+  check('Trenner zwischen den Eintraegen', await page.locator('.trail .sep').count(), 2);
+  check('Trenner ist nicht klickbar', await page.locator('.trail a .sep').count(), 0);
   await page.locator('.trail a').first().click();
   await page.waitForTimeout(300);
   check('Spur fuehrt zum Ziel', await page.locator('h1').innerText(), 'Polygon');

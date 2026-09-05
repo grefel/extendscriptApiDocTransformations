@@ -69,10 +69,15 @@ function make(data, d, ctx) {
   };
   const known = n => resolve(n) !== null;
 
-  function typeList(ts, arr) {
+  const OR = ' <span class="or">|</span> ';
+
+  /* esOnly: Typen, die an dieser Stelle nur unter ExtendScript gelten. Sie
+     werden samt ihrem Trennstrich in einen data-uxp="hide"-Knoten gepackt,
+     damit im UXP-Modus kein einsames "|" stehen bleibt. */
+  function typeList(ts, arr, esOnly) {
     if (!ts || !ts.length) return '';
     const suffix = arr ? '<span class="arr">[]</span>' : '';
-    return ts.map(t => {
+    const parts = ts.map(t => {
       let out = link(t) + suffix;
       const c = d.byName.get(t);
       if (c && isCollection(c)) {
@@ -84,8 +89,35 @@ function make(data, d, ctx) {
           out += `<wbr><span class="gen">&lt;</span>${link(el)}<span class="gen">&gt;</span>`;
       }
       return out;
-    }).join(' <span class="or">|</span> ');
+    });
+    if (!esOnly || !esOnly.length) return parts.join(OR);
+    let out = '';
+    let sepDone = false;   /* der Strich wurde schon vom Vorgaenger mitgenommen */
+    parts.forEach((html, i) => {
+      const sep = i && !sepDone ? OR : '';
+      sepDone = false;
+      if (!esOnly.includes(ts[i])) { out += sep + html; return; }
+      if (i) {
+        /* Steht der Typ hinten, geht der Strich VOR ihm mit weg. */
+        out += `<span data-uxp="hide">${sep}${html}</span>`;
+      } else {
+        /* Steht er vorn, der Strich DAHINTER — sonst beginnt die Zeile mit ihm. */
+        out += `<span data-uxp="hide">${html}${parts.length > 1 ? OR : ''}</span>`;
+        sepDone = true;
+      }
+    });
+    return out;
   }
+
+  /* Ein File als Event-Handler gibt es in UXP nicht — dort ist es immer eine
+     Funktion. Betrifft addEventListener, removeEventListener und
+     EventListeners.add. app.doScript() bleibt ausdruecklich unberuehrt: dort
+     laeuft eine ExtendScript-Datei auch unter UXP. */
+  const esOnlyArg = (cls, method, arg) =>
+    target.uxp && arg === 'handler' &&
+      (/^(add|remove)EventListener$/.test(method) ||
+        (cls === 'EventListeners' && method === 'add'))
+      ? ['File'] : null;
 
   function inlineEnum(ts) {
     for (const t of ts || []) {
@@ -140,12 +172,13 @@ function make(data, d, ctx) {
       <div class="chain">${chain(c)}</div>`;
 
     /* Erfahrungswerte, die nicht im Objektmodell stehen — siehe build/notes.js.
-       Gilt der Hinweis nur fuer eine Laufzeit, blendet site.js ihn im anderen
-       Modus aus. */
-    const note = notes[c.n];
-    if (note && (!note.products || note.products.includes(target.slug)))
+       Gilt ein Hinweis nur fuer eine Laufzeit, blendet site.js ihn im anderen
+       Modus aus; ohne Umschalter erscheinen nur die allgemeinen. */
+    for (const note of notes.notesFor(c.n, kindOf(c), target.slug)) {
+      if (note.runtime && note.runtime !== 'es' && !target.uxp) continue;
       h += `<p class="warn"${note.runtime ? ` data-only="${esc(note.runtime)}"` : ''}
         role="note">${esc(note.text)}</p>`;
+    }
 
     const pill = (key, text, n) =>
       `<button class="pill" type="button" data-o="${key}">${text} ${n}</button>`;
@@ -193,7 +226,7 @@ function make(data, d, ctx) {
         if (m.a.length) {
           h += '<div class="args">' + m.a.map(a => `<div class="arg">
             <span class="an${a.o ? ' o' : ''}">${esc(a.n)}${a.o ? '?' : ''}</span>
-            <span class="at">${typeList(a.t, a.arr) || '—'}${extras(a)}</span>
+            <span class="at">${typeList(a.t, a.arr, esOnlyArg(c.n, m.n, a.n)) || '—'}${extras(a)}</span>
             <span class="ad">${esc(a.d.replace(/\s*\(Optional\)$/, ''))}</span></div>`).join('') + '</div>';
         }
         h += '</article>';

@@ -42,12 +42,10 @@
     });
   }
 
-  /* ---------- Schriftgroesse ----------
-     --fs skaliert jede Schriftgroesse im Stylesheet. Die Kopfzeile setzt ihn
-     fuer sich auf 1 zurueck: sie ist 44px hoch, und .side, .bar und .grid
-     rechnen mit dieser Zahl. Gesetzt wird der Wert schon vom Inline-Skript im
-     <head>, hier kommen nur die Knoepfe dazu. */
-  /* BASE ist die 100%-Stufe und steht ebenso als --fs im Stylesheet, damit
+  /* ---------- Zoom ----------
+     --fs ist der Zoom auf :root und skaliert die ganze Seite. Gesetzt wird er
+     schon vom Inline-Skript im <head>, hier kommen nur die Knoepfe dazu.
+     BASE ist die 100%-Stufe und steht ebenso als --fs im Stylesheet, damit
      ohne JavaScript dasselbe gilt. Die Stufen sind relativ dazu, die
      Beschriftung auch: "100%" bedeutet zoom 1.15. */
   const BASE = 1.15;
@@ -96,7 +94,9 @@
 
   function applyRuntime() {
     const uxp = runtime === 'uxp';
-    $$('.mem[data-uxp="hide"]').forEach(el => { el.hidden = uxp; });
+    /* Deckt beides ab: ganze Member (die []-Methoden) und einzelne
+       Typangaben, die nur unter ExtendScript gelten (File als Event-Handler). */
+    $$('[data-uxp="hide"]').forEach(el => { el.hidden = uxp; });
     /* File und Folder heissen in UXP gleich, sind aber eine andere API. Im
        UXP-Modus zeigt der Link auf Adobes UXP-Referenz. Das urspruengliche
        Ziel bleibt in data-es-href, damit das Zurueckschalten stimmt. */
@@ -150,11 +150,13 @@
     if (CURRENT) store.set('recent', JSON.stringify([[HERE, CURRENT]].concat(seen).slice(0, 12)));
     const prev = seen.slice(0, 3);
     if (prev.length) {
+      /* Trenner als eigene Elemente, nicht als ::before im Link: sonst gehoerte
+         der Strich zur Klickflaeche und wuerde beim Kuerzen mit abgeschnitten. */
       trail.innerHTML = '<span class="h">Recent</span>' + prev.map(([slug, n]) => {
         const href = slug === HERE ? page(n)
           : '../' + encodeURIComponent(slug) + '/' + page(n);
         return `<a href="${href}" title="${esc(n)}">${esc(n)}</a>`;
-      }).join('');
+      }).join('<span class="sep">|</span>');
       trail.hidden = false;
     }
   }
