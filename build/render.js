@@ -367,8 +367,10 @@ function make(data, d, ctx) {
     h += `<section class="machine"><h2 class="sechead" id="for-tools">For editors and AI agents</h2>
       <ul class="dl">
         <li><a href="${esc(target.slug)}.d.ts" download><b>${esc(target.slug)}.d.ts</b>
-          <span>TypeScript declarations, self-contained. Drop it into a project and
-          the editor answers without a lookup.</span></a></li>
+          <span>TypeScript declarations: this object model, the Core JavaScript
+          classes and the global names. Drop it into a project and the editor
+          answers without a lookup.${target.kind === 'Product'
+            ? ' Dialogs are in <a href="../scriptui/scriptui.d.ts" download>scriptui.d.ts</a>.' : ''}</span></a></li>
         <li><a href="llms.txt"><b>llms.txt</b>
           <span>Where everything lives, for an AI agent. Every object also has a
           Markdown twin at the same path as its page.</span></a></li>
