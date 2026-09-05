@@ -898,8 +898,32 @@ const check = (name, got, want) => {
   await page.waitForTimeout(250);
   check('Produktseite verlinkt die Typen',
     await page.locator('.machine a[href="indesign.d.ts"]').count(), 1);
+  check('… und die kombinierte Datei mit ScriptUI',
+    await page.locator('.machine a[href="indesign-scriptui.d.ts"]').count(), 1);
   check('Produktseite verlinkt llms.txt',
     await page.locator('.machine a[href="llms.txt"]').count(), 1);
+
+  /* --- ScriptUI ohne Suffix ---
+     Das Suffix trennte die Klassen von gleichnamigen Produktklassen. Seit
+     ScriptUI ein eigenes Ziel ist, steht keine davon daneben — und im Skript
+     heisst die Klasse Window. */
+  await page.goto(url('scriptui/Window.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('ScriptUI-Seite heisst Window', await page.locator('h1').innerText(), 'Window');
+  check('kein Suffix in der Objektliste',
+    (await page.locator('.sidelist a').allInnerTexts()).some(t => /SUI/.test(t)), false);
+  check('kein Suffix in den Typen der Seite',
+    (await page.locator('td.t').allInnerTexts()).some(t => /SUI/.test(t)), false);
+  /* Der Weg in die Kern-Bibliothek muss weiter stimmen: FlashPlayer.loadMovie
+     ist die einzige ScriptUI-Stelle, die eine Kernklasse nennt. */
+  await page.goto(url('scriptui/FlashPlayer.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('File zeigt weiter nach javascript/',
+    await page.evaluate(() => {
+      const a = [...document.querySelectorAll('td.t a, .arg .at a, .mem .ret a')]
+        .find(x => x.textContent === 'File');
+      return a ? a.getAttribute('href') : 'kein File-Link';
+    }), '../javascript/File.html');
   await page.goto(url('index.html'));
   await page.waitForTimeout(200);
   check('Startseite verweist auf llms.txt',

@@ -57,9 +57,16 @@ const targets = [
   { slug: 'javascript', label: 'Core JavaScript', kind: 'Shared library',
     shortVersion: 'ExtendScript only', esOnly: true,
     data: subset(shared, 'js', 'Core JavaScript Classes') },
+  /* Das Suffix (WindowSUI) trennt die ScriptUI-Klassen im gemeinsamen Modell
+     von den neun gleichnamigen Produktklassen. Im eigenen Ziel steht keine
+     davon daneben, und im Skript heisst die Klasse Window — deshalb faellt es
+     hier weg, fuer die Seiten wie fuer die Typen. Geprueft: kein Produkt- und
+     kein Kerntyp heisst wie eine ScriptUI-Klasse, ohne selbst eine zu sein. */
   { slug: 'scriptui', label: 'ScriptUI', kind: 'Shared library',
     shortVersion: 'ExtendScript only', esOnly: true,
-    data: subset(shared, 'sui', 'ScriptUI Classes') }
+    data: Object.assign(subset(shared, 'sui', 'ScriptUI Classes'), {
+      classes: agents.withoutSuiSuffix(subset(shared, 'sui', '').classes)
+    }) }
 ];
 
 for (const t of targets) {
@@ -165,20 +172,40 @@ for (const t of targets) {
   const forTypes = t.kind === 'Product'
     ? t.data.classes.concat(js.data.classes)
     : t.data.classes;
-  const dtsClasses = (t.slug === 'scriptui'
-    ? agents.withoutSuiSuffix(forTypes.map(c => Object.assign({}, c, { element: elementOf(c) })))
-    : forTypes.map(c => Object.assign({}, c, { element: elementOf(c) })))
+  const withElement = cs => cs.map(c => Object.assign({}, c, { element: elementOf(c) }))
     .sort((a, b) => a.n < b.n ? -1 : a.n > b.n ? 1 : 0);
-  /* Eigene Typabbildung fuer die entsuffixte Datei: die gemeinsame kennt nur
-     WindowSUI und liesse jeden Verweis ins Leere laufen. */
-  const Tdts = t.slug === 'scriptui'
-    ? agents.makeTypeMapper(new Set(dtsClasses.map(c => c.n)))
-    : T;
+  /* Eigene Typabbildung je Deklarationsdatei: sie darf nur Namen kennen, die
+     in derselben Datei stehen. Die gemeinsame kennt auch die Nachbarziele —
+     damit stand in scriptui.d.ts ein Verweis auf File, den die Datei nicht
+     deklariert. Was hier fehlt, wird zum Alias auf any. */
+  const dtsClasses = withElement(forTypes);
+  const Tdts = agents.makeTypeMapper(new Set(dtsClasses.map(c => c.n)));
   write(t.slug + '/' + t.slug + '.d.ts', agents.buildTypes(dtsClasses, Tdts, {
     title: t.label + ' — ' + t.data.version,
     generated: t.data.generated,
     home: 'https://www.indesignjs.de/extendscriptAPI/' + t.slug + '/'
   }));
+
+  /* ---------- Produkt und ScriptUI in einer Datei ----------
+     Neun Klassennamen gibt es in beiden Modellen; TypeScript kennt je globalem
+     Namen nur eine Bedeutung. Wer einen Dialog baut, braucht new Window() —
+     deshalb gewinnt hier ScriptUI, und die neun Produktklassen fallen weg.
+     Ihre Verweise werden zu any: keine Hilfe, aber auch keine falsche. Ohne
+     das erbte etwa ImportExportEvent von ScriptUIs Event. */
+  if (t.kind === 'Product') {
+    const suiNames = new Set(sui.data.classes.map(c => c.n));
+    const weicht = new Set(t.data.classes.map(c => c.n).filter(n => suiNames.has(n)));
+    const kombi = t.data.classes.filter(c => !weicht.has(c.n))
+      .map(c => weicht.has(c.sup) ? Object.assign({}, c, { sup: null }) : c)
+      .concat(js.data.classes, sui.data.classes);
+    const Tk = agents.makeTypeMapper(new Set(kombi.map(c => c.n)), weicht);
+    write(t.slug + '/' + t.slug + '-scriptui.d.ts', agents.buildTypes(withElement(kombi), Tk, {
+      title: t.label + ' + ScriptUI — ' + t.data.version,
+      generated: t.data.generated,
+      home: 'https://www.indesignjs.de/extendscriptAPI/' + t.slug + '/',
+      yielded: [...weicht].sort()
+    }));
+  }
   write(t.slug + '/llms.txt', agents.llmsProduct(t, t.data.classes, kindOf));
   typeStats.push([t.slug, T.stats()]);
 

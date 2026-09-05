@@ -36,9 +36,11 @@ Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
 | `serve.js` | Entwicklungsserver, ohne Abhängigkeit |
 | `zip.js` | minimaler ZIP-Schreiber für das Offline-Archiv |
 | `notes.js` | Hinweise, die nicht im Objektmodell stehen |
-| `additions.js` | Member, die Adobes Export vergisst |
+| `additions.js` | Member, die Adobes Export vergisst, und falsche Typangaben |
 | `shortcuts.js` | Einstiegspunkte auf der Übersichtsseite |
 | `agents.js` | Markdown, api.json, llms.txt und die TypeScript-Deklarationen |
+| `check-types.js` | übersetzt jede `.d.ts` und jedes Beispielskript mit `tsc` |
+| `fixtures/*.js` | Alltagsskripte als Regressionstest der Deklarationen |
 
 ## Abhängigkeiten
 
@@ -136,22 +138,66 @@ Die `.d.ts` eines Produkts ist **in sich geschlossen**: das Objektmodell plus
 Core JavaScript plus die globalen Namen. Eine Datei ins Projekt legen und fertig
 — Verweise auf Nachbardateien wären beim Herunterladen nur eine Fehlerquelle.
 
-**ScriptUI steckt nicht darin, sondern in `scriptui/scriptui.d.ts`.** Auf der
-Website tragen seine Klassen ein Suffix (`WindowSUI`), weil neun von ihnen so
-heißen wie Produktklassen: `Window`, `Button`, `Event`, `Events`, `Group`,
-`ListBox`, `Panel`, `RadioButton`, `StaticText`. Im Code ist das Suffix falsch —
-dort steht `new Window("dialog")`. Die eigene Datei trägt deshalb die richtigen
-Namen (`agents.withoutSuiSuffix` schreibt Klassennamen **und** alle Verweise um,
-dazu bekommt sie eine eigene Typabbildung, sonst zeigten die Verweise ins Leere).
+### ScriptUI: kein Suffix mehr, dafür drei Dateien
 
-Beide Dateien zusammen in einem Projekt gehen **nicht**: gemessen 20 Fehler,
-zehn Namen doppelt (die neun plus `File`). TypeScript kennt je globalem Namen
-nur eine Bedeutung; das ist keine Einstellungssache. Wer einen Dialog schreibt,
-nimmt `scriptui.d.ts` statt der Produktdatei. `build/fixtures/scriptui.js` baut
-einen echten Dialog und hält das fest.
+Neun ScriptUI-Klassen heißen wie Produktklassen: `Window`, `Button`, `Event`,
+`Events`, `Group`, `ListBox`, `Panel`, `RadioButton`, `StaticText`. Deshalb trug
+das Modell sie mit Suffix (`WindowSUI`). **Sichtbar ist das Suffix nirgends
+mehr** — weder in den Typen noch auf der Website: seit ScriptUI ein eigenes Ziel
+mit eigenem Ordner ist, steht dort keine Produktklasse daneben.
+`agents.withoutSuiSuffix` schreibt beim Zusammenstellen des Ziels Klassennamen
+**und** alle Verweise um; im gemeinsamen Modell bleibt das Suffix, sonst
+kollidierten die Klassen in `derive()`. Geprüft wurde vorher, dass kein
+Produkt- und kein Kerntyp so heißt wie eine ScriptUI-Klasse, ohne selbst eine
+zu sein — sonst zeigten Links plötzlich in die falsche Bibliothek.
+
+Damit gibt es drei Zuschnitte:
+
+| Datei | Inhalt | wofür |
+|---|---|---|
+| `<slug>.d.ts` | Objektmodell + Core JavaScript + globale Namen | Skript ohne Dialog |
+| `scriptui.d.ts` | nur ScriptUI | Dialog ohne Hostbezug |
+| `<slug>-scriptui.d.ts` | beides, die neun Produktklassen weichen | Skript **mit** Dialog |
+
+Nebeneinander legen kann man sie nicht: gemessen 20 Fehler, zehn Namen doppelt.
+TypeScript kennt je globalem Namen nur eine Bedeutung, das ist keine
+Einstellungssache. In der kombinierten Datei gewinnt deshalb ScriptUI — ein
+Dialog braucht `new Window(…)` —, und die neun Produktklassen fallen weg.
+Verweise auf sie werden über `makeTypeMapper(known, toAny)` zu `any`: keine
+Hilfe, aber auch nichts Falsches. Ohne diesen Weg zeigten sie stumm auf die
+gleichnamige ScriptUI-Klasse. Wer von den neun erbt, verliert das `extends`,
+sonst erbte `ImportExportEvent` von ScriptUIs `Event`.
+
+Zwei Angaben aus Adobes ScriptUI-Modell blockieren jeden Dialog und werden
+deshalb zu `any`: `add()` steht als `Object` da (auf `Object` ist jeder Zugriff
+ein Fehler; welches Element entsteht, hängt am ersten Argument), und `show()`
+steht als `void`, obwohl ein Dialog sein Ergebnis zurückgibt. Noch besser wären
+Überladungen nach dem Zeichenketten-Argument (`add("button")` → `Button`) —
+dafür bräuchte es eine Tabelle der Elementarten, bisher nicht gebaut.
 
 `llms.txt` ist eine Konvention, kein Standard; nichts findet sie von allein. Ihr
 Wert liegt darin, dass man sagen kann „richte deinen Agenten auf diese URL".
+
+### Der Prüfer lief jahrelang ins Leere
+
+**`check-types.js` hat den Compiler nie gestartet und trotzdem „bestanden"
+gemeldet.** Es rief `node_modules/.bin/tsc.cmd` über `execFileSync` — und seit
+Node 18.20/20.12 verweigert Node das Starten von `.bat`/`.cmd` ohne `shell`
+(CVE-2024-27980). Der `EINVAL` landete im `catch`, dort stand keine Zeile mit
+`error TS`, und damit galt jede Datei als fehlerfrei. Aufgefallen ist es nur,
+weil derselbe Aufruf von Hand einen Fehler zeigte, den der Lauf nicht kannte.
+
+Zwei Lehren, beide eingebaut: Der Compiler wird jetzt als **JS mit demselben
+`node`** aufgerufen (`node_modules/typescript/bin/tsc`), und ein Lauf ohne
+Ausgabe **und** ohne Exit-Code gilt als Fehler, nicht als Erfolg. Ein Prüfer,
+der nichts findet, muss beweisen können, dass er gesucht hat.
+
+Was dabei sofort sichtbar wurde: 16 Fehler in Photoshop (Klassen erben von der
+Enumeration `SaveOptions` — in TypeScript kein Konstruktor, TS2507; das
+`extends` fällt jetzt weg) und ein Verweis auf `File` in `scriptui.d.ts`, das
+die Datei nicht deklariert. Deshalb hat jede Deklarationsdatei jetzt ihre
+**eigene Typabbildung**, die nur Namen aus derselben Datei kennt; was fehlt,
+wird zum Alias auf `any`.
 
 ### Was beim Übersetzen schiefging
 

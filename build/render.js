@@ -369,8 +369,13 @@ function make(data, d, ctx) {
         <li><a href="${esc(target.slug)}.d.ts" download><b>${esc(target.slug)}.d.ts</b>
           <span>TypeScript declarations: this object model, the Core JavaScript
           classes and the global names. Drop it into a project and the editor
-          answers without a lookup.${target.kind === 'Product'
-            ? ' Dialogs are in <a href="../scriptui/scriptui.d.ts" download>scriptui.d.ts</a>.' : ''}</span></a></li>
+          answers without a lookup.</span></a></li>
+        ${target.kind === 'Product' ? `<li>
+          <a href="${esc(target.slug)}-scriptui.d.ts" download><b>${esc(target.slug)}-scriptui.d.ts</b>
+          <span>The same plus ScriptUI, for scripts with a dialog. Nine classes
+          share a name with ScriptUI (Window, Button, Event, …); in this file
+          they belong to ScriptUI, because <code>new Window()</code> is what a
+          dialog needs. Take one file or the other, never both.</span></a></li>` : ''}
         <li><a href="llms.txt"><b>llms.txt</b>
           <span>Where everything lives, for an AI agent. Every object also has a
           Markdown twin at the same path as its page.</span></a></li>
