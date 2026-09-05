@@ -63,7 +63,7 @@
   --accent-soft: #16283f;
   --warn: #e0a458;
   --ro: #8b94a6;
-  --rw: hsl(11deg 76.24% 61.99%);
+  --rw: hsl(11, 50%, 45%);
   --enum: #c08cf0;
   --ev: #f2836b;
 }
@@ -1089,13 +1089,15 @@ td.d,
   margin-top: 10px
 }
 
-/* Blasen passen sich dem Namen an und umbrechen — ein festes Raster machte aus
-   "Page" und "ChangeGrepPreference" gleich breite Knoepfe. */
+/* Raster statt Umbruch: mit flex-wrap ergaben die verschieden langen Namen
+   Zeilen zu 4, 4, 5, 4, 2 Blasen, die rechts ausfransten. auto-fill haelt die
+   Spalten in Flucht; 168px ist die Breite des laengsten Namens
+   (ChangeGrepPreference, 20 Zeichen), damit nichts gekuerzt wird. */
 .quick {
   flex: 0 1 auto;
-  max-width: 360px;
-  display: flex;
-  flex-wrap: wrap;
+  max-width: 528px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
   gap: 6px;
   align-content: start
 }

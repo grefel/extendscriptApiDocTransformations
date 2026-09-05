@@ -244,21 +244,49 @@ const check = (name, got, want) => {
   await page.waitForSelector('.side a.on', { timeout: 10000 });
   check('indesign behaelt den Umschalter', await page.locator('.rt').count(), 1);
 
-  /* --- Hinweise, die nicht im Objektmodell stehen (build/notes.js) --- */
+  /* --- XMLElements.itemByName: von Hand ergaenzt, nur ExtendScript ---
+     Adobes XML-Export fuehrt die Methode nicht auf, im Object Model Viewer
+     steht sie und unter ExtendScript funktioniert sie seit CS3. Unter UXP
+     nicht mehr. Siehe build/additions.js. */
   await page.goto(url('indesign/XMLElements.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
-  check('XMLElements traegt den Hinweis', await page.locator('.warn').isVisible(), true);
-  /* Der Hinweis behauptet, die Methode fehle — das muss stimmen. */
-  check('itemByName fehlt dort wirklich',
-    await page.locator('#m-itemByName').count(), 0);
-  check('andere Collections haben itemByName',
-    await (async () => {
-      await page.goto(url('indesign/Pages.html'));
-      await page.waitForTimeout(200);
-      return page.locator('#m-itemByName').count();
-    })(), 1);
-  check('Hinweis steht nur dort',
-    await page.locator('.warn').count(), 0);
+  check('itemByName ist ergaenzt', await page.locator('#m-itemByName').count(), 1);
+  check('unter ExtendScript sichtbar',
+    await page.locator('#m-itemByName').isVisible(), true);
+  check('unter ExtendScript ohne Hinweis',
+    await page.locator('.warn').isVisible(), false);
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(300);
+  check('unter UXP ausgeblendet',
+    await page.locator('#m-itemByName').isVisible(), false);
+  check('unter UXP mit Hinweis',
+    /evaluateXPathExpression/.test(await page.locator('.warn').innerText()), true);
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(250);
+  /* Die Ergaenzung darf nur dort greifen. */
+  await page.goto(url('indesign/Pages.html'));
+  await page.waitForTimeout(250);
+  check('Pages hat itemByName aus der Quelle',
+    await page.locator('#m-itemByName').count(), 1);
+  check('und keinen Hinweis', await page.locator('.warn').count(), 0);
+
+  /* --- NothingEnum erzeugt keine Chips mehr ---
+     NOTHING ist der einzige Wert und sagt nichts aus; er stand unter 1.487
+     Properties und verdeckte in 11 Faellen den echten Enum daneben. */
+  await page.goto(url('indesign/CellStyle.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  const chips = await page.locator('.vchip').allTextContents();
+  check('kein NOTHING-Chip', chips.filter(t => t === 'NOTHING').length, 0);
+  check('die nuetzlichen Chips bleiben', chips.length > 0, true);
+  check('darunter die Ausrichtungen', chips.includes('CENTER_ALIGN'), true);
+
+  /* --- Vererbungszeile nur, wenn es Vorfahren gibt --- */
+  check('ohne Vorfahren keine Zeile', await page.locator('.chain').count(), 0);
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('mit Vorfahren schon',
+    (await page.locator('.chain').innerText()).split(/\s+/).filter(Boolean).join(' '),
+    'PageItem › SplineItem › Rectangle');
 
   /* --- UXP: ein File als Event-Handler gibt es dort nicht ---
      Der Strich muss mit verschwinden, sonst begaenne die Zeile mit "|". */
@@ -525,6 +553,19 @@ const check = (name, got, want) => {
   const deadQuick = await page.evaluate(() =>
     [...document.querySelectorAll('.quick a')].filter(a => !a.getAttribute('href')).length);
   check('keine Blase ohne Ziel', deadQuick, 0);
+  /* In Flucht: mit flex-wrap fransten die Zeilen rechts aus (4, 4, 5, 4, 2). */
+  const quickGeom = await page.evaluate(() => {
+    const as = [...document.querySelectorAll('.quick a')];
+    const r = a => a.getBoundingClientRect();
+    return {
+      spalten: new Set(as.map(a => Math.round(r(a).left))).size,
+      breiten: new Set(as.map(a => Math.round(r(a).width))).size,
+      gekuerzt: as.filter(a => a.scrollWidth > a.clientWidth + 1).length
+    };
+  });
+  check('Blasen stehen in Spalten', quickGeom.spalten <= 3, true);
+  check('alle gleich breit', quickGeom.breiten, 1);
+  check('kein Name gekuerzt', quickGeom.gekuerzt, 0);
   await page.locator('.quick a').first().click();
   await page.waitForTimeout(400);
   check('Blase fuehrt zum Objekt', await page.locator('h1').innerText(), 'Application');

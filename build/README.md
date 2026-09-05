@@ -36,6 +36,7 @@ Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
 | `serve.js` | Entwicklungsserver, ohne Abhängigkeit |
 | `zip.js` | minimaler ZIP-Schreiber für das Offline-Archiv |
 | `notes.js` | Hinweise, die nicht im Objektmodell stehen |
+| `additions.js` | Member, die Adobes Export vergisst |
 | `shortcuts.js` | Einstiegspunkte auf der Übersichtsseite |
 | `agents.js` | Markdown, api.json, llms.txt und die TypeScript-Deklarationen |
 
@@ -329,17 +330,43 @@ einer Art, `byMember` für eine einzelne Tabellenzeile (Schlüssel
 ein Kasten oben an der Seite wäre für eine von 341 Properties die falsche
 Stelle.
 
-**`XMLElements.itemByName()`**. Die Methode steht gar nicht im
-Objektmodell, obwohl fast jede andere Collection sie hat — der Weg führt über
-`evaluateXPathExpression()` am übergeordneten `XMLElement`. `check-site.js`
-prüft beides nach: dass der Hinweis dort steht, und dass die Methode dort
-wirklich fehlt, während `Pages` sie hat. Ein Hinweis, dessen Behauptung nicht
-mehr stimmt, wäre schlimmer als keiner.
+Nicht zu verwechseln mit `additions.js`: dort stehen **Member selbst**, die
+Adobes Export vergisst, hier nur Hinweise **ueber** Member.
+
+**`XMLElements.itemByName()`** — nur unter UXP ein Problem. Dort funktioniert
+sie nicht, der Weg führt über `evaluateXPathExpression()` am übergeordneten
+`XMLElement`.
+
+Der Fall zeigt, wozu `additions.js` da ist: **Adobes XML-Export führt die
+Methode gar nicht auf** (nachgesehen in `sourceXML/id_26.xml`, dort stehen
+nur `count`, `add`, `item`, `itemByID`, `itemByRange` und die üblichen).
+Im Object Model Viewer steht sie, und unter ExtendScript funktioniert sie seit
+CS3 bis InDesign 2026. Sie wird deshalb ergänzt und als
+`uxp: false` markiert, damit der UXP-Modus sie ausblendet.
+
+`check-site.js` prüft beide Richtungen: unter ExtendScript ist die Methode da
+und der Hinweis weg, unter UXP umgekehrt. Und dass `Pages` seine eigene
+`itemByName` aus der Quelle behält.
 
 **`equals()` statt `==` an allen Enumerations**, nur unter UXP. Adobes
 Migrationsanleitung nennt genau diesen Fall, und zwar mit einem
 Enumerationswert als Beispiel — deshalb steht der Hinweis dort und nicht an
 jedem Objekt, wo er nur Rauschen wäre.
+
+### Zwei Zeilen, die nur Rauschen waren
+
+**`NothingEnum` erzeugt keine Wertechips mehr.** Der Enum hat genau einen Wert,
+`NOTHING`, und der heißt nur „kann auch leer sein". Als Chip stand er unter
+**1.487 Properties** und verdeckte in 11 Fällen den echten Enum daneben — bei
+`CellStyle` trug fast jede Zeile einen. `inlineEnum()` überspringt ihn jetzt;
+die nützlichen Chips (`CENTER_ALIGN`, `ASCENT_OFFSET` …) bleiben.
+
+**Die Vererbungszeile entfällt, wenn es keine Vorfahren gibt.** Bei `CellStyle`
+stand dort nur `CellStyle` — eine Zeile, die den Seitentitel wiederholt.
+Betrifft alle 432 Enumerations und jedes Objekt ohne `superclass`.
+
+Nachfahren zeigt die Seite nicht; ableitbar wäre das (`sup` rückwärts), bisher
+nicht gebaut.
 
 ### Einstiegspunkte auf der Übersichtsseite
 

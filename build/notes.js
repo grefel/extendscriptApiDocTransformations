@@ -21,9 +21,12 @@ const ID = ['indesign', 'indesign-server'];
 const byName = {
   XMLElements: {
     products: ID,
-    text: 'itemByName() does not work here — the method is not part of the ' +
-      'object model at all, although most other collections have it. ' +
-      'Use evaluateXPathExpression() on the parent XMLElement instead.'
+    runtime: 'uxp',
+    /* Unter ExtendScript funktioniert itemByName() hier seit CS3 — Adobes
+       XML-Export fuehrt sie nur nicht auf, deshalb ergaenzt sie
+       additions.js. Unter UXP ist sie tot. */
+    text: 'itemByName() does not work under UXP. Use ' +
+      'evaluateXPathExpression() on the parent XMLElement instead.'
   }
 };
 
