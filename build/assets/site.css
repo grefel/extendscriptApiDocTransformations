@@ -353,8 +353,14 @@ a:hover {
   /* align-self:center haelt das Suchfeld aus der gemeinsamen Grundlinie
      heraus. Sonst bestimmt seine Innenpolsterung, wo die Grundlinie der
      Kopfzeile liegt — und die Wortmarke sass auf der Startseite, wo es das
-     Suchfeld nicht gibt, 3,7px hoeher als sonst. */
+     Suchfeld nicht gibt, 3,7px hoeher als sonst.
+
+     top:0 hebt dafuer den Versatz aus .top>* auf: der schiebt die
+     grundlinienausgerichteten Elemente um 8px nach unten, damit die Gruppe
+     mittig sitzt. Zentriert ist das Suchfeld schon — beides addierte sich
+     und es sass 9px zu tief. */
   align-self: center;
+  top: 0;
   margin-left: auto;
   display: flex;
   align-items: center;
@@ -1080,6 +1086,16 @@ ul.grid li {
 td.d,
 .arg .ad {
   overflow-wrap: anywhere
+}
+
+/* Abgeschalteter Verweis: die Klasse gibt es unter UXP nicht, und ein Ziel
+   dafuer auch nicht. Durchgestrichen, weil "existiert hier nicht" gemeint ist
+   und nicht "gerade nicht anklickbar". */
+a[data-uxp="off"]:not([href]) {
+  color: var(--dim);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  cursor: default
 }
 
 /* Hinweis an einer einzelnen Tabellenzeile. Eigene Zeile unter der

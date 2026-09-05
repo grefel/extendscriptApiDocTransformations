@@ -405,6 +405,30 @@ gemeinsamen `data-uxp="hide"`-Knoten.
 `app.doScript()` bleibt ausdrücklich unberührt — dort läuft eine
 ExtendScript-Datei auch unter UXP.
 
+### Kern-JavaScript unter UXP
+
+Die 22 Klassen der gemeinsamen Bibliothek beschreiben **ES3 von 2003**. Unter
+UXP stimmt davon nur die Hälfte, deshalb zerfallen die Verweise in drei Fälle:
+
+| | Ziel im UXP-Modus |
+|---|---|
+| `Array`, `Boolean`, `Date`, `Error`, `Function`, `Math`, `Number`, `Object`, `RegExp`, `String` | MDN — es gibt sie dort, nur in moderner Fassung |
+| `File`, `Folder` | Adobes UXP-Referenz — gleicher Name, andere API |
+| `$`, `Namespace`, `QName`, `Reflection`, `ReflectionInfo`, `Socket`, `UnitValue`, `XML`, `XMLList`, `global` | **kein Ziel**, der Link wird abgeschaltet (durchgestrichen) |
+
+Ein `<a>` ohne `href` ist kein Link mehr und auch per Tastatur nicht mehr
+erreichbar — deshalb wird das Attribut entfernt und nicht nur die Farbe
+geändert.
+
+**Die Regel greift nur, wenn der Verweis wirklich nach `../javascript/`
+zeigt.** Ein Produkt darf eine eigene Klasse gleichen Namens haben — InDesigns
+`Document` ist kein Kernobjekt und bleibt unberührt. Geprüft wird das mit.
+
+Kosten: die drei Primitiven `String`, `Number` und `Boolean` machen über 21.000
+der Verweise aus. Das sind pro Seite **+1 KB gzip** (Rectangle: 17 statt 16 KB)
+und +1,1 MB im Archiv. Wer das sparen will, nimmt die drei aus `MDN_CLASSES` —
+wer `String` anklickt, weiß meist ohnehin, was eine Zeichenkette ist.
+
 ### File und Folder unter UXP
 
 Beide heißen in UXP genauso und sind eine völlig andere API — kein globales

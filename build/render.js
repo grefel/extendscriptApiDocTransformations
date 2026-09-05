@@ -61,12 +61,32 @@ function make(data, d, ctx) {
     Folder: 'https://developer.adobe.com/indesign/uxp/reference/uxp-api/reference-js/' +
       'modules/uxp/persistent-file-storage/folder'
   };
+
+  /* Die uebrigen Kern-JavaScript-Klassen zerfallen unter UXP in zwei Gruppen.
+
+     Standard-ECMAScript gibt es dort, nur in einer modernen Fassung — die
+     Seiten hier beschreiben ES3 von 2003, also zeigt der Link auf MDN. */
+  const MDN = 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/';
+  const MDN_CLASSES = new Set(['Array', 'Boolean', 'Date', 'Error', 'Function',
+    'Math', 'Number', 'Object', 'RegExp', 'String']);
+
+  /* Der Rest gibt es unter UXP gar nicht: das Debugobjekt, die E4X-Klassen und
+     Adobes Eigenbauten. Dorthin fuehrt kein Link, auch kein fremder. */
+  const NO_UXP = new Set(['$', 'Namespace', 'QName', 'Reflection', 'ReflectionInfo',
+    'Socket', 'UnitValue', 'XML', 'XMLList', 'global']);
+
   const link = n => {
     const href = resolve(n);
     if (!href) return esc(n);
-    const alt = target.uxp && UXP_DOCS[n]
-      ? ` data-uxp-href="${esc(UXP_DOCS[n])}"` : '';
-    return `<a href="${esc(href)}"${alt}>${esc(n)}</a>`;
+    /* Nur greifen, wenn der Verweis wirklich in die gemeinsame
+       JavaScript-Bibliothek zeigt — ein Produkt darf eine eigene Klasse
+       gleichen Namens haben, und die bleibt richtig. */
+    const core = target.uxp && href.startsWith('../javascript/');
+    let extra = '';
+    if (core && UXP_DOCS[n]) extra = ` data-uxp-href="${esc(UXP_DOCS[n])}"`;
+    else if (core && MDN_CLASSES.has(n)) extra = ` data-uxp-href="${esc(MDN + n)}"`;
+    else if (core && NO_UXP.has(n)) extra = ' data-uxp="off"';
+    return `<a href="${esc(href)}"${extra}>${esc(n)}</a>`;
   };
   const known = n => resolve(n) !== null;
 

@@ -97,13 +97,31 @@
     /* Deckt beides ab: ganze Member (die []-Methoden) und einzelne
        Typangaben, die nur unter ExtendScript gelten (File als Event-Handler). */
     $$('[data-uxp="hide"]').forEach(el => { el.hidden = uxp; });
-    /* File und Folder heissen in UXP gleich, sind aber eine andere API. Im
-       UXP-Modus zeigt der Link auf Adobes UXP-Referenz. Das urspruengliche
-       Ziel bleibt in data-es-href, damit das Zurueckschalten stimmt. */
+    /* Verweise in die Kern-JavaScript-Bibliothek stimmen unter UXP nicht mehr.
+       Wo es ein richtiges Ziel gibt, zeigt der Link dorthin — Adobes
+       UXP-Referenz fuer File und Folder, MDN fuer die Standardklassen. Das
+       urspruengliche Ziel bleibt in data-es-href, damit das Zurueckschalten
+       stimmt. */
     $$('a[data-uxp-href]').forEach(a => {
       if (!a.dataset.esHref) a.dataset.esHref = a.getAttribute('href');
       a.setAttribute('href', uxp ? a.dataset.uxpHref : a.dataset.esHref);
-      a.title = uxp ? 'UXP: a different API with the same name' : '';
+      a.title = !uxp ? ''
+        : /developer\.adobe\.com/.test(a.dataset.uxpHref)
+          ? 'UXP: a different API with the same name'
+          : 'UXP uses the standard JavaScript class — this page describes '
+            + 'ExtendScript’s ES3 version';
+    });
+    /* Und wo es keins gibt, wird der Link abgeschaltet: ein <a> ohne href ist
+       kein Link mehr und auch nicht mehr per Tastatur erreichbar. */
+    $$('a[data-uxp="off"]').forEach(a => {
+      if (!a.dataset.esHref) a.dataset.esHref = a.getAttribute('href');
+      if (uxp) {
+        a.removeAttribute('href');
+        a.title = 'Not available in UXP';
+      } else {
+        a.setAttribute('href', a.dataset.esHref);
+        a.title = '';
+      }
     });
     /* Hinweise, die nur eine Laufzeit betreffen — am Objekt (.warn) wie an
        einzelnen Zeilen (.mwarn). */
