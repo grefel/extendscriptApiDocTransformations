@@ -19,7 +19,9 @@
 :root {
   zoom: var(--fs);
   color-scheme: light;
-  --fs: 1;
+  /* 1.15 ist die neue 100%-Stufe: der Standard war zu klein. Die Knoepfe
+     beschriften relativ dazu, 100% heisst also zoom 1.15. */
+  --fs: 1.15;
   --sb: #ccd3de;
   --sb-h: #aab4c4;
 
@@ -52,7 +54,7 @@
   --ink: #a6abb4;
   --dim: #888f9b;
   --line: #232935;
-  --accent: hsl(100deg 35.85% 67.58%);
+  --accent: hsl(100, 61%, 37%);
   --accent-soft: #16283f;
   --warn: #e0a458;
   --ro: #8b94a6;
@@ -676,10 +678,14 @@ th {
   border-bottom: 1px solid var(--line)
 }
 
+/* baseline statt top: die vier Spalten haben verschiedene Schriftgroessen
+   (Name 12.5, Typ 11.5, Zugriff 10.5, Beschreibung 13.5 px). Mit top stehen
+   die Kaesten buendig und die Schriften sitzen versetzt — das flimmert beim
+   Ueberfliegen. baseline richtet die erste Zeile jeder Zelle aneinander aus. */
 td {
   padding: 2px 0px 2px 6px;
   border-bottom: 1px solid var(--line);
-  vertical-align: top
+  vertical-align: baseline
 }
 
 tr:hover td {
@@ -1072,7 +1078,7 @@ td.d,
   max-width: 52ch
 }
 
-@container page (max-width: 900px) {
+@container page (max-width: 950px) {
   .refcard a {
     flex-direction: column
   }
@@ -1084,7 +1090,7 @@ td.d,
 
 /* Maschinenlesbare Ausgaben auf der Produktseite. Kein Blickfang: wer sie
    sucht, sucht gezielt. */
-.machine .dl {
+.dl {
   list-style: none;
   padding: 0;
   margin: 10px 0 0;
@@ -1093,7 +1099,7 @@ td.d,
   gap: 9px
 }
 
-.machine .dl a {
+.dl a {
   display: block;
   padding: 11px 13px;
   border: 1px solid var(--line);
@@ -1102,19 +1108,19 @@ td.d,
   color: var(--ink)
 }
 
-.machine .dl a:hover {
+.dl a:hover {
   border-color: var(--accent);
   text-decoration: none
 }
 
-.machine .dl b {
+.dl b {
   display: block;
   font: 12.5px var(--mono);
   color: var(--accent);
   font-weight: 600
 }
 
-.machine .dl span {
+.dl span {
   display: block;
   margin-top: 5px;
   font-size: 12px;
@@ -1342,10 +1348,10 @@ footer .by .sep {
   }
 }
 
-/* Unterhalb dieser Breite sprengte die Kopfzeile das Fenster — nicht die
-   Tabelle: das Suchfeld hielt seine min-width von 265 px. Es darf jetzt
-   schrumpfen, Tastenkuerzel und API-Version treten ab. */
-@container page (max-width: 900px) {
+/* Gemessen: der Kopf passt bis 950 px logischer Breite, bei 925 px ragt er
+   11 px heraus — die A-Knoepfe brauchen ihren Platz. Ab hier schrumpft das
+   Suchfeld, Tastenkuerzel und API-Version treten ab. */
+@container page (max-width: 950px) {
 
   /* Parameter untereinander statt in drei Spalten: die beiden auto-Spalten
      richten sich am breitesten Namen und Typ aus und drueckten die Seite sonst
