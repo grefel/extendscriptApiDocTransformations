@@ -6,16 +6,15 @@
    Navigationsliste nicht: 1000+ Eintraege wuerden jede Seite aufblaehen. */
 'use strict';
 
+const notes = require('./notes');
+
 const esc = s => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-/* Muss synchron im <head> laufen, bevor der Browser das erste Mal zeichnet.
-   site.js laeuft mit defer und damit zu spaet: die Seite erschiene beim
-   Navigieren kurz im dunklen Standardthema und klappte dann um. */
-/* Laeuft inline im <head>, vor dem ersten Zeichnen. Mit "defer" wuerde jede
-   Folgeseite kurz im Standard erscheinen und dann umklappen.
-   Ohne gespeicherte Wahl und ohne JavaScript gilt Hell — das ist der Standard
-   im Stylesheet, hier wird nichts gesetzt. */
+/* Laeuft synchron im <head>, vor dem ersten Zeichnen. site.js hat "defer" und
+   ist damit zu spaet: die Folgeseite erschiene kurz im Standard und klappte
+   dann um. Ohne gespeicherte Wahl gilt Hell bei Zoom 1,15 — das steht im
+   Stylesheet, hier wird dann nichts gesetzt. */
 const THEME_BOOT =
   'try{var d=document.documentElement,s=localStorage;' +
   'if(s.getItem("theme")==="dark")d.dataset.t="dark";' +
@@ -50,7 +49,24 @@ function make(data, d, ctx) {
   const { isCollection, elementOf, objectOf, paramOf, returnedBy } = d;
   const { target, targets, resolve } = ctx;
   const kindOf = c => (c.enum ? 'Enumeration' : isCollection(c) ? 'Collection' : 'Object');
-  const link = n => { const href = resolve(n); return href ? `<a href="${esc(href)}">${esc(n)}</a>` : esc(n); };
+  /* File und Folder heissen in UXP genauso, sind aber eine voellig andere API:
+     kein globales File-Objekt, sondern require('uxp').storage.localFileSystem.
+     Im UXP-Modus zeigt der Link deshalb auf Adobes UXP-Referenz statt auf die
+     ExtendScript-Klasse. Umgeschaltet wird in site.js; hier steht nur das
+     zweite Ziel im Markup, damit es ohne JavaScript keine falsche Zusage gibt. */
+  const UXP_DOCS = {
+    File: 'https://developer.adobe.com/indesign/uxp/reference/uxp-api/reference-js/' +
+      'modules/uxp/persistent-file-storage/file',
+    Folder: 'https://developer.adobe.com/indesign/uxp/reference/uxp-api/reference-js/' +
+      'modules/uxp/persistent-file-storage/folder'
+  };
+  const link = n => {
+    const href = resolve(n);
+    if (!href) return esc(n);
+    const alt = target.uxp && UXP_DOCS[n]
+      ? ` data-uxp-href="${esc(UXP_DOCS[n])}"` : '';
+    return `<a href="${esc(href)}"${alt}>${esc(n)}</a>`;
+  };
   const known = n => resolve(n) !== null;
 
   function typeList(ts, arr) {
@@ -122,6 +138,14 @@ function make(data, d, ctx) {
       <h1>${esc(c.n)}</h1>
       <p class="lede">${esc(c.d)}</p>
       <div class="chain">${chain(c)}</div>`;
+
+    /* Erfahrungswerte, die nicht im Objektmodell stehen — siehe build/notes.js.
+       Gilt der Hinweis nur fuer eine Laufzeit, blendet site.js ihn im anderen
+       Modus aus. */
+    const note = notes[c.n];
+    if (note && (!note.products || note.products.includes(target.slug)))
+      h += `<p class="warn"${note.runtime ? ` data-only="${esc(note.runtime)}"` : ''}
+        role="note">${esc(note.text)}</p>`;
 
     const pill = (key, text, n) =>
       `<button class="pill" type="button" data-o="${key}">${text} ${n}</button>`;

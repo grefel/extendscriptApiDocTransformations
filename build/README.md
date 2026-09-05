@@ -35,6 +35,7 @@ Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
 | `check-site.js` | Browsertest der fertigen Website |
 | `serve.js` | Entwicklungsserver, ohne Abhängigkeit |
 | `zip.js` | minimaler ZIP-Schreiber für das Offline-Archiv |
+| `notes.js` | Hinweise, die nicht im Objektmodell stehen |
 | `agents.js` | Markdown, api.json, llms.txt und die TypeScript-Deklarationen |
 
 ## Abhängigkeiten
@@ -313,6 +314,31 @@ dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Ind
 - **Illustrator, Photoshop und Bridge haben keine Events.**
 - Photoshops neueste verfügbare XML ist CC 2015.5 von 2016; das steht als
   Hinweis auf der Startseite und der Produktseite.
+
+### Hinweise, die nicht im Objektmodell stehen
+
+Adobes Export beschreibt, was es gibt — nicht, was davon kaputt ist. Solche
+Erfahrungswerte stehen in `build/notes.js` und erscheinen als Warnung unter der
+Beschreibung des Objekts. Je Eintrag: auf welche Ziele er passt (`products`),
+optional auf welche Laufzeit (`runtime`), und der Text.
+
+Bisher einer: **`XMLElements.itemByName()`**. Die Methode steht gar nicht im
+Objektmodell, obwohl fast jede andere Collection sie hat — der Weg führt über
+`evaluateXPathExpression()` am übergeordneten `XMLElement`. `check-site.js`
+prüft beides nach: dass der Hinweis dort steht, und dass die Methode dort
+wirklich fehlt, während `Pages` sie hat. Ein Hinweis, dessen Behauptung nicht
+mehr stimmt, wäre schlimmer als keiner.
+
+### File und Folder unter UXP
+
+Beide heißen in UXP genauso und sind eine völlig andere API — kein globales
+`File`, sondern `require("uxp").storage.localFileSystem`. Im UXP-Modus zeigen
+die Typlinks deshalb auf Adobes UXP-Referenz statt auf die ExtendScript-Klasse.
+
+Das Ziel steht als `data-uxp-href` im Markup, umgehängt wird in `site.js`; das
+ursprüngliche Ziel wandert dabei nach `data-es-href`, damit das Zurückschalten
+stimmt. Nur die beiden InDesign-Ziele bekommen das Attribut — sie allein haben
+den Umschalter.
 
 ### Theme, Laufzeit und Rechtliches
 
