@@ -609,6 +609,13 @@ const check = (name, got, want) => {
       const r = document.querySelector('.refcard').getBoundingClientRect();
       return q.right <= r.left + 1;
     }), true);
+  /* Und auf gleicher Hoehe: die Karte hatte ein eigenes margin-top und begann
+     11px unter der ersten Blasenreihe. */
+  check('beide beginnen auf gleicher Hoehe',
+    await page.evaluate(() => {
+      const t = s => Math.round(document.querySelector(s).getBoundingClientRect().top);
+      return t('.refcard a') - t('.quick a');
+    }), 0);
   await page.goto(url('illustrator/index.html'));
   await page.waitForTimeout(250);
   check('Illustrator ohne Einstiegspunkte', await page.locator('.quick').count(), 0);
