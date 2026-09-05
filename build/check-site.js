@@ -244,21 +244,27 @@ const check = (name, got, want) => {
   await page.waitForSelector('.side a.on', { timeout: 10000 });
   check('indesign behaelt den Umschalter', await page.locator('.rt').count(), 1);
 
-  /* --- Theme: Beschriftung und kein Aufblitzen beim Navigieren --- */
-  check('Themeknopf nennt das Ziel',
-    (await page.locator('.tg').innerText()).trim(), 'light mode');
-  /* color-scheme muss mitwandern, sonst zeichnet Chrome helle
-     Systemscrollbalken in die dunkle Seite. */
+  /* --- Theme: Hell ist der Standard --- */
   const scheme = () =>
     page.evaluate(() => getComputedStyle(document.documentElement).colorScheme);
-  check('dunkel: color-scheme dunkel', await scheme(), 'dark');
+  /* Ohne gespeicherte Wahl setzt niemand data-t; es gilt die Palette auf
+     :root. Genau so sieht es auch ohne JavaScript aus. */
+  check('Standard ist hell, ohne data-t',
+    await page.evaluate(() => document.documentElement.dataset.t || '(nicht gesetzt)'),
+    '(nicht gesetzt)');
+  check('hell: color-scheme hell', await scheme(), 'light');
+  check('Themeknopf nennt das Ziel',
+    (await page.locator('.tg').innerText()).trim(), 'dark mode');
   await page.click('.tg');
   await page.waitForTimeout(200);
   check('nach dem Umschalten umgekehrt',
-    (await page.locator('.tg').innerText()).trim(), 'dark mode');
-  check('hell: color-scheme hell', await scheme(), 'light');
-  /* Entscheidend: das Inline-Skript im <head> setzt das Thema vor dem ersten
-     Zeichnen. Ohne das erschiene jede Folgeseite kurz dunkel. */
+    (await page.locator('.tg').innerText()).trim(), 'light mode');
+  /* color-scheme muss mitwandern, sonst zeichnet Chrome Systemscrollbalken
+     im falschen Ton. */
+  check('dunkel: color-scheme dunkel', await scheme(), 'dark');
+  /* Entscheidend: das Inline-Skript im <head> setzt Thema und Schriftgroesse
+     vor dem ersten Zeichnen. Ohne das erschiene jede Folgeseite kurz im
+     Standard und klappte dann um. */
   const boot = await page.evaluate(() => {
     const s = document.head.querySelector('script:not([src])');
     return s ? s.textContent.includes('localStorage') : false;
@@ -266,9 +272,63 @@ const check = (name, got, want) => {
   check('Theme wird im <head> gesetzt', boot, true);
   await page.goto(url('indesign/Document.html'));
   check('Theme ueberlebt die Navigation',
-    await page.evaluate(() => document.documentElement.dataset.t), 'light');
-  await page.click('.tg');   /* zurueck auf dunkel fuer die restlichen Pruefungen */
+    await page.evaluate(() => document.documentElement.dataset.t), 'dark');
+
+  /* --- Schriftgroesse --- */
+  const fsState = () => page.evaluate(() => ({
+    fs: getComputedStyle(document.documentElement).getPropertyValue('--fs').trim(),
+    body: getComputedStyle(document.body).fontSize,
+    head: getComputedStyle(document.querySelector('.top .logo')).fontSize,
+    lvl: document.querySelector('.fs .lvl').textContent
+  }));
+  const fs0 = await fsState();
+  check('Schriftgroesse startet bei 100%', fs0.lvl, '100%');
+  await page.click('.fs button[data-f="+"]');
+  await page.click('.fs button[data-f="+"]');
+  await page.waitForTimeout(200);
+  const fs2 = await fsState();
+  check('A+ vergroessert den Inhalt', parseFloat(fs2.body) > parseFloat(fs0.body), true);
+  /* Die Kopfzeile ist 44px hoch und .side, .bar und .grid rechnen damit —
+     sie darf nicht mitwachsen. */
+  check('die Kopfzeile bleibt unveraendert', fs2.head, fs0.head);
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForTimeout(300);
+  check('Schriftgroesse ueberlebt die Navigation', (await fsState()).lvl, fs2.lvl);
+  check('bei 130% laeuft nichts heraus',
+    await page.evaluate(() =>
+      document.documentElement.scrollWidth - document.documentElement.clientWidth), 0);
+  /* Am unteren Anschlag wird A− abgeblendet statt zu verschwinden — deshalb
+     klicken, solange der Knopf noch reagiert, statt eine Anzahl zu raten. */
+  const minus = page.locator('.fs button[data-f="-"]');
+  for (let k = 0; k < 8 && !(await minus.isDisabled()); k++) {
+    await minus.click();
+    await page.waitForTimeout(80);
+  }
+  check('kleinste Stufe erreicht', (await fsState()).lvl, '85%');
+  check('A− am Anschlag abgeblendet',
+    await page.locator('.fs button[data-f="-"]').isDisabled(), true);
+  await page.click('.fs button[data-f="+"]');
   await page.waitForTimeout(150);
+
+  /* --- Kurzreferenz nur bei den beiden InDesign-Zielen --- */
+  await page.goto(url('indesign/index.html'));
+  await page.waitForTimeout(300);
+  check('Kurzreferenz verlinkt',
+    await page.locator('.refcard a[href="https://www.indesignjs.de/idskurzreferenz.pdf"]').count(),
+    1);
+  check('Vorschaubild geladen',
+    await page.evaluate(() => {
+      const i = document.querySelector('.refcard img');
+      return !!i && i.naturalWidth > 0;
+    }), true);
+  await page.goto(url('indesign-server/index.html'));
+  await page.waitForTimeout(250);
+  check('Server hat sie auch', await page.locator('.refcard').count(), 1);
+  await page.goto(url('illustrator/index.html'));
+  await page.waitForTimeout(250);
+  check('Illustrator hat sie nicht', await page.locator('.refcard').count(), 0);
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForTimeout(250);
 
   /* --- Impressum und Datenschutz --- */
   check('Footer verlinkt Impressum',
@@ -419,6 +479,32 @@ const check = (name, got, want) => {
       check(tag + ': keine Zelle laeuft aus', o.cells, 0);
     }
   }
+  /* Grosse Schrift und schmales Fenster zusammen. Grenze: bis 900 px sauber.
+     Darunter waeren es bei 150% noch rund 25 Zeichen je Zeile im Inhalt —
+     dafuer muesste die Seitenleiste einklappen, das ist eigene Arbeit. */
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  for (let k = 0; k < 3; k++) {
+    await page.click('.fs button[data-f="+"]');
+    await page.waitForTimeout(90);
+  }
+  for (const w of [1000, 900]) {
+    const o = await overflowAt(w, 'indesign/Document.html');
+    check('150% bei ' + w + 'px: kein Ueberhang', o.page, 0);
+    check('150% bei ' + w + 'px: keine Zelle laeuft aus', o.cells, 0);
+  }
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  const back = page.locator('.fs button[data-f="-"]');
+  for (let k = 0; k < 8 && !(await back.isDisabled()); k++) {
+    await back.click();
+    await page.waitForTimeout(70);
+  }
+  await page.click('.fs button[data-f="+"]');   /* zurueck auf 100% */
+  await page.waitForTimeout(120);
+
   /* Zugriffsspalte: voller Wortlaut solange er passt, darunter abgekuerzt. */
   await overflowAt(1300, 'indesign/AssignedStory.html');
   check('breit: Zugriff ausgeschrieben',
@@ -471,7 +557,7 @@ const check = (name, got, want) => {
     await fp.goto(base + 'indesign/Document.html');
     await fp.waitForTimeout(300);
     check('Firefox/http: Theme ueberlebt die Navigation',
-      await fp.evaluate(() => document.documentElement.dataset.t), 'light');
+      await fp.evaluate(() => document.documentElement.dataset.t), 'dark');
     check('Firefox/http: Spur nennt die vorige Seite',
       (await fp.locator('.trail a').allTextContents())[0], 'Rectangle');
     await fp.goto(base + 'indesign/Page.html');
