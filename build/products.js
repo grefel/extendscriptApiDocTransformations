@@ -5,6 +5,7 @@
    label  Kurzname für den Umschalter im Kopf
    src    Produkt-XML; javascript.xml und scriptui.xml kommen immer dazu
    uxp    zeigt den Laufzeit-Umschalter ExtendScript/UXP
+   refcard zeigt die InDesign-Skripting-Kurzreferenz auf der Uebersichtsseite
    note   optionaler Hinweis, wenn die Datenlage nicht aktuell ist */
 'use strict';
 
@@ -13,13 +14,15 @@ module.exports = [
     slug: 'indesign',
     label: 'InDesign',
     src: 'sourceXML/id_26.xml',
-    uxp: true
+    uxp: true,
+    refcard: true
   },
   {
     slug: 'indesign-server',
     label: 'InDesign Server',
     src: 'sourceXML/id_25-server.xml',
-    uxp: true
+    uxp: true,
+    refcard: true
   },
   /* Ohne uxp: Nur fuer InDesign beschreibt dieses Objektmodell zugleich die
      UXP-Laufzeit. Illustrator und Bridge kennen ohnehin keine Methode [],

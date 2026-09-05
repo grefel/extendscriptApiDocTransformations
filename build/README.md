@@ -73,6 +73,27 @@ ergänzt nur Bedienelemente; die sind im HTML als `[hidden]` markiert und werden
 erst durch das Skript eingeschaltet. `check-site.js` prüft das mit abgeschaltetem
 JavaScript mit.
 
+## Kurzreferenz
+
+Die Übersichtsseiten von InDesign und InDesign Server zeigen die
+**InDesign-Skripting-Kurzreferenz** — das Objektmodell auf einer Querformatseite,
+verlinkt auf <https://www.indesignjs.de/idskurzreferenz.pdf>. Gesteuert über
+`refcard: true` in `products.js`; Illustrator und Photoshop bekommen sie nicht,
+dort wäre sie falsch.
+
+**Die Vorschau ist ein Standbild und wird nicht mitgeneriert.** Sie liegt als
+`build/assets/idskurzreferenz.jpg` (840×604, 86 KB) und muss von Hand erneuert
+werden, wenn sich das PDF ändert. Erzeugt mit Chrome im **sichtbaren** Fenster —
+headless gibt es keinen PDF-Betrachter:
+
+```js
+const pg = await browser.newPage({ viewport: { width: 420, height: 302 },
+                                   deviceScaleFactor: 2 });
+await pg.goto("file:///…/idskurzreferenz.pdf#toolbar=0&navpanes=0&view=Fit");
+await pg.screenshot({ path: "build/assets/idskurzreferenz.jpg",
+                      type: "jpeg", quality: 82 });
+```
+
 ## Für Editoren und KI-Agenten
 
 `build/agents.js` erzeugt aus demselben Modell wie das HTML vier weitere
@@ -127,6 +148,15 @@ Zwei Sonderwege:
 
 Sauber bis hinunter zu **650 px** Fensterbreite, ohne waagerechtes Scrollen.
 `check-site.js` misst das bei sieben Breiten auf zwei Seiten nach.
+
+Mit **150 % Schriftgröße** liegt die Grenze bei **900 px**. Darunter blieben rund
+25 Zeichen je Zeile im Inhalt; dafür müsste die Seitenleiste einklappen, und das
+ist eigene Arbeit. Zwei Prüfungen halten die Grenze.
+
+Drei Stellen brauchen deshalb eine Reserve, die bei normaler Schrift nie greift:
+`.args` bekommt `minmax(0,auto)` statt `auto` für die beiden ersten Spalten, und
+Beschreibungen (`.mem .desc`, `td.d`, `.arg .ad`) `overflow-wrap:anywhere` —
+Adobe schreibt dort gelegentlich einen Pfad oder Bezeichner am Stück.
 
 Die Tabellen laufen mit **`table-layout:fixed`**. Vorher bestimmte der längste
 Bezeichner die Namensspalte — `allowFontSizeAndLeadingAdjustment` erzwang 229 px,
@@ -258,6 +288,15 @@ dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Ind
 
 ### Theme, Laufzeit und Rechtliches
 
+- **Hell ist der Standard.** Ohne gespeicherte Wahl und ohne JavaScript gilt die
+  helle Palette — sie steht auf `:root`, die dunkle unter `:root[data-t="dark"]`.
+  Es wird also nur gesetzt, wer ausdrücklich dunkel will.
+- **Schriftgröße über A− / A+ im Kopf.** `--fs` skaliert jede Schriftgröße im
+  Stylesheet (`calc(<px> * var(--fs))`), fünf Stufen von 85 % bis 150 %, gemerkt
+  unter `fs`. **Die Kopfzeile skaliert bewusst nicht mit**: sie ist 44 px hoch,
+  und `.side`, `.bar` und `.grid` rechnen mit dieser Zahl — sie setzt `--fs`
+  für sich auf 1 zurück. Skaliert wird, was man liest.
+  Am Anschlag wird der Knopf abgeblendet statt ausgeblendet, sonst springt der Kopf.
 - **Das Thema setzt ein Inline-Skript im `<head>`**, nicht `site.js`. Letzteres
   läuft mit `defer` und damit erst nach dem Parsen — die Folgeseite erschien
   dadurch beim Navigieren kurz im dunklen Standardthema und klappte dann um.

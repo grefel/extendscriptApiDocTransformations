@@ -48,7 +48,7 @@ const subset = (data, origin, version) => ({
 const targets = [
   ...models.map(m => ({
     slug: m.product.slug, label: m.product.label, note: m.product.note,
-    uxp: m.product.uxp, kind: 'Product',
+    uxp: m.product.uxp, refcard: m.product.refcard, kind: 'Product',
     data: subset(m.data, 'p', m.data.version)
   })),
   /* Beide Bibliotheken gibt es nur unter ExtendScript — UXP nutzt eine andere
@@ -175,7 +175,7 @@ for (const t of targets) {
 /* ---------- Startseite ---------- */
 write('index.html', homePage(targets, models[0].data.generated));
 write('llms.txt', agents.llmsRoot(targets, models[0].data.generated));
-for (const f of ['site.css', 'site.js'])
+for (const f of ['site.css', 'site.js', 'idskurzreferenz.jpg'])
   write('assets/' + f, fs.readFileSync(path.join(__dirname, 'assets', f)));
 
 for (const [slug, st] of typeStats)

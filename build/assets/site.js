@@ -26,7 +26,8 @@
   const tg = $('[data-enhance="theme"]');
   function labelTheme() {
     if (!tg) return;
-    const dark = document.documentElement.dataset.t !== 'light';
+    /* Hell ist der Standard, dunkel wird ausdruecklich gesetzt. */
+    const dark = document.documentElement.dataset.t === 'dark';
     tg.textContent = dark ? 'light mode' : 'dark mode';
     tg.setAttribute('aria-label', 'Switch to ' + (dark ? 'light' : 'dark') + ' mode');
   }
@@ -34,11 +35,44 @@
     tg.hidden = false;
     labelTheme();
     tg.addEventListener('click', () => {
-      const next = document.documentElement.dataset.t === 'light' ? 'dark' : 'light';
+      const next = document.documentElement.dataset.t === 'dark' ? 'light' : 'dark';
       document.documentElement.dataset.t = next;
       store.set('theme', next);
       labelTheme();
     });
+  }
+
+  /* ---------- Schriftgroesse ----------
+     --fs skaliert jede Schriftgroesse im Stylesheet. Die Kopfzeile setzt ihn
+     fuer sich auf 1 zurueck: sie ist 44px hoch, und .side, .bar und .grid
+     rechnen mit dieser Zahl. Gesetzt wird der Wert schon vom Inline-Skript im
+     <head>, hier kommen nur die Knoepfe dazu. */
+  const STEPS = [0.85, 1, 1.15, 1.3, 1.5];
+  const fsBox = $('[data-enhance="fontsize"]');
+  if (fsBox) {
+    const lvl = $('.lvl', fsBox);
+    const buttons = $$('button', fsBox);
+    /* Auf die naechstgelegene Stufe einrasten, falls jemand einen krummen Wert
+       im Speicher hat. */
+    const stored = parseFloat(store.get('fs', '1'));
+    let i = STEPS.indexOf(STEPS.reduce((a, b) =>
+      Math.abs(b - stored) < Math.abs(a - stored) ? b : a, STEPS[1]));
+
+    function applyFs() {
+      document.documentElement.style.setProperty('--fs', STEPS[i]);
+      if (lvl) lvl.textContent = Math.round(STEPS[i] * 100) + '%';
+      buttons.forEach(b => {
+        b.disabled = b.dataset.f === '-' ? i === 0 : i === STEPS.length - 1;
+      });
+      fsBox.title = 'Text size ' + Math.round(STEPS[i] * 100) + '%';
+    }
+    buttons.forEach(b => b.addEventListener('click', () => {
+      i = Math.min(STEPS.length - 1, Math.max(0, i + (b.dataset.f === '+' ? 1 : -1)));
+      store.set('fs', String(STEPS[i]));
+      applyFs();
+    }));
+    applyFs();
+    fsBox.hidden = false;
   }
 
   /* ---------- Laufzeit ExtendScript / UXP ----------

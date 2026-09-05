@@ -12,8 +12,14 @@ const esc = s => String(s == null ? '' : s)
 /* Muss synchron im <head> laufen, bevor der Browser das erste Mal zeichnet.
    site.js laeuft mit defer und damit zu spaet: die Seite erschiene beim
    Navigieren kurz im dunklen Standardthema und klappte dann um. */
+/* Laeuft inline im <head>, vor dem ersten Zeichnen. Mit "defer" wuerde jede
+   Folgeseite kurz im Standard erscheinen und dann umklappen.
+   Ohne gespeicherte Wahl und ohne JavaScript gilt Hell — das ist der Standard
+   im Stylesheet, hier wird nichts gesetzt. */
 const THEME_BOOT =
-  'try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.t=t}catch(e){}';
+  'try{var d=document.documentElement,s=localStorage;' +
+  'if(s.getItem("theme")==="dark")d.dataset.t="dark";' +
+  'var f=parseFloat(s.getItem("fs"));if(f>0)d.style.setProperty("--fs",f)}catch(e){}';
 
 /* Dateiname je Objekt. Im aktuellen Modell ist "$" das einzige Sonderzeichen und
    in Dateinamen wie in URLs unbedenklich — pauschales encodeURIComponent machte
@@ -194,6 +200,25 @@ function make(data, d, ctx) {
       <p class="lede">${esc(data.version)}${v.build ? '' : ''}. ${own.length} entries.</p>`;
     if (target.note) h += `<p class="note">${esc(target.note)}</p>`;
 
+    /* Die Kurzreferenz auf einer Seite. Nur bei den beiden InDesign-Zielen —
+       sie zeigt das InDesign-Objektmodell, fuer Illustrator oder Photoshop
+       waere sie falsch. Die Vorschau ist ein Standbild der ersten Seite und
+       muss von Hand erneuert werden, wenn das PDF sich aendert (siehe
+       build/README.md). */
+    if (target.refcard) {
+      h += `<section class="refcard"><h2 class="sechead" id="cheatsheet">Cheat sheet</h2>
+        <a href="https://www.indesignjs.de/idskurzreferenz.pdf" rel="noopener">
+          <img src="../assets/idskurzreferenz.jpg" width="840" height="604" loading="lazy"
+            alt="InDesign-Skripting-Kurzreferenz: the object model on one page, with the
+                 classes app, Document, Page, TextFrame, Story and Text and the
+                 properties connecting them.">
+          <span><b>InDesign-Skripting-Kurzreferenz</b>
+          <span class="d">The object model on one page: which class holds which
+          collection, what a property returns, and how you get from
+          <code>app</code> to a single character. One landscape page, German
+          labels, English identifiers. PDF, 288 KB.</span></span></a></section>`;
+    }
+
     /* Maschinenlesbare Ausgaben. Bewusst hier und nicht in der Kopfzeile: das
        holt man einmal je Projekt, nicht dutzendfach je Stunde — und der Kopf
        ist voll. Erzeugt von build/agents.js. */
@@ -263,6 +288,11 @@ function shell({ title, description, body, current, target, targets, data, isInd
   <nav class="trail" hidden data-enhance="trail" aria-label="Recently visited"></nav>
   <button class="kbtn" type="button" hidden data-enhance="search">
     <span>Search ${esc(target.label)}…</span><span class="keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></button>
+  <div class="fs" hidden data-enhance="fontsize">
+    <button type="button" data-f="-" aria-label="Smaller text">A−</button>
+    <span class="lvl"></span>
+    <button type="button" data-f="+" aria-label="Larger text">A+</button>
+  </div>
   <button class="tg" type="button" hidden data-enhance="theme"></button>
 </header>
 <div class="grid">
