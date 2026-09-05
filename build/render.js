@@ -452,7 +452,7 @@ function shell({ title, description, body, current, target, targets, data, isInd
   </div>
   <button class="tg" type="button" hidden data-enhance="theme"></button>
 </header>
-<div class="grid">
+<div class="grid${isIndex ? ' norail' : ''}">
   <nav class="side" aria-label="Objects"><a class="allobjects" href="index.html">All entries →</a>
     <div class="sidef" hidden data-enhance="navfilter">
       <input id="nf" type="search" placeholder="Filter objects…" spellcheck="false"
@@ -474,7 +474,7 @@ function shell({ title, description, body, current, target, targets, data, isInd
         <a href="https://www.publishingx.de/datenschutzerklaerung/" rel="noopener">Datenschutz</a></p>
     </footer>
   </main>
-  <aside class="rail2" aria-label="On this page"></aside>
+  ${isIndex ? '' : '<aside class="rail2" aria-label="On this page"></aside>'}
 </div>
 <script src="nav.js" defer></script>
 <script src="../assets/site.js" defer></script>
