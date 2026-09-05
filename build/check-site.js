@@ -896,6 +896,14 @@ const check = (name, got, want) => {
     true);
   await page.goto(url('indesign/index.html'));
   await page.waitForTimeout(250);
+  /* Die Uebersichtsseite hat keine Member und damit nichts fuer die rechte
+     Spalte. Sie leer stehen zu lassen genuegt nicht — das Raster hielte ihre
+     Breite frei und die Kurzreferenz liefe darunter. */
+  check('Uebersichtsseite ohne rechte Spalte',
+    await page.locator('.rail2').count(), 0);
+  check('… und ohne freigehaltene Spalte im Raster',
+    await page.evaluate(() =>
+      getComputedStyle(document.querySelector('.grid')).gridTemplateColumns.split(' ').length), 2);
   check('Produktseite verlinkt die Typen',
     await page.locator('.machine a[href="indesign.d.ts"]').count(), 1);
   check('… und die kombinierte Datei mit ScriptUI',

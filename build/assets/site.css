@@ -458,6 +458,13 @@ kbd {
   min-height: calc(100vh / var(--fs) - 44px)
 }
 
+/* Die Uebersichtsseiten haben keine Member und damit nichts fuer die rechte
+   Spalte. Die Spur einfach leer stehen zu lassen genuegt nicht: das Raster
+   haelt ihre Breite frei, und die Kurzreferenz liefe darunter. */
+.grid.norail {
+  grid-template-columns: 230px minmax(0, 1fr)
+}
+
 .side {
   background: var(--rail);
   border-right: 1px solid var(--line);
