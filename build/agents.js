@@ -54,7 +54,12 @@ const COUNTED = /^(\d+)\s+(.+)$/;
 /* "2 TaskAlertType enumerators", "MatrixContent enumerators" */
 const ENUMERATORS = /^(.*?)\s+enumerators?$/i;
 
-function makeTypeMapper(known) {
+/* known: Klassennamen, die die Datei deklariert.
+   toAny: Namen, die sie bewusst nicht deklariert, obwohl es sie im Modell gibt
+   (die kombinierte Datei laesst neun Produktklassen fuer ScriptUI weichen).
+   Ohne diesen Weg zeigte der Verweis auf die gleichnamige ScriptUI-Klasse —
+   still und falsch. */
+function makeTypeMapper(known, toAny) {
   let unknown = 0;
   const seen = new Map();
   const dangling = new Set();
@@ -64,6 +69,7 @@ function makeTypeMapper(known) {
     if (!name) return 'any';
     if (depth > 4) return 'any';
 
+    if (toAny && toAny.has(name)) return 'any';
     if (SCALAR[name]) return SCALAR[name];
     if (known.has(name)) return name;
     /* fixDom.xsl benennt die Klasse Index in Index_ um. */
@@ -207,7 +213,18 @@ function buildTypes(classes, T, meta) {
   /* Der Kopf muss beschreiben, was wirklich in der Datei steht — sonst sucht
      jemand ScriptUI in einer Produktdatei, in der es nicht mehr ist. */
   const von = new Set(classes.map(c => c.g));
-  if (von.has('p')) {
+  if (meta.yielded) {
+    out.push('// Object model, Core JavaScript, the global names AND ScriptUI in one');
+    out.push('// file — for scripts that put up a dialog.');
+    out.push('//');
+    for (const l of wrap(meta.yielded.length + ' product classes give way to the ' +
+      'ScriptUI classes of the same name: ' + meta.yielded.join(', ') + '.', 70))
+      out.push('// ' + l);
+    out.push('// TypeScript holds one meaning per global name, and a dialog needs');
+    out.push('// new Window(…). References to them read "any" — no help, but nothing');
+    out.push('// false either. Where those classes matter more than a dialog, take');
+    out.push('// the plain product file instead.');
+  } else if (von.has('p')) {
     out.push('// Self-contained: includes the Core JavaScript classes and the global');
     out.push('// names (app, alert, …), so no other file is needed.');
     out.push('//');
@@ -357,7 +374,12 @@ function classBodies(classes, T) {
       continue;
     }
 
-    const ext = c.sup && !TS_BUILTIN.has(c.sup) ? ' extends ' + c.sup : '';
+    /* Erweitert wird nur, was in dieser Datei auch eine Klasse ist. Photoshop
+       laesst Klassen von der Enumeration SaveOptions erben — in TypeScript
+       kein Konstruktor und damit ein Fehler (TS2507); und die kombinierte
+       Datei laesst neun Produktklassen ganz weg. */
+    const erbt = c.sup && !TS_BUILTIN.has(c.sup) && by.has(c.sup) && !by.get(c.sup).enum;
+    const ext = erbt ? ' extends ' + c.sup : '';
     out.push(jsdoc(c.d, [], 0) + 'declare class ' + c.n + ext + ' {');
 
     /* Der Index-Zugriff einer Collection ist in TypeScript keine Methode,
@@ -396,8 +418,17 @@ function classBodies(classes, T) {
          getElements() holt daraus die echte Liste. Adobes Modell schreibt
          Page[] — damit scheitert genau der uebliche Gebrauch
          (pages.everyItem().appliedMaster = m). Der Elementtyp trifft beides. */
-      const ret = m.r && m.r.length
+      let ret = m.r && m.r.length
         ? T.of(m.r, m.n === 'everyItem' ? 0 : m.rarr) : 'void';
+
+      /* Zwei Stellen, an denen Adobes ScriptUI-Angabe jeden Dialog blockiert:
+         add() gibt das erzeugte Element zurueck — welches, haengt am ersten
+         Argument ("button", "group") —, im Modell steht Object, und auf Object
+         ist jeder Zugriff ein Fehler. show() liefert bei einem Dialog das
+         Ergebnis, im Modell steht void, und dlg.show() === 1 waere ein Fehler.
+         any sagt hier "steht nicht fest" statt etwas Falsches. */
+      if (c.g === 'sui' && ((m.n === 'add' && ret === 'Object') ||
+        (m.n === 'show' && ret === 'void'))) ret = 'any';
       const base = inherited(c, 'm', m.n);
       const baseRet = base && (base.r && base.r.length ? T.peek(base.r, base.rarr) : 'void');
       const stoert = widens(ret, baseRet) &&
@@ -572,10 +603,14 @@ function llmsProduct(t, classes, kindOf) {
     '`{ "compilerOptions": { "lib": ["es5"], "types": [], "checkJs": false }, ' +
     '"include": ["**/*.js", "**/*.d.ts"] }`. Without it the editor loads the DOM ' +
     'library, and Document, Event, Text and Window resolve to the browser versions. ' +
-    (t.kind === 'Product'
-      ? 'ScriptUI is not in this file — dialog code uses ' + BASE +
-        'scriptui/scriptui.d.ts instead of it, because nine class names exist in both.'
-      : ''));
+    (t.kind === 'Product' ? 'ScriptUI is not in this file.' : ''));
+  if (t.kind === 'Product')
+    L.push('- [' + t.slug + '-scriptui.d.ts](' + BASE + t.slug + '/' + t.slug +
+      '-scriptui.d.ts): the same plus ScriptUI, for scripts with a dialog. Nine ' +
+      'classes carry a name in both models (Window, Button, Event, Events, Group, ' +
+      'ListBox, Panel, RadioButton, StaticText); here they are the ScriptUI ones, ' +
+      'and references to the product classes read `any`. Use either this file or ' +
+      'the plain one, never both — TypeScript holds one meaning per global name.');
   L.push('- [api.json](' + BASE + t.slug + '/api.json): the whole model as JSON. ' +
     'Large — page through it, do not paste it.');
   L.push('- [index.html](' + BASE + t.slug + '/index.html): every object, linked.');

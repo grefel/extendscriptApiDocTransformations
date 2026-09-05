@@ -107,11 +107,17 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
 - **Konstruktoren stehen als Methode mit dem Klassennamen** (`File(path)`,
   `XML(text)`), und die globalen Namen stecken in einer Klasse `global`.
   Für die `.d.ts` wird beides umgeformt — siehe build/README.md.
-- **Das SUI-Suffix gilt nur für die Website.** Neun ScriptUI-Klassen heißen wie
-  Produktklassen (`Window`, `Button`, `Event`, `Events`, `Group`, `ListBox`,
-  `Panel`, `RadioButton`, `StaticText`). In den `.d.ts` steht kein Suffix:
-  Produktdateien enthalten ScriptUI gar nicht, `scriptui.d.ts` trägt die
-  richtigen Namen. Beide zusammen in einem Projekt gehen nicht.
+- **Das SUI-Suffix gilt nur innerhalb des gemeinsamen Modells.** Neun
+  ScriptUI-Klassen heißen wie Produktklassen (`Window`, `Button`, `Event`,
+  `Events`, `Group`, `ListBox`, `Panel`, `RadioButton`, `StaticText`), deshalb
+  braucht `derive()` die Unterscheidung. **In der Ausgabe kommt es nirgends
+  vor** — die ScriptUI-Seiten heißen `Window.html`, die Typen `Window`. Je
+  Produkt gibt es zusätzlich `<slug>-scriptui.d.ts` für Skripte mit Dialog;
+  darin weichen die neun Produktklassen. Nebeneinander legen kann man die
+  Dateien nicht, TypeScript kennt je globalem Namen nur eine Bedeutung.
+- **`check-types.js` hat den Compiler früher nie gestartet** und trotzdem
+  „bestanden" gemeldet (Node verweigert `.cmd` über `execFileSync`). Bei jedem
+  Prüfer, der nur Erfolge meldet: erst nachweisen, dass er fehlschlagen *kann*.
 - **`Changes` ist eine echte Klasse.** Dateinamen wie `changes.html` kollidieren unter
   Windows mit der generierten `Changes.html`; in der DITA-Strecke ging sie so einmal
   verloren. `build.js` prüft das jetzt und bricht ab. Beim Anlegen neuer Topics immer
