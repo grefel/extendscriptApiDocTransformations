@@ -37,7 +37,10 @@ for (const f of files) {
   const kb = Math.round(fs.statSync(f).size / 1024);
   let out = '';
   try {
-    execFileSync(tsc, ['--noEmit', '--skipLibCheck', '--lib', 'es5', '--types', '', f],
+    /* Ohne --skipLibCheck: geprueft werden soll gerade der Inhalt dieser
+       Deklarationsdatei. Mit dem Schalter blieben Fehler darin unsichtbar —
+       im Editor des Nutzers aber nicht. */
+    execFileSync(tsc, ['--noEmit', '--lib', 'es5', '--types', '', f],
       { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
   } catch (e) {
     out = String(e.stdout || '') + String(e.stderr || '');
@@ -55,4 +58,31 @@ for (const f of files) {
 console.log('\n' + (failed
   ? failed + ' von ' + files.length + ' Deklarationen uebersetzen NICHT'
   : 'alle ' + files.length + ' Deklarationen uebersetzen fehlerfrei'));
+
+/* Dass die Datei uebersetzt, heisst noch nicht, dass man mit ihr arbeiten
+   kann: app, alert, new File und everyItem() fehlten oder waren falsch
+   getypt, obwohl alle sieben Dateien fehlerfrei durchliefen. Deshalb kommt
+   ein echtes Skript hinzu — mit checkJs, sonst prueft niemand den Aufruf. */
+for (const fx of fs.readdirSync(path.join(__dirname, 'fixtures'))) {
+  const slug = path.basename(fx, '.js');
+  const dts = path.join(SITE, slug, slug + '.d.ts');
+  if (!fs.existsSync(dts)) continue;
+  let out = '';
+  try {
+    execFileSync(tsc, ['--noEmit', '--allowJs', '--checkJs', '--lib', 'es5',
+      '--types', '', path.join(__dirname, 'fixtures', fx), dts],
+      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  } catch (e) {
+    out = String(e.stdout || '') + String(e.stderr || '');
+  }
+  const errs = out.split('\n').filter(l => /error TS/.test(l));
+  if (errs.length) {
+    failed++;
+    console.log('FAIL Beispielskript build/fixtures/' + fx + '   ' + errs.length + ' Fehler');
+    for (const l of errs.slice(0, 5)) console.log('       ' + l.trim().replace(/^.*fixtures./, ''));
+  } else {
+    console.log('PASS Beispielskript build/fixtures/' + fx + ' gegen ' + slug + '.d.ts');
+  }
+}
+
 process.exit(failed ? 1 : 0);

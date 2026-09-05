@@ -51,6 +51,9 @@
   const BASE = 1.15;
   const STEPS = [0.85, 1, 1.15, 1.3, 1.5];
   const zoomOf = step => Math.round(BASE * step * 1000) / 1000;
+  /* Setzt der Spur-Block weiter unten. Zoomen aendert die nutzbare Kopfbreite,
+     loest aber kein resize aus — die Spur muss also hier mitgezogen werden. */
+  let fitTrail = null;
   const fsBox = $('[data-enhance="fontsize"]');
   if (fsBox) {
     const lvl = $('.lvl', fsBox);
@@ -68,6 +71,7 @@
         b.disabled = b.dataset.f === '-' ? i === 0 : i === STEPS.length - 1;
       });
       fsBox.title = 'Text size ' + Math.round(STEPS[i] * 100) + '%';
+      if (fitTrail) fitTrail();
     }
     buttons.forEach(b => b.addEventListener('click', () => {
       i = Math.min(STEPS.length - 1, Math.max(0, i + (b.dataset.f === '+' ? 1 : -1)));
@@ -108,8 +112,7 @@
       a.title = !uxp ? ''
         : /developer\.adobe\.com/.test(a.dataset.uxpHref)
           ? 'UXP: a different API with the same name'
-          : 'UXP uses the standard JavaScript class — this page describes '
-            + 'ExtendScript’s ES3 version';
+          : 'UXP uses the standard JavaScript class';
     });
     /* Und wo es keins gibt, wird der Link abgeschaltet: ein <a> ohne href ist
        kein Link mehr und auch nicht mehr per Tastatur erreichbar. */
@@ -147,8 +150,9 @@
   }
 
   /* ---------- Zuletzt besucht ----------
-     Die drei zuvor geoeffneten Objekte, neuestes zuerst; die aktuelle Seite
-     steht nicht darin, sie ist ja schon offen.
+     Die fuenf zuvor geoeffneten Objekte, neuestes zuerst; die aktuelle Seite
+     steht nicht darin, sie ist ja schon offen. Wieviele davon wirklich zu sehen
+     sind, entscheidet fitTrail() nach dem Platz in der Kopfzeile.
 
      Eine Liste ueber alle Objektmodelle: der Weg von Document zu String fuehrt
      ueber die Bibliotheksgrenze, und genau dorthin will man auch zurueck.
@@ -167,7 +171,7 @@
       typeof e[1] === 'string' && !(e[0] === HERE && e[1] === CURRENT));
 
     if (CURRENT) store.set('recent', JSON.stringify([[HERE, CURRENT]].concat(seen).slice(0, 12)));
-    const prev = seen.slice(0, 3);
+    const prev = seen.slice(0, 5);
     if (prev.length) {
       /* Trenner als eigene Elemente, nicht als ::before im Link: sonst gehoerte
          der Strich zur Klickflaeche und wuerde beim Kuerzen mit abgeschnitten. */
@@ -177,6 +181,66 @@
         return `<a href="${href}" title="${esc(n)}">${esc(n)}</a>`;
       }).join('<span class="sep">|</span>');
       trail.hidden = false;
+
+      /* Ungekuerzte Namen sind der Sinn der Spur. Passt der aelteste nicht mehr
+         ganz hinein, faellt er weg — sonst schrumpfen alle fuenf gleichmaessig
+         und aus "Page" wird "Pa…". Wieviel Platz noetig ist, haengt an den
+         besuchten Objekten (AutoCorrectPreference braucht das Fuenffache von
+         Page), deshalb wird gemessen statt nach Fensterbreite geschaltet. */
+      const glieder = [...trail.children].filter(e => e.tagName === 'A' ||
+        e.classList.contains('sep'));
+      /* Alles in Layout-Pixeln (offsetWidth, clientWidth, scrollWidth).
+         getBoundingClientRect rechnet den Zoom mit ein, computed styles nicht —
+         gemischt ergibt das unter A+ falsche Breiten. */
+      fitTrail = () => {
+        glieder.forEach(e => e.classList.remove('gone'));
+        const namen = glieder.filter(e => e.tagName === 'A');
+        /* Steht kein Name beschnitten da, passt alles und es ist nichts zu tun.
+           Die Frage laesst sich nur an den Namen stellen, nicht an der Spur:
+           die Flexbox staucht ihre Kinder, statt sie ueberlaufen zu lassen —
+           scrollWidth und clientWidth der Spur sind deshalb immer gleich. */
+        if (!namen.some(a => a.scrollWidth > a.clientWidth + 2)) return;
+
+        const stil = getComputedStyle(trail);
+        const luecke = parseFloat(stil.columnGap || stil.gap) || 9;
+        const kappe = parseFloat(getComputedStyle(glieder[0]).maxWidth) || Infinity;
+        /* Mit allen Eintraegen sichtbar ist clientWidth genau der Platz, den die
+           Flexbox der Spur zugesteht: laeuft der Inhalt ueber, die Zuteilung,
+           sonst die Inhaltsbreite — und dann muss ohnehin nichts weichen. */
+        /* 4 px Rundungsreserve: offsetWidth und scrollWidth sind ganzzahlig,
+           die Summe faellt dadurch bis zu einigen Pixeln zu knapp aus. */
+        const raum = trail.clientWidth - 4;
+        const marke = trail.querySelector('.h');
+        const trenner = glieder.find(e => e.classList.contains('sep'));
+        /* Die Trenner ziehen sich mit negativen Raendern an die Namen heran —
+           ohne die faellt der fuenfte Eintrag weg, obwohl er passt. */
+        const sepStil = trenner && getComputedStyle(trenner);
+        const sepBreit = trenner ? trenner.offsetWidth +
+          parseFloat(sepStil.marginLeft) + parseFloat(sepStil.marginRight) : 8;
+
+        /* Von neu nach alt aufnehmen, solange der naechste Name ganz hineinpasst.
+           Der erste bleibt immer stehen, auch wenn er dafuer gekuerzt wird. */
+        let breit = marke ? marke.offsetWidth : 0, passt = 0;
+        for (const a of namen) {
+          const dazu = Math.min(a.scrollWidth, kappe) + luecke +
+            (passt ? sepBreit + luecke : 0);
+          if (passt && breit + dazu > raum) break;
+          breit += dazu;
+          passt++;
+        }
+
+        let n = 0;
+        for (const e of glieder) {
+          if (e.tagName === 'A') { if (++n > passt) e.classList.add('gone'); }
+          else if (n >= passt) e.classList.add('gone');
+        }
+      };
+      fitTrail();
+      let t = 0;
+      addEventListener('resize', () => {
+        clearTimeout(t);
+        t = setTimeout(fitTrail, 120);
+      });
     }
   }
 
@@ -230,6 +294,14 @@
   if (bar) {
     bar.hidden = false;
     $('#f', bar).addEventListener('input', applyFilter);
+    /* Escape raeumt das Feld und gibt die Tastatur wieder an die Seite. */
+    $('#f', bar).addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      e.stopPropagation();
+      e.target.value = '';
+      applyFilter();
+      e.target.blur();
+    });
     $$('.pill', bar).forEach(p => p.addEventListener('click', () => {
       only = p.dataset.o;
       applyFilter();
@@ -438,6 +510,12 @@
     if (!scrim.classList.contains('on') && !inField(e.target)) {
       if (e.key === '?') { e.preventDefault(); openPal('?'); return; }
       if (e.key === '/') { e.preventDefault(); openPal(); return; }
+      /* F springt in den Memberfilter dieser Seite. Modifikatoren bleiben dem
+         Browser: Strg+F ist seine Suche und darf nicht abgefangen werden. */
+      if (e.key === 'f' && !e.ctrlKey && !e.metaKey && !e.altKey && bar) {
+        const ff = $('#f', bar);
+        if (ff) { e.preventDefault(); ff.focus(); ff.select(); return; }
+      }
     }
     if (!scrim.classList.contains('on')) return;
     if (e.key === 'Escape') closePal();

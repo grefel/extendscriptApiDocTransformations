@@ -648,9 +648,32 @@ h1 {
   border-bottom: 1px solid var(--line)
 }
 
+/* Traegt das Tastaturkuerzel im Feld. Als <label> zeigt schon der Klick auf
+   das Kuerzel ins Feld, statt ins Leere zu gehen. */
+.fwrap {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-width: 200px
+}
+
+.fwrap kbd {
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none
+}
+
+/* Beim Tippen waere das Kuerzel nur noch Kulisse — und stuende irgendwann
+   hinter dem Text. */
+.fwrap:focus-within kbd {
+  display: none
+}
+
 .bar input {
   flex: 1;
-  min-width: 200px;
+  min-width: 0;
   background: var(--panel);
   border: 1px solid var(--field);
   border-radius: 7px;
@@ -705,6 +728,24 @@ h1 {
   color: var(--dim);
   font-size: 12px;
   margin: 5px 0 0
+}
+
+/* Der Codeblock ist zugleich Kopierknopf: sein Inhalt soll in eine Datei
+   wandern, nicht abgetippt werden. */
+.snip {
+  margin: 9px 0 0;
+  padding: 10px 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow-x: auto;
+  font: 12px/1.55 var(--mono);
+  color: var(--ink)
+}
+
+.snip .cpx {
+  white-space: pre;
+  display: block
 }
 
 /* ---------- Tabellen ---------- */
@@ -1422,13 +1463,12 @@ footer .by .sep {
   color: var(--dim)
 }
 
-/* Gemessen: bis 1250 px stehen alle drei Namen ungekuerzt, darunter schrumpfen
-   sie. Zwei vollstaendige Namen orientieren besser als drei angeschnittene,
-   deshalb faellt der aelteste vorher weg (.h ist das erste Kind). */
-@container page (max-width: 1250px) {
-  .trail a:nth-child(4) {
-    display: none
-  }
+/* Wieviele der fuenf Eintraege hineinpassen, entscheidet site.js nach der
+   wirklichen Breite der Namen und setzt .gone auf den Rest. Eine Schwelle nach
+   Fensterbreite kann das nicht: fuenfmal "Page" braucht weniger Platz als
+   einmal "AutoCorrectPreference". */
+.trail .gone {
+  display: none
 }
 
 @container page (max-width: 1100px) {

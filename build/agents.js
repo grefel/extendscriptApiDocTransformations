@@ -36,6 +36,9 @@ const SCALAR = {
   DateSUI: 'Date',
   /* Punkt und Rechteck gibt Adobe als Zahlenfolge zurueck. */
   Rect: 'number[]', UnitPoint: 'number[]', UnitRect: 'number[]',
+  /* TypeScripts Array ist generisch und braucht ein Typargument; Adobe meint
+     an dieser Stelle eine Liste beliebigen Inhalts. */
+  Array: 'any[]',
   'Property Name/Value Pairs': 'any[]',
   /* Adobes Sammelbegriffe fuer "irgendein Objektverweis". */
   IDBasedObject: 'any', NonIDBasedObject: 'any', UIDBasedObject: 'any',
@@ -92,9 +95,21 @@ function makeTypeMapper(known) {
   }
 
   function arrayOf(t) { return /[|\s]/.test(t) ? '(' + t + ')[]' : t + '[]'; }
-  function note(n) { unknown++; seen.set(n, (seen.get(n) || 0) + 1); }
+  let quiet = false;
+  function note(n) {
+    if (quiet) return;
+    unknown++;
+    seen.set(n, (seen.get(n) || 0) + 1);
+  }
 
   return {
+    /* Wie of(), aber ohne die Statistik zu beruehren: der Vergleich mit der
+       Oberklasse fragt Typen ab, die an ihrer eigenen Klasse schon gezaehlt
+       worden sind. */
+    peek(t, arr, mu) {
+      quiet = true;
+      try { return this.of(t, arr, mu); } finally { quiet = false; }
+    },
     /* t: Liste der Typnamen, arr: Type[]-Notation, mu: auch als String erlaubt */
     of(t, arr, mu) {
       const list = (t && t.length ? t : ['Varies']).map(x => map(x, 0));
@@ -115,6 +130,21 @@ function makeTypeMapper(known) {
    Fehler. Sie stehen ausschliesslich in der Kern-JavaScript-Bibliothek. */
 const TS_BUILTIN = new Set(['String', 'Number', 'Boolean', 'Object', 'Array',
   'Function', 'Date', 'RegExp', 'Error', 'Math', 'JSON']);
+
+/* ExtendScript stellt diese beiden als einzelne Objekte bereit, nicht als
+   Klassen: $.writeln("hallo"), ScriptUI.newFont(…). Adobes Modell fuehrt ihre
+   Properties als statisch, ihre Methoden aber als Instanzmethoden — ohne
+   Angleichung waere $.writeln im Editor ein Fehler. Nicht zu verwechseln mit
+   XML oder RegExp: dort sind die Properties statische Schalter, die Methoden
+   aber wirklich Instanzmethoden. */
+const SINGLETON = new Set(['$', 'ScriptUISUI']);
+
+/* Globale Namen, die lib.es5 schon deklariert. ExtendScript hat sie ebenfalls,
+   aber Adobes Signaturen weichen ab — doppelt deklariert gaebe das entweder
+   einen Fehler oder eine irrefuehrende zweite Ueberladung. */
+const ES5_GLOBALS = new Set(['Infinity', 'NaN', 'undefined', 'eval', 'parseInt',
+  'parseFloat', 'isNaN', 'isFinite', 'decodeURI', 'decodeURIComponent',
+  'encodeURI', 'encodeURIComponent', 'escape', 'unescape']);
 
 const IDENT = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 const member = n => IDENT.test(n) ? n : JSON.stringify(n);
@@ -174,10 +204,18 @@ function buildTypes(classes, T, meta) {
   out.push('// Generated from Adobe’s object model export on ' + meta.generated + '.');
   out.push('// ' + meta.home);
   out.push('//');
-  out.push('// Self-contained: includes the Core JavaScript and ScriptUI classes,');
-  out.push('// so no other file is needed. ExtendScript is not a browser — compile');
-  out.push('// with "lib": ["es5"] and without "dom", or names such as Event and');
-  out.push('// Document will clash with the DOM definitions.');
+  out.push('// Self-contained: includes the Core JavaScript and ScriptUI classes');
+  out.push('// and the global names (app, alert, …), so no other file is needed.');
+  out.push('//');
+  out.push('// ExtendScript is not a browser. With the DOM library loaded, Document,');
+  out.push('// Event, Text and Window resolve to the browser versions and everything');
+  out.push('// below becomes invisible — doc.pages would be unknown, doc.createElement');
+  out.push('// would not. Put this next to your scripts as jsconfig.json:');
+  out.push('//');
+  out.push('//   {');
+  out.push('//     "compilerOptions": { "lib": ["es5"], "types": [], "checkJs": false },');
+  out.push('//     "include": ["**/*.js", "**/*.d.ts"]');
+  out.push('//   }');
   out.push('//');
   out.push('// The descriptive texts are Adobe’s. Where Adobe’s own type information');
   out.push('// is unusable, the type is "any" — see the project README.');
@@ -199,8 +237,93 @@ function buildTypes(classes, T, meta) {
 
 function classBodies(classes, T) {
   const out = [];
+
+  /* Signatur und @param-Zeilen einer Methode — fuer Klassenmethoden wie fuer
+     die globalen Funktionen gleich. */
+  const sig = m => {
+    /* Hinter einem optionalen Parameter darf kein Pflichtparameter stehen
+       (TS1016). Adobe markiert das uneinheitlich: alert(message, title?,
+       errorIcon) — also gilt ab dem ersten optionalen alles Weitere als
+       optional. Sonst liesse sich die Datei nicht uebersetzen und alert("x")
+       waere ein Aufruf mit zu wenigen Argumenten. */
+    let opt = false;
+    return {
+      args: m.a.map(a => {
+        /* Math.max/min fuehren ihre Parameter als "value1, value2, ..." — das
+           ist ein Restparameter, kein Bezeichner. */
+        if (!IDENT.test(a.n)) return '...values: ' + T.of(a.t, true, a.mu);
+        opt = opt || !!a.o;
+        return argName(a.n) + (opt ? '?' : '') + ': ' + T.of(a.t, a.arr, a.mu);
+      }),
+      doc: m.a.map(a => '@param ' + (IDENT.test(a.n) ? argName(a.n) : 'values') + ' ' +
+        String(a.d || '').replace(/\s+/g, ' ').trim())
+    };
+  };
+
+  /* Ueberschriebene Member gegen die Oberklassenkette pruefen. */
+  const by = new Map(classes.map(c => [c.n, c]));
+  const inherited = (c, key, name) => {
+    for (let s = c.sup; s && by.has(s); s = by.get(s).sup) {
+      const hit = (by.get(s)[key] || []).find(x => x.n === name);
+      if (hit) return hit;
+    }
+    return null;
+  };
+
+  /* TypeScript verlangt, dass der Typ eines ueberschriebenen Members zum Typ
+     der Oberklasse passt (TS2416). Adobe weitet in den FindChange*-Klassen
+     jede Property um NothingEnum aus — eine Weitung, keine Verengung. Der Typ
+     bleibt stehen wie er ist, unterdrueckt wird nur die Pruefung: sonst zeigt
+     jedes Projekt, das die Datei einbindet, Fehler darin an. Der Kommentar
+     muss unmittelbar ueber der Zeile stehen, das JSDoc darueber bleibt
+     trotzdem am Member haengen. */
+  const ignore = sup => '  // @ts-ignore Adobe widens the type inherited from ' + sup + '.\n';
+  const widens = (mine, base) => {
+    if (!base || mine === base || mine === 'any' || base === 'any') return false;
+    const parts = new Set(base.split(' | '));
+    return !mine.split(' | ').every(x => parts.has(x));
+  };
+
+  /* Weitet eine Klasse einen Property-Typ, passt sie strukturell nicht mehr zu
+     ihrer Oberklasse — dann stoert auch jede Methode, die die Klasse selbst
+     zurueckgibt (getElements, duplicate). Weitet sie nichts, ist so ein
+     Rueckgabetyp von sich aus vertraeglich und braucht keine Unterdrueckung. */
+  const propWidens = new Map();
+  for (const c of classes) {
+    if (c.enum || !c.sup) continue;
+    propWidens.set(c.n, c.p.some(p => {
+      const base = inherited(c, 'p', p.n);
+      return base && widens(T.peek(p.t, p.arr, p.mu), T.peek(base.t, base.arr, base.mu));
+    }));
+  }
+  const bare = s => String(s).replace(/\[\]$/, '');
+  const selfReturn = (c, ret, baseRet) => bare(ret) === c.n && by.has(bare(baseRet)) &&
+    ret.endsWith('[]') === baseRet.endsWith('[]');
+
   for (const c of classes) {
     if (TS_BUILTIN.has(c.n)) continue;      /* TypeScript deklariert die selbst */
+
+    /* Adobes Modell fasst die globalen Namen zu einer Klasse "global"
+       zusammen. In TypeScript muessen es einzelne Deklarationen sein — sonst
+       kennt der Sprachserver "app" beim Tippen nicht. Was lib.es5 selbst
+       mitbringt, bleibt weg: eine zweite Deklaration mit abweichender
+       Signatur ist ein Fehler. */
+    if (c.n === 'global') {
+      for (const p of c.p) {
+        if (ES5_GLOBALS.has(p.n)) continue;
+        out.push(jsdoc(p.d, [rangeNote(p), unitNote(p)], 0) + 'declare ' +
+          (p.rw === 'readonly' ? 'const ' : 'var ') + p.n + ': ' +
+          T.of(p.t, p.arr, p.mu) + ';');
+      }
+      for (const m of c.m) {
+        if (ES5_GLOBALS.has(m.n)) continue;
+        const s = sig(m);
+        out.push(jsdoc(m.d, s.doc, 0) + 'declare function ' + m.n + '(' +
+          s.args.join(', ') + '): ' + (m.r && m.r.length ? T.of(m.r, m.rarr) : 'void') + ';');
+      }
+      out.push('');
+      continue;
+    }
 
     if (c.enum) {
       out.push(jsdoc(c.d, [], 0) + 'declare enum ' + c.n + ' {');
@@ -222,8 +345,11 @@ function classBodies(classes, T) {
 
     for (const p of c.p) {
       const mods = (p.st ? 'static ' : '') + (p.rw === 'readonly' ? 'readonly ' : '');
+      const t = T.of(p.t, p.arr, p.mu);
+      const base = inherited(c, 'p', p.n);
       out.push(jsdoc(p.d, [rangeNote(p), unitNote(p)], 2) +
-        '  ' + mods + member(p.n) + ': ' + T.of(p.t, p.arr, p.mu) + ';');
+        (base && widens(t, T.peek(base.t, base.arr, base.mu)) ? ignore(c.sup) : '') +
+        '  ' + mods + member(p.n) + ': ' + t + ';');
     }
     /* Events sind Zeichenkettenkonstanten auf Klassenebene. */
     for (const e of c.ev)
@@ -231,19 +357,42 @@ function classBodies(classes, T) {
 
     for (const m of c.m) {
       if (m.n === '[]') continue;           /* siehe Indexsignatur oben */
-      const args = m.a.map(a => {
-        /* Math.max/min fuehren ihre Parameter als "value1, value2, ..." — das
-           ist ein Restparameter, kein Bezeichner. */
-        if (!IDENT.test(a.n)) return '...values: ' + T.of(a.t, true, a.mu);
-        return argName(a.n) + (a.o ? '?' : '') + ': ' + T.of(a.t, a.arr, a.mu);
-      });
-      const doc = m.a.map(a => '@param ' + (IDENT.test(a.n) ? argName(a.n) : 'values') + ' ' +
-        String(a.d || '').replace(/\s+/g, ' ').trim());
-      out.push(jsdoc(m.d, doc, 2) +
-        '  ' + member(m.n) + '(' + args.join(', ') + '): ' +
-        (m.r && m.r.length ? T.of(m.r, m.rarr) : 'void') + ';');
+      const s = sig(m);
+
+      /* Den Konstruktor beschreibt Adobe als Methode mit dem Klassennamen:
+         File(path), Folder(path), XML(text). In TypeScript muss daraus ein
+         constructor werden, sonst laesst sich new File("…") nicht pruefen. */
+      if (m.n === c.n) {
+        out.push(jsdoc(m.d, s.doc, 2) + '  constructor(' + s.args.join(', ') + ');');
+        continue;
+      }
+
+      /* everyItem() gibt kein Array zurueck, sondern einen Sammelverweis: auf
+         ihm setzt man eine Property fuer alle Elemente auf einmal, und
+         getElements() holt daraus die echte Liste. Adobes Modell schreibt
+         Page[] — damit scheitert genau der uebliche Gebrauch
+         (pages.everyItem().appliedMaster = m). Der Elementtyp trifft beides. */
+      const ret = m.r && m.r.length
+        ? T.of(m.r, m.n === 'everyItem' ? 0 : m.rarr) : 'void';
+      const base = inherited(c, 'm', m.n);
+      const baseRet = base && (base.r && base.r.length ? T.peek(base.r, base.rarr) : 'void');
+      const stoert = widens(ret, baseRet) &&
+        (propWidens.get(c.n) || !selfReturn(c, ret, baseRet));
+      out.push(jsdoc(m.d, s.doc, 2) +
+        (stoert ? ignore(c.sup) : '') +
+        '  ' + (SINGLETON.has(c.n) ? 'static ' : '') +
+        member(m.n) + '(' + s.args.join(', ') + '): ' + ret + ';');
     }
     out.push('}\n');
+
+    /* Die ScriptUI-Klassen tragen ein Suffix, damit sie nicht mit gleichnamigen
+       Produktklassen kollidieren. Das globale Objekt heisst aber ScriptUI —
+       unter diesem Namen wird es angesprochen. Kein Produkt fuehrt eine Klasse
+       dieses Namens, der Verweis ist also frei. */
+    if (c.n === 'ScriptUISUI' && !by.has('ScriptUI')) {
+      out.push('/** The ScriptUI object, the entry point to the user interface classes. */');
+      out.push('declare const ScriptUI: typeof ScriptUISUI;\n');
+    }
   }
   return '\n' + out.join('\n');
 }
@@ -372,8 +521,12 @@ function llmsProduct(t, classes, kindOf) {
   L.push('## Files');
   L.push('');
   L.push('- [' + t.slug + '.d.ts](' + BASE + t.slug + '/' + t.slug + '.d.ts): TypeScript ' +
-    'declarations, self-contained. Drop it into a project and the language server ' +
-    'answers without any lookup. Compile with `"lib": ["es5"]` and without `dom`.');
+    'declarations, self-contained — the classes, the enumerations and the global ' +
+    'names (app, alert, $). Drop it into a project and the language server answers ' +
+    'without any lookup. It needs a jsconfig.json next to the scripts: ' +
+    '`{ "compilerOptions": { "lib": ["es5"], "types": [], "checkJs": false }, ' +
+    '"include": ["**/*.js", "**/*.d.ts"] }`. Without it the editor loads the DOM ' +
+    'library, and Document, Event, Text and Window resolve to the browser versions.');
   L.push('- [api.json](' + BASE + t.slug + '/api.json): the whole model as JSON. ' +
     'Large — page through it, do not paste it.');
   L.push('- [index.html](' + BASE + t.slug + '/index.html): every object, linked.');
