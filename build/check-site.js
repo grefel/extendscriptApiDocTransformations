@@ -377,20 +377,64 @@ const check = (name, got, want) => {
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   check('kein equals-Hinweis an Objekten', await page.locator('.warn').count(), 0);
 
+  /* --- Kopfzeile: das Suchfeld sitzt mittig ---
+     Es ist mit align-self:center zentriert, bekam aber zusaetzlich den
+     8px-Versatz aus .top>* und sass damit 9px zu tief. */
+  await page.goto(url('indesign/Book.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('Suchfeld sitzt in der Kopfmitte',
+    Math.abs(await page.evaluate(() => {
+      const t = document.querySelector('.top').getBoundingClientRect();
+      const k = document.querySelector('.kbtn').getBoundingClientRect();
+      return (k.top + k.height / 2) - (t.top + t.height / 2);
+    })) <= 1, true);
+
   /* --- UXP: File und Folder zeigen auf Adobes UXP-Referenz --- */
   await page.goto(url('indesign/Rectangle.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
-  const uxpLink = page.locator('a[data-uxp-href]').first();
+  /* Gezielt den File-Link greifen: seit die Standardklassen auf MDN zeigen,
+     tragen auch String und Number ein data-uxp-href, und Number kommt auf
+     dieser Seite zuerst. */
+  const fileLink = () => page.evaluate(() => {
+    const a = [...document.querySelectorAll('td.t a, .arg .at a')]
+      .find(x => x.textContent === 'File');
+    return a ? a.getAttribute('href') : null;
+  });
   check('File verlinkt im ExtendScript-Modus die Klasse',
-    await uxpLink.getAttribute('href'), '../javascript/File.html');
+    await fileLink(), '../javascript/File.html');
   await page.click('.rt button[data-r="uxp"]');
   await page.waitForTimeout(250);
   check('im UXP-Modus auf developer.adobe.com',
-    /developer\.adobe\.com.*persistent-file-storage/.test(await uxpLink.getAttribute('href')),
-    true);
+    /developer\.adobe\.com.*persistent-file-storage/.test(await fileLink()), true);
   await page.click('.rt button[data-r="es"]');
   await page.waitForTimeout(250);
-  check('und wieder zurueck', await uxpLink.getAttribute('href'), '../javascript/File.html');
+  check('und wieder zurueck', await fileLink(), '../javascript/File.html');
+  /* Die uebrigen Kernklassen gibt es unter UXP, nur in moderner Fassung —
+     dorthin fuehrt MDN statt der ES3-Seite von 2003. */
+  await page.goto(url('indesign/Book.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  const coreLink = n => page.evaluate(name => {
+    const a = [...document.querySelectorAll('td.t a')].find(x => x.textContent === name);
+    return a ? (a.getAttribute('href') === null ? '(abgeschaltet)' : a.getAttribute('href')) : null;
+  }, n);
+  check('ExtendScript: Object zeigt in die Bibliothek',
+    await coreLink('Object'), '../javascript/Object.html');
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(300);
+  check('UXP: Object zeigt auf MDN',
+    /developer\.mozilla\.org.*Global_Objects\/Object$/.test(await coreLink('Object')), true);
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(250);
+  check('und wieder in die Bibliothek',
+    await coreLink('Object'), '../javascript/Object.html');
+  /* Eine produkteigene Klasse gleichen Namens darf nicht umgebogen werden.
+     Deshalb greift die Regel nur, wenn der Verweis wirklich nach
+     ../javascript/ zeigt. */
+  check('produkteigene Klassen bleiben unberuehrt',
+    await page.evaluate(() => {
+      const a = [...document.querySelectorAll('td.t a')].find(x => x.textContent === 'Document');
+      return a ? !!a.dataset.uxpHref : 'kein Document-Link';
+    }), false);
   /* Ohne Laufzeit-Umschalter waere das Umhaengen eine leere Zusage. */
   await page.goto(url('illustrator/Document.html'));
   await page.waitForTimeout(250);
