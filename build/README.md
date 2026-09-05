@@ -322,12 +322,32 @@ Erfahrungswerte stehen in `build/notes.js` und erscheinen als Warnung unter der
 Beschreibung des Objekts. Je Eintrag: auf welche Ziele er passt (`products`),
 optional auf welche Laufzeit (`runtime`), und der Text.
 
-Bisher einer: **`XMLElements.itemByName()`**. Die Methode steht gar nicht im
+Zwei Sorten: `byName` fuer ein einzelnes Objekt, `byKind` fuer alle Objekte
+einer Art.
+
+**`XMLElements.itemByName()`**. Die Methode steht gar nicht im
 Objektmodell, obwohl fast jede andere Collection sie hat — der Weg führt über
 `evaluateXPathExpression()` am übergeordneten `XMLElement`. `check-site.js`
 prüft beides nach: dass der Hinweis dort steht, und dass die Methode dort
 wirklich fehlt, während `Pages` sie hat. Ein Hinweis, dessen Behauptung nicht
 mehr stimmt, wäre schlimmer als keiner.
+
+**`equals()` statt `==` an allen Enumerations**, nur unter UXP. Adobes
+Migrationsanleitung nennt genau diesen Fall, und zwar mit einem
+Enumerationswert als Beispiel — deshalb steht der Hinweis dort und nicht an
+jedem Objekt, wo er nur Rauschen wäre.
+
+### Was unter UXP wegfällt
+
+**Ein `File` als Event-Handler gibt es dort nicht.** Betrifft
+`addEventListener`, `removeEventListener` und `EventListeners.add` — 832
+Parameter. Im UXP-Modus verschwindet die Alternative aus der Typangabe,
+**samt Trennstrich**: sonst begänne die Zeile mit einem einsamen `|`.
+`typeList()` packt dafür den Typ und den angrenzenden Strich in einen
+gemeinsamen `data-uxp="hide"`-Knoten.
+
+`app.doScript()` bleibt ausdrücklich unberührt — dort läuft eine
+ExtendScript-Datei auch unter UXP.
 
 ### File und Folder unter UXP
 
@@ -381,6 +401,17 @@ den Umschalter.
   Alternative gewesen, hätte aber jeden Link verschmutzt.
 - Der Themeknopf nennt das **Ziel**, nicht den Zustand: „light mode" schaltet
   nach hell.
+- **Eingabefelder haben einen eigenen Rahmenton, `--field`.** `--line` ist für
+  Tabellenlinien gedacht und lag bei **1,03:1** gegen die Leiste — als Umriss
+  eines Bedienelements unsichtbar, im dunklen Thema erst recht. WCAG 1.4.11
+  verlangt dort 3:1; `--field` liefert 3,09 (hell) und 3,13 (dunkel), in beiden
+  Themen geprüft.
+- **Event-Namen sind Namen wie alle anderen.** Sie hatten `--ev` und damit eine
+  eigene Farbe; kenntlich sind sie schon durch die eigene Tabelle. Die Farbe
+  bleibt nur als Art-Kennzeichnung in der Suchpalette.
+- **Die Recent-Spur trennt mit `|`.** Als eigene Elemente, nicht als `::before`
+  im Link — sonst gehörte der Strich zur Klickfläche und würde beim Kürzen
+  mit abgeschnitten.
 - **`color-scheme` wandert mit dem Theme mit.** Ohne das zeichnet Chrome helle
   System-Scrollbalken in die dunkle Seite — Firefox ist da von Haus aus
   zurückhaltender, deshalb fiel es zuerst nur in Chrome auf. Es färbt auch die
