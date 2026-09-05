@@ -335,6 +335,11 @@ a:hover {
 }
 
 .kbtn {
+  /* align-self:center haelt das Suchfeld aus der gemeinsamen Grundlinie
+     heraus. Sonst bestimmt seine Innenpolsterung, wo die Grundlinie der
+     Kopfzeile liegt — und die Wortmarke sass auf der Startseite, wo es das
+     Suchfeld nicht gibt, 3,7px hoeher als sonst. */
+  align-self: center;
   margin-left: auto;
   display: flex;
   align-items: center;
@@ -381,6 +386,12 @@ kbd {
 
 /* Knoepfe fuer die Schriftgroesse. Sie skalieren mit allem anderen mit — der
    Zoom wirkt auf die ganze Seite, siehe :root. */
+/* Auf der Startseite gibt es kein Suchfeld, das die Bedienelemente nach rechts
+   schiebt — hier uebernimmt das die Zoomgruppe. */
+.home .top .fs {
+  margin-left: auto
+}
+
 .fs {
   display: flex;
   gap: 2px;
@@ -722,7 +733,7 @@ td.t {
   overflow-wrap: anywhere
 }
 
-td.t .arr {
+td.t {
   color: var(--warn)
 }
 
@@ -740,7 +751,7 @@ td.t .lit {
 
 /* Spitze Klammern in derselben Signalfarbe wie die [] der Arrays. Luft daneben,
    sonst verschmilzt "AutoCorrectTables<AutoCorrectTable>" zu einem Wort. */
-.gen {
+.gen .arr {
   color: var(--warn);
   padding-left: 0.18em;
   font-weight: 400
@@ -1033,6 +1044,18 @@ ul.grid li {
 td.d,
 .arg .ad {
   overflow-wrap: anywhere
+}
+
+/* Bekannte Eigenheiten, die nicht im Objektmodell stehen. Auffaellig, aber
+   nicht schreiend — es ist ein Hinweis, keine Fehlermeldung. */
+.warn {
+  margin: 14px 0 0;
+  padding: 10px 13px;
+  border-left: 3px solid var(--warn);
+  background: var(--panel);
+  border-radius: 0 7px 7px 0;
+  font-size: 12.5px;
+  color: var(--ink);
 }
 
 /* Kurzreferenz: Vorschaubild links, Text rechts; bei schmalem Fenster

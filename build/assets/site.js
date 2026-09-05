@@ -97,6 +97,18 @@
   function applyRuntime() {
     const uxp = runtime === 'uxp';
     $$('.mem[data-uxp="hide"]').forEach(el => { el.hidden = uxp; });
+    /* File und Folder heissen in UXP gleich, sind aber eine andere API. Im
+       UXP-Modus zeigt der Link auf Adobes UXP-Referenz. Das urspruengliche
+       Ziel bleibt in data-es-href, damit das Zurueckschalten stimmt. */
+    $$('a[data-uxp-href]').forEach(a => {
+      if (!a.dataset.esHref) a.dataset.esHref = a.getAttribute('href');
+      a.setAttribute('href', uxp ? a.dataset.uxpHref : a.dataset.esHref);
+      a.title = uxp ? 'UXP: a different API with the same name' : '';
+    });
+    /* Hinweise, die nur eine Laufzeit betreffen. */
+    $$('.warn[data-only]').forEach(el => {
+      el.hidden = el.dataset.only !== runtime;
+    });
     /* Die Zahl steht nur noch auf der Pille — in der Ueberschrift war sie
        doppelt und damit Rauschen. */
     const shown = $$('.mem').filter(el => !el.hidden).length;

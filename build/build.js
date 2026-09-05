@@ -250,6 +250,11 @@ function homePage(targets, generated) {
 <body class="home">
 <header class="top">
   <span class="logo">indesign<b>js</b></span>
+  <div class="fs" hidden data-enhance="fontsize">
+    <button type="button" data-f="-" aria-label="Smaller text">A−</button>
+    <span class="lvl"></span>
+    <button type="button" data-f="+" aria-label="Larger text">A+</button>
+  </div>
   <button class="tg" type="button" hidden data-enhance="theme"></button>
 </header>
 <main class="doc"><div class="dmain">

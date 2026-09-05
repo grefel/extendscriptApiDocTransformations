@@ -244,6 +244,69 @@ const check = (name, got, want) => {
   await page.waitForSelector('.side a.on', { timeout: 10000 });
   check('indesign behaelt den Umschalter', await page.locator('.rt').count(), 1);
 
+  /* --- Hinweise, die nicht im Objektmodell stehen (build/notes.js) --- */
+  await page.goto(url('indesign/XMLElements.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('XMLElements traegt den Hinweis', await page.locator('.warn').isVisible(), true);
+  /* Der Hinweis behauptet, die Methode fehle — das muss stimmen. */
+  check('itemByName fehlt dort wirklich',
+    await page.locator('#m-itemByName').count(), 0);
+  check('andere Collections haben itemByName',
+    await (async () => {
+      await page.goto(url('indesign/Pages.html'));
+      await page.waitForTimeout(200);
+      return page.locator('#m-itemByName').count();
+    })(), 1);
+  check('Hinweis steht nur dort',
+    await page.locator('.warn').count(), 0);
+
+  /* --- UXP: File und Folder zeigen auf Adobes UXP-Referenz --- */
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  const uxpLink = page.locator('a[data-uxp-href]').first();
+  check('File verlinkt im ExtendScript-Modus die Klasse',
+    await uxpLink.getAttribute('href'), '../javascript/File.html');
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(250);
+  check('im UXP-Modus auf developer.adobe.com',
+    /developer\.adobe\.com.*persistent-file-storage/.test(await uxpLink.getAttribute('href')),
+    true);
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(250);
+  check('und wieder zurueck', await uxpLink.getAttribute('href'), '../javascript/File.html');
+  /* Ohne Laufzeit-Umschalter waere das Umhaengen eine leere Zusage. */
+  await page.goto(url('illustrator/Document.html'));
+  await page.waitForTimeout(250);
+  check('Illustrator bekommt kein UXP-Ziel',
+    await page.locator('a[data-uxp-href]').count(), 0);
+
+  /* --- Startseite traegt dieselbe Kopfzeile --- */
+  const headGeom = async f => {
+    await page.goto(url(f));
+    await page.waitForTimeout(300);
+    return page.evaluate(() => {
+      const r = s => {
+        const e = document.querySelector(s);
+        return e ? Math.round(e.getBoundingClientRect().top * 10) / 10 : null;
+      };
+      const right = s => {
+        const e = document.querySelector(s);
+        return e ? Math.round(e.getBoundingClientRect().right) : null;
+      };
+      return { logo: r('.logo'), fs: right('.fs'), tg: right('.tg') };
+    });
+  };
+  const homeHead = await headGeom('index.html');
+  const pageHead = await headGeom('indesign/index.html');
+  check('Startseite hat die Zoomknoepfe', homeHead.fs !== null, true);
+  /* Die Wortmarke sass auf der Startseite hoeher, weil dort das Suchfeld fehlt
+     und damit die gemeinsame Grundlinie der Kopfzeile anders lag. */
+  check('Wortmarke sitzt ueberall gleich', homeHead.logo, pageHead.logo);
+  check('Zoom rechtsbuendig wie sonst', homeHead.fs, pageHead.fs);
+  check('Themeknopf rechtsbuendig wie sonst', homeHead.tg, pageHead.tg);
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+
   /* --- Theme: Hell ist der Standard --- */
   const scheme = () =>
     page.evaluate(() => getComputedStyle(document.documentElement).colorScheme);
