@@ -7,6 +7,7 @@
 'use strict';
 
 const notes = require('./notes');
+const shortcuts = require('./shortcuts');
 
 const esc = s => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -136,6 +137,17 @@ function make(data, d, ctx) {
   const extras = x => (x.rng ? ` <span class="rngv">${esc(x.rng[0])}&ndash;${esc(x.rng[1])}</span>` : '')
     + (x.mu ? ' <span class="muv" title="Measurement unit — may also be written as a string such as &quot;12mm&quot;">unit</span>' : '');
 
+  /* Hinweis an einer einzelnen Zeile, direkt unter der Beschreibung. Ein Kasten
+     oben an der Seite waere fuer eine von 341 Properties die falsche Stelle.
+     Gilt er nur fuer UXP, erscheint er nur bei Zielen mit Umschalter. */
+  function memberNote(cls, member) {
+    const n = notes.noteForMember(cls, member, target.slug);
+    if (!n) return '';
+    if (n.runtime && n.runtime !== 'es' && !target.uxp) return '';
+    return `<span class="mwarn"${n.runtime ? ` data-only="${esc(n.runtime)}"` : ''}
+      >${esc(n.text)}</span>`;
+  }
+
   const copyable = (clip, label) =>
     `<button class="cpx" data-cp="${esc(clip)}" title="Copy ${esc(clip)}">${label}</button>`;
 
@@ -200,7 +212,7 @@ function make(data, d, ctx) {
           <td class="t">${typeList(p.t, p.arr) || '<span class="none">—</span>'}${
             p.v ? ` <span class="lit">= ${esc(p.v)}</span>` : ''}${extras(p)}${inlineEnum(p.t)}</td>
           <td class="a ${p.rw === 'readonly' ? 'ro' : 'rw'}" title="${esc(p.rw)}">${esc(p.rw)}</td>
-          <td class="d">${esc(p.d)}</td></tr>`;
+          <td class="d">${esc(p.d)}${memberNote(c.n, p.n)}</td></tr>`;
       }
       h += '</tbody></table></section>';
     }
@@ -262,8 +274,21 @@ function make(data, d, ctx) {
        waere sie falsch. Die Vorschau ist ein Standbild der ersten Seite und
        muss von Hand erneuert werden, wenn das PDF sich aendert (siehe
        build/README.md). */
+    /* Einstiegspunkte links, Kurzreferenz rechts — beide beantworten dieselbe
+       Frage („wo fange ich an?"), deshalb stehen sie nebeneinander. */
+    const quick = shortcuts.products.includes(target.slug)
+      ? shortcuts.list.filter(n => data.classes.some(c => c.n === n)) : [];
+
+    if (quick.length || target.refcard) {
+      h += '<section class="start"><h2 class="sechead" id="start">Start here</h2><div class="startrow">';
+    }
+    if (quick.length) {
+      h += `<nav class="quick" aria-label="Frequently used objects">
+        ${quick.map(n => `<a href="${esc(pageOf(n))}">${esc(n)}</a>`).join('')}</nav>`;
+    }
+
     if (target.refcard) {
-      h += `<section class="refcard"><h2 class="sechead" id="cheatsheet">Cheat sheet</h2>
+      h += `<div class="refcard">
         <a href="https://www.indesignjs.de/idskurzreferenz.pdf" rel="noopener">
           <img src="../assets/idskurzreferenz.jpg" width="840" height="604" loading="lazy"
             alt="InDesign-Skripting-Kurzreferenz: the object model on one page, with the
@@ -273,8 +298,9 @@ function make(data, d, ctx) {
           <span class="d">The object model on one page: which class holds which
           collection, what a property returns, and how you get from
           <code>app</code> to a single character. One landscape page, German
-          labels, English identifiers. PDF, 288 KB.</span></span></a></section>`;
+          labels, English identifiers. PDF, 288 KB.</span></span></a></div>`;
     }
+    if (quick.length || target.refcard) h += '</div></section>';
 
     /* Die ganze Website als ein Archiv. __ZIPMB__ ersetzt build.js, sobald
        gepackt ist — vorher steht die Groesse nicht fest. */
