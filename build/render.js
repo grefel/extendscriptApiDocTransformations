@@ -47,7 +47,7 @@ function splitVersion(title) {
 /* ctx.resolve(name) -> relativer Pfad oder null. Damit landen Typen wie "File"
    auf der gemeinsamen JavaScript-Bibliothek statt ins Leere zu zeigen. */
 function make(data, d, ctx) {
-  const { isCollection, elementOf, objectOf, paramOf, returnedBy } = d;
+  const { isCollection, elementOf, objectOf, paramOf, returnedBy, subOf } = d;
   const { target, targets, resolve } = ctx;
   const kindOf = c => (c.enum ? 'Enumeration' : isCollection(c) ? 'Collection' : 'Object');
   /* File und Folder heissen in UXP genauso, sind aber eine voellig andere API:
@@ -120,12 +120,10 @@ function make(data, d, ctx) {
         (cls === 'EventListeners' && method === 'add'))
       ? ['File'] : null;
 
-  /* NothingEnum hat genau einen Wert, NOTHING, und der sagt nichts aus — er
-     heisst nur "kann auch leer sein". Als Chip stand er unter 1.487 Properties
-     und verdeckte in 11 Faellen den echten Enum daneben. Wird uebersprungen. */
+  /* Auch NothingEnum bekommt seinen Chip: er ist die Kopierhilfe fuer
+     NothingEnum.NOTHING, und genau so schreibt man es im Skript. */
   function inlineEnum(ts) {
     for (const t of ts || []) {
-      if (t === 'NothingEnum') continue;
       const e = d.byName.get(t);
       if (e && e.enum && e.p.length) {
         const shown = e.p.slice(0, 12).map(v =>
@@ -191,6 +189,12 @@ function make(data, d, ctx) {
       <p class="lede">${esc(c.d)}</p>`;
     const anc = chain(c);
     if (anc) h += `<div class="chain">${anc}</div>`;
+    /* Der Weg nach unten. Adobe liefert nur superclass; von PageItem aus ist
+       die Liste der Rahmenarten aber das Nuetzlichere. */
+    const subs = subOf.get(c.n) || [];
+    if (subs.length)
+      h += `<div class="subs"><span class="h">Extended by</span>${
+        subs.map(n => link(n)).join('<span class="sep">·</span>')}</div>`;
 
     /* Erfahrungswerte, die nicht im Objektmodell stehen — siehe build/notes.js.
        Gilt ein Hinweis nur fuer eine Laufzeit, blendet site.js ihn im anderen

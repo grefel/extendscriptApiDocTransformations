@@ -261,7 +261,15 @@ function derive(data) {
         if (!seen.has(t)) { seen.add(t); push(paramOf, t, [c.n, m.n, true, a.n]); }
     }
   }
-  return { byName: byNameMap, isCollection, elementOf, objectOf, paramOf, returnedBy };
+  /* Vererbung rueckwaerts: welche Objekte erben direkt von diesem. Adobe
+     liefert nur den Weg nach oben (superclass), der Weg nach unten ist die
+     interessantere Richtung — von PageItem aus sieht man so alle Rahmenarten. */
+  const subOf = new Map();
+  for (const c of data.classes) if (c.sup && byNameMap.has(c.sup)) push(subOf, c.sup, c.n);
+
+  return {
+    byName: byNameMap, isCollection, elementOf, objectOf, paramOf, returnedBy, subOf
+  };
 }
 
 module.exports = { build, derive };

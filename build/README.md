@@ -26,7 +26,7 @@ Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
 
 | Datei | Aufgabe |
 |---|---|
-| `model.js` | XML → Datenmodell, plus Ableitungen (Collections, Rückwärtsindizes) |
+| `model.js` | XML → Datenmodell, plus Ableitungen (Collections, Rückwärtsindizes, Nachfahren) |
 | `render.js` | Datenmodell → HTML |
 | `build.js` | schreibt `site/`, prüft Dateinamen-Kollisionen |
 | `assets/site.css` | Stylesheet aller Seiten |
@@ -353,20 +353,27 @@ Migrationsanleitung nennt genau diesen Fall, und zwar mit einem
 Enumerationswert als Beispiel — deshalb steht der Hinweis dort und nicht an
 jedem Objekt, wo er nur Rauschen wäre.
 
-### Zwei Zeilen, die nur Rauschen waren
-
-**`NothingEnum` erzeugt keine Wertechips mehr.** Der Enum hat genau einen Wert,
-`NOTHING`, und der heißt nur „kann auch leer sein". Als Chip stand er unter
-**1.487 Properties** und verdeckte in 11 Fällen den echten Enum daneben — bei
-`CellStyle` trug fast jede Zeile einen. `inlineEnum()` überspringt ihn jetzt;
-die nützlichen Chips (`CENTER_ALIGN`, `ASCENT_OFFSET` …) bleiben.
+### Vererbung in beide Richtungen
 
 **Die Vererbungszeile entfällt, wenn es keine Vorfahren gibt.** Bei `CellStyle`
 stand dort nur `CellStyle` — eine Zeile, die den Seitentitel wiederholt.
 Betrifft alle 432 Enumerations und jedes Objekt ohne `superclass`.
 
-Nachfahren zeigt die Seite nicht; ableitbar wäre das (`sup` rückwärts), bisher
-nicht gebaut.
+**Darunter „EXTENDED BY", der Weg nach unten.** Adobe liefert nur
+`superclass`; `derive()` dreht das um (`subOf`). Von `PageItem` aus sieht man so
+alle neun Rahmenarten auf einmal — die interessantere Richtung, wenn man von
+einem Meta-Objekt aus sucht. `SplineItem` hat vier, `Text` sieben.
+
+### Wertechips brauchen Luft
+
+Gemessen lagen zwischen dem letzten Chip und dem Zeilentrenner nur **3 bis
+5 px**; der Chip sah aus, als sitze er auf der Linie. Jetzt oben und unten je
+6 px, also 10 px bis zum Trenner — `check-site.js` misst das nach.
+
+**Auch `NothingEnum` bekommt seinen Chip.** Er hat nur den einen Wert `NOTHING`,
+ist aber die Kopierhilfe für `NothingEnum.NOTHING` — und genau so schreibt man
+es im Skript. Ihn zu unterdrücken war ein Fehlschluss: der Chip ist kein
+Informationsträger, sondern ein Knopf.
 
 ### Einstiegspunkte auf der Übersichtsseite
 
