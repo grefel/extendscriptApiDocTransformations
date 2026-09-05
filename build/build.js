@@ -153,20 +153,32 @@ for (const t of targets) {
     kindOf, elementOf, T, version: t.data.version, generated: t.data.generated
   }));
 
-  /* Die .d.ts ist in sich geschlossen: ein Produkt plus beide gemeinsamen
-     Bibliotheken. Eine Datei ins Projekt legen und fertig — Verweise auf
-     Nachbardateien waeren beim Herunterladen nur eine Fehlerquelle. */
+  /* Die .d.ts eines Produkts ist in sich geschlossen: das Produkt plus Core
+     JavaScript. Eine Datei ins Projekt legen und fertig — Verweise auf
+     Nachbardateien waeren beim Herunterladen nur eine Fehlerquelle.
+
+     ScriptUI steckt bewusst nicht darin. Neun seiner Klassen heissen wie
+     Produktklassen (Window, Button, Event, Events, Group, ListBox, Panel,
+     RadioButton, StaticText); auf der Website trennt sie ein Suffix, im Code
+     waere WindowSUI aber falsch — dort heisst die Klasse Window. ScriptUI
+     bekommt deshalb seine eigene Datei mit den richtigen Namen. */
   const forTypes = t.kind === 'Product'
-    ? t.data.classes.concat(js.data.classes, sui.data.classes)
+    ? t.data.classes.concat(js.data.classes)
     : t.data.classes;
-  write(t.slug + '/' + t.slug + '.d.ts', agents.buildTypes(
-    forTypes.map(c => Object.assign({}, c, { element: elementOf(c) }))
-      .sort((a, b) => a.n < b.n ? -1 : a.n > b.n ? 1 : 0),
-    T, {
-      title: t.label + ' — ' + t.data.version,
-      generated: t.data.generated,
-      home: 'https://www.indesignjs.de/extendscriptAPI/' + t.slug + '/'
-    }));
+  const dtsClasses = (t.slug === 'scriptui'
+    ? agents.withoutSuiSuffix(forTypes.map(c => Object.assign({}, c, { element: elementOf(c) })))
+    : forTypes.map(c => Object.assign({}, c, { element: elementOf(c) })))
+    .sort((a, b) => a.n < b.n ? -1 : a.n > b.n ? 1 : 0);
+  /* Eigene Typabbildung fuer die entsuffixte Datei: die gemeinsame kennt nur
+     WindowSUI und liesse jeden Verweis ins Leere laufen. */
+  const Tdts = t.slug === 'scriptui'
+    ? agents.makeTypeMapper(new Set(dtsClasses.map(c => c.n)))
+    : T;
+  write(t.slug + '/' + t.slug + '.d.ts', agents.buildTypes(dtsClasses, Tdts, {
+    title: t.label + ' — ' + t.data.version,
+    generated: t.data.generated,
+    home: 'https://www.indesignjs.de/extendscriptAPI/' + t.slug + '/'
+  }));
   write(t.slug + '/llms.txt', agents.llmsProduct(t, t.data.classes, kindOf));
   typeStats.push([t.slug, T.stats()]);
 

@@ -137,7 +137,7 @@ const TS_BUILTIN = new Set(['String', 'Number', 'Boolean', 'Object', 'Array',
    Angleichung waere $.writeln im Editor ein Fehler. Nicht zu verwechseln mit
    XML oder RegExp: dort sind die Properties statische Schalter, die Methoden
    aber wirklich Instanzmethoden. */
-const SINGLETON = new Set(['$', 'ScriptUISUI']);
+const SINGLETON = new Set(['$', 'ScriptUISUI', 'ScriptUI']);
 
 /* Globale Namen, die lib.es5 schon deklariert. ExtendScript hat sie ebenfalls,
    aber Adobes Signaturen weichen ab — doppelt deklariert gaebe das entweder
@@ -204,8 +204,32 @@ function buildTypes(classes, T, meta) {
   out.push('// Generated from Adobe’s object model export on ' + meta.generated + '.');
   out.push('// ' + meta.home);
   out.push('//');
-  out.push('// Self-contained: includes the Core JavaScript and ScriptUI classes');
-  out.push('// and the global names (app, alert, …), so no other file is needed.');
+  /* Der Kopf muss beschreiben, was wirklich in der Datei steht — sonst sucht
+     jemand ScriptUI in einer Produktdatei, in der es nicht mehr ist. */
+  const von = new Set(classes.map(c => c.g));
+  if (von.has('p')) {
+    out.push('// Self-contained: includes the Core JavaScript classes and the global');
+    out.push('// names (app, alert, …), so no other file is needed.');
+    out.push('//');
+    out.push('// ScriptUI is not in here. Nine of its classes carry the names of');
+    out.push('// product classes — Window, Button, Event, Events, Group, ListBox,');
+    out.push('// Panel, RadioButton, StaticText — and TypeScript cannot hold both');
+    out.push('// under one global name. Dialog code therefore uses scriptui.d.ts');
+    out.push('// instead of this file.');
+  } else if (von.has('sui')) {
+    out.push('// The ScriptUI classes under the names the code uses: new Window(…),');
+    out.push('// new Button(…). The website appends SUI to tell them apart from the');
+    out.push('// product classes of the same name; a declaration file has no such');
+    out.push('// room, so the suffix is gone here.');
+    out.push('//');
+    out.push('// Use it INSTEAD OF a product file, not next to one: nine names exist');
+    out.push('// in both (Window, Button, Event, Events, Group, ListBox, Panel,');
+    out.push('// RadioButton, StaticText) and TypeScript takes only one meaning per');
+    out.push('// global name.');
+  } else {
+    out.push('// The Core JavaScript classes of ExtendScript and its global names');
+    out.push('// (app, alert, …). Every product file already contains them.');
+  }
   out.push('//');
   out.push('// ExtendScript is not a browser. With the DOM library loaded, Document,');
   out.push('// Event, Text and Window resolve to the browser versions and everything');
@@ -397,6 +421,27 @@ function classBodies(classes, T) {
   return '\n' + out.join('\n');
 }
 
+/* Fuer die eigenstaendige scriptui.d.ts fallen die SUI-Suffixe weg: im Skript
+   heisst die Klasse Window, nicht WindowSUI. Das Suffix trennt sie auf der
+   Website von den neun gleichnamigen Produktklassen (Window, Button, Event,
+   Events, Group, ListBox, Panel, RadioButton, StaticText) — in einer eigenen
+   Datei stehen die nicht daneben. Umgeschrieben wird der Klassenname wie jeder
+   Verweis darauf, sonst zeigt die Datei auf Namen, die sie nicht deklariert. */
+const bareName = n => String(n).replace(/SUI$/, '');
+function withoutSuiSuffix(classes) {
+  const list = xs => (xs || []).map(bareName);
+  return classes.map(c => Object.assign({}, c, {
+    n: bareName(c.n),
+    sup: c.sup ? bareName(c.sup) : c.sup,
+    element: c.element ? bareName(c.element) : c.element,
+    p: c.p.map(p => Object.assign({}, p, { t: list(p.t) })),
+    m: c.m.map(m => Object.assign({}, m, {
+      r: m.r ? list(m.r) : m.r,
+      a: (m.a || []).map(a => Object.assign({}, a, { t: list(a.t) }))
+    }))
+  }));
+}
+
 /* ---------- Markdown je Objekt ---------- */
 
 const mdEsc = s => String(s == null ? '' : s).replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
@@ -526,7 +571,11 @@ function llmsProduct(t, classes, kindOf) {
     'without any lookup. It needs a jsconfig.json next to the scripts: ' +
     '`{ "compilerOptions": { "lib": ["es5"], "types": [], "checkJs": false }, ' +
     '"include": ["**/*.js", "**/*.d.ts"] }`. Without it the editor loads the DOM ' +
-    'library, and Document, Event, Text and Window resolve to the browser versions.');
+    'library, and Document, Event, Text and Window resolve to the browser versions. ' +
+    (t.kind === 'Product'
+      ? 'ScriptUI is not in this file — dialog code uses ' + BASE +
+        'scriptui/scriptui.d.ts instead of it, because nine class names exist in both.'
+      : ''));
   L.push('- [api.json](' + BASE + t.slug + '/api.json): the whole model as JSON. ' +
     'Large — page through it, do not paste it.');
   L.push('- [index.html](' + BASE + t.slug + '/index.html): every object, linked.');
@@ -575,5 +624,6 @@ function llmsRoot(targets, generated) {
 }
 
 module.exports = {
-  makeTypeMapper, buildTypes, markdown, apiJson, llmsProduct, llmsRoot, TS_BUILTIN
+  makeTypeMapper, buildTypes, markdown, apiJson, llmsProduct, llmsRoot, TS_BUILTIN,
+  withoutSuiSuffix
 };

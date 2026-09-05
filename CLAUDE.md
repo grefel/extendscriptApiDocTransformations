@@ -107,6 +107,11 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
 - **Konstruktoren stehen als Methode mit dem Klassennamen** (`File(path)`,
   `XML(text)`), und die globalen Namen stecken in einer Klasse `global`.
   Für die `.d.ts` wird beides umgeformt — siehe build/README.md.
+- **Das SUI-Suffix gilt nur für die Website.** Neun ScriptUI-Klassen heißen wie
+  Produktklassen (`Window`, `Button`, `Event`, `Events`, `Group`, `ListBox`,
+  `Panel`, `RadioButton`, `StaticText`). In den `.d.ts` steht kein Suffix:
+  Produktdateien enthalten ScriptUI gar nicht, `scriptui.d.ts` trägt die
+  richtigen Namen. Beide zusammen in einem Projekt gehen nicht.
 - **`Changes` ist eine echte Klasse.** Dateinamen wie `changes.html` kollidieren unter
   Windows mit der generierten `Changes.html`; in der DITA-Strecke ging sie so einmal
   verloren. `build.js` prüft das jetzt und bricht ab. Beim Anlegen neuer Topics immer

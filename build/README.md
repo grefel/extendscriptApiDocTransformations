@@ -132,9 +132,23 @@ Ausgaben. Nichts davon wird aus der fertigen Seite zurückgelesen.
 | `<slug>/api.json` | eigenes Werkzeug | 7 MB |
 | `llms.txt` (Wurzel und je Ziel) | der Einstieg, der auf all das zeigt | 1,8 KB / 151 KB |
 
-Die `.d.ts` ist **in sich geschlossen**: ein Produkt plus Core JavaScript und
-ScriptUI. Eine Datei ins Projekt legen und fertig — Verweise auf Nachbardateien
-wären beim Herunterladen nur eine Fehlerquelle.
+Die `.d.ts` eines Produkts ist **in sich geschlossen**: das Objektmodell plus
+Core JavaScript plus die globalen Namen. Eine Datei ins Projekt legen und fertig
+— Verweise auf Nachbardateien wären beim Herunterladen nur eine Fehlerquelle.
+
+**ScriptUI steckt nicht darin, sondern in `scriptui/scriptui.d.ts`.** Auf der
+Website tragen seine Klassen ein Suffix (`WindowSUI`), weil neun von ihnen so
+heißen wie Produktklassen: `Window`, `Button`, `Event`, `Events`, `Group`,
+`ListBox`, `Panel`, `RadioButton`, `StaticText`. Im Code ist das Suffix falsch —
+dort steht `new Window("dialog")`. Die eigene Datei trägt deshalb die richtigen
+Namen (`agents.withoutSuiSuffix` schreibt Klassennamen **und** alle Verweise um,
+dazu bekommt sie eine eigene Typabbildung, sonst zeigten die Verweise ins Leere).
+
+Beide Dateien zusammen in einem Projekt gehen **nicht**: gemessen 20 Fehler,
+zehn Namen doppelt (die neun plus `File`). TypeScript kennt je globalem Namen
+nur eine Bedeutung; das ist keine Einstellungssache. Wer einen Dialog schreibt,
+nimmt `scriptui.d.ts` statt der Produktdatei. `build/fixtures/scriptui.js` baut
+einen echten Dialog und hält das fest.
 
 `llms.txt` ist eine Konvention, kein Standard; nichts findet sie von allein. Ihr
 Wert liegt darin, dass man sagen kann „richte deinen Agenten auf diese URL".
