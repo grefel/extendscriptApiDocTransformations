@@ -1104,6 +1104,51 @@ const check = (name, got, want) => {
   await page.click('.fs button[data-f="+"]');   /* zurueck auf 100% */
   await page.waitForTimeout(120);
 
+  /* Bricht die Typangabe um, bestimmt ihre Zelle die Zeilenhoehe — dann muss
+     unter der letzten Zeile genauso viel Luft bleiben wie sonst, sonst klebt
+     "<CompositeFont>" an der naechsten Zeile. */
+  await page.setViewportSize({ width: 1500, height: 1000 });
+  await page.goto(url('indesign/Document.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  /* Zoomstufe ausdruecklich auf den Standard: der Test davor laesst eine
+     andere im Speicher, und mit ihr ist die Typspalte breit genug, dass gar
+     nichts umbricht — die Messung liefe ins Leere. */
+  await page.evaluate(() => localStorage.setItem('fs', '1.15'));
+  await page.reload();
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.waitForTimeout(300);
+  const luft = await page.evaluate(() => {
+    /* Welche Zelle umbricht, haengt an der Fensterbreite — deshalb wird nicht
+       eine bestimmte Zeile gemessen, sondern die erste ein- und die erste
+       mehrzeilige, die die Seite hergibt. */
+    /* getClientRects liefert ein Rechteck je Inline-Element, nicht je Zeile —
+       gezaehlt wird deshalb ueber die verschiedenen Oberkanten. */
+    const kanten = t => {
+      const r = document.createRange();
+      r.selectNodeContents(t);
+      const rects = [...r.getClientRects()].filter(x => x.height > 2 && x.width > 0);
+      return { zeilen: new Set(rects.map(x => Math.round(x.top))).size,
+        unterste: Math.max(...rects.map(x => x.bottom)) };
+    };
+    const unten = t => t.getBoundingClientRect().bottom - kanten(t).unterste;
+    /* Median, nicht die erste Zelle: in einzelnen Zeilen bestimmt die
+       Beschreibung oder eine Wertekette die Hoehe, dort ist unten viel Luft.
+       Verglichen werden genau ein- und genau zweizeilige Typangaben. */
+    const med = n => {
+      const v = [...document.querySelectorAll('td.t')]
+        .filter(t => kanten(t).zeilen === n).map(unten).sort((a, b) => a - b);
+      return v.length ? v[Math.floor(v.length / 2)] : null;
+    };
+    const eine = med(1), zwei = med(2);
+    return { hat: eine !== null && zwei !== null,
+      diff: eine !== null && zwei !== null ? Math.abs(zwei - eine) : -1,
+      mehrzeilig: [...document.querySelectorAll('td.t')]
+        .filter(t => kanten(t).zeilen === 2).length };
+  });
+  check('mehrzeilige Typangaben vorhanden', luft.hat && luft.mehrzeilig > 3, true);
+  check('umgebrochene Typangabe hat unten gleich viel Luft',
+    luft.diff >= 0 && luft.diff < 1, true);
+
   /* Zugriffsspalte: voller Wortlaut solange er passt, darunter abgekuerzt. */
   await overflowAt(1300, 'indesign/AssignedStory.html');
   check('breit: Zugriff ausgeschrieben',
