@@ -179,6 +179,35 @@ const check = (name, got, want) => {
   check('das Kuerzel steht auch dort im Feld',
     (await page.locator('.sidef kbd').innerText()).trim(), 'O');
 
+  /* Tastenwege zu den Pillen: dieselben Buchstaben, die darauf stehen. */
+  await page.locator('h1').click();
+  for (const [taste, erwartet] of [['p', 'p'], ['m', 'm'], ['e', 'e'], ['a', 'all']]) {
+    await page.keyboard.press(taste);
+    await page.waitForTimeout(200);
+    check(taste.toUpperCase() + ' waehlt die Memberart',
+      await page.locator('.pill.on[data-o]').getAttribute('data-o'), erwartet);
+  }
+  await page.keyboard.press('l');
+  await page.waitForTimeout(250);
+  check('L schaltet die Liste an', await page.locator('.mlist:not([hidden])').count(), 1);
+  /* Mitten in einer langen Tabelle beginnt die Liste weit ueber dem Sichtfeld —
+     ohne den Sprung sieht man nur den Fussbereich. */
+  await page.keyboard.press('l');
+  await page.waitForTimeout(250);
+  await page.evaluate(() => window.scrollTo(0, 3000));
+  await page.waitForTimeout(200);
+  await page.keyboard.press('l');
+  await page.waitForTimeout(400);
+  check('und springt zur Liste, wenn sie oberhalb liegt',
+    await page.evaluate(() => {
+      const box = document.querySelector('.mlist').getBoundingClientRect();
+      const bar = document.querySelector('.bar').getBoundingClientRect();
+      return box.top >= bar.bottom - 1 && box.top - bar.bottom < 30;
+    }), true);
+  await page.keyboard.press('l');
+  await page.waitForTimeout(250);
+  await page.evaluate(() => window.scrollTo(0, 0));
+
   /* Umschalter je Membertyp */
   /* Zahlen stehen nur auf den Pillen, nicht doppelt in den Ueberschriften.
      innerText liefert die Ueberschriften per CSS in Grossbuchstaben zurueck. */
@@ -198,7 +227,7 @@ const check = (name, got, want) => {
   check('aktive Pille hebt sich ab', pillStyle.same, false);
   check('Pill-Beschriftungen',
     (await page.locator('.bar .pill').allInnerTexts()).map(s => s.trim()).join(' | '),
-    'All | Properties 126 | Events 2 | Methods 60 | List');
+    'AllA | Properties 126P | Events 2E | Methods 60M | ListL');
   await page.locator('.bar .pill[data-o="e"]').click();
   await page.waitForTimeout(200);
   check('nur Events sichtbar',
@@ -230,7 +259,8 @@ const check = (name, got, want) => {
   await page.waitForTimeout(250);
   check('UXP: Pages Methoden', await page.locator('.mem:not([hidden])').count(), 14);
   check('UXP: Zaehler auf der Pille',
-    (await page.locator('.pill[data-o="m"]').innerText()).trim(), 'Methods 14');
+    (await page.locator('.pill[data-o="m"]').innerText()).replace(/\s+/g, ' ').trim(),
+    'Methods 14M');
   await page.click('.rt button[data-r="es"]');
   await page.waitForTimeout(250);
 

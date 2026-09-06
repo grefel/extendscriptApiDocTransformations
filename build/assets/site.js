@@ -138,7 +138,9 @@
        doppelt und damit Rauschen. */
     const shown = $$('.mem').filter(el => !el.hidden).length;
     const mp = $('.pill[data-o="m"]');
-    if (mp) mp.textContent = 'Methods ' + shown;
+    /* Nur den Text vor dem Kuerzel ersetzen — textContent loeschte das <kbd>
+       mit, und die Methodenpille stand danach ohne ihr M da. */
+    if (mp && mp.firstChild) mp.firstChild.nodeValue = 'Methods ' + shown;
     $$('.rt button').forEach(b => b.classList.toggle('on', b.dataset.r === runtime));
     document.body.dataset.runtime = runtime;
     buildNav();
@@ -305,6 +307,19 @@
      Tabelle an die richtige Stelle. Loest die frueher rechts stehende Spalte
      ab — die nahm dauerhaft Platz und zeigte dasselbe. */
   function buildList(box) {
+    /* Der Typ steht mit dabei — er ist die zweite Frage nach dem Namen und
+       kostet in der Liste nur ein paar Zeichen. Bei Properties die Typspalte,
+       bei Methoden der Rueckgabetyp ohne den Pfeil; Events haben keinen. */
+    const typVon = el => {
+      const t = el.querySelector('td.t, .ret');
+      if (!t) return '';
+      /* Ohne die Wertechips: sonst steht in der Liste
+         "RepaginateOptionNEXT_EVEN_PAGENEXT_ODD_PAGE…" statt des Typnamens. */
+      const kopie = t.cloneNode(true);
+      kopie.querySelectorAll('.vals').forEach(v => v.remove());
+      const s = kopie.textContent.replace(/[→\s]+/g, ' ').trim();
+      return s && s !== '—' ? ` <i>${esc(s)}</i>` : '';
+    };
     const teil = (label, sel, suffix) => {
       const items = $$(sel).filter(el => !el.closest('[hidden]') && !el.hidden);
       if (!items.length) return '';
@@ -312,7 +327,7 @@
         '<div class="cols">' + items.map(el => {
           const name = (el.querySelector('.cpx, td.n, .id') || el).textContent.trim()
             .replace(/\(.*$/, '');
-          return `<a href="#${esc(el.id)}">${esc(name)}${suffix}</a>`;
+          return `<a href="#${esc(el.id)}">${esc(name)}${suffix}${typVon(el)}</a>`;
         }).join('') + '</div>';
     };
     box.innerHTML = teil('Properties', 'tbody tr[id^="p-"]', '')
@@ -334,6 +349,25 @@
     box.hidden = !alsListe;
     const pille = $('.pill[data-mode="list"]', bar);
     if (pille) pille.classList.toggle('on', alsListe);
+  }
+
+  /* Umschalten mitten in einer langen Tabelle: die Liste ist kuerzer und
+     beginnt weit ueber dem Sichtfeld — ohne den Sprung sieht man nur den
+     Fussbereich und muss hochscrollen. Nur wenn sie wirklich oberhalb liegt,
+     sonst rutschte die Seite beim Umschalten vom Anfang weg. */
+  function zeigeAnsicht() {
+    const box = $('[data-enhance="list"]');
+    const ziel = mode === 'list' ? box : $('section[data-sec]:not([hidden])');
+    if (!ziel || !bar) return;
+    if (ziel.getBoundingClientRect().top < bar.getBoundingClientRect().bottom)
+      ziel.scrollIntoView({ block: 'start' });
+  }
+
+  function toggleListe() {
+    mode = mode === 'list' ? 'table' : 'list';
+    store.set('mode', mode);
+    applyFilter();
+    zeigeAnsicht();
   }
 
   /* Wie weit ein Sprungziel unter dem Seitenanfang beginnen muss, damit es
@@ -598,6 +632,23 @@
          Modifikatoren bleiben dem Browser: Strg+F ist seine Suche und darf
          nicht abgefangen werden. */
       if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+        /* L schaltet zwischen Tabellen und Liste, A/P/E/M waehlen die
+           Memberart — dieselben Buchstaben, die auf den Pillen stehen. Eine
+           Pille, die es auf dieser Seite nicht gibt (kein Event), tut nichts:
+           sonst blendete die Taste den ganzen Inhalt aus. */
+        if (e.key === 'l' && bar) {
+          e.preventDefault();
+          toggleListe();
+          return;
+        }
+        const art = { a: 'all', p: 'p', e: 'e', m: 'm' }[e.key];
+        if (art && bar && $('.pill[data-o="' + art + '"]', bar)) {
+          e.preventDefault();
+          only = art;
+          applyFilter();
+          zeigeAnsicht();
+          return;
+        }
         const ziel = e.key === 'f' ? (bar && $('#f', bar)) : e.key === 'o' ? $('#nf') : null;
         if (ziel && ziel.offsetParent) {
           e.preventDefault();

@@ -261,18 +261,21 @@ function make(data, d, ctx) {
         role="note">${esc(note.text)}</p>`;
     }
 
+    /* Das Kuerzel steht auf der Pille, wie F und O in ihren Feldern: ein
+       Tastenweg, den niemand kennt, ist keiner. */
     const pill = (key, text, n) =>
-      `<button class="pill" type="button" data-o="${key}">${text} ${n}</button>`;
+      `<button class="pill" type="button" data-o="${key}">${text} ${n}<kbd>${
+        key === 'p' ? 'P' : key === 'e' ? 'E' : 'M'}</kbd></button>`;
     h += `<div class="bar" hidden data-enhance="filter">
       <label class="fwrap" for="f">
         <input id="f" type="search" placeholder="Filter members…" spellcheck="false" autocomplete="off">
         <kbd>F</kbd></label>
-      <button class="pill on" type="button" data-o="all">All</button>
+      <button class="pill on" type="button" data-o="all">All<kbd>A</kbd></button>
       ${c.p.length ? pill('p', label, c.p.length) : ''}
       ${c.ev.length ? pill('e', 'Events', c.ev.length) : ''}
       ${c.m.length ? pill('m', 'Methods', c.m.length) : ''}
       <button class="pill mode" type="button" data-mode="list"
-        title="All members as a list">List</button></div>
+        title="All members as a list">List<kbd>L</kbd></button></div>
       <div class="mlist" hidden data-enhance="list"></div>`;
 
     if (c.p.length) {

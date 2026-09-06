@@ -361,6 +361,21 @@ Sie ersetzt die frühere **rechte Spalte**: die nahm dauerhaft 210 px, war nur s
 breit wie ein Bezeichner und zeigte dasselbe. Damit ist das Raster überall
 zweispaltig, und der Kopfbereich bekommt die volle Inhaltsbreite.
 
+**Tastenwege:** `L` schaltet um, `A`/`P`/`E`/`M` wählen die Memberart — die
+Buchstaben stehen als `<kbd>` auf den Pillen, wie `F` und `O` in ihren Feldern.
+Eine Pille, die es auf der Seite nicht gibt (kein Event), tut nichts; sonst
+blendete die Taste den ganzen Inhalt aus.
+
+Beim Umschalten **mitten in einer langen Tabelle** springt die Seite zur Liste:
+die ist kürzer und begänne sonst weit über dem Sichtfeld — man sähe nur den
+Fußbereich. Nur wenn sie wirklich oberhalb liegt, sonst rutschte die Seite beim
+Umschalten vom Anfang weg.
+
+Jeder Eintrag nennt **den Typ** hinter dem Namen (`filePath Folder`,
+`addEventListener() EventListener`). Die Wertechips einer Enumeration müssen
+dabei draußen bleiben, sonst steht dort `RepaginateOptionNEXT_EVEN_PAGE…` statt
+des Typnamens.
+
 Drei Feinheiten, alle beim Prüfen aufgefallen:
 
 - **Der Filter wirkt in beiden Ansichten**, die Pillen für die Memberart
@@ -372,6 +387,9 @@ Drei Feinheiten, alle beim Prüfen aufgefallen:
 - **Innerhalb derselben Seite lädt nichts neu**, deshalb hört `site.js` auf
   `hashchange`: ohne das blieb die Liste stehen, wenn man aus der Palette auf
   einen Member derselben Seite sprang.
+
+Die Polsterung des Inhalts liegt bei **16/20/27 px** — zwei Drittel der
+früheren Werte. Der Inhalt soll die Fläche nutzen, der Rand nur trennen.
 
 ## Schmales Fenster
 

@@ -575,7 +575,9 @@ kbd {
 
 .doc {
   min-width: 0;
-  padding: 24px 30px 40px;
+  /* Zwei Drittel der frueheren Werte (24/30/40): der Inhalt soll die Flaeche
+     nutzen, der Rand nur trennen. */
+  padding: 16px 20px 27px;
   display: flex;
   flex-direction: column
 }
@@ -699,6 +701,13 @@ h1 {
 .bar input:focus {
   outline: none;
   border-color: var(--accent)
+}
+
+.pill kbd {
+  margin-left: 5px;
+  padding: 0 4px;
+  font-size: 9.5px;
+  opacity: .75
 }
 
 .pill {
@@ -889,7 +898,8 @@ h1 {
    Filterzeile bei schmalem Fenster in zwei Reihen umbricht. Der Vorgabewert
    gilt ohne JavaScript: dann ist die Filterzeile ausgeblendet und nur die
    44 px der Kopfzeile kleben. */
-.dmain [id] {
+.dmain [id],
+.mlist {
   scroll-margin-top: var(--sticky, 50px)
 }
 
@@ -1229,7 +1239,7 @@ td.d {
 /* Spaltenbreite nach dem laengsten Bezeichner, nicht nach fester Zahl:
    allowFontSizeAndLeadingAdjustment braucht mehr als eine Enum-Konstante. */
 .mlist .cols {
-  columns: 220px;
+  columns: 300px;
   column-gap: 26px
 }
 
@@ -1241,6 +1251,14 @@ td.d {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis
+}
+
+/* Der Typ steht dezent hinter dem Namen — zweite Frage nach dem Namen,
+   aber nicht die erste. */
+.mlist a i {
+  font-style: normal;
+  color: var(--dim);
+  opacity: .85
 }
 
 .mlist a:hover {
