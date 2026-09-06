@@ -70,10 +70,11 @@ hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
 4. Umgang mit kaputten Adobe-Typangaben (siehe unten).
 5. `fixDom.xsl` benennt die Klasse `Index` in `Index_` um — ein Workaround aus der
    DITA-Zeit. Im HTML-Pfad vermutlich unnötig, wird derzeit aber mit angezeigt.
-6. Wie tief soll die Typabbildung gehen? 231 Typangaben je InDesign-Modell sind
-   Adobe-Prosa und landen als `any` — siehe build/README.md. (Die Zahl zählt
-   einen Durchgang über das Modell; früher meldete der Build 856, weil dieselben
-   Typen für Markdown, api.json und `.d.ts` dreifach gezählt wurden.)
+6. Wie tief soll die Typabbildung gehen? **Kein Typname bleibt mehr
+   unauflösbar** — die 231 zusammengepressten Angaben je InDesign-Modell
+   (`boundsKind:BoundingBoxLimits`) löst `fixdom.js` auf. Als `any` bleiben nur
+   Adobes eigene Platzhalter: `Varies` (221), `VariesSUI` (17) und die vier
+   Sammelbegriffe für „irgendein Objektverweis" (je 3). Siehe build/README.md.
 
 ---
 
@@ -106,8 +107,12 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
   nur im Fließtext als „(Range: 0 to 100)". Beides wird ausgewertet.
 - `Varies` ist ein Adobe-Platzhalter und wird verworfen, sobald konkretere Typen daneben
   stehen.
-- Einzelne Typangaben sind unbrauchbar, z. B. `AnimationSetting.motionPath`
-  (`Orderedarraycontainingkey…`). Adobe-Datenfehler, kein Darstellungsproblem.
+- **Adobe presst Feldname und Typ in eine Angabe**, z. B.
+  `boundsKind:BoundingBoxLimits` oder `Ordered array containing key:String`.
+  `fixdom.js` nimmt den Teil hinter dem letzten Doppelpunkt und macht aus einer
+  geordneten Liste ein `Array` (Elementtyp bewusst offen, die Listen sind
+  gemischt). Vorher standen 231 solche Namen je InDesign-Modell als Rohtext in
+  der Typspalte.
 - **Einzelne Typangaben sind schlicht falsch.** `Document.filePath` und
   `Book.filePath` stehen als `File`, liefern aber einen `Folder`. Korrigiert in
   `build/additions.js` (`types`), abgesichert durch `from`. Die gleichlautenden

@@ -500,6 +500,36 @@ const check = (name, got, want) => {
   check('Illustrator bekommt kein UXP-Ziel',
     await page.locator('a[data-uxp-href]').count(), 0);
 
+  /* --- Adobes zusammengepresste Typangaben ---
+     "boundsKind:BoundingBoxLimits" stand als Rohtext in der Typspalte und
+     verlinkte nirgends. Aufgeloest wird der Teil hinter dem Doppelpunkt; eine
+     "Ordered array containing …"-Angabe wird zum Array. */
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('reframe nennt die gemeinten Typen',
+    await page.evaluate(() => {
+      const at = document.querySelector('#m-reframe .arg .at');
+      return [...at.querySelectorAll('a')].map(a => a.textContent).join(' | ');
+    }), 'CoordinateSpaces | BoundingBoxLimits | Array');
+  for (const seite of ['indesign/Rectangle.html', 'indesign/ChangeObjectPreference.html',
+    'indesign/Application.html']) {
+    await page.goto(url(seite));
+    await page.waitForSelector('.sidelist a', { timeout: 10000 });
+    check(seite.replace('indesign/', '') + ': kein Doppelpunkt in einer Typangabe',
+      await page.evaluate(() => [...document.querySelectorAll('td.t, .arg .at, .mem .ret')]
+        .filter(e => /[A-Za-z]:[A-Za-z]/.test(e.textContent)).length), 0);
+  }
+  /* Die Sonderbehandlung von parent uebersprang Adobes Prosa. */
+  await page.goto(url('indesign/Link.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('Link.parent kennt seine vier Typen',
+    (await page.locator('#p-parent td.t').innerText()).replace(/\s+/g, ' ').trim(),
+    'Graphic | Movie | Story | Sound');
+  await page.goto(url('javascript/File.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('File.parent ist ein Folder',
+    (await page.locator('#p-parent td.t').innerText()).trim(), 'Folder');
+
   /* --- Hierarchie: Enthaltensein in beide Richtungen --- */
   await page.goto(url('indesign/Document.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });

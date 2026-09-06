@@ -61,12 +61,30 @@ const lowerTypes = o => JSON.stringify((o.t || o.r || []).map(s => s.toLowerCase
 const isTypeCaseOnly = (was, now) =>
   lowerTypes(was) === lowerTypes(now) && withoutTypes(was) === withoutTypes(now);
 
+/* 9. Adobe presst Feldname und Typ in eine Angabe ("boundsKind:BoundingBoxLimits",
+      "Ordered array containing coordinateSpace:CoordinateSpaces"). Die alte
+      Strecke liess den Doppelpunkt stehen, fixdom.js loest ihn jetzt auf: der
+      Teil dahinter ist der Typ, eine geordnete Liste wird zum Array.
+      Anerkannt nur, wenn die alte Angabe wirklich einen Doppelpunkt trug und
+      sonst nichts abweicht. */
+const MANGLED = /[A-Za-z]:[A-Za-z]/;
+const hasMangledType = o => MANGLED.test(JSON.stringify(o.t || o.r || []));
+
+/* 10. Wo die alte Strecke ueberhaupt keinen Typ hatte, ist jeder Typ ein
+       Gewinn. Betrifft parent: die Sonderbehandlung uebersprang Adobes
+       "Can return:"-Prosa (Link) und die Form "The Folder object …"
+       (File, Folder). */
+const gainedType = (was, now) =>
+  (was.t || []).length === 0 && (now.t || []).length > 0;
+
 /* Ein Member ist entweder gleich, durch die Portierung verbessert, oder eine
    echte Abweichung. Methoden werden bis in die Parameter hinein verglichen —
    dort steckten sonst Unterschiede, die der Methodenvergleich verdeckt. */
 function classify(was, now) {
   if (JSON.stringify(canon(was)) === JSON.stringify(canon(now))) return 'same';
   if (hasBrokenType(was)) return 'fixed';
+  if (hasMangledType(was) && !hasMangledType(now)) return 'fixed';
+  if (gainedType(was, now) && withoutTypes(was) === withoutTypes(now)) return 'fixed';
   if (isWhitespaceArtefact(canon(was), canon(now))) return 'fixed';
   if (isEmptyValueOnly(was, now)) return 'fixed';
   if (isTrailingPunctuationOnly(canon(was), canon(now))) return 'fixed';
