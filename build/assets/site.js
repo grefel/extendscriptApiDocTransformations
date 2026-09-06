@@ -302,6 +302,16 @@
     if (!bar || bar.hidden) return;
     document.documentElement.style.setProperty('--sticky',
       (44 + bar.offsetHeight + 6) + 'px');
+
+    /* Die rechte Spalte gehoert zu den Tabellen, nicht zur Ueberschrift, und
+       beginnt deshalb auf Hoehe der Filterzeile. Wie weit unten die liegt,
+       haengt an Titel, Beschreibung und Hierarchie — also gemessen. Erst auf
+       0 zuruecksetzen, sonst misst man den eigenen Abstand mit. */
+    const rail = $('.rail2');
+    if (!rail) return;
+    rail.style.marginTop = '0px';
+    const d = bar.offsetTop - rail.offsetTop;
+    if (d > 0) rail.style.marginTop = d + 'px';
   }
 
   if (bar) {
