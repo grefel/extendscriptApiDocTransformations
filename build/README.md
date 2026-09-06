@@ -302,10 +302,33 @@ Zwei Sonderwege:
   `MatrixContent`) behält seinen Namen und bekommt am Kopf der Datei ein
   `type X = any`. Das ist ehrlicher als ein nacktes `any` und lässt erkennen,
   was gemeint war.
-- Ein **Doppelpunkt im Typnamen** ist immer ein Adobe-Datenfehler
-  (`Orderedarraycontainingkey:String`) und wird zu `any`. Der Build meldet je
-  Produkt, wie oft das passiert: 231 bei InDesign, davon allein 132 aus zwei
-  kaputten Angaben.
+- Ein **Doppelpunkt im Typnamen** heißt, dass Adobe Feldname und Typ in eine
+  Angabe gepresst hat. `fixdom.js` löst ihn auf: der Teil hinter dem letzten
+  Doppelpunkt ist der Typ, eine „Ordered array containing …"-Angabe wird zum
+  `Array`. Aus `BoundsKind:BoundingBoxLimits` wird `BoundingBoxLimits`, aus
+  `reframe(in: CoordinateSpaces | any)` also
+  `reframe(in: CoordinateSpaces | BoundingBoxLimits | any[])` — und auf der
+  Seite stehen drei verlinkte Typen statt Rohtext. Betraf **231 Angaben je
+  InDesign-Modell**, 223 davon auflösbar; die übrigen acht nannten hinter dem
+  Doppelpunkt selbst keinen Typ (`dataValue:VariesType` → `Varies`).
+  Der Elementtyp des Arrays bleibt bewusst offen: die Listen sind gemischt
+  (Koordinatenraum, Bezugsrahmen, Zahlen), ein geratener Elementtyp würde
+  richtigen Code als falsch melden. Was drinsteht, sagt die Beschreibung.
+
+  **Damit meldet der Build keine unauflösbaren Typnamen mehr.** Was noch `any`
+  wird, sind Adobes eigene Platzhalter, alle in `SCALAR` benannt: `Varies` (221
+  Stellen, davon nur 3 an einer Property), `VariesSUI` (17) und die vier
+  Sammelbegriffe `IDBasedObject`, `NonIDBasedObject`, `UIDBasedObject`,
+  `RootObject` (je 3).
+
+- **`parent` braucht drei Lesarten.** Die Sonderbehandlung kannte nur Adobes
+  Klammerform („The parent … (a Document)"). 21 `parent`-Angaben blieben ohne
+  Typ — und fehlten damit auch in der Hierarchie. Zwei weitere Formen stehen
+  jetzt mit drin: die `Can return:`-Prosa (`Link.parent` → `Story`, `Graphic`,
+  `Movie`, `Sound`) und „The Folder object …" (`File.parent`, `Folder.parent`
+  → `Folder`, samt Adobes Tippfehler „TThe"). Bleiben 18 ScriptUI-Elemente mit
+  „The parent element." — dort nennt Adobe den Behälter nirgends, geraten wird
+  hier nicht.
 
 ## Schmales Fenster
 
