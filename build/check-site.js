@@ -129,7 +129,31 @@ const check = (name, got, want) => {
   await page.waitForTimeout(150);
   check('Strg+F bleibt dem Browser', (await fokus()) === 'f', false);
   check('das Kuerzel steht im Feld',
-    (await page.locator('.fwrap kbd').innerText()).trim(), 'F');
+    (await page.locator('.bar .fwrap kbd').innerText()).trim(), 'F');
+
+  /* O springt in den Filter der Objektliste — dasselbe Muster eine Spalte
+     weiter links. Escape muss auch hier den Fokus zurueckgeben, sonst tippt
+     das naechste F in dieses Feld statt zu springen. */
+  const alleObjekte = await page.locator('.sidelist a').count();
+  await page.keyboard.press('o');
+  await page.waitForTimeout(150);
+  check('O springt in den Objektfilter', await fokus(), 'nf');
+  await page.keyboard.type('rect');
+  await page.waitForTimeout(250);
+  check('und filtert die Objektliste',
+    (await page.locator('.sidelist a').count()) < alleObjekte, true);
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(250);
+  check('Escape leert den Objektfilter',
+    await page.locator('.sidelist a').count(), alleObjekte);
+  check('und gibt den Fokus zurueck', (await fokus()) === 'nf', false);
+  await page.keyboard.press('f');
+  await page.waitForTimeout(150);
+  check('danach greift F wieder', await fokus(), 'f');
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(200);
+  check('das Kuerzel steht auch dort im Feld',
+    (await page.locator('.sidef kbd').innerText()).trim(), 'O');
 
   /* Umschalter je Membertyp */
   /* Zahlen stehen nur auf den Pillen, nicht doppelt in den Ueberschriften.

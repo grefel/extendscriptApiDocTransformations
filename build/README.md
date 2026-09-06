@@ -689,11 +689,13 @@ den Umschalter.
   Und `getBoundingClientRect` rechnet den **Zoom** mit ein, `getComputedStyle`
   nicht — gemischt ergibt das unter A+ falsche Breiten, deshalb durchgehend
   `offsetWidth`/`scrollWidth`.
-- **`F` springt in den Memberfilter**, `Escape` leert ihn und gibt den Fokus
-  zurück. Das Kürzel steht als `<kbd>` im Feld und verschwindet beim Tippen.
-  Modifikatoren bleiben dem Browser: `Strg+F` ist seine Suche. Damit sind es
-  drei Tastenwege — `Strg+K` oder `/` in die Palette, `?` in die Volltextsuche,
-  `F` in den Filter der offenen Seite.
+- **`F` springt in den Memberfilter, `O` in den der Objektliste**, `Escape`
+  leert das jeweilige Feld und gibt den Fokus zurück — ohne das Zurückgeben
+  tippt der nächste Buchstabe ins Feld, statt zu springen. Das Kürzel steht als
+  `<kbd>` im Feld und verschwindet beim Tippen. Modifikatoren bleiben dem
+  Browser: `Strg+F` ist seine Suche. Damit sind es vier Tastenwege —
+  `Strg+K` oder `/` in die Palette, `?` in die Volltextsuche, `F` in den Filter
+  der offenen Seite, `O` in die Objektliste daneben.
 - Der Footer verlinkt **Impressum** und **Datenschutz** auf publishingx.de.
 
 ## Stufe 2: XSLT vollständig abgelöst
