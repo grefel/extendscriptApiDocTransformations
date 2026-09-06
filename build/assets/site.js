@@ -312,6 +312,12 @@
     rail.style.marginTop = '0px';
     const d = bar.offsetTop - rail.offsetTop;
     if (d > 0) rail.style.marginTop = d + 'px';
+
+    /* Ueber der Spalte ist jetzt Platz — den bekommt der Kopf, damit die
+       Hierarchie wirklich am rechten Rand steht. Nur wenn die Spalte auch
+       sichtbar ist: bei schmalem Fenster blendet das Stylesheet sie aus. */
+    document.documentElement.style.setProperty('--headright',
+      d > 0 && rail.offsetParent ? -rail.offsetWidth + 'px' : '0px');
   }
 
   if (bar) {

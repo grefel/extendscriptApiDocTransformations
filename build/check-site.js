@@ -519,30 +519,45 @@ const check = (name, got, want) => {
   await page.waitForTimeout(400);
   const kopfbereich = await page.evaluate(() => {
     const t = document.querySelector('.tree').getBoundingClientRect();
-    const m = document.querySelector('.dmain').getBoundingClientRect();
+    const h = document.querySelector('.head').getBoundingClientRect();
     const k = document.querySelector('.headmain').getBoundingClientRect();
     const r = document.querySelector('.rail2').getBoundingClientRect();
     const bar = document.querySelector('.bar').getBoundingClientRect();
-    return { anteil: Math.round(t.width / m.width * 100),
-      rechtsbuendig: Math.round(t.right - m.right),
+    return { anteil: Math.round(t.width / h.width * 100),
+      rechtsbuendig: Math.round(t.right - h.right),
       nebenDemKopf: t.top < k.bottom - 5,
       versatz: Math.round(r.top - bar.top) };
   });
-  check('Hierarchie nimmt nur ihre Breite ein', kopfbereich.anteil < 40, true);
+  /* Feste Haelften: sonst springt der Kasten von Seite zu Seite in eine andere
+     Groesse und das Blaettern wird unruhig. */
+  check('Hierarchie nimmt die rechte Haelfte', Math.abs(kopfbereich.anteil - 50) <= 2, true);
   check('und steht rechtsbuendig', kopfbereich.rechtsbuendig, 0);
   check('neben dem Kopf, nicht darunter', kopfbereich.nebenDemKopf, true);
+  /* Der Kopf reicht ueber die rechte Spalte hinweg — die beginnt erst auf
+     Hoehe der Filterzeile, darueber ist ihre Spalte leer. Der Abstand zum
+     Fensterrand bleibt derselbe wie im uebrigen Inhalt. */
+  const rand = await page.evaluate(() => {
+    const t = document.querySelector('.tree').getBoundingClientRect();
+    const rail = document.querySelector('.rail2').getBoundingClientRect();
+    const main = document.querySelector('main').getBoundingClientRect();
+    const links = main.left - document.querySelector('.dmain').getBoundingClientRect().left;
+    return { ueberDieSpalte: t.right > rail.left,
+      gleicherRand: Math.abs((rail.right - t.right) + links) < 3 };
+  });
+  check('Kopf nutzt die Flaeche ueber der rechten Spalte', rand.ueberDieSpalte, true);
+  check('und haelt denselben Rand wie der Inhalt', rand.gleicherRand, true);
   /* Auch ein breiter Baum bleibt oben rechts — er wird schmaler und bricht um,
      statt unter den Kopf zu rutschen. */
   await page.goto(url('indesign/Book.html'));
   await page.waitForSelector('.rail2 a', { timeout: 10000 });
   await page.waitForTimeout(300);
-  check('auch ein breiter Baum bleibt oben rechts',
+  check('auch ein breiter Baum bleibt oben rechts und gleich breit',
     await page.evaluate(() => {
       const t = document.querySelector('.tree').getBoundingClientRect();
       const k = document.querySelector('.headmain').getBoundingClientRect();
-      const m = document.querySelector('.dmain').getBoundingClientRect();
-      return t.top < k.bottom - 5 && Math.abs(t.right - m.right) < 2 &&
-        t.width > m.width / 2;
+      const h = document.querySelector('.head').getBoundingClientRect();
+      return t.top < k.bottom - 5 && Math.abs(t.right - h.right) < 2 &&
+        Math.abs(t.width / h.width * 100 - 50) <= 2;
     }), true);
   /* Erst bei schmaler Spalte darf er darunter. */
   await page.setViewportSize({ width: 1000, height: 1000 });

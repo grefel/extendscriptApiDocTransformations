@@ -758,40 +758,49 @@ h1 {
    Die Flaeche neben dem Titel stand sonst leer, und die Hierarchie schob die
    Tabellen nach unten. Passt beides nicht nebeneinander, rutscht der Kasten
    unter den Text und bleibt rechtsbuendig. */
+/* Der Kopf reicht ueber die rechte Spalte hinweg: die beginnt erst auf Hoehe
+   der Filterzeile, darueber ist ihre Spalte leer. site.js setzt --headright
+   auf deren Breite, sobald sie wirklich tiefer sitzt — ohne Skript bleibt der
+   Kasten dort stehen und wuerde ueberdeckt. Der Abstand zum Fensterrand
+   bleibt derselbe wie sonst. */
 .head {
   display: flex;
   align-items: flex-start;
   flex-wrap: nowrap;
-  gap: 8px 26px
+  gap: 8px 26px;
+  margin-right: var(--headright, 0px)
 }
 
+/* Feste Haelften statt einer Breite nach Inhalt: sonst springt der Kasten von
+   Seite zu Seite in eine andere Groesse, und das Blaettern wird unruhig.
+   Die 13 px sind die halbe Luecke, damit beide Haelften wirklich gleich sind. */
 .headmain {
-  flex: 1 1 280px;
+  flex: 1 1 calc(50% - 13px);
   min-width: 0
 }
 
 /* Erst wenn die Spalte wirklich schmal wird, rutscht der Kasten unter den
    Kopf — nebeneinander bliebe fuer den Namen zu wenig uebrig. */
+/* .head .tree, nicht .tree: die Regel fuer die halbe Breite steht weiter unten
+   im Stylesheet und gewaenne sonst bei gleicher Spezifitaet. */
 @container page (max-width: 900px) {
   .head {
     flex-wrap: wrap
   }
 
-  .tree {
-    max-width: 100%
+  .head .tree {
+    flex-basis: auto;
+    width: 100%
   }
 }
 
 /* Nur so breit wie sein Inhalt: bei zwei Eltern und ohne Kinder waere ein Block
    ueber die ganze Spalte fast leer. Der Inhalt bleibt zentriert — die drei
    Zeilen beziehen sich aufeinander. */
-/* Der Kasten sitzt oben rechts, auch wenn der Inhalt lang ist: dann wird er
-   schmaler und seine Zeilen brechen um, statt unter den Kopf zu rutschen.
-   Zwei Drittel der Spalte sind die Grenze — der Rest bleibt dem Namen. */
+/* Der Kasten sitzt oben rechts und nimmt die rechte Haelfte — immer dieselbe,
+   unabhaengig davon, wieviele Namen darin stehen. */
 .tree {
-  width: fit-content;
-  max-width: 66%;
-  flex: 0 1 auto;
+  flex: 0 0 calc(50% - 13px);
   min-width: 0;
   margin: 0 0 4px auto;
   padding: 11px 14px 13px;
