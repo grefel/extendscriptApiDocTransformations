@@ -588,16 +588,26 @@ Der Block trägt echte Information, nicht nur Zierde: eine `Page` steckt laut
 Adobe im `Spread`, nicht im `Document`. Wer sie über `doc.pages` holt, sieht
 hier den Umweg. `check-site.js` prüft genau das.
 
-**Der Kasten sitzt oben rechts, der Kopf links daneben.** Die Fläche neben
-Titel und Beschreibung stand vorher leer, und die Hierarchie schob die Tabellen
-nach unten. Er ist nur so breit wie sein Inhalt (`Color`: 20 % der Spalte) und
-höchstens zwei Drittel davon; ein langer Baum wird schmaler und bricht um,
-statt unter den Kopf zu rutschen. Der Inhalt bleibt zentriert — die drei Zeilen
-beziehen sich aufeinander. Erst unter 900 px Spaltenbreite rutscht er darunter,
-nebeneinander bliebe für den Namen zu wenig übrig.
+**Der Kopf ist halbiert: links Name, Beschreibung und Vererbung, rechts oben
+die Hierarchie.** Die Fläche neben dem Titel stand vorher leer, und die
+Hierarchie schob die Tabellen nach unten.
+
+Beide Hälften sind **fest**, nicht nach Inhalt bemessen. Eine Breite nach Inhalt
+war zuerst gebaut und wieder verworfen: der Kasten sprang von Seite zu Seite in
+eine andere Größe, das Blättern wurde unruhig. Jetzt ist er überall gleich breit
+(49 % des Kopfes), nur die Höhe folgt dem Inhalt. Der Inhalt bleibt zentriert —
+die drei Zeilen beziehen sich aufeinander.
+
+Der Kopf reicht dabei **über die rechte Spalte hinweg**: die beginnt erst auf
+Höhe der Filterzeile, darüber ist ihre Spalte leer. `site.js` setzt dafür
+`--headright` auf deren Breite, sobald sie wirklich tiefer sitzt — ohne Skript
+bleibt sie oben stehen und der Kopf hält Abstand. Erst unter 900 px
+Spaltenbreite rutscht der Kasten unter den Kopf; nebeneinander bliebe für den
+Namen zu wenig übrig. Die Regel dafür steht als `.head .tree`, weil die
+Halbierung weiter unten im Stylesheet sonst gewönne.
 
 Gemessen bei 1848 px Fenster: die Filterzeile steht auf `Book` bei y = 320
-statt 475, auf `Document` bei 556 statt 610.
+statt 475, auf `Color` bei 243 statt 364.
 
 Die **rechte Spalte beginnt auf Höhe der Filterzeile** statt am Seitenkopf: sie
 gehört zu den Tabellen, nicht zur Überschrift. Wie weit unten die Filterzeile
