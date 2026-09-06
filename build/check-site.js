@@ -721,18 +721,26 @@ const check = (name, got, want) => {
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   check('Document steckt in Application',
     (await page.locator('.tree .up').innerText()).trim(), 'Application');
-  check('und enthaelt 81 Objekte',
-    await page.locator('.tree > .down a').count(), 81);
+  /* Ab zwanzig Namen steht die Liste hinter einem Pfeil, sonst offen da. */
+  const KINDER = '.tree > .down a, .tree > .viele > .down a';
+  check('und enthaelt 81 Objekte, eingeklappt',
+    (await page.locator('.tree > .viele > summary').innerText()).trim(), '81 objects');
+  check('der Kasten bleibt dadurch flach',
+    Math.round((await page.locator('.tree').boundingBox()).height) < 200, true);
+  check('aufgeklappt sind es 81 Verweise', await page.locator(KINDER).count(), 81);
   /* Die Preference-Familie steht getrennt: 172 der 423 Objekte gehoeren dazu
      und haengen an fast jedem Objekt. Ab sieben Namen eingeklappt. */
   check('die Preferences stehen getrennt',
     (await page.locator('.tree .prefs summary').innerText()).trim(), '54 preference objects');
   check('und eingeklappt', await page.locator('.tree .prefs[open]').count(), 0);
   check('keine Preference in der Objektzeile',
-    (await page.locator('.tree > .down a').allInnerTexts()).some(t => /Preference$/.test(t)), false);
+    (await page.locator(KINDER).evaluateAll(as => as.map(a => a.textContent.trim())))
+      .some(t => /Preference$/.test(t)), false);
   /* Dass ein Page in "Pages" steckt, ist eine Frage der Schreibweise und
      keine Hierarchie — die Sammlungen bleiben draussen. */
-  const kinder = await page.locator('.tree > .down a').allInnerTexts();
+  /* textContent statt innerText: in einem geschlossenen <details> ist nichts
+     gerendert, und innerText liefert dann leere Zeichenketten. */
+  const kinder = await page.locator(KINDER).evaluateAll(as => as.map(a => a.textContent.trim()));
   check('Sammlungen stehen nicht darin',
     ['Pages', 'Stories', 'Rectangles', 'Layers', 'Spreads'].filter(n => kinder.includes(n)).join(',')
       || 'keine', 'keine');
@@ -744,13 +752,14 @@ const check = (name, got, want) => {
   await page.goto(url('indesign/Spread.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   check('sondern unter Spread',
-    (await page.locator('.tree > .down a').allInnerTexts()).includes('Page'), true);
+    (await page.locator(KINDER).evaluateAll(as => as.map(a => a.textContent.trim())))
+      .includes('Page'), true);
   await page.goto(url('indesign/Document.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   check('die Namenszeile nennt das Objekt',
     (await page.locator('.tree .self').innerText()).trim(), 'Document');
   check('ein Kind fuehrt auf seine Seite',
-    await page.locator('.tree > .down a').first().getAttribute('href'), 'Article.html');
+    await page.locator(KINDER).first().getAttribute('href'), 'Article.html');
   /* Was in 415 von 423 Listen steht, ordnet nichts mehr ein: die drei
      Event-Klassen fallen ganz aus der Hierarchie, in beiden Richtungen und
      auch auf ihrer eigenen Seite. */

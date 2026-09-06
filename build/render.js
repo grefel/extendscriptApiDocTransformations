@@ -242,10 +242,18 @@ function make(data, d, ctx) {
       /* Leerzeichen um den Trenner, nicht nur Rand: ohne sie hat die Zeile
          keine Umbruchstelle und 85 Kindernamen laufen aus der Spalte. */
       const reihe = ns => ns.map(n => link(n)).join(' <span class="sep">|</span> ');
+      /* Ab zwanzig Namen hinter einen Pfeil: die 81 Kinder von Document machten
+         den Kasten hoeher als den halben Bildschirm und schoben die Tabellen
+         hinaus. Kurze Listen bleiben offen, dort waere der Klick nur im Weg. */
+      const MAX_OFFEN = 20;
+      const zeile = (ns, cls, was) => ns.length <= MAX_OFFEN
+        ? `<p class="${cls}">${reihe(ns)}</p>`
+        : `<details class="viele"><summary>${ns.length} ${was}</summary>
+            <p class="${cls}">${reihe(ns)}</p></details>`;
       baum = `<div class="tree"><span class="h">Hierarchy</span>
-        ${ups.length ? `<p class="up">${reihe(ups)}</p>` : ''}
+        ${ups.length ? zeile(ups, 'up', 'objects') : ''}
         <p class="self">${esc(c.n)}</p>
-        ${downs.length ? `<p class="down">${reihe(downs)}</p>` : ''}
+        ${downs.length ? zeile(downs, 'down', 'objects') : ''}
         ${prefs.length ? `<details class="prefs"${prefs.length <= 6 ? ' open' : ''}>
           <summary>${prefs.length} preference object${prefs.length > 1 ? 's' : ''}</summary>
           <p class="down">${reihe(prefs)}</p></details>` : ''}</div>`;

@@ -850,15 +850,21 @@ h1 {
   padding-top: 7px
 }
 
-.tree .prefs > summary {
+.tree summary {
   text-align: center;
   color: var(--dim);
   font: 11.5px var(--sans);
   cursor: pointer
 }
 
-.tree .prefs > summary:hover {
+.tree summary:hover {
   color: var(--accent)
+}
+
+/* Eine eingeklappte Namensliste bekommt oben etwas Luft, damit sie nicht an
+   der Namenszeile klebt. */
+.tree .viele > p {
+  margin-top: 5px
 }
 
 .tree .prefs .down {

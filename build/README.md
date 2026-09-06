@@ -647,9 +647,16 @@ nebeneinander bliebe für den Namen zu wenig übrig. Die Regel dafür steht als
 Gemessen bei 1848 px Fenster: die Filterzeile steht auf `Book` bei y = 320
 statt 475, auf `Color` bei 243 statt 364.
 
-**Preis:** `Document` 426 px (81 Objekte + 54 eingeklappte Preferences),
-`Application` 353 px (68 + 104), `Rectangle` 257 px, `Page` 136 px. Vor dem
-Ausdünnen waren es 609 bzw. 754 px. Drei Objekte haben überhaupt keinen Block.
+**Ab zwanzig Namen steht eine Liste hinter einem Pfeil**, wie die Preferences
+(die ab sieben). Offen blieben sonst 81 Kinder auf `Document` — der Kasten war
+höher als der halbe Bildschirm und schob die Tabellen hinaus. Kurze Listen
+bleiben offen, dort wäre der Klick nur im Weg; im Schnitt sind offene Listen
+1,6 Zeilen lang.
+
+**Preis:** `Document` 153 px, `Application` 129, `Rectangle` 201, `Color` 102.
+Die Filterzeile steht auf `Document` damit bei y = 250 statt 604. Ohne das
+Einklappen waren es 426 bzw. 353 px, vor dem Ausdünnen 609 und 754. Drei Objekte
+haben überhaupt keinen Block.
 
 ### Vererbung in beide Richtungen
 
