@@ -588,6 +588,16 @@ Der Block trägt echte Information, nicht nur Zierde: eine `Page` steckt laut
 Adobe im `Spread`, nicht im `Document`. Wer sie über `doc.pages` holt, sieht
 hier den Umweg. `check-site.js` prüft genau das.
 
+**Der Kasten steht links und ist nur so breit wie sein Inhalt.** Bei zwei
+Eltern und ohne Kinder (`Color`) sind das 20 % der Spalte, bei `Page` 41 %; wo
+die Namen es brauchen, nimmt er die ganze Breite. Der Inhalt bleibt zentriert —
+die drei Zeilen beziehen sich aufeinander. Und die **rechte Spalte beginnt auf
+Höhe der Filterzeile** statt am Seitenkopf: sie gehört zu den Tabellen, nicht
+zur Überschrift. Wie weit unten die Filterzeile liegt, hängt an Titel,
+Beschreibung und Hierarchie, also misst `site.js` es und setzt den Abstand als
+`margin-top` (zurückgesetzt vor jeder Messung, sonst misst man den eigenen
+Abstand mit).
+
 **Preis:** `Document` 426 px (81 Objekte + 54 eingeklappte Preferences),
 `Application` 353 px (68 + 104), `Rectangle` 257 px, `Page` 136 px. Vor dem
 Ausdünnen waren es 609 bzw. 754 px. Drei Objekte haben überhaupt keinen Block.

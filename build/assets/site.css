@@ -754,7 +754,12 @@ h1 {
 /* ---------- Hierarchie: worin steckt es, was steckt darin ----------
    Drei zentrierte Zeilen um den eigenen Namen. Die Beschriftung steht darueber
    und nicht daneben: bei 18 Elternnamen liefe die erste Zeile sonst darunter. */
+/* Der Kasten steht links und ist nur so breit wie sein Inhalt: bei zwei Eltern
+   und ohne Kinder waere ein Block ueber die ganze Spalte fast leer. Der Inhalt
+   bleibt zentriert — die drei Zeilen beziehen sich aufeinander. */
 .tree {
+  width: fit-content;
+  max-width: 100%;
   margin: 16px 0 4px;
   padding: 11px 14px 13px;
   border: 1px solid var(--line);

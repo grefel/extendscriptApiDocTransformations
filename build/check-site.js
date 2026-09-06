@@ -509,6 +509,38 @@ const check = (name, got, want) => {
   check('Illustrator bekommt kein UXP-Ziel',
     await page.locator('a[data-uxp-href]').count(), 0);
 
+  /* --- Kopfbereich: Hierarchie links, rechte Spalte auf Hoehe der Filterzeile ---
+     Der Kasten ist nur so breit wie sein Inhalt; bei zwei Eltern und ohne
+     Kinder waere ein Block ueber die ganze Spalte fast leer. Und die rechte
+     Spalte gehoert zu den Tabellen, nicht zur Ueberschrift. */
+  await page.setViewportSize({ width: 1600, height: 1100 });
+  await page.goto(url('indesign/Color.html'));
+  await page.waitForSelector('.rail2 a', { timeout: 10000 });
+  await page.waitForTimeout(400);
+  const kopfbereich = await page.evaluate(() => {
+    const t = document.querySelector('.tree').getBoundingClientRect();
+    const m = document.querySelector('.dmain').getBoundingClientRect();
+    const r = document.querySelector('.rail2').getBoundingClientRect();
+    const bar = document.querySelector('.bar').getBoundingClientRect();
+    return { anteil: Math.round(t.width / m.width * 100),
+      linksbuendig: Math.round(t.left - m.left),
+      versatz: Math.round(r.top - bar.top) };
+  });
+  check('Hierarchie nimmt nur ihre Breite ein', kopfbereich.anteil < 40, true);
+  check('und steht links', kopfbereich.linksbuendig, 0);
+  check('rechte Spalte beginnt auf Hoehe der Filterzeile',
+    Math.abs(kopfbereich.versatz) <= 2, true);
+  /* Beim Scrollen klebt sie unter der Kopfzeile, nicht darunter verschwunden. */
+  await page.evaluate(() => window.scrollTo(0, 1200));
+  await page.waitForTimeout(300);
+  check('und klebt beim Scrollen unter der Kopfzeile',
+    await page.evaluate(() => {
+      const r = document.querySelector('.rail2').getBoundingClientRect();
+      const k = document.querySelector('.top').getBoundingClientRect();
+      return Math.round(r.top - k.bottom);
+    }), 0);
+  await page.evaluate(() => window.scrollTo(0, 0));
+
   /* --- Sprungziele liegen nicht unter der Filterzeile ---
      Kopf- und Filterzeile kleben. Ohne Abstand landet der angeklickte Member
      darunter, sichtbar ist der naechste — und man haelt ihn fuer den
