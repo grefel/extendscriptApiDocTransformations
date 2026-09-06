@@ -62,6 +62,15 @@ const check = (name, got, want) => {
     await p0.locator('[data-enhance]:not([hidden])').count(), 0);
   check('ohne JS: Navigation zum Index moeglich',
     await p0.locator('a[href="index.html"]').count() > 0, true);
+  /* Ohne Skript klebt nur die Kopfzeile — der Vorgabewert von --sticky. */
+  await p0.goto(url('indesign/Rectangle.html') + '#m-duplicate');
+  await p0.waitForTimeout(400);
+  check('ohne JS: Sprungziel steht unter der Kopfzeile',
+    await p0.evaluate(() => {
+      const z = document.querySelector('#m-duplicate').getBoundingClientRect().top;
+      const k = document.querySelector('.top').getBoundingClientRect().bottom;
+      return z >= k - 1 && z - k < 30;
+    }), true);
   await noJs.close();
 
   /* ---------- mit JavaScript ---------- */
@@ -499,6 +508,40 @@ const check = (name, got, want) => {
   await page.waitForTimeout(250);
   check('Illustrator bekommt kein UXP-Ziel',
     await page.locator('a[data-uxp-href]').count(), 0);
+
+  /* --- Sprungziele liegen nicht unter der Filterzeile ---
+     Kopf- und Filterzeile kleben. Ohne Abstand landet der angeklickte Member
+     darunter, sichtbar ist der naechste — und man haelt ihn fuer den
+     gesuchten. Geprueft aus der rechten Spalte und als Deep-Link, breit wie
+     schmal: bei schmalem Fenster bricht die Filterzeile in zwei Reihen um. */
+  const sprungziel = () => page.evaluate(() => {
+    const z = document.querySelector('#m-findGlyph').getBoundingClientRect().top;
+    const bar = document.querySelector('.bar');
+    const unten = (bar && !bar.hidden ? bar : document.querySelector('.top'))
+      .getBoundingClientRect().bottom;
+    return Math.round(z - unten);
+  });
+  for (const [w, wie] of [[1600, 'breit'], [850, 'schmal']]) {
+    await page.setViewportSize({ width: w, height: 1000 });
+    await page.goto(url('indesign/Application.html'));
+    await page.waitForSelector('.sidelist a', { timeout: 10000 });
+    await page.waitForTimeout(400);
+    await page.evaluate(() => {
+      const a = [...document.querySelectorAll('.rail2 a')]
+        .find(x => x.getAttribute('href') === '#m-findGlyph');
+      if (a) a.click(); else location.hash = '#m-findGlyph';
+    });
+    await page.waitForTimeout(400);
+    const ausSpalte = await sprungziel();
+    check(wie + ': Klick springt unter die Filterzeile',
+      ausSpalte >= 0 && ausSpalte < 30, true);
+    await page.goto(url('indesign/Application.html') + '#m-findGlyph');
+    await page.waitForSelector('.sidelist a', { timeout: 10000 });
+    await page.waitForTimeout(600);
+    const perLink = await sprungziel();
+    check(wie + ': Deep-Link ebenso', perLink >= 0 && perLink < 30, true);
+  }
+  await page.setViewportSize({ width: 1600, height: 1000 });
 
   /* --- Adobes zusammengepresste Typangaben ---
      "boundsKind:BoundingBoxLimits" stand als Rohtext in der Typspalte und
