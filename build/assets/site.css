@@ -15,7 +15,7 @@
 
    Einziger Haken: 100vh rechnet den Zoom nicht mit. Im skalierten
    Koordinatenraum stehen nur 100vh/--fs zur Verfuegung, deshalb steht das so
-   in .grid, .side und .rail2. */
+   in .grid und .side. */
 :root {
   zoom: var(--fs);
   color-scheme: light;
@@ -461,15 +461,8 @@ kbd {
 /* ---------- Raster ---------- */
 .grid {
   display: grid;
-  grid-template-columns: 230px minmax(0, 1fr) 210px;
+  grid-template-columns: 230px minmax(0, 1fr);
   min-height: calc(100vh / var(--fs) - 44px)
-}
-
-/* Die Uebersichtsseiten haben keine Member und damit nichts fuer die rechte
-   Spalte. Die Spur einfach leer stehen zu lassen genuegt nicht: das Raster
-   haelt ihre Breite frei, und die Kurzreferenz liefe darunter. */
-.grid.norail {
-  grid-template-columns: 230px minmax(0, 1fr)
 }
 
 .side {
@@ -758,17 +751,11 @@ h1 {
    Die Flaeche neben dem Titel stand sonst leer, und die Hierarchie schob die
    Tabellen nach unten. Passt beides nicht nebeneinander, rutscht der Kasten
    unter den Text und bleibt rechtsbuendig. */
-/* Der Kopf reicht ueber die rechte Spalte hinweg: die beginnt erst auf Hoehe
-   der Filterzeile, darueber ist ihre Spalte leer. site.js setzt --headright
-   auf deren Breite, sobald sie wirklich tiefer sitzt — ohne Skript bleibt der
-   Kasten dort stehen und wuerde ueberdeckt. Der Abstand zum Fensterrand
-   bleibt derselbe wie sonst. */
 .head {
   display: flex;
   align-items: flex-start;
   flex-wrap: nowrap;
-  gap: 8px 26px;
-  margin-right: var(--headright, 0px)
+  gap: 8px 26px
 }
 
 /* Feste Haelften statt einer Breite nach Inhalt: sonst springt der Kasten von
@@ -1213,53 +1200,52 @@ td.d {
   opacity: .7
 }
 
-/* ---------- rechte Spalte ---------- */
-.rail2 {
-  border-left: 1px solid var(--line);
-  padding: 22px 13px;
-  background: var(--rail);
-  position: sticky;
-  top: 44px;
-  height: calc(100vh / var(--fs) - 44px);
-  overflow-y: auto
+/* ---------- Listenansicht ----------
+   Loest die frueher rechts stehende Spalte ab: die nahm dauerhaft 210 px, zeigte
+   dasselbe und war nur so breit wie ein Name. Hier stehen die Member dort, wo
+   sonst die Tabellen sind — mehrspaltig, damit 341 Namen auf einen Blick
+   passen. Ein Klick fuehrt zurueck in die Tabelle an die richtige Stelle. */
+.mlist {
+  margin: 14px 0 6px
 }
 
-.rail2 .h {
+.mlist .h {
   font: 600 10px var(--sans);
   letter-spacing: .11em;
   text-transform: uppercase;
   color: var(--dim);
-  margin: 14px 0 6px
+  margin: 18px 0 7px
 }
 
-.rail2 .h:first-child {
-  margin-top: 0
+.mlist .h:first-child {
+  margin-top: 4px
 }
 
-.rail2 a {
+.mlist .h .n {
+  opacity: .6;
+  letter-spacing: 0
+}
+
+/* Spaltenbreite nach dem laengsten Bezeichner, nicht nach fester Zahl:
+   allowFontSizeAndLeadingAdjustment braucht mehr als eine Enum-Konstante. */
+.mlist .cols {
+  columns: 220px;
+  column-gap: 26px
+}
+
+.mlist a {
   display: block;
-  padding: 2px 0;
-  font: 11.5px var(--mono);
-  color: var(--dim);
+  padding: 1px 0;
+  font: 12px var(--mono);
+  color: var(--ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis
 }
 
-.rail2 a:hover {
+.mlist a:hover {
   color: var(--accent);
   text-decoration: none
-}
-
-.rail2 .kv {
-  font: 11px var(--mono);
-  color: var(--dim);
-  line-height: 1.85
-}
-
-.rail2 .kv b {
-  color: var(--ink);
-  font-weight: 600
 }
 
 /* ---------- Index ---------- */
@@ -1633,10 +1619,6 @@ footer .by .sep {
     grid-template-columns: 200px minmax(0, 1fr)
   }
 
-  .rail2 {
-    display: none
-  }
-
   .trail {
     display: none
   }
@@ -1741,8 +1723,8 @@ footer .by .sep {
 
   .top,
   .side,
-  .rail2,
   .bar,
+  .mlist,
   .scrim {
     display: none
   }

@@ -44,8 +44,11 @@ hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
 
 ## Entscheidungen
 
-- Konzept B („Console") ist umgesetzt: dreispaltig, tastaturzentriert,
-  Command-Palette über alle Member, Properties/Events/Methoden je als eigene Tabelle.
+- Konzept B („Console") ist umgesetzt: Objektliste links, Inhalt rechts,
+  tastaturzentriert, Command-Palette über alle Member, Properties/Events/Methoden
+  je als eigene Tabelle. Die dritte Spalte („On this page") ist wieder raus — sie
+  nahm dauerhaft 210 px und zeigte dasselbe wie die Pille **List**, die alle
+  Member dort auflistet, wo sonst die Tabellen stehen.
 - **Eine statische Seite je Objekt.** Deep-Links, Drucken und Nutzung ohne JS
   funktionieren; JavaScript ergänzt nur Bedienelemente.
 - Kein `fetch` — Navigationsliste und Suchindex kommen als `<script src>`, damit der
