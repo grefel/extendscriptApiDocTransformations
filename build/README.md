@@ -518,27 +518,37 @@ Quelle ist die `parent`-Property: sie nennt, worin ein Objekt stecken kann
 (`Document` → `Application`, `Rectangle` → 18 Behälter). Die Kinderliste ist
 deren Umkehrung, gebildet in `derive()` als `parentsOf` / `childrenOf`.
 
-Drei Entscheidungen dabei:
+Vier Entscheidungen dabei, alle gegen Rauschen:
 
+- **Enumerations sind nie dabei.** Sie stecken nirgends, sie sind Werte.
 - **Sammlungen bleiben draußen.** Dass eine `Page` in `Pages` steckt, ist eine
   Frage der Schreibweise, keine Hierarchie. (Nebenbei: Adobes Export gibt
   Sammlungen ohnehin keine `parent`-Angabe, sie bekommen also gar keinen Block.)
 - **Ein reiner Selbstbezug fällt weg.** `Application.parent` nennt
   `Application` — das sagt nichts. Steht der eigene Name neben anderen, bleibt
   er: ein `Rectangle` kann in einem `Rectangle` liegen.
-- **Listen über der Hälfte aller Objekte stehen eingeklappt.** `Event`,
-  `EventListener` und `MutationEvent` nennen über 400 Eltern, weil fast jedes
-  Objekt Events auslöst. Zwanzig Zeilen Namen sind keine Hierarchie mehr.
+- **Was fast überall steht, fällt ganz heraus.** `MutationEvent` steht in 422
+  der 423 Kinderlisten, `Event` und `EventListener` in 415 — jedes Objekt kann
+  Events auslösen. Solche Klassen ordnen nichts mehr ein und sind in beiden
+  Richtungen weg, auch auf ihrer eigenen Seite. Die Schwelle ist die Hälfte
+  aller Objekte, damit die Regel bei künftigen Modellen greift, statt drei
+  Namen festzuschreiben.
+
+**Die Preference-Familie steht getrennt und eingeklappt.** 172 der 423 Objekte
+erben von `Preference` und hängen an fast jedem Objekt; `Document` allein hat
+54 davon. Wer nach Struktur sucht, will `Article` und `Story` sehen, nicht 54
+mal „…Preference". Erkannt wird die Familie an der Oberklasse, nicht am Namen —
+sonst fehlten `AnchoredObjectDefault` und `BaselineFrameGridOption`. Bis sechs
+Namen steht die Zeile offen, darüber hinter einer Zusammenfassung
+(`54 preference objects`).
 
 Der Block trägt echte Information, nicht nur Zierde: eine `Page` steckt laut
 Adobe im `Spread`, nicht im `Document`. Wer sie über `doc.pages` holt, sieht
 hier den Umweg. `check-site.js` prüft genau das.
 
-**Preis:** auf `Document` (138 Kinder) ist der Block 609 px hoch, auf
-`Application` (175) 754 px — die Filterzeile rutscht damit auf `Document` von
-y≈210 auf y≈818. Bei 423 Objekten liegt der Median bei 3 Kindern, dort kostet
-er 126 px. Wenn das zu teuer ist: die Kinderzeile ab etwa 40 Namen einklappen
-(dieselbe Mechanik wie bei den Eltern) oder den Block unter die Tabellen legen.
+**Preis:** `Document` 426 px (81 Objekte + 54 eingeklappte Preferences),
+`Application` 353 px (68 + 104), `Rectangle` 257 px, `Page` 136 px. Vor dem
+Ausdünnen waren es 609 bzw. 754 px. Drei Objekte haben überhaupt keinen Block.
 
 ### Vererbung in beide Richtungen
 

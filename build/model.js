@@ -301,11 +301,52 @@ function derive(data) {
     if (isCollection(c)) continue;      /* nur echte Objekte als Kinder */
     for (const e of eltern) push(childrenOf, e, c.n);
   }
-  for (const list of childrenOf.values()) list.sort();
+
+  /* Was fast ueberall steht, ordnet nichts mehr ein: MutationEvent taucht in
+     422 der 423 Kinderlisten auf, Event und EventListener in 415 — jedes
+     Objekt kann Events ausloesen. Solche Klassen fallen ganz aus der
+     Hierarchie, in beiden Richtungen und auch auf ihrer eigenen Seite.
+     Die Schwelle ist die Haelfte aller Objekte, damit die Regel auch bei
+     kuenftigen Modellen greift, statt drei Namen festzuschreiben. */
+  const objekte = data.classes.filter(c => !c.enum && !isCollection(c));
+  const wieOft = new Map();
+  for (const list of childrenOf.values())
+    for (const n of list) wieOft.set(n, (wieOft.get(n) || 0) + 1);
+  const ueberall = new Set([...wieOft].filter(([, z]) => z * 2 > objekte.length).map(([n]) => n));
+
+  /* Die Preference-Familie ist mehr als ein Drittel des Objektmodells (172
+     Klassen) und traegt fast jedes Objekt als Kind. Sie steht deshalb getrennt:
+     wer nach Struktur sucht, will Article und Story sehen, nicht 53 mal
+     "…Preference". Erkannt wird sie an der Oberklasse, nicht am Namen —
+     AnchoredObjectDefault und BaselineFrameGridOption gehoeren dazu. */
+  const erbtVonPreference = c => {
+    let x = c, g = 0;
+    while (x && g++ < 12) { if (x.sup === 'Preference') return true; x = byNameMap.get(x.sup); }
+    return false;
+  };
+  const preference = new Set(objekte.filter(erbtVonPreference).map(c => c.n));
+  preference.add('Preference');
+
+  const prefsOf = new Map();
+  for (const [key, list] of childrenOf) {
+    const rest = [], prefs = [];
+    for (const n of list.sort()) {
+      if (ueberall.has(n)) continue;
+      (preference.has(n) ? prefs : rest).push(n);
+    }
+    if (rest.length) childrenOf.set(key, rest); else childrenOf.delete(key);
+    if (prefs.length) prefsOf.set(key, prefs);
+  }
+  for (const key of [...parentsOf.keys()]) {
+    if (ueberall.has(key)) { parentsOf.delete(key); continue; }
+    const rest = parentsOf.get(key).filter(n => !ueberall.has(n));
+    if (rest.length) parentsOf.set(key, rest); else parentsOf.delete(key);
+  }
+  for (const key of ueberall) { childrenOf.delete(key); prefsOf.delete(key); }
 
   return {
     byName: byNameMap, isCollection, elementOf, objectOf, paramOf, returnedBy, subOf,
-    parentsOf, childrenOf
+    parentsOf, childrenOf, prefsOf
   };
 }
 
