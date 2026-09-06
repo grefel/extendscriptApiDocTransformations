@@ -667,6 +667,13 @@ h1 {
 .fwrap {
   position: relative;
   display: flex;
+  min-width: 0
+}
+
+/* Nur ueber den Tabellen teilt sich das Feld die Zeile mit den Pillen und
+   braucht eine Untergrenze. In der Objektliste steht es allein und muss mit
+   der Leiste schmaler werden koennen. */
+.bar .fwrap {
   flex: 1;
   min-width: 200px
 }

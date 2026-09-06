@@ -455,8 +455,10 @@ function shell({ title, description, body, current, target, targets, data, isInd
 <div class="grid${isIndex ? ' norail' : ''}">
   <nav class="side" aria-label="Objects"><a class="allobjects" href="index.html">All entries →</a>
     <div class="sidef" hidden data-enhance="navfilter">
-      <input id="nf" type="search" placeholder="Filter objects…" spellcheck="false"
-        autocomplete="off" aria-label="Filter the object list"></div>
+      <label class="fwrap" for="nf">
+        <input id="nf" type="search" placeholder="Filter objects…" spellcheck="false"
+          autocomplete="off" aria-label="Filter the object list">
+        <kbd>O</kbd></label></div>
     <div class="sidelist"></div></nav>
   <main class="doc"><div class="dmain">${body}</div>
     <footer>

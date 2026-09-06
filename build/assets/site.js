@@ -366,6 +366,9 @@
       e.stopPropagation();          /* nicht die Suchpalette mitschliessen */
       nf.value = ''; navQuery = ''; store.set('navq', '');
       buildNav();
+      /* Fokus zurueck an die Seite, sonst tippt das naechste F oder O in
+         dieses Feld statt zu springen. */
+      nf.blur();
     });
   }
 
@@ -510,11 +513,17 @@
     if (!scrim.classList.contains('on') && !inField(e.target)) {
       if (e.key === '?') { e.preventDefault(); openPal('?'); return; }
       if (e.key === '/') { e.preventDefault(); openPal(); return; }
-      /* F springt in den Memberfilter dieser Seite. Modifikatoren bleiben dem
-         Browser: Strg+F ist seine Suche und darf nicht abgefangen werden. */
-      if (e.key === 'f' && !e.ctrlKey && !e.metaKey && !e.altKey && bar) {
-        const ff = $('#f', bar);
-        if (ff) { e.preventDefault(); ff.focus(); ff.select(); return; }
+      /* F springt in den Memberfilter dieser Seite, O in den der Objektliste.
+         Modifikatoren bleiben dem Browser: Strg+F ist seine Suche und darf
+         nicht abgefangen werden. */
+      if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+        const ziel = e.key === 'f' ? (bar && $('#f', bar)) : e.key === 'o' ? $('#nf') : null;
+        if (ziel && ziel.offsetParent) {
+          e.preventDefault();
+          ziel.focus();
+          ziel.select();
+          return;
+        }
       }
     }
     if (!scrim.classList.contains('on')) return;
