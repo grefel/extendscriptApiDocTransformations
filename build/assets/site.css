@@ -798,16 +798,28 @@ h1 {
   opacity: .4
 }
 
-/* Eine Liste, die fast alle Objekte nennt, steht eingeklappt da. */
-.tree .most > summary {
+/* Die Preference-Familie steht getrennt und eingeklappt: 172 der 423 Objekte
+   gehoeren dazu und haengen an fast jedem Objekt. Wer nach Struktur sucht,
+   will Article und Story sehen, nicht 53 mal "…Preference". */
+.tree .prefs {
+  margin-top: 7px;
+  border-top: 1px solid var(--line);
+  padding-top: 7px
+}
+
+.tree .prefs > summary {
   text-align: center;
   color: var(--dim);
   font: 11.5px var(--sans);
   cursor: pointer
 }
 
-.tree .most > summary:hover {
+.tree .prefs > summary:hover {
   color: var(--accent)
+}
+
+.tree .prefs .down {
+  margin-top: 5px
 }
 
 /* Der Codeblock ist zugleich Kopierknopf: sein Inhalt soll in eine Datei

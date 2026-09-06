@@ -505,11 +505,18 @@ const check = (name, got, want) => {
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   check('Document steckt in Application',
     (await page.locator('.tree .up').innerText()).trim(), 'Application');
-  check('und enthaelt 138 Objekte',
-    await page.locator('.tree .down a').count(), 138);
+  check('und enthaelt 81 Objekte',
+    await page.locator('.tree > .down a').count(), 81);
+  /* Die Preference-Familie steht getrennt: 172 der 423 Objekte gehoeren dazu
+     und haengen an fast jedem Objekt. Ab sieben Namen eingeklappt. */
+  check('die Preferences stehen getrennt',
+    (await page.locator('.tree .prefs summary').innerText()).trim(), '54 preference objects');
+  check('und eingeklappt', await page.locator('.tree .prefs[open]').count(), 0);
+  check('keine Preference in der Objektzeile',
+    (await page.locator('.tree > .down a').allInnerTexts()).some(t => /Preference$/.test(t)), false);
   /* Dass ein Page in "Pages" steckt, ist eine Frage der Schreibweise und
      keine Hierarchie — die Sammlungen bleiben draussen. */
-  const kinder = await page.locator('.tree .down a').allInnerTexts();
+  const kinder = await page.locator('.tree > .down a').allInnerTexts();
   check('Sammlungen stehen nicht darin',
     ['Pages', 'Stories', 'Rectangles', 'Layers', 'Spreads'].filter(n => kinder.includes(n)).join(',')
       || 'keine', 'keine');
@@ -521,26 +528,23 @@ const check = (name, got, want) => {
   await page.goto(url('indesign/Spread.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   check('sondern unter Spread',
-    (await page.locator('.tree .down a').allInnerTexts()).includes('Page'), true);
+    (await page.locator('.tree > .down a').allInnerTexts()).includes('Page'), true);
   await page.goto(url('indesign/Document.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   check('die Namenszeile nennt das Objekt',
     (await page.locator('.tree .self').innerText()).trim(), 'Document');
   check('ein Kind fuehrt auf seine Seite',
-    await page.locator('.tree .down a').first().getAttribute('href'),
-    'AdjustLayoutPreference.html');
-  /* Fast jedes Objekt kann Events ausloesen: 415 Eltern sind keine Hierarchie
-     mehr, die Liste steht deshalb eingeklappt da. */
-  await page.goto(url('indesign/Event.html'));
-  await page.waitForSelector('.sidelist a', { timeout: 10000 });
-  check('sehr lange Listen sind eingeklappt',
-    await page.locator('.tree details:not([open]) .up').count(), 1);
-  check('der Block bleibt dadurch flach',
-    Math.round((await page.locator('.tree').boundingBox()).height) < 200, true);
-  await page.locator('.tree summary').click();
-  await page.waitForTimeout(200);
-  check('aufgeklappt stehen alle Eltern da',
-    await page.locator('.tree .up a').count(), 415);
+    await page.locator('.tree > .down a').first().getAttribute('href'), 'Article.html');
+  /* Was in 415 von 423 Listen steht, ordnet nichts mehr ein: die drei
+     Event-Klassen fallen ganz aus der Hierarchie, in beiden Richtungen und
+     auch auf ihrer eigenen Seite. */
+  check('Event steht nicht unter Document', kinder.includes('Event'), false);
+  check('EventListener auch nicht', kinder.includes('EventListener'), false);
+  for (const obj of ['Event', 'EventListener', 'MutationEvent']) {
+    await page.goto(url('indesign/' + obj + '.html'));
+    await page.waitForTimeout(200);
+    check(obj + ' selbst ohne Hierarchie-Block', await page.locator('.tree').count(), 0);
+  }
   /* Sammlungen haben in Adobes Export keine parent-Angabe, Enumerations
      ueberhaupt keine Hierarchie. */
   for (const [obj, was] of [['Rectangles', 'Sammlung'], ['NothingEnum', 'Enumeration']]) {

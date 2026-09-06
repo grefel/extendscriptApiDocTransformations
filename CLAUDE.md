@@ -93,9 +93,10 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
 - **`<datatype><array/>`** markiert die `Type[]`-Notation (703 Properties).
 - **Die `parent`-Property ist die Hierarchie.** Sie nennt, worin ein Objekt
   stecken kann; die Kinderliste ist deren Umkehrung (`derive()`:
-  `parentsOf`/`childrenOf`). Sammlungen haben in Adobes Export **keine**
-  `parent`-Angabe. `Event`/`EventListener`/`MutationEvent` nennen über 400
-  Eltern — fast jedes Objekt löst Events aus.
+  `parentsOf`/`childrenOf`/`prefsOf`). Sammlungen haben in Adobes Export
+  **keine** `parent`-Angabe. `Event`/`EventListener`/`MutationEvent` stehen in
+  415+ von 423 Listen und fallen deshalb ganz aus der Hierarchie; die 172
+  Klassen der `Preference`-Familie (erkannt an der Oberklasse) stehen getrennt.
 - **242 Methoden heißen wörtlich `[]`** (`Pages.[]`, `Rectangles.[]`) — der Index-Zugriff
   auf Collections. Der funktioniert in UXP nicht und wird dort ausgeblendet.
 - **Optionale Parameter** sind uneinheitlich markiert: teils `@optional`, teils nur durch
