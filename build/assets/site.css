@@ -395,7 +395,12 @@ kbd {
   background: var(--bg)
 }
 
+/* flex:none und nowrap, sonst staucht die Kopfzeile den Knopf und "dark mode"
+   bricht auf zwei Zeilen — bei 44 px Kopfhoehe sofort sichtbar. Gleiches gilt
+   fuer die Zoomgruppe daneben: beide sind schmal und geben nichts her. */
 .tg {
+  flex: none;
+  white-space: nowrap;
   border: 1px solid var(--line);
   background: var(--panel);
   color: var(--dim);
@@ -415,6 +420,8 @@ kbd {
 
 .fs {
   display: flex;
+  flex: none;
+  white-space: nowrap;
   gap: 2px;
   background: var(--panel);
   border: 1px solid var(--line);
