@@ -51,9 +51,11 @@
   const BASE = 1.15;
   const STEPS = [0.85, 1, 1.15, 1.3, 1.5];
   const zoomOf = step => Math.round(BASE * step * 1000) / 1000;
-  /* Setzt der Spur-Block weiter unten. Zoomen aendert die nutzbare Kopfbreite,
-     loest aber kein resize aus — die Spur muss also hier mitgezogen werden. */
+  /* Setzen die Bloecke weiter unten. Zoomen aendert die nutzbare Kopfbreite und
+     die Hoehe der Filterzeile, loest aber kein resize aus — beides muss hier
+     mitgezogen werden. */
   let fitTrail = null;
+  let refreshSticky = null;
   const fsBox = $('[data-enhance="fontsize"]');
   if (fsBox) {
     const lvl = $('.lvl', fsBox);
@@ -72,6 +74,7 @@
       });
       fsBox.title = 'Text size ' + Math.round(STEPS[i] * 100) + '%';
       if (fitTrail) fitTrail();
+      if (refreshSticky) refreshSticky();
     }
     buttons.forEach(b => b.addEventListener('click', () => {
       i = Math.min(STEPS.length - 1, Math.max(0, i + (b.dataset.f === '+' ? 1 : -1)));
@@ -291,8 +294,25 @@
     buildRail();
   }
 
+  /* Wie weit ein Sprungziel unter dem Seitenanfang beginnen muss, damit es
+     nicht unter der klebenden Filterzeile liegt. offsetHeight, nicht
+     getBoundingClientRect: gebraucht wird die Hoehe in Layout-Pixeln, denn
+     --sticky wird als CSS-Wert wieder mit dem Zoom skaliert. */
+  function stickyOffset() {
+    if (!bar || bar.hidden) return;
+    document.documentElement.style.setProperty('--sticky',
+      (44 + bar.offsetHeight + 6) + 'px');
+  }
+
   if (bar) {
     bar.hidden = false;
+    refreshSticky = stickyOffset;
+    stickyOffset();
+    let st = 0;
+    addEventListener('resize', () => {
+      clearTimeout(st);
+      st = setTimeout(stickyOffset, 120);
+    });
     $('#f', bar).addEventListener('input', applyFilter);
     /* Escape raeumt das Feld und gibt die Tastatur wieder an die Seite. */
     $('#f', bar).addEventListener('keydown', e => {

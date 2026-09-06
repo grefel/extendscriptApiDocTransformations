@@ -330,6 +330,25 @@ Zwei Sonderwege:
   „The parent element." — dort nennt Adobe den Behälter nirgends, geraten wird
   hier nicht.
 
+### Sprungziele unter zwei klebenden Zeilen
+
+Kopfzeile (44 px) und Filterzeile kleben beide oben. Ein Verweis aus der rechten
+Spalte, aus der Palette oder ein Deep-Link scrollte das Ziel deshalb **unter**
+die Filterzeile: sichtbar war der nächste Member, und man hielt ihn für den
+gesuchten. Gemeldet als „springt zum nächsten".
+
+Behoben mit `scroll-margin-top` auf allen Ankern in `.dmain`. Der Wert ist
+gemessen, nicht geschätzt: `site.js` setzt `--sticky` auf
+`44 + Höhe der Filterzeile + 6` und zieht ihn beim Zoomen und bei
+Größenänderung nach — bei schmalem Fenster bricht die Zeile in zwei Reihen um
+(109 px gegenüber 146 px). Gerechnet wird mit `offsetHeight`, also in
+Layout-Pixeln: `--sticky` wird als CSS-Wert später wieder mit dem Zoom
+skaliert.
+
+Ohne JavaScript ist die Filterzeile ausgeblendet, dann klebt nur die Kopfzeile —
+deshalb steht im Stylesheet 50 px als Vorgabe. Alle drei Fälle liegen jetzt 6
+bis 7 px unter der klebenden Kante, geprüft in `check-site.js`.
+
 ## Schmales Fenster
 
 Sauber bis hinunter zu **650 px** Fensterbreite, ohne waagerechtes Scrollen.
