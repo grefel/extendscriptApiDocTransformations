@@ -270,7 +270,10 @@ function make(data, d, ctx) {
       <button class="pill on" type="button" data-o="all">All</button>
       ${c.p.length ? pill('p', label, c.p.length) : ''}
       ${c.ev.length ? pill('e', 'Events', c.ev.length) : ''}
-      ${c.m.length ? pill('m', 'Methods', c.m.length) : ''}</div>`;
+      ${c.m.length ? pill('m', 'Methods', c.m.length) : ''}
+      <button class="pill mode" type="button" data-mode="list"
+        title="All members as a list">List</button></div>
+      <div class="mlist" hidden data-enhance="list"></div>`;
 
     if (c.p.length) {
       h += `<section data-sec="p"><h2 class="sechead" id="properties">${label}</h2>
@@ -477,7 +480,7 @@ function shell({ title, description, body, current, target, targets, data, isInd
   </div>
   <button class="tg" type="button" hidden data-enhance="theme"></button>
 </header>
-<div class="grid${isIndex ? ' norail' : ''}">
+<div class="grid">
   <nav class="side" aria-label="Objects"><a class="allobjects" href="index.html">All entries →</a>
     <div class="sidef" hidden data-enhance="navfilter">
       <label class="fwrap" for="nf">
@@ -501,7 +504,6 @@ function shell({ title, description, body, current, target, targets, data, isInd
         <a href="https://www.publishingx.de/datenschutzerklaerung/" rel="noopener">Datenschutz</a></p>
     </footer>
   </main>
-  ${isIndex ? '' : '<aside class="rail2" aria-label="On this page"></aside>'}
 </div>
 <script src="nav.js" defer></script>
 <script src="../assets/site.js" defer></script>

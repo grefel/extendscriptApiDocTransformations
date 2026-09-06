@@ -349,6 +349,30 @@ Ohne JavaScript ist die Filterzeile ausgeblendet, dann klebt nur die Kopfzeile �
 deshalb steht im Stylesheet 50 px als Vorgabe. Alle drei Fälle liegen jetzt 6
 bis 7 px unter der klebenden Kante, geprüft in `check-site.js`.
 
+## Listenansicht statt rechter Spalte
+
+Eine fünfte Pille **List** zeigt alle Member als Verweise dort, wo sonst die
+Tabellen stehen — mehrspaltig (`columns: 220px`), nach Properties, Events und
+Methoden gruppiert. `Application` sind das 341 Namen auf einen Blick statt
+sieben Bildschirmhöhen Tabelle. Ein Klick führt zurück in die Tabelle, an die
+Stelle des Members.
+
+Sie ersetzt die frühere **rechte Spalte**: die nahm dauerhaft 210 px, war nur so
+breit wie ein Bezeichner und zeigte dasselbe. Damit ist das Raster überall
+zweispaltig, und der Kopfbereich bekommt die volle Inhaltsbreite.
+
+Drei Feinheiten, alle beim Prüfen aufgefallen:
+
+- **Der Filter wirkt in beiden Ansichten**, die Pillen für die Memberart
+  ebenso — die Liste zeigt genau das, was die Tabellen zeigen würden.
+- **Die Wahl gilt beim Blättern weiter** (`mode` in `localStorage`): wer die
+  Liste zum Navigieren nutzt, will sie auf jeder Seite. Ein Sprung auf einen
+  Member gewinnt aber dagegen — sonst zeigte die Seite die Liste, während die
+  Adresse auf eine Tabellenzeile deutet.
+- **Innerhalb derselben Seite lädt nichts neu**, deshalb hört `site.js` auf
+  `hashchange`: ohne das blieb die Liste stehen, wenn man aus der Palette auf
+  einen Member derselben Seite sprang.
+
 ## Schmales Fenster
 
 Sauber bis hinunter zu **650 px** Fensterbreite, ohne waagerechtes Scrollen.
@@ -383,8 +407,8 @@ Platzbedarf also auch.
 | Breite | Verhalten |
 |---|---|
 | ab 1250 px | „Recent" mit drei Einträgen |
-| ab 1100 px | rechte Spalte, Zugriff ausgeschrieben (78 px) |
-| unter 1100 px | rechte Spalte weg, Zugriff als `ro`/`rw` (46 px, Kopf „ACC"), Beschreibung bekommt den Platz |
+| ab 1100 px | Zugriff ausgeschrieben (78 px) |
+| unter 1100 px | Zugriff als `ro`/`rw` (46 px, Kopf „ACC"), Beschreibung bekommt den Platz |
 | unter 900 px | Kopfzeile schrumpft (Tastenkürzel und API-Version treten ab), Parameter stehen untereinander statt in drei Spalten |
 
 Zwei Stellen brauchen eine saubere Trennstelle statt eines harten Umbruchs:
@@ -598,22 +622,12 @@ eine andere Größe, das Blättern wurde unruhig. Jetzt ist er überall gleich b
 (49 % des Kopfes), nur die Höhe folgt dem Inhalt. Der Inhalt bleibt zentriert —
 die drei Zeilen beziehen sich aufeinander.
 
-Der Kopf reicht dabei **über die rechte Spalte hinweg**: die beginnt erst auf
-Höhe der Filterzeile, darüber ist ihre Spalte leer. `site.js` setzt dafür
-`--headright` auf deren Breite, sobald sie wirklich tiefer sitzt — ohne Skript
-bleibt sie oben stehen und der Kopf hält Abstand. Erst unter 900 px
-Spaltenbreite rutscht der Kasten unter den Kopf; nebeneinander bliebe für den
-Namen zu wenig übrig. Die Regel dafür steht als `.head .tree`, weil die
-Halbierung weiter unten im Stylesheet sonst gewönne.
+Erst unter 900 px Spaltenbreite rutscht der Kasten unter den Kopf;
+nebeneinander bliebe für den Namen zu wenig übrig. Die Regel dafür steht als
+`.head .tree`, weil die Halbierung weiter unten im Stylesheet sonst gewönne.
 
 Gemessen bei 1848 px Fenster: die Filterzeile steht auf `Book` bei y = 320
 statt 475, auf `Color` bei 243 statt 364.
-
-Die **rechte Spalte beginnt auf Höhe der Filterzeile** statt am Seitenkopf: sie
-gehört zu den Tabellen, nicht zur Überschrift. Wie weit unten die Filterzeile
-liegt, hängt an Titel, Beschreibung und Hierarchie, also misst `site.js` es und
-setzt den Abstand als `margin-top` (zurückgesetzt vor jeder Messung, sonst
-misst man den eigenen Abstand mit).
 
 **Preis:** `Document` 426 px (81 Objekte + 54 eingeklappte Preferences),
 `Application` 353 px (68 + 104), `Rectangle` 257 px, `Page` 136 px. Vor dem

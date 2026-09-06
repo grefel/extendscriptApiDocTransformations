@@ -271,6 +271,11 @@
   /* ---------- Filter: Textfeld und Umschalter je Membertyp ---------- */
   const bar = $('[data-enhance="filter"]');
   let only = 'all';
+  /* Tabellen oder Liste. Die Wahl gilt weiter, wenn man zum naechsten Objekt
+     blaettert — wer die Liste zum Navigieren nutzt, will sie ueberall. Ein
+     Deep-Link auf einen Member gewinnt aber: sonst zeigte die Seite die Liste,
+     waehrend die Adresse auf eine Zeile in der Tabelle deutet. */
+  let mode = location.hash ? 'table' : store.get('mode', 'table');
 
   function applyFilter() {
     if (!bar) return;
@@ -290,8 +295,45 @@
       const rows = $$('tbody tr, .mem', s);
       s.hidden = (only !== 'all' && s.dataset.sec !== only) || rows.every(r => r.hidden);
     });
-    $$('.pill', bar).forEach(p => p.classList.toggle('on', p.dataset.o === only));
-    buildRail();
+    $$('.pill[data-o]', bar).forEach(p => p.classList.toggle('on', p.dataset.o === only));
+    applyMode();
+  }
+
+  /* ---------- Listenansicht ----------
+     Statt der Tabellen alle Member als Verweise, mehrspaltig: ein Objekt mit
+     341 Membern passt so auf einen Blick, und ein Klick fuehrt zurueck in die
+     Tabelle an die richtige Stelle. Loest die frueher rechts stehende Spalte
+     ab — die nahm dauerhaft Platz und zeigte dasselbe. */
+  function buildList(box) {
+    const teil = (label, sel, suffix) => {
+      const items = $$(sel).filter(el => !el.closest('[hidden]') && !el.hidden);
+      if (!items.length) return '';
+      return `<div class="h">${label} <span class="n">${items.length}</span></div>` +
+        '<div class="cols">' + items.map(el => {
+          const name = (el.querySelector('.cpx, td.n, .id') || el).textContent.trim()
+            .replace(/\(.*$/, '');
+          return `<a href="#${esc(el.id)}">${esc(name)}${suffix}</a>`;
+        }).join('') + '</div>';
+    };
+    box.innerHTML = teil('Properties', 'tbody tr[id^="p-"]', '')
+      + teil('Events', 'tbody tr[id^="e-"]', '')
+      + teil('Methods', '.mem[id^="m-"]', '()');
+    if (!box.innerHTML) box.innerHTML = '<div class="h">Nothing matches the filter</div>';
+  }
+
+  /* Sichtbar ist entweder die Liste oder die Tabellen — nie beides. Die
+     Rueckwaertsverweise darunter bleiben in beiden Ansichten stehen. */
+  function applyMode() {
+    const box = $('[data-enhance="list"]');
+    if (!box) return;
+    const alsListe = mode === 'list';
+    if (alsListe) {
+      buildList(box);
+      $$('section[data-sec]').forEach(s => { s.hidden = true; });
+    }
+    box.hidden = !alsListe;
+    const pille = $('.pill[data-mode="list"]', bar);
+    if (pille) pille.classList.toggle('on', alsListe);
   }
 
   /* Wie weit ein Sprungziel unter dem Seitenanfang beginnen muss, damit es
@@ -303,21 +345,6 @@
     document.documentElement.style.setProperty('--sticky',
       (44 + bar.offsetHeight + 6) + 'px');
 
-    /* Die rechte Spalte gehoert zu den Tabellen, nicht zur Ueberschrift, und
-       beginnt deshalb auf Hoehe der Filterzeile. Wie weit unten die liegt,
-       haengt an Titel, Beschreibung und Hierarchie — also gemessen. Erst auf
-       0 zuruecksetzen, sonst misst man den eigenen Abstand mit. */
-    const rail = $('.rail2');
-    if (!rail) return;
-    rail.style.marginTop = '0px';
-    const d = bar.offsetTop - rail.offsetTop;
-    if (d > 0) rail.style.marginTop = d + 'px';
-
-    /* Ueber der Spalte ist jetzt Platz — den bekommt der Kopf, damit die
-       Hierarchie wirklich am rechten Rand steht. Nur wenn die Spalte auch
-       sichtbar ist: bei schmalem Fenster blendet das Stylesheet sie aus. */
-    document.documentElement.style.setProperty('--headright',
-      d > 0 && rail.offsetParent ? -rail.offsetWidth + 'px' : '0px');
   }
 
   if (bar) {
@@ -338,10 +365,45 @@
       applyFilter();
       e.target.blur();
     });
-    $$('.pill', bar).forEach(p => p.addEventListener('click', () => {
+    $$('.pill[data-o]', bar).forEach(p => p.addEventListener('click', () => {
       only = p.dataset.o;
+      /* Eine Pille waehlt die Memberart — dafuer muessen die Tabellen sichtbar
+         sein. In der Liste wirkt sie trotzdem: sie filtert deren Abschnitte. */
       applyFilter();
     }));
+    const modePille = $('.pill[data-mode="list"]', bar);
+    if (modePille) modePille.addEventListener('click', () => {
+      mode = mode === 'list' ? 'table' : 'list';
+      store.set('mode', mode);
+      applyFilter();
+    });
+    /* Ein Sprung auf einen Member — aus der Palette, aus einem Link auf der
+       Seite oder aus der Adresszeile — braucht die Tabelle. Innerhalb
+       derselben Seite laedt nichts neu, die Wahl beim Seitenaufbau greift dort
+       also nicht. */
+    addEventListener('hashchange', () => {
+      if (!location.hash || mode !== 'list') return;
+      mode = 'table';
+      store.set('mode', mode);
+      applyFilter();
+      const ziel = document.querySelector(location.hash);
+      if (ziel) ziel.scrollIntoView({ block: 'start' });
+    });
+    /* Ein Klick in der Liste fuehrt zurueck in die Tabelle, an die Stelle des
+       Members. Der Sprung braucht scrollIntoView statt nur der Adresse: steht
+       dort schon dieselbe Marke, scrollt der Browser kein zweites Mal. */
+    const box = $('[data-enhance="list"]');
+    if (box) box.addEventListener('click', e => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      e.preventDefault();
+      const ziel = document.querySelector(a.getAttribute('href'));
+      mode = 'table';
+      store.set('mode', mode);
+      applyFilter();
+      history.replaceState(null, '', a.getAttribute('href'));
+      if (ziel) ziel.scrollIntoView({ block: 'start' });
+    });
   }
 
   /* ---------- Navigationsliste ----------
@@ -409,23 +471,6 @@
   }
 
   /* ---------- rechte Spalte ---------- */
-  function buildRail() {
-    const rail = $('.rail2');
-    if (!rail || !CURRENT) return;
-    const sect = (label, sel, suffix) => {
-      const items = $$(sel).filter(el => !el.closest('[hidden]') && !el.hidden);
-      if (!items.length) return '';
-      return `<div class="h">${label} <span style="opacity:.6">${items.length}</span></div>` +
-        items.map(el => {
-          const name = (el.querySelector('.cpx, td.n, .id') || el).textContent.trim()
-            .replace(/\(.*$/, '');
-          return `<a href="#${esc(el.id)}">${esc(name)}${suffix}</a>`;
-        }).join('');
-    };
-    rail.innerHTML = sect('Properties', 'tbody tr[id^="p-"]', '')
-      + sect('Events', 'tbody tr[id^="e-"]', '')
-      + sect('Methods', '.mem[id^="m-"]', '()');
-  }
 
   /* nav.js liegt als <script> vor dieser Datei — kein fetch, damit der
      Offline-Download auch ueber file:// funktioniert. */
@@ -570,5 +615,4 @@
   });
 
   applyRuntime();
-  buildRail();
 })();

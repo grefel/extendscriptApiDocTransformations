@@ -92,8 +92,12 @@ const check = (name, got, want) => {
     await page.locator('.allobjects').isVisible(), false);
   check('mit JS: aktuelle Seite markiert',
     (await page.locator('.side a.on').innerText()).split(/\s+/).filter(Boolean).join(' '), 'Rectangle 188');
-  check('mit JS: rechte Spalte gefuellt',
-    (await page.locator('.rail2 a').count()) > 100, true);
+  /* Die Liste steht erst auf Klick da — die Tabellen sind die Grundansicht. */
+  check('mit JS: Listenansicht bereit, aber aus',
+    (await page.locator('.mlist').count()) + '/' +
+    (await page.locator('.mlist:not([hidden])').count()), '1/0');
+  check('mit JS: die Pille dafuer ist sichtbar',
+    await page.locator('.pill[data-mode="list"]').isVisible(), true);
   /* Die Seitenleiste darf beim Positionieren nicht das Fenster mitscrollen,
      sonst verschwindet die Kopfzeile der Seite unter der Leiste. */
   check('mit JS: Fenster bleibt oben', await page.evaluate(() => window.scrollY), 0);
@@ -102,8 +106,10 @@ const check = (name, got, want) => {
     true);
   /* Die Spur ist der einzige data-enhance-Knoten, der auch mit JS verborgen
      bleiben darf: ohne Verlauf gaebe es nur eine leere Beschriftung. */
+  /* Zwei duerfen verborgen bleiben: die Spur ohne Verlauf und die
+     Listenansicht, solange die Tabellen die Grundansicht sind. */
   check('mit JS: Bedienelemente sichtbar',
-    await page.locator('[data-enhance][hidden]:not(.trail)').count(), 0);
+    await page.locator('[data-enhance][hidden]:not(.trail):not(.mlist)').count(), 0);
   check('mit JS: Spur ohne Verlauf bleibt aus',
     await page.locator('.trail[hidden]').count(), 1);
 
@@ -180,7 +186,7 @@ const check = (name, got, want) => {
     (await page.locator('#properties').innerText()).trim().toLowerCase(), 'properties');
   check('Methoden-Ueberschrift ohne Zahl',
     (await page.locator('#methods').innerText()).trim().toLowerCase(), 'methods');
-  check('Pills vorhanden', await page.locator('.bar .pill').count(), 4);
+  check('Pills vorhanden', await page.locator('.bar .pill').count(), 5);
   /* Nicht nur die Klasse pruefen: die .pill-Regeln fehlten anfangs im
      Stylesheet, die aktive Pille sah dadurch aus wie ein Standardknopf. */
   const pillStyle = await page.evaluate(() => {
@@ -192,7 +198,7 @@ const check = (name, got, want) => {
   check('aktive Pille hebt sich ab', pillStyle.same, false);
   check('Pill-Beschriftungen',
     (await page.locator('.bar .pill').allInnerTexts()).map(s => s.trim()).join(' | '),
-    'All | Properties 126 | Events 2 | Methods 60');
+    'All | Properties 126 | Events 2 | Methods 60 | List');
   await page.locator('.bar .pill[data-o="e"]').click();
   await page.waitForTimeout(200);
   check('nur Events sichtbar',
@@ -201,8 +207,16 @@ const check = (name, got, want) => {
     await page.locator('section[data-sec]:not([hidden])').getAttribute('data-sec'), 'e');
   check('Rueckwaertsverweise bleiben',
     (await page.locator('.rev:not([hidden])').count()) >= 2, true);
-  check('rechte Spalte folgt dem Filter',
-    (await page.locator('.rail2 a').count()), 2);
+  /* Die Memberart wirkt auch in der Liste: Events an, also nur Events. */
+  await page.click('.pill[data-mode="list"]');
+  await page.waitForTimeout(250);
+  check('Liste folgt der gewaehlten Memberart',
+    (await page.locator('.mlist a').count()) + ' / ' +
+    (await page.locator('.mlist .h').allInnerTexts()).join(''), '2 / EVENTS 2');
+  await page.click('.pill[data-mode="list"]');
+  await page.waitForTimeout(250);
+  check('und zurueck zu den Tabellen',
+    await page.locator('section[data-sec]:not([hidden])').count(), 1);
   await page.locator('.bar .pill[data-o="all"]').click();
   await page.waitForTimeout(200);
   check('zurueck auf alle Abschnitte',
@@ -509,47 +523,31 @@ const check = (name, got, want) => {
   check('Illustrator bekommt kein UXP-Ziel',
     await page.locator('a[data-uxp-href]').count(), 0);
 
-  /* --- Kopfbereich: Hierarchie links, rechte Spalte auf Hoehe der Filterzeile ---
-     Der Kasten ist nur so breit wie sein Inhalt; bei zwei Eltern und ohne
-     Kinder waere ein Block ueber die ganze Spalte fast leer. Und die rechte
-     Spalte gehoert zu den Tabellen, nicht zur Ueberschrift. */
+  /* --- Kopfbereich: Name links, Hierarchie rechts oben ---
+     Feste Haelften, damit der Kasten beim Blaettern nicht in jeder Seite eine
+     andere Groesse hat. */
   await page.setViewportSize({ width: 1600, height: 1100 });
   await page.goto(url('indesign/Color.html'));
-  await page.waitForSelector('.rail2 a', { timeout: 10000 });
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
   await page.waitForTimeout(400);
   const kopfbereich = await page.evaluate(() => {
     const t = document.querySelector('.tree').getBoundingClientRect();
     const h = document.querySelector('.head').getBoundingClientRect();
     const k = document.querySelector('.headmain').getBoundingClientRect();
-    const r = document.querySelector('.rail2').getBoundingClientRect();
-    const bar = document.querySelector('.bar').getBoundingClientRect();
+    const m = document.querySelector('.dmain').getBoundingClientRect();
     return { anteil: Math.round(t.width / h.width * 100),
       rechtsbuendig: Math.round(t.right - h.right),
       nebenDemKopf: t.top < k.bottom - 5,
-      versatz: Math.round(r.top - bar.top) };
+      volleBreite: Math.round(h.width - m.width) };
   });
-  /* Feste Haelften: sonst springt der Kasten von Seite zu Seite in eine andere
-     Groesse und das Blaettern wird unruhig. */
   check('Hierarchie nimmt die rechte Haelfte', Math.abs(kopfbereich.anteil - 50) <= 2, true);
   check('und steht rechtsbuendig', kopfbereich.rechtsbuendig, 0);
   check('neben dem Kopf, nicht darunter', kopfbereich.nebenDemKopf, true);
-  /* Der Kopf reicht ueber die rechte Spalte hinweg — die beginnt erst auf
-     Hoehe der Filterzeile, darueber ist ihre Spalte leer. Der Abstand zum
-     Fensterrand bleibt derselbe wie im uebrigen Inhalt. */
-  const rand = await page.evaluate(() => {
-    const t = document.querySelector('.tree').getBoundingClientRect();
-    const rail = document.querySelector('.rail2').getBoundingClientRect();
-    const main = document.querySelector('main').getBoundingClientRect();
-    const links = main.left - document.querySelector('.dmain').getBoundingClientRect().left;
-    return { ueberDieSpalte: t.right > rail.left,
-      gleicherRand: Math.abs((rail.right - t.right) + links) < 3 };
-  });
-  check('Kopf nutzt die Flaeche ueber der rechten Spalte', rand.ueberDieSpalte, true);
-  check('und haelt denselben Rand wie der Inhalt', rand.gleicherRand, true);
+  check('Kopf nutzt die ganze Inhaltsbreite', kopfbereich.volleBreite, 0);
   /* Auch ein breiter Baum bleibt oben rechts — er wird schmaler und bricht um,
      statt unter den Kopf zu rutschen. */
   await page.goto(url('indesign/Book.html'));
-  await page.waitForSelector('.rail2 a', { timeout: 10000 });
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
   await page.waitForTimeout(300);
   check('auch ein breiter Baum bleibt oben rechts und gleich breit',
     await page.evaluate(() => {
@@ -569,18 +567,56 @@ const check = (name, got, want) => {
       return t.top >= k.bottom - 5;
     }), true);
   await page.setViewportSize({ width: 1600, height: 1100 });
-  check('rechte Spalte beginnt auf Hoehe der Filterzeile',
-    Math.abs(kopfbereich.versatz) <= 2, true);
-  /* Beim Scrollen klebt sie unter der Kopfzeile, nicht darunter verschwunden. */
-  await page.evaluate(() => window.scrollTo(0, 1200));
-  await page.waitForTimeout(300);
-  check('und klebt beim Scrollen unter der Kopfzeile',
+
+  /* --- Listenansicht statt rechter Spalte ---
+     Alle Member als Verweise dort, wo sonst die Tabellen stehen; ein Klick
+     fuehrt zurueck in die Tabelle an die Stelle des Members. */
+  await page.goto(url('indesign/Application.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.waitForTimeout(400);
+  await page.click('.pill[data-mode="list"]');
+  await page.waitForTimeout(400);
+  check('Liste zeigt alle Member', await page.locator('.mlist a').count(), 341);
+  check('und die Tabellen weichen',
+    await page.locator('section[data-sec]:not([hidden])').count(), 0);
+  check('nach Gruppen geordnet',
+    (await page.locator('.mlist .h').allInnerTexts()).join(' / '),
+    'PROPERTIES 217 / EVENTS 13 / METHODS 111');
+  check('mehrspaltig, damit 341 Namen auf einen Blick passen',
     await page.evaluate(() => {
-      const r = document.querySelector('.rail2').getBoundingClientRect();
-      const k = document.querySelector('.top').getBoundingClientRect();
-      return Math.round(r.top - k.bottom);
-    }), 0);
-  await page.evaluate(() => window.scrollTo(0, 0));
+      const c = document.querySelector('.mlist .cols');
+      const oben = new Set([...c.querySelectorAll('a')].map(a => Math.round(a.getBoundingClientRect().left)));
+      return oben.size;
+    }) >= 3, true);
+  /* Der Filter wirkt auch hier. */
+  await page.fill('#f', 'script');
+  await page.waitForTimeout(250);
+  const gefiltert = await page.locator('.mlist a').count();
+  check('Filter reduziert auch die Liste', gefiltert > 0 && gefiltert < 341, true);
+  await page.fill('#f', '');
+  await page.waitForTimeout(250);
+  /* Und die Wahl gilt weiter, wenn man zum naechsten Objekt blaettert. */
+  await page.goto(url('indesign/Book.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.waitForTimeout(400);
+  check('die Ansicht bleibt beim Blaettern erhalten',
+    await page.locator('.mlist:not([hidden])').count(), 1);
+  /* Ein Sprung auf einen Member gewinnt gegen die gespeicherte Wahl — auch
+     innerhalb derselben Seite, wo nichts neu laedt. */
+  await page.evaluate(() => { location.hash = '#p-filePath'; });
+  await page.waitForTimeout(400);
+  check('ein Sprung in derselben Seite zeigt die Tabelle',
+    await page.locator('.mlist:not([hidden])').count(), 0);
+  await page.goto(url('indesign/Book.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.waitForTimeout(300);
+  await page.evaluate(() => localStorage.setItem('mode', 'list'));
+  await page.goto(url('indesign/Book.html') + '#p-filePath');
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.waitForTimeout(400);
+  check('und ein Deep-Link beim Laden ebenso',
+    await page.locator('.mlist:not([hidden])').count(), 0);
+  await page.evaluate(() => localStorage.setItem('mode', 'table'));
 
   /* --- Sprungziele liegen nicht unter der Filterzeile ---
      Kopf- und Filterzeile kleben. Ohne Abstand landet der angeklickte Member
@@ -599,15 +635,19 @@ const check = (name, got, want) => {
     await page.goto(url('indesign/Application.html'));
     await page.waitForSelector('.sidelist a', { timeout: 10000 });
     await page.waitForTimeout(400);
+    await page.click('.pill[data-mode="list"]');
+    await page.waitForTimeout(300);
     await page.evaluate(() => {
-      const a = [...document.querySelectorAll('.rail2 a')]
+      const a = [...document.querySelectorAll('.mlist a')]
         .find(x => x.getAttribute('href') === '#m-findGlyph');
       if (a) a.click(); else location.hash = '#m-findGlyph';
     });
     await page.waitForTimeout(400);
-    const ausSpalte = await sprungziel();
-    check(wie + ': Klick springt unter die Filterzeile',
-      ausSpalte >= 0 && ausSpalte < 30, true);
+    const ausListe = await sprungziel();
+    check(wie + ': Klick in der Liste fuehrt in die Tabelle',
+      await page.locator('.mlist:not([hidden])').count(), 0);
+    check(wie + ': und springt unter die Filterzeile',
+      ausListe >= 0 && ausListe < 30, true);
     await page.goto(url('indesign/Application.html') + '#m-findGlyph');
     await page.waitForSelector('.sidelist a', { timeout: 10000 });
     await page.waitForTimeout(600);
@@ -1128,11 +1168,8 @@ const check = (name, got, want) => {
     true);
   await page.goto(url('indesign/index.html'));
   await page.waitForTimeout(250);
-  /* Die Uebersichtsseite hat keine Member und damit nichts fuer die rechte
-     Spalte. Sie leer stehen zu lassen genuegt nicht — das Raster hielte ihre
-     Breite frei und die Kurzreferenz liefe darunter. */
-  check('Uebersichtsseite ohne rechte Spalte',
-    await page.locator('.rail2').count(), 0);
+  /* Die rechte Spalte gibt es nirgends mehr: sie nahm dauerhaft Platz und
+     zeigte dasselbe wie die Listenansicht. */
   check('… und ohne freigehaltene Spalte im Raster',
     await page.evaluate(() =>
       getComputedStyle(document.querySelector('.grid')).gridTemplateColumns.split(' ').length), 2);
