@@ -900,8 +900,14 @@ td.n {
   overflow-wrap: anywhere
 }
 
+/* Mehr Polster unten als die uebrigen Zellen: bricht die Typangabe um
+   (CompositeFonts<CompositeFont>), bestimmt diese Zelle die Zeilenhoehe, und
+   unter der zweiten Zeile blieben nur 2,8 px statt der 5,2 px, die einzeilige
+   Zeilen von der Beschreibungsspalte geschenkt bekommen. Gemessen gleicht 4 px
+   das genau aus und kostet nur an den umgebrochenen Zeilen Hoehe. */
 td.t {
   font: 11.5px var(--mono);
+  padding-bottom: 4px;
   overflow-wrap: anywhere
 }
 
