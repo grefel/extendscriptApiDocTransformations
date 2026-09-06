@@ -751,6 +751,65 @@ h1 {
   margin: 5px 0 0
 }
 
+/* ---------- Hierarchie: worin steckt es, was steckt darin ----------
+   Drei zentrierte Zeilen um den eigenen Namen. Die Beschriftung steht darueber
+   und nicht daneben: bei 18 Elternnamen liefe die erste Zeile sonst darunter. */
+.tree {
+  margin: 16px 0 4px;
+  padding: 11px 14px 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel)
+}
+
+.tree .h {
+  display: block;
+  margin-bottom: 7px;
+  font: 600 10px/1 var(--sans);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: .75
+}
+
+.tree p {
+  margin: 0;
+  text-align: center;
+  font: 12px/1.75 var(--mono)
+}
+
+/* Die Namenszeile traegt die Betonung — sie ist der Bezugspunkt der beiden
+   anderen und wiederholt bewusst die Ueberschrift. */
+.tree .self {
+  font-weight: 700;
+  color: var(--ink);
+  padding: 2px 0
+}
+
+/* Die Kinderliste wird lang (Application: 176 Namen). Zeilenhoehe knapp,
+   Trenner blass, damit die Namen die Aufmerksamkeit tragen. */
+.tree .up,
+.tree .down {
+  color: var(--dim)
+}
+
+.tree .sep {
+  color: var(--dim);
+  opacity: .4
+}
+
+/* Eine Liste, die fast alle Objekte nennt, steht eingeklappt da. */
+.tree .most > summary {
+  text-align: center;
+  color: var(--dim);
+  font: 11.5px var(--sans);
+  cursor: pointer
+}
+
+.tree .most > summary:hover {
+  color: var(--accent)
+}
+
 /* Der Codeblock ist zugleich Kopierknopf: sein Inhalt soll in eine Datei
    wandern, nicht abgetippt werden. */
 .snip {

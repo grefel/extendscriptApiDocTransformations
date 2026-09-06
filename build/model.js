@@ -275,8 +275,37 @@ function derive(data) {
   const subOf = new Map();
   for (const c of data.classes) if (c.sup && byNameMap.has(c.sup)) push(subOf, c.sup, c.n);
 
+  /* Enthaltensein, nicht Vererbung: die parent-Property nennt, worin ein Objekt
+     stecken kann (Document in Application, Rectangle in 18 Behaeltern). Der
+     Weg nach unten ist die Umkehrung davon.
+
+     Sammlungen und Enumerations bleiben draussen: dass ein Rectangle in
+     "Rectangles" steckt, ist eine Frage der Schreibweise, keine Hierarchie —
+     Adobes Object Model Viewer laesst sie ebenso weg. Ein reiner Selbstbezug
+     (Application.parent = Application) sagt nichts und faellt weg; steht der
+     eigene Name neben anderen, ist er echt: ein Rectangle kann in einem
+     Rectangle liegen. */
+  const echteKlasse = n => {
+    const x = byNameMap.get(n);
+    return !!x && !x.enum && !isCollection(x);
+  };
+  const parentsOf = new Map(), childrenOf = new Map();
+  for (const c of data.classes) {
+    if (c.enum) continue;
+    const p = c.p.find(x => x.n === 'parent');
+    if (!p) continue;
+    let eltern = [...new Set(p.t)].filter(echteKlasse);
+    if (eltern.length === 1 && eltern[0] === c.n) eltern = [];
+    if (!eltern.length) continue;
+    parentsOf.set(c.n, eltern.sort());
+    if (isCollection(c)) continue;      /* nur echte Objekte als Kinder */
+    for (const e of eltern) push(childrenOf, e, c.n);
+  }
+  for (const list of childrenOf.values()) list.sort();
+
   return {
-    byName: byNameMap, isCollection, elementOf, objectOf, paramOf, returnedBy, subOf
+    byName: byNameMap, isCollection, elementOf, objectOf, paramOf, returnedBy, subOf,
+    parentsOf, childrenOf
   };
 }
 

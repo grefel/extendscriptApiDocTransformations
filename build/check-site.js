@@ -47,6 +47,15 @@ const check = (name, got, want) => {
     'PageItem › SplineItem › Rectangle');
   check('ohne JS: Rueckwaertsverweise da',
     (await p0.locator('.rev').count()) >= 2, true);
+  /* Die Hierarchie ist Enthaltensein, nicht Vererbung: worin das Objekt
+     stecken kann, und was in ihm stecken kann. Steht im Markup, gilt also
+     auch ohne Skript und im Druck. */
+  check('ohne JS: Hierarchie steht im Markup',
+    (await p0.locator('.tree .self').innerText()).trim(), 'Rectangle');
+  check('ohne JS: Eltern verlinkt',
+    (await p0.locator('.tree .up a').count()) > 5, true);
+  check('ohne JS: Kinder verlinkt',
+    (await p0.locator('.tree .down a').count()) > 5, true);
   check('ohne JS: Footer vollstaendig',
     /Adobe Inc\..*Built from/s.test(await p0.locator('footer').innerText()), true);
   check('ohne JS: Bedienelemente ausgeblendet',
@@ -490,6 +499,55 @@ const check = (name, got, want) => {
   await page.waitForTimeout(250);
   check('Illustrator bekommt kein UXP-Ziel',
     await page.locator('a[data-uxp-href]').count(), 0);
+
+  /* --- Hierarchie: Enthaltensein in beide Richtungen --- */
+  await page.goto(url('indesign/Document.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('Document steckt in Application',
+    (await page.locator('.tree .up').innerText()).trim(), 'Application');
+  check('und enthaelt 138 Objekte',
+    await page.locator('.tree .down a').count(), 138);
+  /* Dass ein Page in "Pages" steckt, ist eine Frage der Schreibweise und
+     keine Hierarchie — die Sammlungen bleiben draussen. */
+  const kinder = await page.locator('.tree .down a').allInnerTexts();
+  check('Sammlungen stehen nicht darin',
+    ['Pages', 'Stories', 'Rectangles', 'Layers', 'Spreads'].filter(n => kinder.includes(n)).join(',')
+      || 'keine', 'keine');
+  check('die enthaltenen Objekte selbst schon',
+    ['Story', 'Layer', 'Spread'].every(n => kinder.includes(n)), true);
+  /* Genau dafuer ist der Block da: eine Page steckt laut Adobe im Spread, nicht
+     im Document — wer sie ueber doc.pages holt, sieht den Umweg hier. */
+  check('Page steht nicht unter Document', kinder.includes('Page'), false);
+  await page.goto(url('indesign/Spread.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('sondern unter Spread',
+    (await page.locator('.tree .down a').allInnerTexts()).includes('Page'), true);
+  await page.goto(url('indesign/Document.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('die Namenszeile nennt das Objekt',
+    (await page.locator('.tree .self').innerText()).trim(), 'Document');
+  check('ein Kind fuehrt auf seine Seite',
+    await page.locator('.tree .down a').first().getAttribute('href'),
+    'AdjustLayoutPreference.html');
+  /* Fast jedes Objekt kann Events ausloesen: 415 Eltern sind keine Hierarchie
+     mehr, die Liste steht deshalb eingeklappt da. */
+  await page.goto(url('indesign/Event.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('sehr lange Listen sind eingeklappt',
+    await page.locator('.tree details:not([open]) .up').count(), 1);
+  check('der Block bleibt dadurch flach',
+    Math.round((await page.locator('.tree').boundingBox()).height) < 200, true);
+  await page.locator('.tree summary').click();
+  await page.waitForTimeout(200);
+  check('aufgeklappt stehen alle Eltern da',
+    await page.locator('.tree .up a').count(), 415);
+  /* Sammlungen haben in Adobes Export keine parent-Angabe, Enumerations
+     ueberhaupt keine Hierarchie. */
+  for (const [obj, was] of [['Rectangles', 'Sammlung'], ['NothingEnum', 'Enumeration']]) {
+    await page.goto(url('indesign/' + obj + '.html'));
+    await page.waitForTimeout(200);
+    check(was + ' ohne Hierarchie-Block', await page.locator('.tree').count(), 0);
+  }
 
   /* --- Korrigierte Typangaben (build/additions.js) ---
      Document.filePath und Book.filePath liefern den Ordner, nicht die Datei.
