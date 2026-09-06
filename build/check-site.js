@@ -958,6 +958,29 @@ const check = (name, got, want) => {
      Rectangle traegt viele Methoden mit Parametern, AssignedStory eine
      Collection-Typangabe; zusammen decken sie beide Engpaesse ab. */
   const BASE = 1.15;
+
+  /* Kein Bedienelement der Kopfzeile darf umbrechen. Gemeldet wurde es fuer
+     "dark mode" in Firefox: bei knapper Kopfzeile stauchte die Flexbox den
+     Knopf, aus 25 px wurden 36. Gemessen wird gegen die Hoehe bei viel Platz —
+     wer hoeher wird, hat eine zweite Zeile. */
+  await page.setViewportSize({ width: 2000, height: 1000 });
+  await page.goto(url('indesign/ObjectStyleFillEffectsCategorySettings.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.waitForTimeout(400);
+  const kopfHoehen = () => page.evaluate(() =>
+    Object.fromEntries([...document.querySelectorAll('.top > *')]
+      .filter(e => e.offsetParent !== null).map(e => [e.className || e.tagName, e.offsetHeight])));
+  const kopfBasis = await kopfHoehen();
+  for (const w of [1700, 1478, 1350, 1232, 1100, 1000]) {
+    await page.setViewportSize({ width: w, height: 1000 });
+    await page.waitForTimeout(250);
+    const jetzt = await kopfHoehen();
+    const zweizeilig = Object.keys(jetzt).filter(k => kopfBasis[k] && jetzt[k] > kopfBasis[k]);
+    check('Kopfzeile bei ' + w + 'px einzeilig',
+      zweizeilig.length ? zweizeilig.join(', ') : 'ja', 'ja');
+  }
+  await page.setViewportSize({ width: 1600, height: 1000 });
+
   for (const w of [1600, 1300, 1150, 1000, 900, 800, 750]) {
     for (const f of ['indesign/Rectangle.html', 'indesign/AssignedStory.html']) {
       const o = await overflowAt(w, f);
