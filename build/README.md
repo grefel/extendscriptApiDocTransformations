@@ -506,6 +506,40 @@ Bewusst **nicht** angefasst: `Application.filePath`, `BookContent.filePath`
 und `Library.filePath` tragen denselben Satz im Export. Ob sie ebenso falsch
 sind, ist nicht nachgeprüft — geraten wird hier nicht.
 
+### Hierarchie: worin steckt es, was steckt darin
+
+Über den Membern stehen drei zentrierte Zeilen — mögliche Eltern, der eigene
+Name, mögliche Kinder — nach dem Vorbild von Adobes Object Model Viewer. Das ist
+**Enthaltensein, nicht Vererbung**: die beiden Blöcke darüber (`.chain`,
+`Extended by`) beantworten „was bin ich", dieser beantwortet „wo bekomme ich das
+her" und „was erreiche ich von hier".
+
+Quelle ist die `parent`-Property: sie nennt, worin ein Objekt stecken kann
+(`Document` → `Application`, `Rectangle` → 18 Behälter). Die Kinderliste ist
+deren Umkehrung, gebildet in `derive()` als `parentsOf` / `childrenOf`.
+
+Drei Entscheidungen dabei:
+
+- **Sammlungen bleiben draußen.** Dass eine `Page` in `Pages` steckt, ist eine
+  Frage der Schreibweise, keine Hierarchie. (Nebenbei: Adobes Export gibt
+  Sammlungen ohnehin keine `parent`-Angabe, sie bekommen also gar keinen Block.)
+- **Ein reiner Selbstbezug fällt weg.** `Application.parent` nennt
+  `Application` — das sagt nichts. Steht der eigene Name neben anderen, bleibt
+  er: ein `Rectangle` kann in einem `Rectangle` liegen.
+- **Listen über der Hälfte aller Objekte stehen eingeklappt.** `Event`,
+  `EventListener` und `MutationEvent` nennen über 400 Eltern, weil fast jedes
+  Objekt Events auslöst. Zwanzig Zeilen Namen sind keine Hierarchie mehr.
+
+Der Block trägt echte Information, nicht nur Zierde: eine `Page` steckt laut
+Adobe im `Spread`, nicht im `Document`. Wer sie über `doc.pages` holt, sieht
+hier den Umweg. `check-site.js` prüft genau das.
+
+**Preis:** auf `Document` (138 Kinder) ist der Block 609 px hoch, auf
+`Application` (175) 754 px — die Filterzeile rutscht damit auf `Document` von
+y≈210 auf y≈818. Bei 423 Objekten liegt der Median bei 3 Kindern, dort kostet
+er 126 px. Wenn das zu teuer ist: die Kinderzeile ab etwa 40 Namen einklappen
+(dieselbe Mechanik wie bei den Eltern) oder den Block unter die Tabellen legen.
+
 ### Vererbung in beide Richtungen
 
 **Die Vererbungszeile entfällt, wenn es keine Vorfahren gibt.** Bei `CellStyle`

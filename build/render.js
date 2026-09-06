@@ -58,9 +58,12 @@ const JSCONFIG = [
 /* ctx.resolve(name) -> relativer Pfad oder null. Damit landen Typen wie "File"
    auf der gemeinsamen JavaScript-Bibliothek statt ins Leere zu zeigen. */
 function make(data, d, ctx) {
-  const { isCollection, elementOf, objectOf, paramOf, returnedBy, subOf } = d;
+  const { isCollection, elementOf, objectOf, paramOf, returnedBy, subOf,
+    parentsOf, childrenOf } = d;
   const { target, targets, resolve } = ctx;
   const kindOf = c => (c.enum ? 'Enumeration' : isCollection(c) ? 'Collection' : 'Object');
+  /* Bezugsgroesse fuer die Hierarchie: wieviele echte Objekte es im Ziel gibt. */
+  const objectCount = data.classes.filter(c => !c.enum && !isCollection(c)).length;
   /* File und Folder heissen in UXP genauso, sind aber eine voellig andere API:
      kein globales File-Objekt, sondern require('uxp').storage.localFileSystem.
      Im UXP-Modus zeigt der Link deshalb auf Adobes UXP-Referenz statt auf die
@@ -226,6 +229,29 @@ function make(data, d, ctx) {
     if (subs.length)
       h += `<div class="subs"><span class="h">Extended by</span>${
         subs.map(n => link(n)).join('<span class="sep">·</span>')}</div>`;
+
+    /* Enthaltensein statt Vererbung: worin dieses Objekt stecken kann, und was
+       in ihm stecken kann. Drei Zeilen um den eigenen Namen, wie im Object
+       Model Viewer — die Frage "wo bekomme ich das her" ist beim Skripten die
+       haeufigste. Fehlt eine Richtung, faellt die Zeile weg. */
+    const ups = parentsOf.get(c.n) || [], downs = childrenOf.get(c.n) || [];
+    if (ups.length || downs.length) {
+      /* Leerzeichen um den Trenner, nicht nur Rand: ohne sie hat die Zeile
+         keine Umbruchstelle und 138 Kindernamen laufen aus der Spalte. */
+      const reihe = ns => ns.map(n => link(n)).join(' <span class="sep">|</span> ');
+      /* Fast alles kann Events ausloesen: Event, EventListener und
+         MutationEvent nennen ueber 400 Eltern. Zwanzig Zeilen Namen ueber dem
+         eigenen sind keine Hierarchie mehr — deckt eine Liste mehr als die
+         Haelfte aller Objekte ab, steht sie eingeklappt da. */
+      const zeile = (ns, cls) => ns.length * 2 > objectCount
+        ? `<details class="most"><summary>${ns.length} objects</summary>
+           <p class="${cls}">${reihe(ns)}</p></details>`
+        : `<p class="${cls}">${reihe(ns)}</p>`;
+      h += `<div class="tree"><span class="h">Hierarchy</span>
+        ${ups.length ? zeile(ups, 'up') : ''}
+        <p class="self">${esc(c.n)}</p>
+        ${downs.length ? zeile(downs, 'down') : ''}</div>`;
+    }
 
     /* Erfahrungswerte, die nicht im Objektmodell stehen — siehe build/notes.js.
        Gilt ein Hinweis nur fuer eine Laufzeit, blendet site.js ihn im anderen

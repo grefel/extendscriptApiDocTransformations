@@ -91,6 +91,11 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
   `$.engineName`) — nicht mit Events vermischen.
 - Bei `classdef[@enumeration='true']` sind die Klassen-Properties die **Enum-Werte**.
 - **`<datatype><array/>`** markiert die `Type[]`-Notation (703 Properties).
+- **Die `parent`-Property ist die Hierarchie.** Sie nennt, worin ein Objekt
+  stecken kann; die Kinderliste ist deren Umkehrung (`derive()`:
+  `parentsOf`/`childrenOf`). Sammlungen haben in Adobes Export **keine**
+  `parent`-Angabe. `Event`/`EventListener`/`MutationEvent` nennen über 400
+  Eltern — fast jedes Objekt löst Events aus.
 - **242 Methoden heißen wörtlich `[]`** (`Pages.[]`, `Rectangles.[]`) — der Index-Zugriff
   auf Collections. Der funktioniert in UXP nicht und wird dort ausgeblendet.
 - **Optionale Parameter** sind uneinheitlich markiert: teils `@optional`, teils nur durch
