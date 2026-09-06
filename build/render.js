@@ -242,10 +242,11 @@ function make(data, d, ctx) {
       /* Leerzeichen um den Trenner, nicht nur Rand: ohne sie hat die Zeile
          keine Umbruchstelle und 85 Kindernamen laufen aus der Spalte. */
       const reihe = ns => ns.map(n => link(n)).join(' <span class="sep">|</span> ');
-      /* Ab zwanzig Namen hinter einen Pfeil: die 81 Kinder von Document machten
+      /* Ab vierzig Namen hinter einen Pfeil: die 81 Kinder von Document machten
          den Kasten hoeher als den halben Bildschirm und schoben die Tabellen
-         hinaus. Kurze Listen bleiben offen, dort waere der Klick nur im Weg. */
-      const MAX_OFFEN = 20;
+         hinaus. Darunter bleibt die Liste offen — ein Klick fuer drei Zeilen
+         waere nur im Weg. */
+      const MAX_OFFEN = 40;
       const zeile = (ns, cls, was) => ns.length <= MAX_OFFEN
         ? `<p class="${cls}">${reihe(ns)}</p>`
         : `<details class="viele"><summary>${ns.length} ${was}</summary>
