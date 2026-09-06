@@ -588,15 +588,22 @@ Der Block trägt echte Information, nicht nur Zierde: eine `Page` steckt laut
 Adobe im `Spread`, nicht im `Document`. Wer sie über `doc.pages` holt, sieht
 hier den Umweg. `check-site.js` prüft genau das.
 
-**Der Kasten steht links und ist nur so breit wie sein Inhalt.** Bei zwei
-Eltern und ohne Kinder (`Color`) sind das 20 % der Spalte, bei `Page` 41 %; wo
-die Namen es brauchen, nimmt er die ganze Breite. Der Inhalt bleibt zentriert —
-die drei Zeilen beziehen sich aufeinander. Und die **rechte Spalte beginnt auf
-Höhe der Filterzeile** statt am Seitenkopf: sie gehört zu den Tabellen, nicht
-zur Überschrift. Wie weit unten die Filterzeile liegt, hängt an Titel,
-Beschreibung und Hierarchie, also misst `site.js` es und setzt den Abstand als
-`margin-top` (zurückgesetzt vor jeder Messung, sonst misst man den eigenen
-Abstand mit).
+**Der Kasten sitzt oben rechts, der Kopf links daneben.** Die Fläche neben
+Titel und Beschreibung stand vorher leer, und die Hierarchie schob die Tabellen
+nach unten. Er ist nur so breit wie sein Inhalt (`Color`: 20 % der Spalte) und
+höchstens zwei Drittel davon; ein langer Baum wird schmaler und bricht um,
+statt unter den Kopf zu rutschen. Der Inhalt bleibt zentriert — die drei Zeilen
+beziehen sich aufeinander. Erst unter 900 px Spaltenbreite rutscht er darunter,
+nebeneinander bliebe für den Namen zu wenig übrig.
+
+Gemessen bei 1848 px Fenster: die Filterzeile steht auf `Book` bei y = 320
+statt 475, auf `Document` bei 556 statt 610.
+
+Die **rechte Spalte beginnt auf Höhe der Filterzeile** statt am Seitenkopf: sie
+gehört zu den Tabellen, nicht zur Überschrift. Wie weit unten die Filterzeile
+liegt, hängt an Titel, Beschreibung und Hierarchie, also misst `site.js` es und
+setzt den Abstand als `margin-top` (zurückgesetzt vor jeder Messung, sonst
+misst man den eigenen Abstand mit).
 
 **Preis:** `Document` 426 px (81 Objekte + 54 eingeklappte Preferences),
 `Application` 353 px (68 + 104), `Rectangle` 257 px, `Page` 136 px. Vor dem
