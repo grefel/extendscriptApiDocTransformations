@@ -754,13 +754,46 @@ h1 {
 /* ---------- Hierarchie: worin steckt es, was steckt darin ----------
    Drei zentrierte Zeilen um den eigenen Namen. Die Beschriftung steht darueber
    und nicht daneben: bei 18 Elternnamen liefe die erste Zeile sonst darunter. */
-/* Der Kasten steht links und ist nur so breit wie sein Inhalt: bei zwei Eltern
-   und ohne Kinder waere ein Block ueber die ganze Spalte fast leer. Der Inhalt
-   bleibt zentriert — die drei Zeilen beziehen sich aufeinander. */
+/* Kopfbereich: links Name, Beschreibung und Vererbung, rechts die Hierarchie.
+   Die Flaeche neben dem Titel stand sonst leer, und die Hierarchie schob die
+   Tabellen nach unten. Passt beides nicht nebeneinander, rutscht der Kasten
+   unter den Text und bleibt rechtsbuendig. */
+.head {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 8px 26px
+}
+
+.headmain {
+  flex: 1 1 280px;
+  min-width: 0
+}
+
+/* Erst wenn die Spalte wirklich schmal wird, rutscht der Kasten unter den
+   Kopf — nebeneinander bliebe fuer den Namen zu wenig uebrig. */
+@container page (max-width: 900px) {
+  .head {
+    flex-wrap: wrap
+  }
+
+  .tree {
+    max-width: 100%
+  }
+}
+
+/* Nur so breit wie sein Inhalt: bei zwei Eltern und ohne Kinder waere ein Block
+   ueber die ganze Spalte fast leer. Der Inhalt bleibt zentriert — die drei
+   Zeilen beziehen sich aufeinander. */
+/* Der Kasten sitzt oben rechts, auch wenn der Inhalt lang ist: dann wird er
+   schmaler und seine Zeilen brechen um, statt unter den Kopf zu rutschen.
+   Zwei Drittel der Spalte sind die Grenze — der Rest bleibt dem Namen. */
 .tree {
   width: fit-content;
-  max-width: 100%;
-  margin: 16px 0 4px;
+  max-width: 66%;
+  flex: 0 1 auto;
+  min-width: 0;
+  margin: 0 0 4px auto;
   padding: 11px 14px 13px;
   border: 1px solid var(--line);
   border-radius: 10px;

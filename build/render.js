@@ -215,17 +215,20 @@ function make(data, d, ctx) {
     const what = c.enum ? 'an ' + esc(c.n) + ' value' : 'a ' + esc(c.n);
     let h = '';
 
-    h += `<div class="kind">${kindOf(c)}${
+    /* Kopfbereich zweispaltig: links Name, Beschreibung und Vererbung, rechts
+       die Hierarchie. Die Flaeche neben dem Titel stand sonst leer, und die
+       Hierarchie schob die Tabellen nach unten. */
+    let kopf = `<div class="kind">${kindOf(c)}${
       el && known(el) ? ` <span class="of">of</span> ${link(el)}` : ''}</div>
       <h1>${esc(c.n)}</h1>
       <p class="lede">${esc(c.d)}</p>`;
     const anc = chain(c);
-    if (anc) h += `<div class="chain">${anc}</div>`;
+    if (anc) kopf += `<div class="chain">${anc}</div>`;
     /* Der Weg nach unten. Adobe liefert nur superclass; von PageItem aus ist
        die Liste der Rahmenarten aber das Nuetzlichere. */
     const subs = subOf.get(c.n) || [];
     if (subs.length)
-      h += `<div class="subs"><span class="h">Extended by</span>${
+      kopf += `<div class="subs"><span class="h">Extended by</span>${
         subs.map(n => link(n)).join('<span class="sep">·</span>')}</div>`;
 
     /* Enthaltensein statt Vererbung: worin dieses Objekt stecken kann, und was
@@ -234,11 +237,12 @@ function make(data, d, ctx) {
        haeufigste. Fehlt eine Richtung, faellt die Zeile weg. */
     const ups = parentsOf.get(c.n) || [], downs = childrenOf.get(c.n) || [];
     const prefs = prefsOf.get(c.n) || [];
+    let baum = '';
     if (ups.length || downs.length || prefs.length) {
       /* Leerzeichen um den Trenner, nicht nur Rand: ohne sie hat die Zeile
          keine Umbruchstelle und 85 Kindernamen laufen aus der Spalte. */
       const reihe = ns => ns.map(n => link(n)).join(' <span class="sep">|</span> ');
-      h += `<div class="tree"><span class="h">Hierarchy</span>
+      baum = `<div class="tree"><span class="h">Hierarchy</span>
         ${ups.length ? `<p class="up">${reihe(ups)}</p>` : ''}
         <p class="self">${esc(c.n)}</p>
         ${downs.length ? `<p class="down">${reihe(downs)}</p>` : ''}
@@ -246,6 +250,7 @@ function make(data, d, ctx) {
           <summary>${prefs.length} preference object${prefs.length > 1 ? 's' : ''}</summary>
           <p class="down">${reihe(prefs)}</p></details>` : ''}</div>`;
     }
+    h += `<div class="head"><div class="headmain">${kopf}</div>${baum}</div>`;
 
     /* Erfahrungswerte, die nicht im Objektmodell stehen — siehe build/notes.js.
        Gilt ein Hinweis nur fuer eine Laufzeit, blendet site.js ihn im anderen

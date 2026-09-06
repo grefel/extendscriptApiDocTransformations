@@ -520,14 +520,40 @@ const check = (name, got, want) => {
   const kopfbereich = await page.evaluate(() => {
     const t = document.querySelector('.tree').getBoundingClientRect();
     const m = document.querySelector('.dmain').getBoundingClientRect();
+    const k = document.querySelector('.headmain').getBoundingClientRect();
     const r = document.querySelector('.rail2').getBoundingClientRect();
     const bar = document.querySelector('.bar').getBoundingClientRect();
     return { anteil: Math.round(t.width / m.width * 100),
-      linksbuendig: Math.round(t.left - m.left),
+      rechtsbuendig: Math.round(t.right - m.right),
+      nebenDemKopf: t.top < k.bottom - 5,
       versatz: Math.round(r.top - bar.top) };
   });
   check('Hierarchie nimmt nur ihre Breite ein', kopfbereich.anteil < 40, true);
-  check('und steht links', kopfbereich.linksbuendig, 0);
+  check('und steht rechtsbuendig', kopfbereich.rechtsbuendig, 0);
+  check('neben dem Kopf, nicht darunter', kopfbereich.nebenDemKopf, true);
+  /* Auch ein breiter Baum bleibt oben rechts — er wird schmaler und bricht um,
+     statt unter den Kopf zu rutschen. */
+  await page.goto(url('indesign/Book.html'));
+  await page.waitForSelector('.rail2 a', { timeout: 10000 });
+  await page.waitForTimeout(300);
+  check('auch ein breiter Baum bleibt oben rechts',
+    await page.evaluate(() => {
+      const t = document.querySelector('.tree').getBoundingClientRect();
+      const k = document.querySelector('.headmain').getBoundingClientRect();
+      const m = document.querySelector('.dmain').getBoundingClientRect();
+      return t.top < k.bottom - 5 && Math.abs(t.right - m.right) < 2 &&
+        t.width > m.width / 2;
+    }), true);
+  /* Erst bei schmaler Spalte darf er darunter. */
+  await page.setViewportSize({ width: 1000, height: 1000 });
+  await page.waitForTimeout(300);
+  check('bei schmaler Spalte rutscht er darunter',
+    await page.evaluate(() => {
+      const t = document.querySelector('.tree').getBoundingClientRect();
+      const k = document.querySelector('.headmain').getBoundingClientRect();
+      return t.top >= k.bottom - 5;
+    }), true);
+  await page.setViewportSize({ width: 1600, height: 1100 });
   check('rechte Spalte beginnt auf Hoehe der Filterzeile',
     Math.abs(kopfbereich.versatz) <= 2, true);
   /* Beim Scrollen klebt sie unter der Kopfzeile, nicht darunter verschwunden. */
