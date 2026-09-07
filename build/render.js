@@ -279,7 +279,8 @@ function make(data, d, ctx) {
        Properties ist die Ueberschrift lange weggescrollt, und bei 423 Objekten
        mit aehnlichen Namen (TextFrame, TextFramePreference) will man sich
        vergewissern, wo man ist. */
-    h += `<div class="bar" hidden data-enhance="filter">
+    h += `<div class="barwatch"></div>
+      <div class="bar" hidden data-enhance="filter">
       <div class="barname">${esc(c.n)}</div>
       <div class="barrow">
       <label class="fwrap" for="f">

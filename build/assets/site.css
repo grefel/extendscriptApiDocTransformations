@@ -645,6 +645,11 @@ h1 {
 }
 
 .bar {
+  /* --namerow ist die Hoehe der Namenszeile. Sie erscheint erst beim Kleben,
+     und ohne Ausgleich waechst die Leiste in diesem Moment um genau diesen
+     Betrag — der Inhalt darunter sprang gemessen um 30 px. Der negative Rand
+     nimmt das zurueck: die Leiste beansprucht im Fluss immer dasselbe. */
+  --namerow: 30px;
   position: sticky;
   top: 44px;
   z-index: 4;
@@ -654,15 +659,33 @@ h1 {
   border-bottom: 1px solid var(--line)
 }
 
+.bar.stuck {
+  margin-top: calc(20px - var(--namerow))
+}
+
 /* Der Objektname bleibt beim Blaettern sichtbar: nach ein paar Bildschirmen
    Properties ist die Ueberschrift weg, und viele Namen aehneln sich
    (TextFrame, TextFramePreference). Kleiner als die Ueberschrift mit ihren
    26 px, aber dieselbe Schrift und dasselbe Gewicht — es ist derselbe Name,
    keine Beschriftung. */
+/* Nur wenn die Leiste wirklich klebt: am Seitenanfang stuende der Name
+   doppelt da, direkt unter der Ueberschrift. site.js setzt .stuck, sobald der
+   Waechter darueber aus dem Blick geraet. */
 .barname {
+  display: none;
+  height: var(--namerow);
   font: 600 17px/1.2 var(--mono);
   color: var(--ink);
-  margin: 0 0 9px
+  padding-bottom: 9px
+}
+
+.bar.stuck .barname {
+  display: block
+}
+
+/* Nullhoher Waechter fuer den IntersectionObserver. */
+.barwatch {
+  height: 0
 }
 
 .barrow {
