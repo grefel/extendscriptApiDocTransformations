@@ -376,13 +376,28 @@
      --sticky wird als CSS-Wert wieder mit dem Zoom skaliert. */
   function stickyOffset() {
     if (!bar || bar.hidden) return;
-    document.documentElement.style.setProperty('--sticky',
-      (44 + bar.offsetHeight + 6) + 'px');
+    /* Gerechnet wird mit der Hoehe im klebenden Zustand: dort ist die Leiste
+       um die Namenszeile hoeher, und genau dann wird gesprungen. Ohne den
+       Zuschlag landete das Ziel 30 px zu hoch, also unter der Leiste. */
+    const namerow = parseFloat(getComputedStyle(bar).getPropertyValue('--namerow')) || 0;
+    const hoch = bar.offsetHeight + (bar.classList.contains('stuck') ? 0 : namerow);
+    document.documentElement.style.setProperty('--sticky', (44 + hoch + 6) + 'px');
 
   }
 
   if (bar) {
     bar.hidden = false;
+    /* Der Objektname erscheint erst, wenn die Leiste wirklich klebt: am
+       Seitenanfang stuende er doppelt da, direkt unter der Ueberschrift.
+       Ein nullhoher Waechter vor der Leiste beantwortet die Frage ohne
+       Scroll-Handler; der Rand von 45 px ist die Hoehe der Kopfzeile plus
+       einem Pixel, damit der Wechsel genau am Anschlag stattfindet. */
+    const watch = $('.barwatch');
+    if (watch && window.IntersectionObserver) {
+      new IntersectionObserver(([e]) => {
+        bar.classList.toggle('stuck', !e.isIntersecting);
+      }, { rootMargin: '-45px 0px 0px 0px', threshold: 0 }).observe(watch);
+    }
     refreshSticky = stickyOffset;
     stickyOffset();
     let st = 0;

@@ -399,6 +399,21 @@ keine Beschriftung. Nach ein paar Bildschirmen Properties ist die Überschrift
 weggescrollt, und bei 423 Objekten ähneln sich viele Namen (`TextFrame`,
 `TextFramePreference`).
 
+**Er erscheint erst, wenn die Leiste wirklich klebt** — am Seitenanfang stünde er
+doppelt da, direkt unter der Überschrift. Beantwortet wird das von einem
+nullhohen Wächter (`.barwatch`) vor der Leiste, den ein `IntersectionObserver`
+mit `rootMargin: -45px` beobachtet: das ist die Höhe der Kopfzeile plus ein
+Pixel, der Wechsel fällt damit genau auf den Anschlag. Kein Scroll-Handler.
+
+Dabei wächst die Leiste um die Namenszeile, und **der Inhalt sprang gemessen um
+30 px**, sobald sie ansetzte — Chromes Scroll-Anchoring fing das nicht ab. Die
+Höhe steht deshalb als `--namerow` fest, die Namenszeile ist genau so hoch, und
+`.bar.stuck` nimmt sie über einen negativen Rand wieder zurück: im Fluss
+beansprucht die Leiste immer dasselbe. Gemessen mit echtem Radscrollen über den
+Anschlag, in Chrome und Firefox: 0 px Abweichung. `--sticky` rechnet die
+Namenszeile immer mit, sonst landete ein Sprungziel 30 px zu hoch — also unter
+der Leiste.
+
 Damit ist die Leiste kein Flexcontainer mehr, sondern trägt zwei Zeilen. Die
 Umbruchregel für schmale Fenster musste deshalb von `.bar` auf `.barrow`
 wandern — ohne sie lief die Pillenreihe bei 750 px um 313 px aus der Spalte und

@@ -182,8 +182,15 @@ const check = (name, got, want) => {
   /* Der Objektname steht in der klebenden Zeile: nach ein paar Bildschirmen
      Properties ist die Ueberschrift weg, und viele Namen aehneln sich. */
   check('die Filterzeile nennt das Objekt',
-    (await page.locator('.barname').innerText()).trim(),
+    (await page.evaluate(() => document.querySelector('.barname').textContent)).trim(),
     (await page.locator('h1').innerText()).trim());
+  /* Am Seitenanfang stuende der Name doppelt da, direkt unter der
+     Ueberschrift — er erscheint erst, wenn die Leiste wirklich klebt. */
+  check('am Seitenanfang steht er nicht doppelt',
+    await page.locator('.barname').isVisible(), false);
+  /* Und die Leiste darf im Fluss nicht wachsen, sonst springt der Inhalt beim
+     Kleben — gemessen waren es 30 px. Die Dokumenthoehe ist der Beweis. */
+  const hoheOben = await page.evaluate(() => document.documentElement.scrollHeight);
   check('kleiner als die Ueberschrift, gleiche Schrift',
     await page.evaluate(() => {
       const a = getComputedStyle(document.querySelector('.barname'));
@@ -193,12 +200,15 @@ const check = (name, got, want) => {
     }), true);
   await page.evaluate(() => window.scrollTo(0, 3000));
   await page.waitForTimeout(250);
-  check('und bleibt beim Scrollen stehen',
+  check('beim Scrollen erscheint er und bleibt stehen',
     await page.evaluate(() => {
-      const n = document.querySelector('.barname').getBoundingClientRect();
+      const n = document.querySelector('.barname');
+      const r = n.getBoundingClientRect();
       const k = document.querySelector('.top').getBoundingClientRect();
-      return n.top >= k.bottom - 1 && n.top - k.bottom < 30;
+      return !!n.offsetParent && r.top >= k.bottom - 1 && r.top - k.bottom < 30;
     }), true);
+  check('die Seite wird dabei nicht laenger',
+    await page.evaluate(() => document.documentElement.scrollHeight), hoheOben);
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForTimeout(150);
 
