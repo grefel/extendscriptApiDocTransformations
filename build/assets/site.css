@@ -648,13 +648,27 @@ h1 {
   position: sticky;
   top: 44px;
   z-index: 4;
-  display: flex;
-  gap: 10px;
-  align-items: center;
   background: var(--bg);
-  padding: 15px 0 11px;
+  padding: 11px 0;
   margin-top: 20px;
   border-bottom: 1px solid var(--line)
+}
+
+/* Der Objektname bleibt beim Blaettern sichtbar: nach ein paar Bildschirmen
+   Properties ist die Ueberschrift weg, und viele Namen aehneln sich
+   (TextFrame, TextFramePreference). Kleiner als die Ueberschrift mit ihren
+   26 px, aber dieselbe Schrift und dasselbe Gewicht — es ist derselbe Name,
+   keine Beschriftung. */
+.barname {
+  font: 600 17px/1.2 var(--mono);
+  color: var(--ink);
+  margin: 0 0 9px
+}
+
+.barrow {
+  display: flex;
+  gap: 10px;
+  align-items: center
 }
 
 /* Traegt das Tastaturkuerzel im Feld. Als <label> zeigt schon der Klick auf
@@ -1718,7 +1732,10 @@ footer .by .sep {
     display: block
   }
 
-  .bar {
+  /* .barrow, nicht .bar: seit der Objektname darueber steht, ist die Leiste
+     kein Flexcontainer mehr. Ohne den Umbruch lief die Pillenreihe bei 750 px
+     um 313 px aus der Spalte und die Seite scrollte seitlich. */
+  .barrow {
     flex-wrap: wrap
   }
 

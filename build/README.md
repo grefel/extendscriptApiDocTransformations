@@ -340,8 +340,8 @@ gesuchten. Gemeldet als „springt zum nächsten".
 Behoben mit `scroll-margin-top` auf allen Ankern in `.dmain`. Der Wert ist
 gemessen, nicht geschätzt: `site.js` setzt `--sticky` auf
 `44 + Höhe der Filterzeile + 6` und zieht ihn beim Zoomen und bei
-Größenänderung nach — bei schmalem Fenster bricht die Zeile in zwei Reihen um
-(109 px gegenüber 146 px). Gerechnet wird mit `offsetHeight`, also in
+Größenänderung nach — bei schmalem Fenster bricht die Pillenreihe um
+(135 px gegenüber 171 px). Gerechnet wird mit `offsetHeight`, also in
 Layout-Pixeln: `--sticky` wird als CSS-Wert später wieder mit dem Zoom
 skaliert.
 
@@ -390,6 +390,24 @@ Drei Feinheiten, alle beim Prüfen aufgefallen:
 
 Die Polsterung des Inhalts liegt bei **16/20/27 px** — zwei Drittel der
 früheren Werte. Der Inhalt soll die Fläche nutzen, der Rand nur trennen.
+
+### Der Objektname in der klebenden Zeile
+
+Über dem Filterfeld steht der Name des Objekts — 17 px statt der 26 px der
+Überschrift, aber dieselbe Schrift und dasselbe Gewicht: es ist derselbe Name,
+keine Beschriftung. Nach ein paar Bildschirmen Properties ist die Überschrift
+weggescrollt, und bei 423 Objekten ähneln sich viele Namen (`TextFrame`,
+`TextFramePreference`).
+
+Damit ist die Leiste kein Flexcontainer mehr, sondern trägt zwei Zeilen. Die
+Umbruchregel für schmale Fenster musste deshalb von `.bar` auf `.barrow`
+wandern — ohne sie lief die Pillenreihe bei 750 px um 313 px aus der Spalte und
+die Seite scrollte seitlich.
+
+**Der Breitendurchlauf hat das nicht gemeldet.** Er wartete nach dem Laden nur
+220 ms und maß, während die Filterzeile noch `[hidden]` war. Jetzt wartet er
+auf `.bar:not([hidden])`; mit deaktivierter Umbruchregel meldet er den
+Überhang prompt (140 px bei 900, 240 bei 800) — nachgewiesen, nicht vermutet.
 
 ## Schmales Fenster
 
