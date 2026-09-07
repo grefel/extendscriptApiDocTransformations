@@ -275,7 +275,13 @@ function make(data, d, ctx) {
     const pill = (key, text, n) =>
       `<button class="pill" type="button" data-o="${key}">${text} ${n}<kbd>${
         key === 'p' ? 'P' : key === 'e' ? 'E' : 'M'}</kbd></button>`;
+    /* Der Name steht in der klebenden Zeile mit: nach ein paar Bildschirmen
+       Properties ist die Ueberschrift lange weggescrollt, und bei 423 Objekten
+       mit aehnlichen Namen (TextFrame, TextFramePreference) will man sich
+       vergewissern, wo man ist. */
     h += `<div class="bar" hidden data-enhance="filter">
+      <div class="barname">${esc(c.n)}</div>
+      <div class="barrow">
       <label class="fwrap" for="f">
         <input id="f" type="search" placeholder="Filter members…" spellcheck="false" autocomplete="off">
         <kbd>F</kbd></label>
@@ -284,7 +290,7 @@ function make(data, d, ctx) {
       ${c.ev.length ? pill('e', 'Events', c.ev.length) : ''}
       ${c.m.length ? pill('m', 'Methods', c.m.length) : ''}
       <button class="pill mode" type="button" data-mode="list"
-        title="All members as a list">List<kbd>L</kbd></button></div>
+        title="All members as a list">List<kbd>L</kbd></button></div></div>
       <div class="mlist" hidden data-enhance="list"></div>`;
 
     if (c.p.length) {

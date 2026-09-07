@@ -179,6 +179,29 @@ const check = (name, got, want) => {
   check('das Kuerzel steht auch dort im Feld',
     (await page.locator('.sidef kbd').innerText()).trim(), 'O');
 
+  /* Der Objektname steht in der klebenden Zeile: nach ein paar Bildschirmen
+     Properties ist die Ueberschrift weg, und viele Namen aehneln sich. */
+  check('die Filterzeile nennt das Objekt',
+    (await page.locator('.barname').innerText()).trim(),
+    (await page.locator('h1').innerText()).trim());
+  check('kleiner als die Ueberschrift, gleiche Schrift',
+    await page.evaluate(() => {
+      const a = getComputedStyle(document.querySelector('.barname'));
+      const b = getComputedStyle(document.querySelector('h1'));
+      return parseFloat(a.fontSize) < parseFloat(b.fontSize) &&
+        a.fontFamily === b.fontFamily && a.fontWeight === b.fontWeight;
+    }), true);
+  await page.evaluate(() => window.scrollTo(0, 3000));
+  await page.waitForTimeout(250);
+  check('und bleibt beim Scrollen stehen',
+    await page.evaluate(() => {
+      const n = document.querySelector('.barname').getBoundingClientRect();
+      const k = document.querySelector('.top').getBoundingClientRect();
+      return n.top >= k.bottom - 1 && n.top - k.bottom < 30;
+    }), true);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(150);
+
   /* Tastenwege zu den Pillen: dieselben Buchstaben, die darauf stehen. */
   await page.locator('h1').click();
   for (const [taste, erwartet] of [['p', 'p'], ['m', 'm'], ['e', 'e'], ['a', 'all']]) {
@@ -1253,6 +1276,10 @@ const check = (name, got, want) => {
   const overflowAt = async (w, file) => {
     await page.setViewportSize({ width: w, height: 1000 });
     await page.goto(url(file));
+    /* Auf die Bedienelemente warten, nicht nur auf ein paar Millisekunden:
+       ohne das wurde gemessen, waehrend die Filterzeile noch [hidden] war —
+       ein Ueberhang von 313 px in ihrer Pillenreihe blieb so unentdeckt. */
+    await page.waitForSelector('.bar:not([hidden])', { timeout: 10000 });
     await page.waitForTimeout(220);
     return page.evaluate(() => ({
       page: document.documentElement.scrollWidth - document.documentElement.clientWidth,
