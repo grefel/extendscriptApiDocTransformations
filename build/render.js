@@ -281,7 +281,7 @@ function make(data, d, ctx) {
        vergewissern, wo man ist. */
     h += `<div class="barwatch"></div>
       <div class="bar" hidden data-enhance="filter">
-      <div class="barname">${esc(c.n)}</div>
+      <div class="barname">${esc(c.n)}<span class="bkind">${kindOf(c)}</span></div>
       <div class="barrow">
       <label class="fwrap" for="f">
         <input id="f" type="search" placeholder="Filter members…" spellcheck="false" autocomplete="off">

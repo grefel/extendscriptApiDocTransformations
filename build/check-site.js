@@ -182,8 +182,15 @@ const check = (name, got, want) => {
   /* Der Objektname steht in der klebenden Zeile: nach ein paar Bildschirmen
      Properties ist die Ueberschrift weg, und viele Namen aehneln sich. */
   check('die Filterzeile nennt das Objekt',
-    (await page.evaluate(() => document.querySelector('.barname').textContent)).trim(),
+    (await page.evaluate(() => document.querySelector('.barname').firstChild.nodeValue)).trim(),
     (await page.locator('h1').innerText()).trim());
+  /* Und die Art dazu, wie oben am Kopf: Object, Collection oder Enumeration. */
+  /* Beide Seiten in Grossbuchstaben vergleichen: am Kopf macht das CSS daraus
+     "OBJECT", im Markup steht "Object". */
+  check('samt seiner Art',
+    (await page.evaluate(() => document.querySelector('.barname .bkind').textContent))
+      .trim().toUpperCase(),
+    (await page.locator('.kind').innerText()).trim().split(' ')[0].toUpperCase());
   /* Am Seitenanfang stuende der Name doppelt da, direkt unter der
      Ueberschrift — er erscheint erst, wenn die Leiste wirklich klebt. */
   check('am Seitenanfang steht er nicht doppelt',
