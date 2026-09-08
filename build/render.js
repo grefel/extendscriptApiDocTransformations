@@ -102,6 +102,30 @@ function make(data, d, ctx) {
   };
   const known = n => resolve(n) !== null;
 
+  /* Ist dieser Typname wirklich die Kern-Klasse File bzw. Folder? Ein Produkt
+     darf eine eigene Klasse gleichen Namens haben — die bleibt unberuehrt. */
+  const uxpDatei = n => {
+    if (!target.uxp || !UXP_DOCS[n]) return false;
+    const href = resolve(n);
+    return !!href && href.startsWith('../javascript/');
+  };
+
+  /* File und Folder sind unter UXP Eintraege aus
+     require('uxp').storage.localFileSystem: gleicher Name, aber eine
+     Promise-API — beschafft wird so ein Eintrag mit await, gelesen und
+     geschrieben ebenso.
+
+     Nur in der Property-Tabelle: dort steht, was man aus dem Objekt
+     herausbekommt und womit man weiterarbeitet. Als Parameter ist ein File
+     bloss die Uebergabe, dafuer lohnt der Zusatz an 228 Stellen nicht.
+
+     Der Chip haengt einmal an der Zelle statt an jedem Token und steht nur im
+     UXP-Modus; ohne JavaScript gilt ExtendScript, deshalb hidden im Markup. */
+  const ASYNC_CHIP = ' <span class="uxpv" data-only="uxp" hidden title="UXP: an entry'
+    + " from require('uxp').storage.localFileSystem — obtaining it and its read"
+    + ' and write methods return promises">async</span>';
+  const asyncChip = ts => (ts || []).some(uxpDatei) ? ASYNC_CHIP : '';
+
   const OR = ' <span class="or">|</span> ';
 
   /* esOnly: Typen, die an dieser Stelle nur unter ExtendScript gelten. Sie
@@ -178,7 +202,10 @@ function make(data, d, ctx) {
     const n = notes.noteForMember(cls, member, target.slug);
     if (!n) return '';
     if (n.runtime && n.runtime !== 'es' && !target.uxp) return '';
-    return `<span class="mwarn"${n.runtime ? ` data-only="${esc(n.runtime)}"` : ''}
+    /* Ein Hinweis nur fuer UXP startet verborgen: ohne JavaScript gibt es
+       keinen Umschalter, dann gilt ExtendScript. */
+    return `<span class="mwarn"${n.runtime ? ` data-only="${esc(n.runtime)}" ${
+      n.runtime === 'uxp' ? 'hidden' : ''}` : ''}
       >${esc(n.text)}</span>`;
   }
 
@@ -266,7 +293,8 @@ function make(data, d, ctx) {
        Modus aus; ohne Umschalter erscheinen nur die allgemeinen. */
     for (const note of notes.notesFor(c.n, kindOf(c), target.slug)) {
       if (note.runtime && note.runtime !== 'es' && !target.uxp) continue;
-      h += `<p class="warn"${note.runtime ? ` data-only="${esc(note.runtime)}"` : ''}
+      h += `<p class="warn"${note.runtime ? ` data-only="${esc(note.runtime)}" ${
+        note.runtime === 'uxp' ? 'hidden' : ''}` : ''}
         role="note">${esc(note.text)}</p>`;
     }
 
@@ -303,6 +331,7 @@ function make(data, d, ctx) {
         h += `<tr id="p-${esc(p.n)}"><td class="n">${copyable(clip, esc(p.n))}${
           p.st ? '<span class="stat">static</span>' : ''}</td>
           <td class="t">${typeList(p.t, p.arr) || '<span class="none">—</span>'}${
+            asyncChip(p.t)}${
             p.v ? ` <span class="lit">= ${esc(p.v)}</span>` : ''}${extras(p)}${inlineEnum(p.t)}</td>
           <td class="a ${p.rw === 'readonly' ? 'ro' : 'rw'}" title="${esc(p.rw)}">${esc(p.rw)}</td>
           <td class="d">${esc(p.d)}${memberNote(c.n, p.n)}</td></tr>`;

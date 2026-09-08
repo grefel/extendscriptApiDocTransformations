@@ -314,9 +314,11 @@
       const t = el.querySelector('td.t, .ret');
       if (!t) return '';
       /* Ohne die Wertechips: sonst steht in der Liste
-         "RepaginateOptionNEXT_EVEN_PAGENEXT_ODD_PAGE…" statt des Typnamens. */
+         "RepaginateOptionNEXT_EVEN_PAGENEXT_ODD_PAGE…" statt des Typnamens.
+         Ausgeblendetes zaehlt textContent mit — der async-Chip stuende sonst
+         auch unter ExtendScript in der Liste. */
       const kopie = t.cloneNode(true);
-      kopie.querySelectorAll('.vals').forEach(v => v.remove());
+      kopie.querySelectorAll('.vals, [hidden]').forEach(v => v.remove());
       const s = kopie.textContent.replace(/[→\s]+/g, ' ').trim();
       return s && s !== '—' ? ` <i>${esc(s)}</i>` : '';
     };
