@@ -520,9 +520,10 @@ in der Wirklichkeit falsch — deshalb läuft die Gegenprobe über http.
 
 ## Noch offen
 
-- Vom UXP-Umschalter ist nur noch der Wegfall der `[]`-Methoden übrig. Welche
-  weiteren Unterschiede zwischen ExtendScript und UXP in die Daten gehören,
-  ist noch zu klären.
+- Der UXP-Umschalter kennt fünf Unterschiede: die `[]`-Methoden, das `File` als
+  Event-Handler, die umgehängten Kern-Verweise, das kursive `async` an File- und
+  Folder-Properties und die Hinweise aus `notes.js`. Welche weiteren in die
+  Daten gehören, ist noch zu klären.
 - Für Illustrator und Photoshop sind fünf bzw. zwei Collections ohne erkennbaren
   Elementtyp — dort fehlen `[]`, `getByName` und `add`.
 
@@ -545,8 +546,8 @@ in der Wirklichkeit falsch — deshalb läuft die Gegenprobe über http.
 in jeder Produkt-XML identisch drin (22 bzw. 34 Klassen) und werden einmal
 ausgegeben statt fünfmal. Damit entfällt auch die alte Sonderbehandlung, `$` und
 alles mit Suffix `SUI` im UXP-Modus auszublenden — im Objektmodell eines Produkts
-kommen sie gar nicht mehr vor. Vom UXP-Umschalter bleibt genau ein Unterschied:
-die Methoden mit dem Namen `[]`.
+kommen sie gar nicht mehr vor. Als Member blendet der Umschalter nur noch die
+Methoden mit dem Namen `[]` aus; der Rest sind Typangaben und Hinweise.
 
 Typverweise lösen erst im eigenen Produkt auf, dann in den gemeinsamen
 Bibliotheken. `Document` bleibt so im eigenen Produkt, `File` landet unter
@@ -777,6 +778,24 @@ Das Ziel steht als `data-uxp-href` im Markup, umgehängt wird in `site.js`; das
 ursprüngliche Ziel wandert dabei nach `data-es-href`, damit das Zurückschalten
 stimmt. Nur die beiden InDesign-Ziele bekommen das Attribut — sie allein haben
 den Umschalter.
+
+Dazu steht im UXP-Modus ein kursives **`async`** hinter dem Typ: so ein Eintrag
+wird mit `await` beschafft, und `read()`/`write()` liefern Promises. Der Chip
+hängt an der Zelle, nicht an jedem Typnamen, und **nur in der
+Property-Tabelle** — 34 Stellen in 26 Objekten. An den 228 Parametern, die ein
+`File` nehmen, steht er nicht: dort ist die Datei bloß die Übergabe, der
+Hinweis gehört dorthin, wo man einen Eintrag herausbekommt und mit ihm
+weiterarbeitet. An den 1.053 `handler`-Parametern von `addEventListener` fiele
+er ohnehin aus, weil das `File` dort unter UXP ganz verschwindet.
+
+Der Chip trägt `data-only="uxp"` und startet `hidden`: ohne JavaScript gibt es
+keinen Umschalter, dann gilt ExtendScript. Dieselbe Regel gilt jetzt für die
+Hinweise aus `notes.js` — vorher blitzten die UXP-Hinweise bis zum ersten
+`applyRuntime()` auf und standen ohne JavaScript dauerhaft da.
+
+Fallstrick: die Listenansicht baut den Typ aus `textContent`, und das zählt
+Ausgeblendetes mit. `buildList()` wirft deshalb `.vals` **und** alles `[hidden]`
+aus der Kopie — sonst stünde „File async“ auch unter ExtendScript in der Liste.
 
 ### Theme, Laufzeit und Rechtliches
 

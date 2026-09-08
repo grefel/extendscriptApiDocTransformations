@@ -60,12 +60,15 @@ hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
 
 ## Offene Fragen
 
-1. **ExtendScript vs. UXP.** Vom Umschalter ist genau ein Unterschied übrig: die
-   242 Methoden namens `[]`. Er steht nur noch bei InDesign und InDesign Server
-   (`uxp: true` in `products.js`). `$` und ScriptUI sind aus den Produkten heraus in
-   eigene Bibliotheken gewandert, die als „ExtendScript only" gekennzeichnet sind.
+1. **ExtendScript vs. UXP.** Als Member blendet der Umschalter nur die 242
+   Methoden namens `[]` aus; dazu kommen das `File` als Event-Handler, die
+   umgehängten Kern-Verweise (MDN, Adobes UXP-Referenz, abgeschaltet), das
+   kursive `async` an den 34 File- und Folder-Properties und die Hinweise aus
+   `notes.js`. Er steht nur bei InDesign und InDesign Server (`uxp: true` in
+   `products.js`). `$` und ScriptUI sind aus den Produkten heraus in eigene
+   Bibliotheken gewandert, die als „ExtendScript only" gekennzeichnet sind.
    **Welche weiteren Unterschiede in die Daten gehören, ist weiterhin offen** — etwa
-   `File`, `Folder`, `Socket`, `XML`/`XMLList`, `UnitValue`, `Reflection`.
+   `Socket`, `XML`/`XMLList`, `UnitValue`, `Reflection`.
 2. Bleibt der Download-Zip pro InDesign-Version bestehen? Die Zips liegen im
    Wurzelverzeichnis, sind aber nicht versioniert.
 3. Soll der Vergleichs-Modus aus Konzept C (2–3 Objekte nebeneinander, nur dort

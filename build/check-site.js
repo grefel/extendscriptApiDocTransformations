@@ -496,6 +496,59 @@ const check = (name, got, want) => {
   await page.click('.rt button[data-r="es"]');
   await page.waitForTimeout(250);
 
+  /* --- UXP: File und Folder sind dort eine Promise-API ---
+     Der Chip haengt an der Typangabe der Property, nicht am Member — und
+     nicht an Parametern: dort ist das File nur die Uebergabe. */
+  await page.goto(url('indesign/Document.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.waitForTimeout(400);
+  const at = sel => page.locator(sel).innerText().then(s => s.replace(/\s+/g, ' ').trim());
+  check('ExtendScript: kein async-Hinweis',
+    await page.locator('.uxpv:not([hidden])').count(), 0);
+  check('ExtendScript: filePath ist ein Folder',
+    await at('tr#p-filePath td.t'), 'Folder');
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(300);
+  check('UXP: Folder ist als async markiert',
+    await at('tr#p-filePath td.t'), 'Folder async');
+  /* evaluateAll statt getAttribute: fehlt der Chip, kommt eine leere Liste
+     zurueck — getAttribute wartet stattdessen 30 s und reisst den ganzen
+     Bericht mit. */
+  check('UXP: der Hinweis nennt die Quelle',
+    /localFileSystem/.test(await page.locator('tr#p-filePath .uxpv')
+      .evaluateAll(els => els.map(e => e.title).join(' '))), true);
+  /* Parameter bleiben frei — auch die, die wirklich ein File nehmen. */
+  check('UXP: nicht am Parameter',
+    await at('#m-exportFile .arg:nth-of-type(2) .at'), 'File');
+  check('UXP: in keinem Methodenkopf',
+    await page.locator('.mem .uxpv').count(), 0);
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(250);
+  check('zurueck: der Hinweis ist wieder weg',
+    await page.locator('.uxpv:not([hidden])').count(), 0);
+  /* In der Listenansicht steht der Typ als Text — ausgeblendetes zaehlt
+     textContent mit, deshalb muss der Chip dort ausdruecklich raus. */
+  const listentyp = async () => {
+    await page.keyboard.press('l');
+    await page.waitForTimeout(300);
+    const t = await page.locator('.mlist a[href="#p-fullName"] i')
+      .evaluateAll(els => els.map(e => e.textContent).join(' '));
+    await page.keyboard.press('l');
+    await page.waitForTimeout(250);
+    return t.trim();
+  };
+  check('Liste unter ExtendScript ohne async', await listentyp(), 'File');
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(300);
+  check('Liste unter UXP mit async', await listentyp(), 'File async');
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(250);
+  /* Ziele ohne Umschalter beschreiben nur ExtendScript. */
+  await page.goto(url('illustrator/Document.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('Illustrator kennt den Hinweis nicht',
+    await page.locator('.uxpv').count(), 0);
+
   /* --- Hinweise an einzelnen Membern (notes.js, byMember) --- */
   await page.goto(url('indesign/Application.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });

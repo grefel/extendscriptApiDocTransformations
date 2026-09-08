@@ -1057,6 +1057,16 @@ td.t .lit {
   cursor: help
 }
 
+/* Nur im UXP-Modus: File und Folder haben dort dieselben Namen, aber eine
+   Promise-API. Kleiner und kursiv, sonst liest sich "Folder async" wie ein
+   zweiter Typname — die Farbe der Zelle behaelt es. */
+.uxpv {
+  font-size: .85em;
+  font-style: italic;
+  cursor: help;
+  white-space: nowrap
+}
+
 td.a {
   font: 10.5px var(--mono);
   overflow-wrap: anywhere
