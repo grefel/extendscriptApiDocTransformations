@@ -692,7 +692,7 @@ h1 {
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--dim);
-  vertical-align: 2px
+  vertical-align: 1px
 }
 
 /* Nullhoher Waechter fuer den IntersectionObserver. */
