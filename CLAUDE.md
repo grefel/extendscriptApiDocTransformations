@@ -119,10 +119,18 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
   geordneten Liste ein `Array` (Elementtyp bewusst offen, die Listen sind
   gemischt). Vorher standen 231 solche Namen je InDesign-Modell als Rohtext in
   der Typspalte.
-- **Einzelne Typangaben sind schlicht falsch.** `Document.filePath` und
-  `Book.filePath` stehen als `File`, liefern aber einen `Folder`. Korrigiert in
-  `build/additions.js` (`types`), abgesichert durch `from`. Die gleichlautenden
+- **Einzelne Typangaben sind schlicht falsch.** `Document.filePath`,
+  `Book.filePath` und `ScriptPreference.scriptsFolder` stehen als `File`,
+  liefern aber einen `Folder`. Korrigiert in `build/additions.js` (`types`),
+  abgesichert durch `from`. Die gleichlautenden
   `Application`/`BookContent`/`Library` sind ungeprüft und bleiben stehen.
+- **Jede Korrektur zuerst in der Roh-XML unter `sourceXML/` nachschlagen.**
+  Erst dort belegen, dass die Angabe wirklich falsch dasteht — und in welchen
+  Produkt-XMLs. Sonst wird etwas „korrigiert", das `fixdom.js`, `fixDom.xsl`
+  oder `additions.js` längst erledigt haben, oder das Adobe inzwischen selbst
+  richtig exportiert; beides fällt im fertigen HTML nicht auf. Das `from`-Feld
+  in `additions.js` sichert genau das ab: Es greift nur, wenn die falsche
+  Angabe noch exakt so in der Quelle steht.
 - **Konstruktoren stehen als Methode mit dem Klassennamen** (`File(path)`,
   `XML(text)`), und die globalen Namen stecken in einer Klasse `global`.
   Für die `.d.ts` wird beides umgeformt — siehe build/README.md.

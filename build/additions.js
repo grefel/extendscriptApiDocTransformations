@@ -50,6 +50,13 @@ module.exports = {
       d: 'The path to the folder containing the book.',
       added: 'Wie Document.filePath: der Wert ist der Ordner, die .indb-Datei ' +
         'selbst steht in fullName.'
+    },
+    'ScriptPreference.scriptsFolder': {
+      from: ['File'],
+      t: ['Folder'],
+      added: 'Adobes Export sagt File; der Wert ist der Skripte-Ordner — die ' +
+        'Beschreibung im Export sagt selbst "folder". Betrifft InDesign und ' +
+        'InDesign Server, andere Produkte kennen die Klasse nicht.'
     }
   }
 };
