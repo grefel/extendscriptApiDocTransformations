@@ -896,6 +896,12 @@ const check = (name, got, want) => {
     await page.click('.rt button[data-r="es"]');
     await page.waitForTimeout(200);
   }
+  /* ScriptPreference.scriptsFolder steht im Export ebenfalls als File. */
+  await page.goto(url('indesign/ScriptPreference.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  check('ScriptPreference.scriptsFolder ist Folder',
+    await typeCell('scriptsFolder'), 'Folder -> ../javascript/Folder.html');
+
   /* Der Tooltip an den MDN-Verweisen bleibt kurz. */
   await page.goto(url('indesign/Book.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
