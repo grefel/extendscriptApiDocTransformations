@@ -62,6 +62,21 @@ const check = (name, got, want) => {
     await p0.locator('[data-enhance]:not([hidden])').count(), 0);
   check('ohne JS: Navigation zum Index moeglich',
     await p0.locator('a[href="index.html"]').count() > 0, true);
+  /* Die acht Uebersichten sind als .../<slug>/ und als .../<slug>/index.html
+     erreichbar. Das Canonical zeigt auf die Verzeichnisform, die Links im
+     Markup bleiben auf index.html — sonst braeche der Offline-Gebrauch. */
+  const canon = () => p0.evaluate(() => {
+    const l = document.querySelector('link[rel=canonical]');
+    return l ? l.getAttribute('href') : '(fehlt)';
+  });
+  check('ohne JS: Canonical der Objektseite', await canon(),
+    'https://www.indesignjs.de/indesignapi/indesign/Rectangle.html');
+  await p0.goto(url('indesign/index.html'));
+  check('ohne JS: Canonical der Uebersicht', await canon(),
+    'https://www.indesignjs.de/indesignapi/indesign/');
+  await p0.goto(url('index.html'));
+  check('ohne JS: Canonical der Startseite', await canon(),
+    'https://www.indesignjs.de/indesignapi/');
   /* Ohne Skript klebt nur die Kopfzeile — der Vorgabewert von --sticky. */
   await p0.goto(url('indesign/Rectangle.html') + '#m-duplicate');
   await p0.waitForTimeout(400);
