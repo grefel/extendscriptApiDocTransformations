@@ -15,7 +15,7 @@
 const fs = require('fs');
 const path = require('path');
 const { build, derive } = require('./model');
-const { make, esc, pageOf, splitVersion, THEME_BOOT } = require('./render');
+const { make, esc, pageOf, splitVersion, THEME_BOOT, BASE } = require('./render');
 const products = require('./products');
 const agents = require('./agents');
 const { createZip } = require('./zip');
@@ -183,7 +183,7 @@ for (const t of targets) {
   write(t.slug + '/' + t.slug + '.d.ts', agents.buildTypes(dtsClasses, Tdts, {
     title: t.label + ' — ' + t.data.version,
     generated: t.data.generated,
-    home: 'https://www.indesignjs.de/indesignapi/' + t.slug + '/'
+    home: BASE + t.slug + '/'
   }));
 
   /* ---------- Produkt und ScriptUI in einer Datei ----------
@@ -202,7 +202,7 @@ for (const t of targets) {
     write(t.slug + '/' + t.slug + '-scriptui.d.ts', agents.buildTypes(withElement(kombi), Tk, {
       title: t.label + ' + ScriptUI — ' + t.data.version,
       generated: t.data.generated,
-      home: 'https://www.indesignjs.de/indesignapi/' + t.slug + '/',
+      home: BASE + t.slug + '/',
       yielded: [...weicht].sort()
     }));
   }
@@ -312,6 +312,7 @@ function homePage(targets, generated) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Adobe ExtendScript API</title>
 <meta name="description" content="Reference for the Adobe ExtendScript object models: InDesign, Illustrator, Photoshop, Bridge, plus ScriptUI and the core JavaScript classes.">
+<link rel="canonical" href="${esc(BASE)}">
 <link rel="stylesheet" href="assets/site.css">
 <script>${THEME_BOOT}</script>
 </head>

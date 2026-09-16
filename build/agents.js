@@ -15,6 +15,8 @@
    fertigen Seite zurueckgelesen. */
 'use strict';
 
+const { BASE } = require('./render');
+
 /* ---------- Typabbildung ExtendScript → TypeScript ----------
 
    Adobes Typangaben sind teils Prosa. 105 der vorkommenden Namen bezeichnen
@@ -589,8 +591,6 @@ function apiJson(target, classes, ctx) {
    liegt darin, dass man sagen kann „richte deinen Agenten auf diese URL".
    Deshalb steht hier nicht der Inhalt, sondern der Weg dorthin, samt Groessen —
    das vollstaendige Modell passt in kein Kontextfenster. */
-
-const BASE = 'https://www.indesignjs.de/indesignapi/';
 
 function llmsProduct(t, classes, kindOf) {
   const n = k => classes.filter(c => kindOf(c) === k).length;

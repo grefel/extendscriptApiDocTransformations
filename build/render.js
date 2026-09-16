@@ -12,6 +12,10 @@ const shortcuts = require('./shortcuts');
 const esc = s => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+/* Oeffentliche Adresse der Website. Steht im Canonical jeder Seite und in den
+   maschinenlesbaren Dateien (agents.js). */
+const BASE = 'https://www.indesignjs.de/indesignapi/';
+
 /* Laeuft synchron im <head>, vor dem ersten Zeichnen. site.js hat "defer" und
    ist damit zu spaet: die Folgeseite erschiene kurz im Standard und klappte
    dann um. Ohne gespeicherte Wahl gilt Hell bei Zoom 1,15 — das steht im
@@ -480,7 +484,12 @@ function make(data, d, ctx) {
 }
 
 /* Gemeinsames Seitengeruest. CSS und JS liegen eine Ebene hoeher, damit der
-   Browser sie ueber alle Produkte hinweg einmal cacht. */
+   Browser sie ueber alle Produkte hinweg einmal cacht.
+
+   Das Canonical nennt die Verzeichnisform (.../indesign/), die Uebersicht ist
+   also unter zwei Adressen erreichbar. Die Links im Markup bleiben relativ und
+   zeigen auf index.html, sonst liefe die Website nicht ueber file:// aus dem
+   Offline-Archiv. */
 function shell({ title, description, body, current, target, targets, data, isIndex }) {
   const v = splitVersion(data.version);
   /* Produktumschalter als <details>: funktioniert ohne JavaScript, ist per
@@ -502,6 +511,7 @@ function shell({ title, description, body, current, target, targets, data, isInd
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)} — ${esc(target.label)} API</title>
 <meta name="description" content="${esc(description).slice(0, 300)}">
+<link rel="canonical" href="${esc(BASE + target.slug + '/' + (isIndex ? '' : pageOf(current)))}">
 <link rel="stylesheet" href="../assets/site.css">
 <script>${THEME_BOOT}</script>
 </head>
@@ -560,4 +570,4 @@ function shell({ title, description, body, current, target, targets, data, isInd
 `;
 }
 
-module.exports = { make, shell, esc, pageOf, splitVersion, THEME_BOOT };
+module.exports = { make, shell, esc, pageOf, splitVersion, THEME_BOOT, BASE };

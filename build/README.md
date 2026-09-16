@@ -82,6 +82,30 @@ ergänzt nur Bedienelemente; die sind im HTML als `[hidden]` markiert und werden
 erst durch das Skript eingeschaltet. `check-site.js` prüft das mit abgeschaltetem
 JavaScript mit.
 
+## Suchmaschinen
+
+Jede der 2.682 Seiten trägt ein `<link rel="canonical">` mit ihrer öffentlichen
+Adresse; die Basis steht als `BASE` in `render.js` und wird von `agents.js`
+mitbenutzt. Nötig ist das für die **acht Übersichtsseiten**: sie sind als
+`.../<slug>/` und als `.../<slug>/index.html` erreichbar, also derselbe Inhalt
+unter zwei Adressen. Die Objektseiten haben je nur eine Adresse und bekommen den
+Verweis der Einheitlichkeit halber mit.
+
+Das Canonical nennt die **Verzeichnisform**, die Links im Markup zeigen weiter
+auf `index.html`. Das ist Absicht: relative Links auf `index.html` sind die
+einzige Form, die auch über `file://` aus dem Offline-Archiv funktioniert. Eine
+serverseitige 301 wäre die schlechtere Lösung — jeder interne Klick liefe dann
+über eine Weiterleitung. `check-site.js` prüft alle drei Formen (Objektseite,
+Übersicht, Startseite).
+
+Nicht Sache des Generators: **`sitemap.xml`** und **`robots.txt`** entstehen auf
+dem Server — robots.txt muss ohnehin auf die Domainwurzel, die Website liegt
+unter `/indesignapi/`. Ebenfalls dort zu klären sind die **2.674
+Markdown-Zwillinge**: sie stehen unter derselben Adresse wie die Seite, nur mit
+`.md`, und sind über `llms.txt` verlinkt. Markdown hat keinen `<head>`, ein
+Canonical geht darin also nicht — wenn sie aus dem Index bleiben sollen, braucht
+es `X-Robots-Tag: noindex` für `*.md`.
+
 ## Offline: die ganze Website als Archiv
 
 `site/indesignapi.zip` — **16 MB, 5.395 Dateien**, entpacken und
