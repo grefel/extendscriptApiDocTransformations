@@ -1,0 +1,777 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="A data merge object. Go to Property Listing | Method Listing Methods: selectDataSource , updateDataSource , removeDataSource , mergeRecords , exportFile , toSource , getElements , toSpecifier , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="DataMerge"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e354943"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>DataMerge</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e354943">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">DataMerge</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">A data merge object.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e354943__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e354943__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e354943__d1e355050">selectDataSource</a>,  <a class="xref" href="#d1e354943__d1e355071">updateDataSource</a>,  <a class="xref" href="#d1e354943__d1e355077">removeDataSource</a>,  <a class="xref" href="#d1e354943__d1e355084">mergeRecords</a>,  <a class="xref" href="#d1e354943__d1e355105">exportFile</a>,  <a class="xref" href="#d1e354943__d1e355150">toSource</a>,  <a class="xref" href="#d1e354943__d1e355162">getElements</a>,  <a class="xref" href="#d1e354943__d1e355176">toSpecifier</a>,  <a class="xref" href="#d1e354943__d1e355188">addEventListener</a>,  <a class="xref" href="#d1e354943__d1e355243">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="DataMergeFields.html#d1e67434">DataMergeFields</a>, <a class="xref" href="DataMergePreference.html#d1e354193">DataMergePreference</a>, <a class="xref" href="Document.html#d1e46972">Document</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="Preferences.html#d1e279820">Preferences</a>, </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Superclass:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Preference.html#d1e279179">Preference</a>
+         </p>
+
+      </div>
+
+      <div class="section" id="d1e354943__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d386498e165">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d386498e171">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d386498e177">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d386498e183">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d386498e165 ">
+                        <p class="p">dataMergeFields</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e171 ">
+                        <p class="p">
+                           <a class="xref" href="DataMergeFields.html#d1e67434">DataMergeFields</a>
+                           <em class="ph i">
+                              <a class="xref" href="DataMergeField.html#d1e67181">DataMergeField</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e177 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e183 ">
+                        <p class="p description">A collection of data merge fields.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d386498e165 ">
+                        <p class="p">dataMergePreferences</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e171 ">
+                        <p class="p">
+                           <a class="xref" href="DataMergePreference.html#d1e354193">DataMergePreference</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e177 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e183 ">
+                        <p class="p description">The data merge preference properties that define the layout and content of the target page.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d386498e165 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e171 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e177 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e183 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d386498e165 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e171 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e177 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e183 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d386498e165 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e171 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e177 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e183 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d386498e165 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e171 ">
+                        <p class="p">
+                           <a class="xref" href="Document.html#d1e46972">Document</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e177 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e183 ">
+                        <p class="p description">The parent of the DataMerge (a Document).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d386498e165 ">
+                        <p class="p">preferences</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e171 ">
+                        <p class="p">
+                           <a class="xref" href="Preferences.html#d1e279820">Preferences</a>
+                           <em class="ph i">
+                              <a class="xref" href="Preference.html#d1e279179">Preference</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e177 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e183 ">
+                        <p class="p description">A collection of preferences objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d386498e165 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e171 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e177 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e183 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e354943__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e354943__d1e355188">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d386498e516">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d386498e522">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d386498e528">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d386498e516 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e522 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e528 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d386498e516 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e522 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e528 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d386498e516 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e522 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e528 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e354943__d1e355105">undefined <strong class="ph b">exportFile</strong> (to:<em class="ph i">File</em>, using:<em class="ph i">PDFExportPreset</em>, outputOversetReportFile:<em class="ph i">File</em>)</p>
+
+         <p class="p description">Merges records and exports to PDF.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d386498e648">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d386498e654">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d386498e660">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d386498e648 ">
+                        <p class="p">to</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e654 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e660 ">
+                        <p class="p description">The path of exported PDF file.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d386498e648 ">
+                        <p class="p">using</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e654 ">
+                        <p class="p">
+                           <a class="xref" href="PDFExportPreset.html#d1e271769">PDFExportPreset</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e660 ">
+                        <p class="p description">The PDF export style to use. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d386498e648 ">
+                        <p class="p">outputOversetReportFile</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e654 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e660 ">
+                        <p class="p description">The path to the file in which to store the overset report. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e354943__d1e355162">
+            <a class="xref" href="DataMerge.html#d1e354943">DataMerge</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e354943__d1e355084">undefined <strong class="ph b">mergeRecords</strong> (outputOversetReportFile:<em class="ph i">File</em>)</p>
+
+         <p class="p description">Merges records and produces an optional overset report.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d386498e788">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d386498e794">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d386498e800">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d386498e788 ">
+                        <p class="p">outputOversetReportFile</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e794 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e800 ">
+                        <p class="p description">The path to the file in which to store the overset report. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e354943__d1e355077">undefined <strong class="ph b">removeDataSource</strong> ()</p>
+
+         <p class="p description">Removes the data source.</p>
+
+         <p class="p methodName" id="d1e354943__d1e355243">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d386498e883">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d386498e889">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d386498e895">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d386498e883 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e889 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e895 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d386498e883 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e889 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e895 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d386498e883 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e889 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e895 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e354943__d1e355050">undefined <strong class="ph b">selectDataSource</strong> (dataSourceFile:<em class="ph i">File</em>)</p>
+
+         <p class="p description">Specifies the file to use as the data source.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d386498e1009">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d386498e1015">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d386498e1021">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d386498e1009 ">
+                        <p class="p">dataSourceFile</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d386498e1015 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d386498e1021 ">
+                        <p class="p description">The path to the data source file.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e354943__d1e355150">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the DataMerge.</p>
+
+         <p class="p methodName" id="d1e354943__d1e355176">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+         <p class="p methodName" id="d1e354943__d1e355071">undefined <strong class="ph b">updateDataSource</strong> ()</p>
+
+         <p class="p description">Updates the data source file with the most current data.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Document.html#d1e46972">Document</a>.dataMergeProperties</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="DataMergeField.html#d1e67181">DataMergeField</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="DataMergePreference.html#d1e354193">DataMergePreference</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Preference.html#d1e279179">Preference</a>.parent</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="DataMerge.html#d1e354943">DataMerge</a>.<a class="xref" href="DataMerge.html#d1e354943__d1e355162">getElements</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

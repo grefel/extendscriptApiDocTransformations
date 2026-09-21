@@ -1,0 +1,645 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="The base class of all JavaScript objects. Go to Property Listing | Method Listing Methods: Object , isValid , toString , toLocaleString , hasOwnProperty , propertyIsEnumerable , isPrototypeOf , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="Object"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e624"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>Object</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e624">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">Object</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">The base class of all JavaScript objects.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e624__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e624__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e624__d1e631">Object</a>,  <a class="xref" href="#d1e624__d1e664">isValid</a>,  <a class="xref" href="#d1e624__d1e739">toString</a>,  <a class="xref" href="#d1e624__d1e763">toLocaleString</a>,  <a class="xref" href="#d1e624__d1e779">hasOwnProperty</a>,  <a class="xref" href="#d1e624__d1e806">propertyIsEnumerable</a>,  <a class="xref" href="#d1e624__d1e833">isPrototypeOf</a>,  <a class="xref" href="#d1e624__d1e860">valueOf</a>,  <a class="xref" href="#d1e624__d1e878">toSource</a>,  <a class="xref" href="#d1e624__d1e896">unwatch</a>,  <a class="xref" href="#d1e624__d1e918">watch</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Function.html#d1e3580">Function</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="Reflection.html#d1e8927">Reflection</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e624__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d1239768e134">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1239768e140">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1239768e146">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1239768e152">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1239768e134 ">
+                        <p class="p">constructor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e140 ">
+                        <p class="p">
+                           <a class="xref" href="Function.html#d1e3580">Function</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e146 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1239768e152 ">
+                        <p class="p description">Points to the constructor function that created this object.</p>
+
+                        <p class="p description">Note that this property is treated as an XML element in the XML class.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1239768e134 ">
+                        <p class="p">prototype</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e140 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e146 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1239768e152 ">
+                        <p class="p description">Points to the prototype object for this object.</p>
+
+                        <p class="p description">Note that this property is treated as an XML element in the XML class.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1239768e134 ">
+                        <p class="p">reflect</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e140 ">
+                        <p class="p">
+                           <a class="xref" href="Reflection.html#d1e8927">Reflection</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e146 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1239768e152 ">
+                        <p class="p description">Retrieves and returns the Reflection object associated with this method or a property.</p>
+
+                        <p class="p description">Note that this property is treated as an XML element in the XML class.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e624__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p noMarginConstructor">
+            <strong class="ph b">Constructor</strong>
+         </p>
+
+         <p class="p methodName" id="d1e624__d1e631">
+            <a class="xref" href="Object.html#d1e624">Object</a> 
+            <strong class="ph b">Object</strong> (what:<em class="ph i">Varies</em>)</p>
+
+         <p class="p description">Creates and returns a new object of a given type.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1239768e311">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1239768e317">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1239768e323">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1239768e311 ">
+                        <p class="p">what</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e317 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1239768e323 ">
+                        <p class="p description">The object type.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e624__d1e779">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">hasOwnProperty</strong> (name:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Reports whether a given property is defined with an instance or within the prototype chain.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1239768e388">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1239768e394">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1239768e400">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1239768e388 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e394 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1239768e400 ">
+                        <p class="p description">The name of the property to check.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e624__d1e833">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">isPrototypeOf</strong> (what:<em class="ph i">Object</em>)</p>
+
+         <p class="p description">Checks whether the given object is a prototype of this object.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1239768e468">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1239768e474">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1239768e480">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1239768e468 ">
+                        <p class="p">what</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e474 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1239768e480 ">
+                        <p class="p description">The object to check.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e624__d1e664">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">isValid</strong> (what:<em class="ph i">Object</em>)</p>
+
+         <p class="p description">Reports whether an object is still valid.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1239768e549">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1239768e555">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1239768e561">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1239768e549 ">
+                        <p class="p">what</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e555 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1239768e561 ">
+                        <p class="p description">The object to check.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e624__d1e806">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">propertyIsEnumerable</strong> (name:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Reports whether a given property is enumerable.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1239768e629">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1239768e635">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1239768e641">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1239768e629 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e635 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1239768e641 ">
+                        <p class="p description">The name of the property to check.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e624__d1e763">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toLocaleString</strong> ()</p>
+
+         <p class="p description">
+						Creates and returns a string representing this object, localized for the current locale. See toString().
+					</p>
+
+         <p class="p methodName" id="d1e624__d1e878">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Creates and returns a string representation of this object.</p>
+
+         <p class="p description">
+						This function serializes the object, so that it can, for example, be passed between engines. Pass the returned string back to eval() to recreate the object. Works only with built-in classes.
+					</p>
+
+         <p class="p methodName" id="d1e624__d1e739">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toString</strong> ()</p>
+
+         <p class="p description">Creates and returns a string representing this object.</p>
+
+         <p class="p description">
+						Many objects (such as Date) override this method in favor of their own implementation. If an object has no string value and no user-defined toString() method, the default method returns [object type], where type is the object type or the name of the constructor function that created the object.
+					</p>
+
+         <p class="p methodName" id="d1e624__d1e896">undefined <strong class="ph b">unwatch</strong> (name:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Removes the watch function of a property.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1239768e752">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1239768e758">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1239768e764">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1239768e752 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e758 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1239768e764 ">
+                        <p class="p description">The name of the property to unwatch.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e624__d1e860">
+            <a class="xref" href="Object.html#d1e624">Object</a> 
+            <strong class="ph b">valueOf</strong> ()</p>
+
+         <p class="p description">Retrieves and returns the primitive value of this object.</p>
+
+         <p class="p description">If the object has no primitive value, returns the object itself.  Note that you rarely need to call this method yourself.  The JavaScript interpreter automatically invokes it when encountering an object where a primitive value is expected.</p>
+
+         <p class="p methodName" id="d1e624__d1e918">undefined <strong class="ph b">watch</strong> (name:<em class="ph i">String</em>, func:<em class="ph i">Function</em>)</p>
+
+         <p class="p description">Adds a watch function to a property, which is called when the value changes.</p>
+
+         <p class="p description">This function can accept, modify, or reject a new value that the user, application, or a script has attempted to place in a property.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1239768e851">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1239768e857">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1239768e863">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1239768e851 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e857 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1239768e863 ">
+                        <p class="p description">The name of the property to watch.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1239768e851 ">
+                        <p class="p">func</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1239768e857 ">
+                        <p class="p">
+                           <a class="xref" href="Function.html#d1e3580">Function</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1239768e863 ">
+                        <p class="p description">The function to be called when the value of this property changes.</p>
+
+                        <p class="p description">
+								This function must three arguments, and return as its result the value to be stored in the property. The arguments are:
+								name: the name of the property that changes.
+								                      oldValue: The old property value.
+								                      newValue: The new property value that was specified.
+							                    </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

@@ -1,0 +1,3974 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="A table row. Go to Property Listing | Method Listing Methods: createOutlines , recompose , findText , changeText , findGrep , changeGrep , findGlyph , changeGlyph , findTransliterate , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="Row"></meta><meta name="DC.Relation" scheme="URI" content="Cell.html"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e381373"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>Row</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e381373">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">Row</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">A table row.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e381373__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e381373__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e381373__d1e383013">createOutlines</a>,  <a class="xref" href="#d1e381373__d1e383046">recompose</a>,  <a class="xref" href="#d1e381373__d1e383052">findText</a>,  <a class="xref" href="#d1e381373__d1e383081">changeText</a>,  <a class="xref" href="#d1e381373__d1e383110">findGrep</a>,  <a class="xref" href="#d1e381373__d1e383139">changeGrep</a>,  <a class="xref" href="#d1e381373__d1e383168">findGlyph</a>,  <a class="xref" href="#d1e381373__d1e383198">changeGlyph</a>,  <a class="xref" href="#d1e381373__d1e383227">findTransliterate</a>,  <a class="xref" href="#d1e381373__d1e383256">changeTransliterate</a>,  <a class="xref" href="#d1e381373__d1e383285">remove</a>,  <a class="xref" href="#d1e381373__d1e383291">merge</a>,  <a class="xref" href="#d1e381373__d1e383318">unmerge</a>,  <a class="xref" href="#d1e381373__d1e383333">split</a>,  <a class="xref" href="#d1e381373__d1e383354">redistribute</a>,  <a class="xref" href="#d1e381373__d1e383387">select</a>,  <a class="xref" href="#d1e381373__d1e383411">toSource</a>,  <a class="xref" href="#d1e381373__d1e383423">getElements</a>,  <a class="xref" href="#d1e381373__d1e383437">toSpecifier</a>,  <a class="xref" href="#d1e381373__d1e383450">addEventListener</a>,  <a class="xref" href="#d1e381373__d1e383504">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="Cells.html#d1e375232">Cells</a>, <a class="xref" href="Column.html#d1e378847">Column</a>, <a class="xref" href="Columns.html#d1e381034">Columns</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="FirstBaseline.html#d1e68674">FirstBaseline</a>, <a class="xref" href="HorizontalOrVertical.html#d1e68566">HorizontalOrVertical</a>, <a class="xref" href="NothingEnum.html#d1e79813">NothingEnum</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="Row.html#d1e381373">Row</a>, <a class="xref" href="RowTypes.html#d1e85976">RowTypes</a>, <a class="xref" href="Rows.html#d1e383561">Rows</a>, <a class="xref" href="SpecialCharacters.html#d1e69220">SpecialCharacters</a>, <a class="xref" href="StartParagraph.html#d1e68466">StartParagraph</a>, <a class="xref" href="String.html#d1e4543">String</a>, <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>, <a class="xref" href="Swatch.html#d1e63132">Swatch</a>, <a class="xref" href="Table.html#d1e375544">Table</a>, <a class="xref" href="VerticalJustification.html#d1e68774">VerticalJustification</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e381373__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d1592347e251">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e257">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e263">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e269">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">autoGrow</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the height of the cell or the cells in the Row can increase or decrease automatically to fit cell content. Note: Allows cells to grow or shrink to the maximum or minimum height, if specified.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">bottomEdgeStrokeColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the bottom edge border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">bottomEdgeStrokeGapColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the gap of the bottom edge border stroke. Note: Not valid when bottom edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">bottomEdgeStrokeGapOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the gap color of the bottom edge border stroke will overprint. Note: Not valid when bottom edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">bottomEdgeStrokeGapTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the bottom edge border stroke gap color. (Range: 0 to 100) Note: Not valid when bottom edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">bottomEdgeStrokeOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the bottom edge border stroke will overprint.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">bottomEdgeStrokeTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the bottom edge border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">bottomEdgeStrokeType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke type of the bottom edge. Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">bottomEdgeStrokeWeight</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke weight of the bottom edge border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">bottomInset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The bottom inset of the cell.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">cells</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Cells.html#d1e375232">Cells</a>
+                           <em class="ph i">
+                              <a class="xref" href="Cell.html#d1e372495">Cell</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">A collection of table cells.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">clipContentToCell</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, clips the cell's content to width and height of the cell.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">columnSpan</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The number of columns that the object spans.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">columns</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Columns.html#d1e381034">Columns</a>
+                           <em class="ph i">
+                              <a class="xref" href="Column.html#d1e378847">Column</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">A collection of table columns.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">contents</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                        <p class="p">
+                           <a class="xref" href="SpecialCharacters.html#d1e69220">SpecialCharacters</a>
+                        </p>
+
+                        <p class="p enumInPTable">SpecialCharacters.AUTO_PAGE_NUMBER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.NEXT_PAGE_NUMBER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.PREVIOUS_PAGE_NUMBER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SECTION_MARKER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.BULLET_CHARACTER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.COPYRIGHT_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DEGREE_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ELLIPSIS_CHARACTER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FORCED_LINE_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.PARAGRAPH_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.REGISTERED_TRADEMARK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SECTION_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.TRADEMARK_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.RIGHT_INDENT_TAB</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.INDENT_HERE_TAB</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.EM_DASH</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.EN_DASH</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DISCRETIONARY_HYPHEN</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.NONBREAKING_HYPHEN</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.END_NESTED_STYLE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DOUBLE_LEFT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DOUBLE_RIGHT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SINGLE_LEFT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SINGLE_RIGHT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.EM_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.EN_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FLUSH_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.HAIR_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.NONBREAKING_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.THIN_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FIGURE_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.PUNCTUATION_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.COLUMN_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FRAME_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.PAGE_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ODD_PAGE_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.EVEN_PAGE_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FOOTNOTE_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.LEFT_TO_RIGHT_EMBEDDING</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.RIGHT_TO_LEFT_EMBEDDING</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.POP_DIRECTIONAL_FORMATTING</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.LEFT_TO_RIGHT_OVERRIDE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.RIGHT_TO_LEFT_OVERRIDE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DOTTED_CIRCLE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ZERO_WIDTH_JOINER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.TEXT_VARIABLE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SINGLE_STRAIGHT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DOUBLE_STRAIGHT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DISCRETIONARY_LINE_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ZERO_WIDTH_NONJOINER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.THIRD_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.QUARTER_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SIXTH_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FIXED_WIDTH_NONBREAKING_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.HEBREW_MAQAF</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.HEBREW_GERESH</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.HEBREW_GERSHAYIM</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ARABIC_KASHIDA</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ARABIC_COMMA</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ARABIC_SEMICOLON</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ARABIC_QUESTION_MARK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.LEFT_TO_RIGHT_MARK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.RIGHT_TO_LEFT_MARK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.HEBREW_SOF_PASUK</p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of Strings<em class="ph i">
+                              <a class="xref" href="String.html#d1e4543">String</a>
+                           </em>
+                        </p>
+
+                        <p class="p">NothingEnums<em class="ph i">
+                              <a class="xref" href="NothingEnum.html#d1e79813">NothingEnum</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The text contents. For rows or columns, when specified as a string, the sting populates each cell in the row or column; when specified as an array, the first value in the array populates the left-most cell in the row or the top-most cell in the column; the next value populates the next cell to the right (for rows) or the next lowest cell (for columns), and so on. Can return: String, SpecialCharacters enumerator or Array of Strings or SpecialCharacters enumerators. Can also accept: NothingEnum enumerator or Array of Strings, SpecialCharacters enumerators or NothingEnum enumerators.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">diagonalLineInFront</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, draws the diagonal line in front of cell contents.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">diagonalLineStrokeColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The diagonal line color, specified as a swatch.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">diagonalLineStrokeGapColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the gap of the diagonal line stroke. Note: Not valid when diagonal line stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">diagonalLineStrokeGapOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the stroke gap of the diagonal line will overprint. Note: Not valid when diagonal line stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">diagonalLineStrokeGapTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the diagonal line stroke gap color. Note: Not valid when diagonal line stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">diagonalLineStrokeOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the diagonal line stroke will overprint.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">diagonalLineStrokeTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The diagonal line tint (as a percentage). (Range: 0 to 100)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">diagonalLineStrokeType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke type of the diagonal line(s). Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">diagonalLineStrokeWeight</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The diagonal line stroke weight.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">fillColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the fill of the object. Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">fillTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the fill of the object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">firstBaselineOffset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="FirstBaseline.html#d1e68674">FirstBaseline</a>
+                        </p>
+
+                        <p class="p enumInPTable">FirstBaseline.ASCENT_OFFSET</p>
+
+                        <p class="p enumInPTable">FirstBaseline.CAP_HEIGHT</p>
+
+                        <p class="p enumInPTable">FirstBaseline.LEADING_OFFSET</p>
+
+                        <p class="p enumInPTable">FirstBaseline.EMBOX_HEIGHT</p>
+
+                        <p class="p enumInPTable">FirstBaseline.X_HEIGHT</p>
+
+                        <p class="p enumInPTable">FirstBaseline.FIXED_HEIGHT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The distance between the baseline of the text and the top inset of the cell.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">gradientFillAngle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The angle of a linear gradient applied to the fill of the object. (Range: -180 to 180)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">gradientFillLength</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The length (of a linear gradient) or radius (of a radial gradient) applied to the fill of the object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">gradientFillStart</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The starting point (in page coordinates) of a gradient applied to the fill of the Row, in the format [x, y].</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">height</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The height of the Row. For a table or column, specifies the sum of the row heights.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">index</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The index of the Row within its containing object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerColumnStrokeColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The color, specified as a swatch, of the inner column border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerColumnStrokeGapColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the gap of the inner column border stroke. Note: Not valid when inner column stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerColumnStrokeGapOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the gap color of the inner column border stroke will overprint. Note: Not valid when inner column stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerColumnStrokeGapTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the inner column border stroke gap color. (Range: 0 to 100) Note: Not valid when inner column stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerColumnStrokeOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the inner column border stroke will overprint.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerColumnStrokeTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the inner column border stroke. (Range: 0 to 100)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerColumnStrokeType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke type of the inner column. Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerColumnStrokeWeight</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke weight of the inner column border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerRowStrokeColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The color, specified as a swatch, of the inner row border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerRowStrokeGapColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the gap of the inner row border stroke. Note: Not valid when inner row stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerRowStrokeGapOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the gap color of the inner row border stroke will overprint. Note: Not valid when inner row stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerRowStrokeGapTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the inner row border stroke. (Range: 0 to 100) Note: Not valid when inner row stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerRowStrokeOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the inner row border stroke will overprint.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerRowStrokeTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the inner row border stroke. (Range: 0 to 100)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerRowStrokeType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke type of the inner row. Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">innerRowStrokeWeight</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke weight of the inner row border strokes.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">keepWithNextRow</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, keeps the row with the next row when the table is split across text frames or pages.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">leftEdgeStrokeColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the left edge border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">leftEdgeStrokeGapColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the gap of the left edge border stroke. Note: Not valid when left edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">leftEdgeStrokeGapOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the gap color of the left edge border stroke will overprint. Note: Not valid when left edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">leftEdgeStrokeGapTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the left edge border stroke gap color. (Range: 0 to 100) Note: Not valid when left edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">leftEdgeStrokeOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the left edge border stroke will overprint.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">leftEdgeStrokeTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the left edge border stroke. (Range: 0 to 100)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">leftEdgeStrokeType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke type of the left edge. Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">leftEdgeStrokeWeight</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke weight of the left edge border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">leftInset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The left inset of the cell.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">maximumHeight</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The maximum height to which cells in the Row may grow. Note: The maximum height cannot be exceeded even when auto grow is set to true. Also, the maximum height can affect redistribution.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">minimumFirstBaselineOffset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The space between the baseline of the text and the top inset of the frame or cell.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">minimumHeight</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The minimum height of the cells in the Row. Note: When auto grow is true, cells can automatically grow larger than this amount when content is added. Also, the minimum height can affect redistribution.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The name of the Row.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">overflows</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the story has overset text.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">overprintFill</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the fill of the object will overprint.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">paragraphSpacingLimit</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The maximum space that can be added between paragraphs in a cell. Note: Valid only when vertical justification is justified.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Table.html#d1e375544">Table</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The parent of the Row (a Table).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">parentColumn</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Column.html#d1e378847">Column</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The parent column of the cell.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">parentRow</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Row.html#d1e381373">Row</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The parent row of the cell.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rightEdgeStrokeColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The color, specified as a swatch, of the right edge border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rightEdgeStrokeGapColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the gap of the right edge border stroke. Note: Not valid when right edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rightEdgeStrokeGapOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the gap color of the right edge border stroke will overprint. Note: Not valid when right edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rightEdgeStrokeGapTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the right edge border stroke gap color. (Range: 0 to 100) Note: Not valid when right edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rightEdgeStrokeOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the right edge border stroke will overprint.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rightEdgeStrokeTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the right edge border stroke. (Range: 0 to 100)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rightEdgeStrokeType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke type of the right edge. Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rightEdgeStrokeWeight</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke weight of the right edge border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rightInset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The right inset of the cell.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rotationAngle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The rotation angle (in degrees) of the cell, specified as one of the following values: 0, 90, 180, or 270.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rowSpan</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The number of rows that the object spans.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rowType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="RowTypes.html#d1e85976">RowTypes</a>
+                        </p>
+
+                        <p class="p enumInPTable">RowTypes.BODY_ROW</p>
+
+                        <p class="p enumInPTable">RowTypes.HEADER_ROW</p>
+
+                        <p class="p enumInPTable">RowTypes.FOOTER_ROW</p>
+
+                        <p class="p enumInPTable">RowTypes.MIXED_STATE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The row type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">rows</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Rows.html#d1e383561">Rows</a>
+                           <em class="ph i">
+                              <a class="xref" href="Row.html#d1e381373">Row</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">A collection of table rows.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">startRow</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="StartParagraph.html#d1e68466">StartParagraph</a>
+                        </p>
+
+                        <p class="p enumInPTable">StartParagraph.ANYWHERE</p>
+
+                        <p class="p enumInPTable">StartParagraph.NEXT_COLUMN</p>
+
+                        <p class="p enumInPTable">StartParagraph.NEXT_FRAME</p>
+
+                        <p class="p enumInPTable">StartParagraph.NEXT_PAGE</p>
+
+                        <p class="p enumInPTable">StartParagraph.NEXT_ODD_PAGE</p>
+
+                        <p class="p enumInPTable">StartParagraph.NEXT_EVEN_PAGE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">Indicates where to start the row.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">topEdgeStrokeColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the top edge border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">topEdgeStrokeGapColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the gap of the top edge border stroke. Note: Not valid when top edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">topEdgeStrokeGapOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the gap color of the top edge border stroke will overprint. Note: Not valid when top edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">topEdgeStrokeGapTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the top edge border stroke gap color. (Range: 0 to 100) Note: Not valid when top edge stroke type is solid.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">topEdgeStrokeOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, the top edge border stroke will overprint.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">topEdgeStrokeTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The tint (as a percentage) of the top edge border stroke. (Range: 0 to 100)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">topEdgeStrokeType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke type of the top edge. Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">topEdgeStrokeWeight</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The stroke weight of the top edge border stroke.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">topInset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The top inset of the cell.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">topLeftDiagonalLine</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, draws a diagonal line starting from the top left.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">topRightDiagonalLine</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">If true, draws a diagonal line starting from the top right.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">verticalJustification</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="VerticalJustification.html#d1e68774">VerticalJustification</a>
+                        </p>
+
+                        <p class="p enumInPTable">VerticalJustification.TOP_ALIGN</p>
+
+                        <p class="p enumInPTable">VerticalJustification.CENTER_ALIGN</p>
+
+                        <p class="p enumInPTable">VerticalJustification.BOTTOM_ALIGN</p>
+
+                        <p class="p enumInPTable">VerticalJustification.JUSTIFY_ALIGN</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The vertical alignment of cell.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">width</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The width of the Row. For a table or row, specifies the sum of the column widths.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1592347e251 ">
+                        <p class="p">writingDirection</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e257 ">
+                        <p class="p">
+                           <a class="xref" href="HorizontalOrVertical.html#d1e68566">HorizontalOrVertical</a>
+                        </p>
+
+                        <p class="p enumInPTable">HorizontalOrVertical.HORIZONTAL</p>
+
+                        <p class="p enumInPTable">HorizontalOrVertical.VERTICAL</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e263 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e269 ">
+                        <p class="p description">The direction of the text in the cell.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e381373__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e381373__d1e383450">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e3972">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e3978">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e3984">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e3972 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e3978 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e3984 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e3972 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e3978 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e3984 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e3972 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e3978 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e3984 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383198">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">changeGlyph</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds glyphs that match the find what value and replaces the glyphs with the change to value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e4102">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e4108">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e4114">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4102 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4108 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4114 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383139">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">changeGrep</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find what value and replaces the text with the change to value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e4182">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e4188">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e4194">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4182 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4188 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4194 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383081">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">changeText</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find what value and replaces the text with the change to value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e4263">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e4269">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e4275">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4263 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4269 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4275 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383256">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">changeTransliterate</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find character type value and replaces the text with the change character type value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e4343">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e4349">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e4355">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4343 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4349 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4355 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383013">
+            <a class="xref" href="PageItem.html#d1e182433">PageItem</a> 
+            <strong class="ph b">createOutlines</strong> ([deleteOriginal:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Converts text to outlines. Each line of text becomes a polygon object. When the converted text is a single letter that has no internal spaces or detached parts, the polygon contains only a single path. Note: To determine whether a font allows the creation of outlines, see allow outlines.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e4424">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e4430">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e4436">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4424 ">
+                        <p class="p">deleteOriginal</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4430 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4436 ">
+                        <p class="p description">If true, deletes the original text. If false, creates the outlines as separate object(s) on top of the text.  (Optional)</p>
+
+                        <p class="p"> (default: true)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383168">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">findGlyph</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds glyphs that match the find what value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e4507">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e4513">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e4519">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4507 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4513 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4519 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383110">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">findGrep</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find what value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e4588">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e4594">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e4600">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4588 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4594 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4600 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383052">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">findText</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find what value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e4668">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e4674">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e4680">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4668 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4674 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4680 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383227">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">findTransliterate</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find character type value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e4749">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e4755">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e4761">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4749 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4755 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4761 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383423">
+            <a class="xref" href="Row.html#d1e381373">Row</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e381373__d1e383291">
+            <a class="xref" href="Cell.html#d1e372495">Cell</a> 
+            <strong class="ph b">merge</strong> (with:<em class="ph i">Varies</em>)</p>
+
+         <p class="p description">Merges the cells.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e4843">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e4849">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e4855">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4843 ">
+                        <p class="p">with</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4849 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4855 ">
+                        <p class="p description">The cell(s) to merge with. Can accept: Cell, Row or Column. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383046">undefined <strong class="ph b">recompose</strong> ()</p>
+
+         <p class="p description">Recomposes the text in the Row.</p>
+
+         <p class="p methodName" id="d1e381373__d1e383354">undefined <strong class="ph b">redistribute</strong> (using:<em class="ph i">HorizontalOrVertical</em>, thru:<em class="ph i">Varies</em>)</p>
+
+         <p class="p description">Redistributes the specified range of Rows so that the Rows have a uniform size. Note: The maximum or minimum height or width specified for some of the cells in the range may prevent them from being exactly even.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e4927">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e4933">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e4939">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4927 ">
+                        <p class="p">using</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4933 ">
+                        <p class="p">
+                           <a class="xref" href="HorizontalOrVertical.html#d1e68566">HorizontalOrVertical</a>
+                        </p>
+
+                        <p class="p enumInPTable">HorizontalOrVertical.HORIZONTAL</p>
+
+                        <p class="p enumInPTable">HorizontalOrVertical.VERTICAL</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4939 ">
+                        <p class="p description">The direction in which to redistribute.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e4927 ">
+                        <p class="p">thru</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e4933 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e4939 ">
+                        <p class="p description">The last Row in the range. Can accept: Cell, Column or Row. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383285">undefined <strong class="ph b">remove</strong> ()</p>
+
+         <p class="p description">Deletes the Row.</p>
+
+         <p class="p methodName" id="d1e381373__d1e383504">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e5050">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e5056">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e5062">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e5050 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e5056 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e5062 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e5050 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e5056 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e5062 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e5050 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e5056 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e5062 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383387">undefined <strong class="ph b">select</strong> ([existingSelection:<em class="ph i">SelectionOptions</em>=SelectionOptions])</p>
+
+         <p class="p description">Selects the object.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e5176">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e5182">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e5188">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e5176 ">
+                        <p class="p">existingSelection</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e5182 ">
+                        <p class="p">
+                           <a class="xref" href="SelectionOptions.html#d1e94282">SelectionOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">SelectionOptions.ADD_TO</p>
+
+                        <p class="p enumInPTable">SelectionOptions.REMOVE_FROM</p>
+
+                        <p class="p enumInPTable">SelectionOptions.REPLACE_WITH</p>
+
+                        <p class="p enumInPTable">SelectionOptions.SET_KEY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e5188 ">
+                        <p class="p description">The selection status of the Row in relation to previously selected objects. (Optional)</p>
+
+                        <p class="p"> (default: SelectionOptions.REPLACE_WITH)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383333">undefined <strong class="ph b">split</strong> (using:<em class="ph i">HorizontalOrVertical</em>)</p>
+
+         <p class="p description">Splits the cell along the specified axis.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1592347e5267">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1592347e5273">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1592347e5279">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1592347e5267 ">
+                        <p class="p">using</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1592347e5273 ">
+                        <p class="p">
+                           <a class="xref" href="HorizontalOrVertical.html#d1e68566">HorizontalOrVertical</a>
+                        </p>
+
+                        <p class="p enumInPTable">HorizontalOrVertical.HORIZONTAL</p>
+
+                        <p class="p enumInPTable">HorizontalOrVertical.VERTICAL</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1592347e5279 ">
+                        <p class="p description">The direction in which to split the cell.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e381373__d1e383411">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the Row.</p>
+
+         <p class="p methodName" id="d1e381373__d1e383437">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+         <p class="p methodName" id="d1e381373__d1e383318">
+            <a class="xref" href="Cell.html#d1e372495">Cell</a> 
+            <strong class="ph b">unmerge</strong> ()</p>
+
+         <p class="p description">Unmerges all merged cells in the Row.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Cell.html#d1e372495">Cell</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Cell.html#d1e372495">Cell</a>.parentRow</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Column.html#d1e378847">Column</a>.parentRow</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Row.html#d1e381373">Row</a>.parentRow</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Row.html#d1e381373">Row</a>.<a class="xref" href="Row.html#d1e381373__d1e383423">getElements</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rows.html#d1e383561">Rows</a>.<a class="xref" href="Rows.html#d1e383561__d1e383820">anyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rows.html#d1e383561">Rows</a>.<a class="xref" href="Rows.html#d1e383561__d1e383833">everyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rows.html#d1e383561">Rows</a>.<a class="xref" href="Rows.html#d1e383561__d1e383793">nextItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rows.html#d1e383561">Rows</a>.<a class="xref" href="Rows.html#d1e383561__d1e383766">previousItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rows.html#d1e383561">Rows</a>.<a class="xref" href="Rows.html#d1e383561__d1e383634">item</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rows.html#d1e383561">Rows</a>.<a class="xref" href="Rows.html#d1e383561__d1e383859">[]</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rows.html#d1e383561">Rows</a>.<a class="xref" href="Rows.html#d1e383561__d1e383661">itemByName</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rows.html#d1e383561">Rows</a>.<a class="xref" href="Rows.html#d1e383561__d1e383688">itemByRange</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rows.html#d1e383561">Rows</a>.<a class="xref" href="Rows.html#d1e383561__d1e383730">firstItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rows.html#d1e383561">Rows</a>.<a class="xref" href="Rows.html#d1e383561__d1e383742">lastItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rows.html#d1e383561">Rows</a>.<a class="xref" href="Rows.html#d1e383561__d1e383754">middleItem</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="related-links">
+<ul class="ullinks">
+<li class="link ulchildlink"><strong><a href="Cell.html">Cell</a></strong><br></br>
+</li>
+</ul>
+</div>
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

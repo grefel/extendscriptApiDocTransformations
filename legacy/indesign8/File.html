@@ -1,0 +1,2119 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="Represents a file in the local file system in a platform-independent manner. Go to Property Listing | Method Listing Methods: File , encode , decode , isEncodingAvailable , openDialog , saveDialog , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="File"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e6276"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>File</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e6276">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">File</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">Represents a file in the local file system in a platform-independent manner.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e6276__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e6276__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e6276__d1e6283">File</a>,  <a class="xref" href="#d1e6276__d1e6340">encode</a>,  <a class="xref" href="#d1e6276__d1e6377">decode</a>,  <a class="xref" href="#d1e6276__d1e6410">isEncodingAvailable</a>,  <a class="xref" href="#d1e6276__d1e6443">openDialog</a>,  <a class="xref" href="#d1e6276__d1e6519">saveDialog</a>,  <a class="xref" href="#d1e6276__d1e6857">resolve</a>,  <a class="xref" href="#d1e6276__d1e6872">rename</a>,  <a class="xref" href="#d1e6276__d1e6906">remove</a>,  <a class="xref" href="#d1e6276__d1e6924">changePath</a>,  <a class="xref" href="#d1e6276__d1e6954">getRelativeURI</a>,  <a class="xref" href="#d1e6276__d1e6987">execute</a>,  <a class="xref" href="#d1e6276__d1e7004">openDlg</a>,  <a class="xref" href="#d1e6276__d1e7079">saveDlg</a>,  <a class="xref" href="#d1e6276__d1e7137">toString</a>,  <a class="xref" href="#d1e6276__d1e7149">toSource</a>,  <a class="xref" href="#d1e6276__d1e7167">createAlias</a>,  <a class="xref" href="#d1e6276__d1e7191">open</a>,  <a class="xref" href="#d1e6276__d1e7267">close</a>,  <a class="xref" href="#d1e6276__d1e7285">read</a>,  <a class="xref" href="#d1e6276__d1e7319">readch</a>,  <a class="xref" href="#d1e6276__d1e7337">readln</a>,  <a class="xref" href="#d1e6276__d1e7355">write</a>,  <a class="xref" href="#d1e6276__d1e7395">writeln</a>,  <a class="xref" href="#d1e6276__d1e7438">seek</a>,  <a class="xref" href="#d1e6276__d1e7507">tell</a>,  <a class="xref" href="#d1e6276__d1e7526">copy</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="Date.html#d1e2080">Date</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="String.html#d1e4543">String</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e6276__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d562165e205">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e211">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e217">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e223">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">absoluteURI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The full path name for the referenced file in URI notation.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">alias</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">If true, the object refers to a file system alias or shortcut.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">created</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="Date.html#d1e2080">Date</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The creation date of the referenced file, or null if the object does not refer to a file on disk.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">creator</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">In Mac OS, the file creator as a four-character string. In Windows or UNIX, value is "????".</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">displayName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The localized name of the referenced file, without the path specification.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">encoding</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">Gets or sets the encoding for subsequent read/write operations.</p>
+
+                        <p class="p description">
+						One of the encoding constants listed in the JavaScript Tools Guide. If the value is not recognized, uses the system default encoding.A special encoder, BINARY, is used to read binary files. It stores each byte of the file as one Unicode character regardless of any encoding. When writing, the lower byte of each Unicode character is treated as a single byte to write.
+					</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">eof</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">When true, a read attempt caused the current position to be at the end of the file, or the file is not open.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">error</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">A string containing a message describing the most recent file system error.</p>
+
+                        <p class="p description">Typically set by the file system, but a script can set it. Setting this value clears any error message and resets the error bit for opened files. Contains the empty string if there is no error.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">exists</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">If true, this object refers to a file or file-system alias that actually exists in the file system.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">fsName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The platform-specific full path name for the referenced file.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">fullName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The full path name for the referenced file in URI notation.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">hidden</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">When true, the file is not shown in the platform-specific file browser.</p>
+
+                        <p class="p description">If the object references a file-system alias or shortcut, the flag is altered on the alias, not on the original file.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">length</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The size of the file in bytes.</p>
+
+                        <p class="p description">Can be set only for a file that is not open, in which case it truncates or pads the file with 0-bytes to the new length.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">lineFeed</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">How line feed characters are written in the file system.</p>
+
+                        <p class="p description">One of the values "Windows", "Macintosh", or "Unix".</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">modified</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="Date.html#d1e2080">Date</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The date of the referenced file's last modification, or null if the object does not refer to a file on the disk.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The file name portion of the absolute URI for the referenced file, without the path specification.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 "> </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The Folder object for the folder that contains this file.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">path</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The path portion of the absolute URI for the referenced file, without the file name.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">When true, prevents the file from being altered or deleted.</p>
+
+                        <p class="p description">If the referenced file is a file-system alias or shortcut, the flag is altered on the alias, not on the original file.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">relativeURI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The path name for the object in URI notation, relative to the current folder.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e205 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e211 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e217 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e223 ">
+                        <p class="p description">The file type as a four-character string.</p>
+
+                        <p class="p description">
+						                  In Mac OS, the Mac OS file type.
+						                  In Windows, "appl" for .EXE files, "shlb" for .DLL files and "TEXT" for any other file.
+					                </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d562165e927">
+                        <p class="p">Name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e933">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e939">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e945">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d562165e927 ">
+                        <p class="p">fs</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e933 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e939 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e945 ">
+                        <p class="p description">The name of the file system.</p>
+
+                        <p class="p description">This is a class property accessed through the File constructor. Valid values are "Windows", "Macintosh", and "Unix".</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e6276__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p noMarginConstructor">
+            <strong class="ph b">Constructor</strong>
+         </p>
+
+         <p class="p methodName" id="d1e6276__d1e6283">
+            <a class="xref" href="File.html#d1e6276">File</a> 
+            <strong class="ph b">File</strong> ([path:<em class="ph i">String</em>])</p>
+
+         <p class="p description">Creates and returns a new File object referring to a given file system location.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e1035">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e1041">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e1047">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1035 ">
+                        <p class="p">path</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1041 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1047 ">
+                        <p class="p description">The full or partial path name of the file,  in platform-specific or URI format.</p>
+
+                        <p class="p description">
+								The value stored in the object is the absolute path. The file that the path refers to does not need to exist.If the path refers to an existing folder:
+								The File function returns a Folder object instead of a File object.
+								                      The new operator returns a File object for a nonexisting file with the same name.
+							                    </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e6924">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">changePath</strong> (path:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Changes the path specification of the referenced file.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e1119">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e1125">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e1131">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1119 ">
+                        <p class="p">path</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1125 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1131 ">
+                        <p class="p description">A string containing the new path, absolute or relative to the current folder.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e7267">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">close</strong> ()</p>
+
+         <p class="p description">Closes this open file.</p>
+
+         <p class="p description">Returns true if the file was closed successfully, false if an I/O error occurred.</p>
+
+         <p class="p methodName" id="d1e6276__d1e7526">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">copy</strong> (target:<em class="ph i">String File</em>)</p>
+
+         <p class="p description">Copies this object’s referenced file to the specified target location.</p>
+
+         <p class="p description">
+						Resolves any aliases to find the source file. If a file exists at the target location, it is overwritten.
+						Returns true if the copy was successful.
+					</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e1219">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e1225">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e1231">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1219 ">
+                        <p class="p">target</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1225 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1231 ">
+                        <p class="p description">A string with the URI path to the target location, or a File object that references the target location.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e7167">undefined <strong class="ph b">createAlias</strong> (path:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Makes this file a file-system alias or shortcut to the specified file.</p>
+
+         <p class="p description">The referenced file for this object must not yet exist on disk. Returns true if the operation was successful.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e1306">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e1312">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e1318">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1306 ">
+                        <p class="p">path</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1312 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1318 ">
+                        <p class="p description">A string containing the path of the target file.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e6377">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">decode</strong> (uri:<em class="ph i">String</em>)</p>
+
+         <p class="p description">
+						Decodes a UTF-8 encoded string as required by RFC 2396, and returns the decoded string.
+					</p>
+
+         <p class="p description">
+						See also String.decodeURI().
+					</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e1389">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e1395">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e1401">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1389 ">
+                        <p class="p">uri</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1395 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1401 ">
+                        <p class="p description">The UTF-8 encoded string to decode.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e6340">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">encode</strong> (name:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Encodes a string as required by RFC 2396, and returns the encoded string.</p>
+
+         <p class="p description">
+						All special characters are encoded in UTF-8 and stored as escaped characters starting with the percent sign followed by two hexadecimal digits. For example, the string "my file" is encoded as "my%20file".
+						Special characters are those with a numeric value greater than 127, except the following: / - _ . ! ~ * ' ( )
+						See also encodeURI().
+					</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e1473">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e1479">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e1485">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1473 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1479 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1485 ">
+                        <p class="p description">The string to encode.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e6987">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">execute</strong> ()</p>
+
+         <p class="p description">Executes or opens this file using the appropriate application, as if it had been double-clicked in a file browser.</p>
+
+         <p class="p description">
+						You can use this method to run scripts, launch applications, and so on.Returns true immediately if the application launch was successful.
+					</p>
+
+         <p class="p methodName" id="d1e6276__d1e6954">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">getRelativeURI</strong> (basePath:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Retrieves and returns the path for this file, relative to the specified base path, in URI notation.</p>
+
+         <p class="p description">If no base path is supplied, the URI is relative to the path of the current folder.  Returns a string containing the relative URI.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e1573">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e1579">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e1585">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1573 ">
+                        <p class="p">basePath</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1579 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1585 ">
+                        <p class="p description">A base path in URI notation.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e6410">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">isEncodingAvailable</strong> (name:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Reports whether a given encoding is available.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e1654">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e1660">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e1666">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1654 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1660 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1666 ">
+                        <p class="p description">The encoding name.</p>
+
+                        <p class="p description">
+								Typical values are "ASCII", "binary", or "UTF-8".  For a complete list of supported encodings, see the JavaScript Tools Guide.
+							</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e7191">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">open</strong> (mode:<em class="ph i">String</em>, [type:<em class="ph i">String</em>], [creator:<em class="ph i">String</em>])</p>
+
+         <p class="p description">Opens the referenced file for subsequent read/write operations. The method resolves any aliases to find the file.</p>
+
+         <p class="p description">
+						Returns true if the file was opened successfully.The method attempts to detect the encoding of the open file. It reads a few bytes at the current location and tries to detect the Byte Order Mark character 0xFFFE. If found, the current position is advanced behind the detected character and the encoding property is set to one of the strings UCS-2BE, UCS-2LE, UCS4-BE, UCS-4LE, or UTF-8. If the marker character is not found, it checks for zero bytes at the current location and makes an assumption about one of the above formats (except UTF-8). If everything fails, the encoding property is set to the system encoding.
+						IMPORTANT: Be careful about opening a file more than once. The operating system usually permits you to do so, but if you start writing to the file using two different File objects, you can destroy your data.
+					</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e1746">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e1752">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e1758">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1746 ">
+                        <p class="p">mode</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1752 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1758 ">
+                        <p class="p description">The read-write mode, a single-character string.</p>
+
+                        <p class="p description">
+								One of these characters:
+								r (read) Opens for reading. If the file does not exist or cannot be found, the call fails.
+								                      w (write) Opens a file for writing. If the file exists, its contents are destroyed. If the file does not exist, creates a new, empty file.
+								                      e (edit) Opens an existing file for reading and writing.
+								                      a (append) Opens an existing file for reading and writing, and moves the current position to the end of the file.
+							                    </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1746 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1752 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1758 ">
+                        <p class="p description">In Mac OS, the type of a newly created file, a 4-character string. Ignored in Windows and UNIX.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1746 ">
+                        <p class="p">creator</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1752 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1758 ">
+                        <p class="p description">In Mac OS, the creator of a newly created file, a 4-character string. Ignored in Windows and UNIX.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e6443">
+            <a class="xref" href="File.html#d1e6276">File</a> 
+            <strong class="ph b">openDialog</strong> (prompt:<em class="ph i">String</em>, [filter:<em class="ph i">Varies</em>=Varies], [multiSelect:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Opens a dialog so the user can select one or more files to open.</p>
+
+         <p class="p description">
+						Opens the built-in platform-specific file-browsing dialog in which a user can select an existing file or multiple files, and creates new File objects to represent the selected files.
+						If the user clicks OK, returns a File object for the selected file, or an array of objects if multiple files are selected.
+						                  If the user cancels, returns null.
+					                </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e1889">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e1895">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e1901">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1889 ">
+                        <p class="p">prompt</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1895 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1901 ">
+                        <p class="p description">The prompt text, displayed if the dialog allows a prompt.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1889 ">
+                        <p class="p">filter</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1895 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1901 ">
+                        <p class="p description">A filter that limits the types of files displayed in the dialog.</p>
+
+                        <p class="p description">
+								                      In Windows,  a filter expression such as "Javascript files:*.jsx;All files:*.*".
+								                      In Mac OS, a filter function that takes a File instance and returns true if the file should be included in the display, false if it should not.
+							                    </p>
+
+                        <p class="p"> (default: null)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e1889 ">
+                        <p class="p">multiSelect</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e1895 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e1901 ">
+                        <p class="p description">When true, the user can select multiple files and the return value is an array.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e7004">
+            <a class="xref" href="File.html#d1e6276">File</a> 
+            <strong class="ph b">openDlg</strong> (prompt:<em class="ph i">String</em>, [filter:<em class="ph i">Varies</em>=Varies], [multiSelect:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Opens the built-in platform-specific file-browsing dialog, in which the user can select an existing file or files, and creates new File objects to represent the selected files.</p>
+
+         <p class="p description">
+						Differs from the class method openDialog() in that it presets the current folder to this File object’s parent folder and the current file to this object’s associated file.
+						If the user clicks OK, returns a File or Folder object for the selected file or folder, or an array of objects.
+						                  If the user cancels, returns null.
+					                </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e2034">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e2040">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e2046">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2034 ">
+                        <p class="p">prompt</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2040 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2046 ">
+                        <p class="p description">A string containing the prompt text, if the dialog allows a prompt.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2034 ">
+                        <p class="p">filter</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2040 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2046 ">
+                        <p class="p description">A filter that limits the types of files displayed in the dialog.</p>
+
+                        <p class="p description">
+								                      In Windows,  a filter expression such as "Javascript files:*.jsx;All files:*.*".
+								                      In Mac OS, a filter function that takes a File instance and returns true if the file should be included in the display, false if it should not.
+							                    </p>
+
+                        <p class="p"> (default: null)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2034 ">
+                        <p class="p">multiSelect</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2040 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2046 ">
+                        <p class="p description">When true, the user can select multiple files and the return value is an array.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e7285">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">read</strong> ([chars:<em class="ph i">Number</em>])</p>
+
+         <p class="p description">Reads the contents of the file, starting at the current position.</p>
+
+         <p class="p description">Returns a string that contains up to the specified number of characters. If a number of characters is not supplied, reads from the current position to the end of the file. If the file is encoded, multiple bytes might be read to create single Unicode characters.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e2172">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e2178">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e2184">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2172 ">
+                        <p class="p">chars</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2178 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2184 ">
+                        <p class="p description">An integer specifying the number of characters to read.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e7319">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">readch</strong> ()</p>
+
+         <p class="p description">Reads a single text character from the file at the current position.</p>
+
+         <p class="p description">Line feeds are recognized as CR, LF, CRLF or LFCR pairs.  If the file is encoded, multiple bytes might be read to create a single Unicode character. Returns a string that contains the character.</p>
+
+         <p class="p methodName" id="d1e6276__d1e7337">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">readln</strong> ()</p>
+
+         <p class="p description">Reads a single line of text from the file at the current position.</p>
+
+         <p class="p description">Line feeds are recognized as CR, LF, CRLF or LFCR pairs.. If the file is encoded, multiple bytes might be read to create single Unicode characters. Returns a string that contains the text.</p>
+
+         <p class="p methodName" id="d1e6276__d1e6906">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">remove</strong> ()</p>
+
+         <p class="p description">Deletes the file associated with this object from disk immediately, without moving it to the system trash.</p>
+
+         <p class="p description">
+						Does not resolve aliases; instead, deletes the referenced alias or shortcut file itself. Returns true if the file was successfully removed.
+						IMPORTANT: Cannot be undone. It is recommended that you prompt the user for permission before deleting.
+					                </p>
+
+         <p class="p methodName" id="d1e6276__d1e6872">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">rename</strong> (newName:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Renames the associated file.</p>
+
+         <p class="p description">Does not resolve aliases, but renames the referenced alias or shortcut file itself. Returns true if the file was successfully renamed.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e2306">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e2312">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e2318">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2306 ">
+                        <p class="p">newName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2312 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2318 ">
+                        <p class="p description">The new file name, with no path information.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e6857">
+            <a class="xref" href="File.html#d1e6276">File</a> 
+            <strong class="ph b">resolve</strong> ()</p>
+
+         <p class="p description">Attempts to resolve the file-system alias or shortcut that this object refers to.</p>
+
+         <p class="p description">If successful, creates and returns a new File object that points to the resolved file system element. Returns null if this object does not refer to an alias, or if the alias could not be resolved.</p>
+
+         <p class="p methodName" id="d1e6276__d1e6519">
+            <a class="xref" href="File.html#d1e6276">File</a> 
+            <strong class="ph b">saveDialog</strong> (prompt:<em class="ph i">String</em>, [filter:<em class="ph i">Varies</em>=Varies])</p>
+
+         <p class="p description">Opens a dialog so the user can select a file name to save to.</p>
+
+         <p class="p description">
+						Opens the built-in platform-specific file-browsing dialog in which a user can select an existing file location to which to save information, and creates a new File object to represent the selected file location.
+						If the user clicks OK, returns a File object for the selected file location.
+						                  If the user cancels, returns null.
+					                </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e2409">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e2415">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e2421">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2409 ">
+                        <p class="p">prompt</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2415 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2421 ">
+                        <p class="p description">The prompt text, displayed if the dialog allows a prompt.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2409 ">
+                        <p class="p">filter</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2415 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2421 ">
+                        <p class="p description">In Windows only, a filter that limits the types of files displayed in the dialog.</p>
+
+                        <p class="p description">In Windows only,  a filter expression such as "Javascript files:*.jsx;All files:*.*". Not used In Mac OS. </p>
+
+                        <p class="p"> (default: null)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e7079">
+            <a class="xref" href="File.html#d1e6276">File</a> 
+            <strong class="ph b">saveDlg</strong> (prompt:<em class="ph i">String</em>, [filter:<em class="ph i">Varies</em>=Varies])</p>
+
+         <p class="p description">Opens the built-in platform-specific file-browsing dialog, in which the user can select an existing file location to which to save information, and creates a new File object to represent the selected file.</p>
+
+         <p class="p description">Differs from the class method saveDialog() in that it presets the current folder to this File object’s parent folder and the file to this object’s associated file.
+						If the user clicks OK, returns a File object for the selected file.
+						                  If the user cancels, returns null.
+					                </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e2522">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e2528">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e2534">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2522 ">
+                        <p class="p">prompt</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2528 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2534 ">
+                        <p class="p description">A string containing the prompt text, if the dialog allows a prompt.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2522 ">
+                        <p class="p">filter</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2528 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2534 ">
+                        <p class="p description">In Windows only, a filter that limits the types of files displayed in the dialog.</p>
+
+                        <p class="p description">In Windows only,  a filter expression such as "Javascript files:*.jsx;All files:*.*". Not used In Mac OS. </p>
+
+                        <p class="p"> (default: null)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e7438">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">seek</strong> (pos:<em class="ph i">Number</em>, [mode:<em class="ph i">Number</em>=Number])</p>
+
+         <p class="p description">Seeks to a given position in the file.</p>
+
+         <p class="p description">The new position cannot be less than 0 or greater than the current file size. Returns true if the position was changed.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e2636">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e2642">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e2648">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2636 ">
+                        <p class="p">pos</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2642 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2648 ">
+                        <p class="p description">
+								The new current position in the file as an offset in bytes from the start, current position, or end, depending on the mode.
+							</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2636 ">
+                        <p class="p">mode</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2642 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 2)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2648 ">
+                        <p class="p description">The seek mode.</p>
+
+                        <p class="p description">
+								One of:
+								0: Seek to absolute position, where pos=0 is the first byte of the file. This is the default.
+								                      1: Seek relative to the current position.
+								                      2. Seek backward from the end of the file.
+							                    </p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e7507">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">tell</strong> ()</p>
+
+         <p class="p description">Retrieves the current position as a byte offset from the start of the file.</p>
+
+         <p class="p description">Returns a number, the position index.</p>
+
+         <p class="p methodName" id="d1e6276__d1e7149">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Creates and returns a serialized string representation of this object.</p>
+
+         <p class="p description">
+						Pass the resulting string to eval() to recreate the object.
+					</p>
+
+         <p class="p methodName" id="d1e6276__d1e7137">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toString</strong> ()</p>
+
+         <p class="p description">Converts this object to a string.</p>
+
+         <p class="p methodName" id="d1e6276__d1e7355">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">write</strong> (text:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Writes the specified text to the file at the current position.</p>
+
+         <p class="p description">
+						You can supply multiple text values; the strings are concatenated to form a single string.For encoded files, writing a single Unicode character may write multiple bytes. Returns true if the write was successful.IMPORTANT: Be careful not to write to a file that is open in another application or object, as this can overwrite existing data.
+					</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e2797">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e2803">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e2809">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2797 ">
+                        <p class="p">text</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2803 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2809 ">
+                        <p class="p description">A text string to be written.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e6276__d1e7395">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">writeln</strong> (text:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Writes a string to the file at the current position and appends a line-feed sequence.</p>
+
+         <p class="p description">
+						You can supply multiple text values. The strings are concatenated into a single string, which is written in the file followed by one line-feed sequence, of the style specified by this object's linefeed property.For encoded files, writing a single Unicode character may write multiple bytes.  Returns true if the write was successful.IMPORTANT: Be careful not to write to a file that is open in another application or object, as this can overwrite existing data.
+					</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d562165e2881">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d562165e2887">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d562165e2893">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d562165e2881 ">
+                        <p class="p">text</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d562165e2887 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d562165e2893 ">
+                        <p class="p description">A text string to be written.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

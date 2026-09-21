@@ -1,0 +1,1319 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="A transformation matrix. Go to Property Listing | Method Listing Methods: scaleMatrix , shearMatrix , rotateMatrix , translateMatrix , catenateMatrix , invertMatrix , changeCoordinates , toSource , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="TransformationMatrix"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e223702"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>TransformationMatrix</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e223702">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">TransformationMatrix</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">A transformation matrix.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e223702__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e223702__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e223702__d1e223903">scaleMatrix</a>,  <a class="xref" href="#d1e223702__d1e223942">shearMatrix</a>,  <a class="xref" href="#d1e223702__d1e223982">rotateMatrix</a>,  <a class="xref" href="#d1e223702__d1e224033">translateMatrix</a>,  <a class="xref" href="#d1e223702__d1e224072">catenateMatrix</a>,  <a class="xref" href="#d1e223702__d1e224099">invertMatrix</a>,  <a class="xref" href="#d1e223702__d1e224111">changeCoordinates</a>,  <a class="xref" href="#d1e223702__d1e224142">toSource</a>,  <a class="xref" href="#d1e223702__d1e224155">getElements</a>,  <a class="xref" href="#d1e223702__d1e224169">toSpecifier</a>,  <a class="xref" href="#d1e223702__d1e224181">addEventListener</a>,  <a class="xref" href="#d1e223702__d1e224235">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Application.html#d1e41025">Application</a>, <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="String.html#d1e4543">String</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e223702__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d2037544e156">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2037544e162">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2037544e168">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2037544e174">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">clockwiseShearAngle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">The shear angle of the transformation matrix.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">counterclockwiseRotationAngle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">The rotation angle of the transformation matrix.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">horizontalScaleFactor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">The horizontal scale factor of the transformation matrix.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">horizontalTranslation</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">The horizontal translation of the transformation matrix.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">index</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">The index of the TransformationMatrix within its containing object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">matrixMapping</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of  2 Arrays of 2 Reals.</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">The mapping the transformation matrix performs on the unit triangle. Can return: Array of Array of 2 Arrays of 2 Reals.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">matrixValues</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">The values of the transformation matrix.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">The name of the TransformationMatrix.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Application.html#d1e41025">Application</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">The parent of the TransformationMatrix (a Application).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">verticalScaleFactor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">The vertical scale factor of the transformation matrix.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2037544e156 ">
+                        <p class="p">verticalTranslation</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e162 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e168 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e174 ">
+                        <p class="p description">The vertical translation of the transformation matrix.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e223702__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e223702__d1e224181">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2037544e716">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2037544e722">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2037544e728">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e716 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e722 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e728 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e716 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e722 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e728 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e716 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e722 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e728 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e223702__d1e224072">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a> 
+            <strong class="ph b">catenateMatrix</strong> (withMatrix:<em class="ph i">TransformationMatrix</em>)</p>
+
+         <p class="p description">Multiply the transformation matrix by another.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2037544e846">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2037544e852">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2037544e858">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e846 ">
+                        <p class="p">withMatrix</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e852 ">
+                        <p class="p">
+                           <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e858 ">
+                        <p class="p description">The right hand matrix factor</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e223702__d1e224111">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">changeCoordinates</strong> (point:<em class="ph i">Array of Number</em>)</p>
+
+         <p class="p description">Multiply the point by the matrix.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2037544e926">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2037544e932">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2037544e938">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e926 ">
+                        <p class="p">point</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e932 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e938 ">
+                        <p class="p description">The point to transform</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e223702__d1e224155">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e223702__d1e224099">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a> 
+            <strong class="ph b">invertMatrix</strong> ()</p>
+
+         <p class="p description">Invert the transformation matrix.</p>
+
+         <p class="p methodName" id="d1e223702__d1e224235">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2037544e1043">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2037544e1049">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2037544e1055">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1043 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1049 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1055 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1043 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1049 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1055 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1043 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1049 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1055 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e223702__d1e223982">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a> 
+            <strong class="ph b">rotateMatrix</strong> (byAngle:<em class="ph i">Number</em>, byCosine:<em class="ph i">Number</em>, bySine:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Rotate the transformation matrix.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2037544e1179">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2037544e1185">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2037544e1191">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1179 ">
+                        <p class="p">byAngle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1185 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1191 ">
+                        <p class="p description">The counterclockwise rotation angle (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1179 ">
+                        <p class="p">byCosine</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1185 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1191 ">
+                        <p class="p description">The cosine of the desired rotation (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1179 ">
+                        <p class="p">bySine</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1185 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1191 ">
+                        <p class="p description">The sine of the desired rotation (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e223702__d1e223903">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a> 
+            <strong class="ph b">scaleMatrix</strong> (horizontallyBy:<em class="ph i">Number</em>, verticallyBy:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Scale the transformation matrix.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2037544e1312">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2037544e1318">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2037544e1324">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1312 ">
+                        <p class="p">horizontallyBy</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1318 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1324 ">
+                        <p class="p description">The horizontal scale factor (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1312 ">
+                        <p class="p">verticallyBy</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1318 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1324 ">
+                        <p class="p description">The vertical scale factor (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e223702__d1e223942">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a> 
+            <strong class="ph b">shearMatrix</strong> (byAngle:<em class="ph i">Number</em>, bySlope:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Shear the transformation matrix.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2037544e1421">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2037544e1427">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2037544e1433">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1421 ">
+                        <p class="p">byAngle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1427 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1433 ">
+                        <p class="p description">The horizontal shear angle (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1421 ">
+                        <p class="p">bySlope</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1427 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1433 ">
+                        <p class="p description">The horizontal shear slope (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e223702__d1e224142">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the TransformationMatrix.</p>
+
+         <p class="p methodName" id="d1e223702__d1e224169">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+         <p class="p methodName" id="d1e223702__d1e224033">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a> 
+            <strong class="ph b">translateMatrix</strong> (horizontallyBy:<em class="ph i">Number</em>, verticallyBy:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Translate the transformation matrix.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2037544e1556">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2037544e1562">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2037544e1568">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1556 ">
+                        <p class="p">horizontallyBy</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1562 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1568 ">
+                        <p class="p description">The horizontal translation distance (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2037544e1556 ">
+                        <p class="p">verticallyBy</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2037544e1562 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2037544e1568 ">
+                        <p class="p description">The vertical translation distance (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Page.html#d1e178169">Page</a>.masterPageTransform</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224298">add</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="FormField.html#d1e116127">FormField</a>.<a class="xref" href="FormField.html#d1e116127__d1e118086">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Button.html#d1e119226">Button</a>.<a class="xref" href="Button.html#d1e119226__d1e121744">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MultiStateObject.html#d1e123782">MultiStateObject</a>.<a class="xref" href="MultiStateObject.html#d1e123782__d1e126044">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="CheckBox.html#d1e127184">CheckBox</a>.<a class="xref" href="CheckBox.html#d1e127184__d1e129678">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ComboBox.html#d1e130819">ComboBox</a>.<a class="xref" href="ComboBox.html#d1e130819__d1e133327">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ListBox.html#d1e134467">ListBox</a>.<a class="xref" href="ListBox.html#d1e134467__d1e136987">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="RadioButton.html#d1e138127">RadioButton</a>.<a class="xref" href="RadioButton.html#d1e138127__d1e140621">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextBox.html#d1e141762">TextBox</a>.<a class="xref" href="TextBox.html#d1e141762__d1e144280">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="SignatureField.html#d1e145420">SignatureField</a>.<a class="xref" href="SignatureField.html#d1e145420__d1e147878">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Movie.html#d1e149018">Movie</a>.<a class="xref" href="Movie.html#d1e149018__d1e151295">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Sound.html#d1e152999">Sound</a>.<a class="xref" href="Sound.html#d1e152999__d1e155191">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Spread.html#d1e176194">Spread</a>.<a class="xref" href="Spread.html#d1e176194__d1e177379">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Page.html#d1e178169">Page</a>.<a class="xref" href="Page.html#d1e178169__d1e179569">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MasterSpread.html#d1e180361">MasterSpread</a>.<a class="xref" href="MasterSpread.html#d1e180361__d1e181396">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PageItem.html#d1e182433">PageItem</a>.<a class="xref" href="PageItem.html#d1e182433__d1e184457">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Oval.html#d1e185532">Oval</a>.<a class="xref" href="Oval.html#d1e185532__d1e188319">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rectangle.html#d1e189459">Rectangle</a>.<a class="xref" href="Rectangle.html#d1e189459__d1e192246">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="GraphicLine.html#d1e193386">GraphicLine</a>.<a class="xref" href="GraphicLine.html#d1e193386__d1e196131">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Polygon.html#d1e197272">Polygon</a>.<a class="xref" href="Polygon.html#d1e197272__d1e200059">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Group.html#d1e201232">Group</a>.<a class="xref" href="Group.html#d1e201232__d1e203501">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Image.html#d1e204655">Image</a>.<a class="xref" href="Image.html#d1e204655__d1e206718">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EPS.html#d1e207913">EPS</a>.<a class="xref" href="EPS.html#d1e207913__d1e209926">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDF.html#d1e211120">PDF</a>.<a class="xref" href="PDF.html#d1e211120__d1e213116">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="WMF.html#d1e214311">WMF</a>.<a class="xref" href="WMF.html#d1e214311__d1e216247">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PICT.html#d1e217442">PICT</a>.<a class="xref" href="PICT.html#d1e217442__d1e219378">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Graphic.html#d1e220572">Graphic</a>.<a class="xref" href="Graphic.html#d1e220572__d1e222468">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Guide.html#d1e225088">Guide</a>.<a class="xref" href="Guide.html#d1e225088__d1e225584">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="SplineItem.html#d1e229224">SplineItem</a>.<a class="xref" href="SplineItem.html#d1e229224__d1e231969">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EPSText.html#d1e233044">EPSText</a>.<a class="xref" href="EPSText.html#d1e233044__d1e235131">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ImportedPage.html#d1e236205">ImportedPage</a>.<a class="xref" href="ImportedPage.html#d1e236205__d1e238107">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MediaItem.html#d1e239368">MediaItem</a>.<a class="xref" href="MediaItem.html#d1e239368__d1e241337">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HtmlItem.html#d1e246120">HtmlItem</a>.<a class="xref" href="HtmlItem.html#d1e246120__d1e248086">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>.<a class="xref" href="TextFrame.html#d1e443266__d1e446573">transformValuesOf</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>.<a class="xref" href="TransformationMatrix.html#d1e223702__d1e224099">invertMatrix</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>.<a class="xref" href="TransformationMatrix.html#d1e223702__d1e224072">catenateMatrix</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>.<a class="xref" href="TransformationMatrix.html#d1e223702__d1e224155">getElements</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224624">anyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224637">everyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224492">itemByRange</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224597">nextItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224570">previousItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224438">item</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224663">[]</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224465">itemByName</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224534">firstItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224546">lastItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrices.html#d1e224291">TransformationMatrices</a>.<a class="xref" href="TransformationMatrices.html#d1e224291__d1e224558">middleItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>.<a class="xref" href="TransformationMatrix.html#d1e223702__d1e223982">rotateMatrix</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>.<a class="xref" href="TransformationMatrix.html#d1e223702__d1e223903">scaleMatrix</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>.<a class="xref" href="TransformationMatrix.html#d1e223702__d1e223942">shearMatrix</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>.<a class="xref" href="TransformationMatrix.html#d1e223702__d1e224033">translateMatrix</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

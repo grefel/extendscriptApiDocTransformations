@@ -14,9 +14,14 @@
    blieb 230px breit und schnitt die Namen ab. Auf dem Telefon steht --fs auf 1,
    siehe den Abschnitt "Telefon" am Ende.
 
-   Einziger Haken: 100vh rechnet den Zoom nicht mit. Im skalierten
-   Koordinatenraum stehen nur 100vh/--fs zur Verfuegung, deshalb steht das so
-   in .grid und .side. */
+   Einziger Haken: Was 100vh im skalierten Koordinatenraum bedeutet, sehen die
+   Browser verschieden. Chrome laesst vh unberuehrt — 100vh im Zoom ist also
+   --fs mal zu hoch. Safari rechnet den Zoom schon in die Viewport-Einheiten
+   hinein, dort stimmt 100vh. Eine Formel, die in beiden passt, gibt es nicht.
+   Wo die Hoehe zaehlt, steht deshalb kein vh: Die Objektspalte spannt sich mit
+   top und bottom ans Fenster (siehe .side), und das ist ueberall dasselbe. Die
+   beiden vh in der Suchpalette bleiben — sie verschieben den Kasten um ein
+   Prozent, mehr nicht. */
 :root {
   zoom: var(--fs);
   color-scheme: light;
@@ -491,19 +496,29 @@ kbd {
 }
 
 /* ---------- Raster ---------- */
+/* --sidew steht einmal hier und gilt fuer beides: die Spur im Raster und die
+   Breite der herausgeloesten Objektspalte. */
 .grid {
+  --sidew: 230px;
   display: grid;
-  grid-template-columns: 230px minmax(0, 1fr);
-  min-height: calc(100vh / var(--fs) - 44px)
+  grid-template-columns: var(--sidew) minmax(0, 1fr)
 }
 
+/* Fest statt klebend, und die Hoehe aus top und bottom statt aus 100vh: Beide
+   Werte messen am selben Rechteck, dem Ansichtsfenster, und kommen deshalb
+   ohne Annahme darueber aus, wie der Browser Viewport-Einheiten im Zoom
+   auslegt — auch dann noch, wenn ein Browser zoom gar nicht kennt.
+   Die Spalte liegt damit ausserhalb des Flusses; ihre Spur im Raster bleibt
+   als Platzhalter stehen, die Breite kommt aus derselben Variablen. */
 .side {
   background: var(--rail);
   border-right: 1px solid var(--line);
   padding: 10px 0;
-  position: sticky;
+  position: fixed;
   top: 44px;
-  height: calc(100vh / var(--fs) - 44px);
+  bottom: 0;
+  left: 0;
+  width: var(--sidew);
   overflow-y: auto
 }
 
@@ -605,7 +620,10 @@ kbd {
   color: var(--dim)
 }
 
+/* Zweite Spur ausdruecklich: Die Objektspalte steht ausserhalb des Flusses,
+   ohne diese Angabe rutschte der Inhalt in die freigehaltene erste Spur. */
 .doc {
+  grid-column: 2;
   min-width: 0;
   /* Zwei Drittel der frueheren Werte (24/30/40): der Inhalt soll die Flaeche
      nutzen, der Rand nur trennen. */
@@ -1604,6 +1622,17 @@ footer .meta {
   margin-top: 10px
 }
 
+/* Der Dank an Jongware steht fuer sich, mit Abstand nach oben. */
+footer .credit {
+  font-size: 11px;
+  margin-top: 10px
+}
+
+footer .credit b {
+  color: var(--ink);
+  font-weight: 600
+}
+
 /* Signatur- und Rechtszeile schliessen den Footer ab, in einer Zeile. */
 footer .by {
   font-size: 11px;
@@ -1745,7 +1774,7 @@ footer .by .sep {
 
 @container page (max-width: 1100px) {
   .grid {
-    grid-template-columns: 200px minmax(0, 1fr)
+    --sidew: 200px
   }
 
   .trail {
@@ -1911,6 +1940,11 @@ footer .by .sep {
      ueber die Suche, die dafuer im Kopf bleibt. */
   .grid {
     grid-template-columns: minmax(0, 1fr)
+  }
+
+  /* Es gibt nur noch eine Spur, die Festlegung aus .doc muss zurueck. */
+  .doc {
+    grid-column: 1
   }
 
   .side {

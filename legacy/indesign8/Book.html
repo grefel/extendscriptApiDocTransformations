@@ -1,0 +1,2257 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="A book. Go to Property Listing | Method Listing Methods: packageForPrint , preflight , print , close , save , exportFile , synchronize , repaginate , insertLabel , extractLabel , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="Book"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e56077"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>Book</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e56077">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">Book</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">A book.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e56077__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e56077__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e56077__d1e56534">packageForPrint</a>,  <a class="xref" href="#d1e56077__d1e56673">preflight</a>,  <a class="xref" href="#d1e56077__d1e56709">print</a>,  <a class="xref" href="#d1e56077__d1e56742">close</a>,  <a class="xref" href="#d1e56077__d1e56805">save</a>,  <a class="xref" href="#d1e56077__d1e56854">exportFile</a>,  <a class="xref" href="#d1e56077__d1e56956">synchronize</a>,  <a class="xref" href="#d1e56077__d1e56962">repaginate</a>,  <a class="xref" href="#d1e56077__d1e56968">insertLabel</a>,  <a class="xref" href="#d1e56077__d1e57001">extractLabel</a>,  <a class="xref" href="#d1e56077__d1e57028">updateChapterAndParagraphNumbers</a>,  <a class="xref" href="#d1e56077__d1e57035">updateAllNumbers</a>,  <a class="xref" href="#d1e56077__d1e57041">updateAllCrossReferences</a>,  <a class="xref" href="#d1e56077__d1e57047">toSource</a>,  <a class="xref" href="#d1e56077__d1e57059">getElements</a>,  <a class="xref" href="#d1e56077__d1e57073">toSpecifier</a>,  <a class="xref" href="#d1e56077__d1e57085">addEventListener</a>,  <a class="xref" href="#d1e56077__d1e57140">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Application.html#d1e41025">Application</a>, <a class="xref" href="BookContent.html#d1e57520">BookContent</a>, <a class="xref" href="BookContents.html#d1e58036">BookContents</a>, <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="Document.html#d1e46972">Document</a>, <a class="xref" href="EPubExportPreference.html#d1e359500">EPubExportPreference</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="File.html#d1e6276">File</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="Preferences.html#d1e279820">Preferences</a>, <a class="xref" href="PreflightBookOption.html#d1e350406">PreflightBookOption</a>, <a class="xref" href="PrintPreference.html#d1e263764">PrintPreference</a>, <a class="xref" href="RepaginateOption.html#d1e85799">RepaginateOption</a>, <a class="xref" href="SmartMatchOptions.html#d1e85937">SmartMatchOptions</a>, <a class="xref" href="String.html#d1e4543">String</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e56077__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d96812e222">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e228">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e234">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d96812e240">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">automaticDocumentConversion</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, automatically converts the book content object during repagination and synchronization.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">automaticPagination</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, automatically updates page numbers when pages in book content files are added, deleted, or rearranged.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">bookContents</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="BookContents.html#d1e58036">BookContents</a>
+                           <em class="ph i">
+                              <a class="xref" href="BookContent.html#d1e57520">BookContent</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">A collection of book content objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">epubExportPreferences</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="EPubExportPreference.html#d1e359500">EPubExportPreference</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">EPub export preference settings.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">filePath</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">The full path to the file.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">fullName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">The full path to the Book, including the name of the Book.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">index</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">The index of the Book within its containing object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">insertBlankPage</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, inserts a blank page as necessary to fill in page number gaps caused by the odd or even specification set in the repagination option.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">label</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">A property that can be set to any string.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">mergeIdenticalLayers</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, merges identically named layers when exporting to PDF.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">modified</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, the Book has been modified since it was last saved.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">The name of the Book.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Application.html#d1e41025">Application</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">The parent of the Book (a Application).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">preferences</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Preferences.html#d1e279820">Preferences</a>
+                           <em class="ph i">
+                              <a class="xref" href="Preference.html#d1e279179">Preference</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">A collection of preferences objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">preflightBookOptions</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="PreflightBookOption.html#d1e350406">PreflightBookOption</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">Preflight book option settings.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">printPreferences</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="PrintPreference.html#d1e263764">PrintPreference</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">Print preference settings.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">repaginationOption</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="RepaginateOption.html#d1e85799">RepaginateOption</a>
+                        </p>
+
+                        <p class="p enumInPTable">RepaginateOption.NEXT_PAGE</p>
+
+                        <p class="p enumInPTable">RepaginateOption.NEXT_ODD_PAGE</p>
+
+                        <p class="p enumInPTable">RepaginateOption.NEXT_EVEN_PAGE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">Page numbering options for book content objects within the book.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">saved</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, the Book has been saved since it was created.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">smartMatchStyleGroups</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="SmartMatchOptions.html#d1e85937">SmartMatchOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">SmartMatchOptions.MATCH_STYLE_PATH</p>
+
+                        <p class="p enumInPTable">SmartMatchOptions.MATCH_STYLE_NAME</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">How to match styles with same name while synchronizing a book.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">styleSourceDocument</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Document.html#d1e46972">Document</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="BookContent.html#d1e57520">BookContent</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">Current style source document. Can return: Document or BookContent.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeBulletNumberingList</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize bullets and numbering.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeCellStyle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize cell styles.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeCharacterStyle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize character styles.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeConditionalText</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize conditional text.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeMasterPage</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize master pages.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeObjectStyle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize object styles.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeParagraphStyle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize paragraph styles.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeSwatch</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize swatches.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeTableOfContentStyle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize table of content styles.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeTableStyle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize table styles.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeTextVariable</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize text variables.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d96812e222 ">
+                        <p class="p">synchronizeTrapStyle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e240 ">
+                        <p class="p description">If true, synchronize trap styles.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e56077__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e56077__d1e57085">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d96812e1469">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e1475">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d96812e1481">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1469 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1475 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1481 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1469 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1475 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1481 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1469 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1475 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1481 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e56077__d1e56742">undefined <strong class="ph b">close</strong> ([saving:<em class="ph i">SaveOptions</em>=SaveOptions], savingIn:<em class="ph i">File</em>, versionComments:<em class="ph i">String</em>, [forceSave:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Close the Book</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d96812e1604">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e1610">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d96812e1616">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1604 ">
+                        <p class="p">saving</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1610 ">
+                        <p class="p">
+                           <a class="xref" href="SaveOptions.html#d1e93505">SaveOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">SaveOptions.NO</p>
+
+                        <p class="p enumInPTable">SaveOptions.ASK</p>
+
+                        <p class="p enumInPTable">SaveOptions.YES</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1616 ">
+                        <p class="p description">Whether to save changes before closing the Book (Optional)</p>
+
+                        <p class="p"> (default: SaveOptions.ASK)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1604 ">
+                        <p class="p">savingIn</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1610 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1616 ">
+                        <p class="p description">The file in which to save the Book (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1604 ">
+                        <p class="p">versionComments</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1610 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1616 ">
+                        <p class="p description">The comment for this version (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1604 ">
+                        <p class="p">forceSave</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1610 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1616 ">
+                        <p class="p description">Forcibly save a version (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e56077__d1e56854">undefined <strong class="ph b">exportFile</strong> (format:<em class="ph i">Varies</em>, to:<em class="ph i">File</em>, [showingOptions:<em class="ph i">Boolean</em>=Boolean], using:<em class="ph i">PDFExportPreset</em>, whichDocuments:<em class="ph i">Array of BookContent</em>, versionComments:<em class="ph i">String</em>, [forceSave:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Exports the book to a file.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d96812e1789">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e1795">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d96812e1801">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1789 ">
+                        <p class="p">format</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1795 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1801 ">
+                        <p class="p description">The export format, specified as an enumeration value or as an extension that appears in the Save as type or Format menu in the Export dialog. Can accept: ExportFormat enumerator or String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1789 ">
+                        <p class="p">to</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1795 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1801 ">
+                        <p class="p description">The file to which to export the book. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1789 ">
+                        <p class="p">showingOptions</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1795 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1801 ">
+                        <p class="p description">Used to specify if the PDF Export Options Dialog needs to be shown or not (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1789 ">
+                        <p class="p">using</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1795 ">
+                        <p class="p">
+                           <a class="xref" href="PDFExportPreset.html#d1e271769">PDFExportPreset</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1801 ">
+                        <p class="p description">Used to specify the presets for the export which can be the object of the preset type, enumeration for existing presets or user defined presets, or a string naming the preset to be used, but in case Showing Options is true, the preset specified in the Export Dialog will over ride this parameter (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1789 ">
+                        <p class="p">whichDocuments</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1795 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="BookContent.html#d1e57520">BookContent</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1801 ">
+                        <p class="p description">Used to specify a list of book content references, from the current book, where the list may contain duplicate entries and if the list is not specified then the entire book contents shall be exported (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1789 ">
+                        <p class="p">versionComments</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1795 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1801 ">
+                        <p class="p description">The comment for this version. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e1789 ">
+                        <p class="p">forceSave</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e1795 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e1801 ">
+                        <p class="p description">If true, forcibly saves a version. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e56077__d1e57001">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">extractLabel</strong> (key:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Gets the label value associated with the specified key.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d96812e2027">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e2033">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d96812e2039">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2027 ">
+                        <p class="p">key</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2033 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2039 ">
+                        <p class="p description">The key.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e56077__d1e57059">
+            <a class="xref" href="Book.html#d1e56077">Book</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e56077__d1e56968">undefined <strong class="ph b">insertLabel</strong> (key:<em class="ph i">String</em>, value:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Sets the label to the value associated with the specified key.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d96812e2120">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e2126">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d96812e2132">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2120 ">
+                        <p class="p">key</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2126 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2132 ">
+                        <p class="p description">The key.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2120 ">
+                        <p class="p">value</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2126 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2132 ">
+                        <p class="p description">The value.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e56077__d1e56534">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">packageForPrint</strong> (to:<em class="ph i">File</em>, copyingFonts:<em class="ph i">Boolean</em>, copyingLinkedGraphics:<em class="ph i">Boolean</em>, copyingProfiles:<em class="ph i">Boolean</em>, updatingGraphics:<em class="ph i">Boolean</em>, includingHiddenLayers:<em class="ph i">Boolean</em>, ignorePreflightErrors:<em class="ph i">Boolean</em>, creatingReport:<em class="ph i">Boolean</em>, versionComments:<em class="ph i">String</em>, [forceSave:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Packages the document.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d96812e2254">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e2260">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d96812e2266">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2254 ">
+                        <p class="p">to</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2260 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2266 ">
+                        <p class="p description">The folder, alias, or path in which to place the packaged files.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2254 ">
+                        <p class="p">copyingFonts</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2260 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2266 ">
+                        <p class="p description">If true, copies fonts used in the document to the package folder.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2254 ">
+                        <p class="p">copyingLinkedGraphics</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2260 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2266 ">
+                        <p class="p description">If true, copies linked graphics files to the package folder.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2254 ">
+                        <p class="p">copyingProfiles</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2260 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2266 ">
+                        <p class="p description">If true, copies color profiles to the package folder.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2254 ">
+                        <p class="p">updatingGraphics</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2260 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2266 ">
+                        <p class="p description">If true, updates graphics links to the package folder.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2254 ">
+                        <p class="p">includingHiddenLayers</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2260 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2266 ">
+                        <p class="p description">If true, copies fonts and links from hidden layers to the package.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2254 ">
+                        <p class="p">ignorePreflightErrors</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2260 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2266 ">
+                        <p class="p description">If true, ignores preflight errors and proceeds with the packaging. If false, cancels the packaging when errors exist.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2254 ">
+                        <p class="p">creatingReport</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2260 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2266 ">
+                        <p class="p description">If true, creates a package report that includes printing instructions, print settings, lists of fonts, links and required inks, and other information.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2254 ">
+                        <p class="p">versionComments</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2260 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2266 ">
+                        <p class="p description">The comments for the version. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2254 ">
+                        <p class="p">forceSave</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2260 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2266 ">
+                        <p class="p description">If true, forcibly saves a version. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e56077__d1e56673">undefined <strong class="ph b">preflight</strong> (to:<em class="ph i">File</em>, [autoOpen:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Preflight a book and optionally save the resulting report.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d96812e2563">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e2569">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d96812e2575">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2563 ">
+                        <p class="p">to</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2569 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2575 ">
+                        <p class="p description">The preflight report to save to. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2563 ">
+                        <p class="p">autoOpen</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2569 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2575 ">
+                        <p class="p description">If true, automatically open the report after creation. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e56077__d1e56709">undefined <strong class="ph b">print</strong> (printDialog:<em class="ph i">Boolean</em>, using:<em class="ph i">Varies</em>)</p>
+
+         <p class="p description">Prints the Book(s).</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d96812e2670">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e2676">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d96812e2682">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2670 ">
+                        <p class="p">printDialog</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2676 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2682 ">
+                        <p class="p description">Whether to invoke the print dialog (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2670 ">
+                        <p class="p">using</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2676 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2682 ">
+                        <p class="p description">Printer preset to use. Can accept: PrinterPresetTypes enumerator or PrinterPreset. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e56077__d1e57140">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d96812e2778">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e2784">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d96812e2790">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2778 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2784 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2790 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2778 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2784 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2790 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2778 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2784 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2790 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e56077__d1e56962">undefined <strong class="ph b">repaginate</strong> ()</p>
+
+         <p class="p description">Repaginates the book.</p>
+
+         <p class="p methodName" id="d1e56077__d1e56805">undefined <strong class="ph b">save</strong> (to:<em class="ph i">File</em>, versionComments:<em class="ph i">String</em>, [forceSave:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Saves the book.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d96812e2918">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d96812e2924">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d96812e2930">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2918 ">
+                        <p class="p">to</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2924 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2930 ">
+                        <p class="p description">The file path. Note: Required only if the book has not been previously saved. If the book has previously been saved, specifying a path saves a copy and closes the original book. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2918 ">
+                        <p class="p">versionComments</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2924 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2930 ">
+                        <p class="p description">The comment for this version. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d96812e2918 ">
+                        <p class="p">forceSave</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d96812e2924 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d96812e2930 ">
+                        <p class="p description">If true, forcibly saves a version. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e56077__d1e56956">undefined <strong class="ph b">synchronize</strong> ()</p>
+
+         <p class="p description">Synchronizes the entire book to the style source document.</p>
+
+         <p class="p methodName" id="d1e56077__d1e57047">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the Book.</p>
+
+         <p class="p methodName" id="d1e56077__d1e57073">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+         <p class="p methodName" id="d1e56077__d1e57041">undefined <strong class="ph b">updateAllCrossReferences</strong> ()</p>
+
+         <p class="p description">Updates the cross references in the entire book.</p>
+
+         <p class="p methodName" id="d1e56077__d1e57035">undefined <strong class="ph b">updateAllNumbers</strong> ()</p>
+
+         <p class="p description">Update all numbers (e.g. Page numbers, chapter numbers and paragraph numbers) throughout the book.</p>
+
+         <p class="p methodName" id="d1e56077__d1e57028">undefined <strong class="ph b">updateChapterAndParagraphNumbers</strong> ()</p>
+
+         <p class="p description">Updates chapter numbers and paragraph numbers throughout the book.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Application.html#d1e41025">Application</a>.activeBook</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BookContent.html#d1e57520">BookContent</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EPubExportPreference.html#d1e359500">EPubExportPreference</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Preference.html#d1e279179">Preference</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PreflightBookOption.html#d1e350406">PreflightBookOption</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PrintPreference.html#d1e263764">PrintPreference</a>.parent</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57203">add</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Book.html#d1e56077">Book</a>.<a class="xref" href="Book.html#d1e56077__d1e57059">getElements</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57440">anyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57453">everyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57413">nextItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57386">previousItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57254">item</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57479">[]</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57281">itemByName</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57308">itemByRange</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57350">firstItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57362">lastItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Books.html#d1e57196">Books</a>.<a class="xref" href="Books.html#d1e57196__d1e57374">middleItem</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

@@ -227,9 +227,17 @@ man Template-Literale aus dem Quelltext mit.
 |---|---|
 | `build/` | die Pipeline — Modell, Rendering, Tests, agents.js |
 | `sourceXML/` | Adobe-Originale je Produkt/Version, **nicht** versioniert |
+| `legacy/` | fertiges HTML älterer Fassungen, wird unverändert durchgereicht |
 | `site/` | erzeugte Website, gitignored |
 | `design/` | eingefrorene Prototypen der Designphase (Konzepte A, B, C) |
 | `temp/` | nur für `npm run verify`; `prepare-xslt.js` legt den Ordner selbst an |
+
+Unter `legacy/indesign8/` liegt die 2014 mit oXygen WebHelp gebaute CS6-Fassung.
+Sie zieht von `/extendscriptAPI/indesign8/` nach `/indesignapi/indesign8/` um, weil
+das alte Verzeichnis auf dem Server wegfällt; `build/archive.js` reicht sie durch
+und setzt sie auf `noindex`. Verlinkt ist sie nur auf der Startseite, im
+Offline-Archiv steckt sie nicht. Einzelheiten in
+**[build/README.md](build/README.md)**, Abschnitt „Archiv".
 
 `domOut/`, `skinAndInfo/` und die Download-Zips sind mit der DITA-Strecke weg.
 Der Inhalt von `sourceXML/` ist **nicht in der Git-Historie** — vor dem Löschen dort

@@ -1,0 +1,2840 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="An event. Go to Property Listing | Method Listing Methods: stopPropagation , preventDefault , toSource , getElements , toSpecifier Objects: AlignDistributePreference , AnchoredObjectDefault , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="Event"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e33542"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>Event</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e33542">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">Event</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">An event.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e33542__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e33542__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e33542__d1e36582">stopPropagation</a>,  <a class="xref" href="#d1e33542__d1e36588">preventDefault</a>,  <a class="xref" href="#d1e33542__d1e36594">toSource</a>,  <a class="xref" href="#d1e33542__d1e36607">getElements</a>,  <a class="xref" href="#d1e33542__d1e36621">toSpecifier</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="AlignDistributePreference.html#d1e357164">AlignDistributePreference</a>, <a class="xref" href="AnchoredObjectDefault.html#d1e325799">AnchoredObjectDefault</a>, <a class="xref" href="AnchoredObjectSetting.html#d1e326109">AnchoredObjectSetting</a>, <a class="xref" href="AngleCombobox.html#d1e499516">AngleCombobox</a>, <a class="xref" href="AngleEditbox.html#d1e502182">AngleEditbox</a>, <a class="xref" href="AnimationBehavior.html#d1e163869">AnimationBehavior</a>, <a class="xref" href="AnimationSetting.html#d1e358445">AnimationSetting</a>, <a class="xref" href="Application.html#d1e41025">Application</a>, <a class="xref" href="Article.html#d1e244102">Article</a>, <a class="xref" href="ArticleChild.html#d1e245543">ArticleChild</a>, <a class="xref" href="ArticleMember.html#d1e244894">ArticleMember</a>, <a class="xref" href="Asset.html#d1e249888">Asset</a>, <a class="xref" href="AssignedStory.html#d1e28845">AssignedStory</a>, <a class="xref" href="Assignment.html#d1e27891">Assignment</a>, <a class="xref" href="AutoCorrectPreference.html#d1e277538">AutoCorrectPreference</a>, <a class="xref" href="AutoCorrectTable.html#d1e470154">AutoCorrectTable</a>, <a class="xref" href="BackgroundTask.html#d1e46294">BackgroundTask</a>, <a class="xref" href="BaselineFrameGridOption.html#d1e326667">BaselineFrameGridOption</a>, <a class="xref" href="Behavior.html#d1e156283">Behavior</a>, <a class="xref" href="BevelAndEmbossSetting.html#d1e337712">BevelAndEmbossSetting</a>, <a class="xref" href="BlendingSetting.html#d1e335420">BlendingSetting</a>, <a class="xref" href="Book.html#d1e56077">Book</a>, <a class="xref" href="BookContent.html#d1e57520">BookContent</a>, <a class="xref" href="Bookmark.html#d1e103842">Bookmark</a>, <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="BorderPanel.html#d1e504871">BorderPanel</a>, <a class="xref" href="BuildingBlock.html#d1e110570">BuildingBlock</a>, <a class="xref" href="Bullet.html#d1e481165">Bullet</a>, <a class="xref" href="Button.html#d1e119226">Button</a>, <a class="xref" href="ButtonPreference.html#d1e351076">ButtonPreference</a>, <a class="xref" href="CaptionMetadataVariablePreference.html#d1e329894">CaptionMetadataVariablePreference</a>, <a class="xref" href="Cell.html#d1e372495">Cell</a>, <a class="xref" href="CellStyle.html#d1e387095">CellStyle</a>, <a class="xref" href="CellStyleGroup.html#d1e389567">CellStyleGroup</a>, <a class="xref" href="CellStyleMapping.html#d1e361689">CellStyleMapping</a>, <a class="xref" href="Change.html#d1e470702">Change</a>, <a class="xref" href="ChangeGlyphPreference.html#d1e313787">ChangeGlyphPreference</a>, <a class="xref" href="ChangeGrepPreference.html#d1e307914">ChangeGrepPreference</a>, <a class="xref" href="ChangeObjectPreference.html#d1e314085">ChangeObjectPreference</a>, <a class="xref" href="ChangeTextPreference.html#d1e302041">ChangeTextPreference</a>, <a class="xref" href="ChangeTransliteratePreference.html#d1e316508">ChangeTransliteratePreference</a>, <a class="xref" href="ChapterNumberPreference.html#d1e355300">ChapterNumberPreference</a>, <a class="xref" href="ChapterNumberVariablePreference.html#d1e328274">ChapterNumberVariablePreference</a>, <a class="xref" href="CharStyleMapping.html#d1e362300">CharStyleMapping</a>, <a class="xref" href="Character.html#d1e398055">Character</a>, <a class="xref" href="CharacterStyle.html#d1e459029">CharacterStyle</a>, <a class="xref" href="CharacterStyleGroup.html#d1e477615">CharacterStyleGroup</a>, <a class="xref" href="CheckBox.html#d1e127184">CheckBox</a>, <a class="xref" href="CheckboxControl.html#d1e494715">CheckboxControl</a>, <a class="xref" href="CjkGridPreference.html#d1e331318">CjkGridPreference</a>, <a class="xref" href="ClearFormBehavior.html#d1e170572">ClearFormBehavior</a>, <a class="xref" href="ClipboardPreference.html#d1e352370">ClipboardPreference</a>, <a class="xref" href="ClippingPathSettings.html#d1e268713">ClippingPathSettings</a>, <a class="xref" href="Color.html#d1e63837">Color</a>, <a class="xref" href="ColorSetting.html#d1e280406">ColorSetting</a>, <a class="xref" href="Column.html#d1e378847">Column</a>, <a class="xref" href="ComboBox.html#d1e130819">ComboBox</a>, <a class="xref" href="CompositeFont.html#d1e478402">CompositeFont</a>, <a class="xref" href="CompositeFontEntry.html#d1e479091">CompositeFontEntry</a>, <a class="xref" href="Condition.html#d1e483462">Condition</a>, <a class="xref" href="ConditionSet.html#d1e485001">ConditionSet</a>, <a class="xref" href="ConditionalTextPreference.html#d1e359250">ConditionalTextPreference</a>, <a class="xref" href="ContentPlacerObject.html#d1e55761">ContentPlacerObject</a>, <a class="xref" href="ContentTransparencySetting.html#d1e338570">ContentTransparencySetting</a>, <a class="xref" href="ContourOption.html#d1e226792">ContourOption</a>, <a class="xref" href="CrossReference.html#d1e113937">CrossReference</a>, <a class="xref" href="CrossReferenceFormat.html#d1e109105">CrossReferenceFormat</a>, <a class="xref" href="CrossReferenceSource.html#d1e109812">CrossReferenceSource</a>, <a class="xref" href="CustomTextVariablePreference.html#d1e329651">CustomTextVariablePreference</a>, <a class="xref" href="DTD.html#d1e513811">DTD</a>, <a class="xref" href="DashedStrokeStyle.html#d1e368956">DashedStrokeStyle</a>, <a class="xref" href="DataMerge.html#d1e354943">DataMerge</a>, <a class="xref" href="DataMergeField.html#d1e67181">DataMergeField</a>, <a class="xref" href="DataMergeImagePlaceholder.html#d1e66619">DataMergeImagePlaceholder</a>, <a class="xref" href="DataMergeOption.html#d1e354645">DataMergeOption</a>, <a class="xref" href="DataMergePreference.html#d1e354193">DataMergePreference</a>, <a class="xref" href="DataMergeTextPlaceholder.html#d1e66021">DataMergeTextPlaceholder</a>, <a class="xref" href="Date.html#d1e2080">Date</a>, <a class="xref" href="DateVariablePreference.html#d1e328530">DateVariablePreference</a>, <a class="xref" href="Dialog.html#d1e491623">Dialog</a>, <a class="xref" href="DialogColumn.html#d1e495325">DialogColumn</a>, <a class="xref" href="DialogRow.html#d1e505688">DialogRow</a>, <a class="xref" href="DictionaryPreference.html#d1e276634">DictionaryPreference</a>, <a class="xref" href="DirectionalFeatherSetting.html#d1e339108">DirectionalFeatherSetting</a>, <a class="xref" href="DisplayPerformancePreference.html#d1e348958">DisplayPerformancePreference</a>, <a class="xref" href="DisplaySetting.html#d1e349214">DisplaySetting</a>, <a class="xref" href="Document.html#d1e46972">Document</a>, <a class="xref" href="DocumentPreference.html#d1e259839">DocumentPreference</a>, <a class="xref" href="DocumentPreset.html#d1e262577">DocumentPreset</a>, <a class="xref" href="DottedStrokeStyle.html#d1e369655">DottedStrokeStyle</a>, <a class="xref" href="DropShadowSetting.html#d1e335712">DropShadowSetting</a>, <a class="xref" href="Dropdown.html#d1e494103">Dropdown</a>, <a class="xref" href="EPS.html#d1e207913">EPS</a>, <a class="xref" href="EPSExportPreference.html#d1e267424">EPSExportPreference</a>, <a class="xref" href="EPSImportPreference.html#d1e278088">EPSImportPreference</a>, <a class="xref" href="EPSText.html#d1e233044">EPSText</a>, <a class="xref" href="EPubExportPreference.html#d1e359500">EPubExportPreference</a>, <a class="xref" href="EnablingGroup.html#d1e498675">EnablingGroup</a>, <a class="xref" href="EventPhases.html#d1e79861">EventPhases</a>, <a class="xref" href="ExcelImportPreference.html#d1e347944">ExcelImportPreference</a>, <a class="xref" href="ExportForWebPreference.html#d1e325476">ExportForWebPreference</a>, <a class="xref" href="FeatherSetting.html#d1e336193">FeatherSetting</a>, <a class="xref" href="FileNameVariablePreference.html#d1e328786">FileNameVariablePreference</a>, <a class="xref" href="FillTransparencySetting.html#d1e334882">FillTransparencySetting</a>, <a class="xref" href="FindChangeBevelAndEmbossSetting.html#d1e344381">FindChangeBevelAndEmbossSetting</a>, <a class="xref" href="FindChangeBlendingSetting.html#d1e341339">FindChangeBlendingSetting</a>, <a class="xref" href="FindChangeContentTransparencySetting.html#d1e340980">FindChangeContentTransparencySetting</a>, <a class="xref" href="FindChangeDirectionalFeatherSetting.html#d1e345556">FindChangeDirectionalFeatherSetting</a>, <a class="xref" href="FindChangeDropShadowSetting.html#d1e341697">FindChangeDropShadowSetting</a>, <a class="xref" href="FindChangeFeatherSetting.html#d1e342345">FindChangeFeatherSetting</a>, <a class="xref" href="FindChangeFillTransparencySetting.html#d1e340620">FindChangeFillTransparencySetting</a>, <a class="xref" href="FindChangeGlyphOption.html#d1e281535">FindChangeGlyphOption</a>, <a class="xref" href="FindChangeGradientFeatherSetting.html#d1e346059">FindChangeGradientFeatherSetting</a>, <a class="xref" href="FindChangeGrepOption.html#d1e281230">FindChangeGrepOption</a>, <a class="xref" href="FindChangeInnerGlowSetting.html#d1e343854">FindChangeInnerGlowSetting</a>, <a class="xref" href="FindChangeInnerShadowSetting.html#d1e342751">FindChangeInnerShadowSetting</a>, <a class="xref" href="FindChangeObjectOption.html#d1e281815">FindChangeObjectOption</a>, <a class="xref" href="FindChangeOuterGlowSetting.html#d1e343350">FindChangeOuterGlowSetting</a>, <a class="xref" href="FindChangeSatinSetting.html#d1e345101">FindChangeSatinSetting</a>, <a class="xref" href="FindChangeStrokeTransparencySetting.html#d1e340261">FindChangeStrokeTransparencySetting</a>, <a class="xref" href="FindChangeTextOption.html#d1e280877">FindChangeTextOption</a>, <a class="xref" href="FindChangeTransliterateOption.html#d1e282107">FindChangeTransliterateOption</a>, <a class="xref" href="FindChangeTransparencySetting.html#d1e339902">FindChangeTransparencySetting</a>, <a class="xref" href="FindGlyphPreference.html#d1e294074">FindGlyphPreference</a>, <a class="xref" href="FindGrepPreference.html#d1e288255">FindGrepPreference</a>, <a class="xref" href="FindObjectPreference.html#d1e294399">FindObjectPreference</a>, <a class="xref" href="FindTextPreference.html#d1e282436">FindTextPreference</a>, <a class="xref" href="FindTransliteratePreference.html#d1e296821">FindTransliteratePreference</a>, <a class="xref" href="FlattenerPreference.html#d1e333211">FlattenerPreference</a>, <a class="xref" href="FlattenerPreset.html#d1e332427">FlattenerPreset</a>, <a class="xref" href="Font.html#d1e466552">Font</a>, <a class="xref" href="FontLockingPreference.html#d1e276390">FontLockingPreference</a>, <a class="xref" href="Footnote.html#d1e473666">Footnote</a>, <a class="xref" href="FootnoteOption.html#d1e327004">FootnoteOption</a>, <a class="xref" href="FormField.html#d1e116127">FormField</a>, <a class="xref" href="FrameFittingOption.html#d1e224705">FrameFittingOption</a>, <a class="xref" href="GalleyPreference.html#d1e331979">GalleyPreference</a>, <a class="xref" href="GeneralPreference.html#d1e351755">GeneralPreference</a>, <a class="xref" href="GotoAnchorBehavior.html#d1e169042">GotoAnchorBehavior</a>, <a class="xref" href="GotoFirstPageBehavior.html#d1e156989">GotoFirstPageBehavior</a>, <a class="xref" href="GotoLastPageBehavior.html#d1e157736">GotoLastPageBehavior</a>, <a class="xref" href="GotoNextPageBehavior.html#d1e158483">GotoNextPageBehavior</a>, <a class="xref" href="GotoNextStateBehavior.html#d1e165356">GotoNextStateBehavior</a>, <a class="xref" href="GotoNextViewBehavior.html#d1e159978">GotoNextViewBehavior</a>, <a class="xref" href="GotoPageBehavior.html#d1e169849">GotoPageBehavior</a>, <a class="xref" href="GotoPreviousPageBehavior.html#d1e159231">GotoPreviousPageBehavior</a>, <a class="xref" href="GotoPreviousStateBehavior.html#d1e166079">GotoPreviousStateBehavior</a>, <a class="xref" href="GotoPreviousViewBehavior.html#d1e160725">GotoPreviousViewBehavior</a>, <a class="xref" href="GotoStateBehavior.html#d1e166801">GotoStateBehavior</a>, <a class="xref" href="GotoURLBehavior.html#d1e161473">GotoURLBehavior</a>, <a class="xref" href="GrabberPreference.html#d1e356932">GrabberPreference</a>, <a class="xref" href="Gradient.html#d1e61794">Gradient</a>, <a class="xref" href="GradientFeatherSetting.html#d1e339521">GradientFeatherSetting</a>, <a class="xref" href="GradientStop.html#d1e62552">GradientStop</a>, <a class="xref" href="Graphic.html#d1e220572">Graphic</a>, <a class="xref" href="GraphicLayer.html#d1e269406">GraphicLayer</a>, <a class="xref" href="GraphicLayerOption.html#d1e269150">GraphicLayerOption</a>, <a class="xref" href="GraphicLine.html#d1e193386">GraphicLine</a>, <a class="xref" href="GridDataInformation.html#d1e330150">GridDataInformation</a>, <a class="xref" href="GridPreference.html#d1e260567">GridPreference</a>, <a class="xref" href="GridPrintingPreference.html#d1e331687">GridPrintingPreference</a>, <a class="xref" href="Group.html#d1e201232">Group</a>, <a class="xref" href="Guide.html#d1e225088">Guide</a>, <a class="xref" href="GuidePreference.html#d1e261057">GuidePreference</a>, <a class="xref" href="HTMLExportPreference.html#d1e360229">HTMLExportPreference</a>, <a class="xref" href="HiddenText.html#d1e484217">HiddenText</a>, <a class="xref" href="HtmlItem.html#d1e246120">HtmlItem</a>, <a class="xref" href="Hyperlink.html#d1e102975">Hyperlink</a>, <a class="xref" href="HyperlinkExternalPageDestination.html#d1e107592">HyperlinkExternalPageDestination</a>, <a class="xref" href="HyperlinkPageDestination.html#d1e106799">HyperlinkPageDestination</a>, <a class="xref" href="HyperlinkPageItemSource.html#d1e104641">HyperlinkPageItemSource</a>, <a class="xref" href="HyperlinkTextDestination.html#d1e106079">HyperlinkTextDestination</a>, <a class="xref" href="HyperlinkTextSource.html#d1e105354">HyperlinkTextSource</a>, <a class="xref" href="HyperlinkURLDestination.html#d1e108391">HyperlinkURLDestination</a>, <a class="xref" href="HyphenationException.html#d1e468893">HyphenationException</a>, <a class="xref" href="IMEPreference.html#d1e270147">IMEPreference</a>, <a class="xref" href="IdleTask.html#d1e39938">IdleTask</a>, <a class="xref" href="Image.html#d1e204655">Image</a>, <a class="xref" href="ImageIOPreference.html#d1e268439">ImageIOPreference</a>, <a class="xref" href="ImagePreference.html#d1e268208">ImagePreference</a>, <a class="xref" href="ImportedPage.html#d1e236205">ImportedPage</a>, <a class="xref" href="ImportedPageAttribute.html#d1e278344">ImportedPageAttribute</a>, <a class="xref" href="InCopyExportOption.html#d1e322002">InCopyExportOption</a>, <a class="xref" href="Index.html#d1e111909">Index</a>, <a class="xref" href="IndexOptions.html#d1e112769">IndexOptions</a>, <a class="xref" href="IndexSection.html#d1e115463">IndexSection</a>, <a class="xref" href="IndexingSortOption.html#d1e480585">IndexingSortOption</a>, <a class="xref" href="Ink.html#d1e58402">Ink</a>, <a class="xref" href="InnerGlowSetting.html#d1e337335">InnerGlowSetting</a>, <a class="xref" href="InnerShadowSetting.html#d1e336515">InnerShadowSetting</a>, <a class="xref" href="InsertionPoint.html#d1e436811">InsertionPoint</a>, <a class="xref" href="IntegerCombobox.html#d1e498002">IntegerCombobox</a>, <a class="xref" href="IntegerEditbox.html#d1e497342">IntegerEditbox</a>, <a class="xref" href="InteractivePDFExportPreference.html#d1e273586">InteractivePDFExportPreference</a>, <a class="xref" href="JPEGExportPreference.html#d1e353834">JPEGExportPreference</a>, <a class="xref" href="KinsokuTable.html#d1e467375">KinsokuTable</a>, <a class="xref" href="Language.html#d1e465046">Language</a>, <a class="xref" href="LanguageWithVendors.html#d1e465745">LanguageWithVendors</a>, <a class="xref" href="Layer.html#d1e175084">Layer</a>, <a class="xref" href="LayoutAdjustmentPreference.html#d1e278868">LayoutAdjustmentPreference</a>, <a class="xref" href="LayoutGridDataInformation.html#d1e330576">LayoutGridDataInformation</a>, <a class="xref" href="LayoutWindow.html#d1e53152">LayoutWindow</a>, <a class="xref" href="Library.html#d1e249227">Library</a>, <a class="xref" href="LibraryPanel.html#d1e486107">LibraryPanel</a>, <a class="xref" href="Line.html#d1e410966">Line</a>, <a class="xref" href="Link.html#d1e250621">Link</a>, <a class="xref" href="LinkMetadata.html#d1e251817">LinkMetadata</a>, <a class="xref" href="LinkedPageItemOption.html#d1e363520">LinkedPageItemOption</a>, <a class="xref" href="LinkedStoryOption.html#d1e360793">LinkedStoryOption</a>, <a class="xref" href="LinkingPreference.html#d1e321758">LinkingPreference</a>, <a class="xref" href="ListBox.html#d1e134467">ListBox</a>, <a class="xref" href="MarginPreference.html#d1e261377">MarginPreference</a>, <a class="xref" href="MasterSpread.html#d1e180361">MasterSpread</a>, <a class="xref" href="MatchCharacterStylePreference.html#d1e329054">MatchCharacterStylePreference</a>, <a class="xref" href="MatchParagraphStylePreference.html#d1e329353">MatchParagraphStylePreference</a>, <a class="xref" href="MeasurementCombobox.html#d1e503514">MeasurementCombobox</a>, <a class="xref" href="MeasurementEditbox.html#d1e504200">MeasurementEditbox</a>, <a class="xref" href="MediaItem.html#d1e239368">MediaItem</a>, <a class="xref" href="Menu.html#d1e487998">Menu</a>, <a class="xref" href="MenuAction.html#d1e486470">MenuAction</a>, <a class="xref" href="MenuElement.html#d1e488603">MenuElement</a>, <a class="xref" href="MenuItem.html#d1e489788">MenuItem</a>, <a class="xref" href="MenuSeparator.html#d1e490490">MenuSeparator</a>, <a class="xref" href="MetadataPreference.html#d1e348297">MetadataPreference</a>, <a class="xref" href="MixedInk.html#d1e60120">MixedInk</a>, <a class="xref" href="MixedInkGroup.html#d1e60953">MixedInkGroup</a>, <a class="xref" href="MojikumiTable.html#d1e468113">MojikumiTable</a>, <a class="xref" href="MojikumiUiPreference.html#d1e275994">MojikumiUiPreference</a>, <a class="xref" href="MotionPreset.html#d1e243365">MotionPreset</a>, <a class="xref" href="Movie.html#d1e149018">Movie</a>, <a class="xref" href="MovieBehavior.html#d1e162220">MovieBehavior</a>, <a class="xref" href="MultiStateObject.html#d1e123782">MultiStateObject</a>, <a class="xref" href="NamedGrid.html#d1e479884">NamedGrid</a>, <a class="xref" href="NavigationPoint.html#d1e152389">NavigationPoint</a>, <a class="xref" href="NestedGrepStyle.html#d1e390984">NestedGrepStyle</a>, <a class="xref" href="NestedLineStyle.html#d1e390354">NestedLineStyle</a>, <a class="xref" href="NestedStyle.html#d1e464392">NestedStyle</a>, <a class="xref" href="Note.html#d1e472716">Note</a>, <a class="xref" href="NotePreference.html#d1e352931">NotePreference</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="NumberingList.html#d1e481923">NumberingList</a>, <a class="xref" href="NumberingRestartPolicy.html#d1e481575">NumberingRestartPolicy</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="ObjectExportOption.html#d1e275129">ObjectExportOption</a>, <a class="xref" href="ObjectStyle.html#d1e252275">ObjectStyle</a>, <a class="xref" href="ObjectStyleContentEffectsCategorySettings.html#d1e356591">ObjectStyleContentEffectsCategorySettings</a>, <a class="xref" href="ObjectStyleFillEffectsCategorySettings.html#d1e356250">ObjectStyleFillEffectsCategorySettings</a>, <a class="xref" href="ObjectStyleGroup.html#d1e482675">ObjectStyleGroup</a>, <a class="xref" href="ObjectStyleObjectEffectsCategorySettings.html#d1e355568">ObjectStyleObjectEffectsCategorySettings</a>, <a class="xref" href="ObjectStyleStrokeEffectsCategorySettings.html#d1e355909">ObjectStyleStrokeEffectsCategorySettings</a>, <a class="xref" href="OpacityGradientStop.html#d1e65440">OpacityGradientStop</a>, <a class="xref" href="OpenFileBehavior.html#d1e164603">OpenFileBehavior</a>, <a class="xref" href="OuterGlowSetting.html#d1e336970">OuterGlowSetting</a>, <a class="xref" href="Oval.html#d1e185532">Oval</a>, <a class="xref" href="PDF.html#d1e211120">PDF</a>, <a class="xref" href="PDFAttribute.html#d1e182171">PDFAttribute</a>, <a class="xref" href="PDFExportPreference.html#d1e270391">PDFExportPreference</a>, <a class="xref" href="PDFExportPreset.html#d1e271769">PDFExportPreset</a>, <a class="xref" href="PDFPlacePreference.html#d1e273318">PDFPlacePreference</a>, <a class="xref" href="PICT.html#d1e217442">PICT</a>, <a class="xref" href="PNGExportPreference.html#d1e350729">PNGExportPreference</a>, <a class="xref" href="Page.html#d1e178169">Page</a>, <a class="xref" href="PageItem.html#d1e182433">PageItem</a>, <a class="xref" href="PageItemDefault.html#d1e274279">PageItemDefault</a>, <a class="xref" href="PageNumberVariablePreference.html#d1e328006">PageNumberVariablePreference</a>, <a class="xref" href="PageReference.html#d1e114680">PageReference</a>, <a class="xref" href="PagesPanel.html#d1e485729">PagesPanel</a>, <a class="xref" href="Panel.html#d1e491085">Panel</a>, <a class="xref" href="ParaStyleMapping.html#d1e361079">ParaStyleMapping</a>, <a class="xref" href="Paragraph.html#d1e423876">Paragraph</a>, <a class="xref" href="ParagraphDestination.html#d1e111187">ParagraphDestination</a>, <a class="xref" href="ParagraphStyle.html#d1e454003">ParagraphStyle</a>, <a class="xref" href="ParagraphStyleGroup.html#d1e476827">ParagraphStyleGroup</a>, <a class="xref" href="PasteboardPreference.html#d1e261801">PasteboardPreference</a>, <a class="xref" href="Path.html#d1e227929">Path</a>, <a class="xref" href="PathPoint.html#d1e228575">PathPoint</a>, <a class="xref" href="PercentCombobox.html#d1e500190">PercentCombobox</a>, <a class="xref" href="PercentEditbox.html#d1e501522">PercentEditbox</a>, <a class="xref" href="PlaceGun.html#d1e29867">PlaceGun</a>, <a class="xref" href="Polygon.html#d1e197272">Polygon</a>, <a class="xref" href="PolygonPreference.html#d1e276896">PolygonPreference</a>, <a class="xref" href="Preference.html#d1e279179">Preference</a>, <a class="xref" href="PreflightBookOption.html#d1e350406">PreflightBookOption</a>, <a class="xref" href="PreflightOption.html#d1e350059">PreflightOption</a>, <a class="xref" href="PreflightProcess.html#d1e366875">PreflightProcess</a>, <a class="xref" href="PreflightProfile.html#d1e366100">PreflightProfile</a>, <a class="xref" href="PreflightProfileRule.html#d1e367620">PreflightProfileRule</a>, <a class="xref" href="PreflightRule.html#d1e364009">PreflightRule</a>, <a class="xref" href="PreflightRuleInstance.html#d1e365378">PreflightRuleInstance</a>, <a class="xref" href="PrintBookletOption.html#d1e265422">PrintBookletOption</a>, <a class="xref" href="PrintBookletPrintPreference.html#d1e265905">PrintBookletPrintPreference</a>, <a class="xref" href="PrintFormBehavior.html#d1e171307">PrintFormBehavior</a>, <a class="xref" href="PrintPreference.html#d1e263764">PrintPreference</a>, <a class="xref" href="PrinterPreset.html#d1e322277">PrinterPreset</a>, <a class="xref" href="RadioButton.html#d1e138127">RadioButton</a>, <a class="xref" href="RadiobuttonControl.html#d1e496750">RadiobuttonControl</a>, <a class="xref" href="RadiobuttonGroup.html#d1e496128">RadiobuttonGroup</a>, <a class="xref" href="RealCombobox.html#d1e502841">RealCombobox</a>, <a class="xref" href="RealEditbox.html#d1e500863">RealEditbox</a>, <a class="xref" href="Rectangle.html#d1e189459">Rectangle</a>, <a class="xref" href="Row.html#d1e381373">Row</a>, <a class="xref" href="RuleDataObject.html#d1e364599">RuleDataObject</a>, <a class="xref" href="SWFExportPreference.html#d1e357468">SWFExportPreference</a>, <a class="xref" href="SatinSetting.html#d1e338198">SatinSetting</a>, <a class="xref" href="ScriptArg.html#d1e40639">ScriptArg</a>, <a class="xref" href="ScriptMenuAction.html#d1e487195">ScriptMenuAction</a>, <a class="xref" href="ScriptPreference.html#d1e280078">ScriptPreference</a>, <a class="xref" href="Section.html#d1e227076">Section</a>, <a class="xref" href="ShowHideFieldsBehavior.html#d1e162991">ShowHideFieldsBehavior</a>, <a class="xref" href="SignatureField.html#d1e145420">SignatureField</a>, <a class="xref" href="SmartGuidePreference.html#d1e277782">SmartGuidePreference</a>, <a class="xref" href="Snippet.html#d1e242412">Snippet</a>, <a class="xref" href="Sound.html#d1e152999">Sound</a>, <a class="xref" href="SoundBehavior.html#d1e168283">SoundBehavior</a>, <a class="xref" href="SpellPreference.html#d1e277152">SpellPreference</a>, <a class="xref" href="SplineItem.html#d1e229224">SplineItem</a>, <a class="xref" href="Spread.html#d1e176194">Spread</a>, <a class="xref" href="State.html#d1e122885">State</a>, <a class="xref" href="StaticText.html#d1e493492">StaticText</a>, <a class="xref" href="Story.html#d1e447623">Story</a>, <a class="xref" href="StoryGridDataInformation.html#d1e330910">StoryGridDataInformation</a>, <a class="xref" href="StoryPreference.html#d1e253846">StoryPreference</a>, <a class="xref" href="StoryWindow.html#d1e54150">StoryWindow</a>, <a class="xref" href="String.html#d1e4543">String</a>, <a class="xref" href="StripedStrokeStyle.html#d1e370342">StripedStrokeStyle</a>, <a class="xref" href="StrokeFillProxySetting.html#d1e278588">StrokeFillProxySetting</a>, <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>, <a class="xref" href="StrokeTransparencySetting.html#d1e334344">StrokeTransparencySetting</a>, <a class="xref" href="StyleExportTagMap.html#d1e476193">StyleExportTagMap</a>, <a class="xref" href="Submenu.html#d1e489102">Submenu</a>, <a class="xref" href="SubmitFormBehavior.html#d1e172042">SubmitFormBehavior</a>, <a class="xref" href="Swatch.html#d1e63132">Swatch</a>, <a class="xref" href="TOCStyle.html#d1e371011">TOCStyle</a>, <a class="xref" href="TOCStyleEntry.html#d1e371803">TOCStyleEntry</a>, <a class="xref" href="TabStop.html#d1e463744">TabStop</a>, <a class="xref" href="Table.html#d1e375544">Table</a>, <a class="xref" href="TableStyle.html#d1e383900">TableStyle</a>, <a class="xref" href="TableStyleGroup.html#d1e386308">TableStyleGroup</a>, <a class="xref" href="TableStyleMapping.html#d1e362910">TableStyleMapping</a>, <a class="xref" href="TaggedPDFPreference.html#d1e274042">TaggedPDFPreference</a>, <a class="xref" href="TaggedTextExportPreference.html#d1e347444">TaggedTextExportPreference</a>, <a class="xref" href="TaggedTextImportPreference.html#d1e347688">TaggedTextImportPreference</a>, <a class="xref" href="Text.html#d1e391603">Text</a>, <a class="xref" href="TextBox.html#d1e141762">TextBox</a>, <a class="xref" href="TextColumn.html#d1e417421">TextColumn</a>, <a class="xref" href="TextDefault.html#d1e255387">TextDefault</a>, <a class="xref" href="TextEditbox.html#d1e492894">TextEditbox</a>, <a class="xref" href="TextEditingPreference.html#d1e275714">TextEditingPreference</a>, <a class="xref" href="TextExportPreference.html#d1e346798">TextExportPreference</a>, <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>, <a class="xref" href="TextFramePreference.html#d1e254139">TextFramePreference</a>, <a class="xref" href="TextImportPreference.html#d1e346480">TextImportPreference</a>, <a class="xref" href="TextPath.html#d1e471371">TextPath</a>, <a class="xref" href="TextPreference.html#d1e254725">TextPreference</a>, <a class="xref" href="TextStyleRange.html#d1e430356">TextStyleRange</a>, <a class="xref" href="TextVariable.html#d1e474730">TextVariable</a>, <a class="xref" href="TextVariableInstance.html#d1e475410">TextVariableInstance</a>, <a class="xref" href="TextWrapPreference.html#d1e226252">TextWrapPreference</a>, <a class="xref" href="TimingGroup.html#d1e173777">TimingGroup</a>, <a class="xref" href="TimingList.html#d1e173221">TimingList</a>, <a class="xref" href="TimingSetting.html#d1e172790">TimingSetting</a>, <a class="xref" href="TimingTarget.html#d1e174424">TimingTarget</a>, <a class="xref" href="Tint.html#d1e64617">Tint</a>, <a class="xref" href="ToolBox.html#d1e267922">ToolBox</a>, <a class="xref" href="Topic.html#d1e113269">Topic</a>, <a class="xref" href="TrackChangesPreference.html#d1e353237">TrackChangesPreference</a>, <a class="xref" href="TransformPreference.html#d1e352650">TransformPreference</a>, <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>, <a class="xref" href="TransparencyPreference.html#d1e333532">TransparencyPreference</a>, <a class="xref" href="TransparencySetting.html#d1e333806">TransparencySetting</a>, <a class="xref" href="TrapPreset.html#d1e59192">TrapPreset</a>, <a class="xref" href="UserDictionary.html#d1e469523">UserDictionary</a>, <a class="xref" href="ValidationError.html#d1e511300">ValidationError</a>, <a class="xref" href="ViewPreference.html#d1e262133">ViewPreference</a>, <a class="xref" href="ViewZoomBehavior.html#d1e167535">ViewZoomBehavior</a>, <a class="xref" href="WMF.html#d1e214311">WMF</a>, <a class="xref" href="WatermarkPreference.html#d1e351313">WatermarkPreference</a>, <a class="xref" href="Widget.html#d1e492331">Widget</a>, <a class="xref" href="Window.html#d1e52348">Window</a>, <a class="xref" href="Word.html#d1e404510">Word</a>, <a class="xref" href="WordRTFImportPreference.html#d1e347042">WordRTFImportPreference</a>, <a class="xref" href="XFLExportPreference.html#d1e358002">XFLExportPreference</a>, <a class="xref" href="XMLAttribute.html#d1e508638">XMLAttribute</a>, <a class="xref" href="XMLComment.html#d1e511824">XMLComment</a>, <a class="xref" href="XMLElement.html#d1e506473">XMLElement</a>, <a class="xref" href="XMLExportMap.html#d1e510653">XMLExportMap</a>, <a class="xref" href="XMLExportPreference.html#d1e324626">XMLExportPreference</a>, <a class="xref" href="XMLImportMap.html#d1e510042">XMLImportMap</a>, <a class="xref" href="XMLImportPreference.html#d1e324221">XMLImportPreference</a>, <a class="xref" href="XMLInstruction.html#d1e512518">XMLInstruction</a>, <a class="xref" href="XMLItem.html#d1e513236">XMLItem</a>, <a class="xref" href="XMLPreference.html#d1e325097">XMLPreference</a>, <a class="xref" href="XMLRuleMatchData.html#d1e521325">XMLRuleMatchData</a>, <a class="xref" href="XMLRuleProcessor.html#d1e520529">XMLRuleProcessor</a>, <a class="xref" href="XMLTag.html#d1e509299">XMLTag</a>, <a class="xref" href="XMLViewPreference.html#d1e349761">XMLViewPreference</a>, <a class="xref" href="XmlStory.html#d1e514431">XmlStory</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e33542__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d520246e1751">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d520246e1757">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d520246e1763">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d520246e1769">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">bubbles</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">If true, the event supports the bubbling phase of propagation.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">cancelable</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">If true, the default behavior of the event on its target can be canceled.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">currentTarget</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">The current propagation target of the event.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">defaultPrevented</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">If true, the default behavior of the event on its target has been canceled.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">eventPhase</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="EventPhases.html#d1e79861">EventPhases</a>
+                        </p>
+
+                        <p class="p enumInPTable">EventPhases.NOT_DISPATCHING</p>
+
+                        <p class="p enumInPTable">EventPhases.AT_TARGET</p>
+
+                        <p class="p enumInPTable">EventPhases.BUBBLING_PHASE</p>
+
+                        <p class="p enumInPTable">EventPhases.DONE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">The current propagation phase of the event.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">The name of the event.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">id</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">The unique ID of the Event.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">index</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">The index of the Event within its containing object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="AlignDistributePreference.html#d1e357164">AlignDistributePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="AnchoredObjectDefault.html#d1e325799">AnchoredObjectDefault</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="AnchoredObjectSetting.html#d1e326109">AnchoredObjectSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="AngleCombobox.html#d1e499516">AngleCombobox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="AngleEditbox.html#d1e502182">AngleEditbox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="AnimationBehavior.html#d1e163869">AnimationBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="AnimationSetting.html#d1e358445">AnimationSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Application.html#d1e41025">Application</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Article.html#d1e244102">Article</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ArticleChild.html#d1e245543">ArticleChild</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ArticleMember.html#d1e244894">ArticleMember</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Asset.html#d1e249888">Asset</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="AssignedStory.html#d1e28845">AssignedStory</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Assignment.html#d1e27891">Assignment</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="AutoCorrectPreference.html#d1e277538">AutoCorrectPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="AutoCorrectTable.html#d1e470154">AutoCorrectTable</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="BackgroundTask.html#d1e46294">BackgroundTask</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="BaselineFrameGridOption.html#d1e326667">BaselineFrameGridOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Behavior.html#d1e156283">Behavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="BevelAndEmbossSetting.html#d1e337712">BevelAndEmbossSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="BlendingSetting.html#d1e335420">BlendingSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Book.html#d1e56077">Book</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="BookContent.html#d1e57520">BookContent</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Bookmark.html#d1e103842">Bookmark</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="BorderPanel.html#d1e504871">BorderPanel</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="BuildingBlock.html#d1e110570">BuildingBlock</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Bullet.html#d1e481165">Bullet</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Button.html#d1e119226">Button</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ButtonPreference.html#d1e351076">ButtonPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CaptionMetadataVariablePreference.html#d1e329894">CaptionMetadataVariablePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Cell.html#d1e372495">Cell</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CellStyle.html#d1e387095">CellStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CellStyleGroup.html#d1e389567">CellStyleGroup</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CellStyleMapping.html#d1e361689">CellStyleMapping</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Change.html#d1e470702">Change</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ChangeGlyphPreference.html#d1e313787">ChangeGlyphPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ChangeGrepPreference.html#d1e307914">ChangeGrepPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ChangeObjectPreference.html#d1e314085">ChangeObjectPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ChangeTextPreference.html#d1e302041">ChangeTextPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ChangeTransliteratePreference.html#d1e316508">ChangeTransliteratePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ChapterNumberPreference.html#d1e355300">ChapterNumberPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ChapterNumberVariablePreference.html#d1e328274">ChapterNumberVariablePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CharStyleMapping.html#d1e362300">CharStyleMapping</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Character.html#d1e398055">Character</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CharacterStyle.html#d1e459029">CharacterStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CharacterStyleGroup.html#d1e477615">CharacterStyleGroup</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CheckBox.html#d1e127184">CheckBox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CheckboxControl.html#d1e494715">CheckboxControl</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CjkGridPreference.html#d1e331318">CjkGridPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ClearFormBehavior.html#d1e170572">ClearFormBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ClipboardPreference.html#d1e352370">ClipboardPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ClippingPathSettings.html#d1e268713">ClippingPathSettings</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Color.html#d1e63837">Color</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ColorSetting.html#d1e280406">ColorSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Column.html#d1e378847">Column</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ComboBox.html#d1e130819">ComboBox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CompositeFont.html#d1e478402">CompositeFont</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CompositeFontEntry.html#d1e479091">CompositeFontEntry</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Condition.html#d1e483462">Condition</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ConditionSet.html#d1e485001">ConditionSet</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ConditionalTextPreference.html#d1e359250">ConditionalTextPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ContentPlacerObject.html#d1e55761">ContentPlacerObject</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ContentTransparencySetting.html#d1e338570">ContentTransparencySetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ContourOption.html#d1e226792">ContourOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CrossReference.html#d1e113937">CrossReference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CrossReferenceFormat.html#d1e109105">CrossReferenceFormat</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CrossReferenceSource.html#d1e109812">CrossReferenceSource</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="CustomTextVariablePreference.html#d1e329651">CustomTextVariablePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DTD.html#d1e513811">DTD</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DashedStrokeStyle.html#d1e368956">DashedStrokeStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DataMerge.html#d1e354943">DataMerge</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DataMergeField.html#d1e67181">DataMergeField</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DataMergeImagePlaceholder.html#d1e66619">DataMergeImagePlaceholder</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DataMergeOption.html#d1e354645">DataMergeOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DataMergePreference.html#d1e354193">DataMergePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DataMergeTextPlaceholder.html#d1e66021">DataMergeTextPlaceholder</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DateVariablePreference.html#d1e328530">DateVariablePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Dialog.html#d1e491623">Dialog</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DialogColumn.html#d1e495325">DialogColumn</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DialogRow.html#d1e505688">DialogRow</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DictionaryPreference.html#d1e276634">DictionaryPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DirectionalFeatherSetting.html#d1e339108">DirectionalFeatherSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DisplayPerformancePreference.html#d1e348958">DisplayPerformancePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DisplaySetting.html#d1e349214">DisplaySetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Document.html#d1e46972">Document</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DocumentPreference.html#d1e259839">DocumentPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DocumentPreset.html#d1e262577">DocumentPreset</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DottedStrokeStyle.html#d1e369655">DottedStrokeStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="DropShadowSetting.html#d1e335712">DropShadowSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Dropdown.html#d1e494103">Dropdown</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="EPS.html#d1e207913">EPS</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="EPSExportPreference.html#d1e267424">EPSExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="EPSImportPreference.html#d1e278088">EPSImportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="EPSText.html#d1e233044">EPSText</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="EPubExportPreference.html#d1e359500">EPubExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="EnablingGroup.html#d1e498675">EnablingGroup</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ExcelImportPreference.html#d1e347944">ExcelImportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ExportForWebPreference.html#d1e325476">ExportForWebPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FeatherSetting.html#d1e336193">FeatherSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FileNameVariablePreference.html#d1e328786">FileNameVariablePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FillTransparencySetting.html#d1e334882">FillTransparencySetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeBevelAndEmbossSetting.html#d1e344381">FindChangeBevelAndEmbossSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeBlendingSetting.html#d1e341339">FindChangeBlendingSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeContentTransparencySetting.html#d1e340980">FindChangeContentTransparencySetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeDirectionalFeatherSetting.html#d1e345556">FindChangeDirectionalFeatherSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeDropShadowSetting.html#d1e341697">FindChangeDropShadowSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeFeatherSetting.html#d1e342345">FindChangeFeatherSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeFillTransparencySetting.html#d1e340620">FindChangeFillTransparencySetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeGlyphOption.html#d1e281535">FindChangeGlyphOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeGradientFeatherSetting.html#d1e346059">FindChangeGradientFeatherSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeGrepOption.html#d1e281230">FindChangeGrepOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeInnerGlowSetting.html#d1e343854">FindChangeInnerGlowSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeInnerShadowSetting.html#d1e342751">FindChangeInnerShadowSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeObjectOption.html#d1e281815">FindChangeObjectOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeOuterGlowSetting.html#d1e343350">FindChangeOuterGlowSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeSatinSetting.html#d1e345101">FindChangeSatinSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeStrokeTransparencySetting.html#d1e340261">FindChangeStrokeTransparencySetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeTextOption.html#d1e280877">FindChangeTextOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeTransliterateOption.html#d1e282107">FindChangeTransliterateOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindChangeTransparencySetting.html#d1e339902">FindChangeTransparencySetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindGlyphPreference.html#d1e294074">FindGlyphPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindGrepPreference.html#d1e288255">FindGrepPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindObjectPreference.html#d1e294399">FindObjectPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindTextPreference.html#d1e282436">FindTextPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FindTransliteratePreference.html#d1e296821">FindTransliteratePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FlattenerPreference.html#d1e333211">FlattenerPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FlattenerPreset.html#d1e332427">FlattenerPreset</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Font.html#d1e466552">Font</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FontLockingPreference.html#d1e276390">FontLockingPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Footnote.html#d1e473666">Footnote</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FootnoteOption.html#d1e327004">FootnoteOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FormField.html#d1e116127">FormField</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="FrameFittingOption.html#d1e224705">FrameFittingOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GalleyPreference.html#d1e331979">GalleyPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GeneralPreference.html#d1e351755">GeneralPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoAnchorBehavior.html#d1e169042">GotoAnchorBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoFirstPageBehavior.html#d1e156989">GotoFirstPageBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoLastPageBehavior.html#d1e157736">GotoLastPageBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoNextPageBehavior.html#d1e158483">GotoNextPageBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoNextStateBehavior.html#d1e165356">GotoNextStateBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoNextViewBehavior.html#d1e159978">GotoNextViewBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoPageBehavior.html#d1e169849">GotoPageBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoPreviousPageBehavior.html#d1e159231">GotoPreviousPageBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoPreviousStateBehavior.html#d1e166079">GotoPreviousStateBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoPreviousViewBehavior.html#d1e160725">GotoPreviousViewBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoStateBehavior.html#d1e166801">GotoStateBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GotoURLBehavior.html#d1e161473">GotoURLBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GrabberPreference.html#d1e356932">GrabberPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Gradient.html#d1e61794">Gradient</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GradientFeatherSetting.html#d1e339521">GradientFeatherSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GradientStop.html#d1e62552">GradientStop</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Graphic.html#d1e220572">Graphic</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GraphicLayer.html#d1e269406">GraphicLayer</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GraphicLayerOption.html#d1e269150">GraphicLayerOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GraphicLine.html#d1e193386">GraphicLine</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GridDataInformation.html#d1e330150">GridDataInformation</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GridPreference.html#d1e260567">GridPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GridPrintingPreference.html#d1e331687">GridPrintingPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Group.html#d1e201232">Group</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Guide.html#d1e225088">Guide</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="GuidePreference.html#d1e261057">GuidePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="HTMLExportPreference.html#d1e360229">HTMLExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="HiddenText.html#d1e484217">HiddenText</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="HtmlItem.html#d1e246120">HtmlItem</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Hyperlink.html#d1e102975">Hyperlink</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="HyperlinkExternalPageDestination.html#d1e107592">HyperlinkExternalPageDestination</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="HyperlinkPageDestination.html#d1e106799">HyperlinkPageDestination</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="HyperlinkPageItemSource.html#d1e104641">HyperlinkPageItemSource</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="HyperlinkTextDestination.html#d1e106079">HyperlinkTextDestination</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="HyperlinkTextSource.html#d1e105354">HyperlinkTextSource</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="HyperlinkURLDestination.html#d1e108391">HyperlinkURLDestination</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="HyphenationException.html#d1e468893">HyphenationException</a>
+                        </p>
+
+                        <p class="p">IDBasedObject</p>
+
+                        <p class="p">
+                           <a class="xref" href="IMEPreference.html#d1e270147">IMEPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="IdleTask.html#d1e39938">IdleTask</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Image.html#d1e204655">Image</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ImageIOPreference.html#d1e268439">ImageIOPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ImagePreference.html#d1e268208">ImagePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ImportedPage.html#d1e236205">ImportedPage</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ImportedPageAttribute.html#d1e278344">ImportedPageAttribute</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="InCopyExportOption.html#d1e322002">InCopyExportOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Index.html#d1e111909">Index</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="IndexOptions.html#d1e112769">IndexOptions</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="IndexSection.html#d1e115463">IndexSection</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="IndexingSortOption.html#d1e480585">IndexingSortOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Ink.html#d1e58402">Ink</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="InnerGlowSetting.html#d1e337335">InnerGlowSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="InnerShadowSetting.html#d1e336515">InnerShadowSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="InsertionPoint.html#d1e436811">InsertionPoint</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="IntegerCombobox.html#d1e498002">IntegerCombobox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="IntegerEditbox.html#d1e497342">IntegerEditbox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="InteractivePDFExportPreference.html#d1e273586">InteractivePDFExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="JPEGExportPreference.html#d1e353834">JPEGExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="KinsokuTable.html#d1e467375">KinsokuTable</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Language.html#d1e465046">Language</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="LanguageWithVendors.html#d1e465745">LanguageWithVendors</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Layer.html#d1e175084">Layer</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="LayoutAdjustmentPreference.html#d1e278868">LayoutAdjustmentPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="LayoutGridDataInformation.html#d1e330576">LayoutGridDataInformation</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="LayoutWindow.html#d1e53152">LayoutWindow</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Library.html#d1e249227">Library</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="LibraryPanel.html#d1e486107">LibraryPanel</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Line.html#d1e410966">Line</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Link.html#d1e250621">Link</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="LinkMetadata.html#d1e251817">LinkMetadata</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="LinkedPageItemOption.html#d1e363520">LinkedPageItemOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="LinkedStoryOption.html#d1e360793">LinkedStoryOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="LinkingPreference.html#d1e321758">LinkingPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ListBox.html#d1e134467">ListBox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MarginPreference.html#d1e261377">MarginPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MasterSpread.html#d1e180361">MasterSpread</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MatchCharacterStylePreference.html#d1e329054">MatchCharacterStylePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MatchParagraphStylePreference.html#d1e329353">MatchParagraphStylePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MeasurementCombobox.html#d1e503514">MeasurementCombobox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MeasurementEditbox.html#d1e504200">MeasurementEditbox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MediaItem.html#d1e239368">MediaItem</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Menu.html#d1e487998">Menu</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MenuAction.html#d1e486470">MenuAction</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MenuElement.html#d1e488603">MenuElement</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MenuItem.html#d1e489788">MenuItem</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MenuSeparator.html#d1e490490">MenuSeparator</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MetadataPreference.html#d1e348297">MetadataPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MixedInk.html#d1e60120">MixedInk</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MixedInkGroup.html#d1e60953">MixedInkGroup</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MojikumiTable.html#d1e468113">MojikumiTable</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MojikumiUiPreference.html#d1e275994">MojikumiUiPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MotionPreset.html#d1e243365">MotionPreset</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Movie.html#d1e149018">Movie</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MovieBehavior.html#d1e162220">MovieBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="MultiStateObject.html#d1e123782">MultiStateObject</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="NamedGrid.html#d1e479884">NamedGrid</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="NavigationPoint.html#d1e152389">NavigationPoint</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="NestedGrepStyle.html#d1e390984">NestedGrepStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="NestedStyle.html#d1e464392">NestedStyle</a>
+                        </p>
+
+                        <p class="p">NonIDBasedObject</p>
+
+                        <p class="p">
+                           <a class="xref" href="Note.html#d1e472716">Note</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="NotePreference.html#d1e352931">NotePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="NumberingList.html#d1e481923">NumberingList</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="NumberingRestartPolicy.html#d1e481575">NumberingRestartPolicy</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ObjectExportOption.html#d1e275129">ObjectExportOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ObjectStyle.html#d1e252275">ObjectStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ObjectStyleContentEffectsCategorySettings.html#d1e356591">ObjectStyleContentEffectsCategorySettings</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ObjectStyleFillEffectsCategorySettings.html#d1e356250">ObjectStyleFillEffectsCategorySettings</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ObjectStyleGroup.html#d1e482675">ObjectStyleGroup</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ObjectStyleObjectEffectsCategorySettings.html#d1e355568">ObjectStyleObjectEffectsCategorySettings</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ObjectStyleStrokeEffectsCategorySettings.html#d1e355909">ObjectStyleStrokeEffectsCategorySettings</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="OpacityGradientStop.html#d1e65440">OpacityGradientStop</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="OpenFileBehavior.html#d1e164603">OpenFileBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="OuterGlowSetting.html#d1e336970">OuterGlowSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Oval.html#d1e185532">Oval</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PDF.html#d1e211120">PDF</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PDFAttribute.html#d1e182171">PDFAttribute</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PDFExportPreference.html#d1e270391">PDFExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PDFExportPreset.html#d1e271769">PDFExportPreset</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PDFPlacePreference.html#d1e273318">PDFPlacePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PICT.html#d1e217442">PICT</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PNGExportPreference.html#d1e350729">PNGExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Page.html#d1e178169">Page</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PageItem.html#d1e182433">PageItem</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PageItemDefault.html#d1e274279">PageItemDefault</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PageNumberVariablePreference.html#d1e328006">PageNumberVariablePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PageReference.html#d1e114680">PageReference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PagesPanel.html#d1e485729">PagesPanel</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Panel.html#d1e491085">Panel</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ParaStyleMapping.html#d1e361079">ParaStyleMapping</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Paragraph.html#d1e423876">Paragraph</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ParagraphDestination.html#d1e111187">ParagraphDestination</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ParagraphStyle.html#d1e454003">ParagraphStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ParagraphStyleGroup.html#d1e476827">ParagraphStyleGroup</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PasteboardPreference.html#d1e261801">PasteboardPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Path.html#d1e227929">Path</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PathPoint.html#d1e228575">PathPoint</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PercentCombobox.html#d1e500190">PercentCombobox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PercentEditbox.html#d1e501522">PercentEditbox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PlaceGun.html#d1e29867">PlaceGun</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Polygon.html#d1e197272">Polygon</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PolygonPreference.html#d1e276896">PolygonPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Preference.html#d1e279179">Preference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PreflightBookOption.html#d1e350406">PreflightBookOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PreflightOption.html#d1e350059">PreflightOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PreflightProcess.html#d1e366875">PreflightProcess</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PreflightProfile.html#d1e366100">PreflightProfile</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PreflightProfileRule.html#d1e367620">PreflightProfileRule</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PreflightRule.html#d1e364009">PreflightRule</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PreflightRuleInstance.html#d1e365378">PreflightRuleInstance</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PrintBookletOption.html#d1e265422">PrintBookletOption</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PrintBookletPrintPreference.html#d1e265905">PrintBookletPrintPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PrintFormBehavior.html#d1e171307">PrintFormBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PrintPreference.html#d1e263764">PrintPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="PrinterPreset.html#d1e322277">PrinterPreset</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="RadioButton.html#d1e138127">RadioButton</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="RadiobuttonControl.html#d1e496750">RadiobuttonControl</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="RadiobuttonGroup.html#d1e496128">RadiobuttonGroup</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="RealCombobox.html#d1e502841">RealCombobox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="RealEditbox.html#d1e500863">RealEditbox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Rectangle.html#d1e189459">Rectangle</a>
+                        </p>
+
+                        <p class="p">RootObject</p>
+
+                        <p class="p">
+                           <a class="xref" href="Row.html#d1e381373">Row</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="RuleDataObject.html#d1e364599">RuleDataObject</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="SWFExportPreference.html#d1e357468">SWFExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="SatinSetting.html#d1e338198">SatinSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ScriptArg.html#d1e40639">ScriptArg</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ScriptMenuAction.html#d1e487195">ScriptMenuAction</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ScriptPreference.html#d1e280078">ScriptPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Section.html#d1e227076">Section</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ShowHideFieldsBehavior.html#d1e162991">ShowHideFieldsBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="SignatureField.html#d1e145420">SignatureField</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="SmartGuidePreference.html#d1e277782">SmartGuidePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Snippet.html#d1e242412">Snippet</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Sound.html#d1e152999">Sound</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="SoundBehavior.html#d1e168283">SoundBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="SpellPreference.html#d1e277152">SpellPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="SplineItem.html#d1e229224">SplineItem</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Spread.html#d1e176194">Spread</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="State.html#d1e122885">State</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="StaticText.html#d1e493492">StaticText</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Story.html#d1e447623">Story</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="StoryGridDataInformation.html#d1e330910">StoryGridDataInformation</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="StoryPreference.html#d1e253846">StoryPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="StoryWindow.html#d1e54150">StoryWindow</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="StripedStrokeStyle.html#d1e370342">StripedStrokeStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="StrokeFillProxySetting.html#d1e278588">StrokeFillProxySetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="StrokeTransparencySetting.html#d1e334344">StrokeTransparencySetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="StyleExportTagMap.html#d1e476193">StyleExportTagMap</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Submenu.html#d1e489102">Submenu</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="SubmitFormBehavior.html#d1e172042">SubmitFormBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TOCStyle.html#d1e371011">TOCStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TOCStyleEntry.html#d1e371803">TOCStyleEntry</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TabStop.html#d1e463744">TabStop</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Table.html#d1e375544">Table</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TableStyle.html#d1e383900">TableStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TableStyleGroup.html#d1e386308">TableStyleGroup</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TableStyleMapping.html#d1e362910">TableStyleMapping</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TaggedPDFPreference.html#d1e274042">TaggedPDFPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TaggedTextExportPreference.html#d1e347444">TaggedTextExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TaggedTextImportPreference.html#d1e347688">TaggedTextImportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Text.html#d1e391603">Text</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextBox.html#d1e141762">TextBox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextColumn.html#d1e417421">TextColumn</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextDefault.html#d1e255387">TextDefault</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextEditbox.html#d1e492894">TextEditbox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextEditingPreference.html#d1e275714">TextEditingPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextExportPreference.html#d1e346798">TextExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextFramePreference.html#d1e254139">TextFramePreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextImportPreference.html#d1e346480">TextImportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextPath.html#d1e471371">TextPath</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextPreference.html#d1e254725">TextPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextStyleRange.html#d1e430356">TextStyleRange</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextVariable.html#d1e474730">TextVariable</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextVariableInstance.html#d1e475410">TextVariableInstance</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextWrapPreference.html#d1e226252">TextWrapPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TimingGroup.html#d1e173777">TimingGroup</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TimingList.html#d1e173221">TimingList</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TimingSetting.html#d1e172790">TimingSetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TimingTarget.html#d1e174424">TimingTarget</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Tint.html#d1e64617">Tint</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ToolBox.html#d1e267922">ToolBox</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Topic.html#d1e113269">Topic</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TrackChangesPreference.html#d1e353237">TrackChangesPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TransformPreference.html#d1e352650">TransformPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TransparencyPreference.html#d1e333532">TransparencyPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TransparencySetting.html#d1e333806">TransparencySetting</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TrapPreset.html#d1e59192">TrapPreset</a>
+                        </p>
+
+                        <p class="p">UIDBasedObject</p>
+
+                        <p class="p">
+                           <a class="xref" href="UserDictionary.html#d1e469523">UserDictionary</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ValidationError.html#d1e511300">ValidationError</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ViewPreference.html#d1e262133">ViewPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="ViewZoomBehavior.html#d1e167535">ViewZoomBehavior</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="WMF.html#d1e214311">WMF</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="WatermarkPreference.html#d1e351313">WatermarkPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Widget.html#d1e492331">Widget</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Window.html#d1e52348">Window</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Word.html#d1e404510">Word</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="WordRTFImportPreference.html#d1e347042">WordRTFImportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XFLExportPreference.html#d1e358002">XFLExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLAttribute.html#d1e508638">XMLAttribute</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLComment.html#d1e511824">XMLComment</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLElement.html#d1e506473">XMLElement</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLExportMap.html#d1e510653">XMLExportMap</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLExportPreference.html#d1e324626">XMLExportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLImportMap.html#d1e510042">XMLImportMap</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLImportPreference.html#d1e324221">XMLImportPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLInstruction.html#d1e512518">XMLInstruction</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLItem.html#d1e513236">XMLItem</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLPreference.html#d1e325097">XMLPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLRuleMatchData.html#d1e521325">XMLRuleMatchData</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLRuleProcessor.html#d1e520529">XMLRuleProcessor</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLTag.html#d1e509299">XMLTag</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XMLViewPreference.html#d1e349761">XMLViewPreference</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="XmlStory.html#d1e514431">XmlStory</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="NestedLineStyle.html#d1e390354">NestedLineStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">The parent of the Event (a Object, UIDBasedObject, CellStyleGroup, CellStyle, TableStyleGroup, Article, ConditionSet, HiddenText, Condition, MotionPreset, AssignedStory, Assignment, ObjectStyleGroup, ObjectStyle, NumberingList, Snippet, Dialog, Swatch, Color, Tint, Gradient, MixedInkGroup, MixedInk, Behavior, SubmitFormBehavior, PrintFormBehavior, ClearFormBehavior, GotoPageBehavior, GotoAnchorBehavior, SoundBehavior, ViewZoomBehavior, GotoStateBehavior, GotoPreviousStateBehavior, GotoNextStateBehavior, OpenFileBehavior, AnimationBehavior, ShowHideFieldsBehavior, MovieBehavior, GotoURLBehavior, GotoPreviousViewBehavior, GotoNextViewBehavior, GotoPreviousPageBehavior, GotoNextPageBehavior, GotoLastPageBehavior, GotoFirstPageBehavior, PreflightProfileRule, PreflightRuleInstance, PreflightProfile, CrossReferenceFormat, HyperlinkURLDestination, HyperlinkExternalPageDestination, HyperlinkPageDestination, HyperlinkTextDestination, ParagraphDestination, HyperlinkTextSource, CrossReferenceSource, HyperlinkPageItemSource, Bookmark, Hyperlink, IndexSection, PageReference, CrossReference, Index, TOCStyle, FlattenerPreset, BookContent, MenuAction, ScriptMenuAction, NamedGrid, CompositeFontEntry, CompositeFont, CharacterStyleGroup, ParagraphStyleGroup, TextVariableInstance, Footnote, XMLRuleProcessor, XMLTag, Note, TableStyle, TextPath, Asset, Link, Section, MojikumiTable, KinsokuTable, Guide, LanguageWithVendors, Language, PageItem, HtmlItem, FormField, SignatureField, TextBox, RadioButton, ListBox, ComboBox, CheckBox, MultiStateObject, Button, MediaItem, Sound, Movie, EPSText, SplineItem, Polygon, GraphicLine, Rectangle, Oval, Graphic, ImportedPage, PICT, WMF, PDF, EPS, Image, Group, TextFrame, MasterSpread, TrapPreset, Ink, DocumentPreset, Page, Spread, Layer, CharacterStyle, ParagraphStyle, Story, XmlStory, IDBasedObject, ArticleChild, ArticleMember, DialogRow, DialogColumn, Widget, BorderPanel, MeasurementEditbox, MeasurementCombobox, RealCombobox, AngleEditbox, PercentEditbox, RealEditbox, PercentCombobox, AngleCombobox, EnablingGroup, IntegerCombobox, IntegerEditbox, RadiobuttonControl, RadiobuttonGroup, CheckboxControl, Dropdown, StaticText, TextEditbox, BackgroundTask, State, RuleDataObject, XMLItem, DTD, XMLInstruction, XMLComment, XMLElement, Table, Cell, IdleTask, StrokeStyle, StripedStrokeStyle, DottedStrokeStyle, DashedStrokeStyle, GraphicLayer, NonIDBasedObject, TableStyleMapping, CharStyleMapping, CellStyleMapping, ParaStyleMapping, TimingTarget, TimingGroup, TimingList, OpacityGradientStop, DataMergeField, DataMergeImagePlaceholder, DataMergeTextPlaceholder, Panel, LibraryPanel, PagesPanel, Window, StoryWindow, LayoutWindow, NavigationPoint, PreflightProcess, PreflightRule, BuildingBlock, DisplaySetting, IndexingSortOption, Topic, TOCStyleEntry, MenuElement, MenuSeparator, MenuItem, Submenu, Menu, StyleExportTagMap, TextVariable, XMLRuleMatchData, ValidationError, XMLExportMap, XMLImportMap, XMLAttribute, PrinterPreset, Row, Column, Change, RootObject, Document, Application, Book, Library, Preference, ContentPlacerObject, LinkedPageItemOption, LinkedStoryOption, HTMLExportPreference, EPubExportPreference, ConditionalTextPreference, TimingSetting, AnimationSetting, XFLExportPreference, SWFExportPreference, AlignDistributePreference, GrabberPreference, ObjectStyleContentEffectsCategorySettings, ObjectStyleFillEffectsCategorySettings, ObjectStyleStrokeEffectsCategorySettings, ObjectStyleObjectEffectsCategorySettings, ChapterNumberPreference, NumberingRestartPolicy, Bullet, DataMerge, DataMergeOption, DataMergePreference, JPEGExportPreference, TrackChangesPreference, NotePreference, TransformPreference, ClipboardPreference, GeneralPreference, WatermarkPreference, ButtonPreference, PNGExportPreference, PreflightBookOption, PreflightOption, XMLViewPreference, DisplayPerformancePreference, IndexOptions, LinkMetadata, MetadataPreference, ExcelImportPreference, TaggedTextImportPreference, TaggedTextExportPreference, WordRTFImportPreference, TextExportPreference, TextImportPreference, FindChangeContentTransparencySetting, FindChangeFillTransparencySetting, FindChangeStrokeTransparencySetting, FindChangeTransparencySetting, GradientFeatherSetting, FindChangeGradientFeatherSetting, DirectionalFeatherSetting, FindChangeDirectionalFeatherSetting, ContentTransparencySetting, SatinSetting, FindChangeSatinSetting, BevelAndEmbossSetting, FindChangeBevelAndEmbossSetting, InnerGlowSetting, FindChangeInnerGlowSetting, OuterGlowSetting, FindChangeOuterGlowSetting, InnerShadowSetting, FindChangeInnerShadowSetting, FeatherSetting, FindChangeFeatherSetting, DropShadowSetting, FindChangeDropShadowSetting, BlendingSetting, FindChangeBlendingSetting, FillTransparencySetting, StrokeTransparencySetting, TransparencySetting, TransparencyPreference, FlattenerPreference, GalleyPreference, GridPrintingPreference, CjkGridPreference, StoryGridDataInformation, LayoutGridDataInformation, GridDataInformation, CaptionMetadataVariablePreference, CustomTextVariablePreference, MatchParagraphStylePreference, MatchCharacterStylePreference, FileNameVariablePreference, DateVariablePreference, ChapterNumberVariablePreference, PageNumberVariablePreference, FootnoteOption, BaselineFrameGridOption, AnchoredObjectSetting, AnchoredObjectDefault, ExportForWebPreference, XMLPreference, XMLExportPreference, XMLImportPreference, InCopyExportOption, LinkingPreference, ChangeTransliteratePreference, ChangeObjectPreference, ChangeGlyphPreference, ChangeGrepPreference, ChangeTextPreference, FindTransliteratePreference, FindObjectPreference, FindGlyphPreference, FindGrepPreference, FindTextPreference, FindChangeTransliterateOption, FindChangeObjectOption, FindChangeGlyphOption, FindChangeGrepOption, FindChangeTextOption, ColorSetting, ScriptArg, ScriptPreference, PlaceGun, LayoutAdjustmentPreference, StrokeFillProxySetting, ImportedPageAttribute, EPSImportPreference, SmartGuidePreference, AutoCorrectPreference, SpellPreference, PolygonPreference, DictionaryPreference, FontLockingPreference, MojikumiUiPreference, ContourOption, TextWrapPreference, TextEditingPreference, FrameFittingOption, ObjectExportOption, PageItemDefault, TaggedPDFPreference, InteractivePDFExportPreference, PDFAttribute, PDFPlacePreference, PDFExportPreference, IMEPreference, GraphicLayerOption, ClippingPathSettings, ImageIOPreference, ImagePreference, ToolBox, EPSExportPreference, PrintBookletPrintPreference, PrintBookletOption, PrintPreference, ViewPreference, PasteboardPreference, MarginPreference, GuidePreference, GridPreference, DocumentPreference, TextDefault, TextPreference, TextFramePreference, StoryPreference, PathPoint, Path, GradientStop, AutoCorrectTable, UserDictionary, HyphenationException, Font, TransformationMatrix, PDFExportPreset, NestedStyle, TabStop, Text, InsertionPoint, TextStyleRange, Paragraph, TextColumn, Line, Word, Character, NestedGrepStyle or NestedLineStyle).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">propagationStopped</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">If true, propagation of the event beyond the current target has been stopped.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">target</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">The target of the event.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e1751 ">
+                        <p class="p">timeStamp</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1757 ">
+                        <p class="p">
+                           <a class="xref" href="Date.html#d1e2080">Date</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e1763 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e1769 ">
+                        <p class="p description">The time the event was initialized.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Constants/Events</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d520246e5069">
+                        <p class="p">Name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d520246e5075">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d520246e5081">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d520246e5087">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_ACTIVATE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after the Event becomes active. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_CLOSE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched when a Event is closing. Since the close has been committed, it can no longer be canceled. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_CONTEXT_CHANGED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after the active context changes. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_DELETE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after a Event is deleted. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_EMBED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after a Event is embedded. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_INVOKE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after the Event is invoked. This event does not bubble. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_LINKS_CHANGED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after one or more links in the Event have been added, deleted, or modified. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_MOVE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after a Event is relocated from one object to another. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_NEW</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after a Event is created. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_OPEN</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after a Event is opened. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_PLACE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after a Event is placed. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_QUIT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched when the Event is quitting. Since the quit has been committed, it can not be canceled. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_SELECTION_ATTRIBUTE_CHANGED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after an attribute on the active selection changes. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_SELECTION_CHANGED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after the active selection changes. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_UNEMBED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after a Event is unembedded. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">AFTER_UPDATE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched after a Event is updated. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">BEFORE_CLOSE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched before a Event is closed. This event bubbles. This event is cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">BEFORE_DEACTIVATE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched before the Event becomes inactive. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">BEFORE_DELETE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched before a Event is deleted. This event bubbles. This event is cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">BEFORE_DISPLAY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched before the Event is displayed. This event does not bubble. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">BEFORE_EMBED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched before a Event is embedded. This event bubbles. This event is cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">BEFORE_INVOKE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched before the Event is invoked. This event does not bubble. This event is cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">BEFORE_MOVE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched before a Event is relocated from one object to another. This event bubbles. This event is cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">BEFORE_PLACE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched before a Event is placed. This event bubbles. This event is cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">BEFORE_QUIT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched before the Event is quit. Allows the quit to be canceled. This event bubbles. This event is cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">BEFORE_UNEMBED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched before a Event is unembedded. This event bubbles. This event is cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">BEFORE_UPDATE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched before a Event is updated. This event bubbles. This event is cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d520246e5069 ">
+                        <p class="p">ON_INVOKE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5075 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d520246e5081 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d520246e5087 ">
+                        <p class="p description">Dispatched when the Event is invoked. This event does not bubble. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e33542__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e33542__d1e36607">
+            <a class="xref" href="Event.html#d1e33542">Event</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e33542__d1e36588">undefined <strong class="ph b">preventDefault</strong> ()</p>
+
+         <p class="p description">Cancels the default behavior of the event on its target.</p>
+
+         <p class="p methodName" id="d1e33542__d1e36582">undefined <strong class="ph b">stopPropagation</strong> ()</p>
+
+         <p class="p description">Stops propagation of the event beyond the current target.</p>
+
+         <p class="p methodName" id="d1e33542__d1e36594">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the Event.</p>
+
+         <p class="p methodName" id="d1e33542__d1e36621">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.<a class="xref" href="Event.html#d1e33542__d1e36607">getElements</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Events.html#d1e36635">Events</a>.<a class="xref" href="Events.html#d1e36635__d1e36840">anyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Events.html#d1e36635">Events</a>.<a class="xref" href="Events.html#d1e36635__d1e36852">everyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Events.html#d1e36635">Events</a>.<a class="xref" href="Events.html#d1e36635__d1e36813">nextItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Events.html#d1e36635">Events</a>.<a class="xref" href="Events.html#d1e36635__d1e36786">previousItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Events.html#d1e36635">Events</a>.<a class="xref" href="Events.html#d1e36635__d1e36681">itemByID</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Events.html#d1e36635">Events</a>.<a class="xref" href="Events.html#d1e36635__d1e36654">item</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Events.html#d1e36635">Events</a>.<a class="xref" href="Events.html#d1e36635__d1e36879">[]</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Events.html#d1e36635">Events</a>.<a class="xref" href="Events.html#d1e36635__d1e36708">itemByRange</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Events.html#d1e36635">Events</a>.<a class="xref" href="Events.html#d1e36635__d1e36749">firstItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Events.html#d1e36635">Events</a>.<a class="xref" href="Events.html#d1e36635__d1e36762">lastItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Events.html#d1e36635">Events</a>.<a class="xref" href="Events.html#d1e36635__d1e36774">middleItem</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

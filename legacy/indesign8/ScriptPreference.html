@@ -1,0 +1,672 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="Scripting environment preferences. Go to Property Listing | Method Listing Methods: toSource , getElements , toSpecifier , addEventListener , removeEventListener Objects: Application , AutoEnum , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="ScriptPreference"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e280078"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>ScriptPreference</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e280078">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">ScriptPreference</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">Scripting environment preferences.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e280078__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e280078__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e280078__d1e280258">toSource</a>,  <a class="xref" href="#d1e280078__d1e280270">getElements</a>,  <a class="xref" href="#d1e280078__d1e280284">toSpecifier</a>,  <a class="xref" href="#d1e280078__d1e280296">addEventListener</a>,  <a class="xref" href="#d1e280078__d1e280350">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Application.html#d1e41025">Application</a>, <a class="xref" href="AutoEnum.html#d1e79837">AutoEnum</a>, <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="File.html#d1e6276">File</a>, <a class="xref" href="MeasurementUnits.html#d1e70416">MeasurementUnits</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="String.html#d1e4543">String</a>, <a class="xref" href="UserInteractionLevels.html#d1e92691">UserInteractionLevels</a>, </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Superclass:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Preference.html#d1e279179">Preference</a>
+         </p>
+
+      </div>
+
+      <div class="section" id="d1e280078__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d1621021e152">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1621021e158">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1621021e164">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1621021e170">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1621021e152 ">
+                        <p class="p">enableRedraw</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e158 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e164 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e170 ">
+                        <p class="p description">If true, enables redraw during script execution.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1621021e152 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e158 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e164 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e170 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1621021e152 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e158 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e164 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e170 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1621021e152 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e158 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e164 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e170 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1621021e152 ">
+                        <p class="p">measurementUnit</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e158 ">
+                        <p class="p">
+                           <a class="xref" href="AutoEnum.html#d1e79837">AutoEnum</a>
+                        </p>
+
+                        <p class="p enumInPTable">AutoEnum.AUTO_VALUE</p>
+
+                        <p class="p">
+                           <a class="xref" href="MeasurementUnits.html#d1e70416">MeasurementUnits</a>
+                        </p>
+
+                        <p class="p enumInPTable">MeasurementUnits.POINTS</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.PICAS</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.INCHES</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.INCHES_DECIMAL</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.MILLIMETERS</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.CENTIMETERS</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.CICEROS</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.CUSTOM</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.AGATES</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.U</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.BAI</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.MILS</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.PIXELS</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.Q</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.HA</p>
+
+                        <p class="p enumInPTable">MeasurementUnits.AMERICAN_POINTS</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e164 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e170 ">
+                        <p class="p description">The measurement unit used during script processing. Can return: AutoEnum enumerator or MeasurementUnits enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1621021e152 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e158 ">
+                        <p class="p">
+                           <a class="xref" href="Application.html#d1e41025">Application</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e164 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e170 ">
+                        <p class="p description">The parent of the ScriptPreference (a Application).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1621021e152 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e158 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e164 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e170 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1621021e152 ">
+                        <p class="p">scriptsFolder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e158 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e164 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e170 ">
+                        <p class="p description">The path to the Scripts folder for the application.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1621021e152 ">
+                        <p class="p">scriptsList</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e158 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of  2 Strings</p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of Files<em class="ph i">
+                              <a class="xref" href="File.html#d1e6276">File</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e164 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e170 ">
+                        <p class="p description">A list of the scripts in the Scripts folder. Can return: Array of Array of 2 Strings or Files.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1621021e152 ">
+                        <p class="p">userInteractionLevel</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e158 ">
+                        <p class="p">
+                           <a class="xref" href="UserInteractionLevels.html#d1e92691">UserInteractionLevels</a>
+                        </p>
+
+                        <p class="p enumInPTable">UserInteractionLevels.NEVER_INTERACT</p>
+
+                        <p class="p enumInPTable">UserInteractionLevels.INTERACT_WITH_ALL</p>
+
+                        <p class="p enumInPTable">UserInteractionLevels.INTERACT_WITH_ALERTS</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e164 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e170 ">
+                        <p class="p description">Controls the display of dialogs and alerts during script processing.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1621021e152 ">
+                        <p class="p">version</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e158 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                        <p class="p">Real</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e164 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e170 ">
+                        <p class="p description">The version of the scripting environment. Can also accept: Real.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e280078__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e280078__d1e280296">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1621021e669">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1621021e675">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1621021e681">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1621021e669 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e675 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e681 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1621021e669 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e675 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e681 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1621021e669 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e675 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e681 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e280078__d1e280270">
+            <a class="xref" href="ScriptPreference.html#d1e280078">ScriptPreference</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e280078__d1e280350">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1621021e818">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1621021e824">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1621021e830">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1621021e818 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e824 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e830 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1621021e818 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e824 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e830 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1621021e818 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1621021e824 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1621021e830 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e280078__d1e280258">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the ScriptPreference.</p>
+
+         <p class="p methodName" id="d1e280078__d1e280284">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Application.html#d1e41025">Application</a>.scriptPreferences</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="ScriptPreference.html#d1e280078">ScriptPreference</a>.<a class="xref" href="ScriptPreference.html#d1e280078__d1e280270">getElements</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

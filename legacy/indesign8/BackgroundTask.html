@@ -1,0 +1,877 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="background task Go to Property Listing | Method Listing Methods: cancelTask , waitForTask , queryProperty , toSource , getElements , toSpecifier , addEventListener , removeEventListener Objects: ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="BackgroundTask"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e46294"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>BackgroundTask</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e46294">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">BackgroundTask</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">background task</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e46294__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e46294__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e46294__d1e46465">cancelTask</a>,  <a class="xref" href="#d1e46294__d1e46471">waitForTask</a>,  <a class="xref" href="#d1e46294__d1e46483">queryProperty</a>,  <a class="xref" href="#d1e46294__d1e46510">toSource</a>,  <a class="xref" href="#d1e46294__d1e46522">getElements</a>,  <a class="xref" href="#d1e46294__d1e46537">toSpecifier</a>,  <a class="xref" href="#d1e46294__d1e46549">addEventListener</a>,  <a class="xref" href="#d1e46294__d1e46603">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Application.html#d1e41025">Application</a>, <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="String.html#d1e4543">String</a>, <a class="xref" href="TaskState.html#d1e93350">TaskState</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e46294__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d81017e143">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d81017e149">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d81017e155">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d81017e161">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">alerts</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of  2 TaskAlertType enumerators</p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of Strings<em class="ph i">
+                              <a class="xref" href="String.html#d1e4543">String</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">The alerts encountered while running this task object. Can return: Array of Array of 2 TaskAlertType enumerators or Strings.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">documentName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">The document name on which this task operates.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">id</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">The unique ID of the BackgroundTask.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">index</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">The index of the BackgroundTask within its containing object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">The name of the BackgroundTask.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="Application.html#d1e41025">Application</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">The parent of the BackgroundTask (a Application).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">percentDone</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">Progress information for this task.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d81017e143 ">
+                        <p class="p">status</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e149 ">
+                        <p class="p">
+                           <a class="xref" href="TaskState.html#d1e93350">TaskState</a>
+                        </p>
+
+                        <p class="p enumInPTable">TaskState.QUEUED</p>
+
+                        <p class="p enumInPTable">TaskState.RUNNING</p>
+
+                        <p class="p enumInPTable">TaskState.WAITING</p>
+
+                        <p class="p enumInPTable">TaskState.CANCELLING</p>
+
+                        <p class="p enumInPTable">TaskState.COMPLETED</p>
+
+                        <p class="p enumInPTable">TaskState.CANCELLED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e155 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e161 ">
+                        <p class="p description">The current status of this task object.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e46294__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e46294__d1e46549">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d81017e639">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d81017e645">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d81017e651">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d81017e639 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e645 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e651 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d81017e639 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e645 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e651 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d81017e639 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e645 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e651 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e46294__d1e46465">undefined <strong class="ph b">cancelTask</strong> ()</p>
+
+         <p class="p description">Cancels the specified background task.</p>
+
+         <p class="p methodName" id="d1e46294__d1e46522">
+            <a class="xref" href="BackgroundTask.html#d1e46294">BackgroundTask</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e46294__d1e46483">Varies <strong class="ph b">queryProperty</strong> (name:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Queries for a particular property in the task metadata.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d81017e787">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d81017e793">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d81017e799">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d81017e787 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e793 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e799 ">
+                        <p class="p description">The task property being queried</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e46294__d1e46603">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d81017e874">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d81017e880">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d81017e886">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d81017e874 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e880 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e886 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d81017e874 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e880 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e886 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d81017e874 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d81017e880 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d81017e886 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e46294__d1e46510">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the BackgroundTask.</p>
+
+         <p class="p methodName" id="d1e46294__d1e46537">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+         <p class="p methodName" id="d1e46294__d1e46471">
+            <a class="xref" href="TaskState.html#d1e93350">TaskState</a> 
+            <strong class="ph b">waitForTask</strong> ()</p>
+
+         <p class="p description">Waits for the task to finish.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTask.html#d1e46294">BackgroundTask</a>.<a class="xref" href="BackgroundTask.html#d1e46294__d1e46522">getElements</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46892">anyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46905">everyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46865">nextItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46838">previousItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46733">itemByID</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46679">item</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46931">[]</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46706">itemByName</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46760">itemByRange</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46802">firstItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46814">lastItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="BackgroundTasks.html#d1e46660">BackgroundTasks</a>.<a class="xref" href="BackgroundTasks.html#d1e46660__d1e46826">middleItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Document.html#d1e46972">Document</a>.<a class="xref" href="Document.html#d1e46972__d1e51609">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="FormField.html#d1e116127">FormField</a>.<a class="xref" href="FormField.html#d1e116127__d1e118462">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Button.html#d1e119226">Button</a>.<a class="xref" href="Button.html#d1e119226__d1e122121">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MultiStateObject.html#d1e123782">MultiStateObject</a>.<a class="xref" href="MultiStateObject.html#d1e123782__d1e126420">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="CheckBox.html#d1e127184">CheckBox</a>.<a class="xref" href="CheckBox.html#d1e127184__d1e130055">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ComboBox.html#d1e130819">ComboBox</a>.<a class="xref" href="ComboBox.html#d1e130819__d1e133704">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ListBox.html#d1e134467">ListBox</a>.<a class="xref" href="ListBox.html#d1e134467__d1e137364">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="RadioButton.html#d1e138127">RadioButton</a>.<a class="xref" href="RadioButton.html#d1e138127__d1e140998">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextBox.html#d1e141762">TextBox</a>.<a class="xref" href="TextBox.html#d1e141762__d1e144657">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="SignatureField.html#d1e145420">SignatureField</a>.<a class="xref" href="SignatureField.html#d1e145420__d1e148254">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Movie.html#d1e149018">Movie</a>.<a class="xref" href="Movie.html#d1e149018__d1e151648">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Sound.html#d1e152999">Sound</a>.<a class="xref" href="Sound.html#d1e152999__d1e155544">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PageItem.html#d1e182433">PageItem</a>.<a class="xref" href="PageItem.html#d1e182433__d1e184834">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Oval.html#d1e185532">Oval</a>.<a class="xref" href="Oval.html#d1e185532__d1e188696">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rectangle.html#d1e189459">Rectangle</a>.<a class="xref" href="Rectangle.html#d1e189459__d1e192623">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="GraphicLine.html#d1e193386">GraphicLine</a>.<a class="xref" href="GraphicLine.html#d1e193386__d1e196507">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Polygon.html#d1e197272">Polygon</a>.<a class="xref" href="Polygon.html#d1e197272__d1e200436">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Group.html#d1e201232">Group</a>.<a class="xref" href="Group.html#d1e201232__d1e203877">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Image.html#d1e204655">Image</a>.<a class="xref" href="Image.html#d1e204655__d1e207095">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EPS.html#d1e207913">EPS</a>.<a class="xref" href="EPS.html#d1e207913__d1e210302">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDF.html#d1e211120">PDF</a>.<a class="xref" href="PDF.html#d1e211120__d1e213493">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="WMF.html#d1e214311">WMF</a>.<a class="xref" href="WMF.html#d1e214311__d1e216623">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PICT.html#d1e217442">PICT</a>.<a class="xref" href="PICT.html#d1e217442__d1e219754">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Graphic.html#d1e220572">Graphic</a>.<a class="xref" href="Graphic.html#d1e220572__d1e222845">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="SplineItem.html#d1e229224">SplineItem</a>.<a class="xref" href="SplineItem.html#d1e229224__d1e232345">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EPSText.html#d1e233044">EPSText</a>.<a class="xref" href="EPSText.html#d1e233044__d1e235508">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ImportedPage.html#d1e236205">ImportedPage</a>.<a class="xref" href="ImportedPage.html#d1e236205__d1e238484">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MediaItem.html#d1e239368">MediaItem</a>.<a class="xref" href="MediaItem.html#d1e239368__d1e241713">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HtmlItem.html#d1e246120">HtmlItem</a>.<a class="xref" href="HtmlItem.html#d1e246120__d1e248462">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Text.html#d1e391603">Text</a>.<a class="xref" href="Text.html#d1e391603__d1e397485">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Character.html#d1e398055">Character</a>.<a class="xref" href="Character.html#d1e398055__d1e403940">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Word.html#d1e404510">Word</a>.<a class="xref" href="Word.html#d1e404510__d1e410395">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Line.html#d1e410966">Line</a>.<a class="xref" href="Line.html#d1e410966__d1e416851">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextColumn.html#d1e417421">TextColumn</a>.<a class="xref" href="TextColumn.html#d1e417421__d1e423306">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Paragraph.html#d1e423876">Paragraph</a>.<a class="xref" href="Paragraph.html#d1e423876__d1e429786">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextStyleRange.html#d1e430356">TextStyleRange</a>.<a class="xref" href="TextStyleRange.html#d1e430356__d1e436241">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="InsertionPoint.html#d1e436811">InsertionPoint</a>.<a class="xref" href="InsertionPoint.html#d1e436811__d1e442696">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>.<a class="xref" href="TextFrame.html#d1e443266__d1e446950">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Story.html#d1e447623">Story</a>.<a class="xref" href="Story.html#d1e447623__d1e453382">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="XMLElement.html#d1e506473">XMLElement</a>.<a class="xref" href="XMLElement.html#d1e506473__d1e508028">asynchronousExportFile</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="XmlStory.html#d1e514431">XmlStory</a>.<a class="xref" href="XmlStory.html#d1e514431__d1e519908">asynchronousExportFile</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

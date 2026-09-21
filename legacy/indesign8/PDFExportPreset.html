@@ -1,0 +1,2407 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="PDF export settings for the document object. Go to Property Listing | Method Listing Methods: remove , duplicate , toSource , getElements , toSpecifier , addEventListener , removeEventListener ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="PDFExportPreset"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e271769"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>PDFExportPreset</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e271769">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">PDFExportPreset</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">PDF export settings for the document object.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e271769__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e271769__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e271769__d1e272838">remove</a>,  <a class="xref" href="#d1e271769__d1e272844">duplicate</a>,  <a class="xref" href="#d1e271769__d1e272856">toSource</a>,  <a class="xref" href="#d1e271769__d1e272868">getElements</a>,  <a class="xref" href="#d1e271769__d1e272882">toSpecifier</a>,  <a class="xref" href="#d1e271769__d1e272895">addEventListener</a>,  <a class="xref" href="#d1e271769__d1e272949">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="AcrobatCompatibility.html#d1e72444">AcrobatCompatibility</a>, <a class="xref" href="Application.html#d1e41025">Application</a>, <a class="xref" href="BitmapCompression.html#d1e72597">BitmapCompression</a>, <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="CompressionQuality.html#d1e72697">CompressionQuality</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="ExportLayerOptions.html#d1e73428">ExportLayerOptions</a>, <a class="xref" href="File.html#d1e6276">File</a>, <a class="xref" href="FlattenerPreset.html#d1e332427">FlattenerPreset</a>, <a class="xref" href="ICCProfiles.html#d1e72528">ICCProfiles</a>, <a class="xref" href="InteractiveElementsOptions.html#d1e73950">InteractiveElementsOptions</a>, <a class="xref" href="MarkTypes.html#d1e94921">MarkTypes</a>, <a class="xref" href="MonoBitmapCompression.html#d1e72813">MonoBitmapCompression</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="PDFColorSpace.html#d1e72344">PDFColorSpace</a>, <a class="xref" href="PDFCompressionType.html#d1e73204">PDFCompressionType</a>, <a class="xref" href="PDFMarkWeight.html#d1e72897">PDFMarkWeight</a>, <a class="xref" href="PDFProfileSelector.html#d1e73259">PDFProfileSelector</a>, <a class="xref" href="PDFXStandards.html#d1e73328">PDFXStandards</a>, <a class="xref" href="Sampling.html#d1e72951">Sampling</a>, <a class="xref" href="String.html#d1e4543">String</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e271769__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d1307128e201">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1307128e207">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1307128e213">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1307128e219">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">acrobatCompatibility</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="AcrobatCompatibility.html#d1e72444">AcrobatCompatibility</a>
+                        </p>
+
+                        <p class="p enumInPTable">AcrobatCompatibility.ACROBAT_4</p>
+
+                        <p class="p enumInPTable">AcrobatCompatibility.ACROBAT_5</p>
+
+                        <p class="p enumInPTable">AcrobatCompatibility.ACROBAT_6</p>
+
+                        <p class="p enumInPTable">AcrobatCompatibility.ACROBAT_7</p>
+
+                        <p class="p enumInPTable">AcrobatCompatibility.ACROBAT_8</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The exported PDF document's Acrobat compatibility.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">appliedFlattenerPreset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="FlattenerPreset.html#d1e332427">FlattenerPreset</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The transparency flattener preset to use.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">bleedBottom</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The height of the bleed area at the bottom of the page. Note: Valid only when use document bleed to print is true.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">bleedInside</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The width of the bleed area at the inside of the page. Note: Valid only when use document bleed to print is true.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">bleedMarks</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, print bleed marks.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">bleedOutside</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The width of the bleed area at the outside of the page. Note: Valid only when use document bleed to print is true.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">bleedTop</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The height of the bleed area at the top of the page. Note: Valid only when use document bleed to print is true.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">colorBars</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, add small squares of color representing the CMYK inks and tints of gray in 10% increments.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">colorBitmapCompression</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="BitmapCompression.html#d1e72597">BitmapCompression</a>
+                        </p>
+
+                        <p class="p enumInPTable">BitmapCompression.NONE</p>
+
+                        <p class="p enumInPTable">BitmapCompression.AUTO_COMPRESSION</p>
+
+                        <p class="p enumInPTable">BitmapCompression.JPEG</p>
+
+                        <p class="p enumInPTable">BitmapCompression.ZIP</p>
+
+                        <p class="p enumInPTable">BitmapCompression.JPEG_2000</p>
+
+                        <p class="p enumInPTable">BitmapCompression.AUTOMATIC_JPEG_2000</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The amount of bitmap compression to use.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">colorBitmapQuality</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="CompressionQuality.html#d1e72697">CompressionQuality</a>
+                        </p>
+
+                        <p class="p enumInPTable">CompressionQuality.MINIMUM</p>
+
+                        <p class="p enumInPTable">CompressionQuality.LOW</p>
+
+                        <p class="p enumInPTable">CompressionQuality.MEDIUM</p>
+
+                        <p class="p enumInPTable">CompressionQuality.HIGH</p>
+
+                        <p class="p enumInPTable">CompressionQuality.MAXIMUM</p>
+
+                        <p class="p enumInPTable">CompressionQuality.FOUR_BIT</p>
+
+                        <p class="p enumInPTable">CompressionQuality.EIGHT_BIT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The compression option to apply to color images.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">colorBitmapSampling</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Sampling.html#d1e72951">Sampling</a>
+                        </p>
+
+                        <p class="p enumInPTable">Sampling.NONE</p>
+
+                        <p class="p enumInPTable">Sampling.DOWNSAMPLE</p>
+
+                        <p class="p enumInPTable">Sampling.SUBSAMPLE</p>
+
+                        <p class="p enumInPTable">Sampling.BICUBIC_DOWNSAMPLE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The sampling option to apply to color bitmap images in the PDF document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">colorBitmapSamplingDPI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 9 - 2400)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The ppi of the resampled image. (Range: 9 to 2400)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">colorTileSize</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 128 - 2048)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The tile size for color images. Valid only when color bitmap compression is JPEG 2000. (Range: 128 to 2048)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">compressTextAndLineArt</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, compresses text and line art using ZIP compression.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">compressionType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="PDFCompressionType.html#d1e73204">PDFCompressionType</a>
+                        </p>
+
+                        <p class="p enumInPTable">PDFCompressionType.COMPRESS_NONE</p>
+
+                        <p class="p enumInPTable">PDFCompressionType.COMPRESS_STRUCTURE</p>
+
+                        <p class="p enumInPTable">PDFCompressionType.COMPRESS_OBJECTS</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The objects to compress in the PDF document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">cropImagesToFrames</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, image data that falls outside the visible portion of an image's frame is not exported to the PDF document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">cropMarks</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">Prints crop marks that define where the page should be trimmed.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">effectiveOCRegistry</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">Effective PDF/X OC Registry.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">effectiveOutputCondition</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">Effective PDF/X output condition.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">effectivePDFDestinationProfile</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="PDFProfileSelector.html#d1e73259">PDFProfileSelector</a>
+                        </p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_NO_PROFILE</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_MONITOR_PROFILE</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_DOCUMENT</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.WORKING</p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">Effective destination color profile. Can return: PDFProfileSelector enumerator or String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">effectivePDFXProfile</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="PDFProfileSelector.html#d1e73259">PDFProfileSelector</a>
+                        </p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_NO_PROFILE</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_MONITOR_PROFILE</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_DOCUMENT</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.WORKING</p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">Effective PDF X color profile. Can return: PDFProfileSelector enumerator or String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">exportGuidesAndGrids</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, includes visible guides and baseline grids in the PDF document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">exportLayers</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, saves each layer as an Acrobat layer within the PDF document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">exportNonprintingObjects</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, makes non-printing objects visible in the PDF document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">exportReaderSpreads</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, each spread in the exported document is combined into a single page that has spread's original width.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">exportWhichLayers</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="ExportLayerOptions.html#d1e73428">ExportLayerOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">ExportLayerOptions.EXPORT_ALL_LAYERS</p>
+
+                        <p class="p enumInPTable">ExportLayerOptions.EXPORT_VISIBLE_LAYERS</p>
+
+                        <p class="p enumInPTable">ExportLayerOptions.EXPORT_VISIBLE_PRINTABLE_LAYERS</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">Which layers to export.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">fullName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The full path to the PDFExportPreset, including the name of the PDFExportPreset.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">generateThumbnails</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, generates thumbnail images for each page or spread.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">grayTileSize</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 128 - 2048)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The tile size for grayscale images. Valid only when grayscale bitmap compression is JPEG 2000. (Range: 128 to 2048)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">grayscaleBitmapCompression</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="BitmapCompression.html#d1e72597">BitmapCompression</a>
+                        </p>
+
+                        <p class="p enumInPTable">BitmapCompression.NONE</p>
+
+                        <p class="p enumInPTable">BitmapCompression.AUTO_COMPRESSION</p>
+
+                        <p class="p enumInPTable">BitmapCompression.JPEG</p>
+
+                        <p class="p enumInPTable">BitmapCompression.ZIP</p>
+
+                        <p class="p enumInPTable">BitmapCompression.JPEG_2000</p>
+
+                        <p class="p enumInPTable">BitmapCompression.AUTOMATIC_JPEG_2000</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The bitmap compression option to apply to grayscale bitmap images.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">grayscaleBitmapQuality</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="CompressionQuality.html#d1e72697">CompressionQuality</a>
+                        </p>
+
+                        <p class="p enumInPTable">CompressionQuality.MINIMUM</p>
+
+                        <p class="p enumInPTable">CompressionQuality.LOW</p>
+
+                        <p class="p enumInPTable">CompressionQuality.MEDIUM</p>
+
+                        <p class="p enumInPTable">CompressionQuality.HIGH</p>
+
+                        <p class="p enumInPTable">CompressionQuality.MAXIMUM</p>
+
+                        <p class="p enumInPTable">CompressionQuality.FOUR_BIT</p>
+
+                        <p class="p enumInPTable">CompressionQuality.EIGHT_BIT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The compression option to apply to grayscale bitmap images.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">grayscaleBitmapSampling</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Sampling.html#d1e72951">Sampling</a>
+                        </p>
+
+                        <p class="p enumInPTable">Sampling.NONE</p>
+
+                        <p class="p enumInPTable">Sampling.DOWNSAMPLE</p>
+
+                        <p class="p enumInPTable">Sampling.SUBSAMPLE</p>
+
+                        <p class="p enumInPTable">Sampling.BICUBIC_DOWNSAMPLE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The sampling option to apply to grayscale bitmap images.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">grayscaleBitmapSamplingDPI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 9 - 2400)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The ppi of the resampled image. (Range: 9 to 2400)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">ignoreSpreadOverrides</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, ignores flattener spread overrides.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">includeBookmarks</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, displays bookmarks and table of contents entries as links in the bookmarks pane in the PDF document. If false, no bookmarks are exported.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">includeHyperlinks</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, includes hyperlinks when exporting the document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">includeICCProfiles</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="ICCProfiles.html#d1e72528">ICCProfiles</a>
+                        </p>
+
+                        <p class="p enumInPTable">ICCProfiles.INCLUDE_NONE</p>
+
+                        <p class="p enumInPTable">ICCProfiles.INCLUDE_ALL</p>
+
+                        <p class="p enumInPTable">ICCProfiles.INCLUDE_TAGGED</p>
+
+                        <p class="p enumInPTable">ICCProfiles.INCLUDE_RGB_AND_TAGGED</p>
+
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The ICC Profiles to include in the exported PDF document. Can also accept: Boolean.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">includeSlugWithPDF</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, includes the document's slug area in the PDF document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">includeStructure</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, creates a tagged PDF file. Note: If acrobat compatibility is acrobat 6 or higher, tags are visible only when the PDF is opened in Acrobat 6 or higher.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">index</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The index of the PDFExportPreset within its containing object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">interactiveElementsOption</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="InteractiveElementsOptions.html#d1e73950">InteractiveElementsOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">InteractiveElementsOptions.DO_NOT_INCLUDE</p>
+
+                        <p class="p enumInPTable">InteractiveElementsOptions.APPEARANCE_ONLY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">How to draw interactive elements.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">monochromeBitmapCompression</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="MonoBitmapCompression.html#d1e72813">MonoBitmapCompression</a>
+                        </p>
+
+                        <p class="p enumInPTable">MonoBitmapCompression.NONE</p>
+
+                        <p class="p enumInPTable">MonoBitmapCompression.CCIT3</p>
+
+                        <p class="p enumInPTable">MonoBitmapCompression.CCIT4</p>
+
+                        <p class="p enumInPTable">MonoBitmapCompression.ZIP</p>
+
+                        <p class="p enumInPTable">MonoBitmapCompression.RUN_LENGTH</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The bitmap compression option to apply to monochrome bitmap images.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">monochromeBitmapSampling</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Sampling.html#d1e72951">Sampling</a>
+                        </p>
+
+                        <p class="p enumInPTable">Sampling.NONE</p>
+
+                        <p class="p enumInPTable">Sampling.DOWNSAMPLE</p>
+
+                        <p class="p enumInPTable">Sampling.SUBSAMPLE</p>
+
+                        <p class="p enumInPTable">Sampling.BICUBIC_DOWNSAMPLE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The sampling option to apply to monochrome bitmap images.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">monochromeBitmapSamplingDPI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 9 - 2400)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The ppi of the resampled image. (Range: 9 to 2400)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The name of the PDFExportPreset.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">ocRegistry</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The web address for the output condition registry. Not valid when PDF/X-3 is the compliance standard or PDF export preset.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">omitBitmaps</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, replaces bitmap images with OPI links.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">omitEPS</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, replaces EPS images with OPI links.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">omitPDF</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, replaces PDF images with OPI links.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">optimizePDF</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, optimizes the exported PDF document for faster viewing in a web browser. Note: Compresses text and line art, regardless of specified compression settings.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">outputCondition</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The name of the intended printing condition. Valid only when a PDF/X compliance standard has been defined for the document. Not valid when PDF/X-3 is the compliance standard or PDF export preset. For information on compliance standards, see standards compliance and PDF X standards.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">outputConditionName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The name of the output condition. Valid only when a PDF/X standard has been defined for the document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">pageInformationMarks</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, prints the filename, page number, current date and time, and color separation name.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">pageMarksOffset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The offset from the edge of the page for page marks.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Application.html#d1e41025">Application</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The parent of the PDFExportPreset (a Application).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">pdfColorSpace</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="PDFColorSpace.html#d1e72344">PDFColorSpace</a>
+                        </p>
+
+                        <p class="p enumInPTable">PDFColorSpace.RGB</p>
+
+                        <p class="p enumInPTable">PDFColorSpace.CMYK</p>
+
+                        <p class="p enumInPTable">PDFColorSpace.UNCHANGED_COLOR_SPACE</p>
+
+                        <p class="p enumInPTable">PDFColorSpace.REPURPOSE_RGB</p>
+
+                        <p class="p enumInPTable">PDFColorSpace.REPURPOSE_CMYK</p>
+
+                        <p class="p enumInPTable">PDFColorSpace.GRAY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The color space to use to represent color information in the exported PDF document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">pdfDestinationProfile</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="PDFProfileSelector.html#d1e73259">PDFProfileSelector</a>
+                        </p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_NO_PROFILE</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_MONITOR_PROFILE</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_DOCUMENT</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.WORKING</p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The gamut of the final RGB or CMYK device. Can return: PDFProfileSelector enumerator or String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">pdfMarkType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="MarkTypes.html#d1e94921">MarkTypes</a>
+                        </p>
+
+                        <p class="p enumInPTable">MarkTypes.DEFAULT_VALUE</p>
+
+                        <p class="p enumInPTable">MarkTypes.J_MARK_WITH_CIRCLE</p>
+
+                        <p class="p enumInPTable">MarkTypes.J_MARK_WITHOUT_CIRCLE</p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The type of printer marks, either an enum value or the name of a custom marks file. Can return: MarkTypes enumerator or String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">pdfXProfile</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="PDFProfileSelector.html#d1e73259">PDFProfileSelector</a>
+                        </p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_NO_PROFILE</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_MONITOR_PROFILE</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.USE_DOCUMENT</p>
+
+                        <p class="p enumInPTable">PDFProfileSelector.WORKING</p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The PDF X color profile to use for the PDF document. . Can return: PDFProfileSelector enumerator or String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">printerMarkWeight</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="PDFMarkWeight.html#d1e72897">PDFMarkWeight</a>
+                        </p>
+
+                        <p class="p enumInPTable">PDFMarkWeight.P125PT</p>
+
+                        <p class="p enumInPTable">PDFMarkWeight.P25PT</p>
+
+                        <p class="p enumInPTable">PDFMarkWeight.P50PT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The stroke weight for printer's marks.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">registrationMarks</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, prints small targets outside the page area for aligning color separations.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">simulateOverprint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, simulates the effects of overprinting spot inks with different neutral density values by converting spot colors to process colors for printing. Note: Not valid when the color output mode is defined to leave color profiles unchanged.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">standardsCompliance</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="PDFXStandards.html#d1e73328">PDFXStandards</a>
+                        </p>
+
+                        <p class="p enumInPTable">PDFXStandards.NONE</p>
+
+                        <p class="p enumInPTable">PDFXStandards.PDFX1A2001_STANDARD</p>
+
+                        <p class="p enumInPTable">PDFXStandards.PDFX32002_STANDARD</p>
+
+                        <p class="p enumInPTable">PDFXStandards.PDFX1A2003_STANDARD</p>
+
+                        <p class="p enumInPTable">PDFXStandards.PDFX32003_STANDARD</p>
+
+                        <p class="p enumInPTable">PDFXStandards.PDFX42010_STANDARD</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The PDF/X standards compliance to test against.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">subsetFontsBelow</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 100)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">Sets the threshold for embedding complete fonts based on how many of the fonts' characters are used in the document. If the percentage of characters used in the document for any given font exceeds the specified value, the font is completely embedded; otherwise, the font is subsetted. (Range: 0 to 100) Notes: Embedding complete fonts increases file size. To completely embed all fonts, use 0 (zero).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">thresholdToCompressColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 1 - 10)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The minimum dpi at which color compression is applied. (Range: 1 to 10 times the value specified for color bitmap sampling DPI.)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">thresholdToCompressGray</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 1 - 10)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The minimum dpi at which grayscale compression is applied. (Range: 1 to 10 times the value specified for grayscale bitmap sampling DPI.)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">thresholdToCompressMonochrome</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 1 - 10)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">The minimum dpi at which monochrome compression is applied. (Range: 1 to 10 times the value specified for monochrome bitmap sampling DPI.)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1307128e201 ">
+                        <p class="p">useDocumentBleedWithPDF</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e207 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e213 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e219 ">
+                        <p class="p description">If true, uses the document's bleed settings in the PDF document.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e271769__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e271769__d1e272895">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1307128e2906">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1307128e2912">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1307128e2918">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1307128e2906 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e2912 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e2918 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1307128e2906 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e2912 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e2918 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1307128e2906 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e2912 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e2918 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e271769__d1e272844">
+            <a class="xref" href="PDFExportPreset.html#d1e271769">PDFExportPreset</a> 
+            <strong class="ph b">duplicate</strong> ()</p>
+
+         <p class="p description">Duplicates the PDFExportPreset.</p>
+
+         <p class="p methodName" id="d1e271769__d1e272868">
+            <a class="xref" href="PDFExportPreset.html#d1e271769">PDFExportPreset</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e271769__d1e272838">undefined <strong class="ph b">remove</strong> ()</p>
+
+         <p class="p description">Deletes the PDFExportPreset.</p>
+
+         <p class="p methodName" id="d1e271769__d1e272949">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1307128e3078">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1307128e3084">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1307128e3090">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1307128e3078 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e3084 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e3090 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1307128e3078 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e3084 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e3090 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1307128e3078 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1307128e3084 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1307128e3090 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e271769__d1e272856">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the PDFExportPreset.</p>
+
+         <p class="p methodName" id="d1e271769__d1e272882">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273013">add</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPreset.html#d1e271769">PDFExportPreset</a>.<a class="xref" href="PDFExportPreset.html#d1e271769__d1e272844">duplicate</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPreset.html#d1e271769">PDFExportPreset</a>.<a class="xref" href="PDFExportPreset.html#d1e271769__d1e272868">getElements</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273238">anyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273251">everyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273211">nextItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273184">previousItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273052">item</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273277">[]</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273079">itemByName</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273106">itemByRange</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273148">firstItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273160">lastItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDFExportPresets.html#d1e273006">PDFExportPresets</a>.<a class="xref" href="PDFExportPresets.html#d1e273006__d1e273172">middleItem</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

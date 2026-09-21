@@ -1,0 +1,1124 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="The $ object provides a number of debugging facilities and informational methods. Go to Property Listing | Method Listing Methods: about , toString , write , writeln , bp , getenv , setenv , sleep , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="$"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e62"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>$</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e62">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">$</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">The $ object provides a number of debugging facilities and informational methods.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e62__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e62__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e62__d1e374">about</a>,  <a class="xref" href="#d1e62__d1e386">toString</a>,  <a class="xref" href="#d1e62__d1e398">write</a>,  <a class="xref" href="#d1e62__d1e420">writeln</a>,  <a class="xref" href="#d1e62__d1e441">bp</a>,  <a class="xref" href="#d1e62__d1e462">getenv</a>,  <a class="xref" href="#d1e62__d1e489">setenv</a>,  <a class="xref" href="#d1e62__d1e522">sleep</a>,  <a class="xref" href="#d1e62__d1e546">colorPicker</a>,  <a class="xref" href="#d1e62__d1e574">evalFile</a>,  <a class="xref" href="#d1e62__d1e616">gc</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d53e113">
+                        <p class="p">Name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d53e119">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d53e125">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d53e131">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">build</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The ExtendScript build information.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">buildDate</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="Date.html#d1e2080">Date</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The ExtendScript build date.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">decimalPoint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The character used as the decimal point character in formatted numeric output.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">engineName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The name of the current ExtendScript engine, if set.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">error</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="Error.html#d1e6174">Error</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The most recent run-time error information.</p>
+
+                        <p class="p description">
+						Assigning error text to this property generates a run-time error; however, the preferred way to generate a run-time error is to throw an Error object.
+					</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">fileName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The file name of the current script.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">flags</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">Gets or sets low-level debug output flags.</p>
+
+                        <p class="p description">
+						A logical AND of bit flag values:
+						0x0002 (2): Displays each line with its line number as it is executed.
+						                  0x0040 (64): Enables excessive garbage collection. Usually, garbage collection starts when the number of objects has increased by a certain amount since the last garbage collection. This flag causes ExtendScript to garbage collect after almost every statement. This impairs performance severely, but is useful when you suspect that an object gets released too soon.
+						                  0x0080 (128): Displays all calls with their arguments and the return value.
+						                  
+							0x0100 (256): Enables extended error handling (see strict).
+						
+						                  0x0200 (512): Enables the localization feature of the toString method. Equivalent to the localize property.
+					                </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">global</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">A reference to the global object, which contains the JavaScript global namespace.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">hiresTimer</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">
+						A high-resolution timer, measuring the time in microseconds. The timer starts when ExtendScript is
+						initialized during the application startup sequence. Every read access resets the timer to Zero.
+					</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">includePath</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The path for include files for the current script.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">level</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The current debugging level, which enables or disables the JavaScript debugger.</p>
+
+                        <p class="p description">One of 0 (no debugging), 1 (break on runtime errors), or 2 (full debug mode).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">line</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The current line number of the currently executing script.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">locale</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">Gets or sets the current locale.</p>
+
+                        <p class="p description">
+						The string contains five characters in the form LL_RR, where LL is an ISO 639 language specifier, and RR is an ISO 3166 region specifier.Initially, this is the value that the application or the platform returns for the current user. You can set it to temporarily change the locale for testing. To return to the application or platform setting, set to undefined, null, or the empty string.
+					</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">localize</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">Set to true to enable the extended localization features of the built-in toString() method.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">memCache</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The ExtendScript memory cache size, in bytes.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">os</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The current operating system version information.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">screens</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">An array of objects containing information about the display screens attached to your computer.</p>
+
+                        <p class="p description">
+						Each object has the properties left, top, right, bottom, which contain the four corners of each screen in global coordinates.A property primary is true if that object describes the primary display.
+					</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">stack</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The current stack trace.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">strict</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">Sets or clears strict mode for object modification.</p>
+
+                        <p class="p description">When true, any attempt to write to a read-only property causes a runtime error. Some objects do not permit the creation of new properties when true.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d53e113 ">
+                        <p class="p">version</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e119 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e131 ">
+                        <p class="p description">The version number of the ExtendScript engine.</p>
+
+                        <p class="p description">Formatted as a three-part number and description; for example: "3.92.95 (debug)".</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e62__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e62__d1e374">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">about</strong> ()</p>
+
+         <p class="p description">Shows an About box for the ExtendScript component, and returns the text for the box.</p>
+
+         <p class="p methodName" id="d1e62__d1e441">undefined <strong class="ph b">bp</strong> ([condition:<em class="ph i">Varies</em>])</p>
+
+         <p class="p description">Breaks execution at the current position.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d53e835">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d53e841">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d53e847">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d53e835 ">
+                        <p class="p">condition</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e841 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e847 ">
+                        <p class="p description">A string containing a JavaScript statement to be used as a condition. If the statement evaluates to true or nonzero when this point is reached, execution stops.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e62__d1e546">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">colorPicker</strong> (color:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Invokes the platform-specific color selection dialog, and returns the selected color.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d53e911">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d53e917">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d53e923">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d53e911 ">
+                        <p class="p">color</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e917 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e923 ">
+                        <p class="p description">The color to be preselected in the dialog, as 0xRRGGBB, or -1 for the platform default.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e62__d1e574">Varies <strong class="ph b">evalFile</strong> (file:<em class="ph i">File</em>, [timeout:<em class="ph i">Number</em>=Number])</p>
+
+         <p class="p description">Loads and evaluates a file.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d53e991">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d53e997">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d53e1003">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d53e991 ">
+                        <p class="p">file</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e997 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e1003 ">
+                        <p class="p description">The file to load.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d53e991 ">
+                        <p class="p">timeout</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e997 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e1003 ">
+                        <p class="p description">An optional timeout in milliseconds.</p>
+
+                        <p class="p"> (default: 10000)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e62__d1e616">undefined <strong class="ph b">gc</strong> ()</p>
+
+         <p class="p description">Initiates garbage collection in the ExtendScript engine.</p>
+
+         <p class="p methodName" id="d1e62__d1e462">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">getenv</strong> (name:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Retrieves the value of an environment variable.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d53e1108">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d53e1114">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d53e1120">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d53e1108 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e1114 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e1120 ">
+                        <p class="p description">The name of the variable.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e62__d1e489">undefined <strong class="ph b">setenv</strong> (name:<em class="ph i">String</em>, value:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Sets the value of an environment variable.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d53e1188">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d53e1194">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d53e1200">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d53e1188 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e1194 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e1200 ">
+                        <p class="p description">The name of the variable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d53e1188 ">
+                        <p class="p">value</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e1194 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e1200 ">
+                        <p class="p description">The value of the variable.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e62__d1e522">undefined <strong class="ph b">sleep</strong> (msecs:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Suspends the calling thread for a number of milliseconds.</p>
+
+         <p class="p description">During a sleep period, checks at 100 millisecond intervals to see whether the sleep should be terminated. This can happen if there is a break request, or if the script timeout has expired.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d53e1293">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d53e1299">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d53e1305">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d53e1293 ">
+                        <p class="p">msecs</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e1299 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e1305 ">
+                        <p class="p description">Number of milliseconds to sleep.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e62__d1e386">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toString</strong> ()</p>
+
+         <p class="p description">Converts this object to a string.</p>
+
+         <p class="p methodName" id="d1e62__d1e398">undefined <strong class="ph b">write</strong> (text:<em class="ph i">Varies</em>)</p>
+
+         <p class="p description">Prints text to the Console.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d53e1382">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d53e1388">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d53e1394">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d53e1382 ">
+                        <p class="p">text</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e1388 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e1394 ">
+                        <p class="p description">The text to print. All arguments are concatenated.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e62__d1e420">undefined <strong class="ph b">writeln</strong> (text:<em class="ph i">Varies</em>)</p>
+
+         <p class="p description">Prints text to the Console, and adds a newline character.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d53e1455">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d53e1461">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d53e1467">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d53e1455 ">
+                        <p class="p">text</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d53e1461 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d53e1467 ">
+                        <p class="p description">The text to print. All arguments are concatenated.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

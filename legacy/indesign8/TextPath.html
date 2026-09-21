@@ -1,0 +1,2193 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="A text object that is on a path. Go to Property Listing | Method Listing Methods: findText , changeText , findGrep , changeGrep , findGlyph , changeGlyph , findTransliterate , changeTransliterate , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="TextPath"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e471371"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>TextPath</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e471371">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">TextPath</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">A text object that is on a path.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e471371__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e471371__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e471371__d1e471927">findText</a>,  <a class="xref" href="#d1e471371__d1e471956">changeText</a>,  <a class="xref" href="#d1e471371__d1e471986">findGrep</a>,  <a class="xref" href="#d1e471371__d1e472015">changeGrep</a>,  <a class="xref" href="#d1e471371__d1e472044">findGlyph</a>,  <a class="xref" href="#d1e471371__d1e472073">changeGlyph</a>,  <a class="xref" href="#d1e471371__d1e472102">findTransliterate</a>,  <a class="xref" href="#d1e471371__d1e472131">changeTransliterate</a>,  <a class="xref" href="#d1e471371__d1e472161">remove</a>,  <a class="xref" href="#d1e471371__d1e472167">insertLabel</a>,  <a class="xref" href="#d1e471371__d1e472200">extractLabel</a>,  <a class="xref" href="#d1e471371__d1e472227">toSource</a>,  <a class="xref" href="#d1e471371__d1e472239">getElements</a>,  <a class="xref" href="#d1e471371__d1e472253">toSpecifier</a>,  <a class="xref" href="#d1e471371__d1e472266">addEventListener</a>,  <a class="xref" href="#d1e471371__d1e472320">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="Characters.html#d1e404252">Characters</a>, <a class="xref" href="EPSText.html#d1e233044">EPSText</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="FlipValues.html#d1e81411">FlipValues</a>, <a class="xref" href="GraphicLine.html#d1e193386">GraphicLine</a>, <a class="xref" href="InsertionPoints.html#d1e443008">InsertionPoints</a>, <a class="xref" href="Lines.html#d1e417163">Lines</a>, <a class="xref" href="NothingEnum.html#d1e79813">NothingEnum</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="Oval.html#d1e185532">Oval</a>, <a class="xref" href="Paragraphs.html#d1e430098">Paragraphs</a>, <a class="xref" href="PathTypeAlignments.html#d1e81357">PathTypeAlignments</a>, <a class="xref" href="Polygon.html#d1e197272">Polygon</a>, <a class="xref" href="Rectangle.html#d1e189459">Rectangle</a>, <a class="xref" href="SpecialCharacters.html#d1e69220">SpecialCharacters</a>, <a class="xref" href="SplineItem.html#d1e229224">SplineItem</a>, <a class="xref" href="Story.html#d1e447623">Story</a>, <a class="xref" href="String.html#d1e4543">String</a>, <a class="xref" href="TextColumns.html#d1e423618">TextColumns</a>, <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>, <a class="xref" href="TextFrameContents.html#d1e69136">TextFrameContents</a>, <a class="xref" href="TextPath.html#d1e471371">TextPath</a>, <a class="xref" href="TextPathEffects.html#d1e81143">TextPathEffects</a>, <a class="xref" href="TextStyleRanges.html#d1e436553">TextStyleRanges</a>, <a class="xref" href="TextTypeAlignments.html#d1e81227">TextTypeAlignments</a>, <a class="xref" href="Texts.html#d1e397797">Texts</a>, <a class="xref" href="Words.html#d1e410708">Words</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e471371__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d1964136e268">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e274">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e280">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e286">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">centerBracket</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The halfway point between the start bracket and the end bracket.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">characters</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Characters.html#d1e404252">Characters</a>
+                           <em class="ph i">
+                              <a class="xref" href="Character.html#d1e398055">Character</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A collection of characters.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">contents</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextFrameContents.html#d1e69136">TextFrameContents</a>
+                        </p>
+
+                        <p class="p enumInPTable">TextFrameContents.PLACEHOLDER_TEXT</p>
+
+                        <p class="p enumInPTable">TextFrameContents.PLACEHOLDER_TEXT_ARABIC</p>
+
+                        <p class="p enumInPTable">TextFrameContents.PLACEHOLDER_TEXT_HEBREW</p>
+
+                        <p class="p enumInPTable">TextFrameContents.PLACEHOLDER_TEXT_CYRILLIC</p>
+
+                        <p class="p enumInPTable">TextFrameContents.PLACEHOLDER_TEXT_GREEK</p>
+
+                        <p class="p">
+                           <a class="xref" href="SpecialCharacters.html#d1e69220">SpecialCharacters</a>
+                        </p>
+
+                        <p class="p enumInPTable">SpecialCharacters.AUTO_PAGE_NUMBER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.NEXT_PAGE_NUMBER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.PREVIOUS_PAGE_NUMBER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SECTION_MARKER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.BULLET_CHARACTER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.COPYRIGHT_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DEGREE_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ELLIPSIS_CHARACTER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FORCED_LINE_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.PARAGRAPH_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.REGISTERED_TRADEMARK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SECTION_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.TRADEMARK_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.RIGHT_INDENT_TAB</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.INDENT_HERE_TAB</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.EM_DASH</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.EN_DASH</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DISCRETIONARY_HYPHEN</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.NONBREAKING_HYPHEN</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.END_NESTED_STYLE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DOUBLE_LEFT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DOUBLE_RIGHT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SINGLE_LEFT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SINGLE_RIGHT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.EM_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.EN_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FLUSH_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.HAIR_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.NONBREAKING_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.THIN_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FIGURE_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.PUNCTUATION_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.COLUMN_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FRAME_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.PAGE_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ODD_PAGE_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.EVEN_PAGE_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FOOTNOTE_SYMBOL</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.LEFT_TO_RIGHT_EMBEDDING</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.RIGHT_TO_LEFT_EMBEDDING</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.POP_DIRECTIONAL_FORMATTING</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.LEFT_TO_RIGHT_OVERRIDE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.RIGHT_TO_LEFT_OVERRIDE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DOTTED_CIRCLE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ZERO_WIDTH_JOINER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.TEXT_VARIABLE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SINGLE_STRAIGHT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DOUBLE_STRAIGHT_QUOTE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.DISCRETIONARY_LINE_BREAK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ZERO_WIDTH_NONJOINER</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.THIRD_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.QUARTER_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.SIXTH_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.FIXED_WIDTH_NONBREAKING_SPACE</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.HEBREW_MAQAF</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.HEBREW_GERESH</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.HEBREW_GERSHAYIM</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ARABIC_KASHIDA</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ARABIC_COMMA</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ARABIC_SEMICOLON</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.ARABIC_QUESTION_MARK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.LEFT_TO_RIGHT_MARK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.RIGHT_TO_LEFT_MARK</p>
+
+                        <p class="p enumInPTable">SpecialCharacters.HEBREW_SOF_PASUK</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The contents of the text frame. Can return: String, TextFrameContents enumerator or SpecialCharacters enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">endBracket</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The end of the type on a path. Note: Additional text becomes overset text unless the text is linked to another path or text frame.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">endTextFrame</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextPath.html#d1e471371">TextPath</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The last text frame in the thread. Can return: TextFrame or TextPath.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">flipPathEffect</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="FlipValues.html#d1e81411">FlipValues</a>
+                        </p>
+
+                        <p class="p enumInPTable">FlipValues.NOT_FLIPPED</p>
+
+                        <p class="p enumInPTable">FlipValues.FLIPPED</p>
+
+                        <p class="p enumInPTable">FlipValues.UNDEFINED_FLIP_VALUE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The flip effect applied to the type on a path.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">id</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The unique ID of the TextPath.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">index</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The index of the TextPath within its containing object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">insertionPoints</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="InsertionPoints.html#d1e443008">InsertionPoints</a>
+                           <em class="ph i">
+                              <a class="xref" href="InsertionPoint.html#d1e436811">InsertionPoint</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A collection of insertion points.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">label</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A property that can be set to any string.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">lines</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Lines.html#d1e417163">Lines</a>
+                           <em class="ph i">
+                              <a class="xref" href="Line.html#d1e410966">Line</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A collection of lines.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The name of the TextPath; this is an alias to the TextPath's label property.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">nextTextFrame</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                        <p class="p">
+                           <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextPath.html#d1e471371">TextPath</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The next text frame in the thread. Can return: TextFrame or TextPath. Can also accept: NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">overflows</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">If true, the story has overset text.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">paragraphs</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Paragraphs.html#d1e430098">Paragraphs</a>
+                           <em class="ph i">
+                              <a class="xref" href="Paragraph.html#d1e423876">Paragraph</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A collection of paragraphs.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="GraphicLine.html#d1e193386">GraphicLine</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Oval.html#d1e185532">Oval</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Polygon.html#d1e197272">Polygon</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Rectangle.html#d1e189459">Rectangle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="EPSText.html#d1e233044">EPSText</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="SplineItem.html#d1e229224">SplineItem</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The parent of the TextPath (a SplineItem, Polygon, GraphicLine, Rectangle, Oval, TextFrame or EPSText).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">parentStory</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Story.html#d1e447623">Story</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The story that contains the text.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">pathAlignment</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="PathTypeAlignments.html#d1e81357">PathTypeAlignments</a>
+                        </p>
+
+                        <p class="p enumInPTable">PathTypeAlignments.TOP_PATH_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">PathTypeAlignments.BOTTOM_PATH_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">PathTypeAlignments.CENTER_PATH_ALIGNMENT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The alignment of the type on a path.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">pathEffect</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="TextPathEffects.html#d1e81143">TextPathEffects</a>
+                        </p>
+
+                        <p class="p enumInPTable">TextPathEffects.RAINBOW_PATH_EFFECT</p>
+
+                        <p class="p enumInPTable">TextPathEffects.SKEW_PATH_EFFECT</p>
+
+                        <p class="p enumInPTable">TextPathEffects.RIBBON_PATH_EFFECT</p>
+
+                        <p class="p enumInPTable">TextPathEffects.STAIR_STEP_PATH_EFFECT</p>
+
+                        <p class="p enumInPTable">TextPathEffects.GRAVITY_PATH_EFFECT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The effect applied to the type on a path.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">pathSpacing</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The spacing applied to the type on a path.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">previousTextFrame</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                        <p class="p">
+                           <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextPath.html#d1e471371">TextPath</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The previous text frame in the thread. Can return: TextFrame or TextPath. Can also accept: NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">startBracket</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The location of the start of the type on the path, expressed in points. Note: 0 is the first point on the path.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">startTextFrame</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="TextPath.html#d1e471371">TextPath</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The first text frame in the thread. Can return: TextFrame or TextPath.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">textAlignment</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="TextTypeAlignments.html#d1e81227">TextTypeAlignments</a>
+                        </p>
+
+                        <p class="p enumInPTable">TextTypeAlignments.ASCENDER_TEXT_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">TextTypeAlignments.DESCENDER_TEXT_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">TextTypeAlignments.CENTER_TEXT_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">TextTypeAlignments.BASELINE_TEXT_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">TextTypeAlignments.ABOVE_RIGHT_EM_BOX_TEXT_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">TextTypeAlignments.BELOW_LEFT_EM_BOX_TEXT_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">TextTypeAlignments.ABOVE_RIGHT_ICF_BOX_TEXT_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">TextTypeAlignments.BELOW_LEFT_ICF_BOX_TEXT_ALIGNMENT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The alignment applied to the type on a path.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">textColumns</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="TextColumns.html#d1e423618">TextColumns</a>
+                           <em class="ph i">
+                              <a class="xref" href="TextColumn.html#d1e417421">TextColumn</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A collection of text columns.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">textFrameIndex</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">The index of the text frame within the story.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">textStyleRanges</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="TextStyleRanges.html#d1e436553">TextStyleRanges</a>
+                           <em class="ph i">
+                              <a class="xref" href="TextStyleRange.html#d1e430356">TextStyleRange</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A collection of text style ranges.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">texts</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Texts.html#d1e397797">Texts</a>
+                           <em class="ph i">
+                              <a class="xref" href="Text.html#d1e391603">Text</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A collection of text objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e268 ">
+                        <p class="p">words</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e274 ">
+                        <p class="p">
+                           <a class="xref" href="Words.html#d1e410708">Words</a>
+                           <em class="ph i">
+                              <a class="xref" href="Word.html#d1e404510">Word</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e280 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e286 ">
+                        <p class="p description">A collection of words.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Constants/Events</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d1964136e1790">
+                        <p class="p">Name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e1796">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e1802">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e1808">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e1790 ">
+                        <p class="p">AFTER_PLACE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e1796 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e1802 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e1808 ">
+                        <p class="p description">Dispatched after a TextPath is placed. This event bubbles. This event is not cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1964136e1790 ">
+                        <p class="p">BEFORE_PLACE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e1796 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e1802 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e1808 ">
+                        <p class="p description">Dispatched before a TextPath is placed. This event bubbles. This event is cancelable.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e471371__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e471371__d1e472266">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e1926">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e1932">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e1938">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e1926 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e1932 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e1938 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e1926 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e1932 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e1938 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e1926 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e1932 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e1938 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e472073">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">changeGlyph</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds glyphs that match the find what value and replaces the glyphs with the change to value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e2056">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e2062">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e2068">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2056 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2062 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2068 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e472015">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">changeGrep</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find what value and replaces the text with the change to value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e2136">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e2142">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e2148">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2136 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2142 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2148 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e471956">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">changeText</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find what value and replaces the text with the change to value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e2217">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e2223">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e2229">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2217 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2223 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2229 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e472131">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">changeTransliterate</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find character type value and replaces the text with the change character type value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e2297">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e2303">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e2309">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2297 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2303 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2309 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e472200">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">extractLabel</strong> (key:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Gets the label value associated with the specified key.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e2378">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e2384">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e2390">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2378 ">
+                        <p class="p">key</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2384 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2390 ">
+                        <p class="p description">The key.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e472044">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">findGlyph</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds glyphs that match the find what value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e2458">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e2464">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e2470">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2458 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2464 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2470 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e471986">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">findGrep</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find what value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e2539">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e2545">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e2551">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2539 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2545 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2551 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e471927">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">findText</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find what value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e2619">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e2625">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e2631">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2619 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2625 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2631 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e472102">
+            <a class="xref" href="Text.html#d1e391603">Text</a> 
+            <strong class="ph b">findTransliterate</strong> (reverseOrder:<em class="ph i">Boolean</em>)</p>
+
+         <p class="p description">Finds text that matches the find character type value.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e2700">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e2706">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e2712">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2700 ">
+                        <p class="p">reverseOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2706 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2712 ">
+                        <p class="p description">If true, returns the results in reverse order. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e472239">
+            <a class="xref" href="TextPath.html#d1e471371">TextPath</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e471371__d1e472167">undefined <strong class="ph b">insertLabel</strong> (key:<em class="ph i">String</em>, value:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Sets the label to the value associated with the specified key.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e2793">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e2799">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e2805">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2793 ">
+                        <p class="p">key</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2799 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2805 ">
+                        <p class="p description">The key.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2793 ">
+                        <p class="p">value</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2799 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2805 ">
+                        <p class="p description">The value.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e472161">undefined <strong class="ph b">remove</strong> ()</p>
+
+         <p class="p description">Deletes the TextPath.</p>
+
+         <p class="p methodName" id="d1e471371__d1e472320">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1964136e2913">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1964136e2919">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1964136e2925">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2913 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2919 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2925 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2913 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2919 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2925 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1964136e2913 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1964136e2919 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1964136e2925 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e471371__d1e472227">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the TextPath.</p>
+
+         <p class="p methodName" id="d1e471371__d1e472253">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>.startTextFrame</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPath.html#d1e471371">TextPath</a>.startTextFrame</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>.endTextFrame</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPath.html#d1e471371">TextPath</a>.endTextFrame</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>.nextTextFrame</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPath.html#d1e471371">TextPath</a>.nextTextFrame</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Character.html#d1e398055">Character</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="InsertionPoint.html#d1e436811">InsertionPoint</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Line.html#d1e410966">Line</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Paragraph.html#d1e423876">Paragraph</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Text.html#d1e391603">Text</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextColumn.html#d1e417421">TextColumn</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextStyleRange.html#d1e430356">TextStyleRange</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Word.html#d1e404510">Word</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>.previousTextFrame</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPath.html#d1e471371">TextPath</a>.previousTextFrame</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472384">add</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPath.html#d1e471371">TextPath</a>.<a class="xref" href="TextPath.html#d1e471371__d1e472239">getElements</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472637">anyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472649">everyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472609">nextItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472582">previousItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472477">itemByID</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472423">item</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472675">[]</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472450">itemByName</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472505">itemByRange</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472546">firstItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472558">lastItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextPaths.html#d1e472377">TextPaths</a>.<a class="xref" href="TextPaths.html#d1e472377__d1e472570">middleItem</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

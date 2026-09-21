@@ -1,0 +1,1556 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="EPub export preferences. Go to Property Listing | Method Listing Methods: toSource , getElements , toSpecifier , addEventListener , removeEventListener Objects: Book , Boolean , BulletListExportOption ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="EPubExportPreference"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e359500"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>EPubExportPreference</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e359500">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">EPubExportPreference</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">EPub export preferences.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e359500__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e359500__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e359500__d1e360079">toSource</a>,  <a class="xref" href="#d1e359500__d1e360091">getElements</a>,  <a class="xref" href="#d1e359500__d1e360106">toSpecifier</a>,  <a class="xref" href="#d1e359500__d1e360118">addEventListener</a>,  <a class="xref" href="#d1e359500__d1e360172">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Book.html#d1e56077">Book</a>, <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="BulletListExportOption.html#d1e101966">BulletListExportOption</a>, <a class="xref" href="Document.html#d1e46972">Document</a>, <a class="xref" href="EpubCover.html#d1e101912">EpubCover</a>, <a class="xref" href="EpubVersion.html#d1e102098">EpubVersion</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="ExportOrder.html#d1e101858">ExportOrder</a>, <a class="xref" href="GIFOptionsPalette.html#d1e81736">GIFOptionsPalette</a>, <a class="xref" href="ImageAlignmentType.html#d1e98767">ImageAlignmentType</a>, <a class="xref" href="ImageConversion.html#d1e81667">ImageConversion</a>, <a class="xref" href="ImagePageBreakType.html#d1e98821">ImagePageBreakType</a>, <a class="xref" href="ImageResolution.html#d1e98698">ImageResolution</a>, <a class="xref" href="ImageSizeOption.html#d1e98659">ImageSizeOption</a>, <a class="xref" href="JPEGOptionsFormat.html#d1e81875">JPEGOptionsFormat</a>, <a class="xref" href="JPEGOptionsQuality.html#d1e81805">JPEGOptionsQuality</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="NumberedListExportOption.html#d1e102005">NumberedListExportOption</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="String.html#d1e4543">String</a>, </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Superclass:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Preference.html#d1e279179">Preference</a>
+         </p>
+
+      </div>
+
+      <div class="section" id="d1e359500__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d507331e198">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d507331e204">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d507331e210">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d507331e216">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">applyImageAlignmentToAnchoredObjectSettings</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">apply image alignment to anchored object settings.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">bottomMargin</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">Bottom margin of the epub.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">breakDocument</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">If  true, break InDesign document into smaller piece when generating epub.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">bulletExportOption</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="BulletListExportOption.html#d1e101966">BulletListExportOption</a>
+                        </p>
+
+                        <p class="p enumInPTable">BulletListExportOption.UNORDERED_LIST</p>
+
+                        <p class="p enumInPTable">BulletListExportOption.AS_TEXT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The bullet export option.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">coverImageFile</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The epub cover image file path.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">customImageSizeOption</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="ImageSizeOption.html#d1e98659">ImageSizeOption</a>
+                        </p>
+
+                        <p class="p enumInPTable">ImageSizeOption.SIZE_FIXED</p>
+
+                        <p class="p enumInPTable">ImageSizeOption.SIZE_RELATIVE_TO_PAGE_WIDTH</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">Allows user to select the image size option for conversion</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">embedFont</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">If true, embed font in epub.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">epubCover</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="EpubCover.html#d1e101912">EpubCover</a>
+                        </p>
+
+                        <p class="p enumInPTable">EpubCover.NONE</p>
+
+                        <p class="p enumInPTable">EpubCover.FIRST_PAGE</p>
+
+                        <p class="p enumInPTable">EpubCover.EXTERNAL_IMAGE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The epub cover option.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">epubPublisher</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The epub publisher.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">exportOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="ExportOrder.html#d1e101858">ExportOrder</a>
+                        </p>
+
+                        <p class="p enumInPTable">ExportOrder.LAYOUT_ORDER</p>
+
+                        <p class="p enumInPTable">ExportOrder.ARTICLE_PANEL_ORDER</p>
+
+                        <p class="p enumInPTable">ExportOrder.XML_STRUCTURE_ORDER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The export order.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">externalStyleSheets</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The file path of external cascading style sheets.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">footnoteFollowParagraph</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">If  true, output footnote immediately after its paragraph.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">gifOptionsInterlaced</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">If true, generates interlaced GIFs. Note: Not valid  when image conversion is JPEG.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">gifOptionsPalette</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="GIFOptionsPalette.html#d1e81736">GIFOptionsPalette</a>
+                        </p>
+
+                        <p class="p enumInPTable">GIFOptionsPalette.ADAPTIVE_PALETTE</p>
+
+                        <p class="p enumInPTable">GIFOptionsPalette.MACINTOSH_PALETTE</p>
+
+                        <p class="p enumInPTable">GIFOptionsPalette.WEB_PALETTE</p>
+
+                        <p class="p enumInPTable">GIFOptionsPalette.WINDOWS_PALETTE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The color palette for GIF conversion. Note: Not valid when image conversion is JPEG.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">id</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The epub unique identifier, like ISBN.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">ignoreObjectConversionSettings</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">ignore object level image conversion settings.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">imageAlignment</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="ImageAlignmentType.html#d1e98767">ImageAlignmentType</a>
+                        </p>
+
+                        <p class="p enumInPTable">ImageAlignmentType.ALIGN_LEFT</p>
+
+                        <p class="p enumInPTable">ImageAlignmentType.ALIGN_CENTER</p>
+
+                        <p class="p enumInPTable">ImageAlignmentType.ALIGN_RIGHT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">Alignment applied to images</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">imageConversion</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="ImageConversion.html#d1e81667">ImageConversion</a>
+                        </p>
+
+                        <p class="p enumInPTable">ImageConversion.AUTOMATIC</p>
+
+                        <p class="p enumInPTable">ImageConversion.JPEG</p>
+
+                        <p class="p enumInPTable">ImageConversion.GIF</p>
+
+                        <p class="p enumInPTable">ImageConversion.PNG</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The file format to use for converted images. Note: Valid only when copy optimized images and/or copy formatted images is true.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">imageExportResolution</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="ImageResolution.html#d1e98698">ImageResolution</a>
+                        </p>
+
+                        <p class="p enumInPTable">ImageResolution.PPI_72</p>
+
+                        <p class="p enumInPTable">ImageResolution.PPI_96</p>
+
+                        <p class="p enumInPTable">ImageResolution.PPI_150</p>
+
+                        <p class="p enumInPTable">ImageResolution.PPI_300</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The export resolution</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">imagePageBreak</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="ImagePageBreakType.html#d1e98821">ImagePageBreakType</a>
+                        </p>
+
+                        <p class="p enumInPTable">ImagePageBreakType.PAGE_BREAK_BEFORE</p>
+
+                        <p class="p enumInPTable">ImagePageBreakType.PAGE_BREAK_AFTER</p>
+
+                        <p class="p enumInPTable">ImagePageBreakType.PAGE_BREAK_BEFORE_AND_AFTER</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">Image page break settings to be used with objects</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">imageSpaceAfter</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 8640)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">Space After applied to images</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">imageSpaceBefore</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 8640)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">Space Before applied to images</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">includeCSSDefinition</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">If true, include CSS definition.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">includeDocumentMetadata</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">If true, output document metadata into epub.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">javascripts</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The file path of external javascripts.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">jpegOptionsFormat</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="JPEGOptionsFormat.html#d1e81875">JPEGOptionsFormat</a>
+                        </p>
+
+                        <p class="p enumInPTable">JPEGOptionsFormat.BASELINE_ENCODING</p>
+
+                        <p class="p enumInPTable">JPEGOptionsFormat.PROGRESSIVE_ENCODING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The formatting method for converted JPEG images. Note: Not valid  when image conversion is GIF.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">jpegOptionsQuality</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="JPEGOptionsQuality.html#d1e81805">JPEGOptionsQuality</a>
+                        </p>
+
+                        <p class="p enumInPTable">JPEGOptionsQuality.LOW</p>
+
+                        <p class="p enumInPTable">JPEGOptionsQuality.MEDIUM</p>
+
+                        <p class="p enumInPTable">JPEGOptionsQuality.HIGH</p>
+
+                        <p class="p enumInPTable">JPEGOptionsQuality.MAXIMUM</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The quality of converted JPEG images. Note: Not valid when image conversion is GIF.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">leftMargin</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">Left margin of the epub.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">level</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The PNG compression level.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">numberedListExportOption</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="NumberedListExportOption.html#d1e102005">NumberedListExportOption</a>
+                        </p>
+
+                        <p class="p enumInPTable">NumberedListExportOption.ORDERED_LIST</p>
+
+                        <p class="p enumInPTable">NumberedListExportOption.STATIC_ORDERED_LIST</p>
+
+                        <p class="p enumInPTable">NumberedListExportOption.AS_TEXT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The numbered list export option.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">paragraphStyleName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The name of paragraph style to break InDesign document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Book.html#d1e56077">Book</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Document.html#d1e46972">Document</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The parent of the EPubExportPreference (a Book or Document).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">preserveLayoutAppearence</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">If true, format image based on layout appearence.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">preserveLocalOverride</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">If true, output local style override.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">rightMargin</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">Right margin of the epub.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">stripSoftReturn</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">If  true, strip soft return.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">tocStyleName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The name of TOC style to generate epub TOC.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">topMargin</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">Top margin of the epub.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">useImagePageBreak</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">If true, image page break settings will be used in objects</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">version</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="EpubVersion.html#d1e102098">EpubVersion</a>
+                        </p>
+
+                        <p class="p enumInPTable">EpubVersion.EPUB2</p>
+
+                        <p class="p enumInPTable">EpubVersion.EPUB3</p>
+
+                        <p class="p enumInPTable">EpubVersion.EPUB3_WITH_LAYOUT</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">The version of EPUB.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d507331e198 ">
+                        <p class="p">viewDocumentAfterExport</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e204 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e210 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e216 ">
+                        <p class="p description">If true, open docuemnt in viewer after export.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e359500__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e359500__d1e360118">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d507331e1823">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d507331e1829">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d507331e1835">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d507331e1823 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e1829 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e1835 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d507331e1823 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e1829 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e1835 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d507331e1823 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e1829 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e1835 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e359500__d1e360091">
+            <a class="xref" href="EPubExportPreference.html#d1e359500">EPubExportPreference</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e359500__d1e360172">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d507331e1972">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d507331e1978">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d507331e1984">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d507331e1972 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e1978 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e1984 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d507331e1972 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e1978 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e1984 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d507331e1972 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d507331e1978 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d507331e1984 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e359500__d1e360079">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the EPubExportPreference.</p>
+
+         <p class="p methodName" id="d1e359500__d1e360106">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Document.html#d1e46972">Document</a>.epubExportPreferences</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Book.html#d1e56077">Book</a>.epubExportPreferences</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="EPubExportPreference.html#d1e359500">EPubExportPreference</a>.<a class="xref" href="EPubExportPreference.html#d1e359500__d1e360091">getElements</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

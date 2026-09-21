@@ -1,0 +1,3468 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="A page. Go to Property Listing | Method Listing Methods: placeXML , setContent , snapshotCurrentLayout , deleteLayoutSnapshot , deleteAllLayoutSnapshots , move , remove , duplicate , placeAndLink , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="Page"></meta><meta name="DC.Relation" scheme="URI" content="PageItem.html"></meta><meta name="DC.Relation" scheme="URI" content="TextFrame.html"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e178169"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>Page</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e178169">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">Page</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">A page.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e178169__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e178169__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e178169__d1e178908">placeXML</a>,  <a class="xref" href="#d1e178169__d1e178978">setContent</a>,  <a class="xref" href="#d1e178169__d1e179017">snapshotCurrentLayout</a>,  <a class="xref" href="#d1e178169__d1e179023">deleteLayoutSnapshot</a>,  <a class="xref" href="#d1e178169__d1e179029">deleteAllLayoutSnapshots</a>,  <a class="xref" href="#d1e178169__d1e179035">move</a>,  <a class="xref" href="#d1e178169__d1e179093">remove</a>,  <a class="xref" href="#d1e178169__d1e179099">duplicate</a>,  <a class="xref" href="#d1e178169__d1e179141">placeAndLink</a>,  <a class="xref" href="#d1e178169__d1e179223">place</a>,  <a class="xref" href="#d1e178169__d1e179335">removeOverride</a>,  <a class="xref" href="#d1e178169__d1e179341">detach</a>,  <a class="xref" href="#d1e178169__d1e179348">select</a>,  <a class="xref" href="#d1e178169__d1e179372">transform</a>,  <a class="xref" href="#d1e178169__d1e179444">reframe</a>,  <a class="xref" href="#d1e178169__d1e179479">resize</a>,  <a class="xref" href="#d1e178169__d1e179569">transformValuesOf</a>,  <a class="xref" href="#d1e178169__d1e179598">resolve</a>,  <a class="xref" href="#d1e178169__d1e179653">contentPlace</a>,  <a class="xref" href="#d1e178169__d1e179785">insertLabel</a>,  <a class="xref" href="#d1e178169__d1e179818">extractLabel</a>,  <a class="xref" href="#d1e178169__d1e179845">toSource</a>,  <a class="xref" href="#d1e178169__d1e179857">getElements</a>,  <a class="xref" href="#d1e178169__d1e179871">toSpecifier</a>,  <a class="xref" href="#d1e178169__d1e179884">addEventListener</a>,  <a class="xref" href="#d1e178169__d1e179938">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="Buttons.html#d1e122506">Buttons</a>, <a class="xref" href="CheckBoxes.html#d1e130440">CheckBoxes</a>, <a class="xref" href="ComboBoxes.html#d1e134089">ComboBoxes</a>, <a class="xref" href="EPSTexts.html#d1e235893">EPSTexts</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="FormFields.html#d1e118848">FormFields</a>, <a class="xref" href="Graphic.html#d1e220572">Graphic</a>, <a class="xref" href="GraphicLines.html#d1e196893">GraphicLines</a>, <a class="xref" href="Graphics.html#d1e223390">Graphics</a>, <a class="xref" href="GridDataInformation.html#d1e330150">GridDataInformation</a>, <a class="xref" href="Groups.html#d1e204263">Groups</a>, <a class="xref" href="Guides.html#d1e225901">Guides</a>, <a class="xref" href="LayoutRuleOptions.html#d1e70947">LayoutRuleOptions</a>, <a class="xref" href="ListBoxes.html#d1e137749">ListBoxes</a>, <a class="xref" href="MarginPreference.html#d1e261377">MarginPreference</a>, <a class="xref" href="MasterSpread.html#d1e180361">MasterSpread</a>, <a class="xref" href="Movies.html#d1e152010">Movies</a>, <a class="xref" href="MultiStateObjects.html#d1e126806">MultiStateObjects</a>, <a class="xref" href="NothingEnum.html#d1e79813">NothingEnum</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="Ovals.html#d1e189081">Ovals</a>, <a class="xref" href="PageColorOptions.html#d1e70854">PageColorOptions</a>, <a class="xref" href="PageItem.html#d1e182433">PageItem</a>, <a class="xref" href="PageItems.html#d1e185219">PageItems</a>, <a class="xref" href="PageSideOptions.html#d1e70761">PageSideOptions</a>, <a class="xref" href="Polygons.html#d1e200821">Polygons</a>, <a class="xref" href="Preferences.html#d1e279820">Preferences</a>, <a class="xref" href="RadioButtons.html#d1e141383">RadioButtons</a>, <a class="xref" href="Rectangles.html#d1e193008">Rectangles</a>, <a class="xref" href="Section.html#d1e227076">Section</a>, <a class="xref" href="SignatureFields.html#d1e148640">SignatureFields</a>, <a class="xref" href="SnapshotBlendingModes.html#d1e71063">SnapshotBlendingModes</a>, <a class="xref" href="Sounds.html#d1e155905">Sounds</a>, <a class="xref" href="SplineItems.html#d1e232732">SplineItems</a>, <a class="xref" href="Spread.html#d1e176194">Spread</a>, <a class="xref" href="String.html#d1e4543">String</a>, <a class="xref" href="TextBoxes.html#d1e145042">TextBoxes</a>, <a class="xref" href="TextFrames.html#d1e447245">TextFrames</a>, <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>, <a class="xref" href="TrapPreset.html#d1e59192">TrapPreset</a>, <a class="xref" href="UIColors.html#d1e79243">UIColors</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e178169__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d1333579e368">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e374">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e380">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e386">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">allGraphics</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Graphic.html#d1e220572">Graphic</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">Lists all graphics contained by the Page.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">allPageItems</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="PageItem.html#d1e182433">PageItem</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">Lists all page items contained by the Page.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">appliedAlternateLayout</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Section.html#d1e227076">Section</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The alternate layout section to which the page belongs.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">appliedMaster</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="MasterSpread.html#d1e180361">MasterSpread</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The master spread applied to the Page. Can also accept: NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">appliedSection</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Section.html#d1e227076">Section</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The section to which the page belongs.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">appliedTrapPreset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="TrapPreset.html#d1e59192">TrapPreset</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The trap preset applied to the page. Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">bounds</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The bounds of the Page, in the format [y1, x1, y2, x2].</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">buttons</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Buttons.html#d1e122506">Buttons</a>
+                           <em class="ph i">
+                              <a class="xref" href="Button.html#d1e119226">Button</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of buttons.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">checkBoxes</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="CheckBoxes.html#d1e130440">CheckBoxes</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of checkboxes.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">comboBoxes</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="ComboBoxes.html#d1e134089">ComboBoxes</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of comboboxes.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">documentOffset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The sequential number of the page within the document.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">epstexts</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="EPSTexts.html#d1e235893">EPSTexts</a>
+                           <em class="ph i">
+                              <a class="xref" href="EPSText.html#d1e233044">EPSText</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">EPSTexts</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">formFields</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="FormFields.html#d1e118848">FormFields</a>
+                           <em class="ph i">
+                              <a class="xref" href="FormField.html#d1e116127">FormField</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of form fields.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">graphicLines</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="GraphicLines.html#d1e196893">GraphicLines</a>
+                           <em class="ph i">
+                              <a class="xref" href="GraphicLine.html#d1e193386">GraphicLine</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of graphic lines.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">gridData</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="GridDataInformation.html#d1e330150">GridDataInformation</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">Default grid properties. Note: Applies to named, layout, and frame (story) grids.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">groups</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Groups.html#d1e204263">Groups</a>
+                           <em class="ph i">
+                              <a class="xref" href="Group.html#d1e201232">Group</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of groups.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">guides</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Guides.html#d1e225901">Guides</a>
+                           <em class="ph i">
+                              <a class="xref" href="Guide.html#d1e225088">Guide</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of guides.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">id</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The unique ID of the Page.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">index</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The index of the Page within its containing object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">label</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A property that can be set to any string.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">layoutRule</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="LayoutRuleOptions.html#d1e70947">LayoutRuleOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">LayoutRuleOptions.OFF</p>
+
+                        <p class="p enumInPTable">LayoutRuleOptions.SCALE</p>
+
+                        <p class="p enumInPTable">LayoutRuleOptions.RECENTER</p>
+
+                        <p class="p enumInPTable">LayoutRuleOptions.GUIDE_BASED</p>
+
+                        <p class="p enumInPTable">LayoutRuleOptions.OBJECT_BASED</p>
+
+                        <p class="p enumInPTable">LayoutRuleOptions.USE_MASTER</p>
+
+                        <p class="p enumInPTable">LayoutRuleOptions.PRESERVE_EXISTING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">layout rule</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">listBoxes</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="ListBoxes.html#d1e137749">ListBoxes</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of listboxes.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">marginPreferences</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="MarginPreference.html#d1e261377">MarginPreference</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">Margin preference settings.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">masterPageItems</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of  PageItems</p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Graphics.html#d1e223390">Graphics</a>
+                           <em class="ph i">
+                              <a class="xref" href="Graphic.html#d1e220572">Graphic</a>
+                           </em>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Guides.html#d1e225901">Guides</a>
+                           <em class="ph i">
+                              <a class="xref" href="Guide.html#d1e225088">Guide</a>
+                           </em>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Movies.html#d1e152010">Movies</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Sounds.html#d1e155905">Sounds</a>
+                           <em class="ph i">
+                              <a class="xref" href="Sound.html#d1e152999">Sound</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The items on a specified document page that originated on the applied master page and have not been overridden or detached. Can return: Array of PageItems, Guides, Graphics, Movies or Sounds.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">masterPageTransform</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The transform applied to the master page before it is applied to Page.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">multiStateObjects</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="MultiStateObjects.html#d1e126806">MultiStateObjects</a>
+                           <em class="ph i">
+                              <a class="xref" href="MultiStateObject.html#d1e123782">MultiStateObject</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of multi-state objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The name of the Page.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">optionalPage</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">optional page for HTML5 pagination. Obsolete after CS6</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">ovals</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Ovals.html#d1e189081">Ovals</a>
+                           <em class="ph i">
+                              <a class="xref" href="Oval.html#d1e185532">Oval</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of ellipses.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">pageColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of  3 Reals (0 - 255)</p>
+
+                        <p class="p">
+                           <a class="xref" href="PageColorOptions.html#d1e70854">PageColorOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">PageColorOptions.NOTHING</p>
+
+                        <p class="p enumInPTable">PageColorOptions.USE_MASTER_COLOR</p>
+
+                        <p class="p">
+                           <a class="xref" href="UIColors.html#d1e79243">UIColors</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The color label of the Page, specified either as  an array of three doubles, each in the range 0 to 255 and representing R, G, and B values, or as a UI color. Can return: Array of 3 Reals (0 - 255) or UIColors enumerator or PageColorOptions enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">pageItems</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="PageItems.html#d1e185219">PageItems</a>
+                           <em class="ph i">
+                              <a class="xref" href="PageItem.html#d1e182433">PageItem</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The page items collection, which can be used to process all page items in a container (such as a document, page, or group), regardless of type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="MasterSpread.html#d1e180361">MasterSpread</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Spread.html#d1e176194">Spread</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The parent of the Page (a Spread or MasterSpread).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">polygons</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Polygons.html#d1e200821">Polygons</a>
+                           <em class="ph i">
+                              <a class="xref" href="Polygon.html#d1e197272">Polygon</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of polygons.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">preferences</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Preferences.html#d1e279820">Preferences</a>
+                           <em class="ph i">
+                              <a class="xref" href="Preference.html#d1e279179">Preference</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of preferences objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">radioButtons</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="RadioButtons.html#d1e141383">RadioButtons</a>
+                           <em class="ph i">
+                              <a class="xref" href="RadioButton.html#d1e138127">RadioButton</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of radio buttons.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">rectangles</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Rectangles.html#d1e193008">Rectangles</a>
+                           <em class="ph i">
+                              <a class="xref" href="Rectangle.html#d1e189459">Rectangle</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of rectangles.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">side</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="PageSideOptions.html#d1e70761">PageSideOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">PageSideOptions.RIGHT_HAND</p>
+
+                        <p class="p enumInPTable">PageSideOptions.LEFT_HAND</p>
+
+                        <p class="p enumInPTable">PageSideOptions.SINGLE_SIDED</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The side of the binding spine on which to place the page within the spread.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">signatureFields</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="SignatureFields.html#d1e148640">SignatureFields</a>
+                           <em class="ph i">
+                              <a class="xref" href="SignatureField.html#d1e145420">SignatureField</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of signature fields.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">snapshotBlendingMode</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="SnapshotBlendingModes.html#d1e71063">SnapshotBlendingModes</a>
+                        </p>
+
+                        <p class="p enumInPTable">SnapshotBlendingModes.IGNORE_LAYOUT_SNAPSHOTS</p>
+
+                        <p class="p enumInPTable">SnapshotBlendingModes.USE_NEAREST_SNAPSHOT</p>
+
+                        <p class="p enumInPTable">SnapshotBlendingModes.LIMITED_SNAPSHOT_BLENDING</p>
+
+                        <p class="p enumInPTable">SnapshotBlendingModes.FULL_SNAPSHOT_BLENDING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">snapshot blending mode</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">splineItems</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="SplineItems.html#d1e232732">SplineItems</a>
+                           <em class="ph i">
+                              <a class="xref" href="SplineItem.html#d1e229224">SplineItem</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The spline items collection.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">tabOrder</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of  Buttons</p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="CheckBoxes.html#d1e130440">CheckBoxes</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="ComboBoxes.html#d1e134089">ComboBoxes</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="ListBoxes.html#d1e137749">ListBoxes</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="RadioButtons.html#d1e141383">RadioButtons</a>
+                           <em class="ph i">
+                              <a class="xref" href="RadioButton.html#d1e138127">RadioButton</a>
+                           </em>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="TextBoxes.html#d1e145042">TextBoxes</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="SignatureFields.html#d1e148640">SignatureFields</a>
+                           <em class="ph i">
+                              <a class="xref" href="SignatureField.html#d1e145420">SignatureField</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">The order in which the focus moves to different form fields in the PDF when the tab key is pressed. Can return: Array of Buttons, CheckBoxes, ComboBoxes, ListBoxes, RadioButtons, TextBoxes or SignatureFields.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">textBoxes</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="TextBoxes.html#d1e145042">TextBoxes</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of text boxes.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1333579e368 ">
+                        <p class="p">textFrames</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e374 ">
+                        <p class="p">
+                           <a class="xref" href="TextFrames.html#d1e447245">TextFrames</a>
+                           <em class="ph i">
+                              <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e380 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e386 ">
+                        <p class="p description">A collection of text frames.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e178169__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e178169__d1e179884">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e2282">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e2288">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e2294">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2282 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2288 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2294 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2282 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2288 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2294 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2282 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2288 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2294 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179653">Varies <strong class="ph b">contentPlace</strong> (pageItems:<em class="ph i">Array of PageItem</em>, [linkPageItems:<em class="ph i">Boolean</em>=Boolean], [linkStories:<em class="ph i">Boolean</em>=Boolean], [mapStyles:<em class="ph i">Boolean</em>=Boolean], placePoint:<em class="ph i">Array of Number String</em>, destinationLayer:<em class="ph i">Layer</em>, [showingOptions:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Duplicate an object and place it into the target.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e2427">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e2433">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e2439">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2427 ">
+                        <p class="p">pageItems</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2433 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="PageItem.html#d1e182433">PageItem</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2439 ">
+                        <p class="p description">One or more page items to place or load</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2427 ">
+                        <p class="p">linkPageItems</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2433 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2439 ">
+                        <p class="p description">Whether to link pageItems in content placer (if true it will override link stories value) (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2427 ">
+                        <p class="p">linkStories</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2433 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2439 ">
+                        <p class="p description">Whether to link stories in content placer (only applicable for single story, pageItem links will also be created in case of more than one item) (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2427 ">
+                        <p class="p">mapStyles</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2433 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2439 ">
+                        <p class="p description">Whether to map styles in content placer (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2427 ">
+                        <p class="p">placePoint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2433 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2439 ">
+                        <p class="p description">The point at which to place (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2427 ">
+                        <p class="p">destinationLayer</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2433 ">
+                        <p class="p">
+                           <a class="xref" href="Layer.html#d1e175084">Layer</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2439 ">
+                        <p class="p description">The layer on which to place (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2427 ">
+                        <p class="p">showingOptions</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2433 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2439 ">
+                        <p class="p description">Whether to display the link options dialog (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179029">undefined <strong class="ph b">deleteAllLayoutSnapshots</strong> ()</p>
+
+         <p class="p description">Delete all layout snapshots for this Page.</p>
+
+         <p class="p methodName" id="d1e178169__d1e179023">undefined <strong class="ph b">deleteLayoutSnapshot</strong> ()</p>
+
+         <p class="p description">Delete the snapshot of the layout for the current Page size and shape.</p>
+
+         <p class="p methodName" id="d1e178169__d1e179341">undefined <strong class="ph b">detach</strong> ()</p>
+
+         <p class="p description">Detaches an overridden master page item from the master page.</p>
+
+         <p class="p methodName" id="d1e178169__d1e179099">
+            <a class="xref" href="Page.html#d1e178169">Page</a> 
+            <strong class="ph b">duplicate</strong> ([to:<em class="ph i">LocationOptions</em>=LocationOptions], reference:<em class="ph i">Varies</em>)</p>
+
+         <p class="p description">Duplicates the page.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e2720">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e2726">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e2732">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2720 ">
+                        <p class="p">to</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2726 ">
+                        <p class="p">
+                           <a class="xref" href="LocationOptions.html#d1e79159">LocationOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">LocationOptions.BEFORE</p>
+
+                        <p class="p enumInPTable">LocationOptions.AFTER</p>
+
+                        <p class="p enumInPTable">LocationOptions.AT_END</p>
+
+                        <p class="p enumInPTable">LocationOptions.AT_BEGINNING</p>
+
+                        <p class="p enumInPTable">LocationOptions.UNKNOWN</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2732 ">
+                        <p class="p description">The location at which to place the duplicate page relative to the reference object or within the document or spread.  (Optional)</p>
+
+                        <p class="p"> (default: LocationOptions.AT_END)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2720 ">
+                        <p class="p">reference</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2726 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2732 ">
+                        <p class="p description">The reference object. Note: Required when the to value specifies before or after. Can accept: Page or Spread. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179818">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">extractLabel</strong> (key:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Gets the label value associated with the specified key.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e2841">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e2847">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e2853">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2841 ">
+                        <p class="p">key</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2847 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2853 ">
+                        <p class="p description">The key.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179857">
+            <a class="xref" href="Page.html#d1e178169">Page</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e178169__d1e179785">undefined <strong class="ph b">insertLabel</strong> (key:<em class="ph i">String</em>, value:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Sets the label to the value associated with the specified key.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e2934">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e2940">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e2946">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2934 ">
+                        <p class="p">key</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2940 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2946 ">
+                        <p class="p description">The key.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e2934 ">
+                        <p class="p">value</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e2940 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e2946 ">
+                        <p class="p description">The value.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179035">
+            <a class="xref" href="Page.html#d1e178169">Page</a> 
+            <strong class="ph b">move</strong> ([to:<em class="ph i">LocationOptions</em>=LocationOptions], reference:<em class="ph i">Varies</em>, [binding:<em class="ph i">BindingOptions</em>=BindingOptions])</p>
+
+         <p class="p description">Moves the page.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e3045">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e3051">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e3057">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3045 ">
+                        <p class="p">to</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3051 ">
+                        <p class="p">
+                           <a class="xref" href="LocationOptions.html#d1e79159">LocationOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">LocationOptions.BEFORE</p>
+
+                        <p class="p enumInPTable">LocationOptions.AFTER</p>
+
+                        <p class="p enumInPTable">LocationOptions.AT_END</p>
+
+                        <p class="p enumInPTable">LocationOptions.AT_BEGINNING</p>
+
+                        <p class="p enumInPTable">LocationOptions.UNKNOWN</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3057 ">
+                        <p class="p description">The new location of the page relative to the reference object or within the document or spread.  (Optional)</p>
+
+                        <p class="p"> (default: LocationOptions.AT_END)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3045 ">
+                        <p class="p">reference</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3051 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3057 ">
+                        <p class="p description">The reference object. Note: Required when the to parameter value specifies before or after. Can accept: Page or Spread. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3045 ">
+                        <p class="p">binding</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3051 ">
+                        <p class="p">
+                           <a class="xref" href="BindingOptions.html#d1e70269">BindingOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">BindingOptions.RIGHT_ALIGN</p>
+
+                        <p class="p enumInPTable">BindingOptions.LEFT_ALIGN</p>
+
+                        <p class="p enumInPTable">BindingOptions.DEFAULT_VALUE</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3057 ">
+                        <p class="p description">The location of the binding spine in spreads. (Optional)</p>
+
+                        <p class="p"> (default: BindingOptions.DEFAULT_VALUE)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179223">Varies <strong class="ph b">place</strong> (fileName:<em class="ph i">File</em>, placePoint:<em class="ph i">Array of Number String</em>, destinationLayer:<em class="ph i">Layer</em>, [showingOptions:<em class="ph i">Boolean</em>=Boolean], [autoflowing:<em class="ph i">Boolean</em>=Boolean], withProperties:<em class="ph i">Object</em>)</p>
+
+         <p class="p description">Places the file.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e3215">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e3221">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e3227">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3215 ">
+                        <p class="p">fileName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3221 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3227 ">
+                        <p class="p description">The file to place</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3215 ">
+                        <p class="p">placePoint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3221 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3227 ">
+                        <p class="p description">The point at which to place (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3215 ">
+                        <p class="p">destinationLayer</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3221 ">
+                        <p class="p">
+                           <a class="xref" href="Layer.html#d1e175084">Layer</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3227 ">
+                        <p class="p description">The layer on which to place (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3215 ">
+                        <p class="p">showingOptions</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3221 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3227 ">
+                        <p class="p description">Whether to display the import options dialog (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3215 ">
+                        <p class="p">autoflowing</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3221 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3227 ">
+                        <p class="p description">Whether to autoflow placed text (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3215 ">
+                        <p class="p">withProperties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3221 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3227 ">
+                        <p class="p description">Initial values for properties of the placed object(s) (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179141">
+            <a class="xref" href="Story.html#d1e447623">Story</a> 
+            <strong class="ph b">placeAndLink</strong> (parentStory:<em class="ph i">Story</em>, placePoint:<em class="ph i">Array of Number String</em>, destinationLayer:<em class="ph i">Layer</em>, [showingOptions:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Deprecated: Use contentPlace method. Original Description: Create a linked story and place it into the target.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e3452">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e3458">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e3464">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3452 ">
+                        <p class="p">parentStory</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3458 ">
+                        <p class="p">
+                           <a class="xref" href="Story.html#d1e447623">Story</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3464 ">
+                        <p class="p description">The story to place and link from.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3452 ">
+                        <p class="p">placePoint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3458 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3464 ">
+                        <p class="p description">The point at which to place (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3452 ">
+                        <p class="p">destinationLayer</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3458 ">
+                        <p class="p">
+                           <a class="xref" href="Layer.html#d1e175084">Layer</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3464 ">
+                        <p class="p description">The layer on which to place (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3452 ">
+                        <p class="p">showingOptions</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3458 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3464 ">
+                        <p class="p description">Whether to display the link options dialog (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e178908">
+            <a class="xref" href="PageItem.html#d1e182433">PageItem</a> 
+            <strong class="ph b">placeXML</strong> (using:<em class="ph i">XMLElement</em>, placePoint:<em class="ph i">Array of Number String</em>, [autoflowing:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Places the XML element onto a page. If the place point is above an existing page item, place the XML element into the page item.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e3632">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e3638">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e3644">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3632 ">
+                        <p class="p">using</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3638 ">
+                        <p class="p">
+                           <a class="xref" href="XMLElement.html#d1e506473">XMLElement</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3644 ">
+                        <p class="p description">The XML element to place.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3632 ">
+                        <p class="p">placePoint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3638 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3644 ">
+                        <p class="p description">The point at which to place the object, specified in the format [x, y].</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3632 ">
+                        <p class="p">autoflowing</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3638 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3644 ">
+                        <p class="p description">If true, autoflows placed text. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179444">undefined <strong class="ph b">reframe</strong> (in:<em class="ph i">Varies</em>, opposingCorners:<em class="ph i">Array of Varies</em>)</p>
+
+         <p class="p description">Move the bounding box of the page item</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e3779">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e3785">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e3791">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3779 ">
+                        <p class="p">in</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3785 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3791 ">
+                        <p class="p description">The bounding box to resize. Can accept: CoordinateSpaces enumerator or Ordered array containing coordinateSpace:CoordinateSpaces enumerator, boundsKind:BoundingBoxLimits enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3779 ">
+                        <p class="p">opposingCorners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3785 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3791 ">
+                        <p class="p description">Opposing corners of new bounding box in the given coordinate space</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179093">undefined <strong class="ph b">remove</strong> ()</p>
+
+         <p class="p description">Deletes the Page.</p>
+
+         <p class="p methodName" id="d1e178169__d1e179938">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e3896">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e3902">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e3908">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3896 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3902 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3908 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3896 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3902 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3908 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e3896 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e3902 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e3908 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179335">undefined <strong class="ph b">removeOverride</strong> ()</p>
+
+         <p class="p description">Removes the override from a previously overridden master page item.</p>
+
+         <p class="p methodName" id="d1e178169__d1e179479">undefined <strong class="ph b">resize</strong> (in:<em class="ph i">Varies</em>, from:<em class="ph i">Varies</em>, by:<em class="ph i">ResizeMethods</em>, values:<em class="ph i">Array of Varies</em>, [resizeIndividually:<em class="ph i">Boolean</em>=Boolean], [consideringRulerUnits:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Resize the page item.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e4047">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e4053">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e4059">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4047 ">
+                        <p class="p">in</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4053 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4059 ">
+                        <p class="p description">The bounding box to resize. Can accept: CoordinateSpaces enumerator, BoundingBoxLimits enumerator or Ordered array containing coordinateSpace:CoordinateSpaces enumerator, boundsKind:BoundingBoxLimits enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4047 ">
+                        <p class="p">from</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4053 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4059 ">
+                        <p class="p description">The transform origin. Legal specifications: relative to bounding box: anchor | {anchor | {x,y}, bounds kind [, coordinate space]}; relative to coordinate space: {x,y} | {{x,y}[, coordinate space]}; relative to layout window ruler: {{x,y}, page index | bounds kind}. Can accept: Array of 2 Reals, AnchorPoint enumerator or Array of Arrays of 2 Reals, CoordinateSpaces enumerators, AnchorPoint enumerators, BoundingBoxLimits enumerators or Long Integers.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4047 ">
+                        <p class="p">by</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4053 ">
+                        <p class="p">
+                           <a class="xref" href="ResizeMethods.html#d1e74755">ResizeMethods</a>
+                        </p>
+
+                        <p class="p enumInPTable">ResizeMethods.ADDING_CURRENT_DIMENSIONS_TO</p>
+
+                        <p class="p enumInPTable">ResizeMethods.MULTIPLYING_CURRENT_DIMENSIONS_BY</p>
+
+                        <p class="p enumInPTable">ResizeMethods.REPLACING_CURRENT_DIMENSIONS_WITH</p>
+
+                        <p class="p enumInPTable">ResizeMethods.RESHAPING_AREA_TO_RATIO</p>
+
+                        <p class="p enumInPTable">ResizeMethods.RESHAPING_BORDER_TO_RATIO</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4059 ">
+                        <p class="p description">How the current dimensions are affected by the given values</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4047 ">
+                        <p class="p">values</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4053 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4059 ">
+                        <p class="p description">The width and height values. Legal dimensions specifications: {x, y [, coordinate space]}, {x, resize constraint [, coordinate space]}, or {resize constraint, y [, coordinate space]}; where x and y are real numbers and coordinate space is used to determine _only_ the unit of length for x and y; coordinate space is ignored for the 'current dimensions times' resize method). Can accept: Array of Reals, ResizeConstraints enumerators or CoordinateSpaces enumerators.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4047 ">
+                        <p class="p">resizeIndividually</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4053 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4059 ">
+                        <p class="p description">If false and multiple page items are targeted, the new dimensions are attained only by moving the individual items rather than resizing them. (Optional)</p>
+
+                        <p class="p"> (default: true)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4047 ">
+                        <p class="p">consideringRulerUnits</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4053 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4059 ">
+                        <p class="p description">If true then a ruler location is interpreted using ruler units rather than points. The default value is false. This parameter has no effect unless the reference point is specified relative to a page. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179598">Varies <strong class="ph b">resolve</strong> (location:<em class="ph i">Varies</em>, in:<em class="ph i">CoordinateSpaces</em>, [consideringRulerUnits:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Get the coordinates of the given location in the specified coordinate system.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e4269">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e4275">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e4281">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4269 ">
+                        <p class="p">location</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4275 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4281 ">
+                        <p class="p description">The location requested. Can accept: Array of 2 Reals, AnchorPoint enumerator or Array of Arrays of 2 Reals, CoordinateSpaces enumerators, AnchorPoint enumerators, BoundingBoxLimits enumerators or Long Integers.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4269 ">
+                        <p class="p">in</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4275 ">
+                        <p class="p">
+                           <a class="xref" href="CoordinateSpaces.html#d1e74479">CoordinateSpaces</a>
+                        </p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.PASTEBOARD_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.PARENT_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.INNER_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.PAGE_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.SPREAD_COORDINATES</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4281 ">
+                        <p class="p description">The coordinate space to use.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4269 ">
+                        <p class="p">consideringRulerUnits</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4275 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4281 ">
+                        <p class="p description">If true then a ruler location is interpreted using ruler units rather than points. The default value is false. This parameter has no effect unless the reference point is specified relative to a page. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179348">undefined <strong class="ph b">select</strong> ([existingSelection:<em class="ph i">SelectionOptions</em>=SelectionOptions])</p>
+
+         <p class="p description">Selects the object.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e4411">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e4417">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e4423">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4411 ">
+                        <p class="p">existingSelection</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4417 ">
+                        <p class="p">
+                           <a class="xref" href="SelectionOptions.html#d1e94282">SelectionOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">SelectionOptions.ADD_TO</p>
+
+                        <p class="p enumInPTable">SelectionOptions.REMOVE_FROM</p>
+
+                        <p class="p enumInPTable">SelectionOptions.REPLACE_WITH</p>
+
+                        <p class="p enumInPTable">SelectionOptions.SET_KEY</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4423 ">
+                        <p class="p description">The selection status of the Page in relation to previously selected objects. (Optional)</p>
+
+                        <p class="p"> (default: SelectionOptions.REPLACE_WITH)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e178978">
+            <a class="xref" href="PageItem.html#d1e182433">PageItem</a> 
+            <strong class="ph b">setContent</strong> (using:<em class="ph i">String</em>, relativeBasePath:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Replaces the content of XML element with content imported from a file.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e4509">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e4515">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e4521">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4509 ">
+                        <p class="p">using</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4515 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4521 ">
+                        <p class="p description">The file path to the import file.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4509 ">
+                        <p class="p">relativeBasePath</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4515 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4521 ">
+                        <p class="p description">Base path used to resolve relative paths. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179017">undefined <strong class="ph b">snapshotCurrentLayout</strong> ()</p>
+
+         <p class="p description">Create a snapshot of the layout for the current Page size and shape.</p>
+
+         <p class="p methodName" id="d1e178169__d1e179845">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the Page.</p>
+
+         <p class="p methodName" id="d1e178169__d1e179871">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+         <p class="p methodName" id="d1e178169__d1e179372">undefined <strong class="ph b">transform</strong> (in:<em class="ph i">CoordinateSpaces</em>, from:<em class="ph i">Varies</em>, withMatrix:<em class="ph i">Varies</em>, replacingCurrent:<em class="ph i">Varies</em>, [consideringRulerUnits:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Transform the page item.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e4660">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e4666">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e4672">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4660 ">
+                        <p class="p">in</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4666 ">
+                        <p class="p">
+                           <a class="xref" href="CoordinateSpaces.html#d1e74479">CoordinateSpaces</a>
+                        </p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.PASTEBOARD_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.PARENT_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.INNER_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.PAGE_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.SPREAD_COORDINATES</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4672 ">
+                        <p class="p description">The coordinate space to use</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4660 ">
+                        <p class="p">from</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4666 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4672 ">
+                        <p class="p description">The temporary origin during the transformation. Can accept: Array of 2 Reals, AnchorPoint enumerator or Array of Arrays of 2 Reals, CoordinateSpaces enumerators, AnchorPoint enumerators, BoundingBoxLimits enumerators or Long Integers.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4660 ">
+                        <p class="p">withMatrix</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4666 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4672 ">
+                        <p class="p description">Transform matrix. Can accept: Array of 6 Reals or TransformationMatrix.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4660 ">
+                        <p class="p">replacingCurrent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4666 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4672 ">
+                        <p class="p description">Transform components to consider; providing this optional parameter causes the target's existing transform components to be replaced with new values.  Without this parameter, the given matrix is concatenated onto the target's existing transform combining the effect of the two. Can accept: MatrixContent enumerator, Array of MatrixContent enumerators or Long Integer. (Optional)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4660 ">
+                        <p class="p">consideringRulerUnits</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4666 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4672 ">
+                        <p class="p description">If true then a ruler based origin is interpreted using ruler units rather than points. The default value is false. This parameter has no effect unless the reference point is specified relative to a page. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e178169__d1e179569">
+            <a class="xref" href="TransformationMatrix.html#d1e223702">TransformationMatrix</a> 
+            <strong class="ph b">transformValuesOf</strong> (in:<em class="ph i">CoordinateSpaces</em>)</p>
+
+         <p class="p description">Get the transformation values of the page item.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1333579e4847">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1333579e4853">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1333579e4859">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1333579e4847 ">
+                        <p class="p">in</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1333579e4853 ">
+                        <p class="p">
+                           <a class="xref" href="CoordinateSpaces.html#d1e74479">CoordinateSpaces</a>
+                        </p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.PASTEBOARD_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.PARENT_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.INNER_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.PAGE_COORDINATES</p>
+
+                        <p class="p enumInPTable">CoordinateSpaces.SPREAD_COORDINATES</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1333579e4859 ">
+                        <p class="p description">The coordinate space to use</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Bookmark.html#d1e103842">Bookmark</a>.destination</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="LayoutWindow.html#d1e53152">LayoutWindow</a>.activePage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="FormField.html#d1e116127">FormField</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Button.html#d1e119226">Button</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MultiStateObject.html#d1e123782">MultiStateObject</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="CheckBox.html#d1e127184">CheckBox</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ComboBox.html#d1e130819">ComboBox</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ListBox.html#d1e134467">ListBox</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="RadioButton.html#d1e138127">RadioButton</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextBox.html#d1e141762">TextBox</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="SignatureField.html#d1e145420">SignatureField</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Movie.html#d1e149018">Movie</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Sound.html#d1e152999">Sound</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PageItem.html#d1e182433">PageItem</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Oval.html#d1e185532">Oval</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Rectangle.html#d1e189459">Rectangle</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="GraphicLine.html#d1e193386">GraphicLine</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Polygon.html#d1e197272">Polygon</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Group.html#d1e201232">Group</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Image.html#d1e204655">Image</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EPS.html#d1e207913">EPS</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PDF.html#d1e211120">PDF</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="WMF.html#d1e214311">WMF</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PICT.html#d1e217442">PICT</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Graphic.html#d1e220572">Graphic</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Guide.html#d1e225088">Guide</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="SplineItem.html#d1e229224">SplineItem</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EPSText.html#d1e233044">EPSText</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ImportedPage.html#d1e236205">ImportedPage</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MediaItem.html#d1e239368">MediaItem</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HtmlItem.html#d1e246120">HtmlItem</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextFrame.html#d1e443266">TextFrame</a>.parentPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkPageDestination.html#d1e106799">HyperlinkPageDestination</a>.destinationPage</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="GridDataInformation.html#d1e330150">GridDataInformation</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MarginPreference.html#d1e261377">MarginPreference</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Preference.html#d1e279179">Preference</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Section.html#d1e227076">Section</a>.pageStart</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180014">add</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Page.html#d1e178169">Page</a>.<a class="xref" href="Page.html#d1e178169__d1e179099">duplicate</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Page.html#d1e178169">Page</a>.<a class="xref" href="Page.html#d1e178169__d1e179035">move</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Page.html#d1e178169">Page</a>.<a class="xref" href="Page.html#d1e178169__d1e179857">getElements</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180282">anyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180294">everyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180254">nextItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180227">previousItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180122">itemByID</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180068">item</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180320">[]</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180095">itemByName</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180150">itemByRange</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180191">firstItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180203">lastItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Pages.html#d1e179995">Pages</a>.<a class="xref" href="Pages.html#d1e179995__d1e180215">middleItem</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="related-links">
+<ul class="ullinks">
+<li class="link ulchildlink"><strong><a href="PageItem.html">PageItem</a></strong><br></br>
+</li>
+<li class="link ulchildlink"><strong><a href="TextFrame.html">TextFrame</a></strong><br></br>
+</li>
+</ul>
+</div>
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>
