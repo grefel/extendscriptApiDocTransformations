@@ -450,22 +450,25 @@ auf `.bar:not([hidden])`; mit deaktivierter Umbruchregel meldet er den
 
 ## Schmales Fenster
 
-Sauber bis hinunter zu **650 px** Fensterbreite, ohne waagerechtes Scrollen.
-`check-site.js` misst das bei sieben Breiten auf zwei Seiten nach.
+Sauber bis hinunter zu **278 px** logischer Breite, ohne waagerechtes Scrollen.
+`check-site.js` misst das bei fünfzehn Breiten nach — von 1600 px bis zu einem
+320-px-Telefon.
 
 Mit Zoom zählt die **logische** Breite, also Fenster ÷ Zoom — dieselbe Grenze.
 Beim Standardzoom 1,15 heißt das: ein 750-px-Fenster ist logisch 652 px und
 gerade noch drin. Der Kopf ist der engste Punkt; gemessen passt er bis 950 px
 logischer Breite, bei 925 px ragt er 11 px heraus. Darum treten Tastenkürzel
 und API-Version ab 950 px ab, nicht erst ab 900.
-1000 px bei 150 % sind logisch 667 px und damit in Ordnung, 900 px wären 600 px
-und damit darunter. Unterhalb von 650 px müsste die Seitenleiste einklappen; das
-ist eigene Arbeit.
+1000 px bei 150 % sind logisch 667 px und damit in Ordnung, 900 px wären 600 px.
+Unterhalb von 620 px klappt die Seitenleiste weg, siehe „Telefon" unten.
 
 Drei Stellen brauchen deshalb eine Reserve, die bei normaler Schrift nie greift:
 `.args` bekommt `minmax(0,auto)` statt `auto` für die beiden ersten Spalten, und
 Beschreibungen (`.mem .desc`, `td.d`, `.arg .ad`) `overflow-wrap:anywhere` —
-Adobe schreibt dort gelegentlich einen Pfad oder Bezeichner am Stück.
+Adobe schreibt dort gelegentlich einen Pfad oder Bezeichner am Stück. Dasselbe
+gilt für `.mem .id`: eine Signatur wie
+`getStyleConflictResolutionStrategy(charOrParaStyle?)` ist für den Umbruch ein
+einziges Wort und wird 444 px breit.
 
 Die Tabellen laufen mit **`table-layout:fixed`**. Vorher bestimmte der längste
 Bezeichner die Namensspalte — `allowFontSizeAndLeadingAdjustment` erzwang 229 px,
@@ -479,18 +482,91 @@ bei mittlerer Fensterbreite zu schmal für „read/write", und der Text lief in 
 Beschreibung. Sie hat jetzt eine **feste Breite** — der Wortlaut ist fest, der
 Platzbedarf also auch.
 
-| Breite | Verhalten |
+| Logische Breite | Verhalten |
 |---|---|
 | ab 1250 px | „Recent" mit drei Einträgen |
 | ab 1100 px | Zugriff ausgeschrieben (78 px) |
 | unter 1100 px | Zugriff als `ro`/`rw` (46 px, Kopf „ACC"), Beschreibung bekommt den Platz |
-| unter 900 px | Kopfzeile schrumpft (Tastenkürzel und API-Version treten ab), Parameter stehen untereinander statt in drei Spalten |
+| unter 950 px | Kopfzeile schrumpft (Tastenkürzel und API-Version treten ab), Parameter stehen untereinander statt in drei Spalten |
+| unter 900 px | Der Hierarchie-Kasten rutscht unter den Kopf |
+| unter 620 px | Seitenleiste weg, Inhalt über die volle Breite; A− / A+ und der Themeknopf treten ab |
+| unter 460 px | Wortmarke weicht, „ExtendScript" wird zu „ES", Tabellen werden Blöcke, Einstiegspunkte als dichte Reihe |
+
+Die Grenzen sind **logische** Breiten. Eine Ausnahme: der Zoomwechsel bei 620 px
+misst echte Fensterpixel — unterhalb davon sind beide Maße ohnehin dasselbe.
 
 Zwei Stellen brauchen eine saubere Trennstelle statt eines harten Umbruchs:
 `td.n` und `td.t` bekommen `overflow-wrap:anywhere` als letzte Reserve, und die
 Collection-Notation trägt ein `<wbr>` vor der Klammer — aus
 `EventListeners<EventListener>` wird so ein Umbruch **vor** `<EventListener>`
 statt mitten im Bezeichner.
+
+## Telefon
+
+Bis zum Umbau endeten die Regeln bei 950 px, und ein Telefon fiel drei Mal
+darunter. Gemessen auf einem 390-px-Gerät: bei Standardzoom bleiben **339
+logische Pixel**, davon nahm die Seitenleiste 200. Der Inhaltsspalte blieben
+139 px, der Tabelle 99, und darin bekam die Beschreibung **5 px** — eine Spalte,
+in der jeder Buchstabe auf einer eigenen Zeile stand. Die Zugriffsspalte war mit
+ihren festen 46 px breiter als Name und Typ zusammen. Zusätzlich schob die
+Kopfzeile die Seite auf 606 px, weil sie nicht umbricht.
+
+Der Grund für den Totalausfall statt eines hässlichen Überhangs ist
+`table-layout:fixed`: es verteilt Prozentwerte **ohne Untergrenze** weiter. Eine
+Tabelle mit `auto` wäre über den Rand gelaufen und mit Pinch-Zoom noch lesbar
+geblieben — so verhält sich die alte Website.
+
+Zwei Grenzen, nicht eine. Ohne Seitenleiste trägt die Tabelle noch bis etwa
+460 px; ein schmales Fenster am Rechner behält sie dadurch.
+
+- **Unter 620 px fällt die Seitenleiste weg** (`display:none`, `.grid` einspaltig).
+  Navigiert wird über die Suche, die dafür im Kopf bleibt. Kein Schubfach: es
+  kostet Skript, Fokusverwaltung und einen Knopf, und die Suche kann dasselbe.
+- **Unter 460 px werden die Tabellen zu Blöcken.** Name und Zugriff nebeneinander,
+  Typ und Beschreibung darunter — dieselbe Form, die die Methoden als `.mem`
+  schon haben. Umgestellt wird **nur die Darstellung**: `thead` verschwindet,
+  `tr` wird ein Grid aus zwei Spalten, die `<tr>` behalten ihre `id`. Deshalb
+  arbeiten Deep-Links, Filterzeile, Listenansicht und der UXP-Umschalter
+  unverändert weiter, und `render.js` musste nichts anderes ausgeben.
+- **Einstiegspunkte als dichte Reihe, unter 560 px.** Siehe den eigenen
+  Abschnitt weiter unten — die 19 Blasen standen dort auf 19 Zeilen.
+
+Die Kopfzeile bleibt dabei **einzeilig auf 44 px** — `.bar` und `.side` kleben
+auf diesem Wert, und `stickyOffset()` rechnet mit derselben Zahl. Dafür geben
+A− / A+ und der Themeknopf ihren Platz ab (das Gerät kann beides selbst:
+Pinch-Zoom und `prefers-color-scheme`), darunter auch die Wortmarke — aber nur
+dort, wo der Produktumschalter sie ersetzt, nicht auf der Startseite. Übrig
+bleiben Produktumschalter, ExtendScript/UXP und Suche. „ExtendScript"
+ausgeschrieben kostete 55 px, die die Suche braucht, und steht deshalb als „ES"
+da — derselbe Kniff wie in der Zugriffsspalte.
+
+Drei Stellen brauchten zusätzlich eine Trennstelle, die am Rechner nie greift:
+`.mem .id` (Signaturen), `.revbox a` (Rückwärtsverweise, breit bewusst
+einzeilig) und `.arg .an`. Letzteres gibt unter 950 px sein `white-space:nowrap`
+auf — in der Grid-Fassung hält es den Parameternamen in seiner Spalte zusammen,
+im Fließtext wird `clearingOverridesThroughRootObjectStyle` sonst 303 px breit
+und läuft aus der Seite.
+
+**Unter 620 px echter Fensterbreite steht der Zoom auf 1** statt auf 1,15 — auf
+einem 390-px-Telefon sind das 51 px mehr, und die Schriftgröße bringt das Gerät
+selbst mit. Die Regel muss eine `@media`-Abfrage sein: sie kann nicht im
+skalierten Raum messen, weil sie den Maßstab ändert. Sie trägt `!important`,
+sonst gewönne eine am Rechner gespeicherte Größe, die als Inline-Stil auf
+`:root` landet.
+
+Die 620 px sind so gewählt, dass der Übergang **stetig** bleibt: 621 px bei
+Zoom 1,15 sind logisch 540, 620 px bei Zoom 1 sind logisch 620 — beide unter
+der 620er-Grenze der Container-Query, die Seitenleiste bleibt also auf beiden
+Seiten weg. Gemessen verschwindet sie bei 713 px Fensterbreite und kommt bis
+hinunter zu 320 px nicht zurück; `check-site.js` prüft genau diese drei
+Punkte. Der Preis ist ein Sprung in der Schriftgröße, wenn man ein Fenster am
+Rechner über diese Breite zieht.
+
+Geprüft wird das bei sechs Breiten von 700 px bis 320 px auf zwei Seiten, dazu
+gezielt bei 390 px: Seitenleiste weg, Kopfzeile einzeilig, `tr` als Grid,
+Zugriff neben dem Namen, Typ darunter, Beschreibung über 250 px statt 5.
+Schaltet man die beiden Container-Queries ab, fallen 20 Prüfungen — mit 307 px
+Überhang und 157 überlaufenden Zellen bei 390 px genau das alte Bild.
 
 ## Zwei Browser
 
@@ -750,6 +826,23 @@ Nur für InDesign und InDesign Server. `render.js` filtert die Liste gegen das
 jeweilige Modell, damit keine Blase ins Leere zeigt, falls Adobe einmal ein
 Objekt umbenennt — geprüft wird das auch.
 
+**Die Breite muss man dem Raster ausdrücklich geben.** `.startrow` steht auf
+`align-items: flex-start`; sobald es unter 1150 px eine Spalte wird, heißt das
+für `.quick` fit-content — also eine **unbestimmte** Breite. Und für
+`repeat(auto-fill, …)` ist eine unbestimmte Breite genau *eine* Wiederholung.
+Die 19 Blasen standen dadurch von 460 bis 1130 px logischer Breite einspaltig
+untereinander, während daneben bis zu 990 px frei blieben. `align-self: stretch`
+macht die Breite bestimmt, dann rechnet `auto-fill` wieder. Nichts lief dabei
+über den Rand, der Fehler fiel also durch jede Überhang-Prüfung — `check-site.js`
+misst deshalb bei sechs Breiten die Breite des Kastens gegen den Platz daneben.
+
+**Unter 560 px wird aus dem Raster eine dichte Reihe** (`display: flex`,
+`flex-wrap: wrap`). Die 168 px Spaltenbreite sind die Breite des längsten Namens,
+`ChangeGrepPreference`, und lohnen sich, solange drei Spalten hineinpassen —
+dafür braucht es 3 × 168 + 2 × 6 = 516 px. Darunter blieben zwei Spalten übrig
+und „Page" säße allein in einer 168-px-Zelle. Gemessen: 19 Blasen auf 4 Zeilen
+statt auf 10.
+
 ### Zwei Hinweise aus Adobes Migrationsanleitung
 
 An `Application.activeScript` (unter UXP nur ein Pfad als String, kein
@@ -823,9 +916,21 @@ aus der Kopie — sonst stünde „File async“ auch unter ExtendScript in der 
 
 ### Theme, Laufzeit und Rechtliches
 
-- **Hell ist der Standard.** Ohne gespeicherte Wahl und ohne JavaScript gilt die
-  helle Palette — sie steht auf `:root`, die dunkle unter `:root[data-t="dark"]`.
-  Es wird also nur gesetzt, wer ausdrücklich dunkel will.
+- **Ohne Wahl entscheidet das System.** Hell steht auf `:root`, dunkel unter
+  `:root[data-t="dark"]` **und** unter `prefers-color-scheme: dark` in der Form
+  `:root:not([data-t="light"])`. Das `:not` lässt die getroffene Wahl gewinnen,
+  deshalb schreibt das Inline-Skript beide Werte, nicht mehr nur `dark`.
+
+  Nötig wurde das durch den Telefonstand: dort gibt es keinen Umschalter mehr.
+  Es funktioniert **ohne JavaScript**, deshalb steht es im Stylesheet und nicht
+  im Inline-Skript — zum Preis einer zweiten Abschrift der Palette. CSS kann
+  denselben Regelsatz nicht unter zwei Bedingungen wiederverwenden, und
+  `light-dark()` wäre in älteren Browsern ein ungültiger Wert: die Seite stünde
+  dann ganz ohne Farben da. **Beide Blöcke immer zusammen ändern.**
+
+  `site.js` liest den Zustand seitdem nicht mehr aus `data-t` allein — ohne
+  `matchMedia` böte der Knopf auf einem dunklen System „dark mode" an und
+  schaltete beim ersten Druck nach hell.
 - **100 % bedeutet zoom 1,15.** Der ungezoomte Standard war zu klein. Die
   Bezugsgröße steht als `--fs: 1.15` im Stylesheet, damit ohne JavaScript
   dasselbe gilt, und die Knöpfe beschriften relativ dazu.
@@ -848,9 +953,13 @@ aus der Kopie — sonst stünde „File async“ auch unter ExtendScript in der 
     Seitenleiste bei 150 % um 500 px unter das Fenster.
   - **Media Queries sehen weiter die echte Fensterbreite.** Bei 150 % auf
     1000 px hat die Seite logisch 667 px, nähme aber die Regeln für 1000 px.
-    Die drei Breiten-Umbrüche sind deshalb **Container Queries** auf `body`
+    Die Breiten-Umbrüche sind deshalb **Container Queries** auf `body`
     (`container: page / inline-size`) — ein Container misst im skalierten Raum.
-    Nur `@media print` ist geblieben.
+    Genau eine Ausnahme muss `@media` bleiben: die Regel, die den Zoom auf dem
+    Telefon auf 1 setzt. Sie kann nicht im skalierten Raum messen, weil sie den
+    Maßstab selbst ändert. Sonst sind als `@media` nur `print`,
+    `prefers-color-scheme` und `hover: none` geblieben — die fragen nicht nach
+    Breite.
 
   Geprüft wird die gerenderte Größe, nicht `getComputedStyle().fontSize`:
   `zoom` lässt die berechnete Schriftgröße unverändert.

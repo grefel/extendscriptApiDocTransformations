@@ -1,7 +1,7 @@
 /* Gemeinsames Stylesheet aller Seiten. Wird einmal geladen und ueber alle
    1153 Seiten hinweg gecacht. */
-/* Hell ist der Standard: ohne gespeicherte Wahl und ohne JavaScript gilt diese
-   Palette. --dim und --accent erreichen auf allen drei Untergruenden
+/* Hell ist der Ausgangspunkt. Ohne gespeicherte Wahl entscheidet darueber
+   hinaus prefers-color-scheme, siehe den Block unter der dunklen Palette. --dim und --accent erreichen auf allen drei Untergruenden
    (--bg, --panel, --rail) WCAG AA 4.5:1.
 
    color-scheme faerbt die nativen Bedienelemente mit: ohne das zeichnet Chrome
@@ -11,7 +11,8 @@
    --fs ist der Zoom, den die Knoepfe A− / A+ im Kopf setzen. zoom skaliert die
    ganze Seite — Schrift, Polsterung, Spaltenbreiten —, genau wie der Zoom des
    Browsers. Nur die Schrift zu vergroessern reichte nicht: die Objektspalte
-   blieb 230px breit und schnitt die Namen ab.
+   blieb 230px breit und schnitt die Namen ab. Auf dem Telefon steht --fs auf 1,
+   siehe den Abschnitt "Telefon" am Ende.
 
    Einziger Haken: 100vh rechnet den Zoom nicht mit. Im skalierten
    Koordinatenraum stehen nur 100vh/--fs zur Verfuegung, deshalb steht das so
@@ -66,6 +67,37 @@
   --rw: hsl(11, 50%, 45%);
   --enum: #c08cf0;
   --ev: #f2836b;
+}
+
+/* Ohne ausdrueckliche Wahl entscheidet die Systemeinstellung. Auf dem Telefon
+   faellt der Umschalter weg, dort ist das der einzige Weg zu Dunkel.
+   :not([data-t="light"]) laesst die getroffene Wahl gewinnen — das Inline-Skript
+   im <head> schreibt dafuer beide Werte, nicht nur "dark".
+
+   Die Palette steht hier ein zweites Mal: CSS kann denselben Regelsatz nicht
+   unter zwei Bedingungen wiederverwenden, und light-dark() waere in aelteren
+   Browsern ein ungueltiger Wert — dann stuende die Seite ganz ohne Farben da.
+   Beide Bloecke also immer zusammen aendern. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-t="light"]) {
+    color-scheme: dark;
+    --sb: #2f3745;
+    --sb-h: #414c5e;
+    --field: #6b7381;
+    --bg: #2a2f39;
+    --panel: #21252d;
+    --rail: #232730;
+    --ink: #a6abb4;
+    --dim: #888f9b;
+    --line: #232935;
+    --accent: hsl(100, 61%, 37%);
+    --accent-soft: #16283f;
+    --warn: #e0a458;
+    --ro: #8b94a6;
+    --rw: hsl(11, 50%, 45%);
+    --enum: #c08cf0;
+    --ev: #f2836b;
+  }
 }
 
 * {
@@ -1346,10 +1378,13 @@ ul.grid li {
   font: 12.5px var(--mono)
 }
 
-/* Beschreibungen sind Fliesstext, koennen aber einzelne sehr lange Zeichenfolgen
-   enthalten (Adobe schreibt dort auch mal einen Pfad oder Bezeichner am Stueck).
-   Ohne diese Reserve sprengt so ein Wort bei grosser Schrift die Spalte. */
+/* Alles, was ein einzelnes langes Wort sein kann, muss notfalls mittendrin
+   brechen: Adobe schreibt in Beschreibungen auch mal einen Pfad am Stueck, und
+   Bezeichner wie getStyleConflictResolutionStrategy(charOrParaStyle?) bieten von
+   sich aus keine Trennstelle. Ohne die Reserve laufen sie bei schmalem Fenster
+   oder grosser Schrift ueber den Rand. */
 .mem .desc,
+.mem .id,
 td.d,
 .arg .ad {
   overflow-wrap: anywhere
@@ -1431,9 +1466,20 @@ a[data-uxp="off"]:not([href]) {
   text-decoration: none
 }
 
+/* Untereinander statt nebeneinander — und dabei muss .quick ausdruecklich
+   ueber die volle Breite gehen. .startrow steht auf align-items:flex-start;
+   als Spalte heisst das fit-content in der Breite, also eine unbestimmte
+   Groesse. Fuer repeat(auto-fill, ...) ist eine unbestimmte Breite genau eine
+   Wiederholung: die 19 Blasen standen von 460 bis 1130 px logischer Breite in
+   einer 168-px-Spalte untereinander, waehrend daneben bis zu 990 px frei
+   blieben. Mit stretch wird die Breite bestimmt und auto-fill rechnet wieder. */
 @container page (max-width: 1150px) {
   .startrow { flex-direction: column }
-  .quick { max-width: none }
+
+  .quick {
+    max-width: none;
+    align-self: stretch
+  }
 }
 
 /* Kurzreferenz: Vorschaubild links, Text rechts; bei schmalem Fenster
@@ -1763,10 +1809,15 @@ footer .by .sep {
     margin-bottom: 7px
   }
 
+  /* Und der Name gibt sein nowrap auf. In der Grid-Fassung haelt es ihn in
+     seiner Spalte zusammen; hier steht er im Fliesstext, und ein Parameter wie
+     clearingOverridesThroughRootObjectStyle wird 303 px breit. */
   .arg .an,
   .arg .at {
     display: inline;
-    margin-right: 9px
+    margin-right: 9px;
+    white-space: normal;
+    overflow-wrap: anywhere
   }
 
   .arg .at {
@@ -1802,6 +1853,176 @@ footer .by .sep {
   .kbtn .keys,
   .apiver {
     display: none
+  }
+}
+
+/* Kein Zoom auf dem Telefon: 1,15 kostete dort 15 % der ohnehin knappen
+   Breite — aus 390 px wurden 339 —, und Schriftgroesse bringt das Geraet
+   selbst mit, ueber Pinch-Zoom und die Textgroesse des Systems.
+
+   Als @media, nicht als @container: die Containerbreite ist eine Funktion des
+   Zooms, den diese Regel aendert. Die 620 px sind deshalb echte Fensterpixel
+   und genau so gewaehlt, dass der Uebergang stetig bleibt — 620 px bei Zoom 1
+   sind logisch 620, 621 px bei Zoom 1,15 sind logisch 540. Die Regeln
+   darunter greifen also ohne Luecke und ohne Sprung zurueck.
+
+   !important, weil site.js und das Inline-Skript --fs als Inline-Stil setzen,
+   sobald eine Groesse gespeichert ist. Die Knoepfe dafuer stehen hier ohnehin
+   nicht mehr, eine alte Wahl vom Rechner wuerde die Seite sonst aber
+   weiterhin zusammenstauchen. */
+@media (max-width: 620px) {
+  :root {
+    --fs: 1 !important
+  }
+}
+
+/* Einstiegspunkte dicht in der Reihe statt im Raster. Das Raster fluchtet die
+   Blasen in 168 px breiten Spalten — das ist die Breite des laengsten Namens,
+   ChangeGrepPreference, und lohnt sich, solange drei Spalten hineinpassen.
+   Dafuer braucht es 3 × 168 + 2 × 6 = 516 px, also rund 560 px logische
+   Breite. Darunter blieben zwei Spalten uebrig, und "Page" saesse allein in
+   einer 168-px-Zelle.
+
+   Die Reihe packt stattdessen dicht: 19 Blasen stehen auf 5 Zeilen statt auf
+   10. Der ausgefranste rechte Rand, der beim Entwurf gegen flex-wrap sprach,
+   faellt so nicht auf. Die Blasen duerfen schrumpfen — mit overflow:hidden
+   ist ihre Mindestbreite 0, ein langer Name endet also mit
+   Auslassungspunkten, statt ueber den Rand zu laufen. */
+@container page (max-width: 560px) {
+  .quick {
+    display: flex;
+    flex-wrap: wrap
+  }
+}
+
+/* ---------- Telefon ----------
+   Gemessen wird wie ueberall die logische Breite, also Fenster durch Zoom:
+   ein 390-px-Telefon hat bei Standardzoom 339 px. Davon nahm die Seitenleiste
+   200 px, und in der Beschreibungsspalte blieben 5 px uebrig — eine Spalte,
+   in der jeder Buchstabe eine eigene Zeile bekam.
+
+   Zwei Grenzen, nicht eine: ohne Seitenleiste traegt die Tabelle noch bis
+   etwa 460 px, erst darunter lohnt der Umbau in Bloecke. So behaelt ein
+   schmales Fenster am Rechner seine Tabelle. */
+@container page (max-width: 620px) {
+
+  /* Die Objektliste ist hier nicht zu bezahlen: sie nahm 59 % der Breite fuer
+     eine Liste, die man beim Lesen eines Objekts nicht braucht. Navigiert wird
+     ueber die Suche, die dafuer im Kopf bleibt. */
+  .grid {
+    grid-template-columns: minmax(0, 1fr)
+  }
+
+  .side {
+    display: none
+  }
+
+  /* Schriftgroesse und Farbschema regelt auf dem Telefon das Geraet: Pinch-Zoom
+     und prefers-color-scheme. Die Knoepfe dafuer kosten nur Kopfbreite, und die
+     wird fuer Produktumschalter, Laufzeit und Suche gebraucht. */
+  .fs,
+  .tg {
+    display: none
+  }
+
+  /* Die Rueckwaertsverweise stehen als Chips in einer umbrechenden Reihe; ein
+     einzelner Verweis wie Application.getAllOverlays(portraitDocumentFor-
+     CheckingOverlays) wird aber allein schon 458 px breit. Breit bleibt jeder
+     Chip einzeilig, hier zaehlt nur, dass nichts ueber den Rand laeuft. */
+  .revbox a {
+    white-space: normal;
+    overflow-wrap: anywhere
+  }
+}
+
+@container page (max-width: 460px) {
+
+  /* Die Wortmarke weicht nur dort, wo der Produktumschalter sie ersetzt. Auf
+     der Startseite ist sie der einzige Inhalt der Kopfzeile. */
+  body[data-target] .top .logo {
+    display: none
+  }
+
+  /* "ExtendScript" ausgeschrieben kostet 55 px, die die Suche braucht. Gleicher
+     Kniff wie in der Zugriffsspalte: Schriftgroesse 0 und der Kurztext im
+     ::after. Der volle Wortlaut steht weiter im Umschalter selbst. */
+  .rt button[data-r="es"] {
+    font-size: 0;
+    padding-left: 8px;
+    padding-right: 8px
+  }
+
+  .rt button[data-r="es"]::after {
+    content: "ES";
+    font: 11px/1 var(--sans)
+  }
+
+  /* ---- Tabellen als Bloecke ----
+     Vier Spalten sind hier nicht unterzubringen, und table-layout:fixed hat
+     keine Untergrenze: es verteilt die Prozente weiter, bis in der
+     Beschreibung nichts mehr steht. Die Zeile wird deshalb zum Block in
+     derselben Form, die die Methoden schon haben — Name und Zugriff
+     nebeneinander, Typ und Beschreibung darunter.
+
+     Umgestellt wird nur die Darstellung: die <tr> behalten ihre id, deshalb
+     arbeiten Deep-Links, Filterzeile, Listenansicht und der UXP-Umschalter
+     unveraendert weiter. */
+  thead {
+    display: none
+  }
+
+  table,
+  tbody {
+    display: block
+  }
+
+  table {
+    margin-top: 0
+  }
+
+  tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 10px;
+    row-gap: 2px;
+    padding: 9px 2px;
+    border-bottom: 1px solid var(--line)
+  }
+
+  /* Vorgabe fuer Typ und Beschreibung: eigene Zeile ueber die volle Breite.
+     Name und Zugriff holen sich darunter ihre Plaetze in Zeile 1, alles
+     Weitere fliesst der Reihe nach darunter. */
+  tbody td {
+    display: block;
+    grid-column: 1 / -1;
+    padding: 0;
+    border: 0
+  }
+
+  tbody td.n {
+    grid-column: 1;
+    grid-row: 1
+  }
+
+  tbody td.a {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end
+  }
+
+  /* Der Ausgleich fuer umgebrochene Typangaben gilt nur in der Tabelle: hier
+     setzt row-gap den Abstand, sonst stuenden darunter 6 px statt 2. */
+  tbody td.t {
+    padding-bottom: 0
+  }
+
+}
+
+/* Auf dem Touchscreen bleibt :hover nach dem Antippen haengen — die zuletzt
+   beruehrte Zeile behielte ihren grauen Grund, bis woanders getippt wird. */
+@media (hover: none) {
+  tr:hover td {
+    background: transparent
   }
 }
 

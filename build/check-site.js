@@ -1063,10 +1063,10 @@ const check = (name, got, want) => {
      Zusage fuer nur eines der beiden waere die halbe Miete. */
   const wasDark = await page.evaluate(() => document.documentElement.dataset.t === 'dark');
   for (const want of ['light', 'dark']) {
-    await page.evaluate(t => {
-      if (t === 'dark') document.documentElement.dataset.t = 'dark';
-      else delete document.documentElement.dataset.t;
-    }, want);
+    /* Ausdruecklich setzen, nicht loeschen: ohne data-t entscheidet seit
+       prefers-color-scheme das System, und dann liefe die Schleife zweimal
+       gegen dieselbe Palette. */
+    await page.evaluate(t => { document.documentElement.dataset.t = t; }, want);
     await page.waitForTimeout(150);
     const r = await fieldContrast();
     check('Filterfeld hebt sich ab, ' + want + ' (' + r + ':1)', r >= 3, true);
@@ -1375,7 +1375,12 @@ const check = (name, got, want) => {
     return page.evaluate(() => ({
       page: document.documentElement.scrollWidth - document.documentElement.clientWidth,
       cells: [...document.querySelectorAll('td,th')]
-        .filter(e => e.scrollWidth > e.clientWidth + 1).length
+        .filter(e => e.scrollWidth > e.clientWidth + 1).length,
+      /* Gemessen, nicht gerechnet: unter 620 px Fensterbreite steht der Zoom
+         auf 1, Fenster/BASE waere dort die falsche Zahl. */
+      logisch: document.body.clientWidth,
+      zoom: parseFloat(getComputedStyle(document.documentElement)
+        .getPropertyValue('--fs')) || 1
     }));
   };
   /* Massgeblich ist die LOGISCHE Breite, also Fenster ÷ Zoom: darauf reagieren
@@ -1499,6 +1504,173 @@ const check = (name, got, want) => {
     await page.evaluate(() =>
       getComputedStyle(document.querySelector('td.a'), '::after').content), '"ro"');
   await page.setViewportSize({ width: 1600, height: 1000 });
+
+  /* ---------- Telefon ----------
+     Bis hierher lief alles ab 750 px Fenster. Darunter lag der Bereich, fuer
+     den es gar keine Regeln gab: bei 390 px nahm die Seitenleiste 200 der 339
+     logischen Pixel, und fuer die Beschreibungsspalte blieben 5 px — dort
+     bekam jeder Buchstabe eine eigene Zeile.
+
+     Die Breiten treffen beide Grenzen von beiden Seiten. 700 px liegen noch
+     bei Zoom 1,15 (logisch 609, Seitenleiste weg), ab 620 px steht der Zoom
+     auf 1 — dort ist die logische Breite die Fensterbreite. 500 px bleiben
+     damit eine Tabelle, 430 px werden Bloecke. */
+  for (const w of [700, 620, 500, 430, 390, 320]) {
+    for (const f of ['indesign/Rectangle.html', 'indesign/Document.html']) {
+      const o = await overflowAt(w, f);
+      const tag = w + 'px (logisch ' + o.logisch + ') ' +
+        f.replace('indesign/', '').replace('.html', '');
+      check(tag + ': kein Ueberhang', o.page, 0);
+      check(tag + ': keine Zelle laeuft aus', o.cells, 0);
+    }
+  }
+
+  /* --- Der Zoomwechsel muss stetig sein ---
+     Die Zoomregel ist eine @media-Abfrage auf echte Fensterpixel, die
+     Seitenleiste haengt an einer Container-Query auf die logische Breite.
+     Waeren die beiden Grenzen nicht aufeinander abgestimmt, taeuchte die
+     Seitenleiste in einem schmalen Streifen wieder auf. */
+  const bei = async w => {
+    const o = await overflowAt(w, 'indesign/Rectangle.html');
+    return { ...o, side: await page.evaluate(() =>
+      getComputedStyle(document.querySelector('.side')).display !== 'none') };
+  };
+  const ueber = await bei(621), unter = await bei(620);
+  check('621px: Zoom bleibt 1,15', ueber.zoom, BASE);
+  check('620px: Zoom faellt auf 1', unter.zoom, 1);
+  check('621px: Seitenleiste weg (logisch ' + ueber.logisch + ')', ueber.side, false);
+  check('620px: Seitenleiste weg (logisch ' + unter.logisch + ')', unter.side, false);
+  const breit = await bei(714);
+  check('714px: Seitenleiste wieder da (logisch ' + breit.logisch + ')', breit.side, true);
+
+  await overflowAt(390, 'indesign/TextPreference.html');
+  const tel = await page.evaluate(() => {
+    const q = s => document.querySelector(s);
+    const sichtbar = e => !!e && getComputedStyle(e).display !== 'none' && !e.hidden;
+    const zeile = q('tbody tr[id^="p-"]');
+    const k = {};
+    zeile.querySelectorAll('td').forEach(td =>
+      k[td.className.split(' ')[0]] = td.getBoundingClientRect());
+    return {
+      seitenleiste: sichtbar(q('.side')),
+      regler: sichtbar(q('.fs')) || sichtbar(q('.tg')),
+      wortmarke: sichtbar(q('.logo')),
+      bleibt: sichtbar(q('.prod')) && sichtbar(q('.rt')) && sichtbar(q('.kbtn')),
+      art: getComputedStyle(zeile).display,
+      /* Zugriff gehoert neben den Namen, Typ und Beschreibung darunter. */
+      zugriffNeben: Math.abs(k.a.top - k.n.top) < 4,
+      typDarunter: k.t.top > k.n.bottom - 4,
+      breite: Math.round(k.d.width),
+      /* Die Kopfzeile darf nicht umbrechen: .bar und .side kleben auf 44 px,
+         und stickyOffset rechnet mit derselben Zahl. Geteilt wird durch den
+         wirklichen Zoom — auf dem Telefon ist er 1, sonst 1,15. */
+      kopf: Math.round(q('.top').getBoundingClientRect().height /
+        (parseFloat(getComputedStyle(document.documentElement)
+          .getPropertyValue('--fs')) || 1)),
+      zoom: parseFloat(getComputedStyle(document.documentElement)
+        .getPropertyValue('--fs')) || 1
+    };
+  });
+  check('Telefon: Zoom steht auf 1', tel.zoom, 1);
+  check('Telefon: Seitenleiste weg', tel.seitenleiste, false);
+  check('Telefon: Zoom- und Themeknopf weg', tel.regler, false);
+  check('Telefon: Wortmarke weicht dem Umschalter', tel.wortmarke, false);
+  check('Telefon: Umschalter, Laufzeit, Suche bleiben', tel.bleibt, true);
+  check('Telefon: Kopfzeile bleibt einzeilig', tel.kopf, 44);
+  check('Telefon: Tabellenzeile wird zum Block', tel.art, 'grid');
+  check('Telefon: Zugriff steht neben dem Namen', tel.zugriffNeben, true);
+  check('Telefon: Typ steht darunter', tel.typDarunter, true);
+  /* Vorher waren es 5 px. */
+  check('Telefon: Beschreibung nutzt die Breite (' + tel.breite + 'px)',
+    tel.breite > 250, true);
+  /* --- Einstiegspunkte ---
+     `.startrow` steht auf align-items:flex-start; als Spalte heisst das
+     fit-content in der Breite, also eine unbestimmte Groesse. Fuer
+     repeat(auto-fill, ...) ist eine unbestimmte Breite genau EINE
+     Wiederholung: ohne align-self:stretch standen die 19 Blasen von 460 bis
+     1130 px logischer Breite einspaltig untereinander, waehrend daneben bis
+     zu 990 px frei blieben. Der Fehler faellt nicht auf — die Seite laeuft
+     nirgends ueber —, deshalb wird die Breite hier ausdruecklich gemessen.
+
+     Alle sechs Breiten liegen unter 1150 px logisch, wo .startrow eine Spalte
+     ist; darueber steht .quick absichtlich nur 528 px breit neben der
+     Kurzreferenz. */
+  for (const w of [1300, 1000, 800, 620, 500, 390]) {
+    await page.setViewportSize({ width: w, height: 1000 });
+    await page.goto(url('indesign/index.html'));
+    await page.waitForTimeout(250);
+    const q = await page.evaluate(() => {
+      const box = document.querySelector('.quick');
+      const a = [...box.querySelectorAll('a')];
+      return {
+        logisch: document.body.clientWidth,
+        breit: Math.round(box.getBoundingClientRect().width),
+        platz: Math.round(box.parentElement.getBoundingClientRect().width),
+        n: a.length,
+        spalten: new Set(a.map(e => Math.round(e.getBoundingClientRect().left))).size,
+        zeilen: new Set(a.map(e => Math.round(e.getBoundingClientRect().top))).size,
+        breiteste: Math.round(Math.max(...a.map(e => e.getBoundingClientRect().width)))
+      };
+    });
+    const tag = 'Einstiegspunkte ' + w + 'px (logisch ' + q.logisch + ')';
+    check(tag + ': nutzen die volle Breite', q.breit >= q.platz - 1, true);
+    check(tag + ': brechen um (' + q.n + ' auf ' + q.zeilen + ' Zeilen)',
+      q.spalten >= 2, true);
+    check(tag + ': keine Blase ueber den Rand', q.breiteste <= q.platz, true);
+  }
+  await overflowAt(390, 'indesign/TextPreference.html');
+
+  await page.goto(url('index.html'));
+  await page.waitForTimeout(250);
+  /* Auf der Startseite ist die Wortmarke der einzige Inhalt der Kopfzeile. */
+  check('Telefon: Startseite behaelt die Wortmarke',
+    await page.locator('.logo').isVisible(), true);
+  await page.setViewportSize({ width: 1600, height: 1000 });
+
+  /* ---------- Farbschema aus dem System ----------
+     Auf dem Telefon gibt es den Umschalter nicht mehr, dort fuehrt nur noch
+     prefers-color-scheme nach Dunkel. Eine getroffene Wahl muss das System
+     aber weiterhin ueberstimmen — sonst saesse ein Nutzer mit dunklem System
+     auf einer Seite fest, die er ausdruecklich hell gestellt hat. */
+  const farbe = () => page.evaluate(() => ({
+    bg: getComputedStyle(document.body).backgroundColor,
+    t: document.documentElement.dataset.t || '(nicht gesetzt)',
+    knopf: (document.querySelector('.tg') || {}).textContent || '-'
+  }));
+  const HELL = 'rgb(253, 253, 254)', DUNKEL = 'rgb(42, 47, 57)';
+  await page.evaluate(() => localStorage.removeItem('theme'));
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForTimeout(250);
+  let fb = await farbe();
+  check('System dunkel, keine Wahl: dunkler Grund', fb.bg, DUNKEL);
+  check('System dunkel, keine Wahl: ohne data-t', fb.t, '(nicht gesetzt)');
+  check('System dunkel: der Knopf bietet Hell an', fb.knopf, 'light mode');
+  /* Und die Wahl gewinnt, ueber die Navigation hinweg. */
+  await page.click('.tg');
+  await page.waitForTimeout(200);
+  await page.goto(url('indesign/Document.html'));
+  await page.waitForTimeout(250);
+  fb = await farbe();
+  check('System dunkel, Wahl hell: heller Grund', fb.bg, HELL);
+  check('System dunkel, Wahl hell: data-t haelt dagegen', fb.t, 'light');
+  await page.evaluate(() => localStorage.removeItem('theme'));
+  await page.emulateMedia({ colorScheme: 'light' });
+  await page.goto(url('indesign/Rectangle.html'));
+  await page.waitForTimeout(250);
+  check('System hell, keine Wahl: heller Grund', (await farbe()).bg, HELL);
+  await page.emulateMedia({ colorScheme: null });
+
+  /* Ohne JavaScript gilt dasselbe — die Palette steht im Stylesheet, nicht
+     im Umschalter. Das war der Grund, es nicht ins Inline-Skript zu legen. */
+  const dunkelOhneJs = await browser.newContext(
+    { viewport: { width: 390, height: 820 }, javaScriptEnabled: false, colorScheme: 'dark' });
+  const pd = await dunkelOhneJs.newPage();
+  await pd.goto(url('indesign/Rectangle.html'));
+  await pd.waitForTimeout(200);
+  check('ohne JS: System dunkel wirkt trotzdem',
+    await pd.evaluate(() => getComputedStyle(document.body).backgroundColor), DUNKEL);
+  await dunkelOhneJs.close();
 
   await browser.close();
 

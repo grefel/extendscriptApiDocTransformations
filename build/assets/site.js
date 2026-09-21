@@ -24,10 +24,17 @@
      nichts aufblitzt. Hier kommt nur der Umschalter dazu. Die Beschriftung nennt
      das Ziel, nicht den Zustand: "light mode" schaltet nach hell. */
   const tg = $('[data-enhance="theme"]');
+  const mqDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+  /* Dieselbe Bedingung wie im Stylesheet: data-t gewinnt, sonst das System.
+     Ohne den zweiten Teil boete der Knopf auf einem dunkel eingestellten
+     System "dark mode" an und schaltete beim ersten Druck nach hell. */
+  const istDunkel = () => {
+    const wahl = document.documentElement.dataset.t;
+    return wahl ? wahl === 'dark' : !!(mqDark && mqDark.matches);
+  };
   function labelTheme() {
     if (!tg) return;
-    /* Hell ist der Standard, dunkel wird ausdruecklich gesetzt. */
-    const dark = document.documentElement.dataset.t === 'dark';
+    const dark = istDunkel();
     tg.textContent = dark ? 'light mode' : 'dark mode';
     tg.setAttribute('aria-label', 'Switch to ' + (dark ? 'light' : 'dark') + ' mode');
   }
@@ -35,11 +42,14 @@
     tg.hidden = false;
     labelTheme();
     tg.addEventListener('click', () => {
-      const next = document.documentElement.dataset.t === 'dark' ? 'light' : 'dark';
+      const next = istDunkel() ? 'light' : 'dark';
       document.documentElement.dataset.t = next;
       store.set('theme', next);
       labelTheme();
     });
+    /* Wechselt das System, solange nichts gespeichert ist, faerbt sich die
+       Seite von selbst um — die Beschriftung muss mit. */
+    if (mqDark && mqDark.addEventListener) mqDark.addEventListener('change', labelTheme);
   }
 
   /* ---------- Zoom ----------
