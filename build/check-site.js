@@ -107,6 +107,23 @@ const check = (name, got, want) => {
     await page.locator('.allobjects').isVisible(), false);
   check('mit JS: aktuelle Seite markiert',
     (await page.locator('.side a.on').innerText()).split(/\s+/).filter(Boolean).join(' '), 'Rectangle 188');
+  /* Die Objektspalte reicht vom Fuss der Kopfzeile bis zum unteren Fensterrand
+     — auf jeder Zoomstufe. Sie hing frueher an calc(100vh / --fs); unter Safari
+     blieb darunter eine Luecke, die mit dem Zoom wuchs. Gemessen wird in
+     Geraetepixeln, deshalb faellt der Zoom aus der Rechnung heraus. */
+  const spalte = () => page.evaluate(() => {
+    const s = document.querySelector('.side').getBoundingClientRect();
+    const t = document.querySelector('.top').getBoundingClientRect();
+    const d = document.querySelector('.doc').getBoundingClientRect();
+    return { luft: Math.round(innerHeight - t.height - s.height),
+      oben: Math.round(s.top - t.height), neben: Math.round(d.left - s.right) };
+  });
+  check('mit JS: Objektspalte fuellt das Fenster', JSON.stringify(await spalte()),
+    '{"luft":0,"oben":0,"neben":0}');
+  await page.evaluate(() => document.documentElement.style.setProperty('--fs', 1.725));
+  check('… auch auf der groessten Zoomstufe', JSON.stringify(await spalte()),
+    '{"luft":0,"oben":0,"neben":0}');
+  await page.evaluate(() => document.documentElement.style.removeProperty('--fs'));
   /* Die Liste steht erst auf Klick da — die Tabellen sind die Grundansicht. */
   check('mit JS: Listenansicht bereit, aber aus',
     (await page.locator('.mlist').count()) + '/' +
@@ -1292,6 +1309,17 @@ const check = (name, got, want) => {
     await page.locator('ul.cards a').count(), 7);
   check('Startseite weist auf veraltete Photoshop-Daten hin',
     (await page.locator('ul.cards .note').count()) >= 1, true);
+  /* Die CS6-Fassung haengt nur hier — nicht im Produktumschalter. Sie soll
+     ausserdem nicht in den Suchergebnissen neben der aktuellen stehen. */
+  check('Startseite verlinkt das Archiv',
+    await page.locator('.archive a[href$="/indesign8/"]').count(), 1);
+  check('Startseite dankt Jongware',
+    await page.locator('footer .credit a[href*="jongware"]').count(), 1);
+  check('Archiv steht nicht im Kopf',
+    await page.locator('header a[href*="indesign8"]').count(), 0);
+  check('Archiv auf noindex',
+    /content="noindex/.test(fs.readFileSync(path.join(SITE, 'indesign8/index.html'), 'utf8')),
+    true);
 
   /* --- Maschinenlesbare Ausgaben ---
      Nur Vorhandensein und Verweise; ob die Deklarationen uebersetzen, prueft

@@ -1,0 +1,779 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="Encapsulates input event information for an event that propagates through a container and control hierarchy. Implements W3C standard event handling. This object is passed to a function that you ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="UIEvent (SUI)"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e24880"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>UIEvent (SUI)</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e24880">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">UIEvent (SUI)</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">Encapsulates input event information for an event that propagates through a container and control hierarchy. </p>
+
+      <p class="p description">
+        Implements W3C standard event handling. This object is passed to a function that you register to respond to events of a certain type that occur in a window or control. Use windowObj.addEventListener() or controlObj.addEventListener() to register a handler function.
+      </p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e24880__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e24880__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e24880__d1e24899">UIEvent</a>,  <a class="xref" href="#d1e24880__d1e25119">preventDefault</a>,  <a class="xref" href="#d1e24880__d1e25126">stopPropagation</a>,  <a class="xref" href="#d1e24880__d1e25132">initEvent</a>,  <a class="xref" href="#d1e24880__d1e25198">initUIEvent</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="String.html#d1e4543">String</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e24880__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d2054211e113">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2054211e119">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2054211e125">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2054211e131">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2054211e113 ">
+                        <p class="p">bubbles</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e119 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e131 ">
+                        <p class="p description">True if the event is of a type that bubbles.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2054211e113 ">
+                        <p class="p">cancelable</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e119 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e131 ">
+                        <p class="p description">True if the default action associated with the event can be canceled with preventDefault().</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2054211e113 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e119 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e131 ">
+                        <p class="p description">True if this event can be captured.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2054211e113 ">
+                        <p class="p">currentTarget</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e119 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e131 ">
+                        <p class="p description">The event target object which is currently handling the event. During capturing and bubbling, this is different from the property target.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2054211e113 ">
+                        <p class="p">detail</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e119 ">
+                        <p class="p">VariesSUI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e131 ">
+                        <p class="p description">The click count for a mouse-click event.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2054211e113 ">
+                        <p class="p">eventPhase</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e119 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e131 ">
+                        <p class="p description">The current phase of event propagation; one of none, target, capture, bubble.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2054211e113 ">
+                        <p class="p">target</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e119 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e131 ">
+                        <p class="p description">The event target object for this event.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2054211e113 ">
+                        <p class="p">timeStamp</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e119 ">
+                        <p class="p">DateSUI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e131 ">
+                        <p class="p description">The date and time at which the event occurred.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2054211e113 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e119 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e131 ">
+                        <p class="p description">The name of the event that this  object represents.</p>
+
+                        <p class="p description">
+            Event types are listed in the JavaScript Tools Guide.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2054211e113 ">
+                        <p class="p">view</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e119 ">
+                        <p class="p">VariesSUI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e125 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e131 ">
+                        <p class="p description">The ScriptUI element that this event relates to.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e24880__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p noMarginConstructor">
+            <strong class="ph b">Constructor</strong>
+         </p>
+
+         <p class="p methodName" id="d1e24880__d1e24899">
+            <a class="xref" href="UIEventSUI.html#d1e24880">UIEvent (SUI)</a> 
+            <strong class="ph b">UIEvent</strong> (type:<em class="ph i">String</em>, captures:<em class="ph i">Boolean</em>=Boolean, bubbles:<em class="ph i">Boolean</em>=Boolean, [view:<em class="ph i">Object</em>], [detail:<em class="ph i">Number</em>])</p>
+
+         <p class="p description">Creates an event.</p>
+
+         <p class="p description">
+            The UIEvent object is normally created by ScriptUI and passed to your event handler. However, you can simulate a user action by constructing an event object and sending it to a target object’s dispatchEvent() function.
+          </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2054211e506">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2054211e512">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2054211e518">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e506 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e512 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e518 ">
+                        <p class="p description">
+                The event type. See UIEvent.type property.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e506 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e512 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e518 ">
+                        <p class="p description">Set to true if this event can be captured.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e506 ">
+                        <p class="p">bubbles</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e512 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e518 ">
+                        <p class="p description">Set to true if the event bubbles.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e506 ">
+                        <p class="p">view</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e512 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e518 ">
+                        <p class="p description">The ScriptUI element that this event relates to.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e506 ">
+                        <p class="p">detail</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e512 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e518 ">
+                        <p class="p description">The click count for a mouse-click event.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e24880__d1e25132">undefined <strong class="ph b">initEvent</strong> (type:<em class="ph i">String</em>, captures:<em class="ph i">Boolean</em>=Boolean, bubbles:<em class="ph i">Boolean</em>=Boolean, cancelable:<em class="ph i">Boolean</em>=Boolean)</p>
+
+         <p class="p description">Initializes a UI event as a core W3C event.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2054211e697">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2054211e703">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2054211e709">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e697 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e703 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e709 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e697 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e703 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e709 ">
+                        <p class="p description">Set to true if this event can be captured.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e697 ">
+                        <p class="p">bubbles</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e703 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e709 ">
+                        <p class="p description">Set to true if the event bubbles.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e697 ">
+                        <p class="p">cancelable</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e703 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e709 ">
+                        <p class="p description">Set to true if the default action is cancelable.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e24880__d1e25198">undefined <strong class="ph b">initUIEvent</strong> (type:<em class="ph i">String</em>, captures:<em class="ph i">Boolean</em>=Boolean, bubbles:<em class="ph i">Boolean</em>=Boolean, [view:<em class="ph i">Object</em>], [detail:<em class="ph i">Number</em>])</p>
+
+         <p class="p description">Initializes an event.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2054211e871">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2054211e877">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2054211e883">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e871 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e877 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e883 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e871 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e877 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e883 ">
+                        <p class="p description">Set to true if this event can be captured.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e871 ">
+                        <p class="p">bubbles</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e877 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e883 ">
+                        <p class="p description">Set to true if the event bubbles.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e871 ">
+                        <p class="p">view</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e877 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e883 ">
+                        <p class="p description">The ScriptUI element that this event relates to.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2054211e871 ">
+                        <p class="p">detail</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2054211e877 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2054211e883 ">
+                        <p class="p description">The click count for a mouse-click event.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e24880__d1e25119">undefined <strong class="ph b">preventDefault</strong> ()</p>
+
+         <p class="p description">Prevents the default action associated with this event from being called.</p>
+
+         <p class="p methodName" id="d1e24880__d1e25126">undefined <strong class="ph b">stopPropagation</strong> ()</p>
+
+         <p class="p description">Stops the propagation of this event.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="UIEventSUI.html#d1e24880">UIEvent (SUI)</a>.<a class="xref" href="UIEventSUI.html#d1e24880__d1e24899">UIEvent</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="WindowSUI.html#d1e10773">Window (SUI)</a>.<a class="xref" href="WindowSUI.html#d1e10773__d1e12173">dispatchEvent</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

@@ -1,0 +1,1483 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="Represents a file-system folder or directory in a platform-independent manner. Go to Property Listing | Method Listing Methods: Folder , encode , decode , isEncodingAvailable , selectDialog , resolve ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="Folder"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e7567"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>Folder</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e7567">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">Folder</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">Represents a file-system folder or directory in a platform-independent manner.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e7567__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e7567__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e7567__d1e7574">Folder</a>,  <a class="xref" href="#d1e7567__d1e7834">encode</a>,  <a class="xref" href="#d1e7567__d1e7871">decode</a>,  <a class="xref" href="#d1e7567__d1e7904">isEncodingAvailable</a>,  <a class="xref" href="#d1e7567__d1e7937">selectDialog</a>,  <a class="xref" href="#d1e7567__d1e8131">resolve</a>,  <a class="xref" href="#d1e7567__d1e8149">rename</a>,  <a class="xref" href="#d1e7567__d1e8182">remove</a>,  <a class="xref" href="#d1e7567__d1e8200">changePath</a>,  <a class="xref" href="#d1e7567__d1e8231">getRelativeURI</a>,  <a class="xref" href="#d1e7567__d1e8267">execute</a>,  <a class="xref" href="#d1e7567__d1e8282">toString</a>,  <a class="xref" href="#d1e7567__d1e8294">toSource</a>,  <a class="xref" href="#d1e7567__d1e8312">selectDlg</a>,  <a class="xref" href="#d1e7567__d1e8348">getFiles</a>,  <a class="xref" href="#d1e7567__d1e8387">create</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="Date.html#d1e2080">Date</a>, <a class="xref" href="String.html#d1e4543">String</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e7567__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d664209e155">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e161">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e167">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e173">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">absoluteURI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">The full path name for the referenced folder in URI notation.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">alias</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">When true, the object refers to a file system alias or shortcut.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">created</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="Date.html#d1e2080">Date</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">The creation date of the referenced folder, or null if the object does not refer to a folder on disk.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">displayName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">The localized name portion of the absolute URI for the referenced folder, without the path specification.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">error</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">A message describing the most recent file system error.</p>
+
+                        <p class="p description">Typically set by the file system, but a script can set it. Setting this value clears any error message and resets the error bit for opened files. Contains the empty string if there is no error.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">exists</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">When true, this object refers to a folder that currently exists in the file system.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">fsName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">The platform-specific name of the referenced folder as a full path name.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">fullName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">The full path name for the referenced folder in URI notation. .</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">modified</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="Date.html#d1e2080">Date</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">The date of the referenced folder's last modification, or null if the object does not refer to a folder on disk.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">The folder name portion of the absolute URI for the referenced file, without the path specification.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 "> </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">TThe Folder object for the folder that contains this folder, or null if this object refers to the root folder of a volume.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">path</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">The path portion of the object absolute URI for the referenced file, without the folder name.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e155 ">
+                        <p class="p">relativeURI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e161 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e167 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e173 ">
+                        <p class="p description">The path name for the referenced folder in URI notation, relative to the current folder.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d664209e610">
+                        <p class="p">Name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e616">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e622">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e628">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">appData</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="Folder.html#d1e7567">Folder</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">The folder containing the application data for all users.</p>
+
+                        <p class="p description">
+						                  In Windows, the value of %APPDATA% (by default, C:\\Documents and Settings\\All Users\\Application Data)
+						                  In Mac OS, /Library/Application Support
+					                </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">appPackage</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="Folder.html#d1e7567">Folder</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">In Mac OS, a Folder object for the folder containing the bundle of the running application.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">commonFiles</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="Folder.html#d1e7567">Folder</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">A Folder object for the folder containing common files for all programs installed by the user.</p>
+
+                        <p class="p description">
+						                  In Windows, the value of %CommonProgramFiles% (by default, C:\\Program Files\\Common Files)
+						                  In Mac OS, /Library/Application Support
+					                </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">current</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="Folder.html#d1e7567">Folder</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">A Folder object for the current folder.</p>
+
+                        <p class="p description">Assign a Folder object or a string containing the new path name to set the current folder. This is a class property accessed through the Folder constructor.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">desktop</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="Folder.html#d1e7567">Folder</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">A Folder object for the folder that contains the user’s desktop.</p>
+
+                        <p class="p description">
+						                  In Windows, C:\\Documents and Settings\\username\\Desktop
+						                  In Mac OS, ~/Desktop
+					                </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">fs</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">The name of the current file system.</p>
+
+                        <p class="p description">One of "Windows", "Macintosh", or "Unix".</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">myDocuments</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="Folder.html#d1e7567">Folder</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">A folder pointing to the user's My Documents folder.</p>
+
+                        <p class="p description">
+						                  In Windows, C:\\Documents and Settings\\username\\My Documents
+						                  In Mac OS,  ~/Documents
+					                </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">startup</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="Folder.html#d1e7567">Folder</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">A Folder object for the folder containing the executable image of the running application.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">system</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="Folder.html#d1e7567">Folder</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">A Folder object for the folder containing the operating system files.</p>
+
+                        <p class="p description">
+						                  In Windows, the value of %windir% (by default, C:\\Windows)
+						                  In Mac OS, /System
+					                </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">temp</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="Folder.html#d1e7567">Folder</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">A Folder object for the default folder for temporary files.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">trash</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="Folder.html#d1e7567">Folder</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">A Folder object for the folder containing deleted items. On Windows, the trash folder is a virtual
+								   folder containing a database; therefore, the property value is null on Windows.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d664209e610 ">
+                        <p class="p">userData</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e616 ">
+                        <p class="p">
+                           <a class="xref" href="Folder.html#d1e7567">Folder</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e622 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e628 ">
+                        <p class="p description">A Folder object for the folder containing the user's application data.</p>
+
+                        <p class="p description">
+						                  
+							In Windows, the value of %USERDATA% (by default, C:\\Documents and Settings\\username\\Application Data)
+						
+						                  In Mac OS,  ~/Library/Application Support.
+					                </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e7567__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p noMarginConstructor">
+            <strong class="ph b">Constructor</strong>
+         </p>
+
+         <p class="p methodName" id="d1e7567__d1e7574">
+            <a class="xref" href="Folder.html#d1e7567">Folder</a> 
+            <strong class="ph b">Folder</strong> ([path:<em class="ph i">String</em>])</p>
+
+         <p class="p description">Creates and returns a new Folder object referring to a given file-system location.</p>
+
+         <p class="p description">If the path name refers to an already existing disk file, a File object is returned instead.  Returns the new Folder object.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d664209e1086">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e1092">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e1098">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d664209e1086 ">
+                        <p class="p">path</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e1092 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e1098 ">
+                        <p class="p description">The absolute or relative path to the folder associated with this object, specified in URI format.</p>
+
+                        <p class="p description">
+								The value stored in the object is the absolute path.The path need not refer to an existing folder. If the path refers to an existing file, rather than a folder:
+								
+									The Folder() function returns a File object instead of a Folder object.
+								
+								                      
+									The new operator returns a Folder object for a nonexisting folder with the same name.
+								
+							                    </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e7567__d1e8200">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">changePath</strong> (path:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Changes the path specification of the referenced folder.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d664209e1169">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e1175">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e1181">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d664209e1169 ">
+                        <p class="p">path</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e1175 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e1181 ">
+                        <p class="p description">A string containing the new path, absolute or relative to the current folder.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e7567__d1e8387">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">create</strong> ()</p>
+
+         <p class="p description">
+						Creates a folder at the location given by this object's path property.
+					</p>
+
+         <p class="p description">Returns true if the folder was created.</p>
+
+         <p class="p methodName" id="d1e7567__d1e7871">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">decode</strong> (uri:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Decodes a UTF-8 encoded string as required by RFC 2396, and returns the decoded string.</p>
+
+         <p class="p description">
+						See also String.decodeURI().
+					</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d664209e1269">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e1275">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e1281">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d664209e1269 ">
+                        <p class="p">uri</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e1275 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e1281 ">
+                        <p class="p description">The UTF-8 string to decode.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e7567__d1e7834">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">encode</strong> (name:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Encodes a string as required by RFC 2396, and returns the encoded string.</p>
+
+         <p class="p description">
+						All special characters are encoded in UTF-8 and stored as escaped characters starting with the percent sign followed by two hexadecimal digits. For example, the string "my file" is encoded as "my%20file".
+						Special characters are those with a numeric value greater than 127, except the following: / - _ . ! ~ * ' ( )
+						See also encodeURI().
+					</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d664209e1353">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e1359">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e1365">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d664209e1353 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e1359 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e1365 ">
+                        <p class="p description">The string to encode.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e7567__d1e8267">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">execute</strong> ()</p>
+
+         <p class="p description">Opens this folder in the platform-specific file browser (as if it had been double-clicked in the file browser).</p>
+
+         <p class="p description">Returns true immediately if the folder was opened successfully.</p>
+
+         <p class="p methodName" id="d1e7567__d1e8348">
+            <a class="xref" href="Array.html#d1e968">Array</a> 
+            <strong class="ph b">getFiles</strong> (mask:<em class="ph i">Varies</em>)</p>
+
+         <p class="p description">Retrieves the contents of this folder, filtered by the supplied mask.</p>
+
+         <p class="p description">Returns an array of File and Folder objects, or null if this object's referenced folder does not exist.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d664209e1453">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e1459">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e1465">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d664209e1453 ">
+                        <p class="p">mask</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e1459 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e1465 ">
+                        <p class="p description">A search mask for file names, specified as a string or a function.</p>
+
+                        <p class="p description">
+								A mask string can contain question mark (?) and asterisk (*) wild cards. Default is "*", which matches all file names.
+								Can also be the name of a function that takes a File or Folder object as its argument. It is called for each file or folder found in the search; if it returns true, the object is added to the return array.
+								NOTE: In Windows, all aliases end with the extension .lnk. ExtendScript strips this from the file name when found, in order to preserve compatibility with other operating systems. You can search for all aliases by supplying the search mask "*.lnk", but note that such code is not portable.
+							                    </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e7567__d1e8231">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">getRelativeURI</strong> ([basePath:<em class="ph i">String</em>=String])</p>
+
+         <p class="p description">Retrieves and returns the path for this file, relative to the specified base path, in URI notation.</p>
+
+         <p class="p description">If no base path is supplied, the URI is relative to the path of the current folder.  Returns a string containing the relative URI.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d664209e1536">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e1542">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e1548">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d664209e1536 ">
+                        <p class="p">basePath</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e1542 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e1548 ">
+                        <p class="p description">A base path in URI notation.</p>
+
+                        <p class="p"> (default: .)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e7567__d1e7904">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">isEncodingAvailable</strong> (name:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Reports whether a given encoding is available.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d664209e1619">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e1625">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e1631">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d664209e1619 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e1625 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e1631 ">
+                        <p class="p description">The encoding name.</p>
+
+                        <p class="p description">
+								Typical values are "ASCII", "binary", or "UTF-8".  For a complete list of supported encodings, see the JavaScript Tools Guide.
+							</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e7567__d1e8182">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">remove</strong> ()</p>
+
+         <p class="p description">Deletes the folder associated with this object from disk immediately, without moving it to the system trash.</p>
+
+         <p class="p description">
+						Folders must be empty before they can be deleted. Does not resolve aliases; instead, deletes the referenced alias or shortcut file itself. Returns true if the file was successfully removed.
+						IMPORTANT: Cannot be undone. It is recommended that you prompt the user for permission before deleting.
+					                </p>
+
+         <p class="p methodName" id="d1e7567__d1e8149">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">rename</strong> (newName:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Renames the associated folder.</p>
+
+         <p class="p description">Does not resolve aliases, but renames the referenced alias or shortcut file itself. Returns true if the folder was successfully renamed.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d664209e1722">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e1728">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e1734">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d664209e1722 ">
+                        <p class="p">newName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e1728 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e1734 ">
+                        <p class="p description">The new folder name, with no path information.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e7567__d1e8131">
+            <a class="xref" href="Folder.html#d1e7567">Folder</a> 
+            <strong class="ph b">resolve</strong> ()</p>
+
+         <p class="p description">Attempts to resolve the file-system alias or shortcut that this object refers to.</p>
+
+         <p class="p description">If successful, creates and returns a new Folder object that points to the resolved file system element. Returns null if this object does not refer to an alias, or if the alias could not be resolved.</p>
+
+         <p class="p methodName" id="d1e7567__d1e7937">
+            <a class="xref" href="Folder.html#d1e7567">Folder</a> 
+            <strong class="ph b">selectDialog</strong> (prompt:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Opens the built-in platform-specific file-browsing dialog, and creates a new File or Folder object for the selected file or folder.</p>
+
+         <p class="p description">
+						Differs from the object method selectDlg() in that it does not preselect a folder.
+						If the user clicks OK, returns a File or Folder object for the selected file or folder.
+						                  If the user cancels, returns null.
+					                </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d664209e1823">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e1829">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e1835">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d664209e1823 ">
+                        <p class="p">prompt</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e1829 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e1835 ">
+                        <p class="p description">The prompt text, if the dialog allows a prompt.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e7567__d1e8312">
+            <a class="xref" href="Folder.html#d1e7567">Folder</a> 
+            <strong class="ph b">selectDlg</strong> (prompt:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Opens the built-in platform-specific file-browsing dialog, and creates a new File or Folder object for the selected file or folder.</p>
+
+         <p class="p description">
+						Differs from the class method selectDialog() in that it preselects this folder.
+						If the user clicks OK, returns a File or Folder object for the selected file or folder.
+						                  If the user cancels, returns null.
+					                </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d664209e1906">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d664209e1912">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d664209e1918">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d664209e1906 ">
+                        <p class="p">prompt</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d664209e1912 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d664209e1918 ">
+                        <p class="p description">The prompt text, if the dialog allows a prompt.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e7567__d1e8294">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Creates and returns a serialized string representation of this object.</p>
+
+         <p class="p description">
+						Pass the resulting string to eval() to recreate the object.
+					</p>
+
+         <p class="p methodName" id="d1e7567__d1e8282">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toString</strong> ()</p>
+
+         <p class="p description">Converts this object to a string.</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

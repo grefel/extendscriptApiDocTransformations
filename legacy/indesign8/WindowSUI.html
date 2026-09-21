@@ -1,0 +1,2453 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="The instance represents a top-level window or dialog box, which contains user-interface elements. The globally available Window object provides access to predefined and script-defined windows. Go to ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="Window (SUI)"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e10773"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>Window (SUI)</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e10773">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">Window (SUI)</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">The instance represents a top-level window or dialog box, which contains user-interface elements.</p>
+
+      <p class="p description">
+        The globally available Window object provides access to predefined and script-defined windows.
+      </p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e10773__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e10773__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e10773__d1e10786">Window</a>,  <a class="xref" href="#d1e10773__d1e10949">find</a>,  <a class="xref" href="#d1e10773__d1e10997">alert</a>,  <a class="xref" href="#d1e10773__d1e11051">confirm</a>,  <a class="xref" href="#d1e10773__d1e11115">prompt</a>,  <a class="xref" href="#d1e10773__d1e11808">show</a>,  <a class="xref" href="#d1e10773__d1e11823">hide</a>,  <a class="xref" href="#d1e10773__d1e11835">notify</a>,  <a class="xref" href="#d1e10773__d1e11878">center</a>,  <a class="xref" href="#d1e10773__d1e11899">close</a>,  <a class="xref" href="#d1e10773__d1e11927">add</a>,  <a class="xref" href="#d1e10773__d1e12020">remove</a>,  <a class="xref" href="#d1e10773__d1e12050">addEventListener</a>,  <a class="xref" href="#d1e10773__d1e12116">removeEventListener</a>,  <a class="xref" href="#d1e10773__d1e12173">dispatchEvent</a>,  <a class="xref" href="#d1e10773__d1e12195">onActivate</a>,  <a class="xref" href="#d1e10773__d1e12204">onDeactivate</a>,  <a class="xref" href="#d1e10773__d1e12213">onClose</a>,  <a class="xref" href="#d1e10773__d1e12231">onMove</a>,  <a class="xref" href="#d1e10773__d1e12237">onMoving</a>,  <a class="xref" href="#d1e10773__d1e12247">onResize</a>,  <a class="xref" href="#d1e10773__d1e12253">onResizing</a>,  <a class="xref" href="#d1e10773__d1e12262">onShortcutKey</a>,  <a class="xref" href="#d1e10773__d1e12271">onShow</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="BoundsSUI.html#d1e24752">Bounds (SUI)</a>, <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a>, <a class="xref" href="LayoutManagerSUI.html#d1e12285">LayoutManager (SUI)</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="PointSUI.html#d1e24620">Point (SUI)</a>, <a class="xref" href="ScriptUIGraphicsSUI.html#d1e12523">ScriptUIGraphics (SUI)</a>, <a class="xref" href="String.html#d1e4543">String</a>, <a class="xref" href="WindowSUI.html#d1e10773">Window (SUI)</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e10773__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d2094764e222">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e228">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e234">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e240">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">active</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">Set to true to make this window active. </p>
+
+                        <p class="p description">
+                        A modal dialog that is visible is by definition the active dialog.
+                        An active palette is the front-most window.
+                        
+              An active control is the one with focus—that is, the one that accepts keystrokes, or in the case of a Button, be selected when the user types  Return or Enter.
+            
+                     </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">alignChildren</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">Tells the layout manager how unlike-sized children of this container should be aligned within a column or row. </p>
+
+                        <p class="p description">
+            Order of creation determines which children are at the top of a column or the left of a row; the earlier a child is created, the closer it is to the top or left of its column or row. If defined, alignment for a child element overrides the alignChildren setting for the parent container. See alignment property for values.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">alignment</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">
+            The alignment style for child elements of a container. If defined, this value overrides the alignChildren setting for the parent container.
+          </p>
+
+                        <p class="p description">
+            This can be a single string, which indicates the alignment for the orientation specified in the parent container, or an array of two strings, indicating both the horizontal and vertical alignment (in that order). Allowed values depend on the orientation value of the parent container. They are not case sensitive.
+            
+              For orientation=row:top, bottom, fill
+                        
+                        
+              For orientation=column: left, right, fill
+                        
+                        
+              For orientation=stack:top, bottom, left, right, fill
+                        
+                     </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">bounds</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="BoundsSUI.html#d1e24752">Bounds (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The bounds of the window's drawable area, excluding the frame, in screen coordinates.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">cancelElement</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">
+            For windows of type dialog, the UI element to notify when the user presses a cancellation key combination.
+          </p>
+
+                        <p class="p description">The cancellation key is the Esc key. By default, looks for a button whose name or text is "cancel" (case disregarded).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">characters</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">A number of characters for which to reserve space when calculating the preferred size of the window. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">children</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The collection of UI elements that have been added to this container.</p>
+
+                        <p class="p description">An array indexed by number or by a string containing an element's name. The length property of this array is the number of child elements for container elements, and is zero for controls.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">defaultElement</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">
+            For windows of type dialog, the UI element to notify when the user presses a Enter key.
+          </p>
+
+                        <p class="p description">By default, looks for a button whose name or text is "ok" (case disregarded).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">enabled</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">True if this element is enabled.</p>
+
+                        <p class="p description">An enabled element can accept input, according to its type. When false, control elements do not accept input, and all types of elements have a dimmed appearance. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">frameBounds</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="BoundsSUI.html#d1e24752">Bounds (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The bounds of the window frame in screen coordinates.</p>
+
+                        <p class="p description"> The frame consists of the title bar and borders that enclose the content region of a window, depending on the windowing system. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">frameLocation</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="PointSUI.html#d1e24620">Point (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The top left corner of the window frame in screen coordinates.</p>
+
+                        <p class="p description">
+            The same as [frameBounds.x, frameBounds.y]. Set this value to move the window frame to the specified location on the screen. The frameBounds value changes accordingly.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">frameSize</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The size and location of the window's frame in screen coordinates.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">graphics</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIGraphicsSUI.html#d1e12523">ScriptUIGraphics (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">
+            The graphics object that can be used to customize the window’s appearance, in response to the onDraw event.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">helpTip</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The help text that is displayed when the mouse hovers over the element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">indent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The number of pixels to indent the element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">justify</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The default text justification style for child text elements. </p>
+
+                        <p class="p description">
+            One of left, center, or right. Justification only works if this value is set on creation of the element.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">layout</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="LayoutManagerSUI.html#d1e12285">LayoutManager (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The layout manager for this container.</p>
+
+                        <p class="p description">
+            The first time a container object is made visible, ScriptUI invokes this layout manager by calling its layout() function. Default is an instance of the LayoutManager class that is automatically created when the container element is created.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">location</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="PointSUI.html#d1e24620">Point (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The upper left corner of the window's drawable area.</p>
+
+                        <p class="p description">The same as [bounds.x, bounds.y]. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">margins</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The number of pixels between the edges of a container and the outermost child elements.</p>
+
+                        <p class="p description"> You can specify different margins for each edge of the container. The default value is based on the type of container, and is chosen to match the standard Adobe UI guidelines. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">maximized</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">True if the window is expanded.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">maximumSize</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The largest rectangle to which the window can be resized.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">minimized</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">True if the window is minimized or iconified.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">minimumSize</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The smallest rectangle to which the window can be resized.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">opacity</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The opacity of the window, in the range [0..1]. </p>
+
+                        <p class="p description">A value of 1.0 (the default) makes the window completely opaque, a value of 0 makes it completely transparent. Intermediate values make it partially transparent to any degree.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">orientation</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The layout orientation of children in a container.</p>
+
+                        <p class="p description">
+            Interpreted by the layout manager for the container. The default LayoutManager  Object accepts the (case-insensitive) values row, column, or stack.  For window and panel, the default is column, and for group the default is row. The allowed values for the container’s alignChildren and its children’s alignment properties depend on the orientation.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 "> </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The immediate parent element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">preferredSize</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The preferred size of the window.</p>
+
+                        <p class="p description">Used in automatic layout and resizing. To set a specific value for only one dimension, specify the other dimension as -1. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">An object that contains one or more creation properties of the container (properties used only when the element is created). </p>
+
+                        <p class="p description">
+            Creation properties of a Window object can include:
+            resizeable: When true, the window can be resized by the user. Default is false.
+                        su1PanelCoordinates: Photoshop only. When true, the child panels of this window automatically adjust the positions of their children for compatability with Photoshop CS (in which the vertical coordinate was measured from outside the frame). Default is false. Individual panels can override the parent window’s setting.
+                        closeButton: Bridge only. When true, the title bar includes a button to close the window, if the platform and window type allow it. When false, it does not. Default is true. Not used for dialogs. 
+                        maximizeButton: Bridge only. When true, the title bar includes a button to expand the window to its maximum size (typically, the entire screen), if the platform and window type allow it. When false, it does not. Default is false for type palette, true for type window. Not used for dialogs.
+                     </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">shortcutKey</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">
+            The keypress combination that invokes this element's onShortcutKey() callback.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">size</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The current size and location of the content area of the window in screen coordinates.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">spacing</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The number of pixels separating one child element from its adjacent sibling element.</p>
+
+                        <p class="p description">Because each container holds only a single row or column of children, only a single spacing value is needed for a container. The default value is based on the type of container, and is chosen to match standard Adobe UI guidelines. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">text</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The title, label, or displayed text, a localizeable string.</p>
+
+                        <p class="p description">Does not apply to containers of type group.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The element type; "dialog", "palette", or "window".</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">visible</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">When true, the element is shown, when false it is hidden.</p>
+
+                        <p class="p description">When a container is hidden, its children are also hidden, but they retain their own visibility values, and are shown or hidden accordingly when the parent is next shown.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">window</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="WindowSUI.html#d1e10773">Window (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The window that this element belongs to.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e222 ">
+                        <p class="p">windowBounds</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e228 ">
+                        <p class="p">
+                           <a class="xref" href="BoundsSUI.html#d1e24752">Bounds (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e234 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e240 ">
+                        <p class="p description">The bounds of this window relative to the top-level parent window.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d2094764e1454">
+                        <p class="p">Name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e1460">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e1466">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e1472">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e1454 ">
+                        <p class="p">frameworkName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1460 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1466 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1472 ">
+                        <p class="p description">
+            Deprecated. Use ScriptUI.frameworkName instead.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d2094764e1454 ">
+                        <p class="p">version</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1460 ">
+                        <p class="p">VariesSUI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1466 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1472 ">
+                        <p class="p description">
+            Deprecated. Use ScriptUI.version instead.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e10773__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p noMarginConstructor">
+            <strong class="ph b">Constructor</strong>
+         </p>
+
+         <p class="p methodName" id="d1e10773__d1e10786">undefined <strong class="ph b">Window</strong> (type:<em class="ph i">String</em>, [title:<em class="ph i">String</em>], [bounds:<em class="ph i">BoundsSUI</em>], [properties:<em class="ph i">Object</em>])</p>
+
+         <p class="p description">Creates a new window.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e1591">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e1597">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e1603">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e1591 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1597 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1603 ">
+                        <p class="p description">The window type.  </p>
+
+                        <p class="p description">
+                One of:
+                
+                                 
+                                    window: Creates a simple window that can be used as a main window for an application. (Not supported by Photoshop CS3.)
+                  
+                                 
+                                    palette: Creates a modeless dialog, also called a floating palette. (Not supported by Photoshop CS3.)
+                  
+                                 
+                                    dialog: Creates a modal dialog.
+                  
+                              
+                This argument can also be a ScriptUI resource specification; in that case, all other arguments are ignored.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e1591 ">
+                        <p class="p">title</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1597 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1603 ">
+                        <p class="p description">The window title, a localizable string.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e1591 ">
+                        <p class="p">bounds</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1597 ">
+                        <p class="p">
+                           <a class="xref" href="BoundsSUI.html#d1e24752">Bounds (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1603 ">
+                        <p class="p description">The window's position and size.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e1591 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1597 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1603 ">
+                        <p class="p description">An object containing creation-only properties.</p>
+
+                        <p class="p description">
+                Can contain any of these properties:
+                
+                                 
+                                    resizeable: When true, the window can be resized by the user. Default is false.
+                  
+                                 
+                                    su1PanelCoordinates: Photoshop only. When true, the child panels of this window automatically adjust the positions of their children for compatability with Photoshop CS (in which the vertical coordinate was measured from outside the frame). Default is false. Individual panels can override the parent window’s setting.
+                  
+                                 
+                                    closeButton:  When true, the title bar includes a button to close the window, if the platform and window type allow it. When false, it does not. Default is true. Not used for dialogs.
+                  
+                                 
+                                    maximizeButton:  When true, the title bar includes a button to expand the window to its maximum size (typically, the entire screen), if the platform and window type allow it. When false, it does not. Default is false for type palette, true for type window. Not used for dialogs.
+                  
+                                 
+                                    minimizeButton: When true, the title bar includes a button to minimize or iconify the window, if the platform and window type allow it. When false, it does not. Default is false for type palette, true for type window. Main windows cannot have a minimize button in Mac OS. Not used for dialogs.
+                  
+                                 
+                                    independent:  When true, a window of type window is independent of other application windows, and can be hidden behind them in Windows. In Mac OS, has no effect. Default is false.
+                  
+                                 
+                                    borderless:  When true, the window has no title bar or borders. Properties that control those features are ignored.
+                  
+                              
+                           </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e11927">
+            <a class="xref" href="Object.html#d1e624">Object</a> 
+            <strong class="ph b">add</strong> (type:<em class="ph i">String</em>, [bounds:<em class="ph i">BoundsSUI</em>], [text:<em class="ph i">String</em>], [properties:<em class="ph i">Object</em>])</p>
+
+         <p class="p description">Creates and returns a new control or container object and adds it to the children of this window. </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e1763">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e1769">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e1775">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e1763 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1769 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1775 ">
+                        <p class="p description">
+                The type of the child element, as specified for the type property.
+              </p>
+
+                        <p class="p description">
+                Control types are listed in the JavaScript Tools Guide.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e1763 ">
+                        <p class="p">bounds</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1769 ">
+                        <p class="p">
+                           <a class="xref" href="BoundsSUI.html#d1e24752">Bounds (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1775 ">
+                        <p class="p description">A bounds specification that describes the size and position of the new control or container, relative to its parent. </p>
+
+                        <p class="p description">
+                If supplied, this value creates a new Bounds object which is assigned to the new object’s bounds property.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e1763 ">
+                        <p class="p">text</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1769 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1775 ">
+                        <p class="p description">The text or label, a localizable string.</p>
+
+                        <p class="p description">
+                Initial text to be displayed in the control as the title, label, or contents, depending on the control type. If supplied, this value is assigned to the new object’s text property.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e1763 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1769 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1775 ">
+                        <p class="p description">An object that contains one or more creation properties of the new child (properties used only when the element is created). </p>
+
+                        <p class="p description">
+                The creation properties depend on the element type. See properties property of each control type.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e12050">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">addEventListener</strong> (eventName:<em class="ph i">String</em>, handler:<em class="ph i">Function</em>, [capturePhase:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Registers an event handler for a particular type of event occuring in this window.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e1936">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e1942">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e1948">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e1936 ">
+                        <p class="p">eventName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1942 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1948 ">
+                        <p class="p description">The name of the event.</p>
+
+                        <p class="p description">Predefined event names are: change, changing, move, moving, resize, resizing, show , enterKey, focus, blur, keydown, keyup, mousedown, mouseup, mousemove, mouseover, mouseout, click (detail = 1 for single, 2 for double).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e1936 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1942 ">
+                        <p class="p">
+                           <a class="xref" href="Function.html#d1e3580">Function</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1948 ">
+                        <p class="p description">The function that handles the event.</p>
+
+                        <p class="p description">
+                This can be the name of a function defined in the extension, or a locally defined handler function to be executed when the event occurs. A handler function takes one argument, the UIEvent object.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e1936 ">
+                        <p class="p">capturePhase</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e1942 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e1948 ">
+                        <p class="p description">When true, the handler is called only in the capturing phase of the event propagation. </p>
+
+                        <p class="p description">Default is false, meaning that the handler is called in the bubbling phase if this object is an ancestor of the target, or in the at-target phase if this object is itself the target.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e10997">undefined <strong class="ph b">alert</strong> (message:<em class="ph i">String</em>, [title:<em class="ph i">String</em>], errorIcon:<em class="ph i">Boolean</em>=Boolean)</p>
+
+         <p class="p description">Displays a platform-standard dialog containing a short message and an OK button.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e2081">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e2087">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e2093">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2081 ">
+                        <p class="p">message</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2087 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2093 ">
+                        <p class="p description">TThe string for the displayed message.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2081 ">
+                        <p class="p">title</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2087 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2093 ">
+                        <p class="p description">A string to appear as the title of the dialog, if the platform supports a title. </p>
+
+                        <p class="p description">Ignored in Mac OS, which does not support titles for alert dialogs. The default title string is "Script Alert".</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2081 ">
+                        <p class="p">errorIcon</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2087 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2093 ">
+                        <p class="p description">When true, the platform-standard alert icon is replaced by the platform-standard error icon in the dialog. </p>
+
+                        <p class="p description">Ignored in Mac OS, which does not support icons for alert dialogs. </p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e11878">undefined <strong class="ph b">center</strong> ([window:<em class="ph i">WindowSUI</em>])</p>
+
+         <p class="p description">Centers this window on screen or with repect to another window.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e2216">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e2222">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e2228">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2216 ">
+                        <p class="p">window</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2222 ">
+                        <p class="p">
+                           <a class="xref" href="WindowSUI.html#d1e10773">Window (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2228 ">
+                        <p class="p description">The relative window. If not specified, centers on the screen. </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e11899">undefined <strong class="ph b">close</strong> ([return:<em class="ph i">VariesSUI</em>])</p>
+
+         <p class="p description">Closes this window.</p>
+
+         <p class="p description">
+            . If an onClose() callback is defined for the window, calls that function before closing the window.
+          </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e2296">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e2302">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e2308">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2296 ">
+                        <p class="p">return</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2302 ">
+                        <p class="p">VariesSUI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2308 ">
+                        <p class="p description">A number to be returned from the show() method that invoked this window as a modal dialog.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e11051">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">confirm</strong> (message:<em class="ph i">String</em>, noAsDefault:<em class="ph i">Boolean</em>=Boolean, [title:<em class="ph i">String</em>])</p>
+
+         <p class="p description">Displays a platform-standard dialog containing a short message and two buttons labeled Yes and No.</p>
+
+         <p class="p description">Returns true if the user clicked Yes, false if the user clicked No.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e2382">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e2388">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e2394">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2382 ">
+                        <p class="p">message</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2388 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2394 ">
+                        <p class="p description">The string for the displayed message.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2382 ">
+                        <p class="p">noAsDefault</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2388 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2394 ">
+                        <p class="p description">When true, the No button is the default choice, selected when the user types Enter. </p>
+
+                        <p class="p description">Default is false, meaning that Yes is the default choice. </p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2382 ">
+                        <p class="p">title</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2388 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2394 ">
+                        <p class="p description">A string to appear as the title of the dialog, if the platform supports a title. </p>
+
+                        <p class="p description">Ignored in Mac OS, which does not support titles for alert dialogs. The default title string is "Script Alert".</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e12173">
+            <a class="xref" href="UIEventSUI.html#d1e24880">UIEvent (SUI)</a> 
+            <strong class="ph b">dispatchEvent</strong> ()</p>
+
+         <p class="p description">Simulates the occurrence of an event in this target. </p>
+
+         <p class="p description">
+            A script can create a UIEvent object for a specific event and pass it to this method to start the event propagation for the event.
+          </p>
+
+         <p class="p methodName" id="d1e10773__d1e10949">
+            <a class="xref" href="WindowSUI.html#d1e10773">Window (SUI)</a> 
+            <strong class="ph b">find</strong> (type:<em class="ph i">String</em>, title:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Use this method to find an existing window. </p>
+
+         <p class="p description">
+            This includes windows defined by ScriptUI resource strings, windows already created by a script, and windows created by the application (if the application supports this case). This function is not supported by all applications. Returns a Window object found or generated from the resource, or null if no such window or resource exists.
+          </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e2544">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e2550">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e2556">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2544 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2550 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2556 ">
+                        <p class="p description">The name of a predefined resource available to JavaScript in the current application; or the window type. </p>
+
+                        <p class="p description">If a title is specified, the type is used if more than one window with that title is found. Can be null or the empty string. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2544 ">
+                        <p class="p">title</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2550 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2556 ">
+                        <p class="p description">The window title.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e11823">undefined <strong class="ph b">hide</strong> ()</p>
+
+         <p class="p description">Hides this windows.</p>
+
+         <p class="p description">
+            When a window is hidden, its children are also hidden, but when it is shown again, the children retain their own visibility states. For a modal dialog, closes the dialog and sets its result to 0.
+                     </p>
+
+         <p class="p methodName" id="d1e10773__d1e11835">undefined <strong class="ph b">notify</strong> ([eventName:<em class="ph i">String</em>])</p>
+
+         <p class="p description">Sends a notification message to all listeners, simulating the specified user interaction event.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e2661">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e2667">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e2673">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2661 ">
+                        <p class="p">eventName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2667 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2673 ">
+                        <p class="p description">The event name; if omitted, the default event is sent.</p>
+
+                        <p class="p description">
+                One of: onClose, onMove, onMoving, onResize, onResizing, onShow
+                           </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e12195">undefined <strong class="ph b">onActivate</strong> ()</p>
+
+         <p class="p description">An event-handler callback function, called when the window acquires the keyboard focus.</p>
+
+         <p class="p description">
+            Called when the user gives the window the keyboard focus by clicking it or otherwise making it the active window.
+          </p>
+
+         <p class="p methodName" id="d1e10773__d1e12213">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">onClose</strong> ()</p>
+
+         <p class="p description">An event-handler callback function, called  when the window is about to be closed.</p>
+
+         <p class="p description">
+            Called when a request is made to close the window, either by an explicit call to the close() function or by a user action (clicking the OS-specific close icon in the title bar). The function is called before the window actually closes; it can return false to cancel the close operation.
+          </p>
+
+         <p class="p methodName" id="d1e10773__d1e12204">undefined <strong class="ph b">onDeactivate</strong> ()</p>
+
+         <p class="p description">An event-handler callback function, called when the window loses the keyboard focus.</p>
+
+         <p class="p description">
+            Called when the user moves the keyboard focus from the previously active window to another window.
+          </p>
+
+         <p class="p methodName" id="d1e10773__d1e12231">undefined <strong class="ph b">onMove</strong> ()</p>
+
+         <p class="p description">An event-handler callback function, called  when the window  has been moved</p>
+
+         <p class="p methodName" id="d1e10773__d1e12237">undefined <strong class="ph b">onMoving</strong> ()</p>
+
+         <p class="p description">An event-handler callback function, called  when the window is being moved</p>
+
+         <p class="p description">Called while a window in being moved, each time the position changes. A handler can monitor the move operation.</p>
+
+         <p class="p methodName" id="d1e10773__d1e12247">undefined <strong class="ph b">onResize</strong> ()</p>
+
+         <p class="p description">An event-handler callback function, called after the window has been resized</p>
+
+         <p class="p methodName" id="d1e10773__d1e12253">undefined <strong class="ph b">onResizing</strong> ()</p>
+
+         <p class="p description">An event-handler callback function, called while a window is being resized</p>
+
+         <p class="p description">Called while a window is being resized, each time the height or width changes. A handler can monitor the resize operation.</p>
+
+         <p class="p methodName" id="d1e10773__d1e12262">undefined <strong class="ph b">onShortcutKey</strong> ()</p>
+
+         <p class="p description">
+            In Windows only, an event-handler callback function, called a shortcut-key sequence is typed that matches the shortcutKey value for this window.
+          </p>
+
+         <p class="p methodName" id="d1e10773__d1e12271">undefined <strong class="ph b">onShow</strong> ()</p>
+
+         <p class="p description">An event-handler callback function, called just before the window is displayed</p>
+
+         <p class="p description">
+            Called when a request is made to open the window using the show() method, before the window is made visible, but after automatic layout is complete. A handler can modify the results of the automatic layout.
+          </p>
+
+         <p class="p methodName" id="d1e10773__d1e11115">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">prompt</strong> (prompt:<em class="ph i">String</em>, [default:<em class="ph i">String</em>], [title:<em class="ph i">String</em>])</p>
+
+         <p class="p description">Displays a modal dialog that returns the user’s text input.</p>
+
+         <p class="p description">Returns the value of the text edit field if the user clicked OK, null if the user clicked Cancel.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e2861">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e2867">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e2873">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2861 ">
+                        <p class="p">prompt</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2867 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2873 ">
+                        <p class="p description">The string for the displayed message.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2861 ">
+                        <p class="p">default</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2867 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2873 ">
+                        <p class="p description">The initial value to be displayed in the text edit field.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2861 ">
+                        <p class="p">title</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2867 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e2873 ">
+                        <p class="p description">A string to appear as the title of the dialog. </p>
+
+                        <p class="p description">In Windows, this appears in the window’s frame; in Mac OS it appears above the message. The default title string is "Script Prompt".</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e12020">undefined <strong class="ph b">remove</strong> (what:<em class="ph i">VariesSUI</em>)</p>
+
+         <p class="p description">
+            Removes the specified child control from this window’s children array.
+          </p>
+
+         <p class="p description"> No error results if the child does not exist. </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e2993">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e2999">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e3005">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e2993 ">
+                        <p class="p">what</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e2999 ">
+                        <p class="p">VariesSUI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e3005 ">
+                        <p class="p description">
+                The child control to remove, specified by 0-based index, text property value, or as a control object.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e12116">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventName:<em class="ph i">String</em>, handler:<em class="ph i">Function</em>, capturePhase:<em class="ph i">Boolean</em>=Boolean)</p>
+
+         <p class="p description">Unregisters an event handler for a particular type of event occuring in this window.</p>
+
+         <p class="p description"> All arguments must be identical to those that were used to register the event handler.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d2094764e3079">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d2094764e3085">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d2094764e3091">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e3079 ">
+                        <p class="p">eventName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e3085 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e3091 ">
+                        <p class="p description">The name of the event.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e3079 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e3085 ">
+                        <p class="p">
+                           <a class="xref" href="Function.html#d1e3580">Function</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e3091 ">
+                        <p class="p description">The function that handles the event.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d2094764e3079 ">
+                        <p class="p">capturePhase</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d2094764e3085 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d2094764e3091 ">
+                        <p class="p description">Whether to call the handler only in the capturing phase of the event propagation.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e10773__d1e11808">undefined <strong class="ph b">show</strong> ()</p>
+
+         <p class="p description">Makes this window visible.</p>
+
+         <p class="p description">
+            If an onShow() callback is defined for a window, calls that function before showing the window.When a window or container is hidden, its children are also hidden, but when it is shown again, the children retain their own visibility states. For a modal dialog, opens the dialog and does not return until the dialog is dismissed. If it is dismissed via the close() method, this method returns any result value passed to that method. Otherwise, returns 0.
+                     </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="WindowSUI.html#d1e10773">Window (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="StaticTextSUI.html#d1e13799">StaticText (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ButtonSUI.html#d1e14430">Button (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="IconButtonSUI.html#d1e15087">IconButton (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EditTextSUI.html#d1e15708">EditText (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ListBoxSUI.html#d1e16445">ListBox (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="DropDownListSUI.html#d1e17343">DropDownList (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="CheckboxSUI.html#d1e18347">Checkbox (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ScrollbarSUI.html#d1e19029">Scrollbar (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="RadioButtonSUI.html#d1e19742">RadioButton (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="SliderSUI.html#d1e20421">Slider (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ProgressbarSUI.html#d1e21113">Progressbar (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TreeViewSUI.html#d1e21653">TreeView (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="FlashPlayerSUI.html#d1e22477">FlashPlayer (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="GroupSUI.html#d1e23094">Group (SUI)</a>.window</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PanelSUI.html#d1e23819">Panel (SUI)</a>.window</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="WindowSUI.html#d1e10773">Window (SUI)</a>.<a class="xref" href="WindowSUI.html#d1e10773__d1e10949">find</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

@@ -1,0 +1,3096 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="Find object preferences. Go to Property Listing | Method Listing Methods: toSource , getElements , toSpecifier , addEventListener , removeEventListener Objects: AnchorPoint , AnchorPosition , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="FindObjectPreference"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e294399"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>FindObjectPreference</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e294399">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">FindObjectPreference</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">Find object preferences.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e294399__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e294399__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e294399__d1e296672">toSource</a>,  <a class="xref" href="#d1e294399__d1e296684">getElements</a>,  <a class="xref" href="#d1e294399__d1e296698">toSpecifier</a>,  <a class="xref" href="#d1e294399__d1e296710">addEventListener</a>,  <a class="xref" href="#d1e294399__d1e296765">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="AnchorPoint.html#d1e93713">AnchorPoint</a>, <a class="xref" href="AnchorPosition.html#d1e81977">AnchorPosition</a>, <a class="xref" href="AnchoredRelativeTo.html#d1e82155">AnchoredRelativeTo</a>, <a class="xref" href="Application.html#d1e41025">Application</a>, <a class="xref" href="ArrowHead.html#d1e75280">ArrowHead</a>, <a class="xref" href="AutoSizingReferenceEnum.html#d1e84120">AutoSizingReferenceEnum</a>, <a class="xref" href="AutoSizingTypeEnum.html#d1e84036">AutoSizingTypeEnum</a>, <a class="xref" href="BaselineFrameGridRelativeOption.html#d1e82693">BaselineFrameGridRelativeOption</a>, <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="ContourOptionsTypes.html#d1e75734">ContourOptionsTypes</a>, <a class="xref" href="CornerOptions.html#d1e74909">CornerOptions</a>, <a class="xref" href="EmptyFrameFittingOptions.html#d1e74840">EmptyFrameFittingOptions</a>, <a class="xref" href="EndCap.html#d1e75102">EndCap</a>, <a class="xref" href="EndJoin.html#d1e75156">EndJoin</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="FindChangeContentTransparencySetting.html#d1e340980">FindChangeContentTransparencySetting</a>, <a class="xref" href="FindChangeFillTransparencySetting.html#d1e340620">FindChangeFillTransparencySetting</a>, <a class="xref" href="FindChangeStrokeTransparencySetting.html#d1e340261">FindChangeStrokeTransparencySetting</a>, <a class="xref" href="FindChangeTransparencySetting.html#d1e339902">FindChangeTransparencySetting</a>, <a class="xref" href="FirstBaseline.html#d1e68674">FirstBaseline</a>, <a class="xref" href="NothingEnum.html#d1e79813">NothingEnum</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="ObjectStyle.html#d1e252275">ObjectStyle</a>, <a class="xref" href="Preferences.html#d1e279820">Preferences</a>, <a class="xref" href="StoryDirectionOptions.html#d1e67747">StoryDirectionOptions</a>, <a class="xref" href="String.html#d1e4543">String</a>, <a class="xref" href="StrokeAlignment.html#d1e75640">StrokeAlignment</a>, <a class="xref" href="StrokeCornerAdjustment.html#d1e75211">StrokeCornerAdjustment</a>, <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>, <a class="xref" href="Swatch.html#d1e63132">Swatch</a>, <a class="xref" href="TextWrapModes.html#d1e75934">TextWrapModes</a>, <a class="xref" href="TextWrapSideOptions.html#d1e75834">TextWrapSideOptions</a>, <a class="xref" href="UIColors.html#d1e79243">UIColors</a>, <a class="xref" href="VerticalJustification.html#d1e68774">VerticalJustification</a>, <a class="xref" href="VerticallyRelativeTo.html#d1e82308">VerticallyRelativeTo</a>, </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Superclass:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Preference.html#d1e279179">Preference</a>
+         </p>
+
+      </div>
+
+      <div class="section" id="d1e294399__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d618707e261">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d618707e267">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d618707e273">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d618707e279">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">anchorPoint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="AnchorPoint.html#d1e93713">AnchorPoint</a>
+                        </p>
+
+                        <p class="p enumInPTable">AnchorPoint.TOP_LEFT_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.TOP_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.TOP_RIGHT_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.LEFT_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.RIGHT_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.BOTTOM_LEFT_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.BOTTOM_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.BOTTOM_RIGHT_ANCHOR</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The point in the anchored object to position. Can return: AnchorPoint enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">anchorSpaceAbove</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The space above an above-line anchored object. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">anchorXoffset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The horizontal (x) offset of the anchored object. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">anchorYoffset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The vertical (y) offset of the anchored object. Corresponds to the space after property for above line positioning. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">anchoredPosition</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="AnchorPosition.html#d1e81977">AnchorPosition</a>
+                        </p>
+
+                        <p class="p enumInPTable">AnchorPosition.INLINE_POSITION</p>
+
+                        <p class="p enumInPTable">AnchorPosition.ABOVE_LINE</p>
+
+                        <p class="p enumInPTable">AnchorPosition.ANCHORED</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The position of the anchored object relative to the anchor. Can return: AnchorPosition enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">appliedObjectStyles</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="ObjectStyle.html#d1e252275">ObjectStyle</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The applied object style(s). Can return: String or NothingEnum enumerator. Can also accept: ObjectStyle.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">applyToMasterPageOnly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, text wraps on the master spread apply to that spread only, and not to any pages the master spread has been applied to. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">autoSizingReferencePoint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="AutoSizingReferenceEnum.html#d1e84120">AutoSizingReferenceEnum</a>
+                        </p>
+
+                        <p class="p enumInPTable">AutoSizingReferenceEnum.TOP_LEFT_POINT</p>
+
+                        <p class="p enumInPTable">AutoSizingReferenceEnum.TOP_CENTER_POINT</p>
+
+                        <p class="p enumInPTable">AutoSizingReferenceEnum.TOP_RIGHT_POINT</p>
+
+                        <p class="p enumInPTable">AutoSizingReferenceEnum.LEFT_CENTER_POINT</p>
+
+                        <p class="p enumInPTable">AutoSizingReferenceEnum.CENTER_POINT</p>
+
+                        <p class="p enumInPTable">AutoSizingReferenceEnum.RIGHT_CENTER_POINT</p>
+
+                        <p class="p enumInPTable">AutoSizingReferenceEnum.BOTTOM_LEFT_POINT</p>
+
+                        <p class="p enumInPTable">AutoSizingReferenceEnum.BOTTOM_CENTER_POINT</p>
+
+                        <p class="p enumInPTable">AutoSizingReferenceEnum.BOTTOM_RIGHT_POINT</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The reference point for auto sizing of text frame. Reference point is automatically adjusted to the suitable value depending on the auto-sizing type value. As an example, top left reference point becomes top center for height only dimension. Can return: AutoSizingReferenceEnum enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">autoSizingType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="AutoSizingTypeEnum.html#d1e84036">AutoSizingTypeEnum</a>
+                        </p>
+
+                        <p class="p enumInPTable">AutoSizingTypeEnum.OFF</p>
+
+                        <p class="p enumInPTable">AutoSizingTypeEnum.HEIGHT_ONLY</p>
+
+                        <p class="p enumInPTable">AutoSizingTypeEnum.WIDTH_ONLY</p>
+
+                        <p class="p enumInPTable">AutoSizingTypeEnum.HEIGHT_AND_WIDTH</p>
+
+                        <p class="p enumInPTable">AutoSizingTypeEnum.HEIGHT_AND_WIDTH_PROPORTIONALLY</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">Auto-sizing type of text frame. Based on type, reference value is automatically adjusted. For example, for height only type, top-left reference point becomes top-center. Recommended to change auto-sizing type, after setting other auto-sizing attributes. Can return: AutoSizingTypeEnum enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">baselineFrameGridColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of  3 Reals (0 - 255)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                        <p class="p">
+                           <a class="xref" href="UIColors.html#d1e79243">UIColors</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The grid line color, specified either as an array of three doubles, each in the range 0 to 255 and representing R, G, and B values, or as a UI color. Can return: Array of 3 Reals (0 - 255) or UIColors enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">baselineFrameGridIncrement</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit(1-8640points)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The distance between grid lines. Can return: Unit (1 - 8640 points) or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">baselineFrameGridRelativeOption</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="BaselineFrameGridRelativeOption.html#d1e82693">BaselineFrameGridRelativeOption</a>
+                        </p>
+
+                        <p class="p enumInPTable">BaselineFrameGridRelativeOption.TOP_OF_PAGE</p>
+
+                        <p class="p enumInPTable">BaselineFrameGridRelativeOption.TOP_OF_MARGIN</p>
+
+                        <p class="p enumInPTable">BaselineFrameGridRelativeOption.TOP_OF_FRAME</p>
+
+                        <p class="p enumInPTable">BaselineFrameGridRelativeOption.TOP_OF_INSET</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The location (top of page, top margin, top of frame, or frame inset) on which to base the custom baseline grid. Can return: BaselineFrameGridRelativeOption enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">bottomCrop</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The amount in measurement units to crop the bottom edge of a graphic. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">bottomLeftCornerOption</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="CornerOptions.html#d1e74909">CornerOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">CornerOptions.NONE</p>
+
+                        <p class="p enumInPTable">CornerOptions.ROUNDED_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.INVERSE_ROUNDED_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.INSET_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.BEVEL_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.FANCY_CORNER</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The shape to apply to the bottom left corner of rectangular shapes. Can return: CornerOptions enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">bottomLeftCornerRadius</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The radius in measurement units of the corner effect applied to the bottom left corner of rectangular shapes. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">bottomRightCornerOption</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="CornerOptions.html#d1e74909">CornerOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">CornerOptions.NONE</p>
+
+                        <p class="p enumInPTable">CornerOptions.ROUNDED_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.INVERSE_ROUNDED_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.INSET_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.BEVEL_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.FANCY_CORNER</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The shape to apply to the bottom right corner of rectangular shapes. Can return: CornerOptions enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">bottomRightCornerRadius</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The radius in measurement units of the corner effect applied to the bottom right corner of rectangular shapes. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">contentTransparencySettings</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="FindChangeContentTransparencySetting.html#d1e340980">FindChangeContentTransparencySetting</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">Transparency settings for the content of the FindObjectPreference. Can return: FindChangeContentTransparencySetting or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">contourType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="ContourOptionsTypes.html#d1e75734">ContourOptionsTypes</a>
+                        </p>
+
+                        <p class="p enumInPTable">ContourOptionsTypes.BOUNDING_BOX</p>
+
+                        <p class="p enumInPTable">ContourOptionsTypes.PHOTOSHOP_PATH</p>
+
+                        <p class="p enumInPTable">ContourOptionsTypes.DETECT_EDGES</p>
+
+                        <p class="p enumInPTable">ContourOptionsTypes.ALPHA_CHANNEL</p>
+
+                        <p class="p enumInPTable">ContourOptionsTypes.GRAPHIC_FRAME</p>
+
+                        <p class="p enumInPTable">ContourOptionsTypes.SAME_AS_CLIPPING</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The contour type. Can return: ContourOptionsTypes enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">endCap</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="EndCap.html#d1e75102">EndCap</a>
+                        </p>
+
+                        <p class="p enumInPTable">EndCap.BUTT_END_CAP</p>
+
+                        <p class="p enumInPTable">EndCap.ROUND_END_CAP</p>
+
+                        <p class="p enumInPTable">EndCap.PROJECTING_END_CAP</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The end shape of an open path. Can return: EndCap enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">endJoin</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="EndJoin.html#d1e75156">EndJoin</a>
+                        </p>
+
+                        <p class="p enumInPTable">EndJoin.MITER_END_JOIN</p>
+
+                        <p class="p enumInPTable">EndJoin.ROUND_END_JOIN</p>
+
+                        <p class="p enumInPTable">EndJoin.BEVEL_END_JOIN</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The corner join applied to the FindObjectPreference. Can return: EndJoin enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">fillColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the fill of the FindObjectPreference. . Can return: Swatch or NothingEnum enumerator. Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">fillTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Real (range 0 - 100)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The percent of tint to use in the FindObjectPreference's fill color. (To specify a tint percent, use a number in the range of 0 to 100; to use the inherited or overridden value, use -1.). Can return: Real or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">fillTransparencySettings</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="FindChangeFillTransparencySetting.html#d1e340620">FindChangeFillTransparencySetting</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">Transparency settings for the fill applied to the FindObjectPreference. Can return: FindChangeFillTransparencySetting or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">firstBaselineOffset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="FirstBaseline.html#d1e68674">FirstBaseline</a>
+                        </p>
+
+                        <p class="p enumInPTable">FirstBaseline.ASCENT_OFFSET</p>
+
+                        <p class="p enumInPTable">FirstBaseline.CAP_HEIGHT</p>
+
+                        <p class="p enumInPTable">FirstBaseline.LEADING_OFFSET</p>
+
+                        <p class="p enumInPTable">FirstBaseline.EMBOX_HEIGHT</p>
+
+                        <p class="p enumInPTable">FirstBaseline.X_HEIGHT</p>
+
+                        <p class="p enumInPTable">FirstBaseline.FIXED_HEIGHT</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The distance between the baseline of the text and the top inset of the text frame or cell. Can return: FirstBaseline enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">fittingAlignment</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="AnchorPoint.html#d1e93713">AnchorPoint</a>
+                        </p>
+
+                        <p class="p enumInPTable">AnchorPoint.TOP_LEFT_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.TOP_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.TOP_RIGHT_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.LEFT_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.RIGHT_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.BOTTOM_LEFT_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.BOTTOM_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.BOTTOM_RIGHT_ANCHOR</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The point with which to align the image empty when fitting in a frame. For information, see frame fitting options. Can return: AnchorPoint enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">fittingOnEmptyFrame</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="EmptyFrameFittingOptions.html#d1e74840">EmptyFrameFittingOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">EmptyFrameFittingOptions.NONE</p>
+
+                        <p class="p enumInPTable">EmptyFrameFittingOptions.CONTENT_TO_FRAME</p>
+
+                        <p class="p enumInPTable">EmptyFrameFittingOptions.PROPORTIONALLY</p>
+
+                        <p class="p enumInPTable">EmptyFrameFittingOptions.FILL_PROPORTIONALLY</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The frame fitting option to apply to placed or pasted content if the frame is empty. Can be applied to a frame, object style, or document or to the application. Can return: EmptyFrameFittingOptions enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">gapColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the gap of a dashed, dotted, or striped stroke. For information, see stroke type. Can return: Swatch or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">gapTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Real (range 0 - 100)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The tint as a percentage of the gap color. (To specify a tint percent, use a number in the range of 0 to 100; to use the inherited or overridden value, use -1.). Can return: Real or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">gradientFillAngle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Real</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The angle of a linear gradient applied to the fill of the FindObjectPreference. (Range: -180 to 180). Can return: Real or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">gradientStrokeAngle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Real</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The angle of a linear gradient applied to the stroke of the FindObjectPreference. (Range: -180 to 180). Can return: Real or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">horizontalReferencePoint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="AnchoredRelativeTo.html#d1e82155">AnchoredRelativeTo</a>
+                        </p>
+
+                        <p class="p enumInPTable">AnchoredRelativeTo.COLUMN_EDGE</p>
+
+                        <p class="p enumInPTable">AnchoredRelativeTo.TEXT_FRAME</p>
+
+                        <p class="p enumInPTable">AnchoredRelativeTo.PAGE_MARGINS</p>
+
+                        <p class="p enumInPTable">AnchoredRelativeTo.PAGE_EDGE</p>
+
+                        <p class="p enumInPTable">AnchoredRelativeTo.ANCHOR_LOCATION</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The horizontal reference point on the page. Valid only when anchored position is custom. Can return: AnchoredRelativeTo enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">ignoreWrap</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, ignores text wrap settings for drawn or placed objects in the text frame. . Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">includeInsideEdges</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, creates interior clipping paths within the surrounding clipping path. Note: Valid only when clipping type is alpha channel or detect edges. . Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">insetSpacing</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of  4 Units (0 - 8640 points)</p>
+
+                        <p class="p">Unit(0-8640points)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The amount to offset text from the edges of the text frame, specified either as a single value applied uniformly to all sides of the text frame or as an array of 4 values in the format [top inset, left inset, bottom inset, right inset]. Can return: Unit (0 - 8640 points), Array of 4 Units (0 - 8640 points) or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">inverse</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, inverts the text wrap. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">leftCrop</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The amount in measurement units to crop the left edge of a graphic. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">leftLineEnd</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="ArrowHead.html#d1e75280">ArrowHead</a>
+                        </p>
+
+                        <p class="p enumInPTable">ArrowHead.NONE</p>
+
+                        <p class="p enumInPTable">ArrowHead.SIMPLE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.SIMPLE_WIDE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.TRIANGLE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.TRIANGLE_WIDE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.BARBED_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.CURVED_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.CIRCLE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.CIRCLE_SOLID_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.SQUARE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.SQUARE_SOLID_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.BAR_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The arrowhead applied to the start of the path. . Can return: ArrowHead enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">lockPosition</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, prevents manual positioning of the anchored object. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">minimumFirstBaselineOffset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit(0-8640points)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The minimum distance between the baseline of the text and the top inset of the text frame or cell. Can return: Unit (0 - 8640 points) or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">minimumHeightForAutoSizing</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The minimum height for auto-sizing of the text frame. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">minimumWidthForAutoSizing</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The minimum width for auto-sizing of the text frame. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">miterLimit</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Real(1-500)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The limit of the ratio of stroke width to miter length before a miter (pointed) join becomes a bevel (squared-off) join. Can return: Real (1 - 500) or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">nonprinting</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, the FindObjectPreference does not print. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">opticalMarginAlignment</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, adjust the position of characters at the edges of the frame to provide a better appearance. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">opticalMarginSize</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit(01-1296points)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The point size used as the basis for calculating optical margin alignment. (Range: 0.1 to 1296). Can return: Unit (0.1 - 1296 points) or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">overprintFill</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, the FindObjectPreference's fill color overprints any underlying objects. If false, the fill color knocks out the underlying colors. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">overprintGap</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, the gap color overprints any underlying colors. If false, the gap color knocks out the underlying colors. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">overprintStroke</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, the FindObjectPreference's stroke color overprints any underlying objects. If false, the stroke color knocks out the  underlying colors. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Application.html#d1e41025">Application</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The parent of the FindObjectPreference (a Application).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">pinPosition</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, pins the position of the anchored object within the text frame top and bottom. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">positionReferencePoint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="AnchorPoint.html#d1e93713">AnchorPoint</a>
+                        </p>
+
+                        <p class="p enumInPTable">AnchorPoint.TOP_LEFT_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.TOP_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.TOP_RIGHT_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.LEFT_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.RIGHT_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.BOTTOM_LEFT_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.BOTTOM_CENTER_ANCHOR</p>
+
+                        <p class="p enumInPTable">AnchorPoint.BOTTOM_RIGHT_ANCHOR</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The point in the referenced object relative to which to position the anchored object. Notes: Valid only when anchored position is custom. Can return: AnchorPoint enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">preferences</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Preferences.html#d1e279820">Preferences</a>
+                           <em class="ph i">
+                              <a class="xref" href="Preference.html#d1e279179">Preference</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">A collection of preferences objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">rightCrop</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The amount in measurement units to crop the right edge of a graphic. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">rightLineEnd</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="ArrowHead.html#d1e75280">ArrowHead</a>
+                        </p>
+
+                        <p class="p enumInPTable">ArrowHead.NONE</p>
+
+                        <p class="p enumInPTable">ArrowHead.SIMPLE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.SIMPLE_WIDE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.TRIANGLE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.TRIANGLE_WIDE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.BARBED_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.CURVED_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.CIRCLE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.CIRCLE_SOLID_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.SQUARE_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.SQUARE_SOLID_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">ArrowHead.BAR_ARROW_HEAD</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The arrowhead applied to the end of the path. Can return: ArrowHead enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">spineRelative</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, the position of the anchored object is relative to the binding spine of the page or spread. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">startingOffsetForBaselineFrameGrid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit(0-8640points)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The amount to offset the baseline grid. Can return: Unit (0 - 8640 points) or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">storyDirection</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="StoryDirectionOptions.html#d1e67747">StoryDirectionOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">StoryDirectionOptions.LEFT_TO_RIGHT_DIRECTION</p>
+
+                        <p class="p enumInPTable">StoryDirectionOptions.RIGHT_TO_LEFT_DIRECTION</p>
+
+                        <p class="p enumInPTable">StoryDirectionOptions.UNKNOWN_DIRECTION</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The direction of the story. Can return: StoryDirectionOptions enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">strokeAlignment</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="StrokeAlignment.html#d1e75640">StrokeAlignment</a>
+                        </p>
+
+                        <p class="p enumInPTable">StrokeAlignment.CENTER_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">StrokeAlignment.INSIDE_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">StrokeAlignment.OUTSIDE_ALIGNMENT</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The stroke alignment applied to the FindObjectPreference. Can return: StrokeAlignment enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">strokeColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="Swatch.html#d1e63132">Swatch</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The swatch (color, gradient, tint, or mixed ink) applied to the stroke of the FindObjectPreference. Can return: Swatch or NothingEnum enumerator. Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">strokeCornerAdjustment</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="StrokeCornerAdjustment.html#d1e75211">StrokeCornerAdjustment</a>
+                        </p>
+
+                        <p class="p enumInPTable">StrokeCornerAdjustment.NONE</p>
+
+                        <p class="p enumInPTable">StrokeCornerAdjustment.DASHES</p>
+
+                        <p class="p enumInPTable">StrokeCornerAdjustment.GAPS</p>
+
+                        <p class="p enumInPTable">StrokeCornerAdjustment.DASHES_AND_GAPS</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The corner adjustment applied to the FindObjectPreference. Can return: StrokeCornerAdjustment enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">strokeDashAndGap</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of  Units</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The dash and gap measurements that define the pattern of a custom dashed line. Define up to six values (in points) in the format [dash1, gap1, dash2, gap2, dash3, gap3]. Can return: Array of Units or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">strokeTint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Real (range 0 - 100)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The percent of tint to use in object's stroke color. (To specify a tint percent, use a number in the range of 0 to 100; to use the inherited or overridden value, use -1.). Can return: Real or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">strokeTransparencySettings</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="FindChangeStrokeTransparencySetting.html#d1e340261">FindChangeStrokeTransparencySetting</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">Transparency settings for the stroke. Can return: FindChangeStrokeTransparencySetting or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">strokeType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="StrokeStyle.html#d1e368339">StrokeStyle</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The name of the stroke style to apply. Can return: StrokeStyle or NothingEnum enumerator. Can also accept: String.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">strokeWeight</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The weight (in points) to apply to the FindObjectPreference's stroke. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">textColumnCount</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">LongInteger(1-40)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The number of columns in the text frame. Note: Depending on the value of use fixed column width, the number of columns can change automatically when the text frame size changes. Can return: Long Integer (1 - 40) or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">textColumnFixedWidth</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit(0-8640points)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The column width of the columns in the text frame. Can return: Unit (0 - 8640 points) or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">textColumnGutter</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit(0-8640points)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The space between columns in the text frame. Can return: Unit (0 - 8640 points) or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">textWrapMode</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="TextWrapModes.html#d1e75934">TextWrapModes</a>
+                        </p>
+
+                        <p class="p enumInPTable">TextWrapModes.NONE</p>
+
+                        <p class="p enumInPTable">TextWrapModes.JUMP_OBJECT_TEXT_WRAP</p>
+
+                        <p class="p enumInPTable">TextWrapModes.NEXT_COLUMN_TEXT_WRAP</p>
+
+                        <p class="p enumInPTable">TextWrapModes.BOUNDING_BOX_TEXT_WRAP</p>
+
+                        <p class="p enumInPTable">TextWrapModes.CONTOUR</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The text wrap mode. . Can return: TextWrapModes enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">textWrapOffset</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Orderedarraycontainingtop:Unit</p>
+
+                        <p class="p">Bottom:Unit</p>
+
+                        <p class="p">Left:Unit</p>
+
+                        <p class="p">Right:Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The minimum space between text and the edges of the wrapped object. Specify four values in the format [top, left, bottom, right]. . Can return: Ordered array containing top:Unit, left:Unit, bottom:Unit, right:Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">textWrapSide</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="TextWrapSideOptions.html#d1e75834">TextWrapSideOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">TextWrapSideOptions.BOTH_SIDES</p>
+
+                        <p class="p enumInPTable">TextWrapSideOptions.LEFT_SIDE</p>
+
+                        <p class="p enumInPTable">TextWrapSideOptions.RIGHT_SIDE</p>
+
+                        <p class="p enumInPTable">TextWrapSideOptions.SIDE_TOWARDS_SPINE</p>
+
+                        <p class="p enumInPTable">TextWrapSideOptions.SIDE_AWAY_FROM_SPINE</p>
+
+                        <p class="p enumInPTable">TextWrapSideOptions.LARGEST_AREA</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">Text wrap side options. Can return: TextWrapSideOptions enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">topCrop</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The amount in measurement units to crop the top edge of a graphic. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">topLeftCornerOption</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="CornerOptions.html#d1e74909">CornerOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">CornerOptions.NONE</p>
+
+                        <p class="p enumInPTable">CornerOptions.ROUNDED_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.INVERSE_ROUNDED_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.INSET_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.BEVEL_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.FANCY_CORNER</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The shape to be applied to the top left corner of rectangular shapes and all corners of non-rectangular shapes.Note: corner option differs from end join in which you can set a radius for a corner option, whereas the rounded or beveled effect of an end join depends on the stroke weight. Can return: CornerOptions enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">topLeftCornerRadius</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The radius in measurement units of the corner effect applied to the top left corner of rectangular shapes and all corners of non-rectangular shapes. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">topRightCornerOption</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="CornerOptions.html#d1e74909">CornerOptions</a>
+                        </p>
+
+                        <p class="p enumInPTable">CornerOptions.NONE</p>
+
+                        <p class="p enumInPTable">CornerOptions.ROUNDED_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.INVERSE_ROUNDED_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.INSET_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.BEVEL_CORNER</p>
+
+                        <p class="p enumInPTable">CornerOptions.FANCY_CORNER</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The shape to apply to the top right corner of rectangular shapes. Can return: CornerOptions enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">topRightCornerRadius</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The radius in measurement units of the corner effect applied to the top right corner of rectangular shapes. Can return: Unit or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">transparencySettings</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="FindChangeTransparencySetting.html#d1e339902">FindChangeTransparencySetting</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">Transparency settings. Can return: FindChangeTransparencySetting or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">useCustomBaselineFrameGrid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, uses a custom baseline frame grid. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">useFixedColumnWidth</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, maintains column width when the text frame is resized. If false, causes columns to resize when the text frame is resized. Note: When true, resizing the frame can change the number of columns in the frame. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">useMinimumHeightForAutoSizing</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, minimum height value is used during the auto-sizing of text frame. . Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">useMinimumWidthForAutoSizing</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, minimum width value is used during the auto-sizing of text frame. . Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">useNoLineBreaksForAutoSizing</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, line-breaks are not introduced after auto sizing. . Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">userModifiedWrap</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">If true, the text wrap path has been explicitly modified by the user. Can return: Boolean or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">verticalJustification</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="VerticalJustification.html#d1e68774">VerticalJustification</a>
+                        </p>
+
+                        <p class="p enumInPTable">VerticalJustification.TOP_ALIGN</p>
+
+                        <p class="p enumInPTable">VerticalJustification.CENTER_ALIGN</p>
+
+                        <p class="p enumInPTable">VerticalJustification.BOTTOM_ALIGN</p>
+
+                        <p class="p enumInPTable">VerticalJustification.JUSTIFY_ALIGN</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The vertical alignment of the text content. . Can return: VerticalJustification enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">verticalReferencePoint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">
+                           <a class="xref" href="VerticallyRelativeTo.html#d1e82308">VerticallyRelativeTo</a>
+                        </p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.COLUMN_EDGE</p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.TEXT_FRAME</p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.PAGE_MARGINS</p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.PAGE_EDGE</p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.LINE_BASELINE</p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.LINE_XHEIGHT</p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.LINE_ASCENT</p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.CAPHEIGHT</p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.TOP_OF_LEADING</p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.EMBOX_TOP</p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.EMBOX_MIDDLE</p>
+
+                        <p class="p enumInPTable">VerticallyRelativeTo.EMBOX_BOTTOM</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The vertical reference point on the page. Valid when anchored position is custom. Can return: VerticallyRelativeTo enumerator or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d618707e261 ">
+                        <p class="p">verticalThreshold</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e267 ">
+                        <p class="p">Unit(0-8640points)</p>
+
+                        <p class="p enumInPTable">NothingEnum.NOTHING</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e273 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e279 ">
+                        <p class="p description">The maximum amount of vertical space between two paragraphs. Note: Valid only when vertical justification is justified; the specified amount is applied in addition to the space before or space after values defined for the paragraph. Can return: Unit (0 - 8640 points) or NothingEnum enumerator.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e294399__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e294399__d1e296710">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d618707e3882">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d618707e3888">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d618707e3894">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d618707e3882 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e3888 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e3894 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d618707e3882 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e3888 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e3894 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d618707e3882 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e3888 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e3894 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e294399__d1e296684">
+            <a class="xref" href="FindObjectPreference.html#d1e294399">FindObjectPreference</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e294399__d1e296765">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d618707e4031">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d618707e4037">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d618707e4043">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d618707e4031 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e4037 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e4043 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d618707e4031 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e4037 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e4043 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d618707e4031 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d618707e4037 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d618707e4043 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e294399__d1e296672">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the FindObjectPreference.</p>
+
+         <p class="p methodName" id="d1e294399__d1e296698">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Application.html#d1e41025">Application</a>.findObjectPreferences</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="FindChangeContentTransparencySetting.html#d1e340980">FindChangeContentTransparencySetting</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="FindChangeFillTransparencySetting.html#d1e340620">FindChangeFillTransparencySetting</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="FindChangeStrokeTransparencySetting.html#d1e340261">FindChangeStrokeTransparencySetting</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="FindChangeTransparencySetting.html#d1e339902">FindChangeTransparencySetting</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Preference.html#d1e279179">Preference</a>.parent</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="FindObjectPreference.html#d1e294399">FindObjectPreference</a>.<a class="xref" href="FindObjectPreference.html#d1e294399__d1e296684">getElements</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

@@ -85,3 +85,5 @@ This project is based on the fantastic ExtendScript API HTML by
 [Theunis de Jong](https://web.archive.org/web/20170106130344/http://www.jongware.com/idjshelp.html)
 a.k.a. **Jongware** († 2020). Without his efforts and inspiration I would not have
 realized it. Thank you!
+
+The site itself carries this credit in the footer of its home page.

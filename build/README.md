@@ -37,6 +37,7 @@ Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
 | `check-site.js` | Browsertest der fertigen Website |
 | `serve.js` | Entwicklungsserver, ohne Abhängigkeit |
 | `zip.js` | minimaler ZIP-Schreiber für das Offline-Archiv |
+| `archive.js` | reicht die alte CS6-Dokumentation aus `legacy/` durch |
 | `notes.js` | Hinweise, die nicht im Objektmodell stehen |
 | `additions.js` | Member, die Adobes Export vergisst, und falsche Typangaben |
 | `shortcuts.js` | Einstiegspunkte auf der Übersichtsseite |
@@ -98,6 +99,11 @@ serverseitige 301 wäre die schlechtere Lösung — jeder interne Klick liefe da
 über eine Weiterleitung. `check-site.js` prüft alle drei Formen (Objektseite,
 Übersicht, Startseite).
 
+Die **CS6-Fassung unter `/indesign8/`** geht den umgekehrten Weg: Jede ihrer
+1.087 Seiten trägt `noindex, follow`. Sie soll erreichbar bleiben, aber nicht
+neben der aktuellen Dokumentation in den Suchergebnissen stehen. Siehe
+„Archiv: die CS6-Fassung".
+
 Nicht Sache des Generators: **`sitemap.xml`** und **`robots.txt`** entstehen auf
 dem Server — robots.txt muss ohnehin auf die Domainwurzel, die Website liegt
 unter `/indesignapi/`. Ebenfalls dort zu klären sind die **2.674
@@ -108,10 +114,12 @@ es `X-Robots-Tag: noindex` für `*.md`.
 
 ## Offline: die ganze Website als Archiv
 
-`site/indesignapi.zip` — **16 MB, 5.395 Dateien**, entpacken und
+`site/indesignapi.zip` — **18,4 MB, 5.400 Dateien**, entpacken und
 `index.html` öffnen. Verlinkt auf der Startseite und jeder Übersichtsseite.
-Es muss wirklich alles hinein: die Typverweise gehen über Produktgrenzen
-hinweg, ein Teilarchiv wäre kaputt.
+Von der erzeugten Website muss wirklich alles hinein: die Typverweise gehen über
+Produktgrenzen hinweg, ein Teilarchiv wäre kaputt. Die **CS6-Fassung bleibt
+draußen** — sie gehört nicht zum Objektmodell, das hier nachgeschlagen wird, und
+hätte das Archiv fast verdoppelt.
 
 Geschrieben von `build/zip.js`, rund 100 Zeilen über `zlib.deflateRawSync`
 plus CRC-Tabelle. **Keine Abhängigkeit** — ZIP ist ein eingefrorenes Format,
@@ -132,7 +140,10 @@ bedient wird: Navigation, Seitenleiste, Volltextsuche.
 Der Build legt am Ende **`site.zip` neben `site/`** — den ganzen Ordner in einem
 Archiv, so wie er auf den Server geht: **ohne Ordnerpräfix**, `index.html` liegt
 also gleich oben. Das Offline-Archiv `indesignapi.zip` ist mit drin, sonst zeigte
-der Download auf dem Server ins Leere. 5.401 Dateien, 35,5 MB.
+der Download auf dem Server ins Leere. 6.575 Einträge, 40,8 MB.
+
+Darin steckt auch die CS6-Fassung — 1.174 Dateien, gepackt 4,4 MB. Im
+Offline-Archiv steckt sie **nicht**, siehe unten.
 
 Ein vorhandenes `site.zip` wird **vor** dem Packen gelöscht: bricht der Lauf ab,
 liegt lieber keines da als ein veraltetes, das wie das neue aussieht.
@@ -145,6 +156,71 @@ für schnelle Durchläufe beim Entwickeln.
 Geprüft mit `Expand-Archive`: 5.401 Dateien, Prüfsummen von `index.html`,
 `Rectangle.html`, `indesign.d.ts`, dem JPEG und dem eingebetteten 18-MB-Archiv
 stimmen mit `site/` überein.
+
+## Archiv: die CS6-Fassung
+
+Unter `site/indesign8/` liegt die **alte, mit oXygen WebHelp gebaute
+Dokumentation für InDesign CS 6 (8.0)**. Sie wird nicht erzeugt, sondern aus
+`legacy/indesign8/` durchgereicht — `build/archive.js`, 1.174 Dateien, 1.087
+Seiten. Grund für den Umzug: Sie stand unter `/extendscriptAPI/indesign8/`, und
+dieses Verzeichnis fällt auf dem Server weg.
+
+Verlinkt ist sie **nur auf der Startseite**, Abschnitt *Archive*. Im
+Produktumschalter im Kopf taucht sie bewusst nicht auf: Sie ist kein Produkt
+neben den anderen, und wer sie sucht, sucht sie gezielt. Der Verweis ist
+**absolut** — er steht auch in der Startseite, die ins Offline-Archiv geht, und
+dort liegt die CS6-Fassung nicht.
+
+**Nicht im Offline-Archiv.** `indesignapi.zip` bleibt bei der erzeugten Website;
+die CS6-Fassung hätte es fast verdoppelt, und wer offline nachschlägt, sucht das
+aktuelle Objektmodell. Im Auslieferungspaket ist sie drin — dort ist alles, was
+auf den Server geht. Die Karte auf der Startseite sagt das dazu.
+
+Beim Kopieren wird fünf Mal eingegriffen — alles andere bleibt Byte für Byte:
+
+- **`noindex, follow`** in jede der 1.087 Seiten. Die CS6-Fassung soll
+  erreichbar bleiben, aber nicht mit der aktuellen Dokumentation um dieselben
+  Suchbegriffe konkurrieren. Ein Canonical wäre hier falsch: Der Inhalt ist
+  nicht derselbe, sondern vierzehn Jahre älter.
+- **`href="/skin.css"` → `href="skin.css"`** in 1.079 Seiten. Die Kopfgestaltung
+  kam von der Domainwurzel; dieselbe Datei liegt byteglich im Archiv. Relativ
+  verlinkt bleibt es auch nach einem Umbau der Wurzel vollständig. Alle
+  betroffenen Seiten liegen im Wurzelverzeichnis des Archivs, der relative Pfad
+  stimmt dort.
+- **Der Kopf von Einstiegs- und Inhaltsseite.** Dort standen ein Download-Zip
+  und die nächstjüngere Fassung, beide unter `/extendscriptAPI/`. An ihrer
+  Stelle steht jetzt der Weg zurück zur aktuellen API.
+- **Die Verweise auf `Index.html` verlieren ihren Link** — siehe unten.
+- **`dita.list`, `dita.xml.properties` und `oxygen-webhelp/check.html`** fallen
+  weg: Reste des DITA-OT-Laufs von 2014, die den lokalen Pfad des Baurechners
+  nennen, plus oXygens Diagnoseseite, die niemand verlinkt und deren einziges
+  Skript nie in die Ausgabe kam.
+
+Danach hat das Archiv **keinen toten internen Verweis und keinen absoluten Pfad**
+mehr; geprüft wird das über alle 1.087 Seiten.
+
+Dazu kommt die von Hand nachgeführte **`about.html`**: Text aus der jüngsten
+Fassung (`indesign21`) übernommen, die toten Verweise ersetzt — jongware.com
+gibt es nicht mehr, der DITA OT ist von GitHub Pages auf `dita-ot.org`
+umgezogen, das Offline-Zip zeigt auf `../indesignapi.zip`. Dazu ein Absatz, der
+sagt, dass dies das Archiv ist und wo die aktuelle Fassung steht. **Diese
+Änderung steckt in `legacy/indesign8/about.html` selbst** — wird der Ordner je
+neu vom Server kopiert, ist sie weg.
+
+### `Index.html` fällt weg
+
+Auf dem Server lagen `index.html` und `Index.html` nebeneinander: **dieselbe
+Seite**, die großgeschriebene ein älterer Stand. Die Klasse *Index* hat nie eine
+eigene Seite gehabt — wer ihrem Verweis folgte, bekam das ganze WebHelp im
+iframe des WebHelp. Windows unterscheidet die beiden Namen ohnehin nicht, in
+`legacy/` ist deshalb nur eine angekommen.
+
+`Index.html` fällt deshalb ganz weg. Die 14 Seiten, die darauf zeigten —
+`Document`, `Story`, `Event`, das Inhaltsverzeichnis und neun weitere —
+**verlieren den Link, der Name bleibt als Text stehen**. Das ist der einzige
+Eingriff, der Inhalt entfernt statt ihn umzubiegen; ein 404 oder eine Seite, die
+sich selbst enthält, wären beide schlechter. Die Regel greift nur bei genau
+`Index.html`, `Indexes.html` und `IndexSection.html` bleiben verlinkt.
 
 ## Kurzreferenz
 
@@ -948,9 +1024,26 @@ aus der Kopie — sonst stünde „File async“ auch unter ExtendScript in der 
 
   Zwei Dinge, die `zoom` mitbringt und die man einmal wissen muss:
 
-  - **`100vh` rechnet den Zoom nicht mit.** Im skalierten Koordinatenraum
-    stehen nur `100vh / var(--fs)` zur Verfügung; ohne die Division ragte die
-    Seitenleiste bei 150 % um 500 px unter das Fenster.
+  - **`100vh` im Zoom bedeutet nicht überall dasselbe** — deshalb steht in den
+    Höhen keins mehr. Chrome lässt Viewport-Einheiten unberührt: Im skalierten
+    Raum sind `100vh` um den Faktor `--fs` zu viel, ohne `100vh / var(--fs)`
+    ragte die Seitenleiste bei 150 % um 500 px unter das Fenster. Safari
+    rechnet den Zoom schon in `vh` hinein; dort teilte dieselbe Formel ein
+    zweites Mal und ließ unter der Leiste eine Lücke, die mit jeder Zoomstufe
+    wuchs (Fehlerbericht von einem Mac, Standardzoom: rund 13 % des Fensters).
+    Eine Formel, die in beiden stimmt, gibt es nicht.
+
+    Die Objektspalte hängt deshalb nicht mehr an `vh`, sondern **mit `top: 44px`
+    und `bottom: 0` am Fenster** (`position: fixed`). Beide Werte messen am
+    selben Rechteck, das Ergebnis ist unabhängig davon, wie ein Browser `vh`
+    unter `zoom` auslegt — und auch davon, ob er `zoom` überhaupt anwendet.
+    Sie steht damit außerhalb des Flusses: Ihre Spur im Raster bleibt als
+    Platzhalter (`--sidew`, eine Quelle für Spurbreite und Elementbreite), und
+    `.doc` nennt seine Spalte ausdrücklich, sonst rutschte der Inhalt in die
+    freigehaltene erste Spur. `check-site.js` misst beides auf zwei Zoomstufen.
+
+    Übrig bleiben zwei `vh` in der Suchpalette. Sie verschieben den Kasten um
+    ein Prozent, mehr nicht.
   - **Media Queries sehen weiter die echte Fensterbreite.** Bei 150 % auf
     1000 px hat die Seite logisch 667 px, nähme aber die Regeln für 1000 px.
     Die Breiten-Umbrüche sind deshalb **Container Queries** auf `body`

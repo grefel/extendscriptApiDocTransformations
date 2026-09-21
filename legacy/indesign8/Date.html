@@ -1,0 +1,1632 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="A date/time object. Go to Method Listing Methods: Date , parse , UTC , getDate , getDay , getYear , getFullYear , getHours , getMilliseconds , getMinutes , getMonth , getSeconds , getTime , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="Date"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e2080"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>Date</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e2080">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">Date</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">A date/time object.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e2080__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e2080__d1e2087">Date</a>,  <a class="xref" href="#d1e2080__d1e2252">parse</a>,  <a class="xref" href="#d1e2080__d1e2279">UTC</a>,  <a class="xref" href="#d1e2080__d1e2442">getDate</a>,  <a class="xref" href="#d1e2080__d1e2463">getDay</a>,  <a class="xref" href="#d1e2080__d1e2487">getYear</a>,  <a class="xref" href="#d1e2080__d1e2502">getFullYear</a>,  <a class="xref" href="#d1e2080__d1e2517">getHours</a>,  <a class="xref" href="#d1e2080__d1e2539">getMilliseconds</a>,  <a class="xref" href="#d1e2080__d1e2560">getMinutes</a>,  <a class="xref" href="#d1e2080__d1e2581">getMonth</a>,  <a class="xref" href="#d1e2080__d1e2602">getSeconds</a>,  <a class="xref" href="#d1e2080__d1e2623">getTime</a>,  <a class="xref" href="#d1e2080__d1e2638">getTimezoneOffset</a>,  <a class="xref" href="#d1e2080__d1e2654">getUTCDate</a>,  <a class="xref" href="#d1e2080__d1e2675">getUTCDay</a>,  <a class="xref" href="#d1e2080__d1e2696">getUTCFullYear</a>,  <a class="xref" href="#d1e2080__d1e2711">getUTCHours</a>,  <a class="xref" href="#d1e2080__d1e2732">getUTCMilliseconds</a>,  <a class="xref" href="#d1e2080__d1e2753">getUTCMinutes</a>,  <a class="xref" href="#d1e2080__d1e2775">getUTCMonth</a>,  <a class="xref" href="#d1e2080__d1e2796">getUTCSeconds</a>,  <a class="xref" href="#d1e2080__d1e2817">setDate</a>,  <a class="xref" href="#d1e2080__d1e2858">setFullYear</a>,  <a class="xref" href="#d1e2080__d1e2893">setHours</a>,  <a class="xref" href="#d1e2080__d1e2934">setMilliseconds</a>,  <a class="xref" href="#d1e2080__d1e2974">setMinutes</a>,  <a class="xref" href="#d1e2080__d1e3013">setSeconds</a>,  <a class="xref" href="#d1e2080__d1e3052">setMonth</a>,  <a class="xref" href="#d1e2080__d1e3093">setUTCDate</a>,  <a class="xref" href="#d1e2080__d1e3134">setUTCFullYear</a>,  <a class="xref" href="#d1e2080__d1e3169">setUTCHours</a>,  <a class="xref" href="#d1e2080__d1e3211">setUTCMilliseconds</a>,  <a class="xref" href="#d1e2080__d1e3252">setUTCMinutes</a>,  <a class="xref" href="#d1e2080__d1e3293">setUTCSeconds</a>,  <a class="xref" href="#d1e2080__d1e3334">setUTCMonth</a>,  <a class="xref" href="#d1e2080__d1e3373">setTime</a>,  <a class="xref" href="#d1e2080__d1e3408">setYear</a>,  <a class="xref" href="#d1e2080__d1e3445">toDateString</a>,  <a class="xref" href="#d1e2080__d1e3457">toTimeString</a>,  <a class="xref" href="#d1e2080__d1e3469">toLocaleString</a>,  <a class="xref" href="#d1e2080__d1e3481">toLocaleDateString</a>,  <a class="xref" href="#d1e2080__d1e3493">toLocaleTimeString</a>,  <a class="xref" href="#d1e2080__d1e3505">toGMTString</a>,  <a class="xref" href="#d1e2080__d1e3518">toUTCString</a>,  <a class="xref" href="#d1e2080__d1e3530">toString</a>,  <a class="xref" href="#d1e2080__d1e3548">valueOf</a>,  <a class="xref" href="#d1e2080__d1e3562">toSource</a>
+         </p>
+
+      </div>
+
+      <div class="section" id="d1e2080__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p noMarginConstructor">
+            <strong class="ph b">Constructor</strong>
+         </p>
+
+         <p class="p methodName" id="d1e2080__d1e2087">
+            <a class="xref" href="Date.html#d1e2080">Date</a> 
+            <strong class="ph b">Date</strong> (year:<em class="ph i">Number</em>, [month:<em class="ph i">Number</em>=Number], [day:<em class="ph i">Number</em>=Number], [hours:<em class="ph i">Number</em>=Number], [min:<em class="ph i">Number</em>=Number], [sec:<em class="ph i">Number</em>=Number], [ms:<em class="ph i">Number</em>=Number])</p>
+
+         <p class="p description">Returns a new Date object holding the current date and time.</p>
+
+         <p class="p description">If parameters are supplied, returns a new Date object holding the supplied date and time.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e304">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e310">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e316">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e304 ">
+                        <p class="p">year</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e310 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e316 ">
+                        <p class="p description">The year expressed in four digits.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e304 ">
+                        <p class="p">month</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e310 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 11)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e316 ">
+                        <p class="p description">An integer value from 0 (Jan) to 11 (Dec).</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e304 ">
+                        <p class="p">day</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e310 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 1 - 31)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e316 ">
+                        <p class="p description">An integer value from 1 to 31, If this argument is not supplied, its value is set to 0.</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e304 ">
+                        <p class="p">hours</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e310 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 23)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e316 ">
+                        <p class="p description">An integer value from 0 (midnight) to 23 (11 PM). If this argument is not supplied, its value is set to 0.</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e304 ">
+                        <p class="p">min</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e310 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 59)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e316 ">
+                        <p class="p description">An integer value from 0 to 59. If this argument is not supplied, its value is set to 0.</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e304 ">
+                        <p class="p">sec</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e310 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 59)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e316 ">
+                        <p class="p description">An Integer value from 0 to 59. If this argument is not supplied, its value is set to 0.</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e304 ">
+                        <p class="p">ms</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e310 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 999)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e316 ">
+                        <p class="p description">An integer value from 0 to 999. If this argument is not supplied, its value is set to 0.</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e2279">
+            <a class="xref" href="Date.html#d1e2080">Date</a> 
+            <strong class="ph b">UTC</strong> (year:<em class="ph i">Number</em>, [month:<em class="ph i">Number</em>=Number], [day:<em class="ph i">Number</em>=Number], [hours:<em class="ph i">Number</em>=Number], [min:<em class="ph i">Number</em>=Number], [sec:<em class="ph i">Number</em>=Number], [ms:<em class="ph i">Number</em>=Number])</p>
+
+         <p class="p description">Returns the number of milliseconds between midnight January 1, 1970, UTC, and the specified time.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e572">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e578">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e584">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e572 ">
+                        <p class="p">year</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e578 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e584 ">
+                        <p class="p description">The year expressed in four digits, for example, 2001.</p>
+
+                        <p class="p description">To indicate for a year from 1900 to 1999, you can specify a value from 0 to 99.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e572 ">
+                        <p class="p">month</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e578 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 11)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e584 ">
+                        <p class="p description">An integer value from 0 (Jan) to 11 (Dec).</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e572 ">
+                        <p class="p">day</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e578 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 1 - 31)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e584 ">
+                        <p class="p description">An integer value from 1 to 31, If this argument is not supplied, its value is set to 0.</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e572 ">
+                        <p class="p">hours</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e578 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 23)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e584 ">
+                        <p class="p description">An integer value from 0 (midnight) to 23 (11 PM). If this argument is not supplied, its value is set to 0.</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e572 ">
+                        <p class="p">min</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e578 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 59)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e584 ">
+                        <p class="p description">An integer value from 0 to 59. If this argument is not supplied, its value is set to 0.</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e572 ">
+                        <p class="p">sec</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e578 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 59)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e584 ">
+                        <p class="p description">An Integer value from 0 to 59. If this argument is not supplied, its value is set to 0.</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e572 ">
+                        <p class="p">ms</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e578 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 999)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e584 ">
+                        <p class="p description">An integer value from 0 to 999. If this argument is not supplied, its value is set to 0.</p>
+
+                        <p class="p"> (default: 0)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e2442">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getDate</strong> ()</p>
+
+         <p class="p description">Returns the day of the month of the specified Date object in local time.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2463">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getDay</strong> ()</p>
+
+         <p class="p description">Returns the day of the week for the specified Date object in local time.</p>
+
+         <p class="p description">This is an integer from 0 (Sunday) to 6 (Saturday).  Returns the day of the week for date.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2502">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getFullYear</strong> ()</p>
+
+         <p class="p description">Returns the four digit year of the specified Date object in local time.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2517">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getHours</strong> ()</p>
+
+         <p class="p description">Returns the hour of the specified Date object in local time.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2539">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getMilliseconds</strong> ()</p>
+
+         <p class="p description">Returns the milliseconds of the specified Date object in local time.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2560">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getMinutes</strong> ()</p>
+
+         <p class="p description">Returns the minutes of the specified Date object in local time.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2581">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getMonth</strong> ()</p>
+
+         <p class="p description">Returns the month of the specified Date object in local time.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2602">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getSeconds</strong> ()</p>
+
+         <p class="p description">Returns the seconds of the specified Date object in local time.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2623">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getTime</strong> ()</p>
+
+         <p class="p description">Returns the number of milliseconds since midnight January 1,1970 UTC for the specified Date object.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2638">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getTimezoneOffset</strong> ()</p>
+
+         <p class="p description">Returns the difference in minutes between the computer's local time and UTC.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2654">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getUTCDate</strong> ()</p>
+
+         <p class="p description">Returns the day of the month of the specified Date object according to UTC.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2675">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getUTCDay</strong> ()</p>
+
+         <p class="p description">Returns the day of the week for the specified Date object according to UTC.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2696">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getUTCFullYear</strong> ()</p>
+
+         <p class="p description">Returns the four digit year of the specified Date object according to UTC.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2711">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getUTCHours</strong> ()</p>
+
+         <p class="p description">Returns the hour of the specified Date object according to UTC.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2732">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getUTCMilliseconds</strong> ()</p>
+
+         <p class="p description">Returns the milliseconds of the specified Date object according to UTC.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2753">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getUTCMinutes</strong> ()</p>
+
+         <p class="p description">Returns the minutes of the specified Date object according to UTC.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2775">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getUTCMonth</strong> ()</p>
+
+         <p class="p description">Returns the month of the specified Date object according to UTC.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2796">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getUTCSeconds</strong> ()</p>
+
+         <p class="p description">Returns the seconds of the specified Date object according to UTC.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2487">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">getYear</strong> ()</p>
+
+         <p class="p description">Returns the year of the specified Date object, as a difference from 1900, in local time.</p>
+
+         <p class="p methodName" id="d1e2080__d1e2252">
+            <a class="xref" href="Date.html#d1e2080">Date</a> 
+            <strong class="ph b">parse</strong> (text:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Parses a string, returning a new Date object. The string should be similar to the string returned bt toString().</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e1081">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e1087">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e1093">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e1081 ">
+                        <p class="p">text</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e1087 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e1093 ">
+                        <p class="p description">The string to parse.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e2817">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setDate</strong> (date:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the day of the month of a specified Date object according to local time.</p>
+
+         <p class="p description">Returns the number of milliseconds between the new date and midnight, January 1, 1970.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e1165">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e1171">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e1177">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e1165 ">
+                        <p class="p">date</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e1171 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 1 - 31)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e1177 ">
+                        <p class="p description">An integer from 1 to 31 indicating the day of the month.</p>
+
+                        <p class="p description"></p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e2858">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setFullYear</strong> (year:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the year of a specified Date object according to local time.</p>
+
+         <p class="p description">This method can also set month and date if those arguments are specified. Returns the number of milliseconds between the new date and midnight, January 1, 1970.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e1250">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e1256">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e1262">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e1250 ">
+                        <p class="p">year</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e1256 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e1262 ">
+                        <p class="p description">A four-digit integer value indicating the year to set.</p>
+
+                        <p class="p description"></p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e2893">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setHours</strong> (hour:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the hours of a specified Date object according to local time.</p>
+
+         <p class="p description">Returns the number of milliseconds between the new date and midnight, January 1, 1970.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e1336">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e1342">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e1348">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e1336 ">
+                        <p class="p">hour</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e1342 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 23)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e1348 ">
+                        <p class="p description">An integer value from 0 (midnight) to 23 (11 PM).</p>
+
+                        <p class="p description"></p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e2934">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setMilliseconds</strong> (ms:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the milliseconds of a specified Date object according to local time.</p>
+
+         <p class="p description">Returns the number of milliseconds between the new date and midnight, January 1, 1970.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e1422">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e1428">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e1434">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e1422 ">
+                        <p class="p">ms</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e1428 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 999)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e1434 ">
+                        <p class="p description">An integer value from 0 to 999.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e2974">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setMinutes</strong> (minutes:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the minutes of a specified Date object according to local time.</p>
+
+         <p class="p description">Returns the number of milliseconds between the new date and midnight, January 1, 1970.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e1505">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e1511">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e1517">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e1505 ">
+                        <p class="p">minutes</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e1511 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 59)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e1517 ">
+                        <p class="p description">An integer value from 0 to 59.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3052">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setMonth</strong> (month:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the month of a specified Date object according to local time.</p>
+
+         <p class="p description">Returns the number of milliseconds between the new date and midnight, January 1, 1970.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e1589">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e1595">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e1601">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e1589 ">
+                        <p class="p">month</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e1595 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 11)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e1601 ">
+                        <p class="p description">An integer value from 0 (Jan) to 11 (Dec).</p>
+
+                        <p class="p description"></p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3013">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setSeconds</strong> (seconds:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the seconds of a specified Date object according to local time.</p>
+
+         <p class="p description">Returns the number of milliseconds between the new date and midnight, January 1, 1970.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e1675">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e1681">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e1687">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e1675 ">
+                        <p class="p">seconds</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e1681 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 59)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e1687 ">
+                        <p class="p description">An integer value from 0 to 59.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3373">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setTime</strong> (ms:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the date of a specified Date object in milliseconds since midnight, January 1, 1970.</p>
+
+         <p class="p description">Returns the value of ms.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e1758">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e1764">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e1770">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e1758 ">
+                        <p class="p">ms</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e1764 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e1770 ">
+                        <p class="p description">An integer indicating the number of milliseconds between the date set and midnight, January 1, 1970.</p>
+
+                        <p class="p description"></p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3093">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setUTCDate</strong> (date:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the date of a specified Date object according to universal time.</p>
+
+         <p class="p description">Returns the number of milliseconds between the new date and midnight, January 1, 1970 in UTC time.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e1844">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e1850">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e1856">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e1844 ">
+                        <p class="p">date</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e1850 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 1 - 31)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e1856 ">
+                        <p class="p description">An integer from 1 to 31 indicating the day of the month.</p>
+
+                        <p class="p description"></p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3134">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setUTCFullYear</strong> (year:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the year of a specified Date object according to UTC, can also set the month and date.</p>
+
+         <p class="p description">Returns the number of milliseconds between the date set and midnight, January 1, 1970, in UTC.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e1930">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e1936">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e1942">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e1930 ">
+                        <p class="p">year</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e1936 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e1942 ">
+                        <p class="p description">The year expressed in four digits.</p>
+
+                        <p class="p description"></p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3169">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setUTCHours</strong> (hours:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the hours of a specified Date object according to UTC.</p>
+
+         <p class="p description">Returns the number of milliseconds between the date set and midnight, January 1, 1970, in UTC.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e2015">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e2021">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e2027">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e2015 ">
+                        <p class="p">hours</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e2021 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 23)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e2027 ">
+                        <p class="p description">An integer value from 0 (midnight) to 23 (11 PM) indicating the hour to be set.</p>
+
+                        <p class="p description"></p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3211">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setUTCMilliseconds</strong> (ms:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the milliseconds of a specified Date object according to UTC.</p>
+
+         <p class="p description">Returns the number of milliseconds between the date set and midnight, January 1, 1970, in UTC.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e2101">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e2107">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e2113">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e2101 ">
+                        <p class="p">ms</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e2107 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 999)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e2113 ">
+                        <p class="p description">An integer value in the range of 0 to 999 indicating the number of milliseconds to set.</p>
+
+                        <p class="p description"></p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3252">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setUTCMinutes</strong> (min:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the minutes of a specified Date object according to UTC.</p>
+
+         <p class="p description">Returns the number of milliseconds between the date set and midnight, January 1, 1970, in UTC.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e2187">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e2193">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e2199">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e2187 ">
+                        <p class="p">min</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e2193 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 59)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e2199 ">
+                        <p class="p description">An integer value in the range 0 to 59 indicating the number of minutes to be set.</p>
+
+                        <p class="p description"></p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3334">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setUTCMonth</strong> (month:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the month of a specified Date object according to UTC.</p>
+
+         <p class="p description">Returns the number of milliseconds between the date set and midnight, January 1, 1970, in UTC.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e2272">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e2278">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e2284">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e2272 ">
+                        <p class="p">month</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e2278 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 11)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e2284 ">
+                        <p class="p description">An integer value in the range 0 (Jan.) to 11 (Dec.) indicating the month to set.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3293">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setUTCSeconds</strong> (sec:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the seconds of a specified Date object according to UTC.</p>
+
+         <p class="p description">Returns the number of milliseconds between the date set and midnight, January 1, 1970, in UTC.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e2356">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e2362">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e2368">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e2356 ">
+                        <p class="p">sec</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e2362 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 0 - 59)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e2368 ">
+                        <p class="p description">An integer value in the range 0 to 59 indicating the number of seconds to set.</p>
+
+                        <p class="p description"></p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3408">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">setYear</strong> (year:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Sets the year of a specified Date object according to local time, as a difference between the current year and 1900.</p>
+
+         <p class="p description">Returns the number of milliseconds between the date set and midnight, January 1, 1970.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d399249e2442">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d399249e2448">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d399249e2454">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d399249e2442 ">
+                        <p class="p">year</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d399249e2448 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d399249e2454 ">
+                        <p class="p description">An integer value indicating the year to set.</p>
+
+                        <p class="p description">The method interprets a 1- or 2- digit value to mean the 1900s; for example, 13 is interpreted to mean 1913.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e2080__d1e3445">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toDateString</strong> ()</p>
+
+         <p class="p description">Returns the date as a string.</p>
+
+         <p class="p methodName" id="d1e2080__d1e3505">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toGMTString</strong> ()</p>
+
+         <p class="p description">Returns the date and time adjusted to GMT (UTC) as a string.</p>
+
+         <p class="p methodName" id="d1e2080__d1e3481">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toLocaleDateString</strong> ()</p>
+
+         <p class="p description">Returns the date as a localized string.</p>
+
+         <p class="p methodName" id="d1e2080__d1e3469">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toLocaleString</strong> ()</p>
+
+         <p class="p description">Returns a string value representing the date and time stored in the Date object in human readable format (localized).</p>
+
+         <p class="p methodName" id="d1e2080__d1e3493">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toLocaleTimeString</strong> ()</p>
+
+         <p class="p description">Returns the time as a localized string.</p>
+
+         <p class="p methodName" id="d1e2080__d1e3562">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">
+						Creates a string representation of this object that can be fed back to eval() to re-create an object. Works only with built-in classes.
+					</p>
+
+         <p class="p methodName" id="d1e2080__d1e3530">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toString</strong> ()</p>
+
+         <p class="p description">Returns a string value representing the date and time stored in the Date object in human readable format.</p>
+
+         <p class="p description">Returns the following string is an example of the format returned by this method: Mon Aug 13, 10:54:21 GMT-0700 2001.</p>
+
+         <p class="p methodName" id="d1e2080__d1e3457">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toTimeString</strong> ()</p>
+
+         <p class="p description">Returns the time as a string.</p>
+
+         <p class="p methodName" id="d1e2080__d1e3518">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toUTCString</strong> ()</p>
+
+         <p class="p description">Returns the date and time adjusted to UTC as a string.</p>
+
+         <p class="p methodName" id="d1e2080__d1e3548">
+            <a class="xref" href="Number.html#d1e5437">Number</a> 
+            <strong class="ph b">valueOf</strong> ()</p>
+
+         <p class="p description">The valueOf() method returns the number of milliseconds that have passed since midnight, Returns an integer.</p>
+
+         <p class="p description"></p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

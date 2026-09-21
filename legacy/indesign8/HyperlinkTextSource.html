@@ -1,0 +1,843 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="A hyperlinked text object or insertion point. Go to Property Listing | Method Listing Methods: remove , showSource , insertLabel , extractLabel , toSource , getElements , toSpecifier , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="HyperlinkTextSource"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e105354"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>HyperlinkTextSource</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e105354">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">HyperlinkTextSource</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">A hyperlinked text object or insertion point.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e105354__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e105354__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e105354__d1e105507">remove</a>,  <a class="xref" href="#d1e105354__d1e105513">showSource</a>,  <a class="xref" href="#d1e105354__d1e105519">insertLabel</a>,  <a class="xref" href="#d1e105354__d1e105552">extractLabel</a>,  <a class="xref" href="#d1e105354__d1e105579">toSource</a>,  <a class="xref" href="#d1e105354__d1e105592">getElements</a>,  <a class="xref" href="#d1e105354__d1e105606">toSpecifier</a>,  <a class="xref" href="#d1e105354__d1e105618">addEventListener</a>,  <a class="xref" href="#d1e105354__d1e105672">removeEventListener</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="CharacterStyle.html#d1e459029">CharacterStyle</a>, <a class="xref" href="Document.html#d1e46972">Document</a>, <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>, <a class="xref" href="Events.html#d1e36635">Events</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="String.html#d1e4543">String</a>, <a class="xref" href="Text.html#d1e391603">Text</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e105354__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d863410e151">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d863410e157">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d863410e163">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d863410e169">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">appliedCharacterStyle</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="CharacterStyle.html#d1e459029">CharacterStyle</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">Character style of the hyperlink text source.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">eventListeners</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="EventListeners.html#d1e33164">EventListeners</a>
+                           <em class="ph i">
+                              <a class="xref" href="EventListener.html#d1e30493">EventListener</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">A collection of event listeners.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">events</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="Events.html#d1e36635">Events</a>
+                           <em class="ph i">
+                              <a class="xref" href="Event.html#d1e33542">Event</a>
+                           </em>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">A collection of events.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">hidden</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">If true, the hyperlink is hidden.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">id</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">The unique ID of the HyperlinkTextSource.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">index</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">The index of the HyperlinkTextSource within its containing object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">isValid</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">Returns true if the object specifier resolves to valid objects.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">label</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">A property that can be set to any string.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">The name of the HyperlinkTextSource.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="Document.html#d1e46972">Document</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">The parent of the HyperlinkTextSource (a Document).</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">A property that allows setting of several properties at the same time.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d863410e151 ">
+                        <p class="p">sourceText</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e157 ">
+                        <p class="p">
+                           <a class="xref" href="Text.html#d1e391603">Text</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e163 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e169 ">
+                        <p class="p description">The hyperlinked text or insertion point.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e105354__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e105354__d1e105618">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a> 
+            <strong class="ph b">addEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Adds an event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d863410e614">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d863410e620">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d863410e626">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d863410e614 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e620 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e626 ">
+                        <p class="p description">The event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d863410e614 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e620 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e626 ">
+                        <p class="p description">The event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d863410e614 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e620 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e626 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e105354__d1e105552">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">extractLabel</strong> (key:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Gets the label value associated with the specified key.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d863410e744">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d863410e750">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d863410e756">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d863410e744 ">
+                        <p class="p">key</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e750 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e756 ">
+                        <p class="p description">The key.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e105354__d1e105592">
+            <a class="xref" href="HyperlinkTextSource.html#d1e105354">HyperlinkTextSource</a> 
+            <strong class="ph b">getElements</strong> ()</p>
+
+         <p class="p description">Resolves the object specifier, creating an array of object references.</p>
+
+         <p class="p methodName" id="d1e105354__d1e105519">undefined <strong class="ph b">insertLabel</strong> (key:<em class="ph i">String</em>, value:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Sets the label to the value associated with the specified key.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d863410e837">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d863410e843">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d863410e849">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d863410e837 ">
+                        <p class="p">key</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e843 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e849 ">
+                        <p class="p description">The key.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d863410e837 ">
+                        <p class="p">value</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e843 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e849 ">
+                        <p class="p description">The value.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e105354__d1e105507">undefined <strong class="ph b">remove</strong> ()</p>
+
+         <p class="p description">Deletes the HyperlinkTextSource.</p>
+
+         <p class="p methodName" id="d1e105354__d1e105672">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventType:<em class="ph i">String</em>, handler:<em class="ph i">Varies</em>, [captures:<em class="ph i">Boolean</em>=Boolean])</p>
+
+         <p class="p description">Removes the event listener.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d863410e957">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d863410e963">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d863410e969">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d863410e957 ">
+                        <p class="p">eventType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e963 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e969 ">
+                        <p class="p description">The registered event type.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d863410e957 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e963 ">
+                        <p class="p">Varies</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e969 ">
+                        <p class="p description">The registered event handler. Can accept: File or JavaScript Function.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d863410e957 ">
+                        <p class="p">captures</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d863410e963 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d863410e969 ">
+                        <p class="p description">This parameter is obsolete. (Optional)</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e105354__d1e105513">undefined <strong class="ph b">showSource</strong> ()</p>
+
+         <p class="p description">Jumps to the hyperlink source.</p>
+
+         <p class="p methodName" id="d1e105354__d1e105579">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSource</strong> ()</p>
+
+         <p class="p description">Generates a string which, if executed, will return the HyperlinkTextSource.</p>
+
+         <p class="p methodName" id="d1e105354__d1e105606">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">toSpecifier</strong> ()</p>
+
+         <p class="p description">Retrieves the object specifier.</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Hyperlink.html#d1e102975">Hyperlink</a>.source</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Event.html#d1e33542">Event</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EventListener.html#d1e30493">EventListener</a>.parent</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="MutationEvent.html#d1e37184">MutationEvent</a>.parent</p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e105735">add</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Text.html#d1e391603">Text</a>.<a class="xref" href="Text.html#d1e391603__d1e397368">findHyperlinks</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Character.html#d1e398055">Character</a>.<a class="xref" href="Character.html#d1e398055__d1e403823">findHyperlinks</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Word.html#d1e404510">Word</a>.<a class="xref" href="Word.html#d1e404510__d1e410278">findHyperlinks</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Line.html#d1e410966">Line</a>.<a class="xref" href="Line.html#d1e410966__d1e416734">findHyperlinks</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextColumn.html#d1e417421">TextColumn</a>.<a class="xref" href="TextColumn.html#d1e417421__d1e423189">findHyperlinks</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Paragraph.html#d1e423876">Paragraph</a>.<a class="xref" href="Paragraph.html#d1e423876__d1e429668">findHyperlinks</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TextStyleRange.html#d1e430356">TextStyleRange</a>.<a class="xref" href="TextStyleRange.html#d1e430356__d1e436124">findHyperlinks</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="InsertionPoint.html#d1e436811">InsertionPoint</a>.<a class="xref" href="InsertionPoint.html#d1e436811__d1e442579">findHyperlinks</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSource.html#d1e105354">HyperlinkTextSource</a>.<a class="xref" href="HyperlinkTextSource.html#d1e105354__d1e105592">getElements</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e106000">anyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e106012">everyItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e105972">nextItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e105945">previousItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e105840">itemByID</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e105786">item</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e106038">[]</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e105813">itemByName</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e105868">itemByRange</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e105909">firstItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e105921">lastItem</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="HyperlinkTextSources.html#d1e105728">HyperlinkTextSources</a>.<a class="xref" href="HyperlinkTextSources.html#d1e105728__d1e105933">middleItem</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

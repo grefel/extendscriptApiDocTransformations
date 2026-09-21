@@ -1,0 +1,655 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="Creates a TCP/IP connection, or establishes a TCP/IP server. Go to Property Listing | Method Listing Methods: Socket , open , listen , close , read , readln , write , writeln , poll Objects: Boolean , ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="Socket"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e8410"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>Socket</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e8410">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">Socket</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">Creates a TCP/IP connection, or establishes a TCP/IP server.</p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e8410__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e8410__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e8410__d1e8417">Socket</a>,  <a class="xref" href="#d1e8410__d1e8514">open</a>,  <a class="xref" href="#d1e8410__d1e8565">listen</a>,  <a class="xref" href="#d1e8410__d1e8622">close</a>,  <a class="xref" href="#d1e8410__d1e8639">read</a>,  <a class="xref" href="#d1e8410__d1e8672">readln</a>,  <a class="xref" href="#d1e8410__d1e8688">write</a>,  <a class="xref" href="#d1e8410__d1e8715">writeln</a>,  <a class="xref" href="#d1e8410__d1e8742">poll</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="String.html#d1e4543">String</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e8410__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d1666801e126">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1666801e132">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1666801e138">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1666801e144">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1666801e126 ">
+                        <p class="p">connected</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e132 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e138 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e144 ">
+                        <p class="p description">When true, the connection is active.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1666801e126 ">
+                        <p class="p">encoding</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e132 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e138 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e144 ">
+                        <p class="p description">Sets or retrieves the name of the encoding used to transmit data.</p>
+
+                        <p class="p description">Typical values are "ASCII", "BINARY", or "UTF-8".</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1666801e126 ">
+                        <p class="p">eof</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e132 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e138 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e144 ">
+                        <p class="p description">When true, the receive buffer is empty.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1666801e126 ">
+                        <p class="p">error</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e132 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e138 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e144 ">
+                        <p class="p description">A message describing the most recent error. Setting this value clears any error message.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1666801e126 ">
+                        <p class="p">host</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e132 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e138 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e144 ">
+                        <p class="p description">The name of the remote computer when a connection is established.</p>
+
+                        <p class="p description"> If the connection is shut down or does not exist, the property contains the empty string.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1666801e126 ">
+                        <p class="p">timeout</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e132 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e138 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e144 ">
+                        <p class="p description">The timeout in seconds to be applied to read or write operations.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e8410__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p noMarginConstructor">
+            <strong class="ph b">Constructor</strong>
+         </p>
+
+         <p class="p methodName" id="d1e8410__d1e8417">
+            <a class="xref" href="Socket.html#d1e8410">Socket</a> 
+            <strong class="ph b">Socket</strong> ()</p>
+
+         <p class="p description">Creates a new Socket object.</p>
+
+         <p class="p methodName" id="d1e8410__d1e8622">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">close</strong> ()</p>
+
+         <p class="p description">Terminates the open connection.</p>
+
+         <p class="p description">
+						Returns true if the connection was closed, false on I/O errors.
+						Deleting the object also closes the connection, but not until JavaScript garbage-collects the object. The connection might stay open longer than you wish if you do not close it explicitly.
+					</p>
+
+         <p class="p methodName" id="d1e8410__d1e8565">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">listen</strong> (port:<em class="ph i">Number</em>, [encoding:<em class="ph i">String</em>=String])</p>
+
+         <p class="p description">Instructs the object to start listening for an incoming connection.</p>
+
+         <p class="p description">The call to open() and the call to listen()are mutually exclusive. Call one function or the other, not both.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1666801e430">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1666801e436">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1666801e442">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1666801e430 ">
+                        <p class="p">port</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e436 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a> (range 1 - 65535)</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e442 ">
+                        <p class="p description">
+								The TCP/IP port number to listen on.
+							</p>
+
+                        <p class="p description">
+								Valid port numbers are 1 to 65535. Typical values are 80 for a Web server, 23 for a Telnet server and so on.
+							</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1666801e430 ">
+                        <p class="p">encoding</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e436 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e442 ">
+                        <p class="p description">The encoding to be used for the connection</p>
+
+                        <p class="p description">Typical values are "ASCII", "BINARY", or "UTF-8".</p>
+
+                        <p class="p"> (default: ASCII)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e8410__d1e8514">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">open</strong> (host:<em class="ph i">String</em>, [encoding:<em class="ph i">String</em>=String])</p>
+
+         <p class="p description">Opens the connection for subsequent read/write operations.</p>
+
+         <p class="p description">The call to open() and the call to listen() are mutually exclusive. Call one function or the other, not both.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1666801e551">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1666801e557">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1666801e563">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1666801e551 ">
+                        <p class="p">host</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e557 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e563 ">
+                        <p class="p description">The server to connect to. </p>
+
+                        <p class="p description">This can be a DNS name, an IPv4 address, or an IPv6 address, followed by a colon and a port number.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1666801e551 ">
+                        <p class="p">encoding</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e557 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e563 ">
+                        <p class="p description">The encoding to be used for the connection</p>
+
+                        <p class="p description">Typical values are "ASCII", "binary", or "UTF-8".</p>
+
+                        <p class="p"> (default: ASCII)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e8410__d1e8742">
+            <a class="xref" href="Socket.html#d1e8410">Socket</a> 
+            <strong class="ph b">poll</strong> ()</p>
+
+         <p class="p description">Checks a listening object for a new incoming connection.</p>
+
+         <p class="p description">If a connection request was detected, the method returns a new Socket object that wraps the new connection. Use this connection object to communicate with the remote computer. After use, close the connection and delete the JavaScript object. If no new connection request was detected, the method returns null.</p>
+
+         <p class="p methodName" id="d1e8410__d1e8639">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">read</strong> ([count:<em class="ph i">Number</em>])</p>
+
+         <p class="p description">
+						Reads up to the specified number of characters from the connection. CR characters are ignored unless the encoding is set to "BINARY".
+					</p>
+
+         <p class="p description">Returns a string that contains up to the number of characters that were supposed to be read, or the number of characters read before the connection closed or timed out.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1666801e685">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1666801e691">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1666801e697">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1666801e685 ">
+                        <p class="p">count</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e691 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e697 ">
+                        <p class="p description">The number of characters to read.</p>
+
+                        <p class="p description">If not supplied, the connection attempts to read as many characters it can get and returns immediately. </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e8410__d1e8672">
+            <a class="xref" href="String.html#d1e4543">String</a> 
+            <strong class="ph b">readln</strong> ()</p>
+
+         <p class="p description">Reads one line of text up to the next line feed. </p>
+
+         <p class="p description">Line feeds are recognized as LF or CRLF pairs. CR characters are ignored. Returns a string containing the characters.</p>
+
+         <p class="p methodName" id="d1e8410__d1e8688">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">write</strong> (text:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Concatenates all arguments into a single string and writes that string to the connection.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1666801e785">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1666801e791">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1666801e797">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1666801e785 ">
+                        <p class="p">text</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e791 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e797 ">
+                        <p class="p description">
+								Any number of string values. All arguments are concatenated to form the string to be written. CRLF sequences are converted to LFs unless the encoding is set to "BINARY".
+							</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e8410__d1e8715">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">writeln</strong> (text:<em class="ph i">String</em>)</p>
+
+         <p class="p description">Concatenates all arguments into a single string, appends a LF character, and writes that string to the connection.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1666801e866">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1666801e872">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1666801e878">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1666801e866 ">
+                        <p class="p">text</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1666801e872 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1666801e878 ">
+                        <p class="p description">
+								Any number of string values. All arguments are concatenated to form the string to be written. CRLF sequences are converted to LFs unless the encoding is set to "BINARY".
+							</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Return</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="Socket.html#d1e8410">Socket</a>.<a class="xref" href="Socket.html#d1e8410__d1e8742">poll</a>()</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="Socket.html#d1e8410">Socket</a>.<a class="xref" href="Socket.html#d1e8410__d1e8417">Socket</a>()</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

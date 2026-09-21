@@ -1,0 +1,1058 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="A control that contains a Flash Player, which can load and play Flash movies stored in SWF files. The ScriptUI FlashPlayer element runs the Flash application within an Adobe application. The Flash ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="FlashPlayer (SUI)"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e22477"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>FlashPlayer (SUI)</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e22477">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">FlashPlayer (SUI)</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">A control that contains a Flash Player, which can load and play Flash movies stored in SWF files. </p>
+
+      <p class="p description">The ScriptUI FlashPlayer element runs the Flash application within an Adobe application. The Flash application runs ActionScript, a different implementation of JavaScript from the ExtendScript version of JavaScript that Adobe applications run. A control object of this type contains functions that allow your script to load SWF files, control movie playback, and communicate with the ActionScript environment. </p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e22477__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e22477__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e22477__d1e22775">invokePlayerFunction</a>,  <a class="xref" href="#d1e22477__d1e22820">loadMovie</a>,  <a class="xref" href="#d1e22477__d1e22841">playMovie</a>,  <a class="xref" href="#d1e22477__d1e22870">stopMovie</a>,  <a class="xref" href="#d1e22477__d1e22881">notify</a>,  <a class="xref" href="#d1e22477__d1e22920">show</a>,  <a class="xref" href="#d1e22477__d1e22930">hide</a>,  <a class="xref" href="#d1e22477__d1e22936">addEventListener</a>,  <a class="xref" href="#d1e22477__d1e23005">removeEventListener</a>,  <a class="xref" href="#d1e22477__d1e23062">dispatchEvent</a>,  <a class="xref" href="#d1e22477__d1e23083">callback</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a>, <a class="xref" href="BoundsSUI.html#d1e24752">Bounds (SUI)</a>, <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a>, <a class="xref" href="Number.html#d1e5437">Number</a>, <a class="xref" href="Object.html#d1e624">Object</a>, <a class="xref" href="PointSUI.html#d1e24620">Point (SUI)</a>, <a class="xref" href="String.html#d1e4543">String</a>, <a class="xref" href="WindowSUI.html#d1e10773">Window (SUI)</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e22477__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d654820e159">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d654820e165">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d654820e171">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d654820e177">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">active</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">True if this element is active.</p>
+
+                        <p class="p description">
+            An active control is the one with keyboard focus—that is, the one that accepts keystrokes, or in the case of a Button, is selected when the user types Return or Enter in Windows, or the space bar in Mac OS.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">alignment</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">
+            The alignment style for this element. If defined, this value overrides the alignChildren setting for the parent container.
+          </p>
+
+                        <p class="p description">
+            This can be a single string, which indicates the alignment for the orientation specified in the parent container, or an array of two strings, indicating both the horizontal and vertical alignment (in that order). Allowed values depend on the orientation value of the parent container. They are not case sensitive.
+            
+              For orientation=row:top, bottom, fill
+                        
+                        
+              For orientation=column: left, right, fill
+                        
+                        
+              For orientation=stack:top, bottom, left, right, fill
+                        
+                     </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">bounds</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="BoundsSUI.html#d1e24752">Bounds (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">The boundaries of the element, in parent-relative coordinates. </p>
+
+                        <p class="p description">Setting an element's size or location changes its bounds property, and vice-versa.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">enabled</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">True if this element is enabled.</p>
+
+                        <p class="p description">An enabled element can accept input, according to its type. When false, control elements do not accept input, and all types of elements have a dimmed appearance. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">helpTip</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">The help text that is displayed when the mouse hovers over the element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">indent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">The number of pixels to indent the element during automatic layout.</p>
+
+                        <p class="p description">Applies for column orientation and left alignment, or row orientation and top alignment.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">location</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="PointSUI.html#d1e24620">Point (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">The upper left corner of this element relative to its parent.</p>
+
+                        <p class="p description">The location is defined as [bounds.x, bounds.y]. Setting an element's location changes its bounds property, and vice-versa. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">maximumSize</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description"> The maximum height and width to which the element can be resized.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">minimumSize</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description"> The minimum height and width to which the element can be resized.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">parent</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 "> </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">The parent element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">preferredSize</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">The preferred size, used by layout managers to determine the best size for each element.</p>
+
+                        <p class="p description">If not explicitly set by a script, value is established by the UI framework in which ScriptUI is employed, and is based on such attributes of the element as its text, font, font size, icon size, and other UI framework-specific attributes.A script can explicitly set this value before the layout manager is invoked in order to establish an element size other than the default. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">properties</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">An object that contains one or more creation properties of the container (properties used only when the element is created). </p>
+
+                        <p class="p description">A FlashPlayer object has no creation properties. </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">size</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">The current dimensions of this element.</p>
+
+                        <p class="p description">
+            Initially undefined, and unless explicitly set by a script, it is defined by a LayoutManager . A script can explicitly set size before the layout manager is invoked to establish an element size other than the preferredSize or the default size, but this is not recommended. Defined as [bounds.width, bounds.height]. Setting an element's size changes its bounds property, and vice-versa.
+          </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">The element type, "flashplayer".</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">visible</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">True if this element is shown, false if it is hidden.</p>
+
+                        <p class="p description">When a container is hidden, its children are also hidden, but they retain their own visibility values, and are shown or hidden accordingly when the parent is next shown.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">window</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="WindowSUI.html#d1e10773">Window (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">The window that this element belongs to.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d654820e159 ">
+                        <p class="p">windowBounds</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e165 ">
+                        <p class="p">
+                           <a class="xref" href="BoundsSUI.html#d1e24752">Bounds (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e171 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e177 ">
+                        <p class="p description">The bounds of this element relative to the top-level parent window.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e22477__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e22477__d1e22936">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">addEventListener</strong> (eventName:<em class="ph i">String</em>, handler:<em class="ph i">Function</em>, capturePhase:<em class="ph i">Boolean</em>=Boolean)</p>
+
+         <p class="p description">Registers an event handler for a particular type of event occuring in this element.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d654820e784">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d654820e790">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d654820e796">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d654820e784 ">
+                        <p class="p">eventName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e790 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e796 ">
+                        <p class="p description">The name of the event.</p>
+
+                        <p class="p description">
+                Event names are listed in the JavaScript Tools Guide.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d654820e784 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e790 ">
+                        <p class="p">
+                           <a class="xref" href="Function.html#d1e3580">Function</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e796 ">
+                        <p class="p description">The function that handles the event.</p>
+
+                        <p class="p description">
+                This can be the name of a function defined in the extension, or a locally defined handler function to be executed when the event occurs. A handler function takes one argument, the UIEvent object.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d654820e784 ">
+                        <p class="p">capturePhase</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e790 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e796 ">
+                        <p class="p description">When true, the handler is called only in the capturing phase of the event propagation. </p>
+
+                        <p class="p description">Default is false, meaning that the handler is called in the bubbling phase if this object is an ancestor of the target, or in the at-target phase if this object is itself the target.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e22477__d1e23083">undefined <strong class="ph b">callback</strong> ()</p>
+
+         <p class="p description">A function definition for a callback from the Flash ActionScript environment.</p>
+
+         <p class="p description">The Flash ActionScript code can call any callback function defined on the ExtendScript side of the FlashPlayer object, invoking it by name as a property of the control object. The function can take any arguments of a supported data types, and can return any value of a supported data type. data types:Number, String, Boolean, null, undefined, Object, Array. </p>
+
+         <p class="p methodName" id="d1e22477__d1e23062">
+            <a class="xref" href="EventSUI.html#d1e25275">Event (SUI)</a> 
+            <strong class="ph b">dispatchEvent</strong> ()</p>
+
+         <p class="p description">Simulates the occurrence of an event in this target. </p>
+
+         <p class="p description">
+            A script can create a UIEvent object for a specific event and pass it to this method to start the event propagation for the event.
+          </p>
+
+         <p class="p methodName" id="d1e22477__d1e22930">undefined <strong class="ph b">hide</strong> ()</p>
+
+         <p class="p description">Hides this element.</p>
+
+         <p class="p methodName" id="d1e22477__d1e22775">VariesSUI <strong class="ph b">invokePlayerFunction</strong> (name:<em class="ph i">String</em>, [argument:<em class="ph i">VariesSUI</em>])</p>
+
+         <p class="p description">Invokes an ActionScript function defined in the Flash application.</p>
+
+         <p class="p description">Returns the result of the invoked function, which must be one of the allowed types. The ActionScript class and date objects are not supported as return values.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d654820e967">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d654820e973">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d654820e979">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d654820e967 ">
+                        <p class="p">name</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e973 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e979 ">
+                        <p class="p description">The name of a Flash ActionScript function that has been registered with the ExternalInterface object by the currently loaded SWF file.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d654820e967 ">
+                        <p class="p">argument</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e973 ">
+                        <p class="p">VariesSUI</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e979 ">
+                        <p class="p description">An argument to pass through to the function.</p>
+
+                        <p class="p description">
+                There can be any number of arguments. An argument must be one of these data types:Number, String, Boolean, null, undefined, Object, Array. No other data types are supported.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e22477__d1e22820">undefined <strong class="ph b">loadMovie</strong> (file:<em class="ph i">File</em>)</p>
+
+         <p class="p description">Loads a movie into the Flash Player, and begins playing it.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d654820e1068">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d654820e1074">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d654820e1080">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d654820e1068 ">
+                        <p class="p">file</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e1074 ">
+                        <p class="p">
+                           <a class="xref" href="File.html#d1e6276">File</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e1080 ">
+                        <p class="p description">The File object for the SWF file to load.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e22477__d1e22881">undefined <strong class="ph b">notify</strong> ([eventName:<em class="ph i">String</em>])</p>
+
+         <p class="p description">Sends a notification message, simulating the specified user interaction event. </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d654820e1144">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d654820e1150">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d654820e1156">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d654820e1144 ">
+                        <p class="p">eventName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e1150 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e1156 ">
+                        <p class="p description">The name of the control event handler to call. </p>
+
+                        <p class="p description">
+                One of: onClick, onChange, onChanging. By default, simulates the onChange event for an edittext control, an onClick event for controls that support that event.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e22477__d1e22841">undefined <strong class="ph b">playMovie</strong> (rewind:<em class="ph i">Boolean</em>=Boolean)</p>
+
+         <p class="p description">Restarts a movie that has been stopped.</p>
+
+         <p class="p description">
+            Do not use on a movie that is currently playing.The stopMovie()-playMovie() sequence does not work for SWF files produced by Flex, or for some files produced by Flash Authoring (depending on how they were implemented).
+          </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d654820e1227">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d654820e1233">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d654820e1239">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d654820e1227 ">
+                        <p class="p">rewind</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e1233 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e1239 ">
+                        <p class="p description">When true, restarts the movie from the beginning; otherwise, starts playing from the	point where it was stopped.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e22477__d1e23005">
+            <a class="xref" href="Boolean.html#d1e5707">Boolean</a> 
+            <strong class="ph b">removeEventListener</strong> (eventName:<em class="ph i">String</em>, handler:<em class="ph i">Function</em>, capturePhase:<em class="ph i">Boolean</em>=Boolean)</p>
+
+         <p class="p description">Unregisters an event handler for a particular type of event occuring in this element.</p>
+
+         <p class="p description"> All arguments must be identical to those that were used to register the event handler.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d654820e1320">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d654820e1326">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d654820e1332">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d654820e1320 ">
+                        <p class="p">eventName</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e1326 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e1332 ">
+                        <p class="p description">The name of the event.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d654820e1320 ">
+                        <p class="p">handler</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e1326 ">
+                        <p class="p">
+                           <a class="xref" href="Function.html#d1e3580">Function</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e1332 ">
+                        <p class="p description">The function that handles the event.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d654820e1320 ">
+                        <p class="p">capturePhase</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d654820e1326 ">
+                        <p class="p">
+                           <a class="xref" href="Boolean.html#d1e5707">Boolean</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d654820e1332 ">
+                        <p class="p description">Whether to call the handler only in the capturing phase of the event propagation.</p>
+
+                        <p class="p"> (default: false)</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e22477__d1e22920">undefined <strong class="ph b">show</strong> ()</p>
+
+         <p class="p description">Shows this element.</p>
+
+         <p class="p description"> When a window or container is hidden, its children are also hidden, but when it is shown again, the children retain their own visibility states.</p>
+
+         <p class="p methodName" id="d1e22477__d1e22870">undefined <strong class="ph b">stopMovie</strong> ()</p>
+
+         <p class="p description">Halts playback of the current movie.</p>
+
+         <p class="p description">
+            The stopMovie()-playMovie() sequence does not work for SWF files produced by Flex, or for some files produced by Flash Authoring (depending on how they were implemented).Using stopMovie() from the player's hosting environment has no effect on an SWF file playing in a ScriptUI Flash Player element. It is, however, possible to produce an SWF using Flash Authoring that can stop itself in response to user interaction.
+          </p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>

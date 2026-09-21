@@ -19,6 +19,7 @@ const { make, esc, pageOf, splitVersion, THEME_BOOT, BASE } = require('./render'
 const products = require('./products');
 const agents = require('./agents');
 const { createZip } = require('./zip');
+const legacy = require('./archive');
 
 const ROOT = path.join(__dirname, '..');
 const OUT = process.env.OUT_DIR || path.join(ROOT, 'site');
@@ -215,6 +216,22 @@ for (const t of targets) {
   console.log('  ' + t.slug.padEnd(17) + String(t.data.classes.length).padStart(5) + ' Seiten');
 }
 
+/* ---------- Archiv ----------
+   Fertiges HTML aus legacy/, unveraendert durchgereicht. Es darf keinem Ziel
+   in die Quere kommen: gleicher Ordnername hiesse, eine erzeugte Bibliothek
+   zu ueberschreiben. */
+for (const a of legacy.archives)
+  if (targets.some(t => t.slug.toLowerCase() === a.dir.toLowerCase())) {
+    console.error('Archiv "' + a.dir + '" heisst wie ein erzeugtes Ziel');
+    process.exit(1);
+  }
+legacy.copyAll(write, m => console.log(m));
+
+/* Ins Offline-Archiv gehoeren die Altfassungen nicht: Sie verdoppelten es fast,
+   und wer offline nachschlaegt, sucht das aktuelle Objektmodell. Im
+   Auslieferungspaket sind sie drin — dort ist alles, was auf den Server geht. */
+const ohneArchiv = e => !legacy.archives.some(a => e.name.startsWith(a.dir + '/'));
+
 /* ---------- Startseite ---------- */
 write('index.html', homePage(targets, models[0].data.generated));
 write('llms.txt', agents.llmsRoot(targets, models[0].data.generated));
@@ -248,7 +265,7 @@ function collect() {
 }
 
 const zipStart = Date.now();
-let entries = collect();
+let entries = collect().filter(ohneArchiv);
 const mb = Math.round(createZip(entries, new Date()).length / 1048576);
 for (const e of entries) {
   if (!/(^|\/)index\.html$/.test(e.name)) continue;
@@ -259,10 +276,11 @@ for (const e of entries) {
     .split('__ZIPPAGES__').join(pages.toLocaleString('en-US')));
 }
 const inhalt = collect();
-const archive = createZip(inhalt, new Date());
+const fuersArchiv = inhalt.filter(ohneArchiv);
+const archive = createZip(fuersArchiv, new Date());
 write(ZIP, archive);
 console.log('archiv   ' + ZIP + '  ' + (archive.length / 1048576).toFixed(1) + ' MB aus ' +
-  entries.length + ' Dateien in ' + ((Date.now() - zipStart) / 1000).toFixed(1) + ' s');
+  fuersArchiv.length + ' Dateien in ' + ((Date.now() - zipStart) / 1000).toFixed(1) + ' s');
 
 /* ---------- Auslieferungspaket ----------
    Der ganze Ordner als ein Zip neben site/, so wie er auf den Server geht:
@@ -293,6 +311,15 @@ for (const [slug, st] of typeStats)
 
 console.log('gesamt   ' + pages + ' Seiten, ' + (bytes / 1048576).toFixed(1) + ' MB in ' +
   (Date.now() - started) + ' ms → ' + path.relative(ROOT, OUT));
+
+/* Die mitgelieferten Altfassungen — im Kopf tauchen sie bewusst nicht auf,
+   gesucht werden sie nur von hier aus. Der Verweis ist absolut, weil er auch
+   in der Fassung steht, die im Offline-Archiv landet: Dort liegen die
+   Altfassungen nicht, ein relativer Verweis ginge also ins Leere. */
+function archiveLinks() {
+  return legacy.archives.map(a => `<li><a href="${esc(BASE + a.dir + '/')}">
+      <b>${esc(a.label)}</b><span>${esc(a.blurb)}</span></a></li>`).join('');
+}
 
 function homePage(targets, generated) {
   const card = t => {
@@ -336,6 +363,8 @@ function homePage(targets, generated) {
     <ul class="cards">${prods.map(card).join('')}</ul></section>
   <section><h2 class="sechead">Shared libraries <b>${libs.length}</b></h2>
     <ul class="cards">${libs.map(card).join('')}</ul></section>
+  <section class="archive"><h2 class="sechead" id="archive">Archive</h2>
+    <ul class="dl">${archiveLinks()}</ul></section>
   <section class="offline"><h2 class="sechead" id="offline">Offline</h2>
     <ul class="dl">
       <li><a href="indesignapi.zip" download><b>indesignapi.zip</b>
@@ -353,6 +382,10 @@ function homePage(targets, generated) {
     are Adobe’s, transformation errors are ours. Copyright of the original files, and the trademarks
     InDesign, Photoshop, Illustrator, ExtendScript and ScriptUI, are held by Adobe Inc.</p>
     <p class="meta">Built on ${esc(generated)}.</p>
+    <p class="credit">The idea, and the original ExtendScript API in HTML, came from
+      <a href="https://web.archive.org/web/20170106130344/http://www.jongware.com/idjshelp.html"
+      rel="noopener">Theunis de Jong</a> — <b>Jongware</b> († 2020). Without his work
+      this site would not exist. Thank you.</p>
     <p class="by">Created with <span class="hrt">&#9829;</span> by
       <a href="https://www.linkedin.com/in/gregor-fellenz/" rel="noopener">Gregor Fellenz</a>,
       <a href="https://www.publishingx.de/" rel="noopener">publishingX</a>

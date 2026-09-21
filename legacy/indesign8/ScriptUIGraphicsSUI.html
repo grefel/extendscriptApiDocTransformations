@@ -1,0 +1,1733 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xml:lang="en-us" lang="en-us">
+<head><meta name="description" content="An object used to draw custom graphics, found in the graphics property of window, container, and control objects. Allows a script to customize aspects of the element’s appearance, such as the color ..."></meta><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="copyright" content="(C) Copyright 2005"></meta><meta name="DC.rights.owner" content="(C) Copyright 2005"></meta><meta name="DC.Type" content="topic"></meta><meta name="DC.Title" content="ScriptUIGraphics (SUI)"></meta><meta name="DC.Format" content="XHTML"></meta><meta name="DC.Identifier" content="d1e12523"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/commonltr.css"><!----></link><title>ScriptUIGraphics (SUI)</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/css/webhelp_topic.css"><!----></link><link rel="stylesheet" type="text/css" href="oxygen-webhelp/resources/skins/skin.css"><!----></link><link rel="stylesheet" type="text/css" href="/skin.css"></link><script type="text/javascript"><!--
+          
+          var prefix = "index.html";
+          
+          --></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-1.8.2.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.cookie.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery-ui.custom.min.js"><!----></script><script type="text/javascript" src="oxygen-webhelp/resources/js/jquery.highlight-3.js"><!----></script><script type="text/javascript" charset="utf-8" src="oxygen-webhelp/resources/js/webhelp_topic.js"><!----></script></head>
+<body onload="highlightSearchTerm()" class="frmBody" id="d1e12523">
+<table class="nav"><tbody><tr><td colspan="2"><div id="printlink"><a href="javascript:window.print();" title="Print this page"></a></div><div id="permalink"><a href="#" title="Link to this page"></a></div></td></tr><tr><td width="75%"></td><td><div class="navheader"></div></td></tr></tbody></table>
+
+   <h1 class="title topictitle1">
+      <span class="keyword">ScriptUIGraphics (SUI)</span>
+   </h1>
+
+   <div class="body">
+      <p class="p description">
+        An object used to draw custom graphics, found in the graphics property of window, container, and control objects.
+      </p>
+
+      <p class="p description">
+        Allows a script to customize aspects of the element’s appearance, such as the color and font. Use an onDraw callback function to set these properties or call the functions.All measurements are in pixels.
+      </p>
+
+      <p class="p quicklinks">
+         Go to <strong class="ph b">
+            <a class="xref" href="#d1e12523__iProps">Property Listing</a>
+         </strong> | <strong class="ph b">
+            <a class="xref" href="#d1e12523__iMethods">Method Listing</a>
+         </strong>
+      </p>
+
+      <div class="section"><h2 class="title sectiontitle">Methods:</h2>
+         
+         <p class="p"> 
+            <a class="xref" href="#d1e12523__d1e12683">newBrush</a>,  <a class="xref" href="#d1e12523__d1e12748">newPen</a>,  <a class="xref" href="#d1e12523__d1e12828">newPath</a>,  <a class="xref" href="#d1e12523__d1e12846">closePath</a>,  <a class="xref" href="#d1e12523__d1e12862">moveTo</a>,  <a class="xref" href="#d1e12523__d1e12913">lineTo</a>,  <a class="xref" href="#d1e12523__d1e12967">rectPath</a>,  <a class="xref" href="#d1e12523__d1e13050">ellipsePath</a>,  <a class="xref" href="#d1e12523__d1e13131">strokePath</a>,  <a class="xref" href="#d1e12523__d1e13167">fillPath</a>,  <a class="xref" href="#d1e12523__d1e13204">drawFocusRing</a>,  <a class="xref" href="#d1e12523__d1e13267">drawImage</a>,  <a class="xref" href="#d1e12523__d1e13342">drawOSControl</a>,  <a class="xref" href="#d1e12523__d1e13348">drawString</a>,  <a class="xref" href="#d1e12523__d1e13420">measureString</a>
+         </p>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Objects:</h2>
+         
+         <p class="p">
+            <a class="xref" href="PointSUI.html#d1e24620">Point (SUI)</a>, <a class="xref" href="ScriptUIBrushSUI.html#d1e12407">ScriptUIBrush (SUI)</a>, <a class="xref" href="ScriptUIFontSUI.html#d1e13646">ScriptUIFont (SUI)</a>, <a class="xref" href="ScriptUIPathSUI.html#d1e12482">ScriptUIPath (SUI)</a>, <a class="xref" href="ScriptUIPenSUI.html#d1e12315">ScriptUIPen (SUI)</a>, </p>
+
+      </div>
+
+      <div class="section" id="d1e12523__iProps"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d1623371e163">
+                        <p class="p">Property</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e169">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e175">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e181">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1623371e163 ">
+                        <p class="p">backgroundColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e169 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIBrushSUI.html#d1e12407">ScriptUIBrush (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e175 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e181 ">
+                        <p class="p description">The background color for containers; for non-containers, the parent background color.</p>
+
+                        <p class="p description">The paint color and style is defined in this brush object.This property is only supported for controls like  dropdownlist, edittext, and listbox.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1623371e163 ">
+                        <p class="p">currentPath</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e169 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIPathSUI.html#d1e12482">ScriptUIPath (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e175 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e181 ">
+                        <p class="p description">The current drawing path, encapsulated in a path object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1623371e163 ">
+                        <p class="p">currentPoint</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e169 ">
+                        <p class="p">
+                           <a class="xref" href="PointSUI.html#d1e24620">Point (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e175 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e181 ">
+                        <p class="p description">The current position in the current drawing path.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1623371e163 ">
+                        <p class="p">disabledBackgroundColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e169 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIBrushSUI.html#d1e12407">ScriptUIBrush (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e175 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e181 ">
+                        <p class="p description">The background color for containers when disabled or inactive; for non-containers, the parent background color.</p>
+
+                        <p class="p description">The paint color and style is defined in this brush object.This property is only supported for controls like  dropdownlist, edittext, and listbox.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1623371e163 ">
+                        <p class="p">disabledForegroundColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e169 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIPenSUI.html#d1e12315">ScriptUIPen (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e175 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e181 ">
+                        <p class="p description">The text color when the element is disabled or inactive.</p>
+
+                        <p class="p description">The paint color and style is defined in this pen object.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1623371e163 ">
+                        <p class="p">font</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e169 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIFontSUI.html#d1e13646">ScriptUIFont (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e175 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e181 ">
+                        <p class="p description">The default font to use for displaying text.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1623371e163 ">
+                        <p class="p">foregroundColor</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e169 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIPenSUI.html#d1e12315">ScriptUIPen (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e175 ">
+                        <p class="p">read/write</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e181 ">
+                        <p class="p description">The text color.</p>
+
+                        <p class="p description">The paint color and style is defined in this pen object.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Property Listing</h2>
+         
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all">
+               
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="20%" id="d1623371e447">
+                        <p class="p">Name</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e453">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e459">
+                        <p class="p">Access</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e465">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1623371e447 ">
+                        <p class="p">BrushType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e453 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e459 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e465 ">
+                        <p class="p description">
+            Contains the enumerated constants for the type argument of newBrush().
+          </p>
+
+                        <p class="p description">Type constants are: SOLID_COLOR, THEME_COLOR.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="20%" headers="d1623371e447 ">
+                        <p class="p">PenType</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e453 ">
+                        <p class="p">
+                           <a class="xref" href="Object.html#d1e624">Object</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e459 ">
+                        <p class="p">readonly</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e465 ">
+                        <p class="p description">
+            Contains the enumerated constants for the type argument of newPen().
+          </p>
+
+                        <p class="p description">Type constants are: SOLID_COLOR, THEME_COLOR.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section" id="d1e12523__iMethods"><h2 class="title sectiontitle">Method Listing</h2>
+         
+         <p class="p methodName" id="d1e12523__d1e12846">undefined <strong class="ph b">closePath</strong> ()</p>
+
+         <p class="p description">Closes the current path.</p>
+
+         <p class="p description">
+            Defines a line from the current postion (currentPoint) to the start point of the current path (the value of currentPath).
+          </p>
+
+         <p class="p methodName" id="d1e12523__d1e13204">undefined <strong class="ph b">drawFocusRing</strong> (left:<em class="ph i">Number</em>, top:<em class="ph i">Number</em>, width:<em class="ph i">Number</em>, height:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Draws a focus ring within a region of this element.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e601">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e607">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e613">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e601 ">
+                        <p class="p">left</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e607 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e613 ">
+                        <p class="p description">The left coordinate of the region.</p>
+
+                        <p class="p description">Value is relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e601 ">
+                        <p class="p">top</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e607 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e613 ">
+                        <p class="p description">The top coordinate of the region.</p>
+
+                        <p class="p description">Value is relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e601 ">
+                        <p class="p">width</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e607 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e613 ">
+                        <p class="p description">The width of the region in pixels.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e601 ">
+                        <p class="p">height</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e607 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e613 ">
+                        <p class="p description">The height of the region in pixels.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e12523__d1e13267">undefined <strong class="ph b">drawImage</strong> (image:<em class="ph i">ScriptUIImageSUI</em>, left:<em class="ph i">Number</em>, top:<em class="ph i">Number</em>, [width:<em class="ph i">Number</em>], [height:<em class="ph i">Number</em>])</p>
+
+         <p class="p description">Draws an image within a given region of the element.</p>
+
+         <p class="p description">Uses the version of the image that is appropriate to the element's current state.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e774">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e780">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e786">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e774 ">
+                        <p class="p">image</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e780 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIImageSUI.html#d1e13733">ScriptUIImage (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e786 ">
+                        <p class="p description">The image to draw.</p>
+
+                        <p class="p description">This object contains different versions of an image appropriate to various element states, such as a dimmed version for the disabled state.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e774 ">
+                        <p class="p">left</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e780 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e786 ">
+                        <p class="p description">The left coordinate of the region, relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e774 ">
+                        <p class="p">top</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e780 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e786 ">
+                        <p class="p description">The top coordinate of the region, relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e774 ">
+                        <p class="p">width</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e780 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e786 ">
+                        <p class="p description">The width in pixels. If provided, the image is stretched or shrunk to fit. If omitted, uses the original image width.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e774 ">
+                        <p class="p">height</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e780 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e786 ">
+                        <p class="p description">The height in pixels. If provided, the image is stretched or shrunk to fit. If omitted, uses the original image height.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e12523__d1e13342">undefined <strong class="ph b">drawOSControl</strong> ()</p>
+
+         <p class="p description">Draw the platform-specific control associated with this element.</p>
+
+         <p class="p methodName" id="d1e12523__d1e13348">undefined <strong class="ph b">drawString</strong> (text:<em class="ph i">String</em>, pen:<em class="ph i">ScriptUIPenSUI</em>, x:<em class="ph i">Number</em>, y:<em class="ph i">Number</em>, [font:<em class="ph i">ScriptUIFontSUI</em>])</p>
+
+         <p class="p description">Draw a string of text starting at a given point in this element, using a given drawing pen and font.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e976">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e982">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e988">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e976 ">
+                        <p class="p">text</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e982 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e988 ">
+                        <p class="p description">The text string.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e976 ">
+                        <p class="p">pen</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e982 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIPenSUI.html#d1e12315">ScriptUIPen (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e988 ">
+                        <p class="p description">The drawing pen to use.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e976 ">
+                        <p class="p">x</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e982 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e988 ">
+                        <p class="p description">The left coordinate, relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e976 ">
+                        <p class="p">y</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e982 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e988 ">
+                        <p class="p description">The top coordinate, relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e976 ">
+                        <p class="p">font</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e982 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIFontSUI.html#d1e13646">ScriptUIFont (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e988 ">
+                        <p class="p description">
+                The font to use. Default is the  font value in this object.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e12523__d1e13050">
+            <a class="xref" href="PointSUI.html#d1e24620">Point (SUI)</a> 
+            <strong class="ph b">ellipsePath</strong> (left:<em class="ph i">Number</em>, top:<em class="ph i">Number</em>, width:<em class="ph i">Number</em>, height:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">
+            Defines an elliptical path within a given rectangular area in the currentPath object, which can be filled using fillPath() or stroked using strokePath().
+          </p>
+
+         <p class="p description">
+            Returns a Point object for the upper left corner of the area, which is the new currentPoint.
+          </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e1170">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e1176">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e1182">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1170 ">
+                        <p class="p">left</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1176 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1182 ">
+                        <p class="p description">The left coordinate of the region, relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1170 ">
+                        <p class="p">top</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1176 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1182 ">
+                        <p class="p description">The top coordinate of the region, relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1170 ">
+                        <p class="p">width</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1176 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1182 ">
+                        <p class="p description">The width of the region in pixels.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1170 ">
+                        <p class="p">height</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1176 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1182 ">
+                        <p class="p description">The height of the region in pixels.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e12523__d1e13167">undefined <strong class="ph b">fillPath</strong> (brush:<em class="ph i">ScriptUIBrushSUI</em>, [path:<em class="ph i">ScriptUIPathSUI</em>])</p>
+
+         <p class="p description">Fills a path using a given painting brush.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e1324">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e1330">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e1336">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1324 ">
+                        <p class="p">brush</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1330 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIBrushSUI.html#d1e12407">ScriptUIBrush (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1336 ">
+                        <p class="p description">The brush object that defines the fill color.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1324 ">
+                        <p class="p">path</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1330 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIPathSUI.html#d1e12482">ScriptUIPath (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1336 ">
+                        <p class="p description">
+                The path object. Default is the currentPath.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e12523__d1e12913">
+            <a class="xref" href="PointSUI.html#d1e24620">Point (SUI)</a> 
+            <strong class="ph b">lineTo</strong> (x:<em class="ph i">Number</em>, y:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">
+            Adds a path segment to the currentPath.
+          </p>
+
+         <p class="p description">
+            The line is defined from the currentPoint to the specified destination point. Returns the Point object  for the destination point, which becomes the new value of currentPoint.
+          </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e1436">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e1442">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e1448">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1436 ">
+                        <p class="p">x</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1442 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1448 ">
+                        <p class="p description">The X coordinate for the destination point, relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1436 ">
+                        <p class="p">y</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1442 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1448 ">
+                        <p class="p description">The Y coordinate for the destination point, relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e12523__d1e13420">
+            <a class="xref" href="DimensionSUI.html#d1e24698">Dimension (SUI)</a> 
+            <strong class="ph b">measureString</strong> (text:<em class="ph i">String</em>, [font:<em class="ph i">ScriptUIFontSUI</em>], [boundingWidth:<em class="ph i">Number</em>])</p>
+
+         <p class="p description">Calculates the size needed to display a string using the given font.</p>
+
+         <p class="p description">
+            Returns a Dimension object that contains the height and width of the string in pixels.
+          </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e1551">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e1557">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e1563">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1551 ">
+                        <p class="p">text</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1557 ">
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1563 ">
+                        <p class="p description">The text string to measure.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1551 ">
+                        <p class="p">font</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1557 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIFontSUI.html#d1e13646">ScriptUIFont (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1563 ">
+                        <p class="p description">
+                The font to use. Default is the font value in this object.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1551 ">
+                        <p class="p">boundingWidth</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1557 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1563 ">
+                        <p class="p description">The bounding width.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e12523__d1e12862">
+            <a class="xref" href="PointSUI.html#d1e24620">Point (SUI)</a> 
+            <strong class="ph b">moveTo</strong> (x:<em class="ph i">Number</em>, y:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">
+            Adds a given point to the currentPath, and makes it the current drawing position.
+          </p>
+
+         <p class="p description">
+            Returns the Point object which is the new value of currentPoint.
+          </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e1687">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e1693">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e1699">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1687 ">
+                        <p class="p">x</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1693 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1699 ">
+                        <p class="p description">The X coordinate for the new point, relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1687 ">
+                        <p class="p">y</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1693 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1699 ">
+                        <p class="p description">The Y coordinate for the new point, relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e12523__d1e12683">
+            <a class="xref" href="ScriptUIBrushSUI.html#d1e12407">ScriptUIBrush (SUI)</a> 
+            <strong class="ph b">newBrush</strong> (type:<em class="ph i">Number</em>, color:<em class="ph i">Array of Number String</em>)</p>
+
+         <p class="p description">Creates a new painting brush object.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e1796">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e1802">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e1808">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1796 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1802 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1808 ">
+                        <p class="p description">The brush type, solid or theme.</p>
+
+                        <p class="p description">
+                One of the constants ScriptUIGraphics.BrushType.SOLID_COLOR or ScriptUIGraphics.BrushType.THEME_COLOR.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1796 ">
+                        <p class="p">color</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1802 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1808 ">
+                        <p class="p description">The brush color.</p>
+
+                        <p class="p description">
+                              If type is SOLID_COLOR, the color expressed as an array of three or four values, in the form [R, B, G, A] specifying the red, green, and blue values of the color and, optionally, the opacity (alpha channel). All values are numbers in the range [0.0..1.0]. An opacity of 0 is fully transparent, and an opacity of 1 is fully opaque.
+                              If the type is THEME_COLOR, the name string of the theme. Theme colors are defined by the host application.
+                           </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e12523__d1e12828">
+            <a class="xref" href="ScriptUIPathSUI.html#d1e12482">ScriptUIPath (SUI)</a> 
+            <strong class="ph b">newPath</strong> ()</p>
+
+         <p class="p description">Creates a new, empty path object.</p>
+
+         <p class="p description">
+            Replaces any existing path in currentPath.
+          </p>
+
+         <p class="p methodName" id="d1e12523__d1e12748">
+            <a class="xref" href="ScriptUIPenSUI.html#d1e12315">ScriptUIPen (SUI)</a> 
+            <strong class="ph b">newPen</strong> (type:<em class="ph i">Number</em>, color:<em class="ph i">Array of Number String</em>, width:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">Creates a new drawing pen object.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e1941">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e1947">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e1953">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1941 ">
+                        <p class="p">type</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1947 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1953 ">
+                        <p class="p description">The pen type, solid or theme.</p>
+
+                        <p class="p description">
+                One of the constants ScriptUIGraphics.PenType.SOLID_COLOR or ScriptUIGraphics.PenType.THEME_COLOR.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1941 ">
+                        <p class="p">color</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1947 ">
+                        <p class="p">
+                           <a class="xref" href="Array.html#d1e968">Array</a> of <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                        <p class="p">
+                           <a class="xref" href="String.html#d1e4543">String</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1953 ">
+                        <p class="p description">The pen color.</p>
+
+                        <p class="p description">
+                              If type is SOLID_COLOR, the color expressed as an array of three or four values, in the form [R, B, G, A] specifying the red, green, and blue values of the color and, optionally, the opacity (alpha channel). All values are numbers in the range [0.0..1.0]. An opacity of 0 is fully transparent, and an opacity of 1 is fully opaque.
+                              If the type is THEME_COLOR, the name string of the theme. Theme colors are defined by the host application.
+                           </p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e1941 ">
+                        <p class="p">width</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e1947 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e1953 ">
+                        <p class="p description">The width of the pen line in pixels.</p>
+
+                        <p class="p description">The line is centered around the current point. For example, if the value is 2, drawing a line from (0, 10) to (5, 10) paints the two rows of pixels directly above and below y-position 10.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e12523__d1e12967">
+            <a class="xref" href="PointSUI.html#d1e24620">Point (SUI)</a> 
+            <strong class="ph b">rectPath</strong> (left:<em class="ph i">Number</em>, top:<em class="ph i">Number</em>, width:<em class="ph i">Number</em>, height:<em class="ph i">Number</em>)</p>
+
+         <p class="p description">
+            Defines a rectangular path in the currentPath object.
+          </p>
+
+         <p class="p description">
+            The rectangle can be filled using fillPath() or stroked using strokePath().Returns the Point object  for the upper left corner of the rectangle, which becomes the new value of currentPoint.
+          </p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e2105">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e2111">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e2117">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e2105 ">
+                        <p class="p">left</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e2111 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e2117 ">
+                        <p class="p description">The left coordinate relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e2105 ">
+                        <p class="p">top</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e2111 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e2117 ">
+                        <p class="p description">The top coordinate relative to the origin of this element.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e2105 ">
+                        <p class="p">width</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e2111 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e2117 ">
+                        <p class="p description">The width in pixels.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e2105 ">
+                        <p class="p">height</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e2111 ">
+                        <p class="p">
+                           <a class="xref" href="Number.html#d1e5437">Number</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e2117 ">
+                        <p class="p description">The height in pixels.</p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+         <p class="p methodName" id="d1e12523__d1e13131">undefined <strong class="ph b">strokePath</strong> (pen:<em class="ph i">ScriptUIPenSUI</em>, [path:<em class="ph i">ScriptUIPathSUI</em>])</p>
+
+         <p class="p description">Strokes the path segments of a path with a given drawing pen.</p>
+
+         
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table parameterTable" frame="border" border="1" rules="all">
+               
+               
+               
+               <thead class="thead" align="left">
+                  <tr class="row">
+                     <th class="entry" valign="top" width="30%" id="d1623371e2259">
+                        <p class="p">Parameter</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="10%" id="d1623371e2265">
+                        <p class="p">Type</p>
+
+                     </th>
+
+                     <th class="entry" valign="top" width="60%" id="d1623371e2271">
+                        <p class="p">Description</p>
+
+                     </th>
+
+                  </tr>
+
+               </thead>
+
+               <tbody class="tbody">
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e2259 ">
+                        <p class="p">pen</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e2265 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIPenSUI.html#d1e12315">ScriptUIPen (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e2271 ">
+                        <p class="p description">The drawing pen that defines the color and line width.</p>
+
+                     </td>
+
+                  </tr>
+
+                  <tr class="row">
+                     <td class="entry" valign="top" width="30%" headers="d1623371e2259 ">
+                        <p class="p">path</p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="10%" headers="d1623371e2265 ">
+                        <p class="p">
+                           <a class="xref" href="ScriptUIPathSUI.html#d1e12482">ScriptUIPath (SUI)</a>
+                        </p>
+
+                     </td>
+
+                     <td class="entry" valign="top" width="60%" headers="d1623371e2271 ">
+                        <p class="p description">
+                The path object. Default is the currentPath.
+              </p>
+
+                     </td>
+
+                  </tr>
+
+               </tbody>
+
+            </table>
+</div>
+
+      </div>
+
+      <div class="section"><h2 class="title sectiontitle">Object of</h2>
+         
+         <p class="p noMargin">
+            <a class="xref" href="StaticTextSUI.html#d1e13799">StaticText (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ButtonSUI.html#d1e14430">Button (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="IconButtonSUI.html#d1e15087">IconButton (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="EditTextSUI.html#d1e15708">EditText (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ListBoxSUI.html#d1e16445">ListBox (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="DropDownListSUI.html#d1e17343">DropDownList (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="CheckboxSUI.html#d1e18347">Checkbox (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ScrollbarSUI.html#d1e19029">Scrollbar (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="SliderSUI.html#d1e20421">Slider (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="ProgressbarSUI.html#d1e21113">Progressbar (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="TreeViewSUI.html#d1e21653">TreeView (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="GroupSUI.html#d1e23094">Group (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="PanelSUI.html#d1e23819">Panel (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="RadioButtonSUI.html#d1e19742">RadioButton (SUI)</a>.graphics</p>
+
+         <p class="p noMargin">
+            <a class="xref" href="WindowSUI.html#d1e10773">Window (SUI)</a>.graphics</p>
+
+      </div>
+
+   </div>
+
+<div class="navfooter"><!----></div><div class="footer"><div>
+	<p>These files are <a href="https://github.com/grefel/extendscriptApiDoc" target="_blank">transformed</a> from data by <a href="http://www.adobe.com" target="_blank">Adobe Systems Incorporated</a>. If questions arise keep to the original versions of the files supplied by Adobe. InDesign, PhotoShop, Illustrator, ExtendScript and ScriptUI are trademarks of <a href="http://www.adobe.com/" target="_blank">Adobe Systems Incorporated</a>.</p>	
+</div></div>
+</body>
+</html>
