@@ -51,6 +51,14 @@ hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
   Member dort auflistet, wo sonst die Tabellen stehen.
 - **Eine statische Seite je Objekt.** Deep-Links, Drucken und Nutzung ohne JS
   funktionieren; JavaScript ergänzt nur Bedienelemente.
+- **Telefon: Seitenleiste weg, Tabellen werden Blöcke.** Unter 620 px fällt die
+  Objektliste weg — navigiert wird über die Suche, die dafür im Kopf bleibt — und
+  der Zoom geht von 1,15 auf 1. Unter 460 px stehen Properties und Events als
+  Blöcke statt in vier Spalten; umgestellt wird nur die Darstellung, die `<tr>`
+  behalten ihre `id`.
+  Im Kopf bleiben nur Produktumschalter, ExtendScript/UXP und Suche, deshalb
+  entscheidet ohne gespeicherte Wahl jetzt `prefers-color-scheme` über das Thema.
+  Details in **[build/README.md](build/README.md)**, Abschnitt „Telefon".
 - Kein `fetch` — Navigationsliste und Suchindex kommen als `<script src>`, damit der
   Offline-Download über `file://` funktioniert.
 - Kein Build-Step und keine Laufzeit-Abhängigkeit im Output.

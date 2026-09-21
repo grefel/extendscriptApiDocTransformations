@@ -18,11 +18,14 @@ const BASE = 'https://www.indesignjs.de/indesignapi/';
 
 /* Laeuft synchron im <head>, vor dem ersten Zeichnen. site.js hat "defer" und
    ist damit zu spaet: die Folgeseite erschiene kurz im Standard und klappte
-   dann um. Ohne gespeicherte Wahl gilt Hell bei Zoom 1,15 — das steht im
-   Stylesheet, hier wird dann nichts gesetzt. */
+   dann um. Ohne gespeicherte Wahl wird hier nichts gesetzt — dann entscheidet
+   prefers-color-scheme im Stylesheet, und der Zoom bleibt bei 1,15.
+
+   Geschrieben werden beide Werte, "light" wie "dark": ausdrueckliches Hell
+   muss ein dunkel eingestelltes System ueberstimmen koennen. */
 const THEME_BOOT =
-  'try{var d=document.documentElement,s=localStorage;' +
-  'if(s.getItem("theme")==="dark")d.dataset.t="dark";' +
+  'try{var d=document.documentElement,s=localStorage,t=s.getItem("theme");' +
+  'if(t==="dark"||t==="light")d.dataset.t=t;' +
   'var f=parseFloat(s.getItem("fs"));if(f>0)d.style.setProperty("--fs",f)}catch(e){}';
 
 /* Dateiname je Objekt. Im aktuellen Modell ist "$" das einzige Sonderzeichen und
