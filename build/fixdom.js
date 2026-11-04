@@ -155,14 +155,15 @@ function parentTypes(description, isSui) {
        Link.parent   "The linked object. Can return: Story, Graphic, Movie or Sound."
        File.parent   "The Folder object for the folder that contains this file."
 
-     Bleiben die 18 ScriptUI-Elemente ("The parent element."): dort nennt Adobe
-     den Behaelter nirgends, geraten wird hier nicht. */
+     Ein Artikel ist kein Typ: "The object's container" (135 Collections in
+     Illustrator und Photoshop) nennt keinen. Ohne Treffer gilt die
+     datatype-Angabe der Quelle, siehe model.js. */
   const acc = ACCEPT_RE.exec(s);
   if (acc) {
     const parts = splitAcceptReturn(acc[2]).filter(t => t.replace(/\s/g, '') !== '');
     if (parts.length) return parts.sort().map(typ);
   }
-  const obj = /\b([A-Z][A-Za-z]+) object\b/.exec(s);
+  const obj = /\b(?!(?:The|An?)\b)([A-Z][A-Za-z]+) object\b/.exec(s);
   if (obj) return [typ(obj[1])];
   return [];
 }
