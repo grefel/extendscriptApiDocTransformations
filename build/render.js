@@ -401,7 +401,8 @@ function make(data, d, ctx) {
             <li>Dialogs with ScriptUI</li>
           </ul></div>
           <div class="rtcard"><h3>UXP</h3><ul>
-            <li><code>.idjs</code> scripts and UXP plugins, since InDesign 2023 (18.0)</li>
+            <li><code>.idjs</code> scripts since InDesign 2023 (18.0), UXP plugins
+              since 18.5</li>
             <li>Modern JavaScript: <code>let</code>, <code>const</code>, arrow functions,
               <code>async</code>/<code>await</code></li>
             <li><code>const { app } = require("indesign")</code> — enumerations come from
