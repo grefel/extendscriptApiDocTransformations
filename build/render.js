@@ -102,14 +102,8 @@ function make(data, d, ctx) {
     const suffix = arr ? '<span class="arr">[]</span>' : '';
     const esOnly = ux && ux.hide;
     const parts = ts.map(t => {
-      /* ux.rename: unter UXP kommt gemessen ein anderer Typ — beide stehen im
-         Markup, der Umschalter zeigt den passenden. */
-      const uxpName = ux && ux.rename && ux.rename[t];
-      const shown = uxpName
-        ? `<span data-uxp="hide">${link(t)}</span><span data-only="uxp" hidden>${link(uxpName)}</span>`
-        : link(t);
       let out = ux && ux.promise.includes(t)
-        ? PROMISE_OPEN + shown + PROMISE_CLOSE + suffix
+        ? PROMISE_OPEN + link(t) + PROMISE_CLOSE + suffix
         : link(t) + suffix;
       const c = d.byName.get(t);
       if (c && isCollection(c)) {

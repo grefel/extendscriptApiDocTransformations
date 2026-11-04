@@ -483,11 +483,10 @@ function withoutSuiSuffix(classes) {
    beide Fassungen nebeneinander — umschalten wie auf der Seite kann eine
    Datei nicht. */
 
-/* Der Typ unter UXP: ux.hide faellt weg, ux.promise wird Promise<…>, und
-   ux.rename setzt den unter UXP gemessenen Typ ein. */
+/* Der Typ unter UXP: ux.hide faellt weg, ux.promise wird Promise<…>. */
 function uxpType(T, ts, arr, mu, ux) {
   const list = (ts || []).filter(n => !ux.hide.includes(n))
-    .map(n => ux.promise.includes(n) ? 'Promise<' + T.peek([ux.rename[n] || n]) + '>' : T.peek([n]));
+    .map(n => ux.promise.includes(n) ? 'Promise<' + T.peek([n]) + '>' : T.peek([n]));
   if (mu && !list.includes('string')) list.push('string');
   const one = [...new Set(list)].join(' | ');
   return arr ? (/[|\s]/.test(one) ? '(' + one + ')[]' : one + '[]') : one;
@@ -656,10 +655,7 @@ const UXP_LINKS = {
 function uxpGuide(t, classes, rt, kindOf) {
   const promised = [], stringOnly = [], gone = [];
   let index = 0;
-  /* Weicht der gemessene Typ von Adobes Angabe ab, steht Adobes dahinter. */
-  const promiseOf = ux => '`' + ux.promise.map(n => 'Promise<' + (ux.rename[n] || n) + '>')
-    .join(' | ') + '`' + (Object.keys(ux.rename).length
-    ? ' (Adobe’s export says `' + Object.keys(ux.rename).join(' | ') + '`)' : '');
+  const promiseOf = ux => '`' + ux.promise.map(n => 'Promise<' + n + '>').join(' | ') + '`';
   for (const c of classes) {
     for (const p of c.p) {
       const ux = rt.member(c.n, 'p', p);

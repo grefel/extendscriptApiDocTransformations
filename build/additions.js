@@ -41,8 +41,7 @@ module.exports = {
       t: ['Folder'],
       d: 'The path to the folder containing the document.',
       added: 'Adobes Export sagt File; der Wert ist ein Folder — die Datei ' +
-        'selbst steht in fullName. In InDesign 2026 geprueft. Bei Application, ' +
-        'BookContent und Library steht dasselbe im Export, dort unangetastet.'
+        'selbst steht in fullName. In InDesign 2026 geprueft.'
     },
     'Book.filePath': {
       from: ['File'],
@@ -50,6 +49,34 @@ module.exports = {
       d: 'The path to the folder containing the book.',
       added: 'Wie Document.filePath: der Wert ist der Ordner, die .indb-Datei ' +
         'selbst steht in fullName.'
+    },
+    /* Die folgenden vier stehen in id_26.xml und id_25-server.xml als File.
+       Geprueft in InDesign 2026 (21.6) per Skript: unter ExtendScript ist
+       jeder Wert ein Folder (instanceof Folder, constructor Folder), unter
+       UXP gemessen ein Promise<Folder> (indesign-uxp-types). */
+    'Application.filePath': {
+      from: ['File'],
+      t: ['Folder'],
+      d: 'The path to the folder containing the application.',
+      added: 'Liefert den Programmordner, die .exe/.app steht in fullName.'
+    },
+    'BookContent.filePath': {
+      from: ['File'],
+      t: ['Folder'],
+      d: 'The path to the folder containing the document.',
+      added: 'Liefert den Ordner des Buchkapitels, die Datei steht in fullName.'
+    },
+    'Library.filePath': {
+      from: ['File'],
+      t: ['Folder'],
+      d: 'The path to the folder containing the library.',
+      added: 'Liefert den Ordner der .indl, die Datei steht in fullName.'
+    },
+    'GeneralPreference.temporaryFolder': {
+      from: ['File'],
+      t: ['Folder'],
+      added: 'Liefert den Ordner fuer temporaere Dateien; die Beschreibung im ' +
+        'Export sagt selbst "location".'
     },
     'ScriptPreference.scriptsFolder': {
       from: ['File'],
