@@ -63,10 +63,13 @@ function property(p, isStatic, isSui) {
   const d = desc(p);
   const o = { n: attr(p, 'name') };
 
-  /* Die parent-Property nennt ihre Typen nur im Text und ist immer readonly. */
+  /* Die parent-Property nennt ihre Typen meist nur im Text und ist immer
+     readonly. Gibt der Text keinen her ("The parent element.", "The object's
+     container."), gilt Adobes datatype — meist Object, bei
+     ReflectionInfo.parent Reflection. */
   if (o.n === 'parent') {
     const types = fix.parentTypes(d, isSui);
-    o.t = typeNames(types);
+    o.t = types.length ? typeNames(types) : member(p, d, isSui).t;
     o.rw = 'readonly';
     o.d = d;
     if (isStatic) o.st = 1;
