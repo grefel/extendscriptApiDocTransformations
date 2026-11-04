@@ -31,10 +31,12 @@ const THEME_BOOT =
 /* Dateiname je Objekt. Im aktuellen Modell ist "$" das einzige Sonderzeichen und
    in Dateinamen wie in URLs unbedenklich — pauschales encodeURIComponent machte
    daraus nur ein haessliches %24. Alles Uebrige wird sicherheitshalber kodiert.
-   Auf Gross-/Kleinschreibung darf man sich nicht verlassen, build.js prueft das. */
+   Auf Gross-/Kleinschreibung darf man sich nicht verlassen, build.js prueft das.
+   Die Klasse Index wird deshalb zu Index_.html — index.html ist die
+   Objektliste. Dieselbe Regel steht in site.js (page). */
 const pageOf = name =>
   name.replace(/[^A-Za-z0-9_$.-]/g, ch => '%' + ch.charCodeAt(0).toString(16).toUpperCase())
-  + '.html';
+  + (name.toLowerCase() === 'index' ? '_' : '') + '.html';
 
 /* Der Titel kommt je Produkt in drei Formen:
      "Adobe InDesign 2026 (21.5.1.73) Object Model"

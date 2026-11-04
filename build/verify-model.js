@@ -126,7 +126,8 @@ for (const p of todo) {
     javascript: path.join(ROOT, 'sourceXML/javascript.xml'),
     scriptui: path.join(ROOT, 'sourceXML/scriptui.xml')
   });
-  const old = legacy.build(ref);
+  /* fixDom.xsl nennt die Klasse Index "Index_"; hier heisst sie wie bei Adobe. */
+  const old = JSON.parse(JSON.stringify(legacy.build(ref)).replace(/"Index_"/g, '"Index"'));
   const took = Date.now() - t0;
 
   const oldBy = new Map(old.classes.map(c => [c.n, c]));

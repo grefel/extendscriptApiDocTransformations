@@ -127,10 +127,10 @@ function classModel(cd, origin) {
   }
 
   let name = attr(cd, 'name');
-  /* ScriptUI-Klassen bekommen ein Suffix, "Index" einen Unterstrich — sonst
-     kollidiert es mit Produktklassen bzw. mit index.html. */
+  /* ScriptUI-Klassen bekommen ein Suffix, sonst kollidieren sie mit
+     Produktklassen. Index behaelt seinen Namen; nur die Seite heisst
+     Index_.html, siehe pageOf() in render.js. */
   if (isSui && !/(object|string|bool|number|array|function|file|folder)/i.test(name)) name += 'SUI';
-  if (attr(cd, 'name') === 'Index') name += '_';
 
   const o = { n: name, d: desc(cd) };
   if (isEnum) o.enum = 1;
