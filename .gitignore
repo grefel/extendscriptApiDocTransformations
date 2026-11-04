@@ -47,8 +47,6 @@ Temporary Items
 # Download-Pakete der Website, je Produktversion
 *.zip
 
-# Gegenprobe gegen die alte XSLT-Strecke; prepare-xslt.js legt den Ordner an
-temp/
 
 # Design-Phase: aus fixedDOM.xml generierte Prototyp-Daten, nicht versionieren
 design/api.json

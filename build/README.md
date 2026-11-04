@@ -16,10 +16,6 @@ NO_PACKAGE=1 npm run build   # ohne das Paket, für schnelle Durchläufe
 npm run check      # Website im Browser prüfen (Playwright)
 npm run check:types # jede .d.ts und jedes Beispielskript mit tsc
 npm run serve      # http://localhost:8080
-
-# nur solange die alte Strecke als Gegenprobe dient (braucht Java + Saxon):
-npm run verify:prepare   # temp/fixedDOM-*.xml über mergeFiles.xslt + fixDom.xsl
-npm run verify           # Portierung dagegen halten — 0 echte Abweichungen
 ```
 
 Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
@@ -33,7 +29,6 @@ Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
 | `build.js` | schreibt `site/`, prüft Dateinamen-Kollisionen |
 | `assets/site.css` | Stylesheet aller Seiten |
 | `assets/site.js` | Verbesserungen: Navigation, Filter, Suche, Zwischenablage |
-| `verify-model.js` | Gegenprobe zur XSLT-Extraktion |
 | `check-site.js` | Browsertest der fertigen Website |
 | `serve.js` | Entwicklungsserver, ohne Abhängigkeit |
 | `zip.js` | minimaler ZIP-Schreiber für das Offline-Archiv |
@@ -1227,8 +1222,10 @@ untereinander (`auto-fit`).
 liest die drei OMV-XMLs direkt und bereinigt beim Einlesen — es gibt keine
 Zwischendatei mehr.
 
-`npm run verify` hält die Portierung gegen die alte Saxon-Strecke:
+Eine Gegenprobe hielt die Portierung gegen die alte Saxon-Strecke:
 **0 echte Abweichungen in allen fünf Produkten**, bei 252 verbesserten Membern.
+Danach sind die XSLT-Dateien, die Gegenprobe und die Sublime-Text-
+Vervollständigungen entfernt worden; letzter Stand mit allem in Commit `aeac1d6`.
 
 ### Dabei behobene Fehler der alten Strecke
 
@@ -1254,8 +1251,3 @@ Zwischendatei mehr.
 5. **Die eingefügte AppleScript-Konstante** trug den Typ `number` klein, weil auf
    literale Ausgabe keine Templates greifen. Jetzt `Number` wie überall sonst.
 
-### Was von der alten Strecke noch da ist
-
-`mergeFiles.xslt`, `fixDom.xsl`, `build/prepare-xslt.js` und `build/legacy-model.js`
-werden **nur noch für `npm run verify`** gebraucht. Sobald die Gegenprobe nicht
-mehr gewünscht ist, können alle vier weg — der Build rührt sie nicht an.
