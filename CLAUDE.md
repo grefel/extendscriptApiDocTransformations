@@ -68,12 +68,16 @@ hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
 
 ## Offene Fragen
 
-1. **ExtendScript vs. UXP.** Als Member blendet der Umschalter nur die 242
-   Methoden namens `[]` aus; dazu kommen das `File` als Event-Handler, die
-   umgehängten Kern-Verweise (MDN, Adobes UXP-Referenz, abgeschaltet), das
-   kursive `async` an den 34 File- und Folder-Properties und die Hinweise aus
-   `notes.js`. Er steht nur bei InDesign und InDesign Server (`uxp: true` in
-   `products.js`). `$` und ScriptUI sind aus den Produkten heraus in eigene
+1. **ExtendScript vs. UXP.** Alle Unterschiede stehen in `build/runtime.js`;
+   Seite, `.md` und api.json fragen dort ab (`uxp`-Feld, `notes`,
+   `runtimes`). Als Member entfallen die 242 Methoden namens `[]` und
+   `XMLElements.itemByName`; dazu kommen das `File` als Event-Handler, die
+   umgehängten Kern-Verweise (MDN, Adobes UXP-Referenz, abgeschaltet),
+   `Promise<File>`/`Promise<Folder>` an 27 Dateiwerten (bei `String | File`
+   nur `String`) und die Hinweise aus `notes.js`. Der Umschalter steht nur
+   bei InDesign und InDesign Server (`uxp: true` in `products.js`). Für
+   UXP-Typen verweist `llms.txt` auf `indesign-uxp-types`, eigene
+   UXP-`.d.ts` gibt es bewusst nicht. `$` und ScriptUI sind aus den Produkten heraus in eigene
    Bibliotheken gewandert, die als „ExtendScript only" gekennzeichnet sind.
    **Welche weiteren Unterschiede in die Daten gehören, ist weiterhin offen** — etwa
    `Socket`, `XML`/`XMLList`, `UnitValue`, `Reflection`.
