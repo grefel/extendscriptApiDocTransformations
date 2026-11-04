@@ -77,7 +77,8 @@ mit allem in Commit `aeac1d6`.
    `Promise<File>`/`Promise<Folder>` an 27 Dateiwerten (bei `String | File`
    nur `String`) und die Hinweise aus `notes.js`. Der Umschalter steht nur
    bei InDesign und InDesign Server (`uxp: true` in `products.js`). Für
-   UXP-Typen verweist `llms.txt` auf `indesign-uxp-types`, eigene
+   UXP-Typen verweisen `llms.txt`, `uxp.md` und die Übersichtsseite
+   („For editors and AI agents“) auf `indesign-uxp-types` (Vlad Vladila, MIT), eigene
    UXP-`.d.ts` gibt es bewusst nicht. Die Regeln stehen als Leitfaden in
    `<slug>/uxp.md` und in Kurzform auf der Übersichtsseite. `$` und ScriptUI sind aus den Produkten heraus in eigene
    Bibliotheken gewandert, die als „ExtendScript only" gekennzeichnet sind.

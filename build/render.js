@@ -453,6 +453,11 @@ function make(data, d, ctx) {
           Markdown twin at the same path as its page.</span></a></li>
         <li><a href="api.json" download><b>api.json</b>
           <span>The whole model as JSON, for your own tooling. Large.</span></a></li>
+        ${target.uxp ? `<li><a href="https://www.npmjs.com/package/indesign-uxp-types" rel="noopener">
+          <b>indesign-uxp-types</b>
+          <span>TypeScript declarations for UXP (<code>require("indesign")</code>),
+          the counterpart to the ExtendScript files above. A community package by
+          Vlad Vladila on npm, not part of this site.</span></a></li>` : ''}
       </ul>
       <p class="hint">ExtendScript is not a browser. With the DOM library loaded,
       <code>Document</code>, <code>Event</code>, <code>Text</code> and
