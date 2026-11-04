@@ -62,6 +62,13 @@ const check = (name, got, want) => {
     await p0.locator('[data-enhance]:not([hidden])').count(), 0);
   check('ohne JS: Navigation zum Index moeglich',
     await p0.locator('a[href="index.html"]').count() > 0, true);
+  /* Syntaxfarben entstehen beim Bauen und brauchen kein Skript; das
+     Kopier-Icon dagegen schon und bleibt ohne Skript verborgen. */
+  await p0.goto(url('indesign/index.html'));
+  check('ohne JS: Hello World eingefaerbt',
+    await p0.locator('.rtcard .snip .hljs-keyword').count() > 0, true);
+  check('ohne JS: kein Kopier-Icon', await p0.locator('.cpicon:visible').count(), 0);
+  await p0.goto(url('indesign/Rectangle.html'));   /* die folgenden Pruefungen erwarten sie */
   /* Die acht Uebersichten sind als .../<slug>/ und als .../<slug>/index.html
      erreichbar. Das Canonical zeigt auf die Verzeichnisform, die Links im
      Markup bleiben auf index.html — sonst braeche der Offline-Gebrauch. */
@@ -612,6 +619,38 @@ const check = (name, got, want) => {
     await page.locator('section.runtimes a[href="https://developer.adobe.com/uxp/"]').count(), 1);
   check('Uebersicht: uxp.md liegt daneben',
     fs.existsSync(path.join(SITE, 'indesign', 'uxp.md')), true);
+  /* Hello World je Laufzeit: der Unterschied steckt im Vergleich der
+     Enumeration. Beide Fassungen sind in InDesign 2026 gelaufen. */
+  const helloCp = () => page.locator('.rtcard .cpicon')
+    .evaluateAll(els => els.map(e => e.dataset.cp));
+  check('Codebloecke: Kopier-Icon sichtbar (2 Hello World + jsconfig)',
+    await page.locator('.cpicon:visible').count(), 3);
+  check('Codebloecke: Icon sitzt oben rechts im Block',
+    await page.evaluate(() => {
+      const box = document.querySelector('.rtcard .snipbox').getBoundingClientRect();
+      const ic = document.querySelector('.rtcard .cpicon').getBoundingClientRect();
+      return ic.top - box.top < 12 && box.right - ic.right < 12;
+    }), true);
+  check('Codebloecke: Enumeration in Enum-Farbe',
+    await page.locator('.rtcard .snip .hljs-title.class_', { hasText: 'Justification' }).count() > 0,
+    true);
+  await page.locator('.rtcard .cpicon').first().click();
+  check('Codebloecke: Klick zeigt den Haken',
+    await page.locator('.rtcard .cpicon').first().evaluate(b => b.classList.contains('ok')), true);
+  const [helloEs, helloUxp] = await helloCp();
+  check('Hello World: zwei Beispiele', (await helloCp()).length, 2);
+  check('Hello World ExtendScript vergleicht mit ==',
+    /justification == Justification\.CENTER_ALIGN/.test(helloEs || ''), true);
+  check('Hello World UXP mit require und equals()',
+    /require\("indesign"\)/.test(helloUxp || '') &&
+      /\.equals\(Justification\.CENTER_ALIGN\)/.test(helloUxp || '') &&
+      !/\[0\]/.test(helloUxp || ''), true);
+  check('Hello World: Codebloecke auf gleicher Hoehe',
+    await page.evaluate(() => {
+      const [a, b] = [...document.querySelectorAll('.rtcard .snip')]
+        .map(e => e.getBoundingClientRect().bottom);
+      return Math.abs(a - b) <= 1;
+    }), true);
   const UXP_TYPES = 'section.machine a[href="https://www.npmjs.com/package/indesign-uxp-types"]';
   check('Uebersicht: UXP-Typen bei den Werkzeugen verlinkt',
     await page.locator(UXP_TYPES).count(), 1);
