@@ -483,10 +483,11 @@ function withoutSuiSuffix(classes) {
    beide Fassungen nebeneinander — umschalten wie auf der Seite kann eine
    Datei nicht. */
 
-/* Der Typ unter UXP: ux.hide faellt weg, ux.promise wird Promise<…>. */
+/* Der Typ unter UXP: ux.hide faellt weg, ux.promise wird Promise<…>, und
+   ux.rename setzt den unter UXP gemessenen Typ ein. */
 function uxpType(T, ts, arr, mu, ux) {
   const list = (ts || []).filter(n => !ux.hide.includes(n))
-    .map(n => ux.promise.includes(n) ? 'Promise<' + T.peek([n]) + '>' : T.peek([n]));
+    .map(n => ux.promise.includes(n) ? 'Promise<' + T.peek([ux.rename[n] || n]) + '>' : T.peek([n]));
   if (mu && !list.includes('string')) list.push('string');
   const one = [...new Set(list)].join(' | ');
   return arr ? (/[|\s]/.test(one) ? '(' + one + ')[]' : one + '[]') : one;
@@ -628,6 +629,154 @@ function apiJson(target, classes, ctx) {
   }, null, 1);
 }
 
+/* ---------- uxp.md ----------
+
+   Leitfaden fuer Agenten, die UXP-Code gegen dieses Objektmodell schreiben.
+   Die Member-Seiten zeigen Abweichungen dort, wo sie auftreten; hier stehen
+   die allgemeinen Regeln einmal, und die betroffenen Member als Liste. Die
+   Listen kommen aus runtime.js, die Regeln sind Text. Quellen wie dort. */
+
+const UXP_LINKS = {
+  uxp: 'https://developer.adobe.com/uxp/',
+  indesign: 'https://developer.adobe.com/indesign/uxp/',
+  migration: 'https://developer.adobe.com/indesign/uxp/resources/migration-guides/extendscript/',
+  types: 'https://www.npmjs.com/package/indesign-uxp-types'
+};
+
+function uxpGuide(t, classes, rt, kindOf) {
+  const promised = [], stringOnly = [], gone = [];
+  let index = 0;
+  /* Weicht der gemessene Typ von Adobes Angabe ab, steht Adobes dahinter. */
+  const promiseOf = ux => '`' + ux.promise.map(n => 'Promise<' + (ux.rename[n] || n) + '>')
+    .join(' | ') + '`' + (Object.keys(ux.rename).length
+    ? ' (Adobe’s export says `' + Object.keys(ux.rename).join(' | ') + '`)' : '');
+  for (const c of classes) {
+    for (const p of c.p) {
+      const ux = rt.member(c.n, 'p', p);
+      if (!ux) continue;
+      const row = '`' + c.n + '.' + p.n + '`';
+      if (ux.promise.length) promised.push(row + ' → ' + promiseOf(ux));
+      else stringOnly.push(row);
+    }
+    for (const m of c.m) {
+      if (rt.member(c.n, 'm', m)) {
+        if (m.n === '[]') index++;
+        else gone.push('`' + c.n + '.' + m.n + '()`');
+        continue;
+      }
+      const ux = rt.member(c.n, 'r', m);
+      if (ux && ux.promise.length) promised.push('`' + c.n + '.' + m.n + '()` returns ' +
+        promiseOf(ux));
+    }
+  }
+  const page = n => '[' + n + '](' + BASE + t.slug + '/' + mdOf(n) + ')';
+
+  const L = [];
+  L.push('# UXP and ExtendScript — ' + t.label);
+  L.push('');
+  L.push('> ' + t.data.version + '. How the object model in this reference is used ' +
+    'from UXP, and where that differs from ExtendScript.');
+  L.push('');
+  L.push('InDesign runs scripts in two engines. **ExtendScript** (`.jsx`) is the ' +
+    'original one: JavaScript at the level of ES3, with `app` and every enumeration ' +
+    'as globals. **UXP** (`.idjs` scripts and UXP plugins, since InDesign 2023 / 18.0) ' +
+    'is modern JavaScript. Both drive the same object model — the classes, ' +
+    'properties and methods documented here. What differs is how you reach it and a ' +
+    'handful of rules around it.');
+  L.push('');
+  L.push('## Reaching the object model');
+  L.push('');
+  L.push('```js');
+  L.push('const { app, PathType } = require("indesign");');
+  L.push('');
+  L.push('async function main() {');
+  L.push('  const doc = app.activeDocument;');
+  L.push('  const page = doc.pages.item(0);        // not doc.pages[0]');
+  L.push('  const path = page.polygons.item(0).paths.item(0);');
+  L.push('  if (path.pathType.equals(PathType.CLOSED_PATH)) {   // not ==');
+  L.push('    console.log("closed");');
+  L.push('  }');
+  L.push('  const file = await doc.fullName;      // a Promise under UXP');
+  L.push('  console.log(file.nativePath);');
+  L.push('}');
+  L.push('main();');
+  L.push('```');
+  L.push('');
+  L.push('## Rules');
+  L.push('');
+  L.push('| | ExtendScript | UXP |');
+  L.push('| --- | --- | --- |');
+  L.push('| `app`, enumerations | globals | `require("indesign")` |');
+  L.push('| Collection item | `pages[0]` or `pages.item(0)` | `pages.item(0)` only — `[]` does not exist |');
+  L.push('| Compare enumerations, DOM objects | `==` | `.equals()` — `==` and `===` do not work |');
+  L.push('| Files and folders | ExtendScript `File`, `Folder` | entries from `require("uxp").storage` |');
+  L.push('| Reading a file or folder property | the object | a Promise — `await` it |');
+  L.push('| Passing a file | `File` | path string or UXP `File` entry |');
+  L.push('| Passing a folder | `Folder` | path string only |');
+  L.push('| Script arguments | `app.scriptArgs` | `script.args` |');
+  L.push('| Event handler | function or `File` | function only |');
+  L.push('| Output | `$.writeln()` | `console.log()` |');
+  L.push('| User interface | ScriptUI | HTML |');
+  L.push('| Not available | — | `$`, ScriptUI, `XML`/`XMLList` (E4X), `Socket`, `UnitValue`, `Reflection` |');
+  L.push('');
+  L.push('`app.doScript()` still runs an ExtendScript file from UXP.');
+  L.push('');
+  L.push('## How this reference marks the differences');
+  L.push('');
+  L.push('- Markdown: a type that differs carries `(UXP: …)`, for example ' +
+    '`File` (UXP: `Promise<File>`). Methods that do not exist under UXP say ' +
+    '_ExtendScript only — not available in UXP._ Runtime notes start with **UXP:**.');
+  L.push('- [api.json](' + BASE + t.slug + '/api.json): `runtimes` lists both engines. ' +
+    'A member that differs has `uxp: { type }`, `uxp: { returns }` or ' +
+    '`uxp: { available: false }`; notes are `notes: [{ runtime, text }]`.');
+  L.push('- The website has an ExtendScript / UXP switch in the header that shows ' +
+    'every page as the chosen engine sees it.');
+  L.push('- The `.d.ts` files here describe ExtendScript. For UXP type declarations use ' +
+    '[indesign-uxp-types](' + UXP_LINKS.types + ').');
+  L.push('');
+  L.push('## File and folder values that are Promises under UXP');
+  L.push('');
+  L.push(promised.length + ' members. Measured at runtime in InDesign 2026 ' +
+    '(indesign-uxp-types).');
+  L.push('');
+  for (const r of promised) L.push('- ' + r);
+  L.push('');
+  if (stringOnly.length) {
+    L.push('## String or File: only the String under UXP');
+    L.push('');
+    L.push('Adobe types these as `String | File`. Under UXP they return the path as a ' +
+      'string.');
+    L.push('');
+    for (const r of stringOnly) L.push('- ' + r);
+    L.push('');
+  }
+  L.push('## Methods that do not exist under UXP');
+  L.push('');
+  L.push('- `[]` — the index accessor on ' + index + ' collections. Use `item(index)`.');
+  for (const r of gone) L.push('- ' + r);
+  L.push('');
+  const noted = classes.filter(c => rt.notes(c.n, kindOf(c)).some(n => n.runtime === 'uxp'));
+  const memberNoted = [];
+  for (const c of classes)
+    for (const x of [...c.p, ...c.m])
+      for (const n of rt.memberNotes(c.n, x.n))
+        if (n.runtime === 'uxp') memberNoted.push('`' + c.n + '.' + x.n + '`: ' + n.text);
+  if (memberNoted.length || noted.some(c => !c.enum)) {
+    L.push('## Further notes');
+    L.push('');
+    for (const c of noted.filter(c => !c.enum))
+      for (const n of rt.notes(c.n, kindOf(c))) L.push('- ' + page(c.n) + ': ' + n.text);
+    for (const r of memberNoted) L.push('- ' + r);
+    L.push('');
+  }
+  L.push('## Adobe’s documentation');
+  L.push('');
+  L.push('- [UXP](' + UXP_LINKS.uxp + ') — the platform: modules, storage, network, UI');
+  L.push('- [InDesign UXP](' + UXP_LINKS.indesign + ') — scripts and plugins in InDesign');
+  L.push('- [Migrating from ExtendScript](' + UXP_LINKS.migration + ')');
+  return L.join('\n') + '\n';
+}
+
 /* ---------- llms.txt ----------
 
    Eine Konvention, kein Standard: nichts findet die Datei von allein. Ihr Wert
@@ -662,6 +811,8 @@ function llmsProduct(t, classes, kindOf) {
       '`require("uxp").storage` entry under UXP.');
     L.push('The `.d.ts` files here describe ExtendScript. For UXP use the ' +
       '[indesign-uxp-types](https://www.npmjs.com/package/indesign-uxp-types) package.');
+    L.push('Before writing UXP code, read [uxp.md](' + BASE + t.slug + '/uxp.md): ' +
+      'the rules that differ from ExtendScript, with every affected member listed.');
     L.push('');
   }
   L.push('## Files');
@@ -731,6 +882,6 @@ function llmsRoot(targets, generated) {
 }
 
 module.exports = {
-  makeTypeMapper, buildTypes, markdown, apiJson, llmsProduct, llmsRoot, TS_BUILTIN,
+  makeTypeMapper, buildTypes, markdown, apiJson, uxpGuide, llmsProduct, llmsRoot, TS_BUILTIN,
   withoutSuiSuffix
 };
