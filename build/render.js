@@ -7,6 +7,12 @@
 'use strict';
 
 const shortcuts = require('./shortcuts');
+/* Syntaxfarben entstehen beim Bauen: die Seiten tragen fertige <span>s,
+   laden kein Skript dafuer und sehen ohne JavaScript und offline gleich aus.
+   Nur der Kern mit den zwei Sprachen, die hier vorkommen. */
+const hljs = require('highlight.js/lib/core');
+hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
+hljs.registerLanguage('json', require('highlight.js/lib/languages/json'));
 
 const esc = s => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -60,6 +66,51 @@ const JSCONFIG = [
   '{',
   '  "compilerOptions": { "lib": ["es5"], "types": [], "checkJs": false },',
   '  "include": ["**/*.js", "**/*.d.ts"]',
+  '}'
+].join('\n');
+
+/* Codeblock mit Syntaxfarben und Kopier-Icon oben rechts. Kopiert wird code,
+   angezeigt auf Wunsch mit einer Kopfzeile ("// hello.jsx") davor. Das Icon
+   startet hidden: ohne JavaScript kopiert es nichts, dann bleibt der Code
+   zum Markieren. site.js blendet es ein; .ok tauscht es kurz gegen den Haken. */
+const ICON_COPY = '<svg class="i-copy" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">' +
+  '<rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/>' +
+  '<path d="M10.5 3.5V3A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg>';
+const ICON_OK = '<svg class="i-ok" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">' +
+  '<path d="M3 8.5l3 3 7-7"/></svg>';
+function snippet(code, lang, label, head) {
+  const shown = head ? head + '\n' + code : code;
+  /* Das Icon sitzt im Rahmen um den <pre>, nicht darin: der Block scrollt
+     auf schmalen Schirmen seitlich, und das Icon wanderte sonst mit. */
+  return `<div class="snipbox"><pre class="snip"><code class="hljs language-${lang}">${
+    hljs.highlight(shown, { language: lang }).value}</code></pre><button type="button" class="cpicon" hidden
+    data-cp="${esc(code)}" title="Copy ${esc(label)}" aria-label="Copy ${esc(label)}">${
+    ICON_COPY}${ICON_OK}</button></div>`;
+}
+
+/* Hello World fuer den Block "ExtendScript and UXP" auf der Uebersichtsseite.
+   Parallel gebaut, damit die Unterschiede ins Auge fallen. */
+const HELLO_JSX = [
+  'var doc = app.documents.add();',
+  'var frame = doc.pages[0].textFrames.add();',
+  'frame.geometricBounds = [20, 20, 40, 120];',
+  'frame.contents = "Hello World";',
+  'var para = frame.paragraphs[0];',
+  'para.justification = Justification.CENTER_ALIGN;',
+  'if (para.justification == Justification.CENTER_ALIGN) {',
+  '  alert("centered");',
+  '}'
+].join('\n');
+const HELLO_IDJS = [
+  'const { app, Justification } = require("indesign");',
+  'const doc = app.documents.add();',
+  'const frame = doc.pages.item(0).textFrames.add();',
+  'frame.geometricBounds = [20, 20, 40, 120];',
+  'frame.contents = "Hello World";',
+  'const para = frame.paragraphs.item(0);',
+  'para.justification = Justification.CENTER_ALIGN;',
+  'if (para.justification.equals(Justification.CENTER_ALIGN)) {',
+  '  console.log("centered");',
   '}'
 ].join('\n');
 
@@ -384,6 +435,10 @@ function make(data, d, ctx) {
     /* Zwei Laufzeiten, ein Objektmodell. Nur, wo das Modell UXP mitbeschreibt
        (products.js: uxp) — dieselben Regeln fuer Agenten stehen in uxp.md. */
     if (target.uxp) {
+      /* Dasselbe Hello World in beiden Laufzeiten, mit einer Enumeration —
+         an ihr zeigt sich der Unterschied beim Vergleichen. Beide in
+         InDesign 2026 ausgefuehrt; unter UXP greift == dort nicht. */
+      const hello = (file, code) => snippet(code, 'javascript', file, '// ' + file);
       h += `<section class="runtimes"><h2 class="sechead" id="extendscript-uxp">ExtendScript and UXP</h2>
         <p class="hint">InDesign runs scripts in two engines. Both drive the same object
         model — the objects, properties and methods on these pages. What differs is the
@@ -399,7 +454,7 @@ function make(data, d, ctx) {
             <li><code>doc.pages[0]</code> or <code>doc.pages.item(0)</code></li>
             <li>Enumerations compare with <code>==</code></li>
             <li>Dialogs with ScriptUI</li>
-          </ul></div>
+          </ul>${hello('hello.jsx', HELLO_JSX)}</div>
           <div class="rtcard"><h3>UXP</h3><ul>
             <li><code>.idjs</code> scripts since InDesign 2023 (18.0), UXP plugins
               since 18.5</li>
@@ -413,7 +468,7 @@ function make(data, d, ctx) {
               properties return a Promise — <code>await doc.fullName</code></li>
             <li>No ScriptUI, no <code>$</code>, no E4X <code>XML</code>; the user
               interface is HTML</li>
-          </ul></div>
+          </ul>${hello('hello.idjs', HELLO_IDJS)}</div>
         </div>
         <p class="rtlinks"><a href="https://developer.adobe.com/uxp/" rel="noopener">Adobe UXP
           documentation</a><span class="sep">·</span><a
@@ -465,8 +520,7 @@ function make(data, d, ctx) {
       below them go unseen — <code>doc.pages</code> unknown,
       <code>doc.createElement</code> offered instead. Save this next to your
       scripts as <code>jsconfig.json</code>:</p>
-      <pre class="snip"><button class="cpx" data-cp="${esc(JSCONFIG)}"
-        title="Copy jsconfig.json">${esc(JSCONFIG)}</button></pre></section>`;
+      ${snippet(JSCONFIG, 'json', 'jsconfig.json')}</section>`;
 
     for (const [name, list] of groups) {
       h += `<section><h2 class="sechead" id="${name.toLowerCase()}">${name} <b>${list.length}</b></h2>

@@ -261,7 +261,10 @@
 
   /* ---------- Zwischenablage ----------
      Member auf Klassenebene werden qualifiziert kopiert (CopyrightStatus.YES),
-     Instanz-Properties nackt, Methoden mit (). Das steckt bereits in data-cp. */
+     Instanz-Properties nackt, Methoden mit (). Das steckt bereits in data-cp.
+     Die Kopier-Icons an Codebloecken stehen hidden im Markup — ohne Skript
+     kopieren sie nichts — und erscheinen erst hier. */
+  $$('.cpicon[hidden]').forEach(b => { b.hidden = false; });
   document.addEventListener('click', async ev => {
     const b = ev.target.closest('[data-cp]');
     if (!b) return;

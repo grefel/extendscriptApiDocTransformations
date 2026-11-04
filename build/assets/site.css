@@ -983,9 +983,91 @@ h1 {
   color: var(--ink)
 }
 
-.snip .cpx {
-  white-space: pre;
-  display: block
+.snip code {
+  font: inherit
+}
+
+/* Rahmen fuer Codeblock und Kopier-Icon. Rechts Platz, damit die erste Zeile
+   nicht unter dem Icon verschwindet. */
+.snipbox {
+  position: relative;
+  margin: 9px 0 0
+}
+
+.snipbox .snip {
+  margin: 0;
+  padding-right: 40px
+}
+
+.cpicon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--dim);
+  cursor: pointer
+}
+
+.cpicon:hover, .cpicon:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent)
+}
+
+.cpicon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round
+}
+
+/* hidden-Attribut gegen display:grid durchsetzen. */
+.cpicon[hidden], .cpicon .i-ok, .cpicon.ok .i-copy {
+  display: none
+}
+
+.cpicon.ok .i-ok {
+  display: inline
+}
+
+.cpicon.ok {
+  color: var(--accent);
+  border-color: var(--accent)
+}
+
+/* Syntaxfarben (highlight.js, beim Bauen eingefaerbt). Aus den Tokens der
+   Seite statt eines fremden Themes: passt zur Palette und folgt dem
+   Dunkelmodus von selbst. Enumerationen in der Enum-Farbe der Seite. */
+.hljs-comment {
+  color: var(--dim);
+  font-style: italic
+}
+
+.hljs-keyword, .hljs-attr {
+  color: var(--ev)
+}
+
+.hljs-title.class_ {
+  color: var(--enum)
+}
+
+.hljs-string {
+  color: var(--accent)
+}
+
+.hljs-number, .hljs-literal {
+  color: var(--warn)
+}
+
+.hljs-built_in, .hljs-variable.language_ {
+  color: var(--rw)
 }
 
 /* ---------- Tabellen ---------- */
@@ -1603,7 +1685,12 @@ a[data-uxp="off"]:not([href]) {
   margin-top: 10px
 }
 
+/* Spalte, damit der Codeblock unten anliegt: beide Hello-World-Beispiele
+   stehen so auf gleicher Hoehe nebeneinander, obwohl die Listen darueber
+   verschieden lang sind. */
 .rtcard {
+  display: flex;
+  flex-direction: column;
   padding: 11px 13px;
   border: 1px solid var(--line);
   border-radius: 9px;
@@ -1617,7 +1704,7 @@ a[data-uxp="off"]:not([href]) {
 }
 
 .rtcard ul {
-  margin: 6px 0 0;
+  margin: 6px 0 10px;
   padding-left: 17px;
   font-size: 12.5px;
   line-height: 1.5;
@@ -1630,6 +1717,21 @@ a[data-uxp="off"]:not([href]) {
 
 .rtcard code, .runtimes .hint code {
   font: 11.5px var(--mono)
+}
+
+/* Hello World unten in der Karte: Seitengrund statt Kartengrund, sonst
+   verschwimmt der Block mit der Karte. */
+.rtcard .snipbox {
+  margin-top: auto
+}
+
+.rtcard .snip {
+  background: var(--bg);
+  font-size: 11.5px
+}
+
+.rtcard .cpicon {
+  background: var(--panel)
 }
 
 .rtlinks {
