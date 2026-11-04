@@ -685,7 +685,8 @@ function uxpGuide(t, classes, rt, kindOf) {
   L.push('');
   L.push('InDesign runs scripts in two engines. **ExtendScript** (`.jsx`) is the ' +
     'original one: JavaScript at the level of ES3, with `app` and every enumeration ' +
-    'as globals. **UXP** (`.idjs` scripts and UXP plugins, since InDesign 2023 / 18.0) ' +
+    'as globals. **UXP** (`.idjs` scripts since InDesign 2023 / 18.0, UXP plugins ' +
+    'since 18.5) ' +
     'is modern JavaScript. Both drive the same object model — the classes, ' +
     'properties and methods documented here. What differs is how you reach it and a ' +
     'handful of rules around it.');
