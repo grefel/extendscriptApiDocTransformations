@@ -82,9 +82,7 @@ hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
 3. Soll der Vergleichs-Modus aus Konzept C (2–3 Objekte nebeneinander, nur dort
    vorhandene Member markiert) als Zusatzseite kommen? Deshalb liegt `design/` noch da.
 4. Umgang mit kaputten Adobe-Typangaben (siehe unten).
-5. `fixDom.xsl` benennt die Klasse `Index` in `Index_` um — ein Workaround aus der
-   DITA-Zeit. Im HTML-Pfad vermutlich unnötig, wird derzeit aber mit angezeigt.
-6. Wie tief soll die Typabbildung gehen? **Kein Typname bleibt mehr
+5. Wie tief soll die Typabbildung gehen? **Kein Typname bleibt mehr
    unauflösbar** — die 231 zusammengepressten Angaben je InDesign-Modell
    (`boundsKind:BoundingBoxLimits`) löst `fixdom.js` auf. Als `any` bleiben nur
    Adobes eigene Platzhalter: `Varies` (221), `VariesSUI` (17) und die vier
@@ -104,6 +102,12 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
   erkennbar, dass die Beschreibung mit `Dispatched` beginnt. 211 Events auf 56 Klassen.
 - Die **übrigen** Klassen-Properties sind echte statische Properties (86, z. B. `$.build`,
   `$.engineName`) — nicht mit Events vermischen.
+- **Methoden auf Klassenebene sind statisch** (`File.openDialog`, `Window.alert`) —
+  **außer bei Collections**: Illustrator und Photoshop legen dort `add()` & Co. ab,
+  die an einer Instanz aufgerufen werden. `build()` in `model.js` korrigiert das.
+- **`Index` heißt `Index`**, nur die Seite heißt `Index_.html` (Kollision mit
+  `index.html` unter Windows). `fixDom.xsl` benennt die Klasse um; die Gegenprobe
+  gleicht das aus.
 - Bei `classdef[@enumeration='true']` sind die Klassen-Properties die **Enum-Werte**.
 - **`<datatype><array/>`** markiert die `Type[]`-Notation (703 Properties).
 - **Die `parent`-Property ist die Hierarchie.** Sie nennt, worin ein Objekt
