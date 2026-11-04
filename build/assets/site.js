@@ -99,11 +99,10 @@
   }
 
   /* ---------- Laufzeit ExtendScript / UXP ----------
-     Bleibt genau ein Inhaltsunterschied: UXP kennt keinen Index-Zugriff auf
-     Collections, deshalb entfallen die Methoden mit dem Namen "[]".
-     $ und ScriptUI mussten frueher hier ausgeblendet werden — sie sind jetzt
-     eigene Bibliotheken im Produktumschalter und tauchen gar nicht mehr im
-     Objektmodell eines Produkts auf. */
+     Was unter UXP anders ist, entscheidet build/runtime.js beim Bauen und
+     schreibt es ins Markup: data-uxp="hide" (entfaellt), data-only (nur in
+     einer Laufzeit sichtbar), data-uxp-href / data-uxp="off" (Kern-Verweise).
+     Hier wird nur umgeschaltet. */
   const rt = $('[data-enhance="runtime"]');
   /* Den Umschalter tragen nur InDesign und InDesign Server. Ohne ihn gilt immer
      ExtendScript — ein anderswo gespeichertes "uxp" wuerde sonst Member

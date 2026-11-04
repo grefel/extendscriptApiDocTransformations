@@ -18,6 +18,7 @@ const { build, derive } = require('./model');
 const { make, esc, pageOf, splitVersion, THEME_BOOT, BASE } = require('./render');
 const products = require('./products');
 const agents = require('./agents');
+const runtime = require('./runtime');
 const { createZip } = require('./zip');
 const legacy = require('./archive');
 
@@ -122,7 +123,10 @@ function assertNoCollisions(t) {
 for (const t of targets) {
   assertNoCollisions(t);
   const d = derive(t.data);
-  const r = make(t.data, d, { target: t, targets, resolve: resolverFor(t) });
+  /* Was unter UXP anders ist — eine Quelle fuer Seite, Markdown und api.json.
+     Kern-Verweis heisst: der Name steht nicht im Ziel, aber in Core JavaScript. */
+  const rt = runtime.forTarget(t, n => !t.names.has(n) && js.names.has(n));
+  const r = make(t.data, d, { target: t, targets, resolve: resolverFor(t), rt });
 
   for (const c of t.data.classes) { write(t.slug + '/' + pageOf(c.n), r.page(c)); pages++; }
   write(t.slug + '/index.html', r.indexPage()); pages++;
@@ -154,11 +158,11 @@ for (const t of targets) {
   for (const c of t.data.classes)
     write(t.slug + '/' + pageOf(c.n).replace(/\.html$/, '.md'),
       agents.markdown(c, {
-        kind: kindOf(c), element: elementOf(c), T, target: t, version: t.data.version
+        kind: kindOf(c), element: elementOf(c), T, target: t, version: t.data.version, rt
       }));
 
   write(t.slug + '/api.json', agents.apiJson(t, t.data.classes, {
-    kindOf, elementOf, T, version: t.data.version, generated: t.data.generated
+    kindOf, elementOf, T, version: t.data.version, generated: t.data.generated, rt
   }));
 
   /* Die .d.ts eines Produkts ist in sich geschlossen: das Produkt plus Core

@@ -6,7 +6,6 @@
    Navigationsliste nicht: 1000+ Eintraege wuerden jede Seite aufblaehen. */
 'use strict';
 
-const notes = require('./notes');
 const shortcuts = require('./shortcuts');
 
 const esc = s => String(s == null ? '' : s)
@@ -69,82 +68,43 @@ const JSCONFIG = [
 function make(data, d, ctx) {
   const { isCollection, elementOf, objectOf, paramOf, returnedBy, subOf,
     parentsOf, childrenOf, prefsOf } = d;
-  const { target, targets, resolve } = ctx;
+  const { target, targets, resolve, rt } = ctx;
   const kindOf = c => (c.enum ? 'Enumeration' : isCollection(c) ? 'Collection' : 'Object');
-  /* File und Folder heissen in UXP genauso, sind aber eine voellig andere API:
-     kein globales File-Objekt, sondern require('uxp').storage.localFileSystem.
-     Im UXP-Modus zeigt der Link deshalb auf Adobes UXP-Referenz statt auf die
-     ExtendScript-Klasse. Umgeschaltet wird in site.js; hier steht nur das
-     zweite Ziel im Markup, damit es ohne JavaScript keine falsche Zusage gibt. */
-  const UXP_DOCS = {
-    File: 'https://developer.adobe.com/indesign/uxp/reference/uxp-api/reference-js/' +
-      'modules/uxp/persistent-file-storage/file',
-    Folder: 'https://developer.adobe.com/indesign/uxp/reference/uxp-api/reference-js/' +
-      'modules/uxp/persistent-file-storage/folder'
-  };
-
-  /* Die uebrigen Kern-JavaScript-Klassen zerfallen unter UXP in zwei Gruppen.
-
-     Standard-ECMAScript gibt es dort, nur in einer modernen Fassung — die
-     Seiten hier beschreiben ES3 von 2003, also zeigt der Link auf MDN. */
-  const MDN = 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/';
-  const MDN_CLASSES = new Set(['Array', 'Boolean', 'Date', 'Error', 'Function',
-    'Math', 'Number', 'Object', 'RegExp', 'String']);
-
-  /* Der Rest gibt es unter UXP gar nicht: das Debugobjekt, die E4X-Klassen und
-     Adobes Eigenbauten. Dorthin fuehrt kein Link, auch kein fremder. */
-  const NO_UXP = new Set(['$', 'Namespace', 'QName', 'Reflection', 'ReflectionInfo',
-    'Socket', 'UnitValue', 'XML', 'XMLList', 'global']);
-
+  /* Was unter UXP anders ist, sagt runtime.js. Umgeschaltet wird in site.js;
+     hier steht nur das zweite Ziel im Markup, damit es ohne JavaScript keine
+     falsche Zusage gibt. */
   const link = n => {
     const href = resolve(n);
     if (!href) return esc(n);
-    /* Nur greifen, wenn der Verweis wirklich in die gemeinsame
-       JavaScript-Bibliothek zeigt — ein Produkt darf eine eigene Klasse
-       gleichen Namens haben, und die bleibt richtig. */
-    const core = target.uxp && href.startsWith('../javascript/');
-    let extra = '';
-    if (core && UXP_DOCS[n]) extra = ` data-uxp-href="${esc(UXP_DOCS[n])}"`;
-    else if (core && MDN_CLASSES.has(n)) extra = ` data-uxp-href="${esc(MDN + n)}"`;
-    else if (core && NO_UXP.has(n)) extra = ' data-uxp="off"';
+    const u = rt.coreLink(n);
+    const extra = !u ? '' : u.off ? ' data-uxp="off"' : ` data-uxp-href="${esc(u.href)}"`;
     return `<a href="${esc(href)}"${extra}>${esc(n)}</a>`;
   };
   const known = n => resolve(n) !== null;
 
-  /* Ist dieser Typname wirklich die Kern-Klasse File bzw. Folder? Ein Produkt
-     darf eine eigene Klasse gleichen Namens haben — die bleibt unberuehrt. */
-  const uxpDatei = n => {
-    if (!target.uxp || !UXP_DOCS[n]) return false;
-    const href = resolve(n);
-    return !!href && href.startsWith('../javascript/');
-  };
-
   /* File und Folder sind unter UXP Eintraege aus
-     require('uxp').storage.localFileSystem: gleicher Name, aber eine
-     Promise-API — beschafft wird so ein Eintrag mit await, gelesen und
-     geschrieben ebenso.
-
-     Nur in der Property-Tabelle: dort steht, was man aus dem Objekt
-     herausbekommt und womit man weiterarbeitet. Als Parameter ist ein File
-     bloss die Uebergabe, dafuer lohnt der Zusatz an 228 Stellen nicht.
-
-     Der Chip haengt einmal an der Zelle statt an jedem Token und steht nur im
-     UXP-Modus; ohne JavaScript gilt ExtendScript, deshalb hidden im Markup. */
-  const ASYNC_CHIP = ' <span class="uxpv" data-only="uxp" hidden title="UXP: an entry'
-    + " from require('uxp').storage.localFileSystem — obtaining it and its read"
-    + ' and write methods return promises">async</span>';
-  const asyncChip = ts => (ts || []).some(uxpDatei) ? ASYNC_CHIP : '';
+     require('uxp').storage.localFileSystem, und wer sie aus einer Property
+     liest, bekommt ein Promise darauf. Die Huelle "Promise<…>" steht nur im
+     UXP-Modus; ohne JavaScript gilt ExtendScript, deshalb hidden im Markup.
+     Ohne Leerraum dazwischen — die Listenansicht liest textContent. */
+  const PROMISE_OPEN = '<span class="uxpv" data-only="uxp" hidden title="UXP: resolves to an entry'
+    + " from require('uxp').storage.localFileSystem — await it\">Promise<span class=\"gen\">&lt;</span></span>";
+  const PROMISE_CLOSE = '<span class="gen" data-only="uxp" hidden>&gt;</span>';
 
   const OR = ' <span class="or">|</span> ';
 
-  /* esOnly: Typen, die an dieser Stelle nur unter ExtendScript gelten. Sie
-     werden samt ihrem Trennstrich in einen data-uxp="hide"-Knoten gepackt,
-     damit im UXP-Modus kein einsames "|" stehen bleibt. */
-  function typeList(ts, arr, esOnly) {
+  /* ux: Abweichung unter UXP aus runtime.js. ux.promise bekommt die Huelle
+     Promise<…>, ux.hide gilt nur unter ExtendScript und wird samt Trennstrich
+     in einen data-uxp="hide"-Knoten gepackt, damit im UXP-Modus kein
+     einsames "|" stehen bleibt. */
+  function typeList(ts, arr, ux) {
     if (!ts || !ts.length) return '';
     const suffix = arr ? '<span class="arr">[]</span>' : '';
+    const esOnly = ux && ux.hide;
     const parts = ts.map(t => {
-      let out = link(t) + suffix;
+      let out = ux && ux.promise.includes(t)
+        ? PROMISE_OPEN + link(t) + PROMISE_CLOSE + suffix
+        : link(t) + suffix;
       const c = d.byName.get(t);
       if (c && isCollection(c)) {
         const el = elementOf(c);
@@ -175,16 +135,6 @@ function make(data, d, ctx) {
     return out;
   }
 
-  /* Ein File als Event-Handler gibt es in UXP nicht — dort ist es immer eine
-     Funktion. Betrifft addEventListener, removeEventListener und
-     EventListeners.add. app.doScript() bleibt ausdruecklich unberuehrt: dort
-     laeuft eine ExtendScript-Datei auch unter UXP. */
-  const esOnlyArg = (cls, method, arg) =>
-    target.uxp && arg === 'handler' &&
-      (/^(add|remove)EventListener$/.test(method) ||
-        (cls === 'EventListeners' && method === 'add'))
-      ? ['File'] : null;
-
   /* Auch NothingEnum bekommt seinen Chip: er ist die Kopierhilfe fuer
      NothingEnum.NOTHING, und genau so schreibt man es im Skript. */
   function inlineEnum(ts) {
@@ -208,14 +158,12 @@ function make(data, d, ctx) {
      oben an der Seite waere fuer eine von 341 Properties die falsche Stelle.
      Gilt er nur fuer UXP, erscheint er nur bei Zielen mit Umschalter. */
   function memberNote(cls, member) {
-    const n = notes.noteForMember(cls, member, target.slug);
-    if (!n) return '';
-    if (n.runtime && n.runtime !== 'es' && !target.uxp) return '';
     /* Ein Hinweis nur fuer UXP startet verborgen: ohne JavaScript gibt es
        keinen Umschalter, dann gilt ExtendScript. */
-    return `<span class="mwarn"${n.runtime ? ` data-only="${esc(n.runtime)}" ${
-      n.runtime === 'uxp' ? 'hidden' : ''}` : ''}
-      >${esc(n.text)}</span>`;
+    return rt.memberNotes(cls, member).map(n =>
+      `<span class="mwarn"${n.runtime ? ` data-only="${esc(n.runtime)}" ${
+        n.runtime === 'uxp' ? 'hidden' : ''}` : ''}
+      >${esc(n.text)}</span>`).join('');
   }
 
   const copyable = (clip, label) =>
@@ -300,8 +248,7 @@ function make(data, d, ctx) {
     /* Erfahrungswerte, die nicht im Objektmodell stehen — siehe build/notes.js.
        Gilt ein Hinweis nur fuer eine Laufzeit, blendet site.js ihn im anderen
        Modus aus; ohne Umschalter erscheinen nur die allgemeinen. */
-    for (const note of notes.notesFor(c.n, kindOf(c), target.slug)) {
-      if (note.runtime && note.runtime !== 'es' && !target.uxp) continue;
+    for (const note of rt.notes(c.n, kindOf(c))) {
       h += `<p class="warn"${note.runtime ? ` data-only="${esc(note.runtime)}" ${
         note.runtime === 'uxp' ? 'hidden' : ''}` : ''}
         role="note">${esc(note.text)}</p>`;
@@ -339,8 +286,7 @@ function make(data, d, ctx) {
         const clip = (c.enum || p.st) ? c.n + '.' + p.n : p.n;
         h += `<tr id="p-${esc(p.n)}"><td class="n">${copyable(clip, esc(p.n))}${
           p.st ? '<span class="stat">static</span>' : ''}</td>
-          <td class="t">${typeList(p.t, p.arr) || '<span class="none">—</span>'}${
-            asyncChip(p.t)}${
+          <td class="t">${typeList(p.t, p.arr, rt.member(c.n, 'p', p)) || '<span class="none">—</span>'}${
             p.v ? ` <span class="lit">= ${esc(p.v)}</span>` : ''}${extras(p)}${inlineEnum(p.t)}</td>
           <td class="a ${p.rw === 'readonly' ? 'ro' : 'rw'}" title="${esc(p.rw)}">${esc(p.rw)}</td>
           <td class="d">${esc(p.d)}${memberNote(c.n, p.n)}</td></tr>`;
@@ -362,18 +308,16 @@ function make(data, d, ctx) {
       for (const m of c.m) {
         const sig = esc(m.n) + '<span class="d">(' +
           m.a.map(a => a.o ? `<span class="opt">${esc(a.n)}?</span>` : esc(a.n)).join(', ') + ')</span>';
-        /* Unter UXP entfaellt der Index-Zugriff "[]" — und alles, was
-           additions.js ausdruecklich als ExtendScript-only eintraegt. */
-        const esOnlyMethod = m.n === '[]' || m.uxp === false;
+        const esOnlyMethod = !!rt.member(c.n, 'm', m);
         h += `<article class="mem" id="m-${esc(m.n)}" data-uxp="${esOnlyMethod ? 'hide' : ''}">
           <div class="top1"><span class="id">${copyable((m.st ? c.n + '.' : '') + m.n + '()', sig)}${
             m.st ? '<span class="stat">static</span>' : ''}</span>
-            <span class="ret">→ ${typeList(m.r, m.rarr) || '<b>void</b>'}</span></div>
+            <span class="ret">→ ${typeList(m.r, m.rarr, rt.member(c.n, 'r', m)) || '<b>void</b>'}</span></div>
           <p class="desc">${esc(m.d)}</p>`;
         if (m.a.length) {
           h += '<div class="args">' + m.a.map(a => `<div class="arg">
             <span class="an${a.o ? ' o' : ''}">${esc(a.n)}${a.o ? '?' : ''}</span>
-            <span class="at">${typeList(a.t, a.arr, esOnlyArg(c.n, m.n, a.n)) || '—'}${extras(a)}</span>
+            <span class="at">${typeList(a.t, a.arr, rt.member(c.n, 'a', a, m.n)) || '—'}${extras(a)}</span>
             <span class="ad">${esc(a.d.replace(/\s*\(Optional\)$/, ''))}</span></div>`).join('') + '</div>';
         }
         h += '</article>';
