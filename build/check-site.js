@@ -612,9 +612,13 @@ const check = (name, got, want) => {
     await page.locator('section.runtimes a[href="https://developer.adobe.com/uxp/"]').count(), 1);
   check('Uebersicht: uxp.md liegt daneben',
     fs.existsSync(path.join(SITE, 'indesign', 'uxp.md')), true);
+  const UXP_TYPES = 'section.machine a[href="https://www.npmjs.com/package/indesign-uxp-types"]';
+  check('Uebersicht: UXP-Typen bei den Werkzeugen verlinkt',
+    await page.locator(UXP_TYPES).count(), 1);
   await page.goto(url('illustrator/index.html'));
   await page.waitForTimeout(300);
   check('Illustrator: kein UXP-Block', await page.locator('section.runtimes').count(), 0);
+  check('Illustrator: kein Link auf UXP-Typen', await page.locator(UXP_TYPES).count(), 0);
   check('Illustrator: keine uxp.md',
     fs.existsSync(path.join(SITE, 'illustrator', 'uxp.md')), false);
 
