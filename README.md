@@ -17,8 +17,10 @@ npm run serve      # http://localhost:8080
 npm run check      # browser test suite (needs Playwright)
 ```
 
-One runtime dependency: [`@xmldom/xmldom`](https://www.npmjs.com/package/@xmldom/xmldom)
-(no transitive dependencies). No Java, no XSLT processor, no DITA-OT, no oXygen.
+Two build dependencies, neither with transitive dependencies:
+[`@xmldom/xmldom`](https://www.npmjs.com/package/@xmldom/xmldom) reads the XML,
+[`highlight.js`](https://www.npmjs.com/package/highlight.js) colours the code samples
+at build time. No Java, no XSLT processor, no DITA-OT, no oXygen.
 **The generated site itself has no dependencies at all** — no framework, no CDN, no
 build step in the browser, and every page is complete without JavaScript.
 

@@ -18,8 +18,9 @@ geht in den öffentlichen Test.
 sourceXML/*.xml → build/ (Node) → site/     2.681 Seiten, ~7 s
 ```
 
-Kein Java, kein Saxon, kein DITA, kein DITA-OT, kein oXygen. Eine Laufzeit-Abhängigkeit
-im Build (`@xmldom/xmldom`, 0 transitive), **keine** in der erzeugten Website.
+Kein Java, kein Saxon, kein DITA, kein DITA-OT, kein oXygen. Zwei Abhängigkeiten
+im Build (`@xmldom/xmldom`, `highlight.js`, beide 0 transitive), **keine** in der
+erzeugten Website — auch die Syntaxfarben der Codeblöcke entstehen beim Bauen.
 
 Sieben Ziele: fünf Produkte (InDesign, InDesign Server, Illustrator, Photoshop, Bridge)
 plus die beiden gemeinsamen Bibliotheken Core JavaScript und ScriptUI. Letztere stecken
