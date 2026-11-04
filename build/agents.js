@@ -516,6 +516,9 @@ function markdown(c, ctx) {
   const sig = x => T.of(x.t, x.arr, x.mu);
   const typed = (x, ux) => '`' + sig(x) + '`' +
     (ux ? ' (UXP: `' + uxpType(T, x.t, x.arr, x.mu, ux) + '`)' : '');
+  /* In einer Tabellenzelle trennt GFM auch an einem | im Codespan; nur \|
+     haelt die Zeile zusammen. Im Methodenkopf stuende es dagegen woertlich. */
+  const cell = s => s.replace(/\|/g, '\\|');
 
   if (c.p.length) {
     L.push('## ' + (c.enum ? 'Values' : 'Properties'), '');
@@ -523,7 +526,7 @@ function markdown(c, ctx) {
     L.push('| --- | --- | --- | --- |');
     for (const p of c.p)
       L.push('| `' + (p.st || c.enum ? c.n + '.' : '') + p.n + '` | ' +
-        typed(p, rt.member(c.n, 'p', p)) +
+        cell(typed(p, rt.member(c.n, 'p', p))) +
         (p.v ? ' = `' + mdEsc(p.v) + '`' : '') + ' | ' + p.rw + ' | ' + mdEsc(p.d) +
         mdNotes(rt.memberNotes(c.n, p.n)) + ' |');
     L.push('');
@@ -549,7 +552,7 @@ function markdown(c, ctx) {
         L.push('| Parameter | Type | Description |');
         L.push('| --- | --- | --- |');
         for (const a of m.a)
-          L.push('| `' + a.n + (a.o ? '?' : '') + '` | ' + typed(a, rt.member(c.n, 'a', a, m.n)) +
+          L.push('| `' + a.n + (a.o ? '?' : '') + '` | ' + cell(typed(a, rt.member(c.n, 'a', a, m.n))) +
             ' | ' + mdEsc(a.d) + ' |');
         L.push('');
       }
