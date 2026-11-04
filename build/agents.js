@@ -566,6 +566,15 @@ function markdown(c, ctx) {
 
 /* ---------- api.json ---------- */
 
+/* Format von api.json und manifest.json. Erhoeht wird nur bei einer
+   Aenderung, die bestehende Leser bricht: ein Feld faellt weg, wird
+   umbenannt oder bedeutet etwas anderes. Neue Felder erhoehen nicht.
+
+     1  ohne Angabe: Index hiess "Index_", kein page, static, uxp, runtimes
+     2  Index heisst Index, page nennt die Datei; static an Methoden;
+        runtimes, uxp und notes */
+const FORMAT_VERSION = 2;
+
 /* Ausgeschriebene Feldnamen statt der internen Kuerzel: die Datei ist fuer
    Fremde gedacht, die das Modell nicht kennen. */
 function apiJson(target, classes, ctx) {
@@ -588,6 +597,7 @@ function apiJson(target, classes, ctx) {
     return o;
   };
   return JSON.stringify({
+    formatVersion: FORMAT_VERSION,
     product: target.label,
     slug: target.slug,
     version, generated,
@@ -878,10 +888,63 @@ function llmsRoot(targets, generated) {
     'are `any` in the declarations rather than invented.');
   L.push('- Methods named `[]` are the collection index accessor. They do not ' +
     'exist in UXP; in the declarations they are an index signature.');
+  L.push('- [manifest.json](' + BASE + 'manifest.json) lists every target with its ' +
+    'version and a `contentHash` that changes only when the model does — check it ' +
+    'before fetching an `api.json` again.');
   return L.join('\n') + '\n';
+}
+
+/* ---------- manifest.json ----------
+
+   Fuer Werkzeuge, die die maschinenlesbaren Dateien zwischenspeichern: was es
+   gibt, in welcher Version, und ob sich seit dem letzten Abruf etwas
+   geaendert hat.
+
+   Zwei Arten Pruefsumme, weil generated das Baudatum ist und damit jede
+   Datei bei jedem Bau anders ausfaellt:
+     files[].sha256  die Datei, wie sie auf dem Server liegt — Integritaet
+     contentHash     api.json ohne generated — aendert sich nur, wenn sich
+                     das Modell oder das Format aendert
+
+   sha256 steht als "sha256:<hex>", damit ein spaeterer Wechsel des
+   Verfahrens am Wert erkennbar bleibt. */
+const sha256 = s => 'sha256:' + require('crypto').createHash('sha256').update(s).digest('hex');
+
+/* api.json ohne Baudatum, als Grundlage des contentHash. */
+const contentHashOf = apiJsonText => {
+  const o = JSON.parse(apiJsonText);
+  delete o.generated;
+  return sha256(JSON.stringify(o));
+};
+
+/* files: Map slug → [[Pfad relativ zum Ziel, Inhalt], …] */
+function manifest(targets, generated, files) {
+  return JSON.stringify({
+    formatVersion: FORMAT_VERSION,
+    generated,
+    base: BASE,
+    targets: targets.map(t => {
+      const own = files.get(t.slug) || [];
+      const api = own.find(([rel]) => rel === 'api.json');
+      return {
+        slug: t.slug,
+        label: t.label,
+        kind: t.kind,
+        version: t.data.version,
+        runtimes: t.uxp ? ['extendscript', 'uxp'] : ['extendscript'],
+        objects: t.data.classes.length,
+        contentHash: api ? contentHashOf(api[1]) : null,
+        files: own.map(([rel, content]) => ({
+          path: t.slug + '/' + rel,
+          bytes: Buffer.byteLength(content),
+          sha256: sha256(content)
+        }))
+      };
+    })
+  }, null, 1) + '\n';
 }
 
 module.exports = {
   makeTypeMapper, buildTypes, markdown, apiJson, uxpGuide, llmsProduct, llmsRoot, TS_BUILTIN,
-  withoutSuiSuffix
+  withoutSuiSuffix, manifest, contentHashOf, FORMAT_VERSION
 };

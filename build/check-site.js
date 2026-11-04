@@ -1391,6 +1391,38 @@ const check = (name, got, want) => {
   check('Markdown ist deutlich kleiner als die Seite',
     Buffer.byteLength(md) * 2 < fs.statSync(path.join(SITE, 'indesign/Rectangle.html')).size,
     true);
+
+  /* --- manifest.json ---
+     Jede genannte Datei muss da sein und zu Groesse und Pruefsumme passen;
+     der contentHash darf nicht am Baudatum haengen. */
+  const { contentHashOf, FORMAT_VERSION } = require('./agents');
+  const hash = b => 'sha256:' + require('crypto').createHash('sha256').update(b).digest('hex');
+  const mf = JSON.parse(fs.readFileSync(path.join(SITE, 'manifest.json'), 'utf8'));
+  check('manifest: formatVersion', mf.formatVersion, FORMAT_VERSION);
+  check('manifest: alle sieben Ziele', mf.targets.map(t => t.slug).join(' '),
+    'indesign indesign-server illustrator photoshop bridge javascript scriptui');
+  let mfFiles = 0, mfBad = [];
+  for (const t of mf.targets)
+    for (const f of t.files) {
+      mfFiles++;
+      const p = path.join(SITE, f.path);
+      const buf = fs.existsSync(p) ? fs.readFileSync(p) : null;
+      if (!buf || buf.length !== f.bytes || hash(buf) !== f.sha256) mfBad.push(f.path);
+    }
+  check('manifest: Dateien stimmen (Groesse, sha256)', mfBad.join(' ') || mfFiles + ' ok',
+    mfFiles + ' ok');
+  const idApi = fs.readFileSync(path.join(SITE, 'indesign/api.json'), 'utf8');
+  const idMf = mf.targets.find(t => t.slug === 'indesign');
+  check('manifest: contentHash passt zu api.json', idMf.contentHash, contentHashOf(idApi));
+  check('manifest: contentHash ueberlebt ein anderes Baudatum',
+    contentHashOf(idApi.replace(/"generated": "[^"]*"/, '"generated": "1999-01-01"')),
+    idMf.contentHash);
+  check('manifest: UXP-Leitfaden nur bei UXP-Zielen',
+    mf.targets.filter(t => t.files.some(f => f.path.endsWith('/uxp.md'))).map(t => t.slug).join(' '),
+    'indesign indesign-server');
+  check('api.json: formatVersion vorn',
+    Object.keys(JSON.parse(idApi))[0] + '=' + JSON.parse(idApi).formatVersion,
+    'formatVersion=' + FORMAT_VERSION);
   await page.goto(url('indesign/index.html'));
   await page.waitForTimeout(250);
   /* Die rechte Spalte gibt es nirgends mehr: sie nahm dauerhaft Platz und
