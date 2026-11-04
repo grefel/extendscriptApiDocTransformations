@@ -107,9 +107,10 @@ const write = (rel, content) => {
 /* Windows unterscheidet Gross-/Kleinschreibung nicht. Zwei Objekte, die sich nur
    darin unterscheiden, wuerden sich ueberschreiben — InDesign hat eine Klasse
    namens Changes, ein Topic changes.html loeschte sie einmal.
-   index.html ist vom Generator belegt. */
+   index.html ist vom Generator belegt, uxp.html steht fuer den Leitfaden
+   uxp.md — jede Seite hat einen Markdown-Zwilling gleichen Namens. */
 function assertNoCollisions(t) {
-  const seen = new Map([['index.html', '(reserviert)']]);
+  const seen = new Map([['index.html', '(reserviert)'], ['uxp.html', '(Leitfaden uxp.md)']]);
   for (const c of t.data.classes) {
     const key = pageOf(c.n).toLowerCase();
     if (seen.has(key)) {
@@ -211,6 +212,8 @@ for (const t of targets) {
       yielded: [...weicht].sort()
     }));
   }
+  /* Leitfaden fuer UXP-Code — nur, wo das Modell UXP mitbeschreibt. */
+  if (t.uxp) write(t.slug + '/uxp.md', agents.uxpGuide(t, t.data.classes, rt, kindOf));
   write(t.slug + '/llms.txt', agents.llmsProduct(t, t.data.classes, kindOf));
   /* Gezaehlt wird an der Deklarationsdatei: ein Durchgang ueber jede Klasse
      des Ziels. Die gemeinsame Abbildung sieht dieselben Typen mehrfach

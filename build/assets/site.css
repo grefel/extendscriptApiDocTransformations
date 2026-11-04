@@ -1593,6 +1593,55 @@ a[data-uxp="off"]:not([href]) {
   line-height: 1.45
 }
 
+/* ExtendScript und UXP auf der Produktseite: zwei Karten nebeneinander, bei
+   schmalem Fenster untereinander. Kein Link-Kasten wie .dl — hier wird
+   gelesen, nicht geklickt. */
+.rtcols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 9px;
+  margin-top: 10px
+}
+
+.rtcard {
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel)
+}
+
+.rtcard h3 {
+  margin: 0;
+  font: 600 13px var(--sans);
+  color: var(--accent)
+}
+
+.rtcard ul {
+  margin: 6px 0 0;
+  padding-left: 17px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink)
+}
+
+.rtcard li + li {
+  margin-top: 2px
+}
+
+.rtcard code, .runtimes .hint code {
+  font: 11.5px var(--mono)
+}
+
+.rtlinks {
+  margin: 10px 0 0;
+  font-size: 12.5px
+}
+
+.rtlinks .sep {
+  margin: 0 8px;
+  color: var(--dim)
+}
+
 /* ---------- Fussbereich ---------- */
 /* Bewusst ruhig: eine Textfarbe, keine Rahmen, kein Fettdruck. */
 footer {

@@ -102,8 +102,14 @@ function make(data, d, ctx) {
     const suffix = arr ? '<span class="arr">[]</span>' : '';
     const esOnly = ux && ux.hide;
     const parts = ts.map(t => {
+      /* ux.rename: unter UXP kommt gemessen ein anderer Typ — beide stehen im
+         Markup, der Umschalter zeigt den passenden. */
+      const uxpName = ux && ux.rename && ux.rename[t];
+      const shown = uxpName
+        ? `<span data-uxp="hide">${link(t)}</span><span data-only="uxp" hidden>${link(uxpName)}</span>`
+        : link(t);
       let out = ux && ux.promise.includes(t)
-        ? PROMISE_OPEN + link(t) + PROMISE_CLOSE + suffix
+        ? PROMISE_OPEN + shown + PROMISE_CLOSE + suffix
         : link(t) + suffix;
       const c = d.byName.get(t);
       if (c && isCollection(c)) {
@@ -380,6 +386,47 @@ function make(data, d, ctx) {
           labels, English identifiers. PDF, 288 KB.</span></span></a></div>`;
     }
     if (quick.length || target.refcard) h += '</div></section>';
+
+    /* Zwei Laufzeiten, ein Objektmodell. Nur, wo das Modell UXP mitbeschreibt
+       (products.js: uxp) — dieselben Regeln fuer Agenten stehen in uxp.md. */
+    if (target.uxp) {
+      h += `<section class="runtimes"><h2 class="sechead" id="extendscript-uxp">ExtendScript and UXP</h2>
+        <p class="hint">InDesign runs scripts in two engines. Both drive the same object
+        model — the objects, properties and methods on these pages. What differs is the
+        language around it. The <b>ExtendScript / UXP</b> switch in the header shows every
+        page as the chosen engine sees it.</p>
+        <div class="rtcols">
+          <div class="rtcard"><h3>ExtendScript</h3><ul>
+            <li><code>.jsx</code> files, run from the Scripts panel</li>
+            <li>JavaScript at the level of ES3 (1999): <code>var</code>, no <code>let</code>,
+              arrow functions or promises</li>
+            <li><code>app</code>, every enumeration, <code>File</code>, <code>Folder</code>
+              and <code>$</code> are globals</li>
+            <li><code>doc.pages[0]</code> or <code>doc.pages.item(0)</code></li>
+            <li>Enumerations compare with <code>==</code></li>
+            <li>Dialogs with ScriptUI</li>
+          </ul></div>
+          <div class="rtcard"><h3>UXP</h3><ul>
+            <li><code>.idjs</code> scripts and UXP plugins, since InDesign 2023 (18.0)</li>
+            <li>Modern JavaScript: <code>let</code>, <code>const</code>, arrow functions,
+              <code>async</code>/<code>await</code></li>
+            <li><code>const { app } = require("indesign")</code> — enumerations come from
+              there too</li>
+            <li><code>doc.pages.item(0)</code> only — there is no <code>[0]</code></li>
+            <li>Enumerations compare with <code>.equals()</code>, not <code>==</code></li>
+            <li>Files come from <code>require("uxp").storage</code>; file and folder
+              properties return a Promise — <code>await doc.fullName</code></li>
+            <li>No ScriptUI, no <code>$</code>, no E4X <code>XML</code>; the user
+              interface is HTML</li>
+          </ul></div>
+        </div>
+        <p class="rtlinks"><a href="https://developer.adobe.com/uxp/" rel="noopener">Adobe UXP
+          documentation</a><span class="sep">·</span><a
+          href="https://developer.adobe.com/indesign/uxp/resources/migration-guides/extendscript/"
+          rel="noopener">Migrating from ExtendScript</a><span class="sep">·</span><a
+          href="uxp.md">uxp.md</a> — the full list of differences, for people and AI agents</p>
+      </section>`;
+    }
 
     /* Die ganze Website als ein Archiv. __ZIPMB__ ersetzt build.js, sobald
        gepackt ist — vorher steht die Groesse nicht fest. */

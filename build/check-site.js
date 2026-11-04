@@ -586,6 +586,38 @@ const check = (name, got, want) => {
   check('Link.filePath unter UXP nur String', await at('tr#p-filePath td.t'), 'String');
   await page.click('.rt button[data-r="es"]');
   await page.waitForTimeout(250);
+  /* Adobe sagt File, unter UXP gemessen ist es ein Folder (runtime.js,
+     MEASURED). Unter ExtendScript bleibt Adobes Angabe stehen. */
+  await page.goto(url('indesign/Application.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.waitForTimeout(400);
+  check('Application.filePath unter ExtendScript', await at('tr#p-filePath td.t'), 'File');
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(300);
+  check('Application.filePath unter UXP gemessen',
+    await at('tr#p-filePath td.t'), 'Promise<Folder>');
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(250);
+
+  /* --- Uebersichtsseite: ExtendScript und UXP erklaert ---
+     Nur bei Zielen mit Umschalter, und vor dem Offline-Archiv. */
+  await page.goto(url('indesign/index.html'));
+  await page.waitForTimeout(300);
+  check('Uebersicht: Block ExtendScript und UXP',
+    await page.locator('section.runtimes').count(), 1);
+  check('Uebersicht: Block steht vor Offline',
+    await page.evaluate(() => [...document.querySelectorAll('h2.sechead')].map(h => h.id)
+      .join(' ').includes('extendscript-uxp offline')), true);
+  check('Uebersicht: verweist auf developer.adobe.com/uxp/',
+    await page.locator('section.runtimes a[href="https://developer.adobe.com/uxp/"]').count(), 1);
+  check('Uebersicht: uxp.md liegt daneben',
+    fs.existsSync(path.join(SITE, 'indesign', 'uxp.md')), true);
+  await page.goto(url('illustrator/index.html'));
+  await page.waitForTimeout(300);
+  check('Illustrator: kein UXP-Block', await page.locator('section.runtimes').count(), 0);
+  check('Illustrator: keine uxp.md',
+    fs.existsSync(path.join(SITE, 'illustrator', 'uxp.md')), false);
+
   /* Ziele ohne Umschalter beschreiben nur ExtendScript. */
   await page.goto(url('illustrator/Document.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
@@ -1350,9 +1382,9 @@ const check = (name, got, want) => {
     /__ZIP/.test(fs.readFileSync(path.join(SITE, 'index.html'), 'utf8')), false);
   /* Der Markdown-Zwilling liegt unter derselben URL wie die Seite — nur so
      kann ein Agent von einem gefundenen Link auf die guenstigere Fassung
-     schliessen. */
+     schliessen. uxp.md ist der Leitfaden, kein Zwilling. */
   check('Markdown-Zwilling zu jeder Seite',
-    fs.readdirSync(path.join(SITE, 'indesign')).filter(f => f.endsWith('.md')).length,
+    fs.readdirSync(path.join(SITE, 'indesign')).filter(f => f.endsWith('.md') && f !== 'uxp.md').length,
     1097);
   const md = fs.readFileSync(path.join(SITE, 'indesign/Rectangle.md'), 'utf8');
   check('Markdown nennt Art und Version', /^# Rectangle\n\n> Object · InDesign/.test(md), true);
