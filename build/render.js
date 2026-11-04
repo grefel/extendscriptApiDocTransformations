@@ -364,7 +364,8 @@ function make(data, d, ctx) {
            additions.js ausdruecklich als ExtendScript-only eintraegt. */
         const esOnlyMethod = m.n === '[]' || m.uxp === false;
         h += `<article class="mem" id="m-${esc(m.n)}" data-uxp="${esOnlyMethod ? 'hide' : ''}">
-          <div class="top1"><span class="id">${copyable(m.n + '()', sig)}</span>
+          <div class="top1"><span class="id">${copyable((m.st ? c.n + '.' : '') + m.n + '()', sig)}${
+            m.st ? '<span class="stat">static</span>' : ''}</span>
             <span class="ret">→ ${typeList(m.r, m.rarr) || '<b>void</b>'}</span></div>
           <p class="desc">${esc(m.d)}</p>`;
         if (m.a.length) {

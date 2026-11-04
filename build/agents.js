@@ -143,14 +143,6 @@ function makeTypeMapper(known, toAny) {
 const TS_BUILTIN = new Set(['String', 'Number', 'Boolean', 'Object', 'Array',
   'Function', 'Date', 'RegExp', 'Error', 'Math', 'JSON']);
 
-/* ExtendScript stellt diese beiden als einzelne Objekte bereit, nicht als
-   Klassen: $.writeln("hallo"), ScriptUI.newFont(…). Adobes Modell fuehrt ihre
-   Properties als statisch, ihre Methoden aber als Instanzmethoden — ohne
-   Angleichung waere $.writeln im Editor ein Fehler. Nicht zu verwechseln mit
-   XML oder RegExp: dort sind die Properties statische Schalter, die Methoden
-   aber wirklich Instanzmethoden. */
-const SINGLETON = new Set(['$', 'ScriptUISUI', 'ScriptUI']);
-
 /* Globale Namen, die lib.es5 schon deklariert. ExtendScript hat sie ebenfalls,
    aber Adobes Signaturen weichen ab — doppelt deklariert gaebe das entweder
    einen Fehler oder eine irrefuehrende zweite Ueberladung. */
@@ -449,7 +441,7 @@ function classBodies(classes, T) {
         (propWidens.get(c.n) || !selfReturn(c, ret, baseRet));
       out.push(jsdoc(m.d, s.doc, 2) +
         (stoert ? ignore(c.sup) : '') +
-        '  ' + (SINGLETON.has(c.n) ? 'static ' : '') +
+        '  ' + (m.st ? 'static ' : '') +
         member(m.n) + '(' + s.args.join(', ') + '): ' + ret + ';');
     }
     out.push('}\n');
@@ -523,7 +515,7 @@ function markdown(c, ctx) {
     L.push('## Methods', '');
     for (const m of c.m) {
       const args = m.a.map(a => a.n + (a.o ? '?' : '') + ': ' + sig(a)).join(', ');
-      L.push('### `' + m.n + '(' + args + ')` → `' +
+      L.push('### `' + (m.st ? c.n + '.' : '') + m.n + '(' + args + ')` → `' +
         (m.r && m.r.length ? T.of(m.r, m.rarr) : 'void') + '`');
       L.push('');
       if (m.d) L.push(mdEsc(m.d), '');
@@ -574,12 +566,10 @@ function apiJson(target, classes, ctx) {
       if (el) o.elementType = el;
       o.properties = c.p.map(mem);
       o.events = c.ev.map(e => ({ name: e.n, description: e.d || '' }));
-      o.methods = c.m.map(m => ({
-        name: m.n,
-        returns: m.r && m.r.length ? T.of(m.r, m.rarr) : 'void',
-        description: m.d || '',
-        parameters: m.a.map(mem)
-      }));
+      o.methods = c.m.map(m => Object.assign(
+        { name: m.n, returns: m.r && m.r.length ? T.of(m.r, m.rarr) : 'void' },
+        m.st ? { static: true } : {},
+        { description: m.d || '', parameters: m.a.map(mem) }));
       return o;
     })
   }, null, 1);

@@ -25,3 +25,6 @@ ok.onClick = function () {
 if (dlg.show() === 1) {
   ScriptUI.newFont('Helvetica', ScriptUI.FontStyle.BOLD, 12);
 }
+
+/* Statische Methoden der Klasse Window. */
+if (Window.confirm('Noch einmal?', false)) Window.alert('Gut.');
