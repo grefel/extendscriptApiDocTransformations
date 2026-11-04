@@ -43,9 +43,27 @@ Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
 
 ## Abhängigkeiten
 
-Genau eine zur Laufzeit des Builds: **`@xmldom/xmldom`** (0 transitive
-Abhängigkeiten). Playwright nur für `npm run check`. Die **Website selbst hat
-keine** — kein Framework, kein CDN, kein Build-Schritt im Browser.
+Zwei zur Laufzeit des Builds, beide ohne transitive Abhängigkeiten:
+**`@xmldom/xmldom`** liest die XMLs, **`highlight.js`** färbt die Codeblöcke
+(`snippet()` in render.js, nur der Kern mit JavaScript und JSON). Playwright
+nur für `npm run check`. Die **Website selbst hat keine** — kein Framework,
+kein CDN, kein Build-Schritt im Browser.
+
+**Syntaxfarben beim Bauen, nicht im Browser.** highlight.js vom CDN bräche
+den Offline-Gebrauch über `file://` und wäre eine Laufzeit-Abhängigkeit. So
+tragen die Seiten fertige `<span class="hljs-…">`, die auch ohne JavaScript
+farbig sind. Die Farben kommen aus den Tokens der Seite (`--ev`, `--enum`,
+`--accent` …) statt aus einem highlight.js-Theme und folgen damit dem
+Dunkelmodus; Enumerationen wie `Justification` stehen in der Enum-Farbe.
+
+**Kopier-Icon oben rechts** an jedem Codeblock. Es sitzt im Rahmen
+`.snipbox` um den `<pre>`, nicht darin — der Block scrollt auf dem Telefon
+seitlich, und das Icon wanderte sonst mit. Es steht `hidden` im Markup und
+erscheint erst mit JavaScript; ohne Skript bleibt der Code zum Markieren.
+
+Die beiden Hello-World-Beispiele im Block „ExtendScript and UXP“ sind in
+InDesign 2026 über COM gelaufen, und unter UXP ist dort auch belegt, dass `==`
+an einer Enumeration nicht greift.
 
 ## Zwei Entscheidungen, die im Code nicht sofort sichtbar sind
 
