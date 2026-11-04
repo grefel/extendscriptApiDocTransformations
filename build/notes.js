@@ -13,7 +13,8 @@
                allgemeinen.
      text      Was dasteht. Englisch wie die uebrige Oberflaeche.
 
-   byName gilt fuer ein Objekt, byKind fuer alle Objekte einer Art. */
+   byName gilt fuer ein Objekt, byKind fuer alle Objekte einer Art.
+   Abgefragt wird ueber runtime.js, das auch die Produktauswahl vornimmt. */
 'use strict';
 
 const ID = ['indesign', 'indesign-server'];
@@ -48,15 +49,12 @@ const byKind = [
    in der Beschreibungsspalte der Zeile — ein Kasten oben an der Seite waere
    fuer eine von 341 Properties die falsche Stelle.
 
-   Quelle fuer beide: Adobes Migrationsanleitung
+   Dass File- und Folder-Properties unter UXP ein Promise liefern, steht
+   nicht hier, sondern als Regel in runtime.js — auch fuer activeScript.
+
+   Quelle: Adobes Migrationsanleitung
    developer.adobe.com/indesign/uxp/resources/migration-guides/extendscript/ */
 const byMember = {
-  'Application.activeScript': {
-    products: ID,
-    runtime: 'uxp',
-    text: 'In UXP this is only the path as a string — not a File object, and ' +
-      'without its properties.'
-  },
   'Application.scriptArgs': {
     products: ID,
     runtime: 'uxp',
@@ -65,20 +63,4 @@ const byMember = {
   }
 };
 
-const fits = (n, slug) => !n.products || n.products.includes(slug);
-
-/* Alle Hinweise, die auf ein Objekt passen. */
-function notesFor(cls, kind, slug) {
-  const out = [];
-  if (byName[cls] && fits(byName[cls], slug)) out.push(byName[cls]);
-  for (const n of byKind) if (n.kind === kind && fits(n, slug)) out.push(n);
-  return out;
-}
-
-/* Der Hinweis an einem Member, oder null. */
-function noteForMember(cls, member, slug) {
-  const n = byMember[cls + '.' + member];
-  return n && fits(n, slug) ? n : null;
-}
-
-module.exports = { notesFor, noteForMember, byName, byKind, byMember };
+module.exports = { byName, byKind, byMember };

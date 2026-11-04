@@ -478,29 +478,54 @@ function withoutSuiSuffix(classes) {
   }));
 }
 
+/* ---------- Laufzeit-Abweichungen ----------
+   Was unter UXP anders ist, sagt runtime.js. Markdown und api.json nennen
+   beide Fassungen nebeneinander — umschalten wie auf der Seite kann eine
+   Datei nicht. */
+
+/* Der Typ unter UXP: ux.hide faellt weg, ux.promise wird Promise<…>. */
+function uxpType(T, ts, arr, mu, ux) {
+  const list = (ts || []).filter(n => !ux.hide.includes(n))
+    .map(n => ux.promise.includes(n) ? 'Promise<' + T.peek([n]) + '>' : T.peek([n]));
+  if (mu && !list.includes('string')) list.push('string');
+  const one = [...new Set(list)].join(' | ');
+  return arr ? (/[|\s]/.test(one) ? '(' + one + ')[]' : one + '[]') : one;
+}
+
+const RUNTIME_NAME = { uxp: 'UXP', es: 'ExtendScript' };
+const RUNTIME_ID = { uxp: 'uxp', es: 'extendscript' };
+
 /* ---------- Markdown je Objekt ---------- */
 
 const mdEsc = s => String(s == null ? '' : s).replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
+const mdNotes = ns => ns.map(n => ' **' + (RUNTIME_NAME[n.runtime] || 'Note') + ':** ' +
+  mdEsc(n.text)).join('');
 
 function markdown(c, ctx) {
-  const { kind, element, T, target, version } = ctx;
+  const { kind, element, T, target, version, rt } = ctx;
   const L = [];
   L.push('# ' + c.n);
   L.push('');
   L.push('> ' + kind + (element ? ' of ' + element : '') + ' · ' + target.label + ' · ' + version);
   L.push('');
   if (c.d) L.push(mdEsc(c.d), '');
+  for (const n of rt.notes(c.n, kind)) L.push(mdNotes([n]).trim(), '');
   if (c.sup) L.push('Extends: `' + c.sup + '`', '');
 
+  /* Typ, und wo UXP abweicht, dessen Fassung dahinter. */
   const sig = x => T.of(x.t, x.arr, x.mu);
+  const typed = (x, ux) => '`' + sig(x) + '`' +
+    (ux ? ' (UXP: `' + uxpType(T, x.t, x.arr, x.mu, ux) + '`)' : '');
 
   if (c.p.length) {
     L.push('## ' + (c.enum ? 'Values' : 'Properties'), '');
     L.push('| Name | Type | Access | Description |');
     L.push('| --- | --- | --- | --- |');
     for (const p of c.p)
-      L.push('| `' + (p.st || c.enum ? c.n + '.' : '') + p.n + '` | `' + sig(p) + '`' +
-        (p.v ? ' = `' + mdEsc(p.v) + '`' : '') + ' | ' + p.rw + ' | ' + mdEsc(p.d) + ' |');
+      L.push('| `' + (p.st || c.enum ? c.n + '.' : '') + p.n + '` | ' +
+        typed(p, rt.member(c.n, 'p', p)) +
+        (p.v ? ' = `' + mdEsc(p.v) + '`' : '') + ' | ' + p.rw + ' | ' + mdEsc(p.d) +
+        mdNotes(rt.memberNotes(c.n, p.n)) + ' |');
     L.push('');
   }
   if (c.ev.length) {
@@ -514,15 +539,18 @@ function markdown(c, ctx) {
     L.push('## Methods', '');
     for (const m of c.m) {
       const args = m.a.map(a => a.n + (a.o ? '?' : '') + ': ' + sig(a)).join(', ');
-      L.push('### `' + (m.st ? c.n + '.' : '') + m.n + '(' + args + ')` → `' +
-        (m.r && m.r.length ? T.of(m.r, m.rarr) : 'void') + '`');
+      const ret = { t: m.r, arr: m.rarr };
+      L.push('### `' + (m.st ? c.n + '.' : '') + m.n + '(' + args + ')` → ' +
+        (m.r && m.r.length ? typed(ret, rt.member(c.n, 'r', m)) : '`void`'));
       L.push('');
-      if (m.d) L.push(mdEsc(m.d), '');
+      if (rt.member(c.n, 'm', m)) L.push('_ExtendScript only — not available in UXP._', '');
+      if (m.d) L.push(mdEsc(m.d) + mdNotes(rt.memberNotes(c.n, m.n)), '');
       if (m.a.length) {
         L.push('| Parameter | Type | Description |');
         L.push('| --- | --- | --- |');
         for (const a of m.a)
-          L.push('| `' + a.n + (a.o ? '?' : '') + '` | `' + sig(a) + '` | ' + mdEsc(a.d) + ' |');
+          L.push('| `' + a.n + (a.o ? '?' : '') + '` | ' + typed(a, rt.member(c.n, 'a', a, m.n)) +
+            ' | ' + mdEsc(a.d) + ' |');
         L.push('');
       }
     }
@@ -537,8 +565,13 @@ function markdown(c, ctx) {
 /* Ausgeschriebene Feldnamen statt der internen Kuerzel: die Datei ist fuer
    Fremde gedacht, die das Modell nicht kennen. */
 function apiJson(target, classes, ctx) {
-  const { kindOf, elementOf, T, version, generated } = ctx;
-  const mem = x => {
+  const { kindOf, elementOf, T, version, generated, rt } = ctx;
+  /* notes: [{ runtime, text }], runtime "uxp", "extendscript" oder null
+     fuer beide. */
+  const notesOf = ns => ns.map(n => ({ runtime: RUNTIME_ID[n.runtime] || null, text: n.text }));
+  /* uxp: nur wo UXP abweicht — { type } bzw. { returns } mit der Fassung
+     unter UXP, oder { available: false }. */
+  const mem = (x, ux, ns) => {
     const o = { name: x.n, type: T.of(x.t, x.arr, x.mu), description: x.d || '' };
     if (x.rw) o.access = x.rw;
     if (x.st) o.static = true;
@@ -546,12 +579,17 @@ function apiJson(target, classes, ctx) {
     if (x.rng) o.range = { min: x.rng[0], max: x.rng[1] };
     if (x.mu) o.measurementUnit = true;
     if (x.o) o.optional = true;
+    if (ux) o.uxp = { type: uxpType(T, x.t, x.arr, x.mu, ux) };
+    if (ns && ns.length) o.notes = notesOf(ns);
     return o;
   };
   return JSON.stringify({
     product: target.label,
     slug: target.slug,
     version, generated,
+    /* Welche Laufzeiten dieses Modell beschreibt. Mit "uxp" tragen
+       abweichende Member ein Feld uxp. */
+    runtimes: rt.on ? ['extendscript', 'uxp'] : ['extendscript'],
     counts: {
       objects: classes.length,
       properties: classes.reduce((n, c) => n + c.p.length, 0),
@@ -562,15 +600,26 @@ function apiJson(target, classes, ctx) {
       /* page: Dateiname relativ zum Ziel. Er folgt nicht immer dem Namen —
          Index liegt als Index_.html neben index.html. */
       const o = { name: c.n, page: pageOf(c.n), kind: kindOf(c), description: c.d || '' };
+      const ns = rt.notes(c.n, kindOf(c));
+      if (ns.length) o.notes = notesOf(ns);
       if (c.sup) o.extends = c.sup;
       const el = elementOf(c);
       if (el) o.elementType = el;
-      o.properties = c.p.map(mem);
+      o.properties = c.p.map(p => mem(p, rt.member(c.n, 'p', p), rt.memberNotes(c.n, p.n)));
       o.events = c.ev.map(e => ({ name: e.n, description: e.d || '' }));
-      o.methods = c.m.map(m => Object.assign(
-        { name: m.n, returns: m.r && m.r.length ? T.of(m.r, m.rarr) : 'void' },
-        m.st ? { static: true } : {},
-        { description: m.d || '', parameters: m.a.map(mem) }));
+      o.methods = c.m.map(m => {
+        const gone = rt.member(c.n, 'm', m);
+        const ret = rt.member(c.n, 'r', m);
+        const ns = rt.memberNotes(c.n, m.n);
+        return Object.assign(
+          { name: m.n, returns: m.r && m.r.length ? T.of(m.r, m.rarr) : 'void' },
+          m.st ? { static: true } : {},
+          gone ? { uxp: { available: false } }
+            : ret ? { uxp: { returns: uxpType(T, m.r, m.rarr, false, ret) } } : {},
+          { description: m.d || '' },
+          ns.length ? { notes: notesOf(ns) } : {},
+          { parameters: m.a.map(a => mem(a, rt.member(c.n, 'a', a, m.n))) });
+      });
       return o;
     })
   }, null, 1);
@@ -597,6 +646,21 @@ function llmsProduct(t, classes, kindOf) {
     '[' + classes[0].n + '](' + BASE + t.slug + '/' + mdOf(classes[0].n) + ').');
   L.push('Fetch the Markdown, not the HTML: same content, a fraction of the tokens.');
   L.push('');
+  /* Ein Agent, der UXP-Code schreibt, braucht vor allem zwei Dinge: wo die
+     Abweichungen stehen, und dass die .d.ts hier ExtendScript beschreibt. */
+  if (t.uxp) {
+    L.push('## UXP');
+    L.push('');
+    L.push('The same object model drives UXP scripts (`.idjs`) and plugins via ' +
+      '`require("indesign")`. Where UXP differs, the Markdown adds `(UXP: …)` to the ' +
+      'type, marks methods that do not exist there as ExtendScript only, and prefixes ' +
+      'runtime notes with **UXP:**. In `api.json` the same shows as a `uxp` field on ' +
+      'the member and as `notes`. File and Folder properties return a Promise of a ' +
+      '`require("uxp").storage` entry under UXP.');
+    L.push('The `.d.ts` files here describe ExtendScript. For UXP use the ' +
+      '[indesign-uxp-types](https://www.npmjs.com/package/indesign-uxp-types) package.');
+    L.push('');
+  }
   L.push('## Files');
   L.push('');
   L.push('- [' + t.slug + '.d.ts](' + BASE + t.slug + '/' + t.slug + '.d.ts): TypeScript ' +
@@ -615,7 +679,9 @@ function llmsProduct(t, classes, kindOf) {
       'and references to the product classes read `any`. Use either this file or ' +
       'the plain one, never both — TypeScript holds one meaning per global name.');
   L.push('- [api.json](' + BASE + t.slug + '/api.json): the whole model as JSON. ' +
-    'Large — page through it, do not paste it.');
+    'Large — page through it, do not paste it.' +
+    (t.uxp ? ' `runtimes` lists ExtendScript and UXP; members that differ under UXP ' +
+      'carry a `uxp` field.' : ''));
   L.push('- [index.html](' + BASE + t.slug + '/index.html): every object, linked.');
   L.push('');
   L.push('## Objects');

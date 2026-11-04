@@ -528,21 +528,21 @@ const check = (name, got, want) => {
   await page.click('.rt button[data-r="es"]');
   await page.waitForTimeout(250);
 
-  /* --- UXP: File und Folder sind dort eine Promise-API ---
-     Der Chip haengt an der Typangabe der Property, nicht am Member — und
-     nicht an Parametern: dort ist das File nur die Uebergabe. */
+  /* --- UXP: File und Folder kommen dort als Promise zurueck ---
+     Die Huelle Promise<…> steht an der Typangabe der Property, nicht am
+     Member — und nicht an Parametern: dort ist das File nur die Uebergabe. */
   await page.goto(url('indesign/Document.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   await page.waitForTimeout(400);
   const at = sel => page.locator(sel).innerText().then(s => s.replace(/\s+/g, ' ').trim());
-  check('ExtendScript: kein async-Hinweis',
+  check('ExtendScript: kein Promise',
     await page.locator('.uxpv:not([hidden])').count(), 0);
   check('ExtendScript: filePath ist ein Folder',
     await at('tr#p-filePath td.t'), 'Folder');
   await page.click('.rt button[data-r="uxp"]');
   await page.waitForTimeout(300);
-  check('UXP: Folder ist als async markiert',
-    await at('tr#p-filePath td.t'), 'Folder async');
+  check('UXP: Promise<Folder>',
+    await at('tr#p-filePath td.t'), 'Promise<Folder>');
   /* evaluateAll statt getAttribute: fehlt der Chip, kommt eine leere Liste
      zurueck — getAttribute wartet stattdessen 30 s und reisst den ganzen
      Bericht mit. */
@@ -556,10 +556,10 @@ const check = (name, got, want) => {
     await page.locator('.mem .uxpv').count(), 0);
   await page.click('.rt button[data-r="es"]');
   await page.waitForTimeout(250);
-  check('zurueck: der Hinweis ist wieder weg',
+  check('zurueck: das Promise ist wieder weg',
     await page.locator('.uxpv:not([hidden])').count(), 0);
   /* In der Listenansicht steht der Typ als Text — ausgeblendetes zaehlt
-     textContent mit, deshalb muss der Chip dort ausdruecklich raus. */
+     textContent mit, deshalb muss die Huelle dort ausdruecklich raus. */
   const listentyp = async () => {
     await page.keyboard.press('l');
     await page.waitForTimeout(300);
@@ -569,10 +569,21 @@ const check = (name, got, want) => {
     await page.waitForTimeout(250);
     return t.trim();
   };
-  check('Liste unter ExtendScript ohne async', await listentyp(), 'File');
+  check('Liste unter ExtendScript ohne Promise', await listentyp(), 'File');
   await page.click('.rt button[data-r="uxp"]');
   await page.waitForTimeout(300);
-  check('Liste unter UXP mit async', await listentyp(), 'File async');
+  check('Liste unter UXP mit Promise', await listentyp(), 'Promise<File>');
+  await page.click('.rt button[data-r="es"]');
+  await page.waitForTimeout(250);
+  /* Steht String neben File, liefert UXP nur den Pfad als String — dann
+     entfaellt File samt Trennstrich, und ein Promise gibt es nicht. */
+  await page.goto(url('indesign/Link.html'));
+  await page.waitForSelector('.sidelist a', { timeout: 10000 });
+  await page.waitForTimeout(400);
+  check('Link.filePath unter ExtendScript', await at('tr#p-filePath td.t'), 'String | File');
+  await page.click('.rt button[data-r="uxp"]');
+  await page.waitForTimeout(300);
+  check('Link.filePath unter UXP nur String', await at('tr#p-filePath td.t'), 'String');
   await page.click('.rt button[data-r="es"]');
   await page.waitForTimeout(250);
   /* Ziele ohne Umschalter beschreiben nur ExtendScript. */
@@ -589,10 +600,11 @@ const check = (name, got, want) => {
     await page.locator('.mwarn:not([hidden])').count(), 0);
   await page.click('.rt button[data-r="uxp"]');
   await page.waitForTimeout(300);
-  check('unter UXP zwei Member-Hinweise',
-    await page.locator('.mwarn:not([hidden])').count(), 2);
-  check('activeScript nennt den String',
-    /string/.test(await page.locator('tr#p-activeScript .mwarn').innerText()), true);
+  check('unter UXP ein Member-Hinweis',
+    await page.locator('.mwarn:not([hidden])').count(), 1);
+  check('activeScript ist ein Promise<File>',
+    await at('tr#p-activeScript td.t'),
+    'Promise<File>');
   check('scriptArgs nennt script.args',
     /script\.args/.test(await page.locator('tr#p-scriptArgs .mwarn').innerText()), true);
   await page.click('.rt button[data-r="es"]');
