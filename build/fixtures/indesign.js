@@ -23,5 +23,10 @@ log.close();
 var indds = new Folder(ordner.fsName).getFiles('*.indd');
 var xml = new XML('<a><b>1</b></a>');
 
+/* Statische Methoden: am Konstruktor, nicht an einer Instanz. */
+var quelle = File.openDialog('Textdatei wählen', '*.txt', false);
+var ziel = Folder.selectDialog('Zielordner wählen');
+var xmlEinstellungen = XML.settings();
+
 $.writeln('Version ' + $.build + ', ' + indds.length + ' Dateien, ' + xml.toString());
 alert('fertig');                                    /* globale Funktion */

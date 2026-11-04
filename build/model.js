@@ -88,12 +88,13 @@ function property(p, isStatic, isSui) {
   return o;
 }
 
-function method(m, isSui) {
+function method(m, isStatic, isSui) {
   const d = desc(m);
   /* Der Rueckgabetyp haengt direkt am <method>; ein <returns> gibt es nicht. */
   const r = member(m, d, isSui);
   const o = { n: attr(m, 'name'), r: r.t };
   if (r.arr) o.rarr = 1;
+  if (isStatic) o.st = 1;
   o.d = d;
   const ps = firstKid(m, 'parameters');
   o.a = (ps ? kids(ps, 'parameter') : []).map(a => {
@@ -122,7 +123,7 @@ function classModel(cd, origin) {
   for (const els of kids(cd, 'elements')) {
     const onClass = attr(els, 'type') === 'class';
     for (const p of kids(els, 'property')) (onClass ? classProps : instanceProps).push(p);
-    for (const m of kids(els, 'method')) methods.push(m);
+    for (const m of kids(els, 'method')) methods.push([m, onClass]);
   }
 
   let name = attr(cd, 'name');
@@ -163,7 +164,7 @@ function classModel(cd, origin) {
   o.ev = (isEnum ? [] : classProps.filter(isEvent))
     .map(e => ({ n: attr(e, 'name'), d: desc(e) })).sort(byName);
 
-  o.m = methods.map(m => method(m, isSui)).sort(byName);
+  o.m = methods.map(([m, onClass]) => method(m, onClass, isSui)).sort(byName);
 
   /* Member, die Adobes Export vergisst — siehe build/additions.js. Nur wenn
      sie nicht doch da sind, damit ein spaeterer Adobe-Fix nichts verdoppelt. */
@@ -224,6 +225,12 @@ function build(sources) {
     }
   }
 
+  /* Methoden auf Klassenebene sind statisch: File.openDialog(), Math.max(),
+     Window.alert(). Illustrator und Photoshop legen dort aber auch add() &
+     Co. ihrer Collections ab (~70) — aufgerufen wird app.documents.add(),
+     also an einer Instanz. Eine Collection hat keine statischen Methoden. */
+  for (const c of classes) if (isCollection(c)) for (const m of c.m) delete m.st;
+
   return {
     version,
     generated: new Date().toISOString().slice(0, 10),
@@ -236,13 +243,14 @@ function build(sources) {
      Illustrator/PS  Dreiklang der Properties length + parent + typename
      Rest            Beschreibung nennt sich selbst "collection"
    Nur "length" reicht nirgends: das haben auch Array, String und Function. */
+const has = (c, name) => c.p.some(p => p.n === name);
+const isCollection = c => !c.enum && (
+  c.m.some(m => m.n === 'everyItem') ||
+  (has(c, 'length') && has(c, 'parent') && has(c, 'typename')) ||
+  /^(a )?collection\b/i.test(c.d || '') || / collection\.?$/i.test(c.d || ''));
+
 function derive(data) {
   const byNameMap = new Map(data.classes.map(c => [c.n, c]));
-  const has = (c, name) => c.p.some(p => p.n === name);
-  const isCollection = c => !c.enum && (
-    c.m.some(m => m.n === 'everyItem') ||
-    (has(c, 'length') && has(c, 'parent') && has(c, 'typename')) ||
-    /^(a )?collection\b/i.test(c.d || '') || / collection\.?$/i.test(c.d || ''));
 
   /* Elementtyp: InDesign liefert ihn ueber "[]", Illustrator und Photoshop
      ueber "getByName" oder "add". Sonst der Singular, falls es ihn gibt. */
