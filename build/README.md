@@ -38,6 +38,7 @@ Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
 | `serve.js` | Entwicklungsserver, ohne Abhängigkeit |
 | `zip.js` | minimaler ZIP-Schreiber für das Offline-Archiv |
 | `archive.js` | reicht die alte CS6-Dokumentation aus `legacy/` durch |
+| `runtime.js` | was unter UXP anders ist — eine Quelle für Seite, `.md` und api.json |
 | `notes.js` | Hinweise, die nicht im Objektmodell stehen |
 | `additions.js` | Member, die Adobes Export vergisst, und falsche Typangaben |
 | `shortcuts.js` | Einstiegspunkte auf der Übersichtsseite |
@@ -708,10 +709,11 @@ in der Wirklichkeit falsch — deshalb läuft die Gegenprobe über http.
 
 ## Noch offen
 
-- Der UXP-Umschalter kennt fünf Unterschiede: die `[]`-Methoden, das `File` als
-  Event-Handler, die umgehängten Kern-Verweise, das kursive `async` an File- und
-  Folder-Properties und die Hinweise aus `notes.js`. Welche weiteren in die
-  Daten gehören, ist noch zu klären.
+- `runtime.js` kennt fünf Unterschiede: die `[]`-Methoden (und was
+  `additions.js` mit `uxp: false` ergänzt), das `File` als Event-Handler, die
+  umgehängten Kern-Verweise, `Promise<File>`/`Promise<Folder>` bzw. `String` an
+  Dateiwerten und die Hinweise aus `notes.js`. Welche weiteren in die Daten
+  gehören, ist noch zu klären.
 - Für Illustrator und Photoshop sind fünf bzw. zwei Collections ohne erkennbaren
   Elementtyp — dort fehlen `[]`, `getByName` und `add`.
 
@@ -765,7 +767,10 @@ dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Ind
 Adobes Export beschreibt, was es gibt — nicht, was davon kaputt ist. Solche
 Erfahrungswerte stehen in `build/notes.js` und erscheinen als Warnung unter der
 Beschreibung des Objekts. Je Eintrag: auf welche Ziele er passt (`products`),
-optional auf welche Laufzeit (`runtime`), und der Text.
+optional auf welche Laufzeit (`runtime`), und der Text. Abgefragt werden sie
+über `runtime.js` (`notes()`, `memberNotes()`), das auch die Produktauswahl
+trifft; im Markdown stehen sie als **UXP:** hinter der Beschreibung, in
+api.json als `notes`.
 
 Drei Sorten: `byName` für ein einzelnes Objekt, `byKind` für alle Objekte
 einer Art, `byMember` für eine einzelne Tabellenzeile (Schlüssel
@@ -931,11 +936,13 @@ dafür braucht es 3 × 168 + 2 × 6 = 516 px. Darunter blieben zwei Spalten übr
 und „Page" säße allein in einer 168-px-Zelle. Gemessen: 19 Blasen auf 4 Zeilen
 statt auf 10.
 
-### Zwei Hinweise aus Adobes Migrationsanleitung
+### Ein Hinweis aus Adobes Migrationsanleitung
 
-An `Application.activeScript` (unter UXP nur ein Pfad als String, kein
-File-Objekt) und `Application.scriptArgs` (unter UXP `script.args`). Beide nur
-im UXP-Modus sichtbar.
+An `Application.scriptArgs` (unter UXP `script.args`), nur im UXP-Modus
+sichtbar. `Application.activeScript` braucht keinen Hinweis: die
+Migrationsanleitung nennt einen Pfad-String, gemessen ist in InDesign 2026
+aber ein `Promise<File>` (indesign-uxp-types) — und genau das zeigt die
+allgemeine Regel für Dateiwerte.
 
 ### Was unter UXP wegfällt
 
@@ -970,7 +977,8 @@ zeigt.** Ein Produkt darf eine eigene Klasse gleichen Namens haben — InDesigns
 
 Kosten: die drei Primitiven `String`, `Number` und `Boolean` machen über 21.000
 der Verweise aus. Das sind pro Seite **+1 KB gzip** (Rectangle: 17 statt 16 KB)
-und +1,1 MB im Archiv. Wer das sparen will, nimmt die drei aus `MDN_CLASSES` —
+und +1,1 MB im Archiv. Wer das sparen will, nimmt die drei aus `MDN_CLASSES`
+in `runtime.js` —
 wer `String` anklickt, weiß meist ohnehin, was eine Zeichenkette ist.
 
 ### File und Folder unter UXP
@@ -984,23 +992,53 @@ ursprüngliche Ziel wandert dabei nach `data-es-href`, damit das Zurückschalten
 stimmt. Nur die beiden InDesign-Ziele bekommen das Attribut — sie allein haben
 den Umschalter.
 
-Dazu steht im UXP-Modus ein kursives **`async`** hinter dem Typ: so ein Eintrag
-wird mit `await` beschafft, und `read()`/`write()` liefern Promises. Der Chip
-hängt an der Zelle, nicht an jedem Typnamen, und **nur in der
-Property-Tabelle** — 34 Stellen in 26 Objekten. An den 228 Parametern, die ein
-`File` nehmen, steht er nicht: dort ist die Datei bloß die Übergabe, der
-Hinweis gehört dorthin, wo man einen Eintrag herausbekommt und mit ihm
-weiterarbeitet. An den 1.053 `handler`-Parametern von `addEventListener` fiele
-er ohnehin aus, weil das `File` dort unter UXP ganz verschwindet.
+**Wer einen Dateiwert liest, bekommt unter UXP ein Promise.** Im UXP-Modus
+steht deshalb `Promise<Folder>` statt `Folder` — 27 Properties in 20 Objekten
+und der Rückgabewert von `Assignment.createPackage()`. Belegt durch die zur
+Laufzeit gemessenen Typen in
+[indesign-uxp-types](https://www.npmjs.com/package/indesign-uxp-types)
+(InDesign 2026).
 
-Der Chip trägt `data-only="uxp"` und startet `hidden`: ohne JavaScript gibt es
-keinen Umschalter, dann gilt ExtendScript. Dieselbe Regel gilt jetzt für die
-Hinweise aus `notes.js` — vorher blitzten die UXP-Hinweise bis zum ersten
-`applyRuntime()` auf und standen ohne JavaScript dauerhaft da.
+**Steht `String` neben `File`, liefert UXP nur den String** —
+`Link.filePath` und sechs weitere (`AssignedStory`, `Assignment`,
+`GotoAnchorBehavior`, `Movie`, `OpenFileBehavior`, `Sound`). Dort fällt `File`
+im UXP-Modus samt Trennstrich weg, wie beim Event-Handler.
+
+An den 228 Parametern, die ein `File` nehmen, ändert sich nichts: übergeben
+werden darf ein Pfad-String oder ein UXP-Eintrag. (Ein Ordner nur als
+Pfad-String — das steht bislang nirgends in den Daten.)
+
+Die Regel steht in `runtime.js` (`valueTypes()`), die Darstellung in
+`typeList()`: „Promise<“ und „>“ tragen `data-only="uxp"` und starten
+`hidden` — ohne JavaScript gibt es keinen Umschalter, dann gilt ExtendScript.
+Dieselbe Regel gilt für die Hinweise aus `notes.js`.
 
 Fallstrick: die Listenansicht baut den Typ aus `textContent`, und das zählt
 Ausgeblendetes mit. `buildList()` wirft deshalb `.vals` **und** alles `[hidden]`
-aus der Kopie — sonst stünde „File async“ auch unter ExtendScript in der Liste.
+aus der Kopie — sonst stünde „Promise<File>“ auch unter ExtendScript in der
+Liste. Aus demselben Grund steht zwischen Hülle und Typname kein Leerraum.
+
+**Offen:** Bei `Application`/`BookContent`/`Library.filePath` und
+`GeneralPreference.temporaryFolder` steht in Adobes Export `File`, gemessen
+ist unter UXP ein `Promise<Folder>`. Bislang unangetastet; eine Korrektur
+gehörte nach `additions.js` (`types`), wenn sie auch unter ExtendScript
+belegt ist.
+
+### Laufzeit in Markdown und api.json
+
+Eine Datei kann nicht umschalten, sie nennt beide Fassungen. Nur bei Zielen
+mit `uxp: true`:
+
+| | Markdown | api.json |
+|---|---|---|
+| Typ weicht ab | `` `File` (UXP: `Promise<File>`) `` | `"uxp": { "type": "Promise<File>" }` |
+| Rückgabe weicht ab | dito im Methodenkopf | `"uxp": { "returns": "Promise<File>" }` |
+| gibt es nicht | _ExtendScript only — not available in UXP._ | `"uxp": { "available": false }` |
+| Hinweis | **UXP:** hinter der Beschreibung | `"notes": [{ "runtime": "uxp", "text": … }]` |
+
+Dazu oben in api.json `runtimes: ["extendscript", "uxp"]` (sonst nur
+`extendscript`) und in `llms.txt` ein Abschnitt **UXP**, der auf
+indesign-uxp-types verweist — die `.d.ts` hier beschreiben ExtendScript.
 
 ### Theme, Laufzeit und Rechtliches
 
