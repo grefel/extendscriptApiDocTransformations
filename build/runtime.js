@@ -47,17 +47,6 @@ const isHandler = (cls, method, arg) => arg === 'handler' &&
 
 const FILE_TYPES = ['File', 'Folder'];
 
-/* Unter UXP gemessen ein Folder, obwohl Adobes Export File sagt
-   (indesign-uxp-types, InDesign 2026). Gilt hier nur fuer UXP; fuer
-   ExtendScript gehoerte eine Korrektur nach additions.js (types), wie bei
-   Document.filePath. "from" begrenzt den Eingriff auf genau diese Angabe. */
-const MEASURED = {
-  'Application.filePath': { from: 'File', to: 'Folder' },
-  'BookContent.filePath': { from: 'File', to: 'Folder' },
-  'Library.filePath': { from: 'File', to: 'Folder' },
-  'GeneralPreference.temporaryFolder': { from: 'File', to: 'Folder' }
-};
-
 /* target: Eintrag aus build.js. isCore(name): verweist der Typname auf die
    Kern-JavaScript-Bibliothek? Ein Produkt darf eine eigene Klasse File
    haben — die bleibt unberuehrt. */
@@ -73,14 +62,10 @@ function forTarget(target, isCore) {
      dort ein Promise auf einen localFileSystem-Eintrag. Steht String
      daneben, liefert UXP nur den Pfad als String (Link.filePath und sechs
      weitere, gemessen) — dann entfaellt der Dateityp. */
-  function valueTypes(ts, key) {
+  function valueTypes(ts) {
     const files = (ts || []).filter(n => FILE_TYPES.includes(n) && isCore(n));
     if (!files.length) return null;
-    if (ts.includes('String')) return { promise: [], hide: files, rename: {} };
-    /* rename: Typname → der unter UXP gemessene. */
-    const fix = MEASURED[key];
-    const rename = fix && ts.length === 1 && ts[0] === fix.from ? { [fix.from]: fix.to } : {};
-    return { promise: files, hide: [], rename };
+    return ts.includes('String') ? { promise: [], hide: files } : { promise: files, hide: [] };
   }
 
   return {
@@ -102,17 +87,15 @@ function forTarget(target, isCore) {
          kind 'r'  Rueckgabetyp            → { promise, hide }
          kind 'a'  Parameter (method, arg) → { promise, hide }
        promise: Typnamen, die unter UXP Promise<…> sind.
-       hide:    Typnamen, die es an dieser Stelle unter UXP nicht gibt.
-       rename:  Typname → der, der unter UXP tatsaechlich kommt. */
+       hide:    Typnamen, die es an dieser Stelle unter UXP nicht gibt. */
     member(cls, kind, x, method) {
       if (!on) return null;
       if (kind === 'm')
         /* [] ist der Index-Zugriff auf Collections, den UXP nicht kennt. */
         return x.n === '[]' || x.uxp === false ? { available: false } : null;
-      if (kind === 'p') return valueTypes(x.t, cls + '.' + x.n);
-      if (kind === 'r') return valueTypes(x.r, cls + '.' + x.n + '()');
+      if (kind === 'p' || kind === 'r') return valueTypes(kind === 'p' ? x.t : x.r);
       if (kind === 'a' && isHandler(cls, method, x.n) && (x.t || []).includes('File'))
-        return { promise: [], hide: ['File'], rename: {} };
+        return { promise: [], hide: ['File'] };
       return null;
     },
 
@@ -131,4 +114,4 @@ function forTarget(target, isCore) {
   };
 }
 
-module.exports = { forTarget, UXP_DOCS, MDN, MDN_CLASSES, NO_UXP, MEASURED };
+module.exports = { forTarget, UXP_DOCS, MDN, MDN_CLASSES, NO_UXP };

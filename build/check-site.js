@@ -586,15 +586,15 @@ const check = (name, got, want) => {
   check('Link.filePath unter UXP nur String', await at('tr#p-filePath td.t'), 'String');
   await page.click('.rt button[data-r="es"]');
   await page.waitForTimeout(250);
-  /* Adobe sagt File, unter UXP gemessen ist es ein Folder (runtime.js,
-     MEASURED). Unter ExtendScript bleibt Adobes Angabe stehen. */
+  /* Adobe sagt File, der Wert ist ein Folder (additions.js) — unter UXP
+     als Promise. */
   await page.goto(url('indesign/Application.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   await page.waitForTimeout(400);
-  check('Application.filePath unter ExtendScript', await at('tr#p-filePath td.t'), 'File');
+  check('Application.filePath unter ExtendScript', await at('tr#p-filePath td.t'), 'Folder');
   await page.click('.rt button[data-r="uxp"]');
   await page.waitForTimeout(300);
-  check('Application.filePath unter UXP gemessen',
+  check('Application.filePath unter UXP',
     await at('tr#p-filePath td.t'), 'Promise<Folder>');
   await page.click('.rt button[data-r="es"]');
   await page.waitForTimeout(250);
@@ -948,9 +948,8 @@ const check = (name, got, want) => {
   }
 
   /* --- Korrigierte Typangaben (build/additions.js) ---
-     Document.filePath und Book.filePath liefern den Ordner, nicht die Datei.
-     Der Eingriff darf nur diese beiden treffen: Application, BookContent und
-     Library tragen im Export denselben falschen Satz und bleiben stehen. */
+     filePath liefert den Ordner, nicht die Datei — in InDesign 2026 per
+     Skript geprueft. Gegenprobe: fullName ist und bleibt die Datei. */
   const typeCell = n => page.evaluate(name => {
     const tr = document.getElementById('p-' + name);
     if (!tr) return 'keine Zeile';
@@ -958,16 +957,18 @@ const check = (name, got, want) => {
     return a ? a.textContent + ' -> ' + (a.getAttribute('href') || '(abgeschaltet)')
              : tr.querySelector('td.t').textContent;
   }, n);
-  for (const [obj, ziel] of [['Document', 'Folder'], ['Book', 'Folder'],
-                             ['Library', 'File'], ['Application', 'File']]) {
+  for (const [obj, prop, ziel] of [['Document', 'filePath', 'Folder'],
+    ['Book', 'filePath', 'Folder'], ['BookContent', 'filePath', 'Folder'],
+    ['Library', 'filePath', 'Folder'], ['Application', 'filePath', 'Folder'],
+    ['Application', 'fullName', 'File'], ['Library', 'fullName', 'File']]) {
     await page.goto(url('indesign/' + obj + '.html'));
     await page.waitForSelector('.sidelist a', { timeout: 10000 });
-    check(obj + '.filePath ist ' + ziel,
-      await typeCell('filePath'), ziel + ' -> ../javascript/' + ziel + '.html');
+    check(obj + '.' + prop + ' ist ' + ziel,
+      await typeCell(prop), ziel + ' -> ../javascript/' + ziel + '.html');
     await page.click('.rt button[data-r="uxp"]');
     await page.waitForTimeout(250);
     check('  und unter UXP auf Adobes ' + ziel.toLowerCase() + '-Seite',
-      (await typeCell('filePath'))
+      (await typeCell(prop))
         .endsWith('persistent-file-storage/' + ziel.toLowerCase()), true);
     await page.click('.rt button[data-r="es"]');
     await page.waitForTimeout(200);
