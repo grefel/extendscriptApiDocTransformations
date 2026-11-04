@@ -15,7 +15,8 @@
    fertigen Seite zurueckgelesen. */
 'use strict';
 
-const { BASE } = require('./render');
+const { BASE, pageOf } = require('./render');
+const mdOf = name => pageOf(name).replace(/\.html$/, '.md');
 
 /* ---------- Typabbildung ExtendScript → TypeScript ----------
 
@@ -78,8 +79,6 @@ function makeTypeMapper(known, toAny) {
        Rueckgabetyp von ScriptUIs add() ein any, ohne dass es jemand merkt. */
     if (TS_BUILTIN.has(name)) return name;
     if (known.has(name)) return name;
-    /* fixDom.xsl benennt die Klasse Index in Index_ um. */
-    if (name === 'Index' && known.has('Index_')) return 'Index_';
 
     let m = ARRAYS_OF.exec(name);
     if (m) return arrayOf(map(m[2], depth + 1));
@@ -560,7 +559,9 @@ function apiJson(target, classes, ctx) {
       methods: classes.reduce((n, c) => n + c.m.length, 0)
     },
     objects: classes.map(c => {
-      const o = { name: c.n, kind: kindOf(c), description: c.d || '' };
+      /* page: Dateiname relativ zum Ziel. Er folgt nicht immer dem Namen —
+         Index liegt als Index_.html neben index.html. */
+      const o = { name: c.n, page: pageOf(c.n), kind: kindOf(c), description: c.d || '' };
       if (c.sup) o.extends = c.sup;
       const el = elementOf(c);
       if (el) o.elementType = el;
@@ -593,7 +594,7 @@ function llmsProduct(t, classes, kindOf) {
   L.push('');
   L.push('Every object has a page and a Markdown twin at the same path:');
   L.push('`' + BASE + t.slug + '/<Object>.md` — for example ' +
-    '[' + classes[0].n + '](' + BASE + t.slug + '/' + encodeURIComponent(classes[0].n) + '.md).');
+    '[' + classes[0].n + '](' + BASE + t.slug + '/' + mdOf(classes[0].n) + ').');
   L.push('Fetch the Markdown, not the HTML: same content, a fraction of the tokens.');
   L.push('');
   L.push('## Files');
@@ -620,7 +621,7 @@ function llmsProduct(t, classes, kindOf) {
   L.push('## Objects');
   L.push('');
   for (const c of classes)
-    L.push('- [' + c.n + '](' + BASE + t.slug + '/' + encodeURIComponent(c.n) + '.md): ' +
+    L.push('- [' + c.n + '](' + BASE + t.slug + '/' + mdOf(c.n) + '): ' +
       kindOf(c) + '. ' + String(c.d || '').replace(/\s+/g, ' ').trim());
   return L.join('\n') + '\n';
 }

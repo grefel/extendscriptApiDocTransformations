@@ -34,7 +34,6 @@ function cleanTypeName(text, isSui) {
   }
 
   if (isSui && !SUI_EXEMPT.test(s)) s += 'SUI';
-  if (String(text) === 'Index') s += '_';
 
   /* "Array of X" behaelt seine Schreibweise, nur das Praefix faellt weg. */
   /* Der Array-Zweig laesst die Schreibweise stehen, deshalb bleiben hier sonst

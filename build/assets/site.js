@@ -17,7 +17,8 @@
   };
 
   const CURRENT = document.body.dataset.object || null;
-  const page = n => encodeURIComponent(n) + '.html';
+  /* Wie pageOf() in render.js: Index liegt als Index_.html neben index.html. */
+  const page = n => encodeURIComponent(n) + (n.toLowerCase() === 'index' ? '_' : '') + '.html';
 
   /* ---------- Theme ----------
      Gesetzt wird es bereits vom Inline-Skript im <head>, damit beim Navigieren
