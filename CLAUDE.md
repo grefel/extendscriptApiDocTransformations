@@ -77,7 +77,10 @@ hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
    nur `String`) und die Hinweise aus `notes.js`. Der Umschalter steht nur
    bei InDesign und InDesign Server (`uxp: true` in `products.js`). Für
    UXP-Typen verweist `llms.txt` auf `indesign-uxp-types`, eigene
-   UXP-`.d.ts` gibt es bewusst nicht. `$` und ScriptUI sind aus den Produkten heraus in eigene
+   UXP-`.d.ts` gibt es bewusst nicht. Die Regeln stehen als Leitfaden in
+   `<slug>/uxp.md` und in Kurzform auf der Übersichtsseite. Vier
+   File-Angaben sind unter UXP gemessen Folder (`MEASURED`); für ExtendScript
+   noch ungeprüft. `$` und ScriptUI sind aus den Produkten heraus in eigene
    Bibliotheken gewandert, die als „ExtendScript only" gekennzeichnet sind.
    **Welche weiteren Unterschiede in die Daten gehören, ist weiterhin offen** — etwa
    `Socket`, `XML`/`XMLList`, `UnitValue`, `Reflection`.

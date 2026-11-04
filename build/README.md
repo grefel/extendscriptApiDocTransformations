@@ -1018,11 +1018,13 @@ Ausgeblendetes mit. `buildList()` wirft deshalb `.vals` **und** alles `[hidden]`
 aus der Kopie — sonst stünde „Promise<File>“ auch unter ExtendScript in der
 Liste. Aus demselben Grund steht zwischen Hülle und Typname kein Leerraum.
 
-**Offen:** Bei `Application`/`BookContent`/`Library.filePath` und
-`GeneralPreference.temporaryFolder` steht in Adobes Export `File`, gemessen
-ist unter UXP ein `Promise<Folder>`. Bislang unangetastet; eine Korrektur
-gehörte nach `additions.js` (`types`), wenn sie auch unter ExtendScript
-belegt ist.
+**Gemessen statt Adobe:** Bei `Application`/`BookContent`/`Library.filePath`
+und `GeneralPreference.temporaryFolder` steht in Adobes Export `File`, unter
+UXP gemessen ist ein `Promise<Folder>`. `runtime.js` (`MEASURED`) setzt das
+**nur für UXP** ein, abgesichert durch `from`; die Seite trägt beide Namen im
+Markup und zeigt je Modus einen. Für ExtendScript bleibt Adobes Angabe stehen,
+bis es dort geprüft ist — dann gehört die Korrektur nach `additions.js`
+(`types`) wie bei `Document.filePath`, und der Eintrag in `MEASURED` entfällt.
 
 ### Laufzeit in Markdown und api.json
 
@@ -1037,8 +1039,28 @@ mit `uxp: true`:
 | Hinweis | **UXP:** hinter der Beschreibung | `"notes": [{ "runtime": "uxp", "text": … }]` |
 
 Dazu oben in api.json `runtimes: ["extendscript", "uxp"]` (sonst nur
-`extendscript`) und in `llms.txt` ein Abschnitt **UXP**, der auf
+`extendscript`) und in `llms.txt` ein Abschnitt **UXP**, der auf `uxp.md` und
 indesign-uxp-types verweist — die `.d.ts` hier beschreiben ExtendScript.
+
+Tabellenzellen schützen jedes `|` als `\|`, auch im Codespan — GFM trennt
+sonst die Zeile. Im Methodenkopf bleibt es ungeschützt, dort stünde der
+Backslash wörtlich.
+
+### Leitfaden uxp.md und der Block auf der Übersichtsseite
+
+Nur bei Zielen mit `uxp: true`. `<slug>/uxp.md` (`uxpGuide()` in agents.js)
+sammelt die allgemeinen Regeln als Tabelle ExtendScript/UXP — `require`,
+`item()` statt `[]`, `equals()`, Dateien, `script.args`, was fehlt — und
+listet die betroffenen Member. Die Listen kommen aus `runtime.js`, nur die
+Regeln sind Text. `uxp.html` ist in `assertNoCollisions()` reserviert, damit
+keine Klasse `UXP` den Leitfaden überschreibt; `check-site.js` nimmt `uxp.md`
+aus der Zählung der Markdown-Zwillinge.
+
+Für Menschen steht dasselbe in Kurzform auf der Übersichtsseite: zwei Karten
+**ExtendScript** und **UXP** im Abschnitt „ExtendScript and UXP“ vor
+„Offline“, darunter Verweise auf <https://developer.adobe.com/uxp/>, Adobes
+Migrationsanleitung und `uxp.md`. Unter 600 px stehen die Karten
+untereinander (`auto-fit`).
 
 ### Theme, Laufzeit und Rechtliches
 
