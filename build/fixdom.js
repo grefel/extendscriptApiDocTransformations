@@ -1,9 +1,6 @@
-/* Portierung von fixDom.xsl. Bereinigt Adobes OMV-Daten beim Einlesen, statt
-   vorher eine zweite XML-Datei zu schreiben.
-
-   Die Regeln stammen eins zu eins aus fixDom.xsl; wo bewusst abgewichen wird,
-   steht es am jeweiligen Ort. build/verify-model.js vergleicht das Ergebnis
-   gegen die alte Saxon-Strecke. */
+/* Bereinigt Adobes OMV-Daten beim Einlesen: Typnamen, Zusatztypen aus der
+   Beschreibung, Wertebereiche, Masseinheiten. Eine Zwischendatei gibt es
+   nicht. */
 'use strict';
 
 /* ScriptUI-Klassen heissen im Original wie Produktklassen (Button, Group …).
@@ -11,7 +8,7 @@
 const SUI_EXEMPT = /(object|string|bool|number|array|function|file|folder)/i;
 
 /* Adobes Typnamen sind uneinheitlich geschrieben. Reihenfolge der Ersetzungen
-   wie in fixDom.xsl, sie bauen aufeinander auf. */
+   ist wichtig, sie bauen aufeinander auf. */
 function cleanTypeName(text, isSui) {
   let s = String(text == null ? '' : text);
 
@@ -56,10 +53,8 @@ function cleanTypeName(text, isSui) {
 /* Adobe haengt Zusatztypen als Prosa an die Beschreibung:
      "… Can return: Swatch or NothingEnum enumerator. Can also accept: String."
 
-   fixDom.xsl hatte hier einen Fehler: die zweite Variable hiess wie die erste
-   und las deren Eingabe statt deren Ergebnis, wodurch "Can also accept:" nie
-   ersetzt wurde. Aus dem Beispiel oben wurde dadurch der Typ
-   "NothingEnumCanalsoaccept:String". Betraf 78 Typen je InDesign-Modell. */
+   Beide Marken muessen ersetzt werden, sonst entsteht aus dem Beispiel ein
+   Typ "NothingEnumCanalsoaccept:String". */
 function splitAcceptReturn(text) {
   return String(text)
     .replace(/ or /g, ',')
@@ -96,15 +91,14 @@ function datatypesOf(node, description, isSui, kids, textOf) {
 
     const dminEl = kids(dt, 'min')[0], dmaxEl = kids(dt, 'max')[0];
     const dmin = dminEl ? textOf(dminEl) : null, dmax = dmaxEl ? textOf(dmaxEl) : null;
-    /* fixDom.xsl parst die Beschreibung nur, wenn die Quelle nicht beide
+    /* Die Beschreibung wird nur geparst, wenn die Quelle nicht beide
        Grenzen nennt. Wo sich beides widerspricht, gewinnt die Quelle:
        BevelAndEmbossSetting.altitude sagt im Text "0 to 90", deklariert 0..100. */
     const parsed = (dmin !== null && dmax !== null) ? null : rangeOf(description);
 
     if (isMU) {
-      /* Beim Aufspalten baut fixDom.xsl das datatype-Element neu und
-         uebernimmt min/max der Quelle NICHT — nur ein aus der Beschreibung
-         geparster Bereich ueberlebt hier. */
+      /* Masseinheit: min/max der Quelle werden NICHT uebernommen — nur ein
+         aus der Beschreibung geparster Bereich gilt hier. */
       if (range === null && parsed) range = [parsed[0], parsed[1]];
       out.push({ name: 'Number', array: hasArray, isUnit: true, value: null });
       out.push({ name: 'String', array: hasArray, isUnit: true, value: null });
@@ -117,9 +111,8 @@ function datatypesOf(node, description, isSui, kids, textOf) {
       out.push({ name: cleanTypeName(raw, isSui), array: hasArray, isUnit: false, value });
     }
 
-    /* Die abgeleiteten Typen haengen in fixDom.xsl an jedem datatype-Element,
-       nicht an der Property. Bei mehreren datatype-Kindern entstehen sie also
-       mehrfach — hier genauso, damit der Vergleich aufgeht. */
+    /* Die abgeleiteten Typen haengen an jedem datatype-Element, nicht an der
+       Property; bei mehreren datatype-Kindern entstehen sie also mehrfach. */
     const m = ACCEPT_RE.exec(String(description || '').replace(/\(Optional\)/g, ''));
     if (m) {
       const parts = splitAcceptReturn(m[2])
@@ -167,7 +160,7 @@ function parentTypes(description, isSui) {
   return [];
 }
 
-/* Nachtraege, die fixDom.xsl in die Daten schreibt. */
+/* Nachtraege, die in Adobes Export fehlen. */
 const APPLESCRIPT_LANGUAGE = {
   n: 'APPLESCRIPT_LANGUAGE', t: ['Number'], rw: 'readonly',
   d: 'The AppleScript language.', v: '1095978087'

@@ -51,23 +51,14 @@ Every target ships more than the pages:
 - `<target>/api.json` — the whole model as JSON.
 - `llms.txt` at the root and per target — the entry point that names all of it.
 
-## Sublime Text code completions
+## History
 
-Separate output, still on the XSLT route: transform a merged and fixed DOM file with
-`dom2sublimeCodeCompletion.xsl` and drop the resulting `jsx.sublime-completions` into
-your Sublime Text `Packages` folder.
-
-## Verifying the port
-
-The pipeline used to be `mergeFiles.xslt` → `fixDom.xsl` → `dom2dita.xsl` → DITA-OT.
-The first two are ported to `build/fixdom.js`; `npm run verify` holds the port against
-the original XSLT chain and reports zero real differences. That comparison needs Java
-and Saxon and is the only thing `mergeFiles.xslt` and `fixDom.xsl` are still kept for:
-
-```sh
-npm run verify:prepare   # temp/fixedDOM-<slug>.xml via Saxon
-npm run verify
-```
+The site used to be built with XSLT (`mergeFiles.xslt` → `fixDom.xsl` →
+`dom2dita.xsl`) and DITA-OT. The cleanup steps are ported to `build/fixdom.js`;
+the port was checked against the original chain with zero real differences before
+the XSLT files were removed. The Sublime Text completions
+(`dom2sublimeCodeCompletion.xsl`) went with them — the TypeScript declarations
+above cover editor completion today.
 
 ## License
 

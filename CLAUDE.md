@@ -29,16 +29,13 @@ Details zur Umsetzung, zu den Fallstricken je Produkt und zu den Größen:
 **[build/README.md](build/README.md)** — dort steht das Meiste, was beim Weiterarbeiten
 gebraucht wird.
 
-### Was von der alten Strecke bleibt
+### Die alte XSLT-Strecke ist entfernt
 
-`mergeFiles.xslt`, `fixDom.xsl`, `build/prepare-xslt.js` und `build/legacy-model.js`
-existieren nur noch als **Gegenprobe** (`npm run verify`, braucht Java + Saxon).
-Sie belegt: 0 echte Abweichungen in allen fünf Produkten, 252 verbesserte Member.
-Der Build rührt sie nicht an; sobald die Gegenprobe nicht mehr gebraucht wird,
-können alle vier weg.
-
-`dom2sublimeCodeCompletion.xsl` erzeugt die Sublime-Text-Vervollständigungen und
-hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
+Die Portierung wurde gegen `mergeFiles.xslt` + `fixDom.xsl` gehalten (0 echte
+Abweichungen in allen fünf Produkten, 252 verbesserte Member). Danach sind die
+XSLT-Dateien, die Gegenprobe (`npm run verify`) und die Sublime-Text-
+Vervollständigungen (`dom2sublimeCodeCompletion.xsl`) weggefallen; letzter Stand
+mit allem in Commit `aeac1d6`.
 
 ---
 
@@ -115,8 +112,7 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
   **außer bei Collections**: Illustrator und Photoshop legen dort `add()` & Co. ab,
   die an einer Instanz aufgerufen werden. `build()` in `model.js` korrigiert das.
 - **`Index` heißt `Index`**, nur die Seite heißt `Index_.html` (Kollision mit
-  `index.html` unter Windows). `fixDom.xsl` benennt die Klasse um; die Gegenprobe
-  gleicht das aus.
+  `index.html` unter Windows).
 - Bei `classdef[@enumeration='true']` sind die Klassen-Properties die **Enum-Werte**.
 - **`<datatype><array/>`** markiert die `Type[]`-Notation (703 Properties).
 - **Die `parent`-Property ist die Hierarchie.** Sie nennt, worin ein Objekt
@@ -153,7 +149,7 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
   `userInteractionLevel` abschalten, offene Dokumente des Nutzers nicht anfassen.
 - **Jede Korrektur zuerst in der Roh-XML unter `sourceXML/` nachschlagen.**
   Erst dort belegen, dass die Angabe wirklich falsch dasteht — und in welchen
-  Produkt-XMLs. Sonst wird etwas „korrigiert", das `fixdom.js`, `fixDom.xsl`
+  Produkt-XMLs. Sonst wird etwas „korrigiert", das `fixdom.js`
   oder `additions.js` längst erledigt haben, oder das Adobe inzwischen selbst
   richtig exportiert; beides fällt im fertigen HTML nicht auf. Das `from`-Feld
   in `additions.js` sichert genau das ab: Es greift nur, wenn die falsche
@@ -204,21 +200,11 @@ npm run build      # sourceXML/*.xml → site/, dazu site.zip zum Hochladen
 npm run serve      # http://localhost:8080
 npm run check      # Browsertest der fertigen Website (Playwright)
 npm run check:types # jede .d.ts und jedes Beispielskript mit dem echten Compiler
-npm run verify     # Portierung gegen die alte XSLT-Strecke halten
 ```
 
 Abweichende Pfade über `OUT_DIR`. `NO_PACKAGE=1` lässt `site.zip` weg
 (~90 s Bauzeit mit Paket, ~85 s ohne — der Löwenanteil ist das Offline-Archiv,
 das zweimal gepackt werden muss).
-
-### Gegenprobe vorbereiten (braucht Java + Saxon)
-
-```sh
-OX="C:/Users/hp/Desktop/Oxygen XML Editor 17/lib"
-java -cp "$OX/saxon9ee.jar" net.sf.saxon.Transform -s:<in> -xsl:<xsl> -o:<out>
-
-npm run verify:prepare     # erzeugt temp/fixedDOM-<slug>.xml
-```
 
 ### Browser
 
@@ -249,7 +235,6 @@ man Template-Literale aus dem Quelltext mit.
 | `legacy/` | fertiges HTML älterer Fassungen, wird unverändert durchgereicht |
 | `site/` | erzeugte Website, gitignored |
 | `design/` | eingefrorene Prototypen der Designphase (Konzepte A, B, C) |
-| `temp/` | nur für `npm run verify`; `prepare-xslt.js` legt den Ordner selbst an |
 
 Unter `legacy/indesign8/` liegt die 2014 mit oXygen WebHelp gebaute CS6-Fassung.
 Sie zieht von `/extendscriptAPI/indesign8/` nach `/indesignapi/indesign8/` um, weil

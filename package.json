@@ -8,9 +8,7 @@
   "scripts": {
     "build": "node build/build.js",
     "check": "node build/check-site.js",
-    "verify": "node build/verify-model.js",
     "serve": "node build/serve.js",
-    "verify:prepare": "node build/prepare-xslt.js",
     "check:types": "node build/check-types.js"
   },
   "dependencies": {

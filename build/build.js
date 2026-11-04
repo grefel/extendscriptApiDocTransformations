@@ -27,8 +27,8 @@ const OUT = process.env.OUT_DIR || path.join(ROOT, 'site');
 const started = Date.now();
 
 /* ---------- Modelle laden ----------
-   Direkt aus sourceXML, ohne Zwischenschritt: mergeFiles.xslt und fixDom.xsl
-   sind nach build/fixdom.js portiert, Saxon wird nicht mehr gebraucht. */
+   Direkt aus sourceXML, ohne Zwischenschritt; bereinigt wird in
+   build/fixdom.js. */
 const JS_XML = path.join(ROOT, 'sourceXML/javascript.xml');
 const SUI_XML = path.join(ROOT, 'sourceXML/scriptui.xml');
 const models = [];

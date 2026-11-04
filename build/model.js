@@ -3,7 +3,6 @@
    Produkt-, JavaScript- und ScriptUI-XML werden direkt gelesen und dabei
    bereinigt (siehe fixdom.js); eine Zwischendatei gibt es nicht.
 
-   build/verify-model.js vergleicht das Ergebnis gegen die alte Saxon-Strecke.
    Fallstricke des Adobe-DOM siehe CLAUDE.md. */
 'use strict';
 
@@ -21,8 +20,8 @@ function kids(el, name) {
     if (n.nodeType === 1 && (!name || localName(n) === name)) out.push(n);
   return out;
 }
-/* Die Quellen tragen teils den omv-Namespace, teils nicht — mergeFiles.xslt hat
-   ihn frueher entfernt. Hier wird stattdessen ueber den lokalen Namen gesucht. */
+/* Die Quellen tragen teils den omv-Namespace, teils nicht — deshalb wird ueber
+   den lokalen Namen gesucht. */
 const localName = n => n.localName || n.nodeName.replace(/^.*:/, '');
 const firstKid = (el, name) => kids(el, name)[0];
 const attr = (el, a) => (el && el.getAttribute(a)) || '';
@@ -146,7 +145,7 @@ function classModel(cd, origin) {
        ...instanceProps.map(p => property(p, false, isSui))]
   ).sort(byName);
 
-  /* fixDom.xsl ergaenzt AppleScript im Windows-DOM. */
+  /* Im Windows-Export fehlt AppleScript unter ScriptLanguage. */
   if (name === 'ScriptLanguage' && !o.p.some(p => p.n === fix.APPLESCRIPT_LANGUAGE.n))
     o.p = [...o.p, Object.assign({}, fix.APPLESCRIPT_LANGUAGE)].sort(byName);
   /* … und app am globalen Objekt. */

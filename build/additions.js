@@ -3,8 +3,7 @@
 
    Nicht zu verwechseln mit notes.js: dort stehen Hinweise ueber Member, hier
    stehen die Member selbst. Beides ist von Hand gepflegt und beides ist eine
-   Abweichung von Adobes Daten — deshalb wird sie markiert (uxp/es) und in
-   verify-model.js als gewollt verbucht.
+   Abweichung von Adobes Daten — deshalb wird sie markiert (uxp/es).
 
    Belegt heisst: nachgewiesen, nicht vermutet. Wer hier etwas eintraegt, sollte
    es ausprobiert haben.
