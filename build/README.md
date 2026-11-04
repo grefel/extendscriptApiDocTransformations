@@ -254,11 +254,33 @@ Ausgaben. Nichts davon wird aus der fertigen Seite zurückgelesen.
 | `<slug>/<slug>.d.ts` | beim **Schreiben** von Code: liegt im Projekt, der Sprachserver antwortet ohne Abruf | 4,5 MB |
 | `<slug>/<Object>.md` | beim **Nachschlagen**: gleiche URL wie die Seite, ohne Markup | 40 KB statt 137 KB |
 | `<slug>/api.json` | eigenes Werkzeug | 7 MB |
+| `<slug>/uxp.md` | Regeln für UXP-Code (nur InDesign, InDesign Server) | 5,5 KB |
 | `llms.txt` (Wurzel und je Ziel) | der Einstieg, der auf all das zeigt | 1,8 KB / 151 KB |
+| `manifest.json` (Wurzel) | für Werkzeuge mit Zwischenspeicher: hat sich etwas geändert? | 7 KB |
 
 Die `.d.ts` eines Produkts ist **in sich geschlossen**: das Objektmodell plus
 Core JavaScript plus die globalen Namen. Eine Datei ins Projekt legen und fertig
 — Verweise auf Nachbardateien wären beim Herunterladen nur eine Fehlerquelle.
+
+### formatVersion und manifest.json
+
+**`formatVersion`** steht vorn in jeder api.json und im Manifest
+(`FORMAT_VERSION` in agents.js). Erhöht wird nur, wenn bestehende Leser
+brechen: ein Feld fällt weg, wird umbenannt oder bedeutet etwas anderes. Neue
+Felder erhöhen nicht. Version 1 ist der unversionierte Stand bis November 2026
+(`Index_`, ohne `page`, `static`, `uxp`); seitdem gilt 2.
+
+**`manifest.json`** listet je Ziel `version`, `runtimes`, `objects`, einen
+`contentHash` und die maschinenlesbaren Dateien (api.json, `.d.ts`, `uxp.md`,
+`llms.txt`) mit `bytes` und `sha256`. Die `.md` je Objekt stehen nicht darin —
+2.600 Einträge, und ihr Inhalt steckt vollständig in api.json.
+
+Fallstrick: `generated` ist das **Baudatum**. Jede Datei, die es nennt, hat
+deshalb nach jedem Bau eine andere Prüfsumme, auch ohne inhaltliche Änderung.
+Der `contentHash` ist darum über api.json **ohne** `generated` gebildet
+(`contentHashOf()`) und ändert sich nur mit Modell oder Format — danach
+richtet ein Werkzeug sein Neuladen. `check-site.js` belegt das, indem es ein
+fremdes Datum einsetzt und denselben Hash erwartet.
 
 ### ScriptUI: kein Suffix mehr, dafür drei Dateien
 

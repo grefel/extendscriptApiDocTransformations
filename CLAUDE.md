@@ -62,6 +62,10 @@ hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
 - Kein `fetch` — Navigationsliste und Suchindex kommen als `<script src>`, damit der
   Offline-Download über `file://` funktioniert.
 - Kein Build-Step und keine Laufzeit-Abhängigkeit im Output.
+- **api.json ist versioniert** (`formatVersion`, derzeit 2). Erhöhen nur bei
+  einer Änderung, die bestehende Leser bricht. `manifest.json` im Wurzelverzeichnis
+  nennt je Ziel einen `contentHash` über api.json ohne `generated` — das ist
+  das Baudatum, jede Datei-Prüfsumme ändert sich deshalb bei jedem Bau.
 - Hausbegriff für eine Seite ist **Object**, nicht Class. Arten: Object / Collection /
   Enumeration.
 - Es heißt **Methode**, nicht Funktion.
