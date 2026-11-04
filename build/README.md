@@ -826,18 +826,21 @@ jedem Objekt, wo er nur Rauschen wäre.
 ### Falsche Typangaben richtigstellen
 
 `additions.js` trägt neben Membern auch **Typkorrekturen**, Schlüssel
-`Klasse.property`. Bisher zwei: `Document.filePath` und `Book.filePath` stehen
-im Export als `File`, liefern aber einen `Folder` — die Datei selbst steht in
-`fullName`. Gilt in beiden Laufzeiten; im UXP-Modus zeigt der Verweis
+`Klasse.property`. `filePath` an `Application`, `Document`, `Book`,
+`BookContent` und `Library` sowie `GeneralPreference.temporaryFolder` und
+`ScriptPreference.scriptsFolder` stehen im Export als `File`, liefern aber
+einen `Folder` — die Datei selbst steht in `fullName`. Gilt in beiden Laufzeiten; im UXP-Modus zeigt der Verweis
 entsprechend auf Adobes `folder`-Seite statt auf `file`.
 
 Jeder Eintrag nennt mit `from` die falsche Angabe und greift nur, solange
 genau die dasteht. Schreibt Adobe den Typ eines Tages richtig oder anders,
 greift die Korrektur nicht mehr, statt eine dann falsche zu erzwingen.
 
-Bewusst **nicht** angefasst: `Application.filePath`, `BookContent.filePath`
-und `Library.filePath` tragen denselben Satz im Export. Ob sie ebenso falsch
-sind, ist nicht nachgeprüft — geraten wird hier nicht.
+Geprüft in InDesign 2026 (21.6) per Skript über COM: jeder der Werte ist
+`instanceof Folder`, die Gegenproben `fullName` sind `File`. Unter UXP
+bestätigen es die gemessenen Typen in indesign-uxp-types (`Promise<Folder>`).
+Die falschen Angaben stehen gleichlautend in `id_26.xml` und
+`id_25-server.xml`; die übrigen Produkte kennen die Properties nicht.
 
 ### Hierarchie: worin steckt es, was steckt darin
 
@@ -1040,13 +1043,9 @@ Ausgeblendetes mit. `buildList()` wirft deshalb `.vals` **und** alles `[hidden]`
 aus der Kopie — sonst stünde „Promise<File>“ auch unter ExtendScript in der
 Liste. Aus demselben Grund steht zwischen Hülle und Typname kein Leerraum.
 
-**Gemessen statt Adobe:** Bei `Application`/`BookContent`/`Library.filePath`
-und `GeneralPreference.temporaryFolder` steht in Adobes Export `File`, unter
-UXP gemessen ist ein `Promise<Folder>`. `runtime.js` (`MEASURED`) setzt das
-**nur für UXP** ein, abgesichert durch `from`; die Seite trägt beide Namen im
-Markup und zeigt je Modus einen. Für ExtendScript bleibt Adobes Angabe stehen,
-bis es dort geprüft ist — dann gehört die Korrektur nach `additions.js`
-(`types`) wie bei `Document.filePath`, und der Eintrag in `MEASURED` entfällt.
+Wo Adobe `File` sagt und ein `Folder` kommt, korrigiert `additions.js` den
+Typ für beide Laufzeiten (siehe „Falsche Typangaben richtigstellen“); die
+Promise-Regel setzt danach an.
 
 ### Laufzeit in Markdown und api.json
 

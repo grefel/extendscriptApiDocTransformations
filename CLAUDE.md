@@ -82,9 +82,7 @@ hängt noch an derselben XSLT-Strecke — eigenständiges Nebenprodukt.
    bei InDesign und InDesign Server (`uxp: true` in `products.js`). Für
    UXP-Typen verweist `llms.txt` auf `indesign-uxp-types`, eigene
    UXP-`.d.ts` gibt es bewusst nicht. Die Regeln stehen als Leitfaden in
-   `<slug>/uxp.md` und in Kurzform auf der Übersichtsseite. Vier
-   File-Angaben sind unter UXP gemessen Folder (`MEASURED`); für ExtendScript
-   noch ungeprüft. `$` und ScriptUI sind aus den Produkten heraus in eigene
+   `<slug>/uxp.md` und in Kurzform auf der Übersichtsseite. `$` und ScriptUI sind aus den Produkten heraus in eigene
    Bibliotheken gewandert, die als „ExtendScript only" gekennzeichnet sind.
    **Welche weiteren Unterschiede in die Daten gehören, ist weiterhin offen** — etwa
    `Socket`, `XML`/`XMLList`, `UnitValue`, `Reflection`.
@@ -142,11 +140,17 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
   geordneten Liste ein `Array` (Elementtyp bewusst offen, die Listen sind
   gemischt). Vorher standen 231 solche Namen je InDesign-Modell als Rohtext in
   der Typspalte.
-- **Einzelne Typangaben sind schlicht falsch.** `Document.filePath`,
-  `Book.filePath` und `ScriptPreference.scriptsFolder` stehen als `File`,
-  liefern aber einen `Folder`. Korrigiert in `build/additions.js` (`types`),
-  abgesichert durch `from`. Die gleichlautenden
-  `Application`/`BookContent`/`Library` sind ungeprüft und bleiben stehen.
+- **Einzelne Typangaben sind schlicht falsch.** `filePath` an `Application`,
+  `Document`, `Book`, `BookContent` und `Library`, dazu
+  `GeneralPreference.temporaryFolder` und `ScriptPreference.scriptsFolder`
+  stehen als `File`, liefern aber einen `Folder`. Korrigiert in
+  `build/additions.js` (`types`), abgesichert durch `from`.
+- **InDesign lässt sich von hier aus fernsteuern** (COM,
+  `New-Object -ComObject InDesign.Application.2026`, dann
+  `DoScript(quelltext, 1246973031)` für JavaScript; der letzte Ausdruck
+  kommt zurück). Typfragen so am lebenden Objekt klären statt raten — eigene
+  Testdateien anlegen und wieder schließen, Dialoge per
+  `userInteractionLevel` abschalten, offene Dokumente des Nutzers nicht anfassen.
 - **Jede Korrektur zuerst in der Roh-XML unter `sourceXML/` nachschlagen.**
   Erst dort belegen, dass die Angabe wirklich falsch dasteht — und in welchen
   Produkt-XMLs. Sonst wird etwas „korrigiert", das `fixdom.js`, `fixDom.xsl`
