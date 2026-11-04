@@ -104,6 +104,16 @@ const write = (rel, content) => {
   bytes += Buffer.byteLength(content);
 };
 
+/* Die maschinenlesbaren Dateien je Ziel merken: manifest.json nennt sie mit
+   Groesse und Pruefsumme. Die .md je Objekt gehoeren nicht dazu — 2.600
+   Eintraege, und ihr Inhalt steckt vollstaendig in api.json. */
+const machine = new Map();
+const keep = (t, rel, content) => {
+  write(t.slug + '/' + rel, content);
+  if (!machine.has(t.slug)) machine.set(t.slug, []);
+  machine.get(t.slug).push([rel, content]);
+};
+
 /* Windows unterscheidet Gross-/Kleinschreibung nicht. Zwei Objekte, die sich nur
    darin unterscheiden, wuerden sich ueberschreiben — InDesign hat eine Klasse
    namens Changes, ein Topic changes.html loeschte sie einmal.
@@ -162,7 +172,7 @@ for (const t of targets) {
         kind: kindOf(c), element: elementOf(c), T, target: t, version: t.data.version, rt
       }));
 
-  write(t.slug + '/api.json', agents.apiJson(t, t.data.classes, {
+  keep(t, 'api.json', agents.apiJson(t, t.data.classes, {
     kindOf, elementOf, T, version: t.data.version, generated: t.data.generated, rt
   }));
 
@@ -186,7 +196,7 @@ for (const t of targets) {
      deklariert. Was hier fehlt, wird zum Alias auf any. */
   const dtsClasses = withElement(forTypes);
   const Tdts = agents.makeTypeMapper(new Set(dtsClasses.map(c => c.n)));
-  write(t.slug + '/' + t.slug + '.d.ts', agents.buildTypes(dtsClasses, Tdts, {
+  keep(t, t.slug + '.d.ts', agents.buildTypes(dtsClasses, Tdts, {
     title: t.label + ' — ' + t.data.version,
     generated: t.data.generated,
     home: BASE + t.slug + '/'
@@ -205,7 +215,7 @@ for (const t of targets) {
       .map(c => weicht.has(c.sup) ? Object.assign({}, c, { sup: null }) : c)
       .concat(js.data.classes, sui.data.classes);
     const Tk = agents.makeTypeMapper(new Set(kombi.map(c => c.n)), weicht);
-    write(t.slug + '/' + t.slug + '-scriptui.d.ts', agents.buildTypes(withElement(kombi), Tk, {
+    keep(t, t.slug + '-scriptui.d.ts', agents.buildTypes(withElement(kombi), Tk, {
       title: t.label + ' + ScriptUI — ' + t.data.version,
       generated: t.data.generated,
       home: BASE + t.slug + '/',
@@ -213,8 +223,8 @@ for (const t of targets) {
     }));
   }
   /* Leitfaden fuer UXP-Code — nur, wo das Modell UXP mitbeschreibt. */
-  if (t.uxp) write(t.slug + '/uxp.md', agents.uxpGuide(t, t.data.classes, rt, kindOf));
-  write(t.slug + '/llms.txt', agents.llmsProduct(t, t.data.classes, kindOf));
+  if (t.uxp) keep(t, 'uxp.md', agents.uxpGuide(t, t.data.classes, rt, kindOf));
+  keep(t, 'llms.txt', agents.llmsProduct(t, t.data.classes, kindOf));
   /* Gezaehlt wird an der Deklarationsdatei: ein Durchgang ueber jede Klasse
      des Ziels. Die gemeinsame Abbildung sieht dieselben Typen mehrfach
      (Markdown und api.json) und meldete entsprechend zu viel. */
@@ -242,6 +252,7 @@ const ohneArchiv = e => !legacy.archives.some(a => e.name.startsWith(a.dir + '/'
 /* ---------- Startseite ---------- */
 write('index.html', homePage(targets, models[0].data.generated));
 write('llms.txt', agents.llmsRoot(targets, models[0].data.generated));
+write('manifest.json', agents.manifest(targets, models[0].data.generated, machine));
 for (const f of ['site.css', 'site.js', 'idskurzreferenz.jpg'])
   write('assets/' + f, fs.readFileSync(path.join(__dirname, 'assets', f)));
 
@@ -383,7 +394,9 @@ function homePage(targets, generated) {
     <p class="lede">Every target ships TypeScript declarations, a JSON model and a
     Markdown twin of each page at the same path. Point an agent at
     <a href="llms.txt">llms.txt</a>, or open a target above and look under
-    <i>For editors and AI agents</i>.</p></section>
+    <i>For editors and AI agents</i>. Tools that cache these files can check
+    <a href="manifest.json">manifest.json</a>: its <code>contentHash</code> per
+    target changes only when the model does.</p></section>
   <footer>
     <p class="legal">Generated with AI assistance from Adobe’s original sources — descriptive texts
     are Adobe’s, transformation errors are ours. Copyright of the original files, and the trademarks
