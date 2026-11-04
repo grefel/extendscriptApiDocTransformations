@@ -361,11 +361,16 @@ mit dem echten Compiler belegt:
 - **`new File("…")` ging nicht.** Den Konstruktor beschreibt Adobe als Methode
   mit dem Klassennamen — `File(path)`, `Folder(path)`, `XML(text)`, `QName`,
   `Namespace`, `Socket`. Daraus wird jetzt ein `constructor`.
-- **`$.writeln()` ging nicht.** `$` und `ScriptUI` sind einzelne Objekte, ihre
-  Methoden führt Adobe aber als Instanzmethoden. Beide sind als `SINGLETON`
-  markiert und bekommen `static`. Nicht zu verwechseln mit `XML` oder
-  `RegExp`: dort sind nur die *Properties* statische Schalter. Weil die
-  ScriptUI-Klassen ein Suffix tragen, kommt zusätzlich
+- **Statische Methoden.** Methoden auf Klassenebene (`<elements type="class">`)
+  sind statisch: `$.writeln()`, `File.openDialog()`, `Window.alert()`,
+  `XML.settings()` — 52 in Core JavaScript und ScriptUI, 3 in Bridge
+  (`MenuElement.create/find/remove`). Das Modell setzt `st`, daraus werden
+  `static` in der `.d.ts`, `"static": true` in api.json, `Klasse.methode()` in
+  der `.md` und die Marke *static* samt Kopierziel auf der Seite.
+  **Collections haben keine:** Illustrator und Photoshop legen `add()`,
+  `rectangle()` & Co. ihrer Collections (~70) auf Klassenebene ab, aufgerufen
+  wird aber `app.documents.add()`. `build()` nimmt das Flag dort wieder weg.
+  Weil die ScriptUI-Klassen ein Suffix tragen, kommt zusätzlich
   `declare const ScriptUI: typeof ScriptUISUI` dazu.
 - **`pages.everyItem()` gab `Page[]`.** Adobes Angabe, aber der Sammelverweis
   ist kein Array: `everyItem().appliedMaster = m` und `everyItem().getElements()`
@@ -394,7 +399,12 @@ bleibt trotzdem am Member hängen (mit der Compiler-API nachgeprüft).
 Adobes Typangaben sind teils Prosa; 116 der vorkommenden Namen bezeichnen keine
 Klasse. Die Regeln in `agents.js` fangen das Meiste ab — `Int`/`LongInteger`/
 `Unit` → `number`, `3 Reals (0 - 255)` → `number[]`, `NothingEnums` →
-`NothingEnum[]`, `Index` → `Index_`.
+`NothingEnum[]`.
+
+Die Klasse `Index` heißt überall `Index` — nur ihre Seite liegt als
+`Index_.html` (bzw. `.md`) neben der Objektliste `index.html`, weil Windows
+beide Namen nicht unterscheidet. Die Regel steht in `pageOf()` (render.js) und
+`page()` (site.js); api.json nennt den Dateinamen je Objekt in `page`.
 
 Zwei Sonderwege:
 
@@ -426,9 +436,11 @@ Zwei Sonderwege:
   Typ — und fehlten damit auch in der Hierarchie. Zwei weitere Formen stehen
   jetzt mit drin: die `Can return:`-Prosa (`Link.parent` → `Story`, `Graphic`,
   `Movie`, `Sound`) und „The Folder object …" (`File.parent`, `Folder.parent`
-  → `Folder`, samt Adobes Tippfehler „TThe"). Bleiben 18 ScriptUI-Elemente mit
-  „The parent element." — dort nennt Adobe den Behälter nirgends, geraten wird
-  hier nicht.
+  → `Folder`, samt Adobes Tippfehler „TThe"). Ein Artikel ist dabei kein Typ:
+  „The object's container" (135 Collections in Illustrator und Photoshop)
+  ergab sonst den Typ „The". Gibt der Text nichts her — dort und bei den 18
+  ScriptUI-Elementen mit „The parent element." —, gilt Adobes `<datatype>`:
+  `Object`, bei `ReflectionInfo.parent` `Reflection`.
 
 ### Sprungziele unter zwei klebenden Zeilen
 
