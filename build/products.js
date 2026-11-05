@@ -6,6 +6,8 @@
    src    Produkt-XML; javascript.xml und scriptui.xml kommen immer dazu
    uxp    zeigt den Laufzeit-Umschalter ExtendScript/UXP
    refcard zeigt die InDesign-Skripting-Kurzreferenz auf der Uebersichtsseite
+   server Skripte laufen im Auftrag eines Clients: Argumente und Ergebnis
+          stehen im Vordergrund (examples.js, Übersichtsseite, uxp.md)
    note   optionaler Hinweis, wenn die Datenlage nicht aktuell ist */
 'use strict';
 
@@ -22,6 +24,7 @@ module.exports = [
     label: 'InDesign Server',
     src: 'sourceXML/id_25-server.xml',
     uxp: true,
+    server: true,
     refcard: true
   },
   /* Ohne uxp: Nur fuer InDesign beschreibt dieses Objektmodell zugleich die

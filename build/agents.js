@@ -16,6 +16,7 @@
 'use strict';
 
 const { BASE, pageOf } = require('./render');
+const examples = require('./examples');
 const mdOf = name => pageOf(name).replace(/\.html$/, '.md');
 
 /* ---------- Typabbildung ExtendScript → TypeScript ----------
@@ -649,6 +650,8 @@ const UXP_LINKS = {
   uxp: 'https://developer.adobe.com/uxp/',
   indesign: 'https://developer.adobe.com/indesign/uxp/',
   migration: 'https://developer.adobe.com/indesign/uxp/resources/migration-guides/extendscript/',
+  args: 'https://developer.adobe.com/indesign/uxp/scripts/tutorials/arguments/',
+  result: 'https://developer.adobe.com/indesign/uxp/scripts/tutorials/script-result/',
   types: 'https://www.npmjs.com/package/indesign-uxp-types'
 };
 
@@ -720,14 +723,53 @@ function uxpGuide(t, classes, rt, kindOf) {
   L.push('| Reading a file or folder property | the object | a Promise — `await` it |');
   L.push('| Passing a file | `File` | path string or UXP `File` entry |');
   L.push('| Passing a folder | `Folder` | path string only |');
-  L.push('| Script arguments | `app.scriptArgs` | `script.args` |');
+  L.push('| Object type | `obj instanceof Rectangle`, `obj.constructor.name` | ' +
+    'the same since 18.4; before that `obj.constructorName == "Rectangle"` |');
+  L.push('| `instanceof` with a superclass | always `false` (`rect instanceof PageItem`) | ' +
+    'always `false` |');
+  L.push('| Script arguments | `app.scriptArgs.getValue("name")`; `arguments` in a script ' +
+    'run by `doScript()` | `require("uxp").script.args` — an array of strings, since 18.4; ' +
+    '`app.scriptArgs` is `undefined` |');
+  L.push('| Script result | the value of the last expression | ' +
+    '`script.setResult(value)`, since 18.4 — the last expression is ignored |');
   L.push('| Event handler | function or `File` | function only |');
   L.push('| Output | `$.writeln()` | `console.log()` |');
   L.push('| User interface | ScriptUI | HTML |');
   L.push('| Not available | — | `$`, ScriptUI, `XML`/`XMLList` (E4X), `Socket`, `UnitValue`, `Reflection` |');
   L.push('');
-  L.push('`app.doScript()` still runs an ExtendScript file from UXP.');
+  L.push('`app.doScript()` still runs an ExtendScript file from UXP. Its ' +
+    '`withArguments` reach an ExtendScript as `arguments` with their types, a UXP ' +
+    'script as strings in `script.args` (`true` becomes `"TRUE"`). `doScript()` ' +
+    'returns the called script\'s result: the last expression of an ExtendScript, ' +
+    'the `script.setResult()` value of a UXP script.');
   L.push('');
+  if (t.server) {
+    const ex = examples.forTarget(t);
+    L.push('## InDesign Server: arguments and result');
+    L.push('');
+    L.push('A server script runs on behalf of a client, so both ends matter: what the ' +
+      'client passes in and what the script hands back. The two engines do both ' +
+      'differently.');
+    L.push('');
+    L.push('- **Arguments.** ExtendScript reads them from `app.scriptArgs`. UXP gets ' +
+      'them in `require("uxp").script.args` as an array of `"name=value"` strings; ' +
+      '`app.scriptArgs` does not exist there. ' +
+      '[Adobe: passing arguments](' + UXP_LINKS.args + ')');
+    L.push('- **Result.** ExtendScript returns the value of the last expression to ' +
+      'the client. UXP returns only what the script passes to ' +
+      '`script.setResult()`. [Adobe: script result](' + UXP_LINKS.result + ')');
+    L.push('');
+    L.push('```js');
+    L.push('// server.jsx');
+    L.push(ex.jsx);
+    L.push('```');
+    L.push('');
+    L.push('```js');
+    L.push('// server.idjs');
+    L.push(ex.idjs);
+    L.push('```');
+    L.push('');
+  }
   L.push('## How this reference marks the differences');
   L.push('');
   L.push('- Markdown: a type that differs carries `(UXP: …)`, for example ' +
@@ -781,6 +823,8 @@ function uxpGuide(t, classes, rt, kindOf) {
   L.push('- [UXP](' + UXP_LINKS.uxp + ') — the platform: modules, storage, network, UI');
   L.push('- [InDesign UXP](' + UXP_LINKS.indesign + ') — scripts and plugins in InDesign');
   L.push('- [Migrating from ExtendScript](' + UXP_LINKS.migration + ')');
+  L.push('- [Passing arguments](' + UXP_LINKS.args + ') and [script result](' +
+    UXP_LINKS.result + ') — `script.args`, `script.setResult()`');
   return L.join('\n') + '\n';
 }
 

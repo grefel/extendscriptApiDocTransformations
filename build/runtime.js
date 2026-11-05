@@ -108,8 +108,7 @@ function forTarget(target, isCore) {
       return out;
     },
     memberNotes(cls, member) {
-      const n = notes.byMember[cls + '.' + member];
-      return n && shown(n) ? [strip(n)] : [];
+      return [].concat(notes.byMember[cls + '.' + member] || []).filter(shown).map(strip);
     }
   };
 }

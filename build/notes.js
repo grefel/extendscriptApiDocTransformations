@@ -28,6 +28,14 @@ const byName = {
        additions.js. Unter UXP ist sie tot. */
     text: 'itemByName() does not work under UXP. Use ' +
       'evaluateXPathExpression() on the parent XMLElement instead.'
+  },
+  ScriptArg: {
+    products: ID,
+    runtime: 'uxp',
+    /* In InDesign 2026 (21.6) geprueft: app.scriptArgs ist unter UXP
+       undefined. */
+    text: 'Not reachable in UXP — app.scriptArgs is undefined there. Read ' +
+      'arguments from require("uxp").script.args (since 18.4).'
   }
 };
 
@@ -52,15 +60,40 @@ const byKind = [
    Dass File- und Folder-Properties unter UXP ein Promise liefern, steht
    nicht hier, sondern als Regel in runtime.js — auch fuer activeScript.
 
-   Quelle: Adobes Migrationsanleitung
-   developer.adobe.com/indesign/uxp/resources/migration-guides/extendscript/ */
+   Ein Member kann je Laufzeit einen eigenen Hinweis tragen, dann steht
+   statt des Eintrags eine Liste.
+
+   Quellen: Adobes Migrationsanleitung
+   developer.adobe.com/indesign/uxp/resources/migration-guides/extendscript/
+   und die Anleitungen .../indesign/uxp/scripts/tutorials/arguments/ und
+   .../script-result/. Das Verhalten von doScript() in InDesign 2026 (21.6)
+   geprueft: UXP macht aus jedem Argument einen String (true wird "TRUE"),
+   ExtendScript behaelt die Typen; der letzte Ausdruck eines UXP-Skripts
+   kommt nicht zurueck. */
 const byMember = {
   'Application.scriptArgs': {
     products: ID,
     runtime: 'uxp',
-    text: 'In UXP, read arguments from script.args instead of ' +
-      'app.scriptArgs.getValue().'
-  }
+    text: 'Undefined in UXP. Read arguments from require("uxp").script.args ' +
+      '(since 18.4) — an array of strings; InDesign Server passes them as ' +
+      '"name=value".'
+  },
+  'Application.doScript': [
+    {
+      products: ID,
+      runtime: 'es',
+      text: 'The called script receives withArguments as arguments. doScript() ' +
+        'returns the value of its last expression.'
+    },
+    {
+      products: ID,
+      runtime: 'uxp',
+      text: 'A called UXP script receives withArguments as strings in ' +
+        'require("uxp").script.args; an ExtendScript receives them as arguments ' +
+        'with their types. doScript() returns what a UXP script passes to ' +
+        'script.setResult() — its last expression is ignored.'
+    }
+  ]
 };
 
 module.exports = { byName, byKind, byMember };

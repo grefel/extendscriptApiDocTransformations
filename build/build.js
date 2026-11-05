@@ -51,7 +51,8 @@ const subset = (data, origin, version) => ({
 const targets = [
   ...models.map(m => ({
     slug: m.product.slug, label: m.product.label, note: m.product.note,
-    uxp: m.product.uxp, refcard: m.product.refcard, kind: 'Product',
+    uxp: m.product.uxp, refcard: m.product.refcard, server: !!m.product.server,
+    kind: 'Product',
     data: subset(m.data, 'p', m.data.version)
   })),
   /* Beide Bibliotheken gibt es nur unter ExtendScript — UXP nutzt eine andere
