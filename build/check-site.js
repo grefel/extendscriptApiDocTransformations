@@ -665,23 +665,32 @@ const check = (name, got, want) => {
   check('Illustrator: keine uxp.md',
     fs.existsSync(path.join(SITE, 'illustrator', 'uxp.md')), false);
 
-  /* --- Argumente, Ergebnis, instanceof (examples.js, in InDesign 2026
-     gelaufen). Beim Server stehen Argumente und Ergebnis im Beispiel. --- */
+  /* --- Argumente, Ergebnis, hasOwnProperty (examples.js, in InDesign 2026
+     gelaufen). Beim Server stehen Argumente und Ergebnis im Beispiel.
+     Aeltere UXP-Fassungen spielen keine Rolle: als Version steht nur
+     "UXP plugins since 18.5" da. --- */
   const rtText = () => page.locator('section.runtimes').innerText();
   const cpOf = () => page.locator('.rtcard .cpicon').evaluateAll(els => els.map(e => e.dataset.cp));
   const uxpMd = s => fs.readFileSync(path.join(SITE, s, 'uxp.md'), 'utf8');
+  const versions = s => (s.match(/\b1[0-9]\.[0-9]\b/g) || []).join(' ');
   await page.goto(url('indesign/index.html'));
   await page.waitForTimeout(300);
   const rtDesk = await rtText();
-  check('Uebersicht: nennt script.args, setResult(), letzten Ausdruck, constructorName',
-    ['script.args', 'script.setResult()', 'last expression', 'constructorName', 'instanceof']
+  check('Uebersicht: nennt script.args, setResult(), letzten Ausdruck, hasOwnProperty, in',
+    ['script.args', 'script.setResult()', 'last expression', 'hasOwnProperty()', '"name" in obj']
       .filter(w => !rtDesk.includes(w)), []);
+  check('Uebersicht: kein instanceof, nur eine Versionsangabe',
+    [/instanceof|constructorName/.test(rtDesk), versions(rtDesk)], [false, '18.5']);
+  check('uxp.md: kein instanceof, nur eine Versionsangabe',
+    ['indesign', 'indesign-server'].map(s =>
+      /instanceof|constructorName/.test(uxpMd(s)) + ' ' + versions(uxpMd(s))),
+    ['false 18.5', 'false 18.5']);
   check('Uebersicht: Adobes Anleitungen zu Argumenten und Ergebnis verlinkt',
     await page.locator('section.runtimes a[href$="/tutorials/arguments/"], ' +
       'section.runtimes a[href$="/tutorials/script-result/"]').count(), 2);
   check('InDesign: Hello World ohne Argumente', (await cpOf()).some(c => /scriptArgs|script\.args/.test(c)), false);
-  check('uxp.md InDesign: Regeln fuer Ergebnis und instanceof, kein Server-Abschnitt',
-    [/\| Script result \|/.test(uxpMd('indesign')), /constructorName/.test(uxpMd('indesign')),
+  check('uxp.md InDesign: Regeln fuer Ergebnis und hasOwnProperty, kein Server-Abschnitt',
+    [/\| Script result \|/.test(uxpMd('indesign')), /hasOwnProperty\(\)/.test(uxpMd('indesign')),
       /## InDesign Server/.test(uxpMd('indesign'))], [true, true, false]);
   await page.goto(url('indesign-server/index.html'));
   await page.waitForTimeout(300);

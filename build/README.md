@@ -822,12 +822,17 @@ ihren Typen. Zurück kommt bei ExtendScript der letzte Ausdruck, bei UXP nur
 der Wert aus `script.setResult()`. Hinweise daher an `Application.scriptArgs`,
 `Application.doScript` (je Laufzeit einer) und am Objekt `ScriptArg`.
 
-**`instanceof`** trifft in beiden Laufzeiten nur die genaue Klasse
-(`rect instanceof Rectangle`), nie eine Oberklasse (`rect instanceof
-PageItem` ist `false`). Adobes Migrationsanleitung nennt `instanceof` unter
-UXP unbrauchbar, aber nur „prior to v18.4"; `constructorName` gibt es nur
-unter UXP, `constructor.name` in beiden. Steht als Regel in `uxp.md` und auf
-der Übersichtsseite, nicht an einzelnen Membern.
+**`hasOwnProperty()`** liefert unter UXP für DOM-Properties immer `false`
+(auch `Object.hasOwn()`), `"name" in obj` funktioniert in beiden Laufzeiten.
+Steht als Regel in `uxp.md` und auf der Übersichtsseite, nicht an einzelnen
+Membern.
+
+**Versionsangaben:** Ältere UXP-Fassungen spielen keine Rolle mehr. Auf der
+Website und in `uxp.md` steht nur „UXP plugins since 18.5", sonst keine
+Version — auch nicht Adobes „since 18.4" bei `script.args` und
+`setResult()`. `instanceof` bleibt bewusst unerwähnt: Es verhält sich in
+beiden Laufzeiten gleich (nur die genaue Klasse, nie eine Oberklasse).
+`check-site.js` prüft beides.
 
 Nicht zu verwechseln mit `additions.js`: dort stehen **Member selbst**, die
 Adobes Export vergisst, hier nur Hinweise **ueber** Member.
