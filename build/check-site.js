@@ -1293,6 +1293,10 @@ const check = (name, got, want) => {
   await page.waitForTimeout(400);
   check('Blase fuehrt zum Objekt', await page.locator('h1').innerText(), 'Application');
   await page.goto(url('indesign/index.html'));
+  /* Nebeneinander erst ab etwa 1650 px, darunter steht die Karte unter den
+     Blasen (siehe unten). */
+  const vpStart = page.viewportSize();
+  await page.setViewportSize({ width: 1800, height: vpStart.height });
   await page.waitForTimeout(400);
   check('Einstiegspunkte links von der Kurzreferenz',
     await page.evaluate(() => {
@@ -1307,6 +1311,25 @@ const check = (name, got, want) => {
       const t = s => Math.round(document.querySelector(s).getBoundingClientRect().top);
       return t('.refcard a') - t('.quick a');
     }), 0);
+  await page.setViewportSize(vpStart);
+  /* Nebeneinander nur mit Platz fuer lesbaren Text: zwischen etwa 1330 und
+     1700 px Fensterbreite quetschte die Karte ihren Text auf 86 px und lief
+     ueber den Rand. Jetzt rutscht sie dort unter die Blasen. */
+  const vp = page.viewportSize();
+  const cramped = [];
+  for (let w = 1000; w <= 2000; w += 50) {
+    await page.setViewportSize({ width: w, height: vp.height });
+    await page.waitForTimeout(60);
+    const r = await page.evaluate(() => {
+      const row = document.querySelector('.startrow').getBoundingClientRect();
+      const card = document.querySelector('.refcard').getBoundingClientRect();
+      const txt = document.querySelector('.refcard a > span').getBoundingClientRect();
+      return card.right - row.right > 1 || txt.width < 200;
+    });
+    if (r) cramped.push(w);
+  }
+  await page.setViewportSize(vp);
+  check('Kurzreferenz nie gequetscht oder ueber dem Rand', cramped.join(' '), '');
   await page.goto(url('illustrator/index.html'));
   await page.waitForTimeout(250);
   check('Illustrator ohne Einstiegspunkte', await page.locator('.quick').count(), 0);
