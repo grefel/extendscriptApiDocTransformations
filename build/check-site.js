@@ -607,14 +607,18 @@ const check = (name, got, want) => {
   await page.waitForTimeout(250);
 
   /* --- Uebersichtsseite: ExtendScript und UXP erklaert ---
-     Nur bei Zielen mit Umschalter, und vor dem Offline-Archiv. */
+     Nur bei Zielen mit Umschalter; danach Werkzeuge samt Archiv, dann Typen. */
   await page.goto(url('indesign/index.html'));
   await page.waitForTimeout(300);
   check('Uebersicht: Block ExtendScript und UXP',
     await page.locator('section.runtimes').count(), 1);
-  check('Uebersicht: Block steht vor Offline',
+  check('Uebersicht: Reihenfolge ExtendScript/UXP, Werkzeuge, Typen',
     await page.evaluate(() => [...document.querySelectorAll('h2.sechead')].map(h => h.id)
-      .join(' ').includes('extendscript-uxp offline')), true);
+      .join(' ').includes('extendscript-uxp for-tools types')), true);
+  check('Uebersicht: Offline-Archiv bei den Werkzeugen',
+    await page.locator('section.machine li#offline a[href="../indesignapi.zip"]').count(), 1);
+  check('Uebersicht: api.json bei den Werkzeugen',
+    await page.locator('section.machine a[href="api.json"]').count(), 1);
   check('Uebersicht: verweist auf developer.adobe.com/uxp/',
     await page.locator('section.runtimes a[href="https://developer.adobe.com/uxp/"]').count(), 1);
   check('Uebersicht: uxp.md liegt daneben',
@@ -651,8 +655,8 @@ const check = (name, got, want) => {
         .map(e => e.getBoundingClientRect().bottom);
       return Math.abs(a - b) <= 1;
     }), true);
-  const UXP_TYPES = 'section.machine a[href="https://www.npmjs.com/package/indesign-uxp-types"]';
-  check('Uebersicht: UXP-Typen bei den Werkzeugen verlinkt',
+  const UXP_TYPES = 'section.types a[href="https://www.npmjs.com/package/indesign-uxp-types"]';
+  check('Uebersicht: UXP-Typen bei den Typen verlinkt',
     await page.locator(UXP_TYPES).count(), 1);
   await page.goto(url('illustrator/index.html'));
   await page.waitForTimeout(300);
@@ -1475,9 +1479,9 @@ const check = (name, got, want) => {
     await page.evaluate(() =>
       getComputedStyle(document.querySelector('.grid')).gridTemplateColumns.split(' ').length), 2);
   check('Produktseite verlinkt die Typen',
-    await page.locator('.machine a[href="indesign.d.ts"]').count(), 1);
+    await page.locator('.types a[href="indesign.d.ts"]').count(), 1);
   check('… und die kombinierte Datei mit ScriptUI',
-    await page.locator('.machine a[href="indesign-scriptui.d.ts"]').count(), 1);
+    await page.locator('.types a[href="indesign-scriptui.d.ts"]').count(), 1);
   check('Produktseite verlinkt llms.txt',
     await page.locator('.machine a[href="llms.txt"]').count(), 1);
 

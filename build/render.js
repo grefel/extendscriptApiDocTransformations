@@ -478,20 +478,24 @@ function make(data, d, ctx) {
       </section>`;
     }
 
-    /* Die ganze Website als ein Archiv. __ZIPMB__ ersetzt build.js, sobald
-       gepackt ist — vorher steht die Groesse nicht fest. */
-    h += `<section class="offline"><h2 class="sechead" id="offline">Offline</h2>
+    /* Maschinenlesbare Ausgaben und das Offline-Archiv, danach die Typen.
+       Bewusst hier und nicht in der Kopfzeile: das holt man einmal je
+       Projekt, nicht dutzendfach je Stunde — und der Kopf ist voll. Erzeugt
+       von build/agents.js; __ZIPMB__ ersetzt build.js, sobald gepackt ist. */
+    h += `<section class="machine"><h2 class="sechead" id="for-tools">For editors and AI agents</h2>
       <ul class="dl">
-        <li><a href="../indesignapi.zip" download><b>indesignapi.zip</b>
+        <li><a href="llms.txt"><b>llms.txt</b>
+          <span>Where everything lives, for an AI agent. Every object also has a
+          Markdown twin at the same path as its page.</span></a></li>
+        <li><a href="api.json" download><b>api.json</b>
+          <span>The whole model as JSON, for your own tooling. Large.</span></a></li>
+        <li id="offline"><a href="../indesignapi.zip" download><b>indesignapi.zip</b>
           <span>The whole site: every application and both shared libraries,
           __ZIPPAGES__ pages. Unpack it and open <code>index.html</code> —
           no server, no internet. About __ZIPMB__ MB.</span></a></li>
       </ul></section>`;
 
-    /* Maschinenlesbare Ausgaben. Bewusst hier und nicht in der Kopfzeile: das
-       holt man einmal je Projekt, nicht dutzendfach je Stunde — und der Kopf
-       ist voll. Erzeugt von build/agents.js. */
-    h += `<section class="machine"><h2 class="sechead" id="for-tools">For editors and AI agents</h2>
+    h += `<section class="types"><h2 class="sechead" id="types">Types</h2>
       <ul class="dl">
         <li><a href="${esc(target.slug)}.d.ts" download><b>${esc(target.slug)}.d.ts</b>
           <span>TypeScript declarations: this object model, the Core JavaScript
@@ -503,11 +507,6 @@ function make(data, d, ctx) {
           share a name with ScriptUI (Window, Button, Event, …); in this file
           they belong to ScriptUI, because <code>new Window()</code> is what a
           dialog needs. Take one file or the other, never both.</span></a></li>` : ''}
-        <li><a href="llms.txt"><b>llms.txt</b>
-          <span>Where everything lives, for an AI agent. Every object also has a
-          Markdown twin at the same path as its page.</span></a></li>
-        <li><a href="api.json" download><b>api.json</b>
-          <span>The whole model as JSON, for your own tooling. Large.</span></a></li>
         ${target.uxp ? `<li><a href="https://www.npmjs.com/package/indesign-uxp-types" rel="noopener">
           <b>indesign-uxp-types</b>
           <span>TypeScript declarations for UXP (<code>require("indesign")</code>),

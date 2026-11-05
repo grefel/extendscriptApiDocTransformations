@@ -394,7 +394,7 @@ function homePage(targets, generated) {
     <p class="lede">Every target ships TypeScript declarations, a JSON model and a
     Markdown twin of each page at the same path. Point an agent at
     <a href="llms.txt">llms.txt</a>, or open a target above and look under
-    <i>For editors and AI agents</i>. Tools that cache these files can check
+    <i>For editors and AI agents</i> and <i>Types</i>. Tools that cache these files can check
     <a href="manifest.json">manifest.json</a>: its <code>contentHash</code> per
     target changes only when the model does.</p></section>
   <footer>

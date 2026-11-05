@@ -1091,10 +1091,14 @@ keine Klasse `UXP` den Leitfaden überschreibt; `check-site.js` nimmt `uxp.md`
 aus der Zählung der Markdown-Zwillinge.
 
 Für Menschen steht dasselbe in Kurzform auf der Übersichtsseite: zwei Karten
-**ExtendScript** und **UXP** im Abschnitt „ExtendScript and UXP“ vor
-„Offline“, darunter Verweise auf <https://developer.adobe.com/uxp/>, Adobes
-Migrationsanleitung und `uxp.md`. Unter 600 px stehen die Karten
-untereinander (`auto-fit`).
+**ExtendScript** und **UXP** im Abschnitt „ExtendScript and UXP“, darunter
+Verweise auf <https://developer.adobe.com/uxp/>, Adobes Migrationsanleitung
+und `uxp.md`. Unter 600 px stehen die Karten untereinander (`auto-fit`).
+
+Danach folgen zwei Abschnitte mit Dateien: **For editors and AI agents**
+(`llms.txt`, `api.json`, das Offline-Archiv — Anker `#offline` sitzt am
+Listeneintrag) und **Types** (`<slug>.d.ts`, `<slug>-scriptui.d.ts`,
+indesign-uxp-types, `jsconfig.json`).
 
 ### Theme, Laufzeit und Rechtliches
 
