@@ -35,7 +35,7 @@ const byName = {
     /* In InDesign 2026 (21.6) geprueft: app.scriptArgs ist unter UXP
        undefined. */
     text: 'Not reachable in UXP — app.scriptArgs is undefined there. Read ' +
-      'arguments from require("uxp").script.args (since 18.4).'
+      'arguments from require("uxp").script.args.'
   }
 };
 
@@ -74,9 +74,8 @@ const byMember = {
   'Application.scriptArgs': {
     products: ID,
     runtime: 'uxp',
-    text: 'Undefined in UXP. Read arguments from require("uxp").script.args ' +
-      '(since 18.4) — an array of strings; InDesign Server passes them as ' +
-      '"name=value".'
+    text: 'Undefined in UXP. Read arguments from require("uxp").script.args — ' +
+      'an array of strings; InDesign Server passes them as "name=value".'
   },
   'Application.doScript': [
     {

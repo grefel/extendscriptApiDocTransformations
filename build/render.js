@@ -413,9 +413,9 @@ function make(data, d, ctx) {
       /* Dasselbe Beispiel in beiden Laufzeiten (examples.js). Beim Server
          stehen Argumente und Ergebnis vorn: dort laeuft jedes Skript im
          Auftrag eines Clients, und genau das regeln beide Laufzeiten anders.
-         instanceof, Argumente und Ergebnis in InDesign 2026 (21.6) geprueft:
-         instanceof trifft in beiden nur die genaue Klasse, nie eine
-         Oberklasse; constructorName gibt es nur unter UXP. */
+         Argumente, Ergebnis und hasOwnProperty() in InDesign 2026 (21.6)
+         geprueft. Versionsangaben bewusst nur eine: aeltere UXP-Fassungen
+         spielen keine Rolle mehr. */
       const hello = (file, code) => snippet(code, 'javascript', file, '// ' + file);
       const ex = examples.forTarget(target);
       const srv = target.server;
@@ -429,8 +429,7 @@ function make(data, d, ctx) {
               srv ? ' such as <code>"name=value"</code>' : ''} — <code>app.scriptArgs</code>
               does not exist</li>
             <li>The result${srv ? ' sent back to the client' : ''} is what you pass to
-              <code>script.setResult()</code>; the last expression is ignored. Both
-              since 18.4</li>`;
+              <code>script.setResult()</code>; the last expression is ignored</li>`;
       h += `<section class="runtimes"><h2 class="sechead" id="extendscript-uxp">ExtendScript and UXP</h2>
         <p class="hint">${srv ? 'InDesign Server' : 'InDesign'} runs scripts in two engines.
         Both drive the same object model — the objects, properties and methods on these
@@ -446,21 +445,21 @@ function make(data, d, ctx) {
               and <code>$</code> are globals</li>
             <li><code>doc.pages[0]</code> or <code>doc.pages.item(0)</code></li>
             <li>Enumerations compare with <code>==</code></li>
-            <li>Object type: <code>obj instanceof Rectangle</code> or
-              <code>obj.constructor.name</code></li>${srv ? '' : esIo}
+            <li>Property check: <code>obj.hasOwnProperty("name")</code> or
+              <code>"name" in obj</code></li>${srv ? '' : esIo}
             <li>Dialogs with ScriptUI</li>
           </ul>${hello(srv ? 'server.jsx' : 'hello.jsx', ex.jsx)}</div>
           <div class="rtcard"><h3>UXP</h3><ul>
-            <li><code>.idjs</code> scripts since InDesign 2023 (18.0), UXP plugins
-              since 18.5</li>${srv ? uxpIo : ''}
+            <li><code>.idjs</code> files, ${srv ? 'run on behalf of a client' : 'run from the Scripts panel'};
+              UXP plugins since 18.5</li>${srv ? uxpIo : ''}
             <li>Modern JavaScript: <code>let</code>, <code>const</code>, arrow functions,
               <code>async</code>/<code>await</code></li>
             <li><code>const { app } = require("indesign")</code> — enumerations come from
               there too</li>
             <li><code>doc.pages.item(0)</code> only — there is no <code>[0]</code></li>
             <li>Enumerations compare with <code>.equals()</code>, not <code>==</code></li>
-            <li>Object type: <code>instanceof</code> since 18.4; for earlier versions
-              <code>obj.constructorName == "Rectangle"</code></li>${srv ? '' : uxpIo}
+            <li>Property check: <code>"name" in obj</code> only —
+              <code>hasOwnProperty()</code> is always <code>false</code> on DOM objects</li>${srv ? '' : uxpIo}
             <li>Files come from <code>require("uxp").storage</code>; file and folder
               properties return a Promise — <code>await doc.fullName</code></li>
             <li>No ScriptUI, no <code>$</code>, no E4X <code>XML</code>; the user

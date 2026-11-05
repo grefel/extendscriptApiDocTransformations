@@ -688,8 +688,7 @@ function uxpGuide(t, classes, rt, kindOf) {
   L.push('');
   L.push('InDesign runs scripts in two engines. **ExtendScript** (`.jsx`) is the ' +
     'original one: JavaScript at the level of ES3, with `app` and every enumeration ' +
-    'as globals. **UXP** (`.idjs` scripts since InDesign 2023 / 18.0, UXP plugins ' +
-    'since 18.5) ' +
+    'as globals. **UXP** (`.idjs` scripts; UXP plugins since 18.5) ' +
     'is modern JavaScript. Both drive the same object model — the classes, ' +
     'properties and methods documented here. What differs is how you reach it and a ' +
     'handful of rules around it.');
@@ -723,15 +722,14 @@ function uxpGuide(t, classes, rt, kindOf) {
   L.push('| Reading a file or folder property | the object | a Promise — `await` it |');
   L.push('| Passing a file | `File` | path string or UXP `File` entry |');
   L.push('| Passing a folder | `Folder` | path string only |');
-  L.push('| Object type | `obj instanceof Rectangle`, `obj.constructor.name` | ' +
-    'the same since 18.4; before that `obj.constructorName == "Rectangle"` |');
-  L.push('| `instanceof` with a superclass | always `false` (`rect instanceof PageItem`) | ' +
-    'always `false` |');
+  L.push('| Does a DOM object have a property? | `obj.hasOwnProperty("name")` or ' +
+    '`"name" in obj` | `"name" in obj` only — `hasOwnProperty()` and `Object.hasOwn()` ' +
+    'are always `false` |');
   L.push('| Script arguments | `app.scriptArgs.getValue("name")`; `arguments` in a script ' +
-    'run by `doScript()` | `require("uxp").script.args` — an array of strings, since 18.4; ' +
+    'run by `doScript()` | `require("uxp").script.args` — an array of strings; ' +
     '`app.scriptArgs` is `undefined` |');
   L.push('| Script result | the value of the last expression | ' +
-    '`script.setResult(value)`, since 18.4 — the last expression is ignored |');
+    '`script.setResult(value)` — the last expression is ignored |');
   L.push('| Event handler | function or `File` | function only |');
   L.push('| Output | `$.writeln()` | `console.log()` |');
   L.push('| User interface | ScriptUI | HTML |');
