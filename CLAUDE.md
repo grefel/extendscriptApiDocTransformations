@@ -146,7 +146,9 @@ Quelle sind die Roh-XMLs in `sourceXML/`; bereinigt wird beim Einlesen in
 - **InDesign lässt sich von hier aus fernsteuern** (COM,
   `New-Object -ComObject InDesign.Application.2026`, dann
   `DoScript(quelltext, 1246973031)` für JavaScript; der letzte Ausdruck
-  kommt zurück). Typfragen so am lebenden Objekt klären statt raten — eigene
+  kommt zurück. UXP mit `1431522407` — dort kommt **nur**, was
+  `require("uxp").script.setResult()` übergibt, der letzte Ausdruck nicht;
+  ein drittes Argument landet als Strings in `script.args`). Typfragen so am lebenden Objekt klären statt raten — eigene
   Testdateien anlegen und wieder schließen, Dialoge per
   `userInteractionLevel` abschalten, offene Dokumente des Nutzers nicht anfassen.
 - **Jede Korrektur zuerst in der Roh-XML unter `sourceXML/` nachschlagen.**

@@ -37,6 +37,7 @@ Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
 | `notes.js` | Hinweise, die nicht im Objektmodell stehen |
 | `additions.js` | Member, die Adobes Export vergisst, und falsche Typangaben |
 | `shortcuts.js` | Einstiegspunkte auf der Übersichtsseite |
+| `examples.js` | Beispielskripte je Laufzeit, für Übersichtsseite und `uxp.md` |
 | `agents.js` | Markdown, api.json, llms.txt und die TypeScript-Deklarationen |
 | `check-types.js` | übersetzt jede `.d.ts` und jedes Beispielskript mit `tsc` |
 | `fixtures/*.js` | Alltagsskripte als Regressionstest der Deklarationen |
@@ -808,10 +809,25 @@ trifft; im Markdown stehen sie als **UXP:** hinter der Beschreibung, in
 api.json als `notes`.
 
 Drei Sorten: `byName` für ein einzelnes Objekt, `byKind` für alle Objekte
-einer Art, `byMember` für eine einzelne Tabellenzeile (Schlüssel
-`Objekt.member`). Der Member-Hinweis steht in der Beschreibungsspalte —
-ein Kasten oben an der Seite wäre für eine von 341 Properties die falsche
-Stelle.
+einer Art, `byMember` für eine einzelne Property oder Methode (Schlüssel
+`Objekt.member`, bei je einem Hinweis pro Laufzeit eine Liste). Der
+Member-Hinweis steht unter der Beschreibung — ein Kasten oben an der Seite
+wäre für eine von 341 Properties die falsche Stelle.
+
+**Argumente und Ergebnis** (in InDesign 2026, 21.6, über COM geprüft):
+`app.scriptArgs` ist unter UXP `undefined`, Argumente stehen in
+`require("uxp").script.args`. `doScript()` reicht `withArguments` an ein
+UXP-Skript als Strings weiter (`true` wird `"TRUE"`), an ein ExtendScript mit
+ihren Typen. Zurück kommt bei ExtendScript der letzte Ausdruck, bei UXP nur
+der Wert aus `script.setResult()`. Hinweise daher an `Application.scriptArgs`,
+`Application.doScript` (je Laufzeit einer) und am Objekt `ScriptArg`.
+
+**`instanceof`** trifft in beiden Laufzeiten nur die genaue Klasse
+(`rect instanceof Rectangle`), nie eine Oberklasse (`rect instanceof
+PageItem` ist `false`). Adobes Migrationsanleitung nennt `instanceof` unter
+UXP unbrauchbar, aber nur „prior to v18.4"; `constructorName` gibt es nur
+unter UXP, `constructor.name` in beiden. Steht als Regel in `uxp.md` und auf
+der Übersichtsseite, nicht an einzelnen Membern.
 
 Nicht zu verwechseln mit `additions.js`: dort stehen **Member selbst**, die
 Adobes Export vergisst, hier nur Hinweise **ueber** Member.
@@ -1094,6 +1110,15 @@ Für Menschen steht dasselbe in Kurzform auf der Übersichtsseite: zwei Karten
 **ExtendScript** und **UXP** im Abschnitt „ExtendScript and UXP“, darunter
 Verweise auf <https://developer.adobe.com/uxp/>, Adobes Migrationsanleitung
 und `uxp.md`. Unter 600 px stehen die Karten untereinander (`auto-fit`).
+
+Die Beispiele kommen aus `examples.js` und sind alle in InDesign 2026
+gelaufen. InDesign zeigt ein Hello World mit Vergleich einer Enumeration.
+InDesign Server (`server: true` in `products.js`) zeigt stattdessen
+Argument und Ergebnis — dort läuft jedes Skript im Auftrag eines Clients.
+Die beiden Punkte stehen beim Server in den Karten gleich nach dem
+Dateityp, und `uxp.md` bekommt einen eigenen Abschnitt mit beiden
+Beispielen. Ein InDesign Server war zum Testen nicht da; die Argumente
+kamen über `doScript()` bzw. ein vorher gesetztes `app.scriptArgs`.
 
 Danach folgen zwei Abschnitte mit Dateien: **For editors and AI agents**
 (`llms.txt`, `api.json`, das Offline-Archiv — Anker `#offline` sitzt am

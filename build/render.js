@@ -7,6 +7,7 @@
 'use strict';
 
 const shortcuts = require('./shortcuts');
+const examples = require('./examples');
 /* Syntaxfarben entstehen beim Bauen: die Seiten tragen fertige <span>s,
    laden kein Skript dafuer und sehen ohne JavaScript und offline gleich aus.
    Nur der Kern mit den zwei Sprachen, die hier vorkommen. */
@@ -87,32 +88,6 @@ function snippet(code, lang, label, head) {
     data-cp="${esc(code)}" title="Copy ${esc(label)}" aria-label="Copy ${esc(label)}">${
     ICON_COPY}${ICON_OK}</button></div>`;
 }
-
-/* Hello World fuer den Block "ExtendScript and UXP" auf der Uebersichtsseite.
-   Parallel gebaut, damit die Unterschiede ins Auge fallen. */
-const HELLO_JSX = [
-  'var doc = app.documents.add();',
-  'var frame = doc.pages[0].textFrames.add();',
-  'frame.geometricBounds = [20, 20, 40, 120];',
-  'frame.contents = "Hello World";',
-  'var para = frame.paragraphs[0];',
-  'para.justification = Justification.CENTER_ALIGN;',
-  'if (para.justification == Justification.CENTER_ALIGN) {',
-  '  alert("centered");',
-  '}'
-].join('\n');
-const HELLO_IDJS = [
-  'const { app, Justification } = require("indesign");',
-  'const doc = app.documents.add();',
-  'const frame = doc.pages.item(0).textFrames.add();',
-  'frame.geometricBounds = [20, 20, 40, 120];',
-  'frame.contents = "Hello World";',
-  'const para = frame.paragraphs.item(0);',
-  'para.justification = Justification.CENTER_ALIGN;',
-  'if (para.justification.equals(Justification.CENTER_ALIGN)) {',
-  '  console.log("centered");',
-  '}'
-].join('\n');
 
 /* ctx.resolve(name) -> relativer Pfad oder null. Damit landen Typen wie "File"
    auf der gemeinsamen JavaScript-Bibliothek statt ins Leere zu zeigen. */
@@ -364,7 +339,7 @@ function make(data, d, ctx) {
           <div class="top1"><span class="id">${copyable((m.st ? c.n + '.' : '') + m.n + '()', sig)}${
             m.st ? '<span class="stat">static</span>' : ''}</span>
             <span class="ret">→ ${typeList(m.r, m.rarr, rt.member(c.n, 'r', m)) || '<b>void</b>'}</span></div>
-          <p class="desc">${esc(m.d)}</p>`;
+          <p class="desc">${esc(m.d)}${memberNote(c.n, m.n)}</p>`;
         if (m.a.length) {
           h += '<div class="args">' + m.a.map(a => `<div class="arg">
             <span class="an${a.o ? ' o' : ''}">${esc(a.n)}${a.o ? '?' : ''}</span>
@@ -435,45 +410,71 @@ function make(data, d, ctx) {
     /* Zwei Laufzeiten, ein Objektmodell. Nur, wo das Modell UXP mitbeschreibt
        (products.js: uxp) — dieselben Regeln fuer Agenten stehen in uxp.md. */
     if (target.uxp) {
-      /* Dasselbe Hello World in beiden Laufzeiten, mit einer Enumeration —
-         an ihr zeigt sich der Unterschied beim Vergleichen. Beide in
-         InDesign 2026 ausgefuehrt; unter UXP greift == dort nicht. */
+      /* Dasselbe Beispiel in beiden Laufzeiten (examples.js). Beim Server
+         stehen Argumente und Ergebnis vorn: dort laeuft jedes Skript im
+         Auftrag eines Clients, und genau das regeln beide Laufzeiten anders.
+         instanceof, Argumente und Ergebnis in InDesign 2026 (21.6) geprueft:
+         instanceof trifft in beiden nur die genaue Klasse, nie eine
+         Oberklasse; constructorName gibt es nur unter UXP. */
       const hello = (file, code) => snippet(code, 'javascript', file, '// ' + file);
+      const ex = examples.forTarget(target);
+      const srv = target.server;
+      const esIo = `
+            <li>Arguments: <code>app.scriptArgs.getValue("name")</code>${srv ? '' : `, or
+              <code>arguments</code> in a script run by <code>doScript()</code>`}</li>
+            <li>The result${srv ? ' sent back to the client' : ''} is the value of the
+              last expression</li>`;
+      const uxpIo = `
+            <li>Arguments: <code>require("uxp").script.args</code>, an array of strings${
+              srv ? ' such as <code>"name=value"</code>' : ''} — <code>app.scriptArgs</code>
+              does not exist</li>
+            <li>The result${srv ? ' sent back to the client' : ''} is what you pass to
+              <code>script.setResult()</code>; the last expression is ignored. Both
+              since 18.4</li>`;
       h += `<section class="runtimes"><h2 class="sechead" id="extendscript-uxp">ExtendScript and UXP</h2>
-        <p class="hint">InDesign runs scripts in two engines. Both drive the same object
-        model — the objects, properties and methods on these pages. What differs is the
-        language around it. The <b>ExtendScript / UXP</b> switch in the header shows every
-        page as the chosen engine sees it.</p>
+        <p class="hint">${srv ? 'InDesign Server' : 'InDesign'} runs scripts in two engines.
+        Both drive the same object model — the objects, properties and methods on these
+        pages. What differs is the language around it${srv ? ', and on a server above all how a script gets its arguments and how it hands back its result' : ''}.
+        The <b>ExtendScript / UXP</b> switch in the header shows every page as the chosen
+        engine sees it.</p>
         <div class="rtcols">
           <div class="rtcard"><h3>ExtendScript</h3><ul>
-            <li><code>.jsx</code> files, run from the Scripts panel</li>
+            <li><code>.jsx</code> files, ${srv ? 'run on behalf of a client' : 'run from the Scripts panel'}</li>${srv ? esIo : ''}
             <li>JavaScript at the level of ES3 (1999): <code>var</code>, no <code>let</code>,
               arrow functions or promises</li>
             <li><code>app</code>, every enumeration, <code>File</code>, <code>Folder</code>
               and <code>$</code> are globals</li>
             <li><code>doc.pages[0]</code> or <code>doc.pages.item(0)</code></li>
             <li>Enumerations compare with <code>==</code></li>
+            <li>Object type: <code>obj instanceof Rectangle</code> or
+              <code>obj.constructor.name</code></li>${srv ? '' : esIo}
             <li>Dialogs with ScriptUI</li>
-          </ul>${hello('hello.jsx', HELLO_JSX)}</div>
+          </ul>${hello(srv ? 'server.jsx' : 'hello.jsx', ex.jsx)}</div>
           <div class="rtcard"><h3>UXP</h3><ul>
             <li><code>.idjs</code> scripts since InDesign 2023 (18.0), UXP plugins
-              since 18.5</li>
+              since 18.5</li>${srv ? uxpIo : ''}
             <li>Modern JavaScript: <code>let</code>, <code>const</code>, arrow functions,
               <code>async</code>/<code>await</code></li>
             <li><code>const { app } = require("indesign")</code> — enumerations come from
               there too</li>
             <li><code>doc.pages.item(0)</code> only — there is no <code>[0]</code></li>
             <li>Enumerations compare with <code>.equals()</code>, not <code>==</code></li>
+            <li>Object type: <code>instanceof</code> since 18.4; for earlier versions
+              <code>obj.constructorName == "Rectangle"</code></li>${srv ? '' : uxpIo}
             <li>Files come from <code>require("uxp").storage</code>; file and folder
               properties return a Promise — <code>await doc.fullName</code></li>
             <li>No ScriptUI, no <code>$</code>, no E4X <code>XML</code>; the user
               interface is HTML</li>
-          </ul>${hello('hello.idjs', HELLO_IDJS)}</div>
+          </ul>${hello(srv ? 'server.idjs' : 'hello.idjs', ex.idjs)}</div>
         </div>
         <p class="rtlinks"><a href="https://developer.adobe.com/uxp/" rel="noopener">Adobe UXP
           documentation</a><span class="sep">·</span><a
           href="https://developer.adobe.com/indesign/uxp/resources/migration-guides/extendscript/"
           rel="noopener">Migrating from ExtendScript</a><span class="sep">·</span><a
+          href="https://developer.adobe.com/indesign/uxp/scripts/tutorials/arguments/"
+          rel="noopener">Arguments</a><span class="sep">·</span><a
+          href="https://developer.adobe.com/indesign/uxp/scripts/tutorials/script-result/"
+          rel="noopener">Script result</a><span class="sep">·</span><a
           href="uxp.md">uxp.md</a> — the full list of differences, for people and AI agents</p>
       </section>`;
     }

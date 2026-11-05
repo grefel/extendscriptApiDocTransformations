@@ -665,6 +665,41 @@ const check = (name, got, want) => {
   check('Illustrator: keine uxp.md',
     fs.existsSync(path.join(SITE, 'illustrator', 'uxp.md')), false);
 
+  /* --- Argumente, Ergebnis, instanceof (examples.js, in InDesign 2026
+     gelaufen). Beim Server stehen Argumente und Ergebnis im Beispiel. --- */
+  const rtText = () => page.locator('section.runtimes').innerText();
+  const cpOf = () => page.locator('.rtcard .cpicon').evaluateAll(els => els.map(e => e.dataset.cp));
+  const uxpMd = s => fs.readFileSync(path.join(SITE, s, 'uxp.md'), 'utf8');
+  await page.goto(url('indesign/index.html'));
+  await page.waitForTimeout(300);
+  const rtDesk = await rtText();
+  check('Uebersicht: nennt script.args, setResult(), letzten Ausdruck, constructorName',
+    ['script.args', 'script.setResult()', 'last expression', 'constructorName', 'instanceof']
+      .filter(w => !rtDesk.includes(w)), []);
+  check('Uebersicht: Adobes Anleitungen zu Argumenten und Ergebnis verlinkt',
+    await page.locator('section.runtimes a[href$="/tutorials/arguments/"], ' +
+      'section.runtimes a[href$="/tutorials/script-result/"]').count(), 2);
+  check('InDesign: Hello World ohne Argumente', (await cpOf()).some(c => /scriptArgs|script\.args/.test(c)), false);
+  check('uxp.md InDesign: Regeln fuer Ergebnis und instanceof, kein Server-Abschnitt',
+    [/\| Script result \|/.test(uxpMd('indesign')), /constructorName/.test(uxpMd('indesign')),
+      /## InDesign Server/.test(uxpMd('indesign'))], [true, true, false]);
+  await page.goto(url('indesign-server/index.html'));
+  await page.waitForTimeout(300);
+  const [srvEs, srvUxp] = await cpOf();
+  check('Server: ExtendScript liest scriptArgs und gibt den letzten Ausdruck zurueck',
+    /app\.scriptArgs/.test(srvEs || '') && /getValue\("name"\)/.test(srvEs || '') &&
+      !/setResult/.test(srvEs || ''), true);
+  check('Server: UXP liest script.args und ruft setResult()',
+    /script\.args/.test(srvUxp || '') && /script\.setResult\(/.test(srvUxp || '') &&
+      !/scriptArgs/.test(srvUxp || ''), true);
+  check('Server: Argumente stehen in beiden Karten direkt nach dem Dateityp',
+    await page.locator('.rtcard ul').evaluateAll(uls =>
+      uls.map(u => /^Arguments/.test(u.children[1].textContent.trim()))), [true, true]);
+  check('uxp.md Server: eigener Abschnitt mit beiden Beispielen',
+    [/## InDesign Server: arguments and result/.test(uxpMd('indesign-server')),
+      /\/\/ server\.jsx/.test(uxpMd('indesign-server')),
+      /\/\/ server\.idjs/.test(uxpMd('indesign-server'))], [true, true, true]);
+
   /* Ziele ohne Umschalter beschreiben nur ExtendScript. */
   await page.goto(url('illustrator/Document.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
@@ -675,17 +710,22 @@ const check = (name, got, want) => {
   await page.goto(url('indesign/Application.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   await page.waitForTimeout(400);
-  check('unter ExtendScript kein Member-Hinweis',
-    await page.locator('.mwarn:not([hidden])').count(), 0);
+  /* Je Laufzeit ein eigener Hinweis an doScript(): Argumente und Ergebnis. */
+  const visibleNotes = () => page.locator('.mwarn:not([hidden])').allInnerTexts();
+  check('unter ExtendScript nur der Hinweis an doScript',
+    (await visibleNotes()).map(t => /last expression/.test(t)), [true]);
   await page.click('.rt button[data-r="uxp"]');
   await page.waitForTimeout(300);
-  check('unter UXP ein Member-Hinweis',
-    await page.locator('.mwarn:not([hidden])').count(), 1);
+  check('unter UXP zwei Member-Hinweise (scriptArgs, doScript)',
+    (await visibleNotes()).length, 2);
   check('activeScript ist ein Promise<File>',
     await at('tr#p-activeScript td.t'),
     'Promise<File>');
   check('scriptArgs nennt script.args',
     /script\.args/.test(await page.locator('tr#p-scriptArgs .mwarn').innerText()), true);
+  check('doScript nennt unter UXP setResult()',
+    /script\.setResult\(\)/.test(
+      await page.locator('#m-doScript .mwarn:not([hidden])').innerText()), true);
   await page.click('.rt button[data-r="es"]');
   await page.waitForTimeout(250);
 
