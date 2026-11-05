@@ -1523,12 +1523,24 @@ a[data-uxp="off"]:not([href]) {
 }
 
 /* Einstiegspunkte und Kurzreferenz nebeneinander: beide beantworten „wo fange
-   ich an?". Bei schmalem Fenster untereinander. */
+   ich an?". Bei schmalem Fenster untereinander. flex-wrap mit der
+   Mindestbreite von .refcard: Reicht der Platz neben den Blasen nicht für
+   Bild und lesbaren Text, rutscht die Karte darunter, statt ihren Text auf
+   wenige Zeichen zu quetschen und über den Rand zu laufen. */
 .startrow {
   display: flex;
+  flex-wrap: wrap;
   gap: 18px;
   align-items: flex-start;
   margin-top: 10px
+}
+
+/* Umgebrochen wird nach der Basis, nicht nach min-width — deshalb 600px als
+   Basis (Bild 320, Abstand 18, Rand und Polster 30, Text gut 230), wachsen
+   bis zur Inhaltsbreite. */
+.refcard {
+  flex: 1 1 600px;
+  max-width: max-content
 }
 
 /* Raster mit justify-items:start — beides zugleich: die Spalten fluchten
@@ -1574,6 +1586,9 @@ a[data-uxp="off"]:not([href]) {
    blieben. Mit stretch wird die Breite bestimmt und auto-fill rechnet wieder. */
 @container page (max-width: 1150px) {
   .startrow { flex-direction: column }
+
+  /* Als Spalte waere die Basis von 600px eine Hoehe. */
+  .refcard { flex: none }
 
   .quick {
     max-width: none;
