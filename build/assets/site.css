@@ -62,7 +62,7 @@
   --bg: #2a2f39;
   --panel: #21252d;
   --rail: #232730;
-  --ink: #a6abb4;
+  --ink: #d5d7dc;
   --dim: #888f9b;
   --line: #232935;
   --accent: hsl(100, 61%, 37%);
@@ -92,7 +92,7 @@
     --bg: #2a2f39;
     --panel: #21252d;
     --rail: #232730;
-    --ink: #a6abb4;
+    --ink: #d5d7dc;
     --dim: #888f9b;
     --line: #232935;
     --accent: hsl(100, 61%, 37%);
@@ -655,7 +655,7 @@ h1 {
 .lede {
   color: var(--dim);
   margin: 8px 0 0;
-  max-width: 78ch
+  /* max-width: 78ch */
 }
 
 .chain {
