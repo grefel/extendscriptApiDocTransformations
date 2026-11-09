@@ -311,7 +311,7 @@ function make(data, d, ctx) {
         <th class="c-a">Access</th><th>Description</th></tr></thead><tbody>`;
       for (const p of c.p) {
         const clip = (c.enum || p.st) ? c.n + '.' + p.n : p.n;
-        h += `<tr id="p-${esc(p.n)}"><td class="n">${copyable(clip, esc(p.n))}${
+        h += `<tr id="p-${esc(p.n)}"${rt.gone(c.n, p.n) ? ' data-uxp="hide"' : ''}><td class="n">${copyable(clip, esc(p.n))}${
           p.st ? '<span class="stat">static</span>' : ''}</td>
           <td class="t">${typeList(p.t, p.arr, rt.member(c.n, 'p', p)) || '<span class="none">—</span>'}${
             p.v ? ` <span class="lit">= ${esc(p.v)}</span>` : ''}${extras(p)}${inlineEnum(p.t)}</td>
@@ -325,7 +325,7 @@ function make(data, d, ctx) {
       h += `<section data-sec="e"><h2 class="sechead" id="events">Events</h2>
         <table><thead><tr><th class="c-n">Name</th><th>Description</th></tr></thead><tbody>`;
       for (const e of c.ev)
-        h += `<tr id="e-${esc(e.n)}"><td class="n ev">${copyable(c.n + '.' + e.n, esc(e.n))}</td>
+        h += `<tr id="e-${esc(e.n)}"${rt.gone(c.n, e.n) ? ' data-uxp="hide"' : ''}><td class="n ev">${copyable(c.n + '.' + e.n, esc(e.n))}</td>
           <td class="d">${esc(e.d)}</td></tr>`;
       h += '</tbody></table></section>';
     }
@@ -551,7 +551,8 @@ function make(data, d, ctx) {
     };
     const mark = c => c.op === 'added' ? ['added', '+'] : c.op === 'removed' ? ['removed', '−'] : ['chg', '~'];
     /* Methoden, die es unter UXP nicht gibt ([]), verschwinden dort auch hier. */
-    const uxpHide = c => c.kind === 'method' && c.m && rt.member(c.objects[0], 'm', c.m) ? ' data-uxp="hide"' : '';
+    const uxpHide = (c, cls) => c.m && (c.kind === 'method' ? rt.member(cls, 'm', c.m)
+      : rt.gone(cls, c.member)) ? ' data-uxp="hide"' : '';
 
     /* Eine Zeile je Änderung; an drei und mehr Objekten mit aufklappbarer
        Liste. own: die Zeile steht schon unter der Überschrift ihres Objekts. */
@@ -569,7 +570,7 @@ function make(data, d, ctx) {
       const list = !own && c.objects.length >= 3
         ? `<details><summary>on ${c.objects.length} objects</summary>${
           c.objects.map(o => to1(o, anchor, esc(o))).join(' · ')}</details>` : '';
-      return `<li class="${cl}${c.breaking ? ' brk' : ''}"${uxpHide(c)}><span class="op">${op}</span>${kind}${who}${what}${list}</li>`;
+      return `<li class="${cl}${c.breaking ? ' brk' : ''}"${uxpHide(c, own || c.objects[0])}><span class="op">${op}</span>${kind}${who}${what}${list}</li>`;
     };
 
     const n = w.counts;
@@ -578,6 +579,16 @@ function make(data, d, ctx) {
         ? 'No changes to the scripting API.'
         : `${n.added} new objects, ${n.changes} changes on ${n.objects} objects, ${n.breaking} that can break existing scripts.`}
       Generated from Adobe’s object model exports.</p>`;
+
+    /* Von Hand gepflegt (build/highlights.js): warum es die neuen Objekte gibt. */
+    const hl = ctx.whatsnew.highlights || [];
+    if (hl.length) {
+      h += `<section><h2 class="sechead" id="highlights">Highlights</h2>`;
+      for (const x of hl)
+        h += `<div class="wnhl"><h3>${esc(x.title)}</h3><p>${esc(x.text)}</p>${x.refs.length
+          ? `<p class="refs">${x.refs.map(r => to1(r.cls, r.anchor, esc(r.label))).join(' · ')}</p>` : ''}</div>`;
+      h += '</section>';
+    }
 
     if (!w.empty) {
       const brk = w.removed.length + w.breaking.length;

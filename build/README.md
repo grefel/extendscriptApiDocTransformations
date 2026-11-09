@@ -889,6 +889,13 @@ Link von der Übersicht, `whatsnew.md` im Manifest und in `llms.txt`, und
 dass jeder eigene Link auf eine vorhandene Seite samt Sprungziel zeigt.
 Ohne Vorversion meldet es `SKIP`; geprüft wird dann mit dem Probelauf.
 
+**Highlights** stehen über den erzeugten Abschnitten und kommen von Hand aus
+`build/highlights.js` (Schlüssel: slug, dann key der neuen Version): je
+Neuerung Titel, ein, zwei Sätze in eigenen Worten und Verweise auf Objekte
+und Member. Nur, was im Objektmodell ankommt. Ein Verweis, den es in der
+neuen Version nicht gibt, ergibt beim Bauen eine Warnung. Die Einträge für
+2026 sind nur Probelauf-Material.
+
 **Am Release-Tag:** Abschnitt Breaking Zeile für Zeile lesen und Auffälliges
 in der Roh-XML nachsehen. Eine Umbenennung erscheint als Entfernen plus
 Hinzufügen.
@@ -1124,6 +1131,1147 @@ gemeinsamen `data-uxp="hide"`-Knoten.
 
 `app.doScript()` bleibt ausdrücklich unberührt — dort läuft eine
 ExtendScript-Datei auch unter UXP.
+
+**Produktklassen und -member, die es nur unter ExtendScript gibt**, stehen in
+`runtime.js` unter `ES_ONLY` — für Fälle, in denen Adobes Export sie ohne
+Einschränkung führt, `require('indesign')` sie aber nicht kennt. Eingetragen
+wird erst, wenn ein Fall in `build/live/` es in beiden Laufzeiten belegt.
+
+- `ES_ONLY.members['Klasse.member']` (Property, Methode oder Event): im
+  UXP-Modus ausgeblendet (`data-uxp="hide"`), im Markdown „ExtendScript only",
+  in api.json `uxp: { available: false }`, in `uxp.md` unter „Members that
+  do not exist under UXP", auf `whatsnew.html` ebenfalls ausgeblendet.
+- `ES_ONLY.classes['Klasse']`: Hinweis oben auf der Seite, Verweise auf die
+  Klasse werden unter UXP abgeschaltet (`data-uxp="off"`, wie bei `# build — XML → statische Website
+
+Einziger Schritt vom Adobe-Objektmodell zur fertigen Website.
+**Weder oXygen noch Java noch Saxon werden gebraucht.**
+
+```
+sourceXML/*.xml → build/ (Node) → site/   2.681 Seiten
+```
+
+## Benutzung
+
+```sh
+npm install
+npm run intake     # neue XML in sourceXML/ benennen, Eintrag für products.js zeigen
+npm run build      # site/ neu bauen, dazu site.zip zum Hochladen   ~90 s
+NO_PACKAGE=1 npm run build   # ohne das Paket, für schnelle Durchläufe
+npm run check      # Website im Browser prüfen (Playwright)
+npm run check:types # jede .d.ts und jedes Beispielskript mit tsc
+npm run serve      # http://localhost:8080
+```
+
+Abweichende Pfade über `OUT_DIR`, eine andere Produktliste über `PRODUCTS`
+(siehe „Quell-XMLs: Dateinamen und Versionen").
+
+## Dateien
+
+| Datei | Aufgabe |
+|---|---|
+| `products.js` | Produkte und ihre Quell-XMLs, je Produkt `versions` (neueste zuerst) |
+| `sources.js` | erkennt Produkt und Version einer XML am Titel, prüft `products.js` |
+| `intake.js` | `npm run intake`: benennt neue XMLs nach ihrer Version |
+| `products-dryrun.js` | Produktliste für den Probelauf eines Versionswechsels |
+| `model.js` | XML → Datenmodell, plus Ableitungen (Collections, Rückwärtsindizes, Nachfahren) |
+| `render.js` | Datenmodell → HTML |
+| `build.js` | schreibt `site/`, prüft Dateinamen-Kollisionen |
+| `assets/site.css` | Stylesheet aller Seiten |
+| `assets/site.js` | Verbesserungen: Navigation, Filter, Suche, Zwischenablage |
+| `check-site.js` | Browsertest der fertigen Website |
+| `serve.js` | Entwicklungsserver, ohne Abhängigkeit |
+| `zip.js` | minimaler ZIP-Schreiber für das Offline-Archiv |
+| `archive.js` | reicht die alte CS6-Dokumentation aus `legacy/` durch |
+| `runtime.js` | was unter UXP anders ist — eine Quelle für Seite, `.md` und api.json |
+| `notes.js` | Hinweise, die nicht im Objektmodell stehen |
+| `additions.js` | Member, die Adobes Export vergisst, und falsche Typangaben |
+| `shortcuts.js` | Einstiegspunkte auf der Übersichtsseite |
+| `examples.js` | Beispielskripte je Laufzeit, für Übersichtsseite und `uxp.md` |
+| `agents.js` | Markdown, api.json, llms.txt und die TypeScript-Deklarationen |
+| `check-types.js` | übersetzt jede `.d.ts` und jedes Beispielskript mit `tsc` |
+| `fixtures/*.js` | Alltagsskripte als Regressionstest der Deklarationen |
+
+## Abhängigkeiten
+
+Zwei zur Laufzeit des Builds, beide ohne transitive Abhängigkeiten:
+**`@xmldom/xmldom`** liest die XMLs, **`highlight.js`** färbt die Codeblöcke
+(`snippet()` in render.js, nur der Kern mit JavaScript und JSON). Playwright
+nur für `npm run check`. Die **Website selbst hat keine** — kein Framework,
+kein CDN, kein Build-Schritt im Browser.
+
+**Syntaxfarben beim Bauen, nicht im Browser.** highlight.js vom CDN bräche
+den Offline-Gebrauch über `file://` und wäre eine Laufzeit-Abhängigkeit. So
+tragen die Seiten fertige `<span class="hljs-…">`, die auch ohne JavaScript
+farbig sind. Die Farben kommen aus den Tokens der Seite (`--ev`, `--enum`,
+`--accent` …) statt aus einem highlight.js-Theme und folgen damit dem
+Dunkelmodus; Enumerationen wie `Justification` stehen in der Enum-Farbe.
+
+**Kopier-Icon oben rechts** an jedem Codeblock. Es sitzt im Rahmen
+`.snipbox` um den `<pre>`, nicht darin — der Block scrollt auf dem Telefon
+seitlich, und das Icon wanderte sonst mit. Es steht `hidden` im Markup und
+erscheint erst mit JavaScript; ohne Skript bleibt der Code zum Markieren.
+
+Die beiden Hello-World-Beispiele im Block „ExtendScript and UXP“ sind in
+InDesign 2026 über COM gelaufen, und unter UXP ist dort auch belegt, dass `==`
+an einer Enumeration nicht greift.
+
+## Zwei Entscheidungen, die im Code nicht sofort sichtbar sind
+
+**Kein `fetch`.** Navigationsliste und Suchindex kommen als `<script>`-Dateien,
+nicht per `fetch`. Grund ist der Offline-Download: über `file://` blockiert Chrome
+`fetch`, ein Script-Tag lädt weiterhin. Der Suchindex (3 MB, 490 KB gzip) wird
+erst beim ersten Öffnen der Palette nachgeladen.
+
+**Die Seitenleiste steht nicht im Markup.** 1.153 Einträge wären ~70 KB auf jeder
+der 1.153 Seiten. Sie kommt aus `assets/nav.js`, das der Browser einmal cacht.
+Ohne JavaScript führt stattdessen ein Link auf `index.html`, das alle Objekte
+vollständig auflistet — jede Seite bleibt also navigierbar. Das Skript verbirgt
+diesen Notnagel-Link, sobald die Liste steht; er bleibt im DOM.
+
+**Zwei Filter, die nichts miteinander zu tun haben.** Das Feld über den Tabellen
+filtert die Member der Seite, das Feld in der Seitenleiste nur die Objektliste
+daneben. Letzteres ist reine Teilzeichenkette ohne Rücksicht auf Groß- und
+Kleinschreibung — die unscharfe Suche über alles leistet die Palette (`Strg/Cmd+K`).
+Gefiltert wird in `buildNav()` selbst, deshalb stimmen die Zahlen in den
+Zwischenüberschriften automatisch und zeigen beim Filtern beide Werte
+(`Objects · 31 / 423`). Ein Neuaufbau kostet ~6 ms je Anschlag.
+Der Begriff überlebt den Seitenwechsel (`navq`), damit ein Weg durch mehrere
+`Text*`-Objekte nicht bei jedem Klick von vorn beginnt; sichtbar bleibt er im
+Feld und in den Zahlen. `Esc` leert ihn, ohne die Palette zu öffnen.
+
+## Ohne JavaScript
+
+Jede Seite ist vollständig im Markup: Beschreibung, Vererbung, Properties, Events,
+Methoden mit Parametern, die drei Rückwärtsverweise und der Footer. Das Skript
+ergänzt nur Bedienelemente; die sind im HTML als `[hidden]` markiert und werden
+erst durch das Skript eingeschaltet. `check-site.js` prüft das mit abgeschaltetem
+JavaScript mit.
+
+## Suchmaschinen
+
+Jede der 2.682 Seiten trägt ein `<link rel="canonical">` mit ihrer öffentlichen
+Adresse; die Basis steht als `BASE` in `render.js` und wird von `agents.js`
+mitbenutzt. Nötig ist das für die **acht Übersichtsseiten**: sie sind als
+`.../<slug>/` und als `.../<slug>/index.html` erreichbar, also derselbe Inhalt
+unter zwei Adressen. Die Objektseiten haben je nur eine Adresse und bekommen den
+Verweis der Einheitlichkeit halber mit.
+
+Das Canonical nennt die **Verzeichnisform**, die Links im Markup zeigen weiter
+auf `index.html`. Das ist Absicht: relative Links auf `index.html` sind die
+einzige Form, die auch über `file://` aus dem Offline-Archiv funktioniert. Eine
+serverseitige 301 wäre die schlechtere Lösung — jeder interne Klick liefe dann
+über eine Weiterleitung. `check-site.js` prüft alle drei Formen (Objektseite,
+Übersicht, Startseite).
+
+Die **CS6-Fassung unter `/indesign8/`** geht den umgekehrten Weg: Jede ihrer
+1.087 Seiten trägt `noindex, follow`. Sie soll erreichbar bleiben, aber nicht
+neben der aktuellen Dokumentation in den Suchergebnissen stehen. Siehe
+„Archiv: die CS6-Fassung".
+
+Nicht Sache des Generators: **`sitemap.xml`** und **`robots.txt`** entstehen auf
+dem Server — robots.txt muss ohnehin auf die Domainwurzel, die Website liegt
+unter `/indesignapi/`. Ebenfalls dort zu klären sind die **2.674
+Markdown-Zwillinge**: sie stehen unter derselben Adresse wie die Seite, nur mit
+`.md`, und sind über `llms.txt` verlinkt. Markdown hat keinen `<head>`, ein
+Canonical geht darin also nicht — wenn sie aus dem Index bleiben sollen, braucht
+es `X-Robots-Tag: noindex` für `*.md`.
+
+## Offline: die ganze Website als Archiv
+
+`site/indesignapi.zip` — **18,4 MB, 5.400 Dateien**, entpacken und
+`index.html` öffnen. Verlinkt auf der Startseite und jeder Übersichtsseite.
+Von der erzeugten Website muss wirklich alles hinein: die Typverweise gehen über
+Produktgrenzen hinweg, ein Teilarchiv wäre kaputt. Die **CS6-Fassung bleibt
+draußen** — sie gehört nicht zum Objektmodell, das hier nachgeschlagen wird, und
+hätte das Archiv fast verdoppelt.
+
+Geschrieben von `build/zip.js`, rund 100 Zeilen über `zlib.deflateRawSync`
+plus CRC-Tabelle. **Keine Abhängigkeit** — ZIP ist ein eingefrorenes Format,
+und die Abhängigkeitsarmut ist hier ein Merkmal. Kein Zip64: bei mehr als
+65.535 Dateien oder 4 GB bricht der Schreiber ab, statt still Falsches zu
+liefern.
+
+**Zweimal gepackt.** Die Übersichtsseiten nennen die Archivgröße, und die steht
+erst nach dem Packen fest. Der zweite Durchgang unterscheidet sich nur um
+wenige Bytes; auf ganze MB gerundet stimmt die Zahl in beiden — auch in der
+Fassung, die im Archiv landet. Kostet rund 10 s der 21 s Bauzeit.
+
+Geprüft wird das Archiv, indem es entpackt und die entpackte Kopie im Browser
+bedient wird: Navigation, Seitenleiste, Volltextsuche.
+
+## Auslieferung: `site.zip`
+
+Der Build legt am Ende **`site.zip` neben `site/`** — den ganzen Ordner in einem
+Archiv, so wie er auf den Server geht: **ohne Ordnerpräfix**, `index.html` liegt
+also gleich oben. Das Offline-Archiv `indesignapi.zip` ist mit drin, sonst zeigte
+der Download auf dem Server ins Leere. 6.575 Einträge, 40,8 MB.
+
+Darin steckt auch die CS6-Fassung — 1.174 Dateien, gepackt 4,4 MB. Im
+Offline-Archiv steckt sie **nicht**, siehe unten.
+
+Ein vorhandenes `site.zip` wird **vor** dem Packen gelöscht: bricht der Lauf ab,
+liegt lieber keines da als ein veraltetes, das wie das neue aussieht.
+
+Gepackt wird aus dem, was ohnehin im Speicher liegt, plus dem eben gebauten
+Archiv — kostet 3 s. Es ein zweites Mal von der Platte zu lesen kostete 27.
+`NO_PACKAGE=1 npm run build` lässt das Paket weg (löscht das alte trotzdem);
+für schnelle Durchläufe beim Entwickeln.
+
+Geprüft mit `Expand-Archive`: 5.401 Dateien, Prüfsummen von `index.html`,
+`Rectangle.html`, `indesign.d.ts`, dem JPEG und dem eingebetteten 18-MB-Archiv
+stimmen mit `site/` überein.
+
+## Archiv: die CS6-Fassung
+
+Unter `site/indesign8/` liegt die **alte, mit oXygen WebHelp gebaute
+Dokumentation für InDesign CS 6 (8.0)**. Sie wird nicht erzeugt, sondern aus
+`legacy/indesign8/` durchgereicht — `build/archive.js`, 1.174 Dateien, 1.087
+Seiten. Grund für den Umzug: Sie stand unter `/extendscriptAPI/indesign8/`, und
+dieses Verzeichnis fällt auf dem Server weg.
+
+Verlinkt ist sie **nur auf der Startseite**, Abschnitt *Archive*. Im
+Produktumschalter im Kopf taucht sie bewusst nicht auf: Sie ist kein Produkt
+neben den anderen, und wer sie sucht, sucht sie gezielt. Der Verweis ist
+**absolut** — er steht auch in der Startseite, die ins Offline-Archiv geht, und
+dort liegt die CS6-Fassung nicht.
+
+**Nicht im Offline-Archiv.** `indesignapi.zip` bleibt bei der erzeugten Website;
+die CS6-Fassung hätte es fast verdoppelt, und wer offline nachschlägt, sucht das
+aktuelle Objektmodell. Im Auslieferungspaket ist sie drin — dort ist alles, was
+auf den Server geht. Die Karte auf der Startseite sagt das dazu.
+
+Beim Kopieren wird fünf Mal eingegriffen — alles andere bleibt Byte für Byte:
+
+- **`noindex, follow`** in jede der 1.087 Seiten. Die CS6-Fassung soll
+  erreichbar bleiben, aber nicht mit der aktuellen Dokumentation um dieselben
+  Suchbegriffe konkurrieren. Ein Canonical wäre hier falsch: Der Inhalt ist
+  nicht derselbe, sondern vierzehn Jahre älter.
+- **`href="/skin.css"` → `href="skin.css"`** in 1.079 Seiten. Die Kopfgestaltung
+  kam von der Domainwurzel; dieselbe Datei liegt byteglich im Archiv. Relativ
+  verlinkt bleibt es auch nach einem Umbau der Wurzel vollständig. Alle
+  betroffenen Seiten liegen im Wurzelverzeichnis des Archivs, der relative Pfad
+  stimmt dort.
+- **Der Kopf von Einstiegs- und Inhaltsseite.** Dort standen ein Download-Zip
+  und die nächstjüngere Fassung, beide unter `/extendscriptAPI/`. An ihrer
+  Stelle steht jetzt der Weg zurück zur aktuellen API.
+- **Die Verweise auf `Index.html` verlieren ihren Link** — siehe unten.
+- **`dita.list`, `dita.xml.properties` und `oxygen-webhelp/check.html`** fallen
+  weg: Reste des DITA-OT-Laufs von 2014, die den lokalen Pfad des Baurechners
+  nennen, plus oXygens Diagnoseseite, die niemand verlinkt und deren einziges
+  Skript nie in die Ausgabe kam.
+
+Danach hat das Archiv **keinen toten internen Verweis und keinen absoluten Pfad**
+mehr; geprüft wird das über alle 1.087 Seiten.
+
+Dazu kommt die von Hand nachgeführte **`about.html`**: Text aus der jüngsten
+Fassung (`indesign21`) übernommen, die toten Verweise ersetzt — jongware.com
+gibt es nicht mehr, der DITA OT ist von GitHub Pages auf `dita-ot.org`
+umgezogen, das Offline-Zip zeigt auf `../indesignapi.zip`. Dazu ein Absatz, der
+sagt, dass dies das Archiv ist und wo die aktuelle Fassung steht. **Diese
+Änderung steckt in `legacy/indesign8/about.html` selbst** — wird der Ordner je
+neu vom Server kopiert, ist sie weg.
+
+### `Index.html` fällt weg
+
+Auf dem Server lagen `index.html` und `Index.html` nebeneinander: **dieselbe
+Seite**, die großgeschriebene ein älterer Stand. Die Klasse *Index* hat nie eine
+eigene Seite gehabt — wer ihrem Verweis folgte, bekam das ganze WebHelp im
+iframe des WebHelp. Windows unterscheidet die beiden Namen ohnehin nicht, in
+`legacy/` ist deshalb nur eine angekommen.
+
+`Index.html` fällt deshalb ganz weg. Die 14 Seiten, die darauf zeigten —
+`Document`, `Story`, `Event`, das Inhaltsverzeichnis und neun weitere —
+**verlieren den Link, der Name bleibt als Text stehen**. Das ist der einzige
+Eingriff, der Inhalt entfernt statt ihn umzubiegen; ein 404 oder eine Seite, die
+sich selbst enthält, wären beide schlechter. Die Regel greift nur bei genau
+`Index.html`, `Indexes.html` und `IndexSection.html` bleiben verlinkt.
+
+## Kurzreferenz
+
+Die Übersichtsseiten von InDesign und InDesign Server zeigen die
+**InDesign-Skripting-Kurzreferenz** — das Objektmodell auf einer Querformatseite,
+verlinkt auf <https://www.indesignjs.de/idskurzreferenz.pdf>. Gesteuert über
+`refcard: true` in `products.js`; Illustrator und Photoshop bekommen sie nicht,
+dort wäre sie falsch.
+
+**Die Vorschau ist ein Standbild und wird nicht mitgeneriert.** Sie liegt als
+`build/assets/idskurzreferenz.jpg` (840×604, 86 KB) und muss von Hand erneuert
+werden, wenn sich das PDF ändert. Erzeugt mit Chrome im **sichtbaren** Fenster —
+headless gibt es keinen PDF-Betrachter:
+
+```js
+const pg = await browser.newPage({ viewport: { width: 420, height: 302 },
+                                   deviceScaleFactor: 2 });
+await pg.goto("file:///…/idskurzreferenz.pdf#toolbar=0&navpanes=0&view=Fit");
+await pg.screenshot({ path: "build/assets/idskurzreferenz.jpg",
+                      type: "jpeg", quality: 82 });
+```
+
+## Für Editoren und KI-Agenten
+
+`build/agents.js` erzeugt aus demselben Modell wie das HTML vier weitere
+Ausgaben. Nichts davon wird aus der fertigen Seite zurückgelesen.
+
+| Ausgabe | wofür | Größe (InDesign) |
+|---|---|---|
+| `<slug>/<slug>.d.ts` | beim **Schreiben** von Code: liegt im Projekt, der Sprachserver antwortet ohne Abruf | 4,5 MB |
+| `<slug>/<Object>.md` | beim **Nachschlagen**: gleiche URL wie die Seite, ohne Markup | 40 KB statt 137 KB |
+| `<slug>/api.json` | eigenes Werkzeug | 7 MB |
+| `<slug>/uxp.md` | Regeln für UXP-Code (nur InDesign, InDesign Server) | 5,5 KB |
+| `llms.txt` (Wurzel und je Ziel) | der Einstieg, der auf all das zeigt | 1,8 KB / 151 KB |
+| `manifest.json` (Wurzel) | für Werkzeuge mit Zwischenspeicher: hat sich etwas geändert? | 7 KB |
+
+Die `.d.ts` eines Produkts ist **in sich geschlossen**: das Objektmodell plus
+Core JavaScript plus die globalen Namen. Eine Datei ins Projekt legen und fertig
+— Verweise auf Nachbardateien wären beim Herunterladen nur eine Fehlerquelle.
+
+### formatVersion und manifest.json
+
+**`formatVersion`** steht vorn in jeder api.json und im Manifest
+(`FORMAT_VERSION` in agents.js). Erhöht wird nur, wenn bestehende Leser
+brechen: ein Feld fällt weg, wird umbenannt oder bedeutet etwas anderes. Neue
+Felder erhöhen nicht. Version 1 ist der unversionierte Stand bis November 2026
+(`Index_`, ohne `page`, `static`, `uxp`); seitdem gilt 2.
+
+**`manifest.json`** listet je Ziel `version`, `runtimes`, `objects`, einen
+`contentHash` und die maschinenlesbaren Dateien (api.json, `.d.ts`, `uxp.md`,
+`llms.txt`) mit `bytes` und `sha256`. Die `.md` je Objekt stehen nicht darin —
+2.600 Einträge, und ihr Inhalt steckt vollständig in api.json.
+
+Fallstrick: `generated` ist das **Baudatum**. Jede Datei, die es nennt, hat
+deshalb nach jedem Bau eine andere Prüfsumme, auch ohne inhaltliche Änderung.
+Der `contentHash` ist darum über api.json **ohne** `generated` gebildet
+(`contentHashOf()`) und ändert sich nur mit Modell oder Format — danach
+richtet ein Werkzeug sein Neuladen. `check-site.js` belegt das, indem es ein
+fremdes Datum einsetzt und denselben Hash erwartet.
+
+### ScriptUI: kein Suffix mehr, dafür drei Dateien
+
+Neun ScriptUI-Klassen heißen wie Produktklassen: `Window`, `Button`, `Event`,
+`Events`, `Group`, `ListBox`, `Panel`, `RadioButton`, `StaticText`. Deshalb trug
+das Modell sie mit Suffix (`WindowSUI`). **Sichtbar ist das Suffix nirgends
+mehr** — weder in den Typen noch auf der Website: seit ScriptUI ein eigenes Ziel
+mit eigenem Ordner ist, steht dort keine Produktklasse daneben.
+`agents.withoutSuiSuffix` schreibt beim Zusammenstellen des Ziels Klassennamen
+**und** alle Verweise um; im gemeinsamen Modell bleibt das Suffix, sonst
+kollidierten die Klassen in `derive()`. Geprüft wurde vorher, dass kein
+Produkt- und kein Kerntyp so heißt wie eine ScriptUI-Klasse, ohne selbst eine
+zu sein — sonst zeigten Links plötzlich in die falsche Bibliothek.
+
+Damit gibt es drei Zuschnitte:
+
+| Datei | Inhalt | wofür |
+|---|---|---|
+| `<slug>.d.ts` | Objektmodell + Core JavaScript + globale Namen | Skript ohne Dialog |
+| `scriptui.d.ts` | nur ScriptUI | Dialog ohne Hostbezug |
+| `<slug>-scriptui.d.ts` | beides, die neun Produktklassen weichen | Skript **mit** Dialog |
+
+Nebeneinander legen kann man sie nicht: gemessen 20 Fehler, zehn Namen doppelt.
+TypeScript kennt je globalem Namen nur eine Bedeutung, das ist keine
+Einstellungssache. In der kombinierten Datei gewinnt deshalb ScriptUI — ein
+Dialog braucht `new Window(…)` —, und die neun Produktklassen fallen weg.
+Verweise auf sie werden über `makeTypeMapper(known, toAny)` zu `any`: keine
+Hilfe, aber auch nichts Falsches. Ohne diesen Weg zeigten sie stumm auf die
+gleichnamige ScriptUI-Klasse. Wer von den neun erbt, verliert das `extends`,
+sonst erbte `ImportExportEvent` von ScriptUIs `Event`.
+
+Zwei Angaben aus Adobes ScriptUI-Modell blockieren jeden Dialog und werden
+deshalb zu `any`: `add()` steht als `Object` da (auf `Object` ist jeder Zugriff
+ein Fehler; welches Element entsteht, hängt am ersten Argument), und `show()`
+steht als `void`, obwohl ein Dialog sein Ergebnis zurückgibt. Noch besser wären
+Überladungen nach dem Zeichenketten-Argument (`add("button")` → `Button`) —
+dafür bräuchte es eine Tabelle der Elementarten, bisher nicht gebaut.
+
+`llms.txt` ist eine Konvention, kein Standard; nichts findet sie von allein. Ihr
+Wert liegt darin, dass man sagen kann „richte deinen Agenten auf diese URL".
+
+### Der Prüfer lief jahrelang ins Leere
+
+**`check-types.js` hat den Compiler nie gestartet und trotzdem „bestanden"
+gemeldet.** Es rief `node_modules/.bin/tsc.cmd` über `execFileSync` — und seit
+Node 18.20/20.12 verweigert Node das Starten von `.bat`/`.cmd` ohne `shell`
+(CVE-2024-27980). Der `EINVAL` landete im `catch`, dort stand keine Zeile mit
+`error TS`, und damit galt jede Datei als fehlerfrei. Aufgefallen ist es nur,
+weil derselbe Aufruf von Hand einen Fehler zeigte, den der Lauf nicht kannte.
+
+Zwei Lehren, beide eingebaut: Der Compiler wird jetzt als **JS mit demselben
+`node`** aufgerufen (`node_modules/typescript/bin/tsc`), und ein Lauf ohne
+Ausgabe **und** ohne Exit-Code gilt als Fehler, nicht als Erfolg. Ein Prüfer,
+der nichts findet, muss beweisen können, dass er gesucht hat.
+
+Was dabei sofort sichtbar wurde: 16 Fehler in Photoshop (Klassen erben von der
+Enumeration `SaveOptions` — in TypeScript kein Konstruktor, TS2507; das
+`extends` fällt jetzt weg) und ein Verweis auf `File` in `scriptui.d.ts`, das
+die Datei nicht deklariert. Deshalb hat jede Deklarationsdatei jetzt ihre
+**eigene Typabbildung**, die nur Namen aus derselben Datei kennt; was fehlt,
+wird zum Alias auf `any`.
+
+### Was beim Übersetzen schiefging
+
+**`npm run check:types` übersetzt jede Deklaration mit dem echten Compiler.**
+Ohne diesen Lauf wäre die Zusage „hier sind Typen" ungedeckt — beim ersten
+Versuch scheiterten alle sieben Dateien an **719 Fehlern**, alle mit derselben
+Ursache: Adobe benutzt reservierte Wörter als Parameternamen
+(`findKeyStrings(for)`, `prompt(…, default, …)`, `rotate(with)`). In einer
+Deklarationsdatei ist der Parametername reine Dokumentation, deshalb trägt er
+jetzt einen Unterstrich (`for_`, `default_`).
+
+Übersetzt wird mit `--lib es5` und **ohne `dom`**: ExtendScript ist kein Browser,
+und mit den DOM-Definitionen kollidieren `Document` und `Event`.
+
+### Warum die Datei allein noch nichts nützt
+
+Alle sieben Dateien übersetzten fehlerfrei — und trotzdem ließ sich mit ihnen
+nicht arbeiten. Gemeldet wurde: `app` unbekannt, und `doc.` bot
+`createElement`, `createCDATASection`, `createRange` an. Nachgestellt und je
+mit dem echten Compiler belegt:
+
+- **Die globalen Namen fehlten.** Adobes Modell fasst sie zur Klasse `global`
+  zusammen (`app`, `alert`, `confirm`, `prompt`, `localize`, `isXMLName`,
+  `uneval`, `setDefaultXMLNamespace`). Als `declare class global { … }` sind
+  sie unerreichbar. Sie stehen jetzt einzeln als `declare const app:
+  Application` und `declare function alert(…)`. Was `lib.es5` selbst
+  mitbringt — `parseInt`, `isNaN`, `encodeURI` … — bleibt weg, sonst gäbe es
+  eine zweite, abweichende Überladung.
+- **Mit geladener DOM-Bibliothek gewinnt der Browser.** `declare class
+  Document` und `interface Document` aus `lib.dom` stehen nebeneinander; mit
+  `skipLibCheck` bleibt der Konflikt stumm, und die Suche landet bei der
+  Browserfassung: `doc.pages` unbekannt, `doc.createElement` erlaubt. Deshalb
+  steht die nötige `jsconfig.json` jetzt im Kopf jeder `.d.ts`, auf der
+  Produktseite als Kopierblock und in `llms.txt`:
+
+  ```json
+  { "compilerOptions": { "lib": ["es5"], "types": [], "checkJs": false },
+    "include": ["**/*.js", "**/*.d.ts"] }
+  ```
+- **`new File("…")` ging nicht.** Den Konstruktor beschreibt Adobe als Methode
+  mit dem Klassennamen — `File(path)`, `Folder(path)`, `XML(text)`, `QName`,
+  `Namespace`, `Socket`. Daraus wird jetzt ein `constructor`.
+- **Statische Methoden.** Methoden auf Klassenebene (`<elements type="class">`)
+  sind statisch: `$.writeln()`, `File.openDialog()`, `Window.alert()`,
+  `XML.settings()` — 52 in Core JavaScript und ScriptUI, 3 in Bridge
+  (`MenuElement.create/find/remove`). Das Modell setzt `st`, daraus werden
+  `static` in der `.d.ts`, `"static": true` in api.json, `Klasse.methode()` in
+  der `.md` und die Marke *static* samt Kopierziel auf der Seite.
+  **Collections haben keine:** Illustrator und Photoshop legen `add()`,
+  `rectangle()` & Co. ihrer Collections (~70) auf Klassenebene ab, aufgerufen
+  wird aber `app.documents.add()`. `build()` nimmt das Flag dort wieder weg.
+  Weil die ScriptUI-Klassen ein Suffix tragen, kommt zusätzlich
+  `declare const ScriptUI: typeof ScriptUISUI` dazu.
+- **`pages.everyItem()` gab `Page[]`.** Adobes Angabe, aber der Sammelverweis
+  ist kein Array: `everyItem().appliedMaster = m` und `everyItem().getElements()`
+  scheiterten beide. Der Rückgabetyp ist jetzt der Elementtyp.
+- **`alert("x")` war ein Aufruf mit zu wenigen Argumenten.** Adobe markiert
+  Pflichtparameter hinter optionalen (`alert(message, title?, errorIcon)`) —
+  in TypeScript verboten (TS1016). Ab dem ersten optionalen gilt jetzt alles
+  Weitere als optional. Betrifft 2 bis 3 Methoden je Produkt.
+- **`Array` ohne Typargument** (4 Stellen) ist jetzt `any[]`.
+
+Zwei Konsequenzen für die Prüfung: `check-types.js` läuft **ohne
+`--skipLibCheck`** — genau der Schalter hatte 66 Fehler *in* der Datei
+verdeckt — und übersetzt zusätzlich `build/fixtures/indesign.js`, ein echtes
+Alltagsskript mit `checkJs`. Dass eine Deklaration übersetzt, heißt eben nicht,
+dass man mit ihr schreiben kann.
+
+Die 66 verdeckten Fehler waren echt: die `FindChange*Setting`-Klassen weiten
+jede geerbte Property um `NothingEnum` aus, was TypeScript verbietet (TS2416).
+Der Typ bleibt stehen wie er ist, darüber steht ein `// @ts-ignore` mit
+Begründung — 114 Zeilen in den beiden InDesign-Dateien, sonst keine. Der
+Kommentar muss unmittelbar über der Deklaration stehen; das JSDoc darüber
+bleibt trotzdem am Member hängen (mit der Compiler-API nachgeprüft).
+
+### Typabbildung
+
+Adobes Typangaben sind teils Prosa; 116 der vorkommenden Namen bezeichnen keine
+Klasse. Die Regeln in `agents.js` fangen das Meiste ab — `Int`/`LongInteger`/
+`Unit` → `number`, `3 Reals (0 - 255)` → `number[]`, `NothingEnums` →
+`NothingEnum[]`.
+
+Die Klasse `Index` heißt überall `Index` — nur ihre Seite liegt als
+`Index_.html` (bzw. `.md`) neben der Objektliste `index.html`, weil Windows
+beide Namen nicht unterscheidet. Die Regel steht in `pageOf()` (render.js) und
+`page()` (site.js); api.json nennt den Dateinamen je Objekt in `page`.
+
+Zwei Sonderwege:
+
+- Ein **sauberer Bezeichner, den Adobe nie definiert** (`ElementPlacement`,
+  `MatrixContent`) behält seinen Namen und bekommt am Kopf der Datei ein
+  `type X = any`. Das ist ehrlicher als ein nacktes `any` und lässt erkennen,
+  was gemeint war.
+- Ein **Doppelpunkt im Typnamen** heißt, dass Adobe Feldname und Typ in eine
+  Angabe gepresst hat. `fixdom.js` löst ihn auf: der Teil hinter dem letzten
+  Doppelpunkt ist der Typ, eine „Ordered array containing …"-Angabe wird zum
+  `Array`. Aus `BoundsKind:BoundingBoxLimits` wird `BoundingBoxLimits`, aus
+  `reframe(in: CoordinateSpaces | any)` also
+  `reframe(in: CoordinateSpaces | BoundingBoxLimits | any[])` — und auf der
+  Seite stehen drei verlinkte Typen statt Rohtext. Betraf **231 Angaben je
+  InDesign-Modell**, 223 davon auflösbar; die übrigen acht nannten hinter dem
+  Doppelpunkt selbst keinen Typ (`dataValue:VariesType` → `Varies`).
+  Der Elementtyp des Arrays bleibt bewusst offen: die Listen sind gemischt
+  (Koordinatenraum, Bezugsrahmen, Zahlen), ein geratener Elementtyp würde
+  richtigen Code als falsch melden. Was drinsteht, sagt die Beschreibung.
+
+  **Damit meldet der Build keine unauflösbaren Typnamen mehr.** Was noch `any`
+  wird, sind Adobes eigene Platzhalter, alle in `SCALAR` benannt: `Varies` (221
+  Stellen, davon nur 3 an einer Property), `VariesSUI` (17) und die vier
+  Sammelbegriffe `IDBasedObject`, `NonIDBasedObject`, `UIDBasedObject`,
+  `RootObject` (je 3).
+
+- **`parent` braucht drei Lesarten.** Die Sonderbehandlung kannte nur Adobes
+  Klammerform („The parent … (a Document)"). 21 `parent`-Angaben blieben ohne
+  Typ — und fehlten damit auch in der Hierarchie. Zwei weitere Formen stehen
+  jetzt mit drin: die `Can return:`-Prosa (`Link.parent` → `Story`, `Graphic`,
+  `Movie`, `Sound`) und „The Folder object …" (`File.parent`, `Folder.parent`
+  → `Folder`, samt Adobes Tippfehler „TThe"). Ein Artikel ist dabei kein Typ:
+  „The object's container" (135 Collections in Illustrator und Photoshop)
+  ergab sonst den Typ „The". Gibt der Text nichts her — dort und bei den 18
+  ScriptUI-Elementen mit „The parent element." —, gilt Adobes `<datatype>`:
+  `Object`, bei `ReflectionInfo.parent` `Reflection`.
+
+### Sprungziele unter zwei klebenden Zeilen
+
+Kopfzeile (44 px) und Filterzeile kleben beide oben. Ein Verweis aus der rechten
+Spalte, aus der Palette oder ein Deep-Link scrollte das Ziel deshalb **unter**
+die Filterzeile: sichtbar war der nächste Member, und man hielt ihn für den
+gesuchten. Gemeldet als „springt zum nächsten".
+
+Behoben mit `scroll-margin-top` auf allen Ankern in `.dmain`. Der Wert ist
+gemessen, nicht geschätzt: `site.js` setzt `--sticky` auf
+`44 + Höhe der Filterzeile + 6` und zieht ihn beim Zoomen und bei
+Größenänderung nach — bei schmalem Fenster bricht die Pillenreihe um
+(135 px gegenüber 171 px). Gerechnet wird mit `offsetHeight`, also in
+Layout-Pixeln: `--sticky` wird als CSS-Wert später wieder mit dem Zoom
+skaliert.
+
+Ohne JavaScript ist die Filterzeile ausgeblendet, dann klebt nur die Kopfzeile —
+deshalb steht im Stylesheet 50 px als Vorgabe. Alle drei Fälle liegen jetzt 6
+bis 7 px unter der klebenden Kante, geprüft in `check-site.js`.
+
+## Listenansicht statt rechter Spalte
+
+Eine fünfte Pille **List** zeigt alle Member als Verweise dort, wo sonst die
+Tabellen stehen — mehrspaltig (`columns: 220px`), nach Properties, Events und
+Methoden gruppiert. `Application` sind das 341 Namen auf einen Blick statt
+sieben Bildschirmhöhen Tabelle. Ein Klick führt zurück in die Tabelle, an die
+Stelle des Members.
+
+Sie ersetzt die frühere **rechte Spalte**: die nahm dauerhaft 210 px, war nur so
+breit wie ein Bezeichner und zeigte dasselbe. Damit ist das Raster überall
+zweispaltig, und der Kopfbereich bekommt die volle Inhaltsbreite.
+
+**Tastenwege:** `L` schaltet um, `A`/`P`/`E`/`M` wählen die Memberart — die
+Buchstaben stehen als `<kbd>` auf den Pillen, wie `F` und `O` in ihren Feldern.
+Eine Pille, die es auf der Seite nicht gibt (kein Event), tut nichts; sonst
+blendete die Taste den ganzen Inhalt aus.
+
+Beim Umschalten **mitten in einer langen Tabelle** springt die Seite zur Liste:
+die ist kürzer und begänne sonst weit über dem Sichtfeld — man sähe nur den
+Fußbereich. Nur wenn sie wirklich oberhalb liegt, sonst rutschte die Seite beim
+Umschalten vom Anfang weg.
+
+Jeder Eintrag nennt **den Typ** hinter dem Namen (`filePath Folder`,
+`addEventListener() EventListener`). Die Wertechips einer Enumeration müssen
+dabei draußen bleiben, sonst steht dort `RepaginateOptionNEXT_EVEN_PAGE…` statt
+des Typnamens.
+
+Drei Feinheiten, alle beim Prüfen aufgefallen:
+
+- **Der Filter wirkt in beiden Ansichten**, die Pillen für die Memberart
+  ebenso — die Liste zeigt genau das, was die Tabellen zeigen würden.
+- **Die Wahl gilt beim Blättern weiter** (`mode` in `localStorage`): wer die
+  Liste zum Navigieren nutzt, will sie auf jeder Seite. Ein Sprung auf einen
+  Member gewinnt aber dagegen — sonst zeigte die Seite die Liste, während die
+  Adresse auf eine Tabellenzeile deutet.
+- **Innerhalb derselben Seite lädt nichts neu**, deshalb hört `site.js` auf
+  `hashchange`: ohne das blieb die Liste stehen, wenn man aus der Palette auf
+  einen Member derselben Seite sprang.
+
+Die Polsterung des Inhalts liegt bei **16/20/27 px** — zwei Drittel der
+früheren Werte. Der Inhalt soll die Fläche nutzen, der Rand nur trennen.
+
+### Der Objektname in der klebenden Zeile
+
+Über dem Filterfeld steht der Name des Objekts — 17 px statt der 26 px der
+Überschrift, aber dieselbe Schrift und dasselbe Gewicht: es ist derselbe Name,
+keine Beschriftung. Nach ein paar Bildschirmen Properties ist die Überschrift
+weggescrollt, und bei 423 Objekten ähneln sich viele Namen (`TextFrame`,
+`TextFramePreference`).
+
+**Er erscheint erst, wenn die Leiste wirklich klebt** — am Seitenanfang stünde er
+doppelt da, direkt unter der Überschrift. Beantwortet wird das von einem
+nullhohen Wächter (`.barwatch`) vor der Leiste, den ein `IntersectionObserver`
+mit `rootMargin: -45px` beobachtet: das ist die Höhe der Kopfzeile plus ein
+Pixel, der Wechsel fällt damit genau auf den Anschlag. Kein Scroll-Handler.
+
+Dabei wächst die Leiste um die Namenszeile, und **der Inhalt sprang gemessen um
+30 px**, sobald sie ansetzte — Chromes Scroll-Anchoring fing das nicht ab. Die
+Höhe steht deshalb als `--namerow` fest, die Namenszeile ist genau so hoch, und
+`.bar.stuck` nimmt sie über einen negativen Rand wieder zurück: im Fluss
+beansprucht die Leiste immer dasselbe. Gemessen mit echtem Radscrollen über den
+Anschlag, in Chrome und Firefox: 0 px Abweichung. `--sticky` rechnet die
+Namenszeile immer mit, sonst landete ein Sprungziel 30 px zu hoch — also unter
+der Leiste.
+
+Damit ist die Leiste kein Flexcontainer mehr, sondern trägt zwei Zeilen. Die
+Umbruchregel für schmale Fenster musste deshalb von `.bar` auf `.barrow`
+wandern — ohne sie lief die Pillenreihe bei 750 px um 313 px aus der Spalte und
+die Seite scrollte seitlich.
+
+**Der Breitendurchlauf hat das nicht gemeldet.** Er wartete nach dem Laden nur
+220 ms und maß, während die Filterzeile noch `[hidden]` war. Jetzt wartet er
+auf `.bar:not([hidden])`; mit deaktivierter Umbruchregel meldet er den
+Überhang prompt (140 px bei 900, 240 bei 800) — nachgewiesen, nicht vermutet.
+
+## Schmales Fenster
+
+Sauber bis hinunter zu **278 px** logischer Breite, ohne waagerechtes Scrollen.
+`check-site.js` misst das bei fünfzehn Breiten nach — von 1600 px bis zu einem
+320-px-Telefon.
+
+Mit Zoom zählt die **logische** Breite, also Fenster ÷ Zoom — dieselbe Grenze.
+Beim Standardzoom 1,15 heißt das: ein 750-px-Fenster ist logisch 652 px und
+gerade noch drin. Der Kopf ist der engste Punkt; gemessen passt er bis 950 px
+logischer Breite, bei 925 px ragt er 11 px heraus. Darum treten Tastenkürzel
+und API-Version ab 950 px ab, nicht erst ab 900.
+1000 px bei 150 % sind logisch 667 px und damit in Ordnung, 900 px wären 600 px.
+Unterhalb von 620 px klappt die Seitenleiste weg, siehe „Telefon" unten.
+
+Drei Stellen brauchen deshalb eine Reserve, die bei normaler Schrift nie greift:
+`.args` bekommt `minmax(0,auto)` statt `auto` für die beiden ersten Spalten, und
+Beschreibungen (`.mem .desc`, `td.d`, `.arg .ad`) `overflow-wrap:anywhere` —
+Adobe schreibt dort gelegentlich einen Pfad oder Bezeichner am Stück. Dasselbe
+gilt für `.mem .id`: eine Signatur wie
+`getStyleConflictResolutionStrategy(charOrParaStyle?)` ist für den Umbruch ein
+einziges Wort und wird 444 px breit.
+
+Die Tabellen laufen mit **`table-layout:fixed`**. Vorher bestimmte der längste
+Bezeichner die Namensspalte — `allowFontSizeAndLeadingAdjustment` erzwang 229 px,
+und bei schmalem Fenster blieb der Beschreibung nichts mehr. Die Kehrseite: eine
+zu schmal deklarierte Spalte schiebt ihren Inhalt jetzt in die Nachbarspalte,
+statt die Tabelle zu verbreitern. Deshalb prüft `check-site.js` **beides** —
+Seitenüberhang *und* Zellen, deren Inhalt breiter ist als die Zelle.
+
+Genau daran ist die Zugriffsspalte zuerst gescheitert: als Prozentwert war sie
+bei mittlerer Fensterbreite zu schmal für „read/write", und der Text lief in die
+Beschreibung. Sie hat jetzt eine **feste Breite** — der Wortlaut ist fest, der
+Platzbedarf also auch.
+
+| Logische Breite | Verhalten |
+|---|---|
+| ab 1250 px | „Recent" mit drei Einträgen |
+| ab 1100 px | Zugriff ausgeschrieben (78 px) |
+| unter 1100 px | Zugriff als `ro`/`rw` (46 px, Kopf „ACC"), Beschreibung bekommt den Platz |
+| unter 950 px | Kopfzeile schrumpft (Tastenkürzel und API-Version treten ab), Parameter stehen untereinander statt in drei Spalten |
+| unter 900 px | Der Hierarchie-Kasten rutscht unter den Kopf |
+| unter 620 px | Seitenleiste weg, Inhalt über die volle Breite; A− / A+ und der Themeknopf treten ab |
+| unter 460 px | Wortmarke weicht, „ExtendScript" wird zu „ES", Tabellen werden Blöcke, Einstiegspunkte als dichte Reihe |
+
+Die Grenzen sind **logische** Breiten. Eine Ausnahme: der Zoomwechsel bei 620 px
+misst echte Fensterpixel — unterhalb davon sind beide Maße ohnehin dasselbe.
+
+Zwei Stellen brauchen eine saubere Trennstelle statt eines harten Umbruchs:
+`td.n` und `td.t` bekommen `overflow-wrap:anywhere` als letzte Reserve, und die
+Collection-Notation trägt ein `<wbr>` vor der Klammer — aus
+`EventListeners<EventListener>` wird so ein Umbruch **vor** `<EventListener>`
+statt mitten im Bezeichner.
+
+## Telefon
+
+Bis zum Umbau endeten die Regeln bei 950 px, und ein Telefon fiel drei Mal
+darunter. Gemessen auf einem 390-px-Gerät: bei Standardzoom bleiben **339
+logische Pixel**, davon nahm die Seitenleiste 200. Der Inhaltsspalte blieben
+139 px, der Tabelle 99, und darin bekam die Beschreibung **5 px** — eine Spalte,
+in der jeder Buchstabe auf einer eigenen Zeile stand. Die Zugriffsspalte war mit
+ihren festen 46 px breiter als Name und Typ zusammen. Zusätzlich schob die
+Kopfzeile die Seite auf 606 px, weil sie nicht umbricht.
+
+Der Grund für den Totalausfall statt eines hässlichen Überhangs ist
+`table-layout:fixed`: es verteilt Prozentwerte **ohne Untergrenze** weiter. Eine
+Tabelle mit `auto` wäre über den Rand gelaufen und mit Pinch-Zoom noch lesbar
+geblieben — so verhält sich die alte Website.
+
+Zwei Grenzen, nicht eine. Ohne Seitenleiste trägt die Tabelle noch bis etwa
+460 px; ein schmales Fenster am Rechner behält sie dadurch.
+
+- **Unter 620 px fällt die Seitenleiste weg** (`display:none`, `.grid` einspaltig).
+  Navigiert wird über die Suche, die dafür im Kopf bleibt. Kein Schubfach: es
+  kostet Skript, Fokusverwaltung und einen Knopf, und die Suche kann dasselbe.
+- **Unter 460 px werden die Tabellen zu Blöcken.** Name und Zugriff nebeneinander,
+  Typ und Beschreibung darunter — dieselbe Form, die die Methoden als `.mem`
+  schon haben. Umgestellt wird **nur die Darstellung**: `thead` verschwindet,
+  `tr` wird ein Grid aus zwei Spalten, die `<tr>` behalten ihre `id`. Deshalb
+  arbeiten Deep-Links, Filterzeile, Listenansicht und der UXP-Umschalter
+  unverändert weiter, und `render.js` musste nichts anderes ausgeben.
+- **Einstiegspunkte als dichte Reihe, unter 560 px.** Siehe den eigenen
+  Abschnitt weiter unten — die 19 Blasen standen dort auf 19 Zeilen.
+
+Die Kopfzeile bleibt dabei **einzeilig auf 44 px** — `.bar` und `.side` kleben
+auf diesem Wert, und `stickyOffset()` rechnet mit derselben Zahl. Dafür geben
+A− / A+ und der Themeknopf ihren Platz ab (das Gerät kann beides selbst:
+Pinch-Zoom und `prefers-color-scheme`), darunter auch die Wortmarke — aber nur
+dort, wo der Produktumschalter sie ersetzt, nicht auf der Startseite. Übrig
+bleiben Produktumschalter, ExtendScript/UXP und Suche. „ExtendScript"
+ausgeschrieben kostete 55 px, die die Suche braucht, und steht deshalb als „ES"
+da — derselbe Kniff wie in der Zugriffsspalte.
+
+Drei Stellen brauchten zusätzlich eine Trennstelle, die am Rechner nie greift:
+`.mem .id` (Signaturen), `.revbox a` (Rückwärtsverweise, breit bewusst
+einzeilig) und `.arg .an`. Letzteres gibt unter 950 px sein `white-space:nowrap`
+auf — in der Grid-Fassung hält es den Parameternamen in seiner Spalte zusammen,
+im Fließtext wird `clearingOverridesThroughRootObjectStyle` sonst 303 px breit
+und läuft aus der Seite.
+
+**Unter 620 px echter Fensterbreite steht der Zoom auf 1** statt auf 1,15 — auf
+einem 390-px-Telefon sind das 51 px mehr, und die Schriftgröße bringt das Gerät
+selbst mit. Die Regel muss eine `@media`-Abfrage sein: sie kann nicht im
+skalierten Raum messen, weil sie den Maßstab ändert. Sie trägt `!important`,
+sonst gewönne eine am Rechner gespeicherte Größe, die als Inline-Stil auf
+`:root` landet.
+
+Die 620 px sind so gewählt, dass der Übergang **stetig** bleibt: 621 px bei
+Zoom 1,15 sind logisch 540, 620 px bei Zoom 1 sind logisch 620 — beide unter
+der 620er-Grenze der Container-Query, die Seitenleiste bleibt also auf beiden
+Seiten weg. Gemessen verschwindet sie bei 713 px Fensterbreite und kommt bis
+hinunter zu 320 px nicht zurück; `check-site.js` prüft genau diese drei
+Punkte. Der Preis ist ein Sprung in der Schriftgröße, wenn man ein Fenster am
+Rechner über diese Breite zieht.
+
+Geprüft wird das bei sechs Breiten von 700 px bis 320 px auf zwei Seiten, dazu
+gezielt bei 390 px: Seitenleiste weg, Kopfzeile einzeilig, `tr` als Grid,
+Zugriff neben dem Namen, Typ darunter, Beschreibung über 250 px statt 5.
+Schaltet man die beiden Container-Queries ab, fallen 20 Prüfungen — mit 307 px
+Überhang und 157 überlaufenden Zellen bei 390 px genau das alte Bild.
+
+## Zwei Browser
+
+Der Hauptlauf nutzt das System-Chrome (`channel: 'chrome'`) über `file://`. Am
+Ende folgt eine kurze **Gegenprobe in Firefox über http** — Theme und „Recent"
+halten ihren Zustand in `localStorage`, und das verhält sich je Browser anders.
+
+Der Firefox-Build gehört nicht zum globalen Playwright und wird bei Bedarf mit
+`npx playwright install firefox` geholt; fehlt er, meldet der Lauf `SKIP` statt
+zu scheitern.
+
+### Offline in Firefox: kein Seitenzustand möglich
+
+**Ein ausgeliefertes Firefox gibt jeder lokalen Datei einen eigenen
+Storage-Origin** (`privacy.file_unique_origin`, Standard seit FF 68). Nachgemessen
+an Firefox 152, zwei Seiten desselben Ordners:
+
+```
+storage/default/file++++…+site+indesign+Rectangle.html
+storage/default/file++++…+site+indesign+Document.html
+```
+
+Zwei Ordner, zwei getrennte Speicher. Folge beim Offline-Download:
+
+- Das **Theme** fällt bei jedem Seitenwechsel auf den Standard zurück.
+- **„Recent"** füllt sich nie und bleibt deshalb ausgeblendet.
+
+Es gibt dort keinen Ausweg: `sessionStorage` und IndexedDB unterliegen derselben
+Trennung, Cookies gibt es auf `file://` nicht, und `window.name` — sonst die
+klassische Reserve — wird beim Origin-Wechsel geleert (ebenfalls nachgemessen).
+Bliebe der Zustand in jedem Link, was jede URL verschmutzt.
+
+**Chrome ist nicht betroffen**, es teilt einen Origin über alle lokalen Dateien.
+Über http, also auf dem Server, gibt es ohnehin nur einen Origin — dort
+funktioniert Firefox genauso wie Chrome.
+
+Wichtig für Tests: **Playwrights Firefox bildet das nicht nach**, auch nicht mit
+gesetztem `privacy.file_unique_origin`. Eine `file://`-Zusage wäre dort grün und
+in der Wirklichkeit falsch — deshalb läuft die Gegenprobe über http.
+
+## Größen
+
+| | roh | gzip |
+|---|---|---|
+| Objektseite (Rectangle) | 133 KB | **16 KB** |
+| größte Seite (Document) | 197 KB | 22 KB |
+| `site.css` + `site.js` | 24 KB | 8 KB |
+| `nav.js` | 29 KB | 7 KB |
+| `search.js` (bei Bedarf) | 3,0 MB | 491 KB |
+| gesamt `site/` | 25 MB | — |
+
+## Noch offen
+
+- `runtime.js` kennt fünf Unterschiede: die `[]`-Methoden (und was
+  `additions.js` mit `uxp: false` ergänzt), das `File` als Event-Handler, die
+  umgehängten Kern-Verweise, `Promise<File>`/`Promise<Folder>` bzw. `String` an
+  Dateiwerten und die Hinweise aus `notes.js`. Welche weiteren in die Daten
+  gehören, ist noch zu klären.
+- Für Illustrator und Photoshop sind fünf bzw. zwei Collections ohne erkennbaren
+  Elementtyp — dort fehlen `[]`, `getByName` und `add`.
+
+## Mehrere Produkte
+
+`build/products.js` listet die Anwendungen mit ihren OMV-XMLs, neueste zuerst.
+`npm run build` liest sie direkt und baut daraus die Website.
+
+| Ordner | Einträge |
+|---|---|
+| `indesign` | 1.097 |
+| `indesign-server` | 966 |
+| `illustrator` | 292 |
+| `photoshop` | 226 |
+| `bridge` | 37 |
+| `javascript` | 22 |
+| `scriptui` | 34 |
+
+**ScriptUI und die Kern-JavaScript-Klassen sind eigene Bibliotheken.** Sie stecken
+in jeder Produkt-XML identisch drin (22 bzw. 34 Klassen) und werden einmal
+ausgegeben statt fünfmal. Damit entfällt auch die alte Sonderbehandlung, `$` und
+alles mit Suffix `SUI` im UXP-Modus auszublenden — im Objektmodell eines Produkts
+kommen sie gar nicht mehr vor. Als Member blendet der Umschalter nur noch die
+Methoden mit dem Namen `[]` aus; der Rest sind Typangaben und Hinweise.
+
+Typverweise lösen erst im eigenen Produkt auf, dann in den gemeinsamen
+Bibliotheken. `Document` bleibt so im eigenen Produkt, `File` landet unter
+`../javascript/File.html`.
+
+Der Produktumschalter im Kopf ist ein `<details>` und funktioniert ohne
+JavaScript. Gibt es das gleichnamige Objekt im Zielprodukt, springt er direkt
+dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Index.
+
+### Quell-XMLs: Dateinamen und Versionen
+
+In `sourceXML/` liegen nur die XMLs, die `products.js` verwendet, dazu
+`javascript.xml` und `scriptui.xml`. Alles andere steht in
+`sourceXML/archive/` unter Adobes ursprünglichem Namen. Beides ist nicht
+versioniert (`.gitignore`).
+
+**Der Dateiname kommt aus dem Titel der XML**, nicht aus Adobes Dateinamen
+und nicht aus dem Attribut `name` — das stimmt nicht immer mit dem Build
+überein (`id_25-server`: `name="20.4"`, Build 20.5.0.49). `build/sources.js`
+liest den Titel des ersten `<map>`:
+
+| Titel | Datei | key |
+|---|---|---|
+| Adobe InDesign 2026 (21.5.1.73) Object Model | `indesign-21.5.1.73.xml` | `2026` |
+| Adobe InDesign Server 2025 (20.5.0.49) Object Model | `indesign-server-20.5.0.49.xml` | `2025` |
+| Adobe Illustrator 29 Type Library | `illustrator-29.xml` | `29` |
+| Adobe Photoshop CC 2015.5 Object Library | `photoshop-2015.5.xml` | `2015` |
+| Adobe Bridge 2021 Object Model | `bridge-2021.xml` | `2021` |
+
+**Neue Version aufnehmen:** XML nach `sourceXML/` legen und `npm run intake`.
+Das benennt sie um und gibt den Eintrag aus, der oben in `versions` gehört —
+oder meldet, dass sie älter ist als die verwendete und ins Archiv gehört.
+`products.js` ändert es nicht; das bleibt die eine Handänderung. Ein
+unbekannter Titelaufbau bricht mit Exit 1 ab, dann das Muster in
+`sources.js` ergänzen.
+
+**`build.js` prüft `versions` vor dem Bauen** und bricht ab, wenn eine Datei
+fehlt, nicht zum Produkt passt (Server-XML im Desktop-Platz), ein `key`
+doppelt vorkommt oder die Liste nicht absteigt. Ein `key`, der nicht zum
+Jahr im Titel passt, ist nur eine Warnung. Die erste Ausgabezeile je Produkt
+(`quelle`) nennt Version und Datei.
+
+Weitere Meldungen, die beim Versionswechsel zählen:
+
+- `typfix   indesign  7/7 angewendet` — die Typkorrekturen aus `additions.js`.
+  Greift eine nicht mehr, nennt eine Warnung Property, Typ in der Quelle und
+  erwartetes `from`. Dann in der Roh-XML nachsehen, ob Adobe den Typ
+  berichtigt oder anders falsch angegeben hat.
+- `warnung  …: Hinweis zu X — Objekt fehlt` bzw. `Member fehlt` — ein
+  Eintrag in `notes.js` für dieses Ziel trifft nichts mehr.
+- Fehlt `javascript.xml` oder `scriptui.xml`, bricht der Bau ab (Exit 2),
+  statt beide Bibliotheken leer zu veröffentlichen.
+
+`check-site.js` liest die Zahl der InDesign-Objekte aus der gebauten
+`indesign/api.json` statt sie fest zu erwarten.
+
+Veröffentlicht wird nur `versions[0]`. `versions[1]` ist die Vorversion:
+Grundlage für `whatsnew.html` (nächster Abschnitt), später auch für den
+Versionsumschalter. Aus den alten XMLs im Archiv wird nichts veröffentlicht;
+die erste echte Vorversion ist 2026 (21.5.1.73) hinter 2027.
+
+**Probelauf:** `build/products-dryrun.js` stellt InDesign 2025 aus dem
+Archiv hinter 2026 — wie beim Release 2027 die 2026 hinter 2027.
+
+```sh
+PRODUCTS=build/products-dryrun.js OUT_DIR=<scratch>/site npm run build
+```
+
+Mit `PRODUCTS` verlangt `build.js` ein `OUT_DIR` und packt kein `site.zip`.
+
+### What's new: `whatsnew.html`
+
+Nennt `products.js` für ein Produkt `versions[1]`, entsteht
+`<slug>/whatsnew.html` mit Markdown-Zwilling `whatsnew.md`, verlinkt aus
+der Übersichtsseite („What's new since InDesign 2026 →") und aus
+`llms.txt`. Ohne Vorversion gibt es die Seite nicht.
+
+`build/whatsnew.js` vergleicht die Produktklassen beider Versionen. Beide
+laufen durch dasselbe `model.build()` — Änderungen an `fixdom.js` oder
+`additions.js` erscheinen so nie als API-Änderung. Core JavaScript und
+ScriptUI bleiben außen vor, sie stammen aus denselben festen Dateien.
+
+**Gliederung:** Breaking (Entferntes, Typen, die Werte verlieren, readonly
+statt read/write, neue Pflicht- oder verschobene Parameter, geänderte
+Enum-Codes) — New objects — On many objects — By object — Minor
+(Parameter-Umbenennungen, reine Beschreibungsänderungen). Ohne Unterschiede
+steht nur „No changes to the scripting API" da.
+
+**Faltungen**, gemessen am Probelauf 20.0 → 21.5 (185 Rohänderungen → 151):
+
+- `parent`-Änderungen, die nur neue Objekte hinzufügen (34), fallen weg.
+  Das neue Objekt zeigt stattdessen „can hold N objects" aus
+  `derive().childrenOf`.
+- Dieselbe Änderung an drei und mehr Objekten wird eine Zeile mit
+  aufklappbarer Liste — Adobe führt geerbte Member flach an jeder Klasse
+  (`flexObjects` an 35 Objekten).
+- Beschreibungsänderungen zählen nur, wenn sich am Member sonst nichts
+  geändert hat; meist wiederholt der Text den neuen Typ (40 von 41).
+- Ein Bereich im Typnamen (`Unit(0-144points)` → `Unit(0-1000points)`)
+  ist eine Bereichs-, keine Typänderung.
+
+Typen laufen durch `typeList()` aus `render.js`, sind also verlinkt, und
+der UXP-Umschalter greift. Größe im Probelauf: 30 KB roh, 5 KB gzip.
+
+`check-site.js` prüft die Seite, wenn es sie gibt: Überschrift, Canonical,
+Link von der Übersicht, `whatsnew.md` im Manifest und in `llms.txt`, und
+dass jeder eigene Link auf eine vorhandene Seite samt Sprungziel zeigt.
+Ohne Vorversion meldet es `SKIP`; geprüft wird dann mit dem Probelauf.
+
+**Am Release-Tag:** Abschnitt Breaking Zeile für Zeile lesen und Auffälliges
+in der Roh-XML nachsehen. Eine Umbenennung erscheint als Entfernen plus
+Hinzufügen.
+
+### Produktspezifische Fallstricke
+
+- **Collections werden je Produkt anders markiert.** InDesign: Methode
+  `everyItem`. Illustrator und Photoshop: die Properties `length` + `parent` +
+  `typename`. Sonst: die Beschreibung nennt sich selbst „collection". Nur
+  `length` allein reicht nirgends — das haben auch `Array`, `String` und
+  `Function`. Bridge hat danach null Collections, und das stimmt.
+- **Elementtyp einer Collection**: InDesign liefert ihn über `[]`, Illustrator
+  und Photoshop über `getByName` oder `add`.
+- **Der Titel kommt in drei Formen** — „Object Model", „Type Library",
+  „Object Library" — und nur InDesign nennt eine Buildnummer.
+- **Illustrator, Photoshop und Bridge haben keine Events.**
+- Photoshops neueste verfügbare XML ist CC 2015.5 von 2016; das steht als
+  Hinweis auf der Startseite und der Produktseite.
+
+### Hinweise, die nicht im Objektmodell stehen
+
+Adobes Export beschreibt, was es gibt — nicht, was davon kaputt ist. Solche
+Erfahrungswerte stehen in `build/notes.js` und erscheinen als Warnung unter der
+Beschreibung des Objekts. Je Eintrag: auf welche Ziele er passt (`products`),
+optional auf welche Laufzeit (`runtime`), und der Text. Abgefragt werden sie
+über `runtime.js` (`notes()`, `memberNotes()`), das auch die Produktauswahl
+trifft; im Markdown stehen sie als **UXP:** hinter der Beschreibung, in
+api.json als `notes`.
+
+Drei Sorten: `byName` für ein einzelnes Objekt, `byKind` für alle Objekte
+einer Art, `byMember` für eine einzelne Property oder Methode (Schlüssel
+`Objekt.member`, bei je einem Hinweis pro Laufzeit eine Liste). Der
+Member-Hinweis steht unter der Beschreibung — ein Kasten oben an der Seite
+wäre für eine von 341 Properties die falsche Stelle.
+
+**Argumente und Ergebnis** (in InDesign 2026, 21.6, über COM geprüft):
+`app.scriptArgs` ist unter UXP `undefined`, Argumente stehen in
+`require("uxp").script.args`. `doScript()` reicht `withArguments` an ein
+UXP-Skript als Strings weiter (`true` wird `"TRUE"`), an ein ExtendScript mit
+ihren Typen. Zurück kommt bei ExtendScript der letzte Ausdruck, bei UXP nur
+der Wert aus `script.setResult()`. Hinweise daher an `Application.scriptArgs`,
+`Application.doScript` (je Laufzeit einer) und am Objekt `ScriptArg`.
+
+**`hasOwnProperty()`** liefert unter UXP für DOM-Properties immer `false`
+(auch `Object.hasOwn()`), `"name" in obj` funktioniert in beiden Laufzeiten.
+Steht als Regel in `uxp.md` und auf der Übersichtsseite, nicht an einzelnen
+Membern.
+
+**Versionsangaben:** Ältere UXP-Fassungen spielen keine Rolle mehr. Auf der
+Website und in `uxp.md` steht nur „UXP plugins since 18.5", sonst keine
+Version — auch nicht Adobes „since 18.4" bei `script.args` und
+`setResult()`. `instanceof` bleibt bewusst unerwähnt: Es verhält sich in
+beiden Laufzeiten gleich (nur die genaue Klasse, nie eine Oberklasse).
+`check-site.js` prüft beides.
+
+Nicht zu verwechseln mit `additions.js`: dort stehen **Member selbst**, die
+Adobes Export vergisst, hier nur Hinweise **ueber** Member.
+
+**`XMLElements.itemByName()`** — nur unter UXP ein Problem. Dort funktioniert
+sie nicht, der Weg führt über `evaluateXPathExpression()` am übergeordneten
+`XMLElement`.
+
+Der Fall zeigt, wozu `additions.js` da ist: **Adobes XML-Export führt die
+Methode gar nicht auf** (nachgesehen in `sourceXML/indesign-21.5.1.73.xml`, dort stehen
+nur `count`, `add`, `item`, `itemByID`, `itemByRange` und die üblichen).
+Im Object Model Viewer steht sie, und unter ExtendScript funktioniert sie seit
+CS3 bis InDesign 2026. Sie wird deshalb ergänzt und als
+`uxp: false` markiert, damit der UXP-Modus sie ausblendet.
+
+`check-site.js` prüft beide Richtungen: unter ExtendScript ist die Methode da
+und der Hinweis weg, unter UXP umgekehrt. Und dass `Pages` seine eigene
+`itemByName` aus der Quelle behält.
+
+**`equals()` statt `==` an allen Enumerations**, nur unter UXP. Adobes
+Migrationsanleitung nennt genau diesen Fall, und zwar mit einem
+Enumerationswert als Beispiel — deshalb steht der Hinweis dort und nicht an
+jedem Objekt, wo er nur Rauschen wäre.
+
+### Falsche Typangaben richtigstellen
+
+`additions.js` trägt neben Membern auch **Typkorrekturen**, Schlüssel
+`Klasse.property`. `filePath` an `Application`, `Document`, `Book`,
+`BookContent` und `Library` sowie `GeneralPreference.temporaryFolder` und
+`ScriptPreference.scriptsFolder` stehen im Export als `File`, liefern aber
+einen `Folder` — die Datei selbst steht in `fullName`. Gilt in beiden Laufzeiten; im UXP-Modus zeigt der Verweis
+entsprechend auf Adobes `folder`-Seite statt auf `file`.
+
+Jeder Eintrag nennt mit `from` die falsche Angabe und greift nur, solange
+genau die dasteht. Schreibt Adobe den Typ eines Tages richtig oder anders,
+greift die Korrektur nicht mehr, statt eine dann falsche zu erzwingen.
+
+Geprüft in InDesign 2026 (21.6) per Skript über COM: jeder der Werte ist
+`instanceof Folder`, die Gegenproben `fullName` sind `File`. Unter UXP
+bestätigen es die gemessenen Typen in indesign-uxp-types (`Promise<Folder>`).
+Die falschen Angaben stehen gleichlautend in `indesign-21.5.1.73.xml` und
+`indesign-server-20.5.0.49.xml`; die übrigen Produkte kennen die Properties nicht.
+
+### Hierarchie: worin steckt es, was steckt darin
+
+Über den Membern stehen drei zentrierte Zeilen — mögliche Eltern, der eigene
+Name, mögliche Kinder — nach dem Vorbild von Adobes Object Model Viewer. Das ist
+**Enthaltensein, nicht Vererbung**: die beiden Blöcke darüber (`.chain`,
+`Extended by`) beantworten „was bin ich", dieser beantwortet „wo bekomme ich das
+her" und „was erreiche ich von hier".
+
+Quelle ist die `parent`-Property: sie nennt, worin ein Objekt stecken kann
+(`Document` → `Application`, `Rectangle` → 18 Behälter). Die Kinderliste ist
+deren Umkehrung, gebildet in `derive()` als `parentsOf` / `childrenOf`.
+
+Vier Entscheidungen dabei, alle gegen Rauschen:
+
+- **Enumerations sind nie dabei.** Sie stecken nirgends, sie sind Werte.
+- **Sammlungen bleiben draußen.** Dass eine `Page` in `Pages` steckt, ist eine
+  Frage der Schreibweise, keine Hierarchie. (Nebenbei: Adobes Export gibt
+  Sammlungen ohnehin keine `parent`-Angabe, sie bekommen also gar keinen Block.)
+- **Ein reiner Selbstbezug fällt weg.** `Application.parent` nennt
+  `Application` — das sagt nichts. Steht der eigene Name neben anderen, bleibt
+  er: ein `Rectangle` kann in einem `Rectangle` liegen.
+- **Was fast überall steht, fällt ganz heraus.** `MutationEvent` steht in 422
+  der 423 Kinderlisten, `Event` und `EventListener` in 415 — jedes Objekt kann
+  Events auslösen. Solche Klassen ordnen nichts mehr ein und sind in beiden
+  Richtungen weg, auch auf ihrer eigenen Seite. Die Schwelle ist die Hälfte
+  aller Objekte, damit die Regel bei künftigen Modellen greift, statt drei
+  Namen festzuschreiben.
+
+**Die Preference-Familie steht getrennt und eingeklappt.** 172 der 423 Objekte
+erben von `Preference` und hängen an fast jedem Objekt; `Document` allein hat
+54 davon. Wer nach Struktur sucht, will `Article` und `Story` sehen, nicht 54
+mal „…Preference". Erkannt wird die Familie an der Oberklasse, nicht am Namen —
+sonst fehlten `AnchoredObjectDefault` und `BaselineFrameGridOption`. Bis sechs
+Namen steht die Zeile offen, darüber hinter einer Zusammenfassung
+(`54 preference objects`).
+
+Der Block trägt echte Information, nicht nur Zierde: eine `Page` steckt laut
+Adobe im `Spread`, nicht im `Document`. Wer sie über `doc.pages` holt, sieht
+hier den Umweg. `check-site.js` prüft genau das.
+
+**Der Kopf ist halbiert: links Name, Beschreibung und Vererbung, rechts oben
+die Hierarchie.** Die Fläche neben dem Titel stand vorher leer, und die
+Hierarchie schob die Tabellen nach unten.
+
+Beide Hälften sind **fest**, nicht nach Inhalt bemessen. Eine Breite nach Inhalt
+war zuerst gebaut und wieder verworfen: der Kasten sprang von Seite zu Seite in
+eine andere Größe, das Blättern wurde unruhig. Jetzt ist er überall gleich breit
+(49 % des Kopfes), nur die Höhe folgt dem Inhalt. Der Inhalt bleibt zentriert —
+die drei Zeilen beziehen sich aufeinander.
+
+Erst unter 900 px Spaltenbreite rutscht der Kasten unter den Kopf;
+nebeneinander bliebe für den Namen zu wenig übrig. Die Regel dafür steht als
+`.head .tree`, weil die Halbierung weiter unten im Stylesheet sonst gewönne.
+
+Gemessen bei 1848 px Fenster: die Filterzeile steht auf `Book` bei y = 320
+statt 475, auf `Color` bei 243 statt 364.
+
+**Ab vierzig Namen steht eine Liste hinter einem Pfeil**; die Preferences
+klappen schon ab sieben ein, sie sind Nebensache. Offen blieben sonst 81 Kinder
+auf `Document` — der Kasten war höher als der halbe Bildschirm und schob die
+Tabellen hinaus. Darunter bleibt die Liste offen: ein Klick für drei Zeilen wäre
+nur im Weg, und im Schnitt sind offene Listen 1,6 Zeilen lang.
+
+**Preis:** `Document` 153 px, `Application` 129, `Rectangle` 305 (34 Kinder
+offen), `Color` 102. Die Filterzeile steht auf `Document` damit bei y = 250
+statt 604. Vor dem Ausdünnen waren es 609 und 754 px. Drei Objekte haben
+überhaupt keinen Block.
+
+### Vererbung in beide Richtungen
+
+**Die Vererbungszeile entfällt, wenn es keine Vorfahren gibt.** Bei `CellStyle`
+stand dort nur `CellStyle` — eine Zeile, die den Seitentitel wiederholt.
+Betrifft alle 432 Enumerations und jedes Objekt ohne `superclass`.
+
+**Darunter „EXTENDED BY", der Weg nach unten.** Adobe liefert nur
+`superclass`; `derive()` dreht das um (`subOf`). Von `PageItem` aus sieht man so
+alle neun Rahmenarten auf einmal — die interessantere Richtung, wenn man von
+einem Meta-Objekt aus sucht. `SplineItem` hat vier, `Text` sieben.
+
+### Wertechips brauchen Luft
+
+Gemessen lagen zwischen dem letzten Chip und dem Zeilentrenner nur **3 bis
+5 px**; der Chip sah aus, als sitze er auf der Linie. Jetzt oben und unten je
+6 px, also 10 px bis zum Trenner — `check-site.js` misst das nach.
+
+**Auch `NothingEnum` bekommt seinen Chip.** Er hat nur den einen Wert `NOTHING`,
+ist aber die Kopierhilfe für `NothingEnum.NOTHING` — und genau so schreibt man
+es im Skript. Ihn zu unterdrücken war ein Fehlschluss: der Chip ist kein
+Informationsträger, sondern ein Knopf.
+
+### Einstiegspunkte auf der Übersichtsseite
+
+Die Seitenleiste listet alle 1.097 Objekte — das hilft beim Suchen, nicht beim
+Anfangen. `build/shortcuts.js` hält 19 Blasen, geordnet nach der Hierarchie
+statt alphabetisch: `app → document → spread/page → Rahmen → Text`, dazu
+Bilder, Formate, Tabellen und die GREP-Einstellungen. Sie stehen links neben
+der Kurzreferenz, weil beide dieselbe Frage beantworten.
+
+Nur für InDesign und InDesign Server. `render.js` filtert die Liste gegen das
+jeweilige Modell, damit keine Blase ins Leere zeigt, falls Adobe einmal ein
+Objekt umbenennt — geprüft wird das auch.
+
+**Die Breite muss man dem Raster ausdrücklich geben.** `.startrow` steht auf
+`align-items: flex-start`; sobald es unter 1150 px eine Spalte wird, heißt das
+für `.quick` fit-content — also eine **unbestimmte** Breite. Und für
+`repeat(auto-fill, …)` ist eine unbestimmte Breite genau *eine* Wiederholung.
+Die 19 Blasen standen dadurch von 460 bis 1130 px logischer Breite einspaltig
+untereinander, während daneben bis zu 990 px frei blieben. `align-self: stretch`
+macht die Breite bestimmt, dann rechnet `auto-fill` wieder. Nichts lief dabei
+über den Rand, der Fehler fiel also durch jede Überhang-Prüfung — `check-site.js`
+misst deshalb bei sechs Breiten die Breite des Kastens gegen den Platz daneben.
+
+**Unter 560 px wird aus dem Raster eine dichte Reihe** (`display: flex`,
+`flex-wrap: wrap`). Die 168 px Spaltenbreite sind die Breite des längsten Namens,
+`ChangeGrepPreference`, und lohnen sich, solange drei Spalten hineinpassen —
+dafür braucht es 3 × 168 + 2 × 6 = 516 px. Darunter blieben zwei Spalten übrig
+und „Page" säße allein in einer 168-px-Zelle. Gemessen: 19 Blasen auf 4 Zeilen
+statt auf 10.
+
+### Ein Hinweis aus Adobes Migrationsanleitung
+
+An `Application.scriptArgs` (unter UXP `script.args`), nur im UXP-Modus
+sichtbar. `Application.activeScript` braucht keinen Hinweis: die
+Migrationsanleitung nennt einen Pfad-String, gemessen ist in InDesign 2026
+aber ein `Promise<File>` (indesign-uxp-types) — und genau das zeigt die
+allgemeine Regel für Dateiwerte.
+
+### Was unter UXP wegfällt
+
+**Ein `File` als Event-Handler gibt es dort nicht.** Betrifft
+`addEventListener`, `removeEventListener` und `EventListeners.add` — 832
+Parameter. Im UXP-Modus verschwindet die Alternative aus der Typangabe,
+**samt Trennstrich**: sonst begänne die Zeile mit einem einsamen `|`.
+`typeList()` packt dafür den Typ und den angrenzenden Strich in einen
+gemeinsamen `data-uxp="hide"`-Knoten.
+
+ oder
+  `XML`), eigener Abschnitt in `uxp.md`. Die Member bleiben auf der
+  Klassenseite sichtbar. Eine Property, die auf die Klasse zeigt, braucht
+  einen eigenen Eintrag unter `members`.
+
+Die Liste ist leer, bis InDesign 2027 geprüft ist (`prerelease/`).
 
 ### Kern-JavaScript unter UXP
 

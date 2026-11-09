@@ -529,6 +529,7 @@ function markdown(c, ctx) {
       L.push('| `' + (p.st || c.enum ? c.n + '.' : '') + p.n + '` | ' +
         cell(typed(p, rt.member(c.n, 'p', p))) +
         (p.v ? ' = `' + mdEsc(p.v) + '`' : '') + ' | ' + p.rw + ' | ' + mdEsc(p.d) +
+        (rt.gone(c.n, p.n) ? ' _ExtendScript only — not available in UXP._' : '') +
         mdNotes(rt.memberNotes(c.n, p.n)) + ' |');
     L.push('');
   }
@@ -536,7 +537,8 @@ function markdown(c, ctx) {
     L.push('## Events', '');
     L.push('| Name | Description |');
     L.push('| --- | --- |');
-    for (const e of c.ev) L.push('| `' + c.n + '.' + e.n + '` | ' + mdEsc(e.d) + ' |');
+    for (const e of c.ev) L.push('| `' + c.n + '.' + e.n + '` | ' + mdEsc(e.d) +
+      (rt.gone(c.n, e.n) ? ' _ExtendScript only — not available in UXP._' : '') + ' |');
     L.push('');
   }
   if (c.m.length) {
@@ -619,8 +621,10 @@ function apiJson(target, classes, ctx) {
       if (c.sup) o.extends = c.sup;
       const el = elementOf(c);
       if (el) o.elementType = el;
-      o.properties = c.p.map(p => mem(p, rt.member(c.n, 'p', p), rt.memberNotes(c.n, p.n)));
-      o.events = c.ev.map(e => ({ name: e.n, description: e.d || '' }));
+      o.properties = c.p.map(p => Object.assign(mem(p, rt.member(c.n, 'p', p), rt.memberNotes(c.n, p.n)),
+        rt.gone(c.n, p.n) ? { uxp: { available: false } } : {}));
+      o.events = c.ev.map(e => Object.assign({ name: e.n, description: e.d || '' },
+        rt.gone(c.n, e.n) ? { uxp: { available: false } } : {}));
       o.methods = c.m.map(m => {
         const gone = rt.member(c.n, 'm', m);
         const ret = rt.member(c.n, 'r', m);
@@ -659,8 +663,12 @@ function uxpGuide(t, classes, rt, kindOf) {
   const promised = [], stringOnly = [], gone = [];
   let index = 0;
   const promiseOf = ux => '`' + ux.promise.map(n => 'Promise<' + n + '>').join(' | ') + '`';
+  const goneClasses = classes.filter(c => rt.esOnly(c.n)).map(c => c.n);
   for (const c of classes) {
+    for (const x of [...c.p, ...c.ev])
+      if (rt.gone(c.n, x.n)) gone.push('`' + c.n + '.' + x.n + '`');
     for (const p of c.p) {
+      if (rt.gone(c.n, p.n)) continue;
       const ux = rt.member(c.n, 'p', p);
       if (!ux) continue;
       const row = '`' + c.n + '.' + p.n + '`';
@@ -797,7 +805,16 @@ function uxpGuide(t, classes, rt, kindOf) {
     for (const r of stringOnly) L.push('- ' + r);
     L.push('');
   }
-  L.push('## Methods that do not exist under UXP');
+  if (goneClasses.length) {
+    L.push('## Objects that do not exist under UXP');
+    L.push('');
+    L.push('In the object model, but `require("indesign")` does not export them. ' +
+      'ExtendScript only.');
+    L.push('');
+    for (const n of goneClasses) L.push('- ' + page(n));
+    L.push('');
+  }
+  L.push('## Members that do not exist under UXP');
   L.push('');
   L.push('- `[]` — the index accessor on ' + index + ' collections. Use `item(index)`.');
   for (const r of gone) L.push('- ' + r);

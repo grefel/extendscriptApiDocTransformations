@@ -38,6 +38,19 @@ const MDN_CLASSES = new Set(['Array', 'Boolean', 'Date', 'Error', 'Function',
 const NO_UXP = new Set(['$', 'Namespace', 'QName', 'Reflection', 'ReflectionInfo',
   'Socket', 'UnitValue', 'XML', 'XMLList', 'global']);
 
+/* Produktklassen und -member, die Adobes Export ohne Einschränkung führt, die
+   es unter UXP aber nicht gibt: require('indesign') exportiert die Klasse
+   nicht, der Member ist dort undefined. Eintragen erst, wenn ein Fall in
+   build/live/cases.js es in beiden Laufzeiten belegt.
+     classes  Klassenname → { products, live }
+     members  'Klasse.member' → { products, live } — Property, Methode oder Event
+   products wie in notes.js; live nennt die ID des Falls in build/live/.
+   Eine Klasse bekommt oben auf ihrer Seite einen Hinweis, ihre Members
+   bleiben dort sichtbar; Verweise auf sie werden unter UXP abgeschaltet.
+   Eine Property, die auf sie zeigt (Document.genaiModels), braucht einen
+   eigenen Eintrag unter members. */
+const ES_ONLY = { classes: {}, members: {} };
+
 /* Ein File als Event-Handler gibt es unter UXP nicht — dort ist es immer eine
    Funktion. app.doScript() bleibt unberuehrt: es fuehrt eine
    ExtendScript-Datei auch unter UXP aus. */
@@ -57,6 +70,9 @@ function forTarget(target, isCore) {
      allein UXP betreffen, fallen dort weg. */
   const shown = n => fits(n) && (on || !n.runtime || n.runtime === 'es');
   const strip = n => ({ runtime: n.runtime || null, text: n.text });
+  const esOnlyClass = n => on && !!ES_ONLY.classes[n] && fits(ES_ONLY.classes[n]);
+  const esOnlyMember = (cls, n) =>
+    on && !!ES_ONLY.members[cls + '.' + n] && fits(ES_ONLY.members[cls + '.' + n]);
 
   /* Typnamen, die als Wert zurueckkommen. Unter UXP ist ein File oder Folder
      dort ein Promise auf einen localFileSystem-Eintrag. Steht String
@@ -71,9 +87,11 @@ function forTarget(target, isCore) {
   return {
     on,
 
-    /* Ziel eines Kern-Verweises unter UXP: { href } fuer ein anderes Ziel,
-       { off: true }, wenn es die Klasse dort nicht gibt, sonst null. */
+    /* Ziel eines Typverweises unter UXP: { href } fuer ein anderes Ziel,
+       { off: true }, wenn es die Klasse dort nicht gibt, sonst null.
+       Betrifft die Kernklassen und die Produktklassen aus ES_ONLY. */
     coreLink(n) {
+      if (esOnlyClass(n)) return { off: true };
       if (!on || !isCore(n)) return null;
       if (UXP_DOCS[n]) return { href: UXP_DOCS[n] };
       if (MDN_CLASSES.has(n)) return { href: MDN + n };
@@ -92,16 +110,29 @@ function forTarget(target, isCore) {
       if (!on) return null;
       if (kind === 'm')
         /* [] ist der Index-Zugriff auf Collections, den UXP nicht kennt. */
-        return x.n === '[]' || x.uxp === false ? { available: false } : null;
+        return x.n === '[]' || x.uxp === false || esOnlyMember(cls, x.n) ? { available: false } : null;
       if (kind === 'p' || kind === 'r') return valueTypes(kind === 'p' ? x.t : x.r);
       if (kind === 'a' && isHandler(cls, method, x.n) && (x.t || []).includes('File'))
         return { promise: [], hide: ['File'] };
       return null;
     },
 
+    /* Property oder Event, das es unter UXP nicht gibt (ES_ONLY). Methoden
+       fragt member(cls, 'm', …) ab. */
+    gone(cls, name) {
+      return esOnlyMember(cls, name);
+    },
+
+    /* Klasse, die es unter UXP nicht gibt (ES_ONLY). */
+    esOnly(cls) {
+      return esOnlyClass(cls);
+    },
+
     /* Hinweise am Objekt und an einem Member, je { runtime, text }. */
     notes(cls, kind) {
       const out = [];
+      if (esOnlyClass(cls)) out.push({ runtime: 'uxp', text: 'Not available in UXP — ' +
+        'require("indesign") does not export this object. ExtendScript only.' });
       const n = notes.byName[cls];
       if (n && shown(n)) out.push(strip(n));
       for (const k of notes.byKind) if (k.kind === kind && shown(k)) out.push(strip(k));
@@ -113,4 +144,4 @@ function forTarget(target, isCore) {
   };
 }
 
-module.exports = { forTarget, UXP_DOCS, MDN, MDN_CLASSES, NO_UXP };
+module.exports = { forTarget, UXP_DOCS, MDN, MDN_CLASSES, NO_UXP, ES_ONLY };

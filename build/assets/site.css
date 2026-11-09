@@ -2382,3 +2382,25 @@ h3.wnobj {
   font: 600 14px var(--mono)
 }
 
+/* Highlights: von Hand gepflegt (build/highlights.js), je Neuerung ein Block. */
+.wnhl {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px
+}
+
+.wnhl h3 {
+  margin: 0;
+  font: 600 14px var(--sans)
+}
+
+.wnhl p {
+  margin: 4px 0 0
+}
+
+.wnhl .refs {
+  font: 12.5px var(--mono);
+  overflow-wrap: anywhere
+}

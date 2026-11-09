@@ -9,8 +9,9 @@
     "build": "node build/build.js",
     "intake": "node build/intake.js",
     "check": "node build/check-site.js",
-    "serve": "node build/serve.js",
-    "check:types": "node build/check-types.js"
+    "check:types": "node build/check-types.js",
+    "live": "node build/live/run.js",
+    "serve": "node build/serve.js"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.9.12",

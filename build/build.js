@@ -28,6 +28,7 @@ const notes = require('./notes');
 const { createZip } = require('./zip');
 const legacy = require('./archive');
 const whatsnew = require('./whatsnew');
+const highlights = require('./highlights');
 
 const ROOT = path.join(__dirname, '..');
 const DRYRUN = process.env.PRODUCTS;
@@ -106,7 +107,8 @@ const targets = [
     uxp: m.product.uxp, refcard: m.product.refcard, server: !!m.product.server,
     kind: 'Product',
     data: subset(m.data, 'p', m.data.version),
-    prev: m.prev ? subset(m.prev, 'p', m.prev.version) : null
+    prev: m.prev ? subset(m.prev, 'p', m.prev.version) : null,
+    versionKey: m.product.versions[0].key
   })),
   /* Beide Bibliotheken gibt es nur unter ExtendScript — UXP nutzt eine andere
      Engine und kennt weder $ und File noch ScriptUI. */
@@ -214,10 +216,14 @@ for (const t of targets) {
   /* Änderungen gegenüber versions[1] (products.js), nur wenn es sie gibt. */
   if (t.prev) {
     const w = whatsnew.diff(t.prev, t.data);
-    t.whatsnew = { w, from: splitVersion(t.prev.version), to: splitVersion(t.data.version) };
+    /* Highlights von Hand (build/highlights.js), je slug und key der neuen Version. */
+    const hl = whatsnew.resolveHighlights((highlights[t.slug] || {})[t.versionKey], t.data.classes);
+    t.whatsnew = { w, from: splitVersion(t.prev.version), to: splitVersion(t.data.version), highlights: hl.items };
     console.log('whatsnew ' + t.slug.padEnd(16) + t.whatsnew.from.name + ' → ' + t.whatsnew.to.name + ': ' +
       (w.empty ? 'keine Änderungen' : w.counts.added + ' neue Objekte, ' + w.counts.changes + ' Änderungen, ' +
-        w.counts.breaking + ' brechen Skripte'));
+        w.counts.breaking + ' brechen Skripte') + ', ' + hl.items.length + ' Highlights');
+    for (const ref of hl.missing)
+      console.warn('warnung  ' + t.slug + ': Highlight-Verweis ' + ref + ' gibt es in ' + t.versionKey + ' nicht');
   }
   const r = make(t.data, d, { target: t, targets, resolve: resolverFor(t), rt, whatsnew: t.whatsnew });
 

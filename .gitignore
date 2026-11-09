@@ -55,6 +55,9 @@ design/api-data.js
 # Adobe-Quell-XMLs samt archive/ (nicht weiterverteilbar)
 sourceXML/
 
+# Vorabinformationen (Prerelease, Adobe Confidential) bis zum Release
+prerelease/
+
 # Generierte Website und Node-Abhaengigkeiten
 site/
 node_modules/

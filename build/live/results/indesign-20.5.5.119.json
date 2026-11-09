@@ -1,0 +1,447 @@
+{
+  "indesign": "20.5.5.119",
+  "name": "Adobe InDesign",
+  "progId": "InDesign.Application.2025",
+  "date": "2026-11-09T10:18:01.319Z",
+  "node": "v24.11.1",
+  "partial": false,
+  "summary": {
+    "PASS": 40,
+    "FAIL": 1,
+    "ERROR": 0,
+    "n/a": 0,
+    "INFO": 0
+  },
+  "notes": [],
+  "cases": [
+    {
+      "id": "xmlelements-itembyname",
+      "title": "XMLElements.itemByName() works in ExtendScript, not in UXP",
+      "where": "additions.js methods.XMLElements itemByName (uxp: false); notes.js byName.XMLElements",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "valid": true,
+          "tag": "live"
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "type": "undefined",
+          "threw": "root.xmlElements.itemByName is not a function",
+          "xpath": 1,
+          "xpathTag": "live"
+        }
+      }
+    },
+    {
+      "id": "scriptargs-undefined-uxp",
+      "title": "app.scriptArgs is undefined in UXP",
+      "where": "notes.js byName.ScriptArg, byMember Application.scriptArgs; agents.js uxp.md",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "type": "object",
+          "cls": "ScriptArg"
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "type": "undefined",
+          "argsIsArray": true
+        }
+      }
+    },
+    {
+      "id": "filepath-application",
+      "title": "Application.filePath is a Folder, not a File",
+      "where": "additions.js types Application.filePath; runtime.js valueTypes (Promise unter UXP)",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "instanceofFolder": true,
+          "ctorFolder": true,
+          "instanceofFile": false
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "promise": true,
+          "isFolder": true,
+          "isFile": false
+        }
+      }
+    },
+    {
+      "id": "filepath-document",
+      "title": "Document.filePath is a Folder, not a File",
+      "where": "additions.js types Document.filePath; agents.js uxp.md (await doc.fullName, Passing a file: path string)",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "instanceofFolder": true,
+          "ctorFolder": true,
+          "instanceofFile": false
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "promise": true,
+          "isFolder": true,
+          "isFile": false,
+          "fullNamePromise": true,
+          "fullNameIsFile": true
+        }
+      }
+    },
+    {
+      "id": "filepath-book",
+      "title": "Book.filePath is a Folder, not a File",
+      "where": "additions.js types Book.filePath; runtime.js valueTypes (Promise unter UXP)",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "instanceofFolder": true,
+          "ctorFolder": true,
+          "instanceofFile": false
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "promise": true,
+          "isFolder": true,
+          "isFile": false
+        }
+      }
+    },
+    {
+      "id": "filepath-bookcontent",
+      "title": "BookContent.filePath is a Folder, not a File",
+      "where": "additions.js types BookContent.filePath; runtime.js valueTypes (Promise unter UXP)",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "instanceofFolder": true,
+          "ctorFolder": true,
+          "instanceofFile": false
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "promise": true,
+          "isFolder": true,
+          "isFile": false
+        }
+      }
+    },
+    {
+      "id": "filepath-library",
+      "title": "Library.filePath is a Folder, not a File",
+      "where": "additions.js types Library.filePath; runtime.js valueTypes (Promise unter UXP)",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "instanceofFolder": true,
+          "ctorFolder": true,
+          "instanceofFile": false
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "promise": true,
+          "isFolder": true,
+          "isFile": false
+        }
+      }
+    },
+    {
+      "id": "temporaryfolder",
+      "title": "GeneralPreference.temporaryFolder is a Folder, not a File",
+      "where": "additions.js types GeneralPreference.temporaryFolder; runtime.js valueTypes (Promise unter UXP)",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "instanceofFolder": true,
+          "ctorFolder": true,
+          "instanceofFile": false
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "promise": true,
+          "isFolder": true,
+          "isFile": false
+        }
+      }
+    },
+    {
+      "id": "scriptsfolder",
+      "title": "ScriptPreference.scriptsFolder is a Folder, not a File",
+      "where": "additions.js types ScriptPreference.scriptsFolder; runtime.js valueTypes (Promise unter UXP)",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "instanceofFolder": true,
+          "ctorFolder": true,
+          "instanceofFile": false
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "promise": true,
+          "isFolder": true,
+          "isFile": false
+        }
+      }
+    },
+    {
+      "id": "string-or-file-is-string-uxp",
+      "title": "Link.filePath (String | File) is a plain string in UXP",
+      "where": "runtime.js valueTypes (String | File → String); agents.js uxp.md „String or File: only the String under UXP“",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "type": "string",
+          "isFile": false,
+          "endsWith": true
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "type": "string",
+          "promise": false,
+          "endsWith": true
+        }
+      }
+    },
+    {
+      "id": "doscript-es-child",
+      "title": "doScript() runs an ExtendScript child: typed arguments, last expression returned",
+      "where": "notes.js byMember Application.doScript (es und uxp); agents.js uxp.md",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "top": "last:boolean,number,5",
+          "inFunction": "number,3"
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": "last:boolean,number,5"
+      }
+    },
+    {
+      "id": "doscript-uxp-child",
+      "title": "doScript() runs a UXP child: string arguments, setResult() returned",
+      "where": "notes.js byMember Application.doScript (uxp); agents.js uxp.md; render.js runtimes",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "withResult": "[\"TRUE\",\"5\",\"x\"]",
+          "lastOnly": "undefined"
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "withResult": "[\"TRUE\",\"5\",\"x\"]",
+          "lastOnly": "undefined"
+        }
+      }
+    },
+    {
+      "id": "collection-index-uxp",
+      "title": "Collection index access [] does not exist in UXP",
+      "where": "runtime.js member() kind m ([] → available: false); agents.js uxp.md; render.js runtimes",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "index": true,
+          "item": true
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "index": "undefined",
+          "item": true
+        }
+      }
+    },
+    {
+      "id": "enum-equals-uxp",
+      "title": "Enumerations compare with equals() in UXP, == in ExtendScript",
+      "where": "notes.js byKind Enumeration; examples.js HELLO_JSX/HELLO_IDJS; agents.js uxp.md",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "eq": true,
+          "strict": true
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "eq": false,
+          "strict": false,
+          "equals": true,
+          "notEquals": false
+        }
+      }
+    },
+    {
+      "id": "dom-equals-uxp",
+      "title": "DOM objects compare with equals() in UXP, == in ExtendScript",
+      "where": "agents.js uxp.md „Compare enumerations, DOM objects“; notes.js byKind Enumeration",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "eq": true
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "eq": false,
+          "strict": false,
+          "equals": true
+        }
+      }
+    },
+    {
+      "id": "hasownproperty-uxp",
+      "title": "hasOwnProperty() is false on DOM objects in UXP; \"in\" works",
+      "where": "render.js runtimes (Property check); agents.js uxp.md; examples.js-Kommentar",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "own": true,
+          "inOp": true,
+          "ownMissing": false
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "own": false,
+          "hasOwn": false,
+          "inOp": true,
+          "inMissing": false
+        }
+      }
+    },
+    {
+      "id": "extendscript-only-globals",
+      "title": "$, E4X, ScriptUI and Adobe extras do not exist in UXP",
+      "where": "runtime.js NO_UXP; agents.js uxp.md „Not available“; render.js runtimes",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "$": "object",
+          "Namespace": "function",
+          "QName": "function",
+          "Reflection": "function",
+          "ReflectionInfo": "function",
+          "Socket": "function",
+          "UnitValue": "function",
+          "XML": "function",
+          "XMLList": "function",
+          "ScriptUI": "function"
+        }
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "$": "undefined",
+          "Namespace": "undefined",
+          "QName": "undefined",
+          "Reflection": "undefined",
+          "ReflectionInfo": "undefined",
+          "Socket": "undefined",
+          "UnitValue": "undefined",
+          "XML": "undefined",
+          "XMLList": "undefined",
+          "ScriptUI": "undefined"
+        }
+      }
+    },
+    {
+      "id": "event-handler-file",
+      "title": "Event handler: function or File in ExtendScript, function only in UXP",
+      "where": "runtime.js isHandler (File als Handler unter UXP ausgeblendet); agents.js uxp.md",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "fileHandler": true,
+          "fired": true
+        }
+      },
+      "uxp": {
+        "status": "FAIL",
+        "value": {
+          "functionHandler": true,
+          "pathHandler": true,
+          "functionFired": true,
+          "pathFired": true
+        },
+        "reason": "Pfad-String als Handler angenommen und ausgeführt"
+      }
+    },
+    {
+      "id": "uxp-save-file-entry",
+      "title": "UXP accepts a localFileSystem File entry where a file is passed",
+      "where": "agents.js uxp.md „Passing a file“",
+      "es": {
+        "status": "—"
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": {
+          "saved": true,
+          "isFile": true,
+          "path": true
+        }
+      }
+    },
+    {
+      "id": "example-hello",
+      "title": "examples.js Hello World runs in both engines",
+      "where": "examples.js HELLO_JSX, HELLO_IDJS; render.js runtimes; check-site.js",
+      "es": {
+        "status": "PASS",
+        "value": [
+          "centered"
+        ]
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": [
+          "centered"
+        ]
+      }
+    },
+    {
+      "id": "example-server",
+      "title": "examples.js server scripts take the argument and return the result",
+      "where": "examples.js SERVER_JSX, SERVER_IDJS; agents.js uxp.md (InDesign Server)",
+      "es": {
+        "status": "PASS",
+        "value": "Hello Live"
+      },
+      "uxp": {
+        "status": "PASS",
+        "value": "Hello Live"
+      }
+    }
+  ]
+}

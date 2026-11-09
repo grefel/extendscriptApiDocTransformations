@@ -274,6 +274,26 @@ function phrase(c) {
   }
 }
 
+/* Highlights aus build/highlights.js gegen die Klassen der neuen Version
+   auflösen. Jeder ref wird { label, cls, anchor }; was es nicht gibt, landet
+   in missing (build.js warnt). */
+function resolveHighlights(list, classes) {
+  const byName = new Map(classes.map(c => [c.n, c]));
+  const missing = [];
+  const items = (list || []).map(h => ({
+    title: h.title, text: h.text,
+    refs: (h.refs || []).map(ref => {
+      const [cls, member] = ref.split('.');
+      const c = byName.get(cls);
+      const kind = !c ? null : !member ? '' : c.p.some(x => x.n === member) ? 'p-'
+        : c.ev.some(x => x.n === member) ? 'e-' : c.m.some(x => x.n === member) ? 'm-' : null;
+      if (kind === null) { missing.push(ref); return null; }
+      return { label: ref + (kind === 'm-' ? '()' : ''), cls, anchor: kind ? kind + member : '' };
+    }).filter(Boolean)
+  }));
+  return { items, missing };
+}
+
 /* Sprungziel auf der Objektseite (render.js: p-, e-, m-). */
 const anchorOf = c => c.kind === 'object' ? '' :
   (c.kind === 'event' ? 'e-' : c.kind === 'method' ? 'm-' : 'p-') + c.member;
@@ -305,6 +325,17 @@ function markdown(w, meta) {
       w.counts.added + ' new objects, ' + w.counts.changes + ' changes on ' + w.counts.objects + ' objects, ' +
       w.counts.breaking + ' that can break existing scripts.') +
     ' Generated from Adobe’s object model exports.');
+  for (const h of meta.highlights || []) {
+    if (h === meta.highlights[0]) { L.push(''); L.push('## Highlights'); }
+    L.push('');
+    L.push('### ' + h.title);
+    L.push('');
+    L.push(h.text);
+    if (h.refs.length) {
+      L.push('');
+      L.push(h.refs.map(r => '[' + r.label + '](' + md(r.cls) + ')').join(', '));
+    }
+  }
   if (w.empty) return L.join('\n') + '\n';
   L.push('');
   L.push('## Breaking');
@@ -350,4 +381,4 @@ function markdown(w, meta) {
   return L.join('\n') + '\n';
 }
 
-module.exports = { diff, markdown, phrase, anchorOf, typeOf, MINOR_HINT };
+module.exports = { diff, markdown, phrase, anchorOf, typeOf, resolveHighlights, MINOR_HINT };
