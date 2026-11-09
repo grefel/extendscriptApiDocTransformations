@@ -8,7 +8,8 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const SITE = process.env.OUT_DIR || path.join(ROOT, 'site');
+/* resolve, damit der Vergleich unten auch bei OUT_DIR mit / unter Windows greift. */
+const SITE = path.resolve(process.env.OUT_DIR || path.join(ROOT, 'site'));
 const PORT = Number(process.env.PORT) || 8080;
 
 const TYPES = {

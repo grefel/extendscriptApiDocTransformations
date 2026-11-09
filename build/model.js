@@ -173,6 +173,19 @@ function classModel(cd, origin, typeFixes) {
 
   o.m = methods.map(([m, onClass]) => method(m, onClass, isSui)).sort(byName);
 
+  /* Falsche Rückgabetypen, Schlüssel "Klasse.methode" — wie types, nur am
+     Rückgabewert. Gilt für jede Überladung mit genau dem from-Typ. */
+  if (origin === 'p') for (const m of o.m) {
+    const key = name + '.' + m.n + '()';
+    const corr = (additions.returns || {})[name + '.' + m.n];
+    if (!corr) continue;
+    if (String(m.r) === String(corr.from)) {
+      m.r = corr.r.slice();
+      typeFixes.applied.push(key);
+    } else if (String(m.r) === String(corr.r)) typeFixes.applied.push(key);
+    else typeFixes.missed.push({ key, found: m.r, from: corr.from });
+  }
+
   /* Member, die Adobes Export vergisst — siehe build/additions.js. Nur wenn
      sie nicht doch da sind, damit ein spaeterer Adobe-Fix nichts verdoppelt. */
   const extra = (additions.methods[name] || []).filter(x => !o.m.some(m => m.n === x.n));

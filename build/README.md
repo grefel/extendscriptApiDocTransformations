@@ -983,6 +983,10 @@ jedem Objekt, wo er nur Rauschen wäre.
 einen `Folder` — die Datei selbst steht in `fullName`. Gilt in beiden Laufzeiten; im UXP-Modus zeigt der Verweis
 entsprechend auf Adobes `folder`-Seite statt auf `file`.
 
+**Rückgabetypen** korrigiert `returns` in `additions.js` nach demselben
+Muster, Schlüssel `Klasse.methode`, Feld `r` statt `t`. Beide zählen in die
+Bauzeile `typfix n/m`; was nicht mehr greift, nennt eine Warnung.
+
 Jeder Eintrag nennt mit `from` die falsche Angabe und greift nur, solange
 genau die dasteht. Schreibt Adobe den Typ eines Tages richtig oder anders,
 greift die Korrektur nicht mehr, statt eine dann falsche zu erzwingen.

@@ -85,5 +85,11 @@ module.exports = {
         'Beschreibung im Export sagt selbst "folder". Betrifft InDesign und ' +
         'InDesign Server, andere Produkte kennen die Klasse nicht.'
     }
-  }
+  },
+
+  /* Falsche Rückgabetypen von Methoden, Schlüssel "Klasse.methode".
+     from und Absicherung wie bei types; r ist der richtige Rückgabetyp.
+     Erst eintragen, wenn ein Fall in build/live/ den Typ belegt. Steht eine
+     Methode an vielen Klassen, die Einträge per Schleife erzeugen. */
+  returns: {}
 };
