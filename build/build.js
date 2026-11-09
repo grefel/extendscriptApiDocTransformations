@@ -27,6 +27,7 @@ const runtime = require('./runtime');
 const notes = require('./notes');
 const { createZip } = require('./zip');
 const legacy = require('./archive');
+const whatsnew = require('./whatsnew');
 
 const ROOT = path.join(__dirname, '..');
 const DRYRUN = process.env.PRODUCTS;
@@ -66,8 +67,15 @@ for (const [f, want] of [[JS_XML, 'javascript'], [SUI_XML, 'scriptui']]) {
   if (!ok) { console.error('fehler   ' + path.relative(ROOT, f) + ' fehlt oder ist nicht ' + want); process.exit(2); }
 }
 const models = [];
+/* versions[1] ist die Vorversion: Grundlage für whatsnew.html. Sie läuft
+   durch dasselbe build(), damit nur Adobes Änderungen als Unterschied
+   erscheinen. */
 for (const p of products)
-  models.push({ product: p, data: build({ product: p.versions[0].file, javascript: JS_XML, scriptui: SUI_XML }) });
+  models.push({
+    product: p,
+    data: build({ product: p.versions[0].file, javascript: JS_XML, scriptui: SUI_XML }),
+    prev: p.versions[1] ? build({ product: p.versions[1].file, javascript: JS_XML, scriptui: SUI_XML }) : null
+  });
 console.log('modelle  ' + models.length + ' Produkte in ' + (Date.now() - started) + ' ms');
 
 /* Typkorrekturen aus additions.js: Nur Produkte, die die Properties kennen,
@@ -97,7 +105,8 @@ const targets = [
     slug: m.product.slug, label: m.product.label, note: m.product.note,
     uxp: m.product.uxp, refcard: m.product.refcard, server: !!m.product.server,
     kind: 'Product',
-    data: subset(m.data, 'p', m.data.version)
+    data: subset(m.data, 'p', m.data.version),
+    prev: m.prev ? subset(m.prev, 'p', m.prev.version) : null
   })),
   /* Beide Bibliotheken gibt es nur unter ExtendScript — UXP nutzt eine andere
      Engine und kennt weder $ und File noch ScriptUI. */
@@ -181,9 +190,11 @@ const keep = (t, rel, content) => {
    darin unterscheiden, wuerden sich ueberschreiben — InDesign hat eine Klasse
    namens Changes, ein Topic changes.html loeschte sie einmal.
    index.html ist vom Generator belegt, uxp.html steht fuer den Leitfaden
-   uxp.md — jede Seite hat einen Markdown-Zwilling gleichen Namens. */
+   uxp.md, whatsnew.html für die Änderungen gegenüber der Vorversion —
+   jede Seite hat einen Markdown-Zwilling gleichen Namens. */
 function assertNoCollisions(t) {
-  const seen = new Map([['index.html', '(reserviert)'], ['uxp.html', '(Leitfaden uxp.md)']]);
+  const seen = new Map([['index.html', '(reserviert)'], ['uxp.html', '(Leitfaden uxp.md)'],
+    ['whatsnew.html', '(Änderungen, whatsnew.md)']]);
   for (const c of t.data.classes) {
     const key = pageOf(c.n).toLowerCase();
     if (seen.has(key)) {
@@ -200,10 +211,22 @@ for (const t of targets) {
   /* Was unter UXP anders ist — eine Quelle fuer Seite, Markdown und api.json.
      Kern-Verweis heisst: der Name steht nicht im Ziel, aber in Core JavaScript. */
   const rt = runtime.forTarget(t, n => !t.names.has(n) && js.names.has(n));
-  const r = make(t.data, d, { target: t, targets, resolve: resolverFor(t), rt });
+  /* Änderungen gegenüber versions[1] (products.js), nur wenn es sie gibt. */
+  if (t.prev) {
+    const w = whatsnew.diff(t.prev, t.data);
+    t.whatsnew = { w, from: splitVersion(t.prev.version), to: splitVersion(t.data.version) };
+    console.log('whatsnew ' + t.slug.padEnd(16) + t.whatsnew.from.name + ' → ' + t.whatsnew.to.name + ': ' +
+      (w.empty ? 'keine Änderungen' : w.counts.added + ' neue Objekte, ' + w.counts.changes + ' Änderungen, ' +
+        w.counts.breaking + ' brechen Skripte'));
+  }
+  const r = make(t.data, d, { target: t, targets, resolve: resolverFor(t), rt, whatsnew: t.whatsnew });
 
   for (const c of t.data.classes) { write(t.slug + '/' + pageOf(c.n), r.page(c)); pages++; }
   write(t.slug + '/index.html', r.indexPage()); pages++;
+  if (t.whatsnew) {
+    write(t.slug + '/whatsnew.html', r.whatsnewPage()); pages++;
+    keep(t, 'whatsnew.md', whatsnew.markdown(t.whatsnew.w, Object.assign({ label: t.label }, t.whatsnew)));
+  }
 
   write(t.slug + '/nav.js', 'window.__NAV=' + JSON.stringify(t.data.classes.map(c => [
     c.n, c.enum ? 2 : d.isCollection(c) ? 1 : 0,

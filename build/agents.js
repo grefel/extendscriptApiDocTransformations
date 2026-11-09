@@ -885,6 +885,10 @@ function llmsProduct(t, classes, kindOf) {
     'Large — page through it, do not paste it.' +
     (t.uxp ? ' `runtimes` lists ExtendScript and UXP; members that differ under UXP ' +
       'carry a `uxp` field.' : ''));
+  if (t.whatsnew)
+    L.push('- [whatsnew.md](' + BASE + t.slug + '/whatsnew.md): what changed since ' +
+      t.whatsnew.from.name + ' — new objects and members, and what can break existing ' +
+      'scripts. Read it before upgrading a script.');
   L.push('- [index.html](' + BASE + t.slug + '/index.html): every object, linked.');
   L.push('');
   L.push('## Objects');

@@ -8,6 +8,7 @@
 
 const shortcuts = require('./shortcuts');
 const examples = require('./examples');
+const whatsnew = require('./whatsnew');
 /* Syntaxfarben entstehen beim Bauen: die Seiten tragen fertige <span>s,
    laden kein Skript dafuer und sehen ohne JavaScript und offline gleich aus.
    Nur der Kern mit den zwei Sprachen, die hier vorkommen. */
@@ -369,9 +370,9 @@ function make(data, d, ctx) {
       ['Collections', own.filter(c => !c.enum && isCollection(c))],
       ['Enumerations', own.filter(c => c.enum)]
     ].filter(([, l]) => l.length);
-    const v = splitVersion(data.version);
     let h = `<div class="kind">${esc(target.kind || 'Reference')}</div><h1>${esc(target.label)}</h1>
-      <p class="lede">${esc(data.version)}${v.build ? '' : ''}. ${own.length} entries.</p>`;
+      <p class="lede">${esc(data.version)}. ${own.length} entries.${ctx.whatsnew
+        ? ` <a class="wnlink" href="whatsnew.html">What’s new since ${esc(ctx.whatsnew.from.name)} →</a>` : ''}</p>`;
     if (target.note) h += `<p class="note">${esc(target.note)}</p>`;
 
     /* Die Kurzreferenz auf einer Seite. Nur bei den beiden InDesign-Zielen —
@@ -530,7 +531,93 @@ function make(data, d, ctx) {
       body: h, current: null, target, targets, data, isIndex: true });
   }
 
-  return { page, indexPage, pageOf };
+  /* whatsnew.html — Gliederung aus build/whatsnew.js. Typen laufen durch
+     typeList(), damit sie verlinkt sind und der UXP-Umschalter greift. */
+  function whatsnewPage() {
+    const { w, from, to } = ctx.whatsnew;
+    const ver = v => esc(v.name) + (v.build ? ' (' + esc(v.build) + ')' : '');
+    const { phrase, anchorOf } = whatsnew;
+    const to1 = (n, anchor, text) =>
+      `<a href="${esc(pageOf(n))}${anchor ? '#' + esc(anchor) : ''}">${text}</a>`;
+    const typeOfAdded = c => {
+      const x = c.m, cls = c.objects[0];
+      if (c.kind === 'property') return ' ' + typeList(x.t, x.arr, rt.member(cls, 'p', x)) +
+        (x.rw === 'readonly' ? ' <span class="k">readonly</span>' : '');
+      if (c.kind === 'value') return x.v ? ` <span class="lit">= ${esc(x.v)}</span>` : '';
+      if (c.kind === 'method') return '<span class="k">(' +
+        x.a.map(a => esc(a.n) + (a.o ? '?' : '')).join(', ') + ')</span>' +
+        (x.r.length ? ' → ' + typeList(x.r, x.rarr, rt.member(cls, 'r', x)) : '');
+      return '';
+    };
+    const mark = c => c.op === 'added' ? ['added', '+'] : c.op === 'removed' ? ['removed', '−'] : ['chg', '~'];
+    /* Methoden, die es unter UXP nicht gibt ([]), verschwinden dort auch hier. */
+    const uxpHide = c => c.kind === 'method' && c.m && rt.member(c.objects[0], 'm', c.m) ? ' data-uxp="hide"' : '';
+
+    /* Eine Zeile je Änderung; an drei und mehr Objekten mit aufklappbarer
+       Liste. own: die Zeile steht schon unter der Überschrift ihres Objekts. */
+    const line = (c, own) => {
+      const [cl, op] = mark(c);
+      const anchor = c.op === 'removed' ? '' : anchorOf(c);
+      const name = esc(c.member || '') + (c.kind === 'method' ? '()' : '');
+      const what = c.op === 'added' ? typeOfAdded(c) : ' <span class="ph">' + esc(phrase(c)) + '</span>';
+      const kind = c.kind === 'object' ? '' : `<span class="k">${esc(c.kind)}</span> `;
+      let who;
+      if (own) who = c.kind === 'object' ? '' : to1(own, anchor, '<b>' + name + '</b>');
+      else if (c.objects.length < 3)
+        who = c.objects.map(o => to1(o, anchor, esc(o) + (c.member ? '.<b>' + name + '</b>' : ''))).join(', ');
+      else who = c.member ? '<b>' + name + '</b>' : '';
+      const list = !own && c.objects.length >= 3
+        ? `<details><summary>on ${c.objects.length} objects</summary>${
+          c.objects.map(o => to1(o, anchor, esc(o))).join(' · ')}</details>` : '';
+      return `<li class="${cl}${c.breaking ? ' brk' : ''}"${uxpHide(c)}><span class="op">${op}</span>${kind}${who}${what}${list}</li>`;
+    };
+
+    const n = w.counts;
+    let h = `<div class="kind">Changes</div><h1>What’s new in ${esc(to.name)}</h1>
+      <p class="lede">The scripting API of ${ver(to)} compared with ${ver(from)}. ${w.empty
+        ? 'No changes to the scripting API.'
+        : `${n.added} new objects, ${n.changes} changes on ${n.objects} objects, ${n.breaking} that can break existing scripts.`}
+      Generated from Adobe’s object model exports.</p>`;
+
+    if (!w.empty) {
+      const brk = w.removed.length + w.breaking.length;
+      h += `<section><h2 class="sechead" id="breaking">Breaking <b>${n.breaking}</b></h2>${brk
+        ? '<ul class="wn">' + w.removed.map(o =>
+          `<li class="removed brk"><span class="op">−</span><span class="k">${esc(o.kind)}</span> <b>${esc(o.n)}</b> <span class="ph">removed</span></li>`).join('') +
+          w.breaking.map(c => line(c)).join('') + '</ul>'
+        : '<p class="hint">Nothing removed or broken.</p>'}</section>`;
+
+      if (w.newObjects.length) {
+        h += `<section><h2 class="sechead" id="new-objects">New objects <b>${n.added}</b></h2><ul class="wn">`;
+        for (const o of w.newObjects)
+          h += `<li class="added"><span class="op">+</span><span class="k">${esc(o.kind)}</span> ${to1(o.n, '', '<b>' + esc(o.n) + '</b>')}${
+            o.collection ? ' · ' + to1(o.collection, '', esc(o.collection)) : ''} <span class="k">${o.members} ${o.members === 1 ? 'member' : 'members'}</span>${
+            o.holds.length ? `<details><summary>can hold ${o.holds.length} objects</summary>${
+              o.holds.map(x => to1(x, '', esc(x))).join(' · ')}</details>` : ''}</li>`;
+        h += '</ul></section>';
+      }
+      if (w.wide.length)
+        h += `<section><h2 class="sechead" id="many-objects">On many objects <b>${w.wide.length}</b></h2>
+          <p class="hint">Adobe lists inherited members on every object, so one addition shows up many times.</p>
+          <ul class="wn">${w.wide.map(c => line(c)).join('')}</ul></section>`;
+      if (w.byObject.length) {
+        h += `<section><h2 class="sechead" id="by-object">By object <b>${w.byObject.length}</b></h2>`;
+        for (const [cls, list] of w.byObject)
+          h += `<h3 class="wnobj" id="o-${esc(cls)}">${to1(cls, '', esc(cls))}</h3><ul class="wn">${
+            list.map(c => line(c, cls)).join('')}</ul>`;
+        h += '</section>';
+      }
+      if (w.minor.length)
+        h += `<section><h2 class="sechead" id="minor">Minor <b>${w.minor.length}</b></h2>
+          <p class="hint">${esc(whatsnew.MINOR_HINT)}</p>
+          <ul class="wn">${w.minor.map(c => line(c)).join('')}</ul></section>`;
+    }
+    return shell({ title: 'What’s new in ' + to.name, file: 'whatsnew.html',
+      description: 'Changes to the ' + target.label + ' scripting API from ' + from.name + ' to ' + to.name + '.',
+      body: h, current: null, target, targets, data, isIndex: false });
+  }
+
+  return { page, indexPage, pageOf, whatsnewPage };
 }
 
 /* Gemeinsames Seitengeruest. CSS und JS liegen eine Ebene hoeher, damit der
@@ -540,7 +627,7 @@ function make(data, d, ctx) {
    also unter zwei Adressen erreichbar. Die Links im Markup bleiben relativ und
    zeigen auf index.html, sonst liefe die Website nicht ueber file:// aus dem
    Offline-Archiv. */
-function shell({ title, description, body, current, target, targets, data, isIndex }) {
+function shell({ title, description, body, current, target, targets, data, isIndex, file }) {
   const v = splitVersion(data.version);
   /* Produktumschalter als <details>: funktioniert ohne JavaScript, ist per
      Tastatur bedienbar und braucht kein Skript zum Navigieren. */
@@ -561,7 +648,7 @@ function shell({ title, description, body, current, target, targets, data, isInd
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)} — ${esc(target.label)} API</title>
 <meta name="description" content="${esc(description).slice(0, 300)}">
-<link rel="canonical" href="${esc(BASE + target.slug + '/' + (isIndex ? '' : pageOf(current)))}">
+<link rel="canonical" href="${esc(BASE + target.slug + '/' + (isIndex ? '' : file || pageOf(current)))}">
 <link rel="stylesheet" href="../assets/site.css">
 <script>${THEME_BOOT}</script>
 </head>

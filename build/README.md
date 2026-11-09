@@ -836,8 +836,10 @@ Weitere Meldungen, die beim Versionswechsel zählen:
 `check-site.js` liest die Zahl der InDesign-Objekte aus der gebauten
 `indesign/api.json` statt sie fest zu erwarten.
 
-Bisher wird nur `versions[0]` gebaut. `versions[1]` ist die Vorversion,
-gedacht als Grundlage für „What's new" und den Versionsumschalter.
+Veröffentlicht wird nur `versions[0]`. `versions[1]` ist die Vorversion:
+Grundlage für `whatsnew.html` (nächster Abschnitt), später auch für den
+Versionsumschalter. Aus den alten XMLs im Archiv wird nichts veröffentlicht;
+die erste echte Vorversion ist 2026 (21.5.1.73) hinter 2027.
 
 **Probelauf:** `build/products-dryrun.js` stellt InDesign 2025 aus dem
 Archiv hinter 2026 — wie beim Release 2027 die 2026 hinter 2027.
@@ -847,6 +849,49 @@ PRODUCTS=build/products-dryrun.js OUT_DIR=<scratch>/site npm run build
 ```
 
 Mit `PRODUCTS` verlangt `build.js` ein `OUT_DIR` und packt kein `site.zip`.
+
+### What's new: `whatsnew.html`
+
+Nennt `products.js` für ein Produkt `versions[1]`, entsteht
+`<slug>/whatsnew.html` mit Markdown-Zwilling `whatsnew.md`, verlinkt aus
+der Übersichtsseite („What's new since InDesign 2026 →") und aus
+`llms.txt`. Ohne Vorversion gibt es die Seite nicht.
+
+`build/whatsnew.js` vergleicht die Produktklassen beider Versionen. Beide
+laufen durch dasselbe `model.build()` — Änderungen an `fixdom.js` oder
+`additions.js` erscheinen so nie als API-Änderung. Core JavaScript und
+ScriptUI bleiben außen vor, sie stammen aus denselben festen Dateien.
+
+**Gliederung:** Breaking (Entferntes, Typen, die Werte verlieren, readonly
+statt read/write, neue Pflicht- oder verschobene Parameter, geänderte
+Enum-Codes) — New objects — On many objects — By object — Minor
+(Parameter-Umbenennungen, reine Beschreibungsänderungen). Ohne Unterschiede
+steht nur „No changes to the scripting API" da.
+
+**Faltungen**, gemessen am Probelauf 20.0 → 21.5 (185 Rohänderungen → 151):
+
+- `parent`-Änderungen, die nur neue Objekte hinzufügen (34), fallen weg.
+  Das neue Objekt zeigt stattdessen „can hold N objects" aus
+  `derive().childrenOf`.
+- Dieselbe Änderung an drei und mehr Objekten wird eine Zeile mit
+  aufklappbarer Liste — Adobe führt geerbte Member flach an jeder Klasse
+  (`flexObjects` an 35 Objekten).
+- Beschreibungsänderungen zählen nur, wenn sich am Member sonst nichts
+  geändert hat; meist wiederholt der Text den neuen Typ (40 von 41).
+- Ein Bereich im Typnamen (`Unit(0-144points)` → `Unit(0-1000points)`)
+  ist eine Bereichs-, keine Typänderung.
+
+Typen laufen durch `typeList()` aus `render.js`, sind also verlinkt, und
+der UXP-Umschalter greift. Größe im Probelauf: 30 KB roh, 5 KB gzip.
+
+`check-site.js` prüft die Seite, wenn es sie gibt: Überschrift, Canonical,
+Link von der Übersicht, `whatsnew.md` im Manifest und in `llms.txt`, und
+dass jeder eigene Link auf eine vorhandene Seite samt Sprungziel zeigt.
+Ohne Vorversion meldet es `SKIP`; geprüft wird dann mit dem Probelauf.
+
+**Am Release-Tag:** Abschnitt Breaking Zeile für Zeile lesen und Auffälliges
+in der Roh-XML nachsehen. Eine Umbenennung erscheint als Entfernen plus
+Hinzufügen.
 
 ### Produktspezifische Fallstricke
 

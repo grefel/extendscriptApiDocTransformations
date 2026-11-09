@@ -2311,3 +2311,74 @@ ul.cards .note {
   font-size: 12.5px;
   margin: 10px 0 0
 }
+
+/* ---------- What's new (whatsnew.html) ----------
+   Listen statt Tabellen: nichts muss auf dem Telefon umgestellt werden.
+   Das Zeichen vorn (+ − ~) steht in eigener Spalte, umbrochene Zeilen
+   beginnen bündig hinter ihm. Lange Typlisten dürfen überall umbrechen. */
+.wnlink {
+  white-space: nowrap
+}
+
+ul.wn {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0
+}
+
+ul.wn > li {
+  position: relative;
+  padding: 5px 0 5px 22px;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+  line-height: 1.5
+}
+
+ul.wn .op {
+  position: absolute;
+  left: 2px;
+  font-family: var(--mono);
+  font-weight: 700
+}
+
+ul.wn li.added .op {
+  color: var(--accent)
+}
+
+ul.wn li.removed .op,
+ul.wn li.brk .op {
+  color: var(--ev)
+}
+
+ul.wn li.chg .op {
+  color: var(--warn)
+}
+
+ul.wn b {
+  font: 600 1em var(--mono)
+}
+
+ul.wn .k {
+  color: var(--dim);
+  font-size: 12px
+}
+
+ul.wn .ph {
+  color: var(--ink)
+}
+
+ul.wn details {
+  margin-top: 2px;
+  font-size: 12.5px
+}
+
+ul.wn summary {
+  color: var(--dim);
+  cursor: pointer
+}
+
+h3.wnobj {
+  margin: 18px 0 0;
+  font: 600 14px var(--mono)
+}
+

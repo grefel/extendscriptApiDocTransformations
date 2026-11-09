@@ -186,7 +186,7 @@ function classModel(cd, origin, typeFixes) {
 
 function parse(file) {
   return new DOMParser({ onError: () => {} })
-    .parseFromString(fs.readFileSync(file, 'utf8').replace(/^﻿/, ''), 'text/xml');
+    .parseFromString(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''), 'text/xml');
 }
 
 function classdefsIn(doc) {

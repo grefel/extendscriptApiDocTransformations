@@ -1508,10 +1508,49 @@ const check = (name, got, want) => {
     /__ZIP/.test(fs.readFileSync(path.join(SITE, 'index.html'), 'utf8')), false);
   /* Der Markdown-Zwilling liegt unter derselben URL wie die Seite — nur so
      kann ein Agent von einem gefundenen Link auf die guenstigere Fassung
-     schliessen. uxp.md ist der Leitfaden, kein Zwilling. */
+     schliessen. uxp.md ist der Leitfaden, whatsnew.md der Zwilling von
+     whatsnew.html — beide keine Objektseiten. */
   check('Markdown-Zwilling zu jeder Seite',
-    fs.readdirSync(path.join(SITE, 'indesign')).filter(f => f.endsWith('.md') && f !== 'uxp.md').length,
+    fs.readdirSync(path.join(SITE, 'indesign')).filter(f => f.endsWith('.md') && f !== 'uxp.md' && f !== 'whatsnew.md').length,
     ID_OBJECTS);
+
+  /* --- What's new ---
+     Gibt es nur, wenn products.js für InDesign eine Vorversion nennt — im
+     Probelauf (build/products-dryrun.js) immer. Jeder Link muss auf eine
+     vorhandene Seite und, mit Anker, auf ein vorhandenes Sprungziel zeigen. */
+  const WN = path.join(SITE, 'indesign/whatsnew.html');
+  if (!fs.existsSync(WN)) {
+    results.push('SKIP What’s new: keine Vorversion in products.js (Probelauf: build/products-dryrun.js)');
+  } else {
+    const wn = fs.readFileSync(WN, 'utf8');
+    const main = wn.slice(wn.indexOf('<div class="dmain">'), wn.indexOf('<footer>'));
+    check('What’s new: Überschrift', /<h1>What’s new in /.test(main), true);
+    check('What’s new: Canonical', /rel="canonical" href="[^"]*\/indesign\/whatsnew\.html"/.test(wn), true);
+    check('What’s new: verlinkt von der Übersicht',
+      /href="whatsnew\.html"/.test(fs.readFileSync(path.join(SITE, 'indesign/index.html'), 'utf8')), true);
+    const ids = new Map();
+    const idsOf = file => {
+      if (!ids.has(file)) ids.set(file, fs.existsSync(file)
+        ? new Set([...fs.readFileSync(file, 'utf8').matchAll(/ id="([^"]+)"/g)].map(m => m[1].replace(/&amp;/g, '&')))
+        : null);
+      return ids.get(file);
+    };
+    /* Nur eigene Seiten; MDN- und UXP-Verweise der Kerntypen zeigen nach außen. */
+    const links = [...main.matchAll(/(?<![-\w])href="([^"#]+)(?:#([^"]*))?"/g)]
+      .filter(m => !/^[a-z]+:/i.test(m[1]));
+    const broken = links.filter(([, file, anchor]) => {
+      const set = idsOf(path.join(SITE, 'indesign', file));
+      return !set || (anchor && !set.has(anchor.replace(/&amp;/g, '&')));
+    }).map(m => m[1] + (m[2] ? '#' + m[2] : ''));
+    check('What’s new: ' + links.length + ' Links, alle Ziele vorhanden', broken.slice(0, 3).join(' ') || 'ok', 'ok');
+    const man = JSON.parse(fs.readFileSync(path.join(SITE, 'manifest.json'), 'utf8'));
+    check('What’s new: whatsnew.md im Manifest',
+      man.targets.find(t => t.slug === 'indesign').files.some(x => x.path === 'indesign/whatsnew.md'), true);
+    check('What’s new: in llms.txt genannt',
+      /whatsnew\.md/.test(fs.readFileSync(path.join(SITE, 'indesign/llms.txt'), 'utf8')), true);
+    check('What’s new: Markdown-Zwilling beginnt mit Überschrift',
+      /^# What’s new in /.test(fs.readFileSync(path.join(SITE, 'indesign/whatsnew.md'), 'utf8')), true);
+  }
   const md = fs.readFileSync(path.join(SITE, 'indesign/Rectangle.md'), 'utf8');
   check('Markdown nennt Art und Version', /^# Rectangle\n\n> Object · InDesign/.test(md), true);
   check('Markdown ist deutlich kleiner als die Seite',
