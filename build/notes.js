@@ -69,7 +69,9 @@ const byKind = [
    .../script-result/. Das Verhalten von doScript() in InDesign 2026 (21.6)
    geprueft: UXP macht aus jedem Argument einen String (true wird "TRUE"),
    ExtendScript behaelt die Typen; der letzte Ausdruck eines UXP-Skripts
-   kommt nicht zurueck. */
+   kommt nicht zurueck. Dass ein ExtendScript-Kind withArguments nur bei
+   Aufruf auf oberster Ebene als arguments sieht, belegt build/live
+   (doscript-es-child). */
 const byMember = {
   'Application.scriptArgs': {
     products: ID,
@@ -81,8 +83,10 @@ const byMember = {
     {
       products: ID,
       runtime: 'es',
-      text: 'The called script receives withArguments as arguments. doScript() ' +
-        'returns the value of its last expression.'
+      text: 'The called script receives withArguments as arguments — but only when ' +
+        'doScript() is called at the top level of a script. The called script runs in ' +
+        'the caller’s scope, so inside a function arguments is that function’s own. ' +
+        'doScript() returns the value of its last expression.'
     },
     {
       products: ID,

@@ -738,7 +738,8 @@ function uxpGuide(t, classes, rt, kindOf) {
     '`app.scriptArgs` is `undefined` |');
   L.push('| Script result | the value of the last expression | ' +
     '`script.setResult(value)` — the last expression is ignored |');
-  L.push('| Event handler | function or `File` | function only |');
+  L.push('| Event handler | function or `File` | function, or the path of a `.jsx` as a ' +
+    'string — that script runs as ExtendScript |');
   L.push('| Output | `$.writeln()` | `console.log()` |');
   L.push('| User interface | ScriptUI | HTML |');
   L.push('| Not available | — | `$`, ScriptUI, `XML`/`XMLList` (E4X), `Socket`, `UnitValue`, `Reflection` |');
@@ -820,11 +821,20 @@ function uxpGuide(t, classes, rt, kindOf) {
   for (const r of gone) L.push('- ' + r);
   L.push('');
   const noted = classes.filter(c => rt.notes(c.n, kindOf(c)).some(n => n.runtime === 'uxp'));
-  const memberNoted = [];
+  /* Gleicher Hinweis am gleichen Member vieler Objekte (addEventListener an
+     über 400) wird eine Zeile. */
+  const byText = new Map();
   for (const c of classes)
     for (const x of [...c.p, ...c.m])
-      for (const n of rt.memberNotes(c.n, x.n))
-        if (n.runtime === 'uxp') memberNoted.push('`' + c.n + '.' + x.n + '`: ' + n.text);
+      for (const n of rt.memberNotes(c.n, x.n)) {
+        if (n.runtime !== 'uxp') continue;
+        const k = x.n + '\u0000' + n.text;
+        if (!byText.has(k)) byText.set(k, { member: x.n + (c.m.includes(x) ? '()' : ''), text: n.text, on: [] });
+        if (!byText.get(k).on.includes(c.n)) byText.get(k).on.push(c.n);
+      }
+  const memberNoted = [...byText.values()].map(g => g.on.length > 3
+    ? '`' + g.member + '` on ' + g.on.length + ' objects: ' + g.text
+    : g.on.map(o => '`' + o + '.' + g.member + '`').join(', ') + ': ' + g.text);
   if (memberNoted.length || noted.some(c => !c.enum)) {
     L.push('## Further notes');
     L.push('');

@@ -414,10 +414,10 @@ const cases = [
 
   {
     id: 'event-handler-file',
-    title: 'Event handler: function or File in ExtendScript, function only in UXP',
+    title: 'Event handler: function or File in ExtendScript, function or .jsx path in UXP',
     claim: 'addEventListener() nimmt unter ExtendScript eine Funktion oder ein File, unter UXP ' +
-      'nur eine Funktion.',
-    where: 'runtime.js isHandler (File als Handler unter UXP ausgeblendet); agents.js uxp.md',
+      'eine Funktion oder den Pfad einer .jsx als String; die .jsx läuft beim Ereignis.',
+    where: 'runtime.js isHandler und HANDLER_NOTE; agents.js uxp.md (Tabelle)',
     /* Die erste Speicherung eines neuen Dokuments ist ein Speichern unter —
        beforeSave/afterSave feuern dabei nicht, afterSaveAs schon.
        handler-*.jsx legt neben sich eine Datei <name>.fired an. Unter UXP
@@ -450,8 +450,7 @@ const cases = [
       });`,
     expect: {
       es: { fileHandler: true, fired: true },
-      uxp: v => (v.functionHandler === true && v.functionFired === true && v.pathHandler !== true) ||
-        'Pfad-String als Handler angenommen' + (v.pathFired ? ' und ausgeführt' : '')
+      uxp: { functionHandler: true, pathHandler: true, functionFired: true, pathFired: true }
     }
   },
 

@@ -51,12 +51,18 @@ const NO_UXP = new Set(['$', 'Namespace', 'QName', 'Reflection', 'ReflectionInfo
    eigenen Eintrag unter members. */
 const ES_ONLY = { classes: {}, members: {} };
 
-/* Ein File als Event-Handler gibt es unter UXP nicht — dort ist es immer eine
-   Funktion. app.doScript() bleibt unberuehrt: es fuehrt eine
-   ExtendScript-Datei auch unter UXP aus. */
+/* Ein File als Event-Handler gibt es unter UXP nicht — ein UXP-File ist ein
+   anderes Objekt. Angenommen wird dort eine Funktion oder der Pfad einer
+   .jsx als String; das Skript läuft dann beim Ereignis als ExtendScript
+   (build/live: event-handler-file, InDesign 2025 und 2026). Den Pfad nennt
+   ein Hinweis, die Typangabe zeigt unter UXP nur die Funktion.
+   app.doScript() bleibt unberührt: es führt eine ExtendScript-Datei auch
+   unter UXP aus. */
 const isHandler = (cls, method, arg) => arg === 'handler' &&
   (/^(add|remove)EventListener$/.test(method) ||
     (cls === 'EventListeners' && method === 'add'));
+const HANDLER_NOTE = 'The handler can also be the path of a .jsx file as a string — ' +
+  'that script runs as ExtendScript when the event fires.';
 
 const FILE_TYPES = ['File', 'Folder'];
 
@@ -139,7 +145,10 @@ function forTarget(target, isCore) {
       return out;
     },
     memberNotes(cls, member) {
-      return [].concat(notes.byMember[cls + '.' + member] || []).filter(shown).map(strip);
+      const out = [].concat(notes.byMember[cls + '.' + member] || []).filter(shown).map(strip);
+      if (on && (member === 'addEventListener' || (cls === 'EventListeners' && member === 'add')))
+        out.push({ runtime: 'uxp', text: HANDLER_NOTE });
+      return out;
     }
   };
 }

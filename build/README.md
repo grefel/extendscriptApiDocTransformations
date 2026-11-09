@@ -1129,6 +1129,13 @@ Parameter. Im UXP-Modus verschwindet die Alternative aus der Typangabe,
 `typeList()` packt dafür den Typ und den angrenzenden Strich in einen
 gemeinsamen `data-uxp="hide"`-Knoten.
 
+Angenommen wird unter UXP neben der Funktion auch der **Pfad einer .jsx als
+String**; das Skript läuft beim Ereignis als ExtendScript (gemessen in 2025
+und 2026, `build/live`: `event-handler-file`). Das sagt ein Hinweis an
+`addEventListener()` und `EventListeners.add()` (`runtime.js`,
+`HANDLER_NOTE`), die Typangabe bleibt bei der Funktion: ein UXP-`File` ist
+ein anderes Objekt.
+
 `app.doScript()` bleibt ausdrücklich unberührt — dort läuft eine
 ExtendScript-Datei auch unter UXP.
 

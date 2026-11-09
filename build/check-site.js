@@ -731,8 +731,10 @@ const check = (name, got, want) => {
     (await visibleNotes()).map(t => /last expression/.test(t)), [true]);
   await page.click('.rt button[data-r="uxp"]');
   await page.waitForTimeout(300);
-  check('unter UXP zwei Member-Hinweise (scriptArgs, doScript)',
-    (await visibleNotes()).length, 2);
+  check('unter UXP drei Member-Hinweise (scriptArgs, doScript, addEventListener)',
+    await visibleNotes().then(ns => ns.length + ' ' +
+      [/^Undefined in UXP/, /setResult/, /path of a \.jsx/].map(re => ns.some(t => re.test(t))).join()),
+    '3 true,true,true');
   check('activeScript ist ein Promise<File>',
     await at('tr#p-activeScript td.t'),
     'Promise<File>');
