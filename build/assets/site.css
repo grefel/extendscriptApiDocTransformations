@@ -2367,6 +2367,14 @@ ul.wn .ph {
   color: var(--ink)
 }
 
+/* Adobes Beschreibung unter der Zeile: gedämpft, damit die Liste scanbar bleibt. */
+ul.wn .wnd {
+  display: block;
+  color: var(--dim);
+  font-size: 12.5px;
+  line-height: 1.45
+}
+
 ul.wn details {
   margin-top: 2px;
   font-size: 12.5px

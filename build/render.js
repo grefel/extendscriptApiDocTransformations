@@ -570,7 +570,9 @@ function make(data, d, ctx) {
       const list = !own && c.objects.length >= 3
         ? `<details><summary>on ${c.objects.length} objects</summary>${
           c.objects.map(o => to1(o, anchor, esc(o))).join(' · ')}</details>` : '';
-      return `<li class="${cl}${c.breaking ? ' brk' : ''}"${uxpHide(c, own || c.objects[0])}><span class="op">${op}</span>${kind}${who}${what}${list}</li>`;
+      const d = whatsnew.descOf(c);
+      return `<li class="${cl}${c.breaking ? ' brk' : ''}"${uxpHide(c, own || c.objects[0])}><span class="op">${op}</span>${kind}${who}${what}${
+        d ? `<span class="wnd">${esc(d)}</span>` : ''}${list}</li>`;
     };
 
     const n = w.counts;
@@ -603,6 +605,7 @@ function make(data, d, ctx) {
         for (const o of w.newObjects)
           h += `<li class="added"><span class="op">+</span><span class="k">${esc(o.kind)}</span> ${to1(o.n, '', '<b>' + esc(o.n) + '</b>')}${
             o.collection ? ' · ' + to1(o.collection, '', esc(o.collection)) : ''} <span class="k">${o.members} ${o.members === 1 ? 'member' : 'members'}</span>${
+            o.d ? `<span class="wnd">${esc(o.d)}</span>` : ''}${
             o.holds.length ? `<details><summary>can hold ${o.holds.length} objects</summary>${
               o.holds.map(x => to1(x, '', esc(x))).join(' · ')}</details>` : ''}</li>`;
         h += '</ul></section>';

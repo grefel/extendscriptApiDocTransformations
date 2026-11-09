@@ -76,7 +76,7 @@ function diff(oldData, newData) {
   const push = c => changes.push(c);
 
   const added = B.filter(c => !mapA.has(c.n)).map(c => ({
-    n: c.n, kind: kind(c, dB), members: c.p.length + c.ev.length + c.m.length,
+    n: c.n, kind: kind(c, dB), d: c.d || '', members: c.p.length + c.ev.length + c.m.length,
     element: dB.isCollection(c) ? dB.elementOf(c) : null
   }));
   const removed = A.filter(c => !mapB.has(c.n)).map(c => ({ n: c.n, kind: kind(c, dA) }));
@@ -294,6 +294,12 @@ function resolveHighlights(list, classes) {
   return { items, missing };
 }
 
+/* Adobes Beschreibung zu einer Zeile: bei Hinzugefügtem und Entferntem die
+   des Members (bei mehreren Objekten die des ersten), sonst keine — Typ- und
+   Beschreibungsänderungen nennen ihren Inhalt selbst. */
+const descOf = c => (c.op === 'added' || c.op === 'removed') && c.m && c.m.d
+  ? String(c.m.d).replace(/\s+/g, ' ').trim() : '';
+
 /* Sprungziel auf der Objektseite (render.js: p-, e-, m-). */
 const anchorOf = c => c.kind === 'object' ? '' :
   (c.kind === 'event' ? 'e-' : c.kind === 'method' ? 'm-' : 'p-') + c.member;
@@ -313,9 +319,11 @@ function markdown(w, meta) {
     : c.kind === 'event' ? '' : c.kind === 'value' ? (c.m.v ? ' = ' + c.m.v : '') : ': ' + typeOf(c.m.t, c.m.arr) + (c.m.rw === 'readonly' ? ' (readonly)' : '');
   /* Typ allein, ohne den Doppelpunkt davor; leer bei Events. */
   const typeSpan = c => { const s = addedText(c).replace(/^[\s:=]+/, '').trim(); return s ? '`' + s + '`' : ''; };
+  /* Adobes Beschreibung aus dem Objektmodell, damit man sieht, wozu es dient. */
+  const dsc = c => { const d = descOf(c); return d ? ' — ' + d : ''; };
   const line = c => c.op === 'added'
-    ? '- + ' + c.kind + ' ' + objs(c) + (typeSpan(c) ? (c.objects.length === 1 ? ' ' : ' — ') + typeSpan(c) : '')
-    : '- ' + (c.kind === 'object' ? '' : c.kind + ' ') + objs(c) + ': ' + phrase(c);
+    ? '- + ' + c.kind + ' ' + objs(c) + (typeSpan(c) ? (c.objects.length === 1 ? ' ' : ' — ') + typeSpan(c) : '') + dsc(c)
+    : '- ' + (c.kind === 'object' ? '' : c.kind + ' ') + objs(c) + ': ' + phrase(c) + dsc(c);
 
   const L = [];
   L.push('# What’s new in ' + to.name + (to.build ? ' (' + to.build + ')' : ''));
@@ -350,7 +358,7 @@ function markdown(w, meta) {
     for (const o of w.newObjects)
       L.push('- [' + o.n + '](' + md(o.n) + ') — ' + o.kind + ', ' + o.members + (o.members === 1 ? ' member' : ' members') +
         (o.collection ? '; collection [' + o.collection + '](' + md(o.collection) + ')' : '') +
-        (o.holds.length ? '; can hold ' + o.holds.join(', ') : ''));
+        (o.holds.length ? '; can hold ' + o.holds.join(', ') : '') + (o.d ? ' — ' + o.d : ''));
   }
   if (w.wide.length) {
     L.push('');
@@ -366,8 +374,8 @@ function markdown(w, meta) {
       L.push('### [' + cls + '](' + md(cls) + ')');
       L.push('');
       for (const c of list) L.push(c.op === 'added'
-        ? '- + ' + c.kind + ' `' + c.member + addedText(c) + '`'
-        : '- ' + (c.kind === 'object' ? '' : c.kind + ' `' + c.member + '` ') + phrase(c));
+        ? '- + ' + c.kind + ' `' + c.member + addedText(c) + '`' + dsc(c)
+        : '- ' + (c.kind === 'object' ? '' : c.kind + ' `' + c.member + '` ') + phrase(c) + dsc(c));
     }
   }
   if (w.minor.length) {
@@ -381,4 +389,4 @@ function markdown(w, meta) {
   return L.join('\n') + '\n';
 }
 
-module.exports = { diff, markdown, phrase, anchorOf, typeOf, resolveHighlights, MINOR_HINT };
+module.exports = { diff, markdown, phrase, anchorOf, typeOf, descOf, resolveHighlights, MINOR_HINT };
