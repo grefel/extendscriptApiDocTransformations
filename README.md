@@ -30,6 +30,9 @@ Details in [build/README.md](build/README.md).
 ## Source files
 
 Put Adobe's OMV exports into `sourceXML/`. They are not redistributed here.
+Then run `npm run intake`: it renames each file after the version in its
+title (`indesign-21.5.1.73.xml`) and prints the entry to add to
+`build/products.js`. Files that are no longer used go to `sourceXML/archive/`.
 
 On macOS:
 

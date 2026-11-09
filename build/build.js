@@ -7,37 +7,81 @@
      site/assets/             gemeinsames CSS und JS
      site/<slug>/             je Produkt bzw. Bibliothek eine Seite pro Objekt
 
-   ScriptUI und die Kern-JavaScript-Klassen stecken in jedem Produkt-XML
-   identisch drin. Sie werden deshalb einmal als eigene Bibliotheken ausgegeben
-   statt in jedem Produkt zu wiederholen. */
+   ScriptUI und die Kern-JavaScript-Klassen kommen aus javascript.xml und
+   scriptui.xml, für alle Produkte dieselben. Sie werden deshalb einmal als
+   eigene Bibliotheken ausgegeben statt in jedem Produkt zu wiederholen.
+
+   PRODUCTS=<datei> ersetzt build/products.js, etwa durch
+   build/products-dryrun.js. Dann ist OUT_DIR Pflicht und site.zip
+   wird nicht gepackt — ein Probelauf kann so nicht versehentlich auf den
+   Server gelangen. */
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
 const { build, derive } = require('./model');
 const { make, esc, pageOf, splitVersion, THEME_BOOT, BASE } = require('./render');
-const products = require('./products');
+const { resolveProducts, describe } = require('./sources');
 const agents = require('./agents');
 const runtime = require('./runtime');
+const notes = require('./notes');
 const { createZip } = require('./zip');
 const legacy = require('./archive');
 
 const ROOT = path.join(__dirname, '..');
-const OUT = process.env.OUT_DIR || path.join(ROOT, 'site');
+const DRYRUN = process.env.PRODUCTS;
+const OUT = process.env.OUT_DIR ? path.resolve(process.env.OUT_DIR) : path.join(ROOT, 'site');
+/* Ein Probelauf darf weder site/ noch das Repo selbst leeren — OUT wird
+   unten komplett gelöscht. */
+if (DRYRUN && (!process.env.OUT_DIR || OUT === path.join(ROOT, 'site') ||
+    (ROOT + path.sep).toLowerCase().startsWith((OUT + path.sep).toLowerCase()))) {
+  console.error('PRODUCTS gesetzt: OUT_DIR muss auf einen eigenen Ordner außerhalb von site/ und des Repos zeigen');
+  process.exit(2);
+}
 const started = Date.now();
+
+/* ---------- Quellen prüfen ----------
+   Jede XML muss zu ihrem Platz in products.js passen (build/sources.js). */
+const resolved = resolveProducts(
+  require(DRYRUN ? path.resolve(DRYRUN) : './products'), ROOT);
+for (const w of resolved.warnings) console.warn('warnung  ' + w);
+if (resolved.errors.length) {
+  for (const e of resolved.errors) console.error('fehler   ' + e);
+  process.exit(resolved.errors.some(e => e.includes(': fehlt ')) ? 2 : 1);
+}
+const products = resolved.products;
+for (const p of products)
+  console.log('quelle   ' + p.slug.padEnd(16) + p.versions.map((v, i) =>
+    v.key + ' (' + (v.info.version || '–') + ')' + (i ? '' : ' ← ' + path.basename(v.src))).join(', Vorversion '));
 
 /* ---------- Modelle laden ----------
    Direkt aus sourceXML, ohne Zwischenschritt; bereinigt wird in
    build/fixdom.js. */
 const JS_XML = path.join(ROOT, 'sourceXML/javascript.xml');
 const SUI_XML = path.join(ROOT, 'sourceXML/scriptui.xml');
-const models = [];
-for (const p of products) {
-  const src = path.join(ROOT, p.src);
-  if (!fs.existsSync(src)) { console.error('fehlt: ' + p.src); process.exit(2); }
-  models.push({ product: p, data: build({ product: src, javascript: JS_XML, scriptui: SUI_XML }) });
+/* model.build() übergeht fehlende Dateien — Core JavaScript und ScriptUI
+   erschienen dann leer, ohne dass der Bau scheitert. */
+for (const [f, want] of [[JS_XML, 'javascript'], [SUI_XML, 'scriptui']]) {
+  const ok = fs.existsSync(f) && describe(f).product === want;
+  if (!ok) { console.error('fehler   ' + path.relative(ROOT, f) + ' fehlt oder ist nicht ' + want); process.exit(2); }
 }
+const models = [];
+for (const p of products)
+  models.push({ product: p, data: build({ product: p.versions[0].file, javascript: JS_XML, scriptui: SUI_XML }) });
 console.log('modelle  ' + models.length + ' Produkte in ' + (Date.now() - started) + ' ms');
+
+/* Typkorrekturen aus additions.js: Nur Produkte, die die Properties kennen,
+   tauchen auf. Eine, die nicht mehr greift, bricht nicht ab — der Typ steht
+   dann wie bei Adobe da —, muss aber in der Roh-XML nachgesehen werden. */
+for (const m of models) {
+  const { applied, missed } = m.data.typeFixes;
+  if (!applied.length && !missed.length) continue;
+  console.log('typfix   ' + m.product.slug.padEnd(16) + applied.length + '/' +
+    (applied.length + missed.length) + ' angewendet');
+  for (const x of missed)
+    console.warn('warnung  ' + m.product.slug + ': Typkorrektur ' + x.key + ' greift nicht — Quelle sagt ' +
+      x.found.join(' | ') + ', additions.js erwartet ' + x.from.join(' | '));
+}
 
 /* ---------- Ziele zusammenstellen ---------- */
 /* Jedes Ziel bekommt nur die Klassen seiner Herkunft. Die gemeinsamen
@@ -74,10 +118,28 @@ const targets = [
 
 for (const t of targets) {
   t.names = new Set(t.data.classes.map(c => c.n));
+  warnOrphanNotes(t);
   /* Nur der Versionsteil: aus "Illustrator 29" neben dem Label "Illustrator"
      bliebe sonst "Illustrator Illustrator 29" stehen. */
   if (!t.shortVersion)
     t.shortVersion = splitVersion(t.data.version).name.replace(t.label, '').trim();
+}
+
+/* Hinweise aus notes.js, deren Objekt oder Member es im Ziel nicht (mehr)
+   gibt, fielen sonst still weg — etwa wenn Adobe ein Member umbenennt.
+   Geprüft wird nur, was ausdrücklich für dieses Ziel gilt. */
+function warnOrphanNotes(t) {
+  const forT = n => [].concat(n).some(x => x.products && x.products.includes(t.slug));
+  const byN = new Map(t.data.classes.map(c => [c.n, c]));
+  for (const [cls, n] of Object.entries(notes.byName))
+    if (forT(n) && !byN.has(cls)) console.warn('warnung  ' + t.slug + ': Hinweis zu ' + cls + ' — Objekt fehlt');
+  for (const [key, n] of Object.entries(notes.byMember)) {
+    if (!forT(n)) continue;
+    const [cls, mem] = key.split('.');
+    const c = byN.get(cls);
+    if (!c || ![...c.p, ...c.m, ...(c.ev || [])].some(x => x.n === mem))
+      console.warn('warnung  ' + t.slug + ': Hinweis zu ' + key + ' — ' + (c ? 'Member' : 'Objekt') + ' fehlt');
+  }
 }
 
 /* Auflösung von Typnamen: erst im eigenen Ziel, dann in den gemeinsamen
@@ -308,8 +370,9 @@ console.log('archiv   ' + ZIP + '  ' + (archive.length / 1048576).toFixed(1) + '
    Das alte Paket wird vorher geloescht — bricht der Lauf ab, liegt lieber
    keines da als ein veraltetes, das wie das neue aussieht. */
 const PAKET = path.join(path.dirname(OUT), path.basename(OUT) + '.zip');
-fs.rmSync(PAKET, { force: true });
-if (process.env.NO_PACKAGE) {
+if (DRYRUN) {
+  console.log('paket    uebersprungen (Probelauf mit PRODUCTS)');
+} else if (fs.rmSync(PAKET, { force: true }), process.env.NO_PACKAGE) {
   console.log('paket    uebersprungen (NO_PACKAGE), altes ' +
     path.basename(PAKET) + ' ist geloescht');
 } else {

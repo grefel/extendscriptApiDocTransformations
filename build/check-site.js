@@ -9,6 +9,12 @@ const { chromium, firefox } = require('playwright');
 
 const ROOT = path.join(__dirname, '..');
 const SITE = process.env.OUT_DIR || path.join(ROOT, 'site');
+/* Wie viele Objekte InDesign hat, steht in der gebauten api.json — mit jeder
+   neuen Version eine andere Zahl. */
+const ID_OBJECTS = (() => {
+  try { return JSON.parse(fs.readFileSync(path.join(SITE, 'indesign/api.json'), 'utf8')).counts.objects; }
+  catch (e) { return NaN; }
+})();
 const url = f => 'file:///' + path.join(SITE, f).replace(/\\/g, '/');
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -109,7 +115,7 @@ const check = (name, got, want) => {
   /* .sidelist, nicht .side: darin steht zusaetzlich der Notnagel-Link
      "All entries →", den das Skript nur verbirgt. */
   check('mit JS: Seitenleiste nachgeladen',
-    await page.locator('.sidelist a').count(), 1097);
+    await page.locator('.sidelist a').count(), ID_OBJECTS);
   check('mit JS: Notnagel-Link verborgen',
     await page.locator('.allobjects').isVisible(), false);
   check('mit JS: aktuelle Seite markiert',
@@ -381,7 +387,7 @@ const check = (name, got, want) => {
   /* Index je Bibliothek */
   await page.goto(url('indesign/index.html'));
   check('Index listet alle InDesign-Objekte',
-    (await page.locator('ul.grid li').count()), 1097);
+    (await page.locator('ul.grid li').count()), ID_OBJECTS);
 
   /* --- Produktumschalter und getrennte Bibliotheken --- */
   await page.goto(url('indesign/Rectangle.html'));
@@ -1374,7 +1380,7 @@ const check = (name, got, want) => {
   await page.goto(url('indesign/Rectangle.html'));
   await page.waitForSelector('.side a.on', { timeout: 10000 });
   const navAll = await page.locator('.sidelist a').count();
-  check('Objektspalte vollstaendig', navAll, 1097);
+  check('Objektspalte vollstaendig', navAll, ID_OBJECTS);
   await page.fill('#nf', 'text');
   await page.waitForTimeout(200);
   const navHits = await page.locator('.sidelist a span').allTextContents();
@@ -1505,7 +1511,7 @@ const check = (name, got, want) => {
      schliessen. uxp.md ist der Leitfaden, kein Zwilling. */
   check('Markdown-Zwilling zu jeder Seite',
     fs.readdirSync(path.join(SITE, 'indesign')).filter(f => f.endsWith('.md') && f !== 'uxp.md').length,
-    1097);
+    ID_OBJECTS);
   const md = fs.readFileSync(path.join(SITE, 'indesign/Rectangle.md'), 'utf8');
   check('Markdown nennt Art und Version', /^# Rectangle\n\n> Object · InDesign/.test(md), true);
   check('Markdown ist deutlich kleiner als die Seite',

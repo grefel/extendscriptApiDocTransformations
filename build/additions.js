@@ -49,7 +49,8 @@ module.exports = {
       added: 'Wie Document.filePath: der Wert ist der Ordner, die .indb-Datei ' +
         'selbst steht in fullName.'
     },
-    /* Die folgenden vier stehen in id_26.xml und id_25-server.xml als File.
+    /* Die folgenden vier stehen in indesign-21.5.1.73.xml und
+       indesign-server-20.5.0.49.xml als File.
        Geprueft in InDesign 2026 (21.6) per Skript: unter ExtendScript ist
        jeder Wert ein Folder (instanceof Folder, constructor Folder), unter
        UXP gemessen ein Promise<Folder> (indesign-uxp-types). */

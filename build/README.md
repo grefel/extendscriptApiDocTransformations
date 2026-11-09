@@ -11,6 +11,7 @@ sourceXML/*.xml → build/ (Node) → site/   2.681 Seiten
 
 ```sh
 npm install
+npm run intake     # neue XML in sourceXML/ benennen, Eintrag für products.js zeigen
 npm run build      # site/ neu bauen, dazu site.zip zum Hochladen   ~90 s
 NO_PACKAGE=1 npm run build   # ohne das Paket, für schnelle Durchläufe
 npm run check      # Website im Browser prüfen (Playwright)
@@ -18,12 +19,17 @@ npm run check:types # jede .d.ts und jedes Beispielskript mit tsc
 npm run serve      # http://localhost:8080
 ```
 
-Abweichende Pfade über `DOM_XML` und `OUT_DIR`.
+Abweichende Pfade über `OUT_DIR`, eine andere Produktliste über `PRODUCTS`
+(siehe „Quell-XMLs: Dateinamen und Versionen").
 
 ## Dateien
 
 | Datei | Aufgabe |
 |---|---|
+| `products.js` | Produkte und ihre Quell-XMLs, je Produkt `versions` (neueste zuerst) |
+| `sources.js` | erkennt Produkt und Version einer XML am Titel, prüft `products.js` |
+| `intake.js` | `npm run intake`: benennt neue XMLs nach ihrer Version |
+| `products-dryrun.js` | Produktliste für den Probelauf eines Versionswechsels |
 | `model.js` | XML → Datenmodell, plus Ableitungen (Collections, Rückwärtsindizes, Nachfahren) |
 | `render.js` | Datenmodell → HTML |
 | `build.js` | schreibt `site/`, prüft Dateinamen-Kollisionen |
@@ -755,7 +761,7 @@ in der Wirklichkeit falsch — deshalb läuft die Gegenprobe über http.
 
 ## Mehrere Produkte
 
-`build/products.js` listet die Anwendungen mit ihrer jeweils neuesten OMV-XML.
+`build/products.js` listet die Anwendungen mit ihren OMV-XMLs, neueste zuerst.
 `npm run build` liest sie direkt und baut daraus die Website.
 
 | Ordner | Einträge |
@@ -782,6 +788,65 @@ Bibliotheken. `Document` bleibt so im eigenen Produkt, `File` landet unter
 Der Produktumschalter im Kopf ist ein `<details>` und funktioniert ohne
 JavaScript. Gibt es das gleichnamige Objekt im Zielprodukt, springt er direkt
 dorthin (`indesign/Rectangle` → `illustrator/Rectangle`), sonst auf dessen Index.
+
+### Quell-XMLs: Dateinamen und Versionen
+
+In `sourceXML/` liegen nur die XMLs, die `products.js` verwendet, dazu
+`javascript.xml` und `scriptui.xml`. Alles andere steht in
+`sourceXML/archive/` unter Adobes ursprünglichem Namen. Beides ist nicht
+versioniert (`.gitignore`).
+
+**Der Dateiname kommt aus dem Titel der XML**, nicht aus Adobes Dateinamen
+und nicht aus dem Attribut `name` — das stimmt nicht immer mit dem Build
+überein (`id_25-server`: `name="20.4"`, Build 20.5.0.49). `build/sources.js`
+liest den Titel des ersten `<map>`:
+
+| Titel | Datei | key |
+|---|---|---|
+| Adobe InDesign 2026 (21.5.1.73) Object Model | `indesign-21.5.1.73.xml` | `2026` |
+| Adobe InDesign Server 2025 (20.5.0.49) Object Model | `indesign-server-20.5.0.49.xml` | `2025` |
+| Adobe Illustrator 29 Type Library | `illustrator-29.xml` | `29` |
+| Adobe Photoshop CC 2015.5 Object Library | `photoshop-2015.5.xml` | `2015` |
+| Adobe Bridge 2021 Object Model | `bridge-2021.xml` | `2021` |
+
+**Neue Version aufnehmen:** XML nach `sourceXML/` legen und `npm run intake`.
+Das benennt sie um und gibt den Eintrag aus, der oben in `versions` gehört —
+oder meldet, dass sie älter ist als die verwendete und ins Archiv gehört.
+`products.js` ändert es nicht; das bleibt die eine Handänderung. Ein
+unbekannter Titelaufbau bricht mit Exit 1 ab, dann das Muster in
+`sources.js` ergänzen.
+
+**`build.js` prüft `versions` vor dem Bauen** und bricht ab, wenn eine Datei
+fehlt, nicht zum Produkt passt (Server-XML im Desktop-Platz), ein `key`
+doppelt vorkommt oder die Liste nicht absteigt. Ein `key`, der nicht zum
+Jahr im Titel passt, ist nur eine Warnung. Die erste Ausgabezeile je Produkt
+(`quelle`) nennt Version und Datei.
+
+Weitere Meldungen, die beim Versionswechsel zählen:
+
+- `typfix   indesign  7/7 angewendet` — die Typkorrekturen aus `additions.js`.
+  Greift eine nicht mehr, nennt eine Warnung Property, Typ in der Quelle und
+  erwartetes `from`. Dann in der Roh-XML nachsehen, ob Adobe den Typ
+  berichtigt oder anders falsch angegeben hat.
+- `warnung  …: Hinweis zu X — Objekt fehlt` bzw. `Member fehlt` — ein
+  Eintrag in `notes.js` für dieses Ziel trifft nichts mehr.
+- Fehlt `javascript.xml` oder `scriptui.xml`, bricht der Bau ab (Exit 2),
+  statt beide Bibliotheken leer zu veröffentlichen.
+
+`check-site.js` liest die Zahl der InDesign-Objekte aus der gebauten
+`indesign/api.json` statt sie fest zu erwarten.
+
+Bisher wird nur `versions[0]` gebaut. `versions[1]` ist die Vorversion,
+gedacht als Grundlage für „What's new" und den Versionsumschalter.
+
+**Probelauf:** `build/products-dryrun.js` stellt InDesign 2025 aus dem
+Archiv hinter 2026 — wie beim Release 2027 die 2026 hinter 2027.
+
+```sh
+PRODUCTS=build/products-dryrun.js OUT_DIR=<scratch>/site npm run build
+```
+
+Mit `PRODUCTS` verlangt `build.js` ein `OUT_DIR` und packt kein `site.zip`.
 
 ### Produktspezifische Fallstricke
 
@@ -842,7 +907,7 @@ sie nicht, der Weg führt über `evaluateXPathExpression()` am übergeordneten
 `XMLElement`.
 
 Der Fall zeigt, wozu `additions.js` da ist: **Adobes XML-Export führt die
-Methode gar nicht auf** (nachgesehen in `sourceXML/id_26.xml`, dort stehen
+Methode gar nicht auf** (nachgesehen in `sourceXML/indesign-21.5.1.73.xml`, dort stehen
 nur `count`, `add`, `item`, `itemByID`, `itemByRange` und die üblichen).
 Im Object Model Viewer steht sie, und unter ExtendScript funktioniert sie seit
 CS3 bis InDesign 2026. Sie wird deshalb ergänzt und als
@@ -873,8 +938,8 @@ greift die Korrektur nicht mehr, statt eine dann falsche zu erzwingen.
 Geprüft in InDesign 2026 (21.6) per Skript über COM: jeder der Werte ist
 `instanceof Folder`, die Gegenproben `fullName` sind `File`. Unter UXP
 bestätigen es die gemessenen Typen in indesign-uxp-types (`Promise<Folder>`).
-Die falschen Angaben stehen gleichlautend in `id_26.xml` und
-`id_25-server.xml`; die übrigen Produkte kennen die Properties nicht.
+Die falschen Angaben stehen gleichlautend in `indesign-21.5.1.73.xml` und
+`indesign-server-20.5.0.49.xml`; die übrigen Produkte kennen die Properties nicht.
 
 ### Hierarchie: worin steckt es, was steckt darin
 

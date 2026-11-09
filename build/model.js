@@ -115,7 +115,7 @@ const byName = (a, b) => (a.n < b.n ? -1 : a.n > b.n ? 1 : 0);
 
 /* ---------- Klassen ---------- */
 
-function classModel(cd, origin) {
+function classModel(cd, origin, typeFixes) {
   const isEnum = attr(cd, 'enumeration') === 'true';
   const isSui = origin === 'sui';
   const classProps = [], instanceProps = [], methods = [];
@@ -152,12 +152,20 @@ function classModel(cd, origin) {
   if (name === 'global' && origin === 'js' && !o.p.some(p => p.n === 'app'))
     o.p = [Object.assign({}, fix.GLOBAL_APP), ...o.p].sort(byName);
 
-  /* Falsche Typangaben richtigstellen — siehe build/additions.js. */
+  /* Falsche Typangaben richtigstellen — siehe build/additions.js. Was
+     nicht mehr greift, landet in typeFixes.missed: Adobe hat die Angabe
+     geändert, from muss neu geprüft werden. Steht schon der richtige Typ da,
+     zählt das als erledigt. */
   if (origin === 'p') for (const prop of o.p) {
-    const corr = additions.types[name + '.' + prop.n];
-    if (!corr || String(prop.t) !== String(corr.from)) continue;
-    prop.t = corr.t.slice();
-    if (corr.d) prop.d = corr.d;
+    const key = name + '.' + prop.n;
+    const corr = additions.types[key];
+    if (!corr) continue;
+    if (String(prop.t) === String(corr.from)) {
+      prop.t = corr.t.slice();
+      if (corr.d) prop.d = corr.d;
+      typeFixes.applied.push(key);
+    } else if (String(prop.t) === String(corr.t)) typeFixes.applied.push(key);
+    else typeFixes.missed.push({ key, found: prop.t, from: corr.from });
   }
 
   o.ev = (isEnum ? [] : classProps.filter(isEvent))
@@ -178,7 +186,7 @@ function classModel(cd, origin) {
 
 function parse(file) {
   return new DOMParser({ onError: () => {} })
-    .parseFromString(fs.readFileSync(file, 'utf8'), 'text/xml');
+    .parseFromString(fs.readFileSync(file, 'utf8').replace(/^﻿/, ''), 'text/xml');
 }
 
 function classdefsIn(doc) {
@@ -213,6 +221,7 @@ function build(sources) {
   ].filter(([, f]) => f && fs.existsSync(f));
 
   const classes = [];
+  const typeFixes = { applied: [], missed: [] };
   let version = '';
   for (const [origin, file] of parts) {
     const doc = parse(file);
@@ -220,7 +229,7 @@ function build(sources) {
     for (const cd of classdefsIn(doc)) {
       /* Photoshop bringt ein zweites "global" mit, das das echte verdeckt. */
       if (origin === 'p' && attr(cd, 'name') === 'global') continue;
-      classes.push(classModel(cd, origin));
+      classes.push(classModel(cd, origin, typeFixes));
     }
   }
 
@@ -233,7 +242,8 @@ function build(sources) {
   return {
     version,
     generated: new Date().toISOString().slice(0, 10),
-    classes: classes.sort(byName)
+    classes: classes.sort(byName),
+    typeFixes
   };
 }
 

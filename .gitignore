@@ -52,6 +52,9 @@ Temporary Items
 design/api.json
 design/api-data.js
 
+# Adobe-Quell-XMLs samt archive/ (nicht weiterverteilbar)
+sourceXML/
+
 # Generierte Website und Node-Abhaengigkeiten
 site/
 node_modules/
