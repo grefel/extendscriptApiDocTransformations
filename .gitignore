@@ -64,3 +64,6 @@ node_modules/
 
 # Persoenliche Editor-Einstellungen (u. a. ExtendScript-Debugger-Ziele)
 .vscode/
+
+# Projektkontext für Claude Code, nur lokal
+CLAUDE.md
