@@ -91,5 +91,14 @@ module.exports = {
      from und Absicherung wie bei types; r ist der richtige Rückgabetyp.
      Erst eintragen, wenn ein Fall in build/live/ den Typ belegt. Steht eine
      Methode an vielen Klassen, die Einträge per Schleife erzeugen. */
-  returns: {}
+  returns: Object.fromEntries(
+    /* applyGrammarFix() liefert 1 oder 0, Adobes Export sagt bool. Geprüft
+       in InDesign 2027 (22.0.0.104), beide Laufzeiten (build/live:
+       applygrammarfix-number); zuerst gefunden von vamitul. */
+    ['Character', 'Document', 'InsertionPoint', 'Line', 'Paragraph', 'Story', 'Text',
+      'TextColumn', 'TextStyleRange', 'Word', 'XmlStory'].map(c => [c + '.applyGrammarFix', {
+      from: ['Boolean'],
+      r: ['Number'],
+      added: 'Liefert 1, wenn ein Vorschlag angewendet wurde, sonst 0.'
+    }]))
 };

@@ -19,6 +19,41 @@
 
 module.exports = {
   indesign: {
+    '2027': [
+      {
+        title: 'Grammar check',
+        text: 'Every story and text range can check its grammar, report the issues as a ' +
+          'JSON string and apply the suggested fixes. Called on a document, the methods ' +
+          'cover every story.',
+        refs: ['Story.checkGrammar', 'Story.getGrammarIssues', 'Story.applyGrammarFix',
+          'Story.applyAllGrammarFixes', 'Story.requestGrammarCheck',
+          'Application.grammarCheckPreference', 'Application.copySuggestionsPreference']
+      },
+      {
+        title: 'JSON in ExtendScript',
+        text: 'The application can read and write JSON — from a string or a file — without a ' +
+          'polyfill. The parsed result comes as [key, value] pairs, not as a plain object. ' +
+          'ExtendScript only; UXP has JSON built in.',
+        refs: ['Application.parseJson', 'Application.parseJsonFile', 'Application.stringifyJson',
+          'Application.writeJsonFile']
+      },
+      {
+        title: 'Table summaries and alt text',
+        text: 'Tables and table styles carry an accessibility summary; preferences control the ' +
+          'AI tag on generated summaries and the alt text icons in the layout.',
+        refs: ['Table.tableSummary', 'TableStyle.tableSummary',
+          'GeneralPreference.addAITagToTableSummary', 'ViewPreference.showAltTextIcon',
+          'Application.checkDocumentOnExportPreference']
+      },
+      {
+        title: 'Generative AI',
+        text: 'New objects describe AI models and the images they generated in a document. ' +
+          'Almost all of their properties are read-only, and scripts cannot add models. ' +
+          'ExtendScript only.',
+        refs: ['GenAIModel', 'GenAIModels', 'GenAIImage', 'GenAIImages', 'Document.genaiModels']
+      }
+    ],
+    /* Nur Probelauf-Material (build/products-dryrun.js). */
     '2026': [
       {
         title: 'Flex Layout',

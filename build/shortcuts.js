@@ -1,6 +1,6 @@
 /* Einstiegspunkte auf der Uebersichtsseite.
 
-   Die Seitenleiste listet alle 1.097 Objekte — das hilft beim Suchen, nicht
+   Die Seitenleiste listet alle 1.101 Objekte — das hilft beim Suchen, nicht
    beim Anfangen. Diese Auswahl ist der Weg, den ein InDesign-Skript fast immer
    nimmt, von oben nach unten durch die Hierarchie:
 

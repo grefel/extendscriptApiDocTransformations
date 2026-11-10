@@ -12,7 +12,7 @@ therefore documented once.
 
 ```sh
 npm install
-npm run build      # sourceXML/*.xml → site/          2,681 pages, ~7 s
+npm run build      # sourceXML/*.xml → site/          2,686 pages, ~7 s
 npm run serve      # http://localhost:8080
 npm run check      # browser test suite (needs Playwright)
 ```
@@ -31,7 +31,7 @@ Details in [build/README.md](build/README.md).
 
 Put Adobe's OMV exports into `sourceXML/`. They are not redistributed here.
 Then run `npm run intake`: it renames each file after the version in its
-title (`indesign-21.5.1.73.xml`) and prints the entry to add to
+title (`indesign-22.0.0.104.xml`) and prints the entry to add to
 `build/products.js`. Files that are no longer used go to `sourceXML/archive/`.
 
 On macOS:

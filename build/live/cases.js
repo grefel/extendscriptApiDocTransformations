@@ -511,6 +511,118 @@ const cases = [
       return app.doScript(${JSON.stringify(hidden(examples.SERVER_IDJS, 'app.documents.add(false)'))},
         ScriptLanguage.UXPSCRIPT, ["name=Live"]);`,
     expect: { es: 'Hello Live', uxp: 'Hello Live' }
+  },
+
+  /* ---------- seit InDesign 2027 (22.0) ----------
+     Zuerst gefunden von Vlad Vladila (vamitul) im Prerelease. */
+  {
+    id: 'json-methods-es-only',
+    title: 'Application JSON methods exist in ExtendScript, not in UXP',
+    claim: 'parseJson, parseJsonFile, stringifyJson, writeJsonFile: unter ExtendScript Funktionen ' +
+      '(Rundreise klappt), unter UXP undefined.',
+    where: 'runtime.js ES_ONLY.members Application.parseJson u. a.',
+    requires: ['22.0'],
+    es: `
+      var names = ["parseJson", "parseJsonFile", "stringifyJson", "writeJsonFile"], t = [];
+      for (var i = 0; i < names.length; i++) t.push(typeof app[names[i]]);
+      return { types: t.join(), roundTrip: app.stringifyJson(app.parseJson('{"a":[1,2]}')) };`,
+    uxp: `
+      const { app } = require("indesign");
+      return { types: ["parseJson", "parseJsonFile", "stringifyJson", "writeJsonFile"].map(n => typeof app[n]).join() };`,
+    expect: {
+      es: v => v.types === 'function,function,function,function' && /"a"/.test(v.roundTrip),
+      uxp: { types: 'undefined,undefined,undefined,undefined' }
+    }
+  },
+
+  {
+    id: 'genai-es-only',
+    title: 'GenAI classes and Document.genaiModels are missing in UXP; add() fails in ExtendScript',
+    claim: 'require("indesign") exportiert GenAIModel(s)/GenAIImage(s) nicht, Document.genaiModels ' +
+      'ist unter UXP undefined. Unter ExtendScript eine leere Sammlung, add() wirft.',
+    where: 'runtime.js ES_ONLY.classes GenAI*, ES_ONLY.members Document.genaiModels; notes.js GenAIModels.add',
+    requires: ['22.0'],
+    es: `
+      var d = scratch(), r = { type: d.genaiModels.constructor.name, length: d.genaiModels.length };
+      try { d.genaiModels.add(); r.add = "ok"; } catch (e) { r.add = "threw"; }
+      return r;`,
+    uxp: `
+      const DOM = require("indesign");
+      const d = scratch();
+      return {
+        classes: ["GenAIModel", "GenAIModels", "GenAIImage", "GenAIImages"].map(n => typeof DOM[n]).join(),
+        genaiModels: typeof d.genaiModels
+      };`,
+    expect: {
+      es: { type: 'GenAIModels', length: 0, add: 'threw' },
+      uxp: { classes: 'undefined,undefined,undefined,undefined', genaiModels: 'undefined' }
+    }
+  },
+
+  {
+    id: 'checkdocument-pref-throws',
+    title: 'Reading app.checkDocumentOnExportPreference throws',
+    claim: 'Die Property existiert, Lesen wirft in beiden Laufzeiten.',
+    where: 'notes.js byMember Application.checkDocumentOnExportPreference',
+    requires: ['22.0'],
+    es: `
+      try { return { value: String(app.checkDocumentOnExportPreference) }; }
+      catch (e) { return { threw: true }; }`,
+    uxp: `
+      const { app } = require("indesign");
+      const r = { inApp: "checkDocumentOnExportPreference" in app };
+      try { r.value = String(app.checkDocumentOnExportPreference); } catch (e) { r.threw = true; }
+      return r;`,
+    expect: { es: { threw: true }, uxp: { inApp: true, threw: true } }
+  },
+
+  {
+    id: 'applygrammarfix-number',
+    title: 'applyGrammarFix() returns a number, not a boolean',
+    claim: 'Adobes Export sagt bool, geliefert wird eine Zahl (1 angewendet, 0 nicht).',
+    where: 'additions.js returns *.applyGrammarFix',
+    requires: ['22.0'],
+    es: `
+      var f = scratch().pages[0].textFrames.add();
+      f.contents = "He go to the store.";
+      var r = f.parentStory.applyGrammarFix(99999);
+      return typeof r + "," + r;`,
+    uxp: `
+      const f = scratch().pages.item(0).textFrames.add();
+      f.contents = "He go to the store.";
+      const r = f.parentStory.applyGrammarFix(99999);
+      return typeof r + "," + r;`,
+    expect: { es: 'number,0', uxp: 'number,0' }
+  },
+
+  {
+    id: 'tablestyle-summary-unset',
+    title: 'TableStyle.tableSummary throws until set; NothingEnum is rejected',
+    claim: 'Ohne eigenen Wert wirft das Lesen; nach dem Setzen lesbar. NothingEnum.NOTHING wird ' +
+      'abgelehnt, auch an Table.tableSummary (dort ist ungesetzt "").',
+    where: 'notes.js byMember TableStyle.tableSummary',
+    requires: ['22.0'],
+    es: `
+      var d = scratch(), st = d.tableStyles.add(), r = {};
+      try { st.tableSummary; r.unsetRead = "ok"; } catch (e) { r.unsetRead = "threw"; }
+      st.tableSummary = "x"; r.afterSet = st.tableSummary;
+      try { st.tableSummary = NothingEnum.NOTHING; r.nothing = "accepted"; } catch (e) { r.nothing = "rejected"; }
+      var f = d.pages[0].textFrames.add(); f.geometricBounds = [10, 10, 150, 150];
+      r.tableUnset = f.parentStory.insertionPoints[0].tables.add().tableSummary;
+      return r;`,
+    uxp: `
+      const { NothingEnum } = require("indesign");
+      const d = scratch(), st = d.tableStyles.add(), r = {};
+      try { st.tableSummary; r.unsetRead = "ok"; } catch (e) { r.unsetRead = "threw"; }
+      st.tableSummary = "x"; r.afterSet = st.tableSummary;
+      try { st.tableSummary = NothingEnum.NOTHING; r.nothing = "accepted"; } catch (e) { r.nothing = "rejected"; }
+      const f = d.pages.item(0).textFrames.add(); f.geometricBounds = [10, 10, 150, 150];
+      r.tableUnset = f.parentStory.insertionPoints.item(0).tables.add().tableSummary;
+      return r;`,
+    expect: {
+      es: { unsetRead: 'threw', afterSet: 'x', nothing: 'rejected', tableUnset: '' },
+      uxp: { unsetRead: 'threw', afterSet: 'x', nothing: 'rejected', tableUnset: '' }
+    }
   }
 ];
 

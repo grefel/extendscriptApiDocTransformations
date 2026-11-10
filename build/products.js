@@ -24,6 +24,7 @@ module.exports = [
     slug: 'indesign',
     label: 'InDesign',
     versions: [
+      { key: '2027', src: 'sourceXML/indesign-22.0.0.104.xml' },
       { key: '2026', src: 'sourceXML/indesign-21.5.1.73.xml' }
     ],
     uxp: true,

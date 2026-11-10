@@ -49,7 +49,24 @@ const NO_UXP = new Set(['$', 'Namespace', 'QName', 'Reflection', 'ReflectionInfo
    bleiben dort sichtbar; Verweise auf sie werden unter UXP abgeschaltet.
    Eine Property, die auf sie zeigt (Document.genaiModels), braucht einen
    eigenen Eintrag unter members. */
-const ES_ONLY = { classes: {}, members: {} };
+const ID = ['indesign', 'indesign-server'];
+/* Belegt in InDesign 2027 (22.0.0.104), build/live: json-methods-es-only und
+   genai-es-only. Zuerst gefunden von Vlad Vladila (vamitul) im Prerelease. */
+const ES_ONLY = {
+  classes: {
+    GenAIModel: { products: ID, live: 'genai-es-only' },
+    GenAIModels: { products: ID, live: 'genai-es-only' },
+    GenAIImage: { products: ID, live: 'genai-es-only' },
+    GenAIImages: { products: ID, live: 'genai-es-only' }
+  },
+  members: {
+    'Application.parseJson': { products: ID, live: 'json-methods-es-only' },
+    'Application.parseJsonFile': { products: ID, live: 'json-methods-es-only' },
+    'Application.stringifyJson': { products: ID, live: 'json-methods-es-only' },
+    'Application.writeJsonFile': { products: ID, live: 'json-methods-es-only' },
+    'Document.genaiModels': { products: ID, live: 'genai-es-only' }
+  }
+};
 
 /* Ein File als Event-Handler gibt es unter UXP nicht — ein UXP-File ist ein
    anderes Objekt. Angenommen wird dort eine Funktion oder der Pfad einer

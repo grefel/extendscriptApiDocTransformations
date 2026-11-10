@@ -15,6 +15,15 @@ const ID_OBJECTS = (() => {
   try { return JSON.parse(fs.readFileSync(path.join(SITE, 'indesign/api.json'), 'utf8')).counts.objects; }
   catch (e) { return NaN; }
 })();
+/* Member von Application, ebenfalls aus api.json — ändert sich mit jeder Version. */
+const APP = (() => {
+  try {
+    const o = JSON.parse(fs.readFileSync(path.join(SITE, 'indesign/api.json'), 'utf8'))
+      .objects.find(x => x.name === 'Application');
+    return { p: o.properties.length, e: o.events.length, m: o.methods.length,
+      all: o.properties.length + o.events.length + o.methods.length };
+  } catch (e) { return { p: NaN, e: NaN, m: NaN, all: NaN }; }
+})();
 const url = f => 'file:///' + path.join(SITE, f).replace(/\\/g, '/');
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -725,16 +734,19 @@ const check = (name, got, want) => {
   await page.goto(url('indesign/Application.html'));
   await page.waitForSelector('.sidelist a', { timeout: 10000 });
   await page.waitForTimeout(400);
-  /* Je Laufzeit ein eigener Hinweis an doScript(): Argumente und Ergebnis. */
+  /* Je Laufzeit ein eigener Hinweis an doScript(): Argumente und Ergebnis.
+     Geprüft wird nach Inhalt — Hinweise, die in beiden Laufzeiten gelten,
+     kommen mit neuen Versionen hinzu. */
   const visibleNotes = () => page.locator('.mwarn:not([hidden])').allInnerTexts();
-  check('unter ExtendScript nur der Hinweis an doScript',
-    (await visibleNotes()).map(t => /last expression/.test(t)), [true]);
+  check('unter ExtendScript der doScript-Hinweis, keiner für UXP',
+    await visibleNotes().then(ns => ns.some(t => /last expression/.test(t)) + ',' +
+      ns.some(t => /setResult|script\.args|path of a \.jsx/.test(t))), 'true,false');
   await page.click('.rt button[data-r="uxp"]');
   await page.waitForTimeout(300);
-  check('unter UXP drei Member-Hinweise (scriptArgs, doScript, addEventListener)',
-    await visibleNotes().then(ns => ns.length + ' ' +
+  check('unter UXP die Hinweise zu scriptArgs, doScript, addEventListener',
+    await visibleNotes().then(ns =>
       [/^Undefined in UXP/, /setResult/, /path of a \.jsx/].map(re => ns.some(t => re.test(t))).join()),
-    '3 true,true,true');
+    'true,true,true');
   check('activeScript ist ein Promise<File>',
     await at('tr#p-activeScript td.t'),
     'Promise<File>');
@@ -879,13 +891,13 @@ const check = (name, got, want) => {
   await page.waitForTimeout(400);
   await page.click('.pill[data-mode="list"]');
   await page.waitForTimeout(400);
-  check('Liste zeigt alle Member', await page.locator('.mlist a').count(), 341);
+  check('Liste zeigt alle Member', await page.locator('.mlist a').count(), APP.all);
   check('und die Tabellen weichen',
     await page.locator('section[data-sec]:not([hidden])').count(), 0);
   check('nach Gruppen geordnet',
     (await page.locator('.mlist .h').allInnerTexts()).join(' / '),
-    'PROPERTIES 217 / EVENTS 13 / METHODS 111');
-  check('mehrspaltig, damit 341 Namen auf einen Blick passen',
+    'PROPERTIES ' + APP.p + ' / EVENTS ' + APP.e + ' / METHODS ' + APP.m);
+  check('mehrspaltig, damit alle Namen auf einen Blick passen',
     await page.evaluate(() => {
       const c = document.querySelector('.mlist .cols');
       const oben = new Set([...c.querySelectorAll('a')].map(a => Math.round(a.getBoundingClientRect().left)));
@@ -895,7 +907,7 @@ const check = (name, got, want) => {
   await page.fill('#f', 'script');
   await page.waitForTimeout(250);
   const gefiltert = await page.locator('.mlist a').count();
-  check('Filter reduziert auch die Liste', gefiltert > 0 && gefiltert < 341, true);
+  check('Filter reduziert auch die Liste', gefiltert > 0 && gefiltert < APP.all, true);
   await page.fill('#f', '');
   await page.waitForTimeout(250);
   /* Und die Wahl gilt weiter, wenn man zum naechsten Objekt blaettert. */
@@ -996,11 +1008,14 @@ const check = (name, got, want) => {
     (await page.locator('.tree .up').innerText()).trim(), 'Application');
   /* Ab zwanzig Namen steht die Liste hinter einem Pfeil, sonst offen da. */
   const KINDER = '.tree > .down a, .tree > .viele > .down a';
-  check('und enthaelt 81 Objekte, eingeklappt',
-    (await page.locator('.tree > .viele > summary').innerText()).trim(), '81 objects');
+  /* Die Zahl ändert sich mit der Version; geprüft wird, dass Zusammenfassung
+     und Liste übereinstimmen und die Liste eingeklappt ist. */
+  const kinderText = (await page.locator('.tree > .viele > summary').innerText()).trim();
+  const kinderZahl = Number((/^(\d+) objects$/.exec(kinderText) || [])[1]);
+  check('und enthaelt viele Objekte, eingeklappt', kinderZahl > 50, true);
   check('der Kasten bleibt dadurch flach',
     Math.round((await page.locator('.tree').boundingBox()).height) < 200, true);
-  check('aufgeklappt sind es 81 Verweise', await page.locator(KINDER).count(), 81);
+  check('aufgeklappt so viele Verweise wie angekündigt', await page.locator(KINDER).count(), kinderZahl);
   /* Die Preference-Familie steht getrennt: 172 der 423 Objekte gehoeren dazu
      und haengen an fast jedem Objekt. Ab sieben Namen eingeklappt. */
   check('die Preferences stehen getrennt',
@@ -1390,7 +1405,7 @@ const check = (name, got, want) => {
   check('nur Treffer in der Spalte',
     navHits.every(n => n.toLowerCase().includes('text')), true);
   check('Ueberschrift nennt Treffer und Gesamtzahl',
-    /^Objects · \d+ \/ 423$/.test((await page.locator('.side .h').first().textContent()).trim()),
+    /^Objects · \d+ \/ \d+$/.test((await page.locator('.side .h').first().textContent()).trim()),
     true);
   /* Der Filter gehoert zur Spalte, nicht zur Seite: die Member bleiben stehen. */
   check('Filter laesst die Member der Seite unberuehrt',

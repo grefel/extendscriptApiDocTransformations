@@ -73,6 +73,25 @@ const byKind = [
    Aufruf auf oberster Ebene als arguments sieht, belegt build/live
    (doscript-es-child). */
 const byMember = {
+  /* InDesign 2027 (22.0.0.104), build/live: checkdocument-pref-throws,
+     genai-es-only, tablestyle-summary-unset. Zuerst gefunden von Vlad
+     Vladila (vamitul) im Prerelease. Nur InDesign: die Server-XML ist noch
+     2025 und kennt die Member nicht. */
+  'Application.checkDocumentOnExportPreference': {
+    products: ['indesign'],
+    text: 'Reading this property throws in InDesign 2027 (22.0), in both ExtendScript and UXP.'
+  },
+  'GenAIModels.add': {
+    products: ['indesign'],
+    runtime: 'es',
+    text: 'Fails with “Invalid object for this request.” in InDesign 2027 (22.0) — scripts ' +
+      'cannot add GenAI models.'
+  },
+  'TableStyle.tableSummary': {
+    products: ['indesign'],
+    text: 'Reading throws as long as the style has no summary of its own. Set a string ' +
+      'first; NothingEnum.NOTHING is rejected — an empty string removes the summary.'
+  },
   'Application.scriptArgs': {
     products: ID,
     runtime: 'uxp',
