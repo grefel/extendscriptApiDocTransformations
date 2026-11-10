@@ -21,10 +21,18 @@ module.exports = {
   indesign: {
     '2027': [
       {
+        title: 'Table summaries and alt text',
+        text: 'Tables and table styles carry an accessibility summary; preferences control the ' +
+          'AI tag on generated summaries and the alt text icons in the layout.',
+        refs: ['Table.tableSummary', 'TableStyle.tableSummary',
+          'GeneralPreference.addAITagToTableSummary', 'ViewPreference.showAltTextIcon',
+          'Application.checkDocumentOnExportPreference']
+      },
+      {
         title: 'Grammar check',
         text: 'Every story and text range can check its grammar, report the issues as a ' +
           'JSON string and apply the suggested fixes. Called on a document, the methods ' +
-          'cover every story.',
+          'cover every story. Grammar suggestions are available for English text only.',
         refs: ['Story.checkGrammar', 'Story.getGrammarIssues', 'Story.applyGrammarFix',
           'Story.applyAllGrammarFixes', 'Story.requestGrammarCheck',
           'Application.grammarCheckPreference', 'Application.copySuggestionsPreference']
@@ -36,14 +44,6 @@ module.exports = {
           'ExtendScript only; UXP has JSON built in.',
         refs: ['Application.parseJson', 'Application.parseJsonFile', 'Application.stringifyJson',
           'Application.writeJsonFile']
-      },
-      {
-        title: 'Table summaries and alt text',
-        text: 'Tables and table styles carry an accessibility summary; preferences control the ' +
-          'AI tag on generated summaries and the alt text icons in the layout.',
-        refs: ['Table.tableSummary', 'TableStyle.tableSummary',
-          'GeneralPreference.addAITagToTableSummary', 'ViewPreference.showAltTextIcon',
-          'Application.checkDocumentOnExportPreference']
       },
       {
         title: 'Generative AI',
