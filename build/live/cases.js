@@ -652,6 +652,34 @@ const cases = [
       while ((__m = __re.exec(__txt))) __keys.push(__m[1]);
       return { runs: /"runs": 2\\b/.test(__txt), keys: __keys.join() };`,
     expect: { es: { runs: true, keys: 'lastRun,runs' } }
+  },
+
+  {
+    id: 'json-findings',
+    title: 'JSON methods: what they accept, key order, errors',
+    claim: 'Die Punkte unter dem JSON-Highlight: Arrays und einfache Werte gehen direkt, ein ' +
+      'Objekt irgendwo in den Daten wird abgelehnt (stringifyJson und writeJsonFile), Schlüssel ' +
+      'alphabetisch beim Lesen und Schreiben, Fehlermeldung bei kaputtem JSON nur "parseJson", ' +
+      'kein globales JSON, toSource() ist kein JSON.',
+    where: 'highlights.js indesign 2027 JSON points',
+    requires: ['22.0'],
+    es: `
+      var r = {}, f = File(Folder.temp + "/live-json-findings.json");
+      r.json = typeof JSON;
+      r.array = app.stringifyJson([1, "a", true]);
+      try { app.stringifyJson([{ a: 1 }]); r.objInArray = "accepted"; } catch (e) { r.objInArray = "rejected"; }
+      try { app.writeJsonFile(f.fsName, { a: 1 }); r.writeObj = "accepted"; } catch (e) { r.writeObj = "rejected"; }
+      r.writeArray = app.writeJsonFile(f.fsName, [1, 2]);
+      if (f.exists) f.remove();
+      r.sorted = app.stringifyJson(["__jsonObject__", [["z", 1], ["a", 2]]]);
+      r.parsedFirst = app.parseJson('{"z":1,"a":2}')[1][0][0];
+      try { app.parseJson('{"a":'); r.bad = "accepted"; } catch (e) { r.bad = e.message; }
+      r.toSource = ({ a: 1 }).toSource();
+      return r;`,
+    expect: {
+      es: { json: 'undefined', array: '[1,"a",true]', objInArray: 'rejected', writeObj: 'rejected',
+        writeArray: true, sorted: '{"a":2,"z":1}', parsedFirst: 'a', bad: 'parseJson', toSource: '({a:1})' }
+    }
   }
 ];
 

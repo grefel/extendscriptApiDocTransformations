@@ -2,11 +2,11 @@
   "indesign": "22.0.0.104",
   "name": "Adobe InDesign",
   "progId": "InDesign.Application.2027",
-  "date": "2026-11-10T09:28:05.686Z",
+  "date": "2026-11-10T09:43:24.419Z",
   "node": "v24.11.1",
   "partial": false,
   "summary": {
-    "PASS": 52,
+    "PASS": 53,
     "FAIL": 0,
     "ERROR": 0,
     "n/a": 0,
@@ -543,6 +543,28 @@
         "value": {
           "runs": true,
           "keys": "lastRun,runs"
+        }
+      },
+      "uxp": {
+        "status": "—"
+      }
+    },
+    {
+      "id": "json-findings",
+      "title": "JSON methods: what they accept, key order, errors",
+      "where": "highlights.js indesign 2027 JSON points",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "json": "undefined",
+          "array": "[1,\"a\",true]",
+          "objInArray": "rejected",
+          "writeObj": "rejected",
+          "writeArray": true,
+          "sorted": "{\"a\":2,\"z\":1}",
+          "parsedFirst": "a",
+          "bad": "parseJson",
+          "toSource": "({a:1})"
         }
       },
       "uxp": {

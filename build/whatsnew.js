@@ -281,7 +281,7 @@ function resolveHighlights(list, classes) {
   const byName = new Map(classes.map(c => [c.n, c]));
   const missing = [];
   const items = (list || []).map(h => ({
-    title: h.title, text: h.text, example: h.example || null,
+    title: h.title, text: h.text, points: h.points || [], example: h.example || null,
     refs: (h.refs || []).map(ref => {
       const [cls, member] = ref.split('.');
       const c = byName.get(cls);
@@ -339,6 +339,10 @@ function markdown(w, meta) {
     L.push('### ' + h.title);
     L.push('');
     L.push(h.text);
+    if (h.points.length) {
+      L.push('');
+      for (const p of h.points) L.push('- ' + p);
+    }
     if (h.refs.length) {
       L.push('');
       L.push(h.refs.map(r => '[' + r.label + '](' + md(r.cls) + ')').join(', '));

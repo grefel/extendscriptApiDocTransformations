@@ -9,6 +9,8 @@
             übernehmen
      refs   'Klasse' oder 'Klasse.member'; build.js warnt, wenn einer ins
             Leere zeigt
+     points optional: Liste unter dem Text, `…` wird Code. Nur, was ein Fall
+            in live/cases.js belegt.
      example  optional { file, code }: Codeblock wie auf der Übersichtsseite.
             Jedes Beispiel braucht einen Fall in live/cases.js, der genau
             diesen Code ausführt.
@@ -80,9 +82,19 @@ module.exports = {
       {
         title: 'JSON in ExtendScript',
         text: 'The application can read and write JSON — from a string or a file — without a ' +
-          'polyfill. An object comes as ["__jsonObject__", [[key, value], …]], not as a plain ' +
-          'object, and the write methods accept only that shape; keys come back sorted ' +
-          'alphabetically. ExtendScript only; UXP has JSON built in.',
+          'polyfill. ExtendScript only; UXP has JSON built in.',
+        points: [
+          'An object comes as `["__jsonObject__", [[key, value], …]]`, nested objects too; ' +
+            'arrays stay plain arrays.',
+          '`stringifyJson()` and `writeJsonFile()` take arrays, strings, numbers and booleans ' +
+            'directly, but reject a plain object anywhere in the data — convert it first, as ' +
+            '`toPairs()` does below.',
+          'Keys come back sorted alphabetically, on reading and on writing. If key order ' +
+            'matters, use a JSON polyfill instead.',
+          'Invalid JSON throws an error whose message is just `parseJson`.',
+          'ExtendScript still has no global `JSON`, and `toSource()` is no substitute: ' +
+            '`({a:1})` is not JSON.'
+        ],
         refs: ['Application.parseJson', 'Application.parseJsonFile', 'Application.stringifyJson',
           'Application.writeJsonFile'],
         example: { file: 'json.jsx', code: JSON_JSX }

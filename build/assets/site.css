@@ -2413,6 +2413,15 @@ h3.wnobj {
   overflow-wrap: anywhere
 }
 
+.wnhl .pts {
+  margin: 6px 0 0;
+  padding-left: 20px
+}
+
+.wnhl .pts li {
+  margin: 2px 0
+}
+
 /* Beispiel im Highlight wie in der Laufzeit-Karte: Seitengrund im Kartengrund. */
 .wnhl .snip {
   background: var(--bg);

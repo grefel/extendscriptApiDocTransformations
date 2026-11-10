@@ -587,7 +587,9 @@ function make(data, d, ctx) {
     if (hl.length) {
       h += `<section><h2 class="sechead" id="highlights">Highlights</h2>`;
       for (const x of hl)
-        h += `<div class="wnhl"><h3>${esc(x.title)}</h3><p>${esc(x.text)}</p>${x.refs.length
+        h += `<div class="wnhl"><h3>${esc(x.title)}</h3><p>${esc(x.text)}</p>${x.points.length
+          ? '<ul class="pts">' + x.points.map(p =>
+            `<li>${esc(p).replace(/`([^`]+)`/g, '<code>$1</code>')}</li>`).join('') + '</ul>' : ''}${x.refs.length
           ? `<p class="refs">${x.refs.map(r => to1(r.cls, r.anchor, esc(r.label))).join(' · ')}</p>` : ''}${x.example
           ? snippet(x.example.code, 'javascript', x.example.file, '// ' + x.example.file) : ''}</div>`;
       h += '</section>';
