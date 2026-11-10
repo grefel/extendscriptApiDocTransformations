@@ -14,6 +14,9 @@
    server   Skripte laufen im Auftrag eines Clients: Argumente und Ergebnis
             stehen im Vordergrund (examples.js, Übersichtsseite, uxp.md)
    note     optionaler Hinweis, wenn die Datenlage nicht aktuell ist
+   descFrom ältere XML desselben Produkts für Adobes neueren Export: füllt
+            leere Beschreibungen und entscheidet über doppelte Member
+            (model.js alignWithOlder)
 
    Neue Version: XML nach sourceXML/ legen, npm run intake, dann den
    ausgegebenen Eintrag oben in versions einfügen. */
@@ -63,6 +66,11 @@ module.exports = [
   {
     slug: 'bridge',
     label: 'Bridge',
-    src: 'sourceXML/bridge-2021.xml'
+    /* Ohne Vorversion, also ohne whatsnew.html: Adobes 2027-Export hat keine
+       Beschreibungen, ein Vergleich zeigte vor allem die fehlenden Texte. */
+    src: 'sourceXML/bridge-2027.xml',
+    descFrom: 'sourceXML/bridge-2021.xml',
+    note: 'Adobe’s Bridge 2027 export has no descriptions. The texts come from Bridge 2021 ' +
+      'wherever the member still exists; members new in 2027 have none.'
   }
 ];

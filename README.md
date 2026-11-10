@@ -12,7 +12,7 @@ therefore documented once.
 
 ```sh
 npm install
-npm run build      # sourceXML/*.xml → site/          2,694 pages, ~7 s
+npm run build      # sourceXML/*.xml → site/          2,695 pages, ~7 s
 npm run serve      # http://localhost:8080
 npm run check      # browser test suite (needs Playwright)
 ```

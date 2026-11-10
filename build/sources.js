@@ -22,7 +22,7 @@ const RULES = [
     m => ({ product: 'illustrator', year: null, version: m[1] })],
   [/^Adobe Photoshop (?:CC )?(\d{4}(?:\.\d+)?) Object Library$/,
     m => ({ product: 'photoshop', year: m[1].slice(0, 4), version: m[1] })],
-  [/^Adobe Bridge (\d{4}) Object Model$/,
+  [/^Adobe Bridge (\d{4})(?: Object Model)?$/,
     m => ({ product: 'bridge', year: m[1], version: m[1] })],
   /* Die beiden gemeinsamen Bibliotheken tragen keine Version. */
   [/^Core JavaScript Classes$/, () => ({ product: 'javascript', year: null, version: null })],
@@ -30,14 +30,16 @@ const RULES = [
 ];
 
 /* Der Titel steht in den ersten Zeilen; 64 KB reichen weit. Ein BOM oder eine
-   XML-Deklaration davor stört den regulären Ausdruck nicht. */
+   XML-Deklaration davor stört den regulären Ausdruck nicht. Adobes neuerer
+   Export (Bridge 2027, Media Encoder) hat kein title am <map>; dort trägt
+   der erste <topicref> den Namen („Adobe Bridge 2027"). */
 function titleOf(file) {
   const fd = fs.openSync(file, 'r');
   try {
     const buf = Buffer.alloc(65536);
     const n = fs.readSync(fd, buf, 0, buf.length, 0);
     const head = buf.toString('utf8', 0, n);
-    const m = /<map\b[^>]*\btitle="([^"]*)"/.exec(head);
+    const m = /<map\b[^>]*\btitle="([^"]*)"/.exec(head) || /<topicref\b[^>]*\bnavtitle="([^"]*)"/.exec(head);
     return m ? m[1].replace(/\s+/g, ' ').trim() : null;
   } finally {
     fs.closeSync(fd);
@@ -106,7 +108,13 @@ function resolveProducts(products, root) {
       if (a && b && compareVersions(a, b) <= 0)
         errors.push(p.slug + ': versions muss absteigen, ' + a + ' steht vor ' + b);
     }
-    return Object.assign({}, p, { versions, src: versions[0] && versions[0].src });
+    let descFrom = null;
+    if (p.descFrom) {
+      descFrom = path.resolve(root, p.descFrom);
+      if (!fs.existsSync(descFrom)) errors.push(p.slug + ': fehlt descFrom ' + p.descFrom);
+      else if (describe(descFrom).product !== p.slug) errors.push(p.slug + ': descFrom ' + p.descFrom + ' ist kein ' + p.slug);
+    }
+    return Object.assign({}, p, { versions, src: versions[0] && versions[0].src, descFrom });
   });
   return { products: list, errors, warnings };
 }

@@ -74,10 +74,18 @@ const models = [];
 for (const p of products)
   models.push({
     product: p,
-    data: build({ product: p.versions[0].file, javascript: JS_XML, scriptui: SUI_XML }),
+    data: build({ product: p.versions[0].file, javascript: JS_XML, scriptui: SUI_XML, descFrom: p.descFrom }),
     prev: p.versions[1] ? build({ product: p.versions[1].file, javascript: JS_XML, scriptui: SUI_XML }) : null
   });
 console.log('modelle  ' + models.length + ' Produkte in ' + (Date.now() - started) + ' ms');
+
+/* Beschreibungen aus einer älteren XML (products.js descFrom). */
+for (const m of models) {
+  const f = m.data.descFill;
+  if (f) console.log('texte    ' + m.product.slug.padEnd(16) + f.filled + '/' + f.members + ' Member und ' +
+    f.classesFilled + '/' + f.classes + ' Objekte aus ' + path.basename(m.product.descFrom) +
+    (f.pruned ? ', ' + f.pruned + ' doppelte Member entfernt' : ''));
+}
 
 /* Typkorrekturen aus additions.js: Nur Produkte, die die Properties kennen,
    tauchen auf. Eine, die nicht mehr greift, bricht nicht ab — der Typ steht

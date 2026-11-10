@@ -222,10 +222,70 @@ const titleOf = doc => {
     }
     return null;
   })(dict, 0);
-  return attr(map, 'title');
+  /* Neuerer Export ohne title: der Name steht am ersten topicref (sources.js). */
+  const top = map && kids(map, 'topicref')[0];
+  return attr(map, 'title') || attr(top, 'navtitle');
 };
 
-/* sources = { product, javascript, scriptui } — Pfade zu den OMV-XMLs. */
+/* Abgleich mit einer älteren XML desselben Produkts (products.js descFrom),
+   für Adobes neueren Export (Bridge 2027):
+
+   - Doppelte Member fallen weg. Der Export führt manche zweimal, statisch
+     und an der Instanz, sonst gleich (ModalOperator), dazu vereinzelt exakt
+     doppelt. Die ältere XML entscheidet, welche Art bleibt; fehlt der Member
+     dort, die Art der übrigen Member der Klasse, sofern eindeutig. Sonst
+     bleiben beide — UnitValue.baseUnit gibt es wirklich zweimal.
+   - Leere Beschreibungen werden gefüllt; Bridge 2027 hat gar keine.
+
+   Klassen werden ohne Rücksicht auf Groß-/Kleinschreibung zugeordnet
+   (Metadata → metadata), AutoX auch zu X; Member erst nach genauem Namen,
+   dann ohne Groß-/Kleinschreibung (ShowTooltips → ShowToolTips). Was es in
+   der älteren XML nicht gab, bleibt leer. */
+function alignWithOlder(classes, older) {
+  const old = new Map(older.map(c => [c.n.toLowerCase(), c]));
+  const st = { members: 0, filled: 0, classes: 0, classesFilled: 0, pruned: 0 };
+  const take = (x, y) => { if (x.d || !y || !y.d) return 0; x.d = y.d; return 1; };
+  const sig = m => m.a.map(a => a.n).join(',');
+  const bare = x => JSON.stringify(Object.assign({}, x, { st: undefined }));
+  const find = (list, n) => {
+    const exact = list.filter(y => y.n === n);
+    return exact.length ? exact : list.filter(y => y.n.toLowerCase() === n.toLowerCase());
+  };
+  for (const c of classes) {
+    if (c.g !== 'p') continue;
+    const o = old.get(c.n.toLowerCase()) || old.get(c.n.replace(/^Auto(?=[A-Z])/, '').toLowerCase());
+
+    for (const kind of ['p', 'm']) {
+      const list = c[kind];
+      const kept = list.filter((x, i) => list.findIndex(y => bare(y) === bare(x) && !y.st === !x.st) === i);
+      const oldAll = o ? [...o.p, ...o.m] : [];
+      const usual = !oldAll.length ? null : oldAll.every(y => y.st) ? true : oldAll.every(y => !y.st) ? false : null;
+      c[kind] = kept.filter(x => {
+        if (!kept.some(y => y !== x && !y.st !== !x.st && bare(y) === bare(x))) return true;
+        const was = o ? o[kind].filter(y => y.n === x.n) : [];
+        const keepStatic = was.length ? was.some(y => y.st) : usual;
+        return keepStatic === null || !!x.st === keepStatic;
+      });
+      st.pruned += list.length - c[kind].length;
+    }
+
+    st.classes++;
+    st.classesFilled += take(c, o);
+    for (const kind of ['p', 'ev', 'm']) for (const x of c[kind]) {
+      st.members++;
+      const same = o ? find(o[kind], x.n) : [];
+      const y = (kind === 'm' && same.find(m => sig(m) === sig(x))) || same[0];
+      if (!y) continue;
+      st.filled += take(x, y);
+      if (kind === 'm') for (const a of x.a) {
+        if (take(a, y.a.find(b => b.n === a.n)) && a.d.endsWith('(Optional)')) a.o = 1;
+      }
+    }
+  }
+  return st;
+}
+
+/* sources = { product, javascript, scriptui, descFrom } — Pfade zu den OMV-XMLs. */
 function build(sources) {
   const parts = [
     ['js', sources.javascript],
@@ -246,6 +306,10 @@ function build(sources) {
     }
   }
 
+  /* Vor der Collection-Erkennung: die hängt teils an der Beschreibung. */
+  const descFill = sources.descFrom
+    ? alignWithOlder(classes, build({ product: sources.descFrom }).classes) : null;
+
   /* Methoden auf Klassenebene sind statisch: File.openDialog(), Math.max(),
      Window.alert(). Illustrator und Photoshop legen dort aber auch add() &
      Co. ihrer Collections ab (~70) — aufgerufen wird app.documents.add(),
@@ -256,7 +320,8 @@ function build(sources) {
     version,
     generated: new Date().toISOString().slice(0, 10),
     classes: classes.sort(byName),
-    typeFixes
+    typeFixes,
+    descFill
   };
 }
 

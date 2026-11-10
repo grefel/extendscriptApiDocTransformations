@@ -4,7 +4,7 @@ Einziger Schritt vom Adobe-Objektmodell zur fertigen Website.
 **Weder oXygen noch Java noch Saxon werden gebraucht.**
 
 ```
-sourceXML/*.xml → build/ (Node) → site/   2.694 Seiten
+sourceXML/*.xml → build/ (Node) → site/   2.695 Seiten
 ```
 
 ## Benutzung
@@ -770,7 +770,7 @@ in der Wirklichkeit falsch — deshalb läuft die Gegenprobe über http.
 | `indesign-server` | 966 |
 | `illustrator` | 299 |
 | `photoshop` | 226 |
-| `bridge` | 37 |
+| `bridge` | 38 |
 | `javascript` | 22 |
 | `scriptui` | 34 |
 
@@ -807,7 +807,20 @@ liest den Titel des ersten `<map>`:
 | Adobe InDesign Server 2025 (20.5.0.49) Object Model | `indesign-server-20.5.0.49.xml` | `2025` |
 | Adobe Illustrator 31 Type Library | `illustrator-31.xml` | `31` |
 | Adobe Photoshop CC 2015.5 Object Library | `photoshop-2015.5.xml` | `2015` |
-| Adobe Bridge 2021 Object Model | `bridge-2021.xml` | `2021` |
+| Adobe Bridge 2027 (ohne `<map title>`, siehe unten) | `bridge-2027.xml` | `2027` |
+
+**Adobes neuerer Export** (Bridge 2027, Media Encoder 2027) sieht anders aus:
+eine Zeile, kein Namensraum, kein `title` am `<map>` — der Name steht am
+ersten `<topicref navtitle>`, dort liest ihn `titleOf()` dann. Bridge 2027
+hat **keine einzige Beschreibung** und führt Member teils doppelt, statisch
+und an der Instanz (`ModalOperator`). Deshalb nennt `products.js` dort
+`descFrom: bridge-2021.xml`: `alignWithOlder()` in `model.js` füllt leere
+Texte aus der älteren XML (Klassen ohne Groß-/Kleinschreibung, `AutoX` auch
+zu `X`) und lässt bei Doppelten die Art stehen, die die ältere XML kennt.
+Die Bauzeile `texte` nennt, wie viel davon griff (2027: 396/540 Member,
+31/38 Objekte, 36 Doppelte). Der `note` dazu steht auf der Startseite und
+der Übersicht des Produkts. Eine Vorversion für What's new hat Bridge
+bewusst nicht.
 
 **Neue Version aufnehmen:** XML nach `sourceXML/` legen und `npm run intake`.
 Das benennt sie um und gibt den Eintrag aus, der oben in `versions` gehört —
