@@ -222,9 +222,10 @@ const titleOf = doc => {
     }
     return null;
   })(dict, 0);
-  /* Neuerer Export ohne title: der Name steht am ersten topicref (sources.js). */
+  /* Neuerer Export ohne title: der Name steht am ersten topicref (sources.js),
+     bei Media Encoder als „Adobe Adobe Media Encoder 2027". */
   const top = map && kids(map, 'topicref')[0];
-  return attr(map, 'title') || attr(top, 'navtitle');
+  return (attr(map, 'title') || attr(top, 'navtitle')).replace(/^Adobe Adobe /, 'Adobe ');
 };
 
 /* Abgleich mit einer älteren XML desselben Produkts (products.js descFrom),
@@ -295,10 +296,10 @@ function build(sources) {
 
   const classes = [];
   const typeFixes = { applied: [], missed: [] };
-  let version = '';
+  let version = '', repair = null;
   for (const [origin, file] of parts) {
     const doc = parse(file);
-    if (origin === 'p') version = titleOf(doc);
+    if (origin === 'p') { version = titleOf(doc); repair = fix.repairNewExport(doc); }
     for (const cd of classdefsIn(doc)) {
       /* Photoshop bringt ein zweites "global" mit, das das echte verdeckt. */
       if (origin === 'p' && attr(cd, 'name') === 'global') continue;
@@ -321,7 +322,8 @@ function build(sources) {
     generated: new Date().toISOString().slice(0, 10),
     classes: classes.sort(byName),
     typeFixes,
-    descFill
+    descFill,
+    repair
   };
 }
 

@@ -29,10 +29,12 @@ const rel = name => 'sourceXML/' + name;
 const norm = f => path.resolve(f).toLowerCase();
 
 /* Welche Dateien products.js verwendet — über den vollen Pfad, denn eine
-   gleichnamige Datei in archive/ ist eine andere. */
+   gleichnamige Datei in archive/ ist eine andere. descFrom zählt mit. */
 const used = new Map();
-for (const p of products)
+for (const p of products) {
   for (const v of p.versions || [{ src: p.src }]) used.set(norm(path.resolve(ROOT, v.src)), v.src);
+  if (p.descFrom) used.set(norm(path.resolve(ROOT, p.descFrom)), p.descFrom);
+}
 
 /* Was in products.js zu ändern ist, damit die neue Datei veröffentlicht wird. */
 function advice(d) {

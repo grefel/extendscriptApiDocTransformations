@@ -85,6 +85,11 @@ for (const m of models) {
   if (f) console.log('texte    ' + m.product.slug.padEnd(16) + f.filled + '/' + f.members + ' Member und ' +
     f.classesFilled + '/' + f.classes + ' Objekte aus ' + path.basename(m.product.descFrom) +
     (f.pruned ? ', ' + f.pruned + ' doppelte Member entfernt' : ''));
+  /* Reparaturen am neueren Export (fixdom.js repairNewExport). */
+  const r = m.data.repair;
+  if (r && (r.merged || r.retyped || r.moved || r.todo))
+    console.log('repariert ' + m.product.slug.padEnd(15) + r.merged + ' Parameter-Fetzen zusammengeführt, ' +
+      r.retyped + ' Typangaben, ' + r.moved + ' Methodentexte zurückgeholt, ' + r.todo + ' TODO-Notizen entfernt');
 }
 
 /* Typkorrekturen aus additions.js: Nur Produkte, die die Properties kennen,

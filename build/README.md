@@ -4,7 +4,7 @@ Einziger Schritt vom Adobe-Objektmodell zur fertigen Website.
 **Weder oXygen noch Java noch Saxon werden gebraucht.**
 
 ```
-sourceXML/*.xml → build/ (Node) → site/   2.695 Seiten
+sourceXML/*.xml → build/ (Node) → site/   2.796 Seiten
 ```
 
 ## Benutzung
@@ -771,6 +771,7 @@ in der Wirklichkeit falsch — deshalb läuft die Gegenprobe über http.
 | `illustrator` | 299 |
 | `photoshop` | 226 |
 | `bridge` | 38 |
+| `media-encoder` | 100 |
 | `javascript` | 22 |
 | `scriptui` | 34 |
 
@@ -808,6 +809,7 @@ liest den Titel des ersten `<map>`:
 | Adobe Illustrator 31 Type Library | `illustrator-31.xml` | `31` |
 | Adobe Photoshop CC 2015.5 Object Library | `photoshop-2015.5.xml` | `2015` |
 | Adobe Bridge 2027 (ohne `<map title>`, siehe unten) | `bridge-2027.xml` | `2027` |
+| Adobe Adobe Media Encoder 2027 (ebenso) | `media-encoder-2027.xml` | `2027` |
 
 **Adobes neuerer Export** (Bridge 2027, Media Encoder 2027) sieht anders aus:
 eine Zeile, kein Namensraum, kein `title` am `<map>` — der Name steht am
@@ -821,6 +823,18 @@ Die Bauzeile `texte` nennt, wie viel davon griff (2027: 396/540 Member,
 31/38 Objekte, 36 Doppelte). Der `note` dazu steht auf der Startseite und
 der Übersicht des Produkts. Eine Vorversion für What's new hat Bridge
 bewusst nicht.
+
+**Media Encoder 2027** hat Texte, aber zerlegte Parameter: Der Exporter
+schrieb „Beschreibung:typ" in `<type>`, trennte an jedem Komma einen neuen
+`<parameter>` mit einem Satzfetzen als Namen ab und hängte die Beschreibung
+der Methode an den letzten Parameter. `repairNewExport()` in `fixdom.js`
+baut das im DOM zurück, bevor `model.js` liest — nur im neueren Export,
+im älteren ist Text im Typ gewollt („Measurement Unit"). Dabei fallen auch
+Adobes interne Notizen („### TODO: …") weg. Die Bauzeile `repariert` nennt
+die Zahlen (2027: 25 Fetzen, 70 Typangaben, 296 Methodentexte, 12 TODOs).
+Die XML enthält auch interne Klassen (`DebugAssert`, `PixelComparison`);
+veröffentlicht wird wie bei den anderen Produkten alles, was Adobe
+exportiert.
 
 **Neue Version aufnehmen:** XML nach `sourceXML/` legen und `npm run intake`.
 Das benennt sie um und gibt den Eintrag aus, der oben in `versions` gehört —

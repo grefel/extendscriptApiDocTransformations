@@ -401,8 +401,10 @@ const check = (name, got, want) => {
   /* --- Produktumschalter und getrennte Bibliotheken --- */
   await page.goto(url('indesign/Rectangle.html'));
   await page.waitForSelector('.side a.on', { timeout: 10000 });
+  /* Alle Produkte aus products.js plus Core JavaScript und ScriptUI. */
+  const ZIELE = require('./products').length + 2;
   check('Umschalter listet alle Bibliotheken',
-    await page.locator('.prodmenu a').count(), 7);
+    await page.locator('.prodmenu a').count(), ZIELE);
   /* textContent statt innerText: im zugeklappten <details> ist der Inhalt
      nicht sichtbar und innerText liefert dann einen leeren String. */
   check('aktuelles Produkt markiert',
@@ -438,7 +440,7 @@ const check = (name, got, want) => {
   }
 
   /* --- Laufzeit-Umschalter tragen nur die beiden InDesign-Ziele --- */
-  for (const slug of ['illustrator', 'photoshop', 'bridge']) {
+  for (const slug of ['illustrator', 'photoshop', 'bridge', 'media-encoder']) {
     await page.goto(url(slug + '/index.html'));
     await page.waitForTimeout(200);
     check(slug + ': kein UXP-Umschalter', await page.locator('.rt').count(), 0);
@@ -1493,7 +1495,7 @@ const check = (name, got, want) => {
   /* Startseite */
   await page.goto(url('index.html'));
   check('Startseite listet alle Bibliotheken',
-    await page.locator('ul.cards a').count(), 7);
+    await page.locator('ul.cards a').count(), ZIELE);
   check('Startseite weist auf veraltete Photoshop-Daten hin',
     (await page.locator('ul.cards .note').count()) >= 1, true);
   /* Die CS6-Fassung haengt nur hier — nicht im Produktumschalter. Sie soll
@@ -1536,7 +1538,7 @@ const check = (name, got, want) => {
      InDesign, meldet das SKIP (Probelauf: build/products-dryrun.js). Jeder
      Link muss auf eine vorhandene Seite und, mit Anker, auf ein vorhandenes
      Sprungziel zeigen. */
-  for (const slug of ['indesign', 'indesign-server', 'illustrator', 'photoshop', 'bridge']) {
+  for (const slug of ['indesign', 'indesign-server', 'illustrator', 'photoshop', 'bridge', 'media-encoder']) {
   const W = 'What’s new ' + slug + ': ';
   const WN = path.join(SITE, slug, 'whatsnew.html');
   if (!fs.existsSync(WN)) {
@@ -1614,8 +1616,8 @@ const check = (name, got, want) => {
   const hash = b => 'sha256:' + require('crypto').createHash('sha256').update(b).digest('hex');
   const mf = JSON.parse(fs.readFileSync(path.join(SITE, 'manifest.json'), 'utf8'));
   check('manifest: formatVersion', mf.formatVersion, FORMAT_VERSION);
-  check('manifest: alle sieben Ziele', mf.targets.map(t => t.slug).join(' '),
-    'indesign indesign-server illustrator photoshop bridge javascript scriptui');
+  check('manifest: alle acht Ziele', mf.targets.map(t => t.slug).join(' '),
+    'indesign indesign-server illustrator photoshop bridge media-encoder javascript scriptui');
   let mfFiles = 0, mfBad = [];
   for (const t of mf.targets)
     for (const f of t.files) {

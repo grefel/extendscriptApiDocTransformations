@@ -24,6 +24,9 @@ const RULES = [
     m => ({ product: 'photoshop', year: m[1].slice(0, 4), version: m[1] })],
   [/^Adobe Bridge (\d{4})(?: Object Model)?$/,
     m => ({ product: 'bridge', year: m[1], version: m[1] })],
+  /* Neuerer Export; Adobe schreibt dort „Adobe Adobe Media Encoder 2027". */
+  [/^Adobe (?:Adobe )?Media Encoder (\d{4})$/,
+    m => ({ product: 'media-encoder', year: m[1], version: m[1] })],
   /* Die beiden gemeinsamen Bibliotheken tragen keine Version. */
   [/^Core JavaScript Classes$/, () => ({ product: 'javascript', year: null, version: null })],
   [/^ScriptUI Classes$/, () => ({ product: 'scriptui', year: null, version: null })]

@@ -169,7 +169,117 @@ const GLOBAL_APP = {
   n: 'app', t: ['Application'], rw: 'readonly', d: 'The application object'
 };
 
+/* Adobes neuerer Export (erkennbar am <map> ohne title; Media Encoder 2027,
+   Bridge 2027) hat Parameter zerlegt. Der Exporter schrieb „Text:typ" in
+   <type> und trennte an jedem Komma einen neuen <parameter> ab, dessen Name
+   ein Satzfetzen ist; die Beschreibung der Methode landete dabei am letzten
+   Fetzen. Hier wird das im DOM zurückgebaut, bevor model.js liest:
+
+   - Fetzen (Name kein Bezeichner) gehören zum Parameter davor; ihre Namen
+     und Texte werden mit „, " wieder zur Beschreibung, der Typ hinter dem
+     letzten Doppelpunkt gilt.
+   - Eine <shortdesc> am letzten Parameter oder Fetzen geht an die Methode,
+     wenn die keine hat.
+   - „Optional…" am Anfang macht den Parameter optional.
+   - „A | null" wird A, „X[]" wird X mit <array/>; übrig bleibende Prosa
+     („Close count") wird any.
+   - Interne Notizen („### TODO: …") fallen aus den Beschreibungen.
+
+   Im älteren Export greift nichts davon: dort ist Text im Typ gewollt
+   („Measurement Unit (Number or String)"). */
+const IDENT = /^[A-Za-z_$][\w$]*$/;
+const TYPE_TAIL = /^([\s\S]*?\S)\s*:\s*([A-Za-z_$][\w$]*(?:\[\])?)$/;
+
+function repairNewExport(doc) {
+  const st = { merged: 0, retyped: 0, moved: 0, todo: 0 };
+  const map = doc.getElementsByTagName('map')[0];
+  if (!map || map.getAttribute('title')) return st;
+  const el = (node, name) => [...node.childNodes].filter(n => n.nodeType === 1 && n.nodeName === name);
+  const squash = s => s.replace(/\s+/g, ' ').trim();
+  const setText = (node, s) => { while (node.firstChild) node.removeChild(node.firstChild); node.appendChild(doc.createTextNode(s)); };
+  const shortdescOf = node => {
+    let sd = el(node, 'shortdesc')[0];
+    if (!sd) { sd = doc.createElement('shortdesc'); node.insertBefore(sd, node.firstChild); }
+    return sd;
+  };
+
+  for (const ps of [...doc.getElementsByTagName('parameters')]) {
+    const method = ps.parentNode;
+    /* Der Exporter hängt die Beschreibung der Methode an den letzten
+       Parameter — in Media Encoder 2027 296-mal, an keinem anderen Platz. */
+    const params = el(ps, 'parameter'), last = params[params.length - 1];
+    const lastSd = last && el(last, 'shortdesc')[0];
+    if (lastSd && !el(method, 'shortdesc').length) { method.insertBefore(lastSd, method.firstChild); st.moved++; }
+    const groups = [];
+    for (const p of el(ps, 'parameter')) {
+      const name = squash(p.getAttribute('name'));
+      if (IDENT.test(name)) { groups.push({ node: p, extra: [] }); continue; }
+      if (groups.length) { groups[groups.length - 1].extra.push(p); continue; }
+      /* Fetzen ganz vorn: ohne Namen ist es kein Parameter (PluginSupport),
+         sonst wird das erste Wort der Name und der Rest Text
+         (ObjectReflection: „object to inspect"). */
+      if (!name) { ps.removeChild(p); st.merged++; continue; }
+      const first = name.split(' ')[0];
+      p.setAttribute('name', IDENT.test(first) ? first : 'value');
+      setText(shortdescOf(p), squash(name + ' ' + (el(p, 'shortdesc')[0] || { textContent: '' }).textContent));
+      groups.push({ node: p, extra: [] });
+      st.retyped++;
+    }
+    for (const g of groups) {
+      const typeEl = g.node.getElementsByTagName('type')[0];
+      const own = typeEl ? squash(typeEl.textContent) : '';
+      if (!g.extra.length && !/\s/.test(own)) continue;
+      const parts = [];
+      let type = null;
+      const read = s => {
+        const m = TYPE_TAIL.exec(s);
+        if (m) { parts.push(m[1]); type = m[2]; } else if (/\s/.test(s)) parts.push(s); else if (s) type = s;
+      };
+      read(own);
+      for (const x of g.extra) {
+        parts.push(squash(x.getAttribute('name')));
+        const t = x.getElementsByTagName('type')[0];
+        read(t ? squash(t.textContent) : '');
+        const sd = el(x, 'shortdesc')[0];
+        if (sd) {
+          if (!el(method, 'shortdesc').length) { method.insertBefore(sd, method.firstChild); st.moved++; }
+          else parts.push(squash(sd.textContent));
+        }
+        ps.removeChild(x);
+        st.merged++;
+      }
+      if (typeEl) setText(typeEl, type || 'any');
+      const text = parts.join(', ');
+      const sd = shortdescOf(g.node);
+      setText(sd, squash([text, sd.textContent].join(' ')));
+      if (/^Optional\b/i.test(text)) g.node.setAttribute('optional', 'true');
+      st.retyped++;
+    }
+  }
+
+  for (const t of [...doc.getElementsByTagName('type')]) {
+    const raw = squash(t.textContent);
+    const names = raw.split(/\s*\|\s*/).filter(n => n && n !== 'null');
+    if (names.length === 1 && names[0] === raw && !/\[\]$/.test(raw) && !/\s/.test(raw)) continue;
+    const dt = t.parentNode;
+    const clean = names.map(n => /\s/.test(n) ? 'any' : n);
+    clean.forEach((n, i) => {
+      const target = i === 0 ? dt : dt.parentNode.insertBefore(doc.createElement('datatype'), dt.nextSibling);
+      const typeNode = i === 0 ? t : target.appendChild(doc.createElement('type'));
+      setText(typeNode, n.replace(/\[\]$/, ''));
+      if (/\[\]$/.test(n) && !el(target, 'array').length) target.appendChild(doc.createElement('array'));
+    });
+    st.retyped++;
+  }
+
+  for (const sd of [...doc.getElementsByTagName('shortdesc')]) {
+    const s = sd.textContent, cut = s.replace(/\s*#{2,}\s*TODO\b[\s\S]*$/, '');
+    if (cut !== s) { setText(sd, cut.trim()); st.todo++; }
+  }
+  return st;
+}
+
 module.exports = {
-  cleanTypeName, splitAcceptReturn, datatypesOf, parentTypes, rangeOf,
+  cleanTypeName, splitAcceptReturn, datatypesOf, parentTypes, rangeOf, repairNewExport,
   APPLESCRIPT_LANGUAGE, GLOBAL_APP
 };

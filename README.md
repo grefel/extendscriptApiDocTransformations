@@ -4,7 +4,7 @@ Generates a readable, searchable reference for the Adobe ExtendScript object mod
 from Adobe's own OMV exports. Published at
 <https://www.indesignjs.de/indesignapi/>.
 
-Covered: InDesign, InDesign Server, Illustrator, Photoshop and Bridge, plus ScriptUI
+Covered: InDesign, InDesign Server, Illustrator, Photoshop, Bridge and Media Encoder, plus ScriptUI
 and the core JavaScript classes — the latter two shared by every application and
 therefore documented once.
 
@@ -12,7 +12,7 @@ therefore documented once.
 
 ```sh
 npm install
-npm run build      # sourceXML/*.xml → site/          2,695 pages, ~7 s
+npm run build      # sourceXML/*.xml → site/          2,796 pages, ~7 s
 npm run serve      # http://localhost:8080
 npm run check      # browser test suite (needs Playwright)
 ```

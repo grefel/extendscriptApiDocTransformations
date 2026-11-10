@@ -72,5 +72,12 @@ module.exports = [
     descFrom: 'sourceXML/bridge-2021.xml',
     note: 'Adobe’s Bridge 2027 export has no descriptions. The texts come from Bridge 2021 ' +
       'wherever the member still exists; members new in 2027 have none.'
+  },
+  /* Erstmals 2027, im neueren Export (sources.js). Ohne uxp-Umschalter wie
+     Illustrator: das Modell beschreibt die ExtendScript-Seite. */
+  {
+    slug: 'media-encoder',
+    label: 'Media Encoder',
+    src: 'sourceXML/media-encoder-2027.xml'
   }
 ];
