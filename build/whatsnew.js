@@ -281,7 +281,7 @@ function resolveHighlights(list, classes) {
   const byName = new Map(classes.map(c => [c.n, c]));
   const missing = [];
   const items = (list || []).map(h => ({
-    title: h.title, text: h.text,
+    title: h.title, text: h.text, example: h.example || null,
     refs: (h.refs || []).map(ref => {
       const [cls, member] = ref.split('.');
       const c = byName.get(cls);
@@ -342,6 +342,13 @@ function markdown(w, meta) {
     if (h.refs.length) {
       L.push('');
       L.push(h.refs.map(r => '[' + r.label + '](' + md(r.cls) + ')').join(', '));
+    }
+    if (h.example) {
+      L.push('');
+      L.push('```js');
+      L.push('// ' + h.example.file);
+      L.push(h.example.code);
+      L.push('```');
     }
   }
   if (w.empty) return L.join('\n') + '\n';

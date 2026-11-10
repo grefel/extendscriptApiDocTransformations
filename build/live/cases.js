@@ -40,6 +40,16 @@
 'use strict';
 
 const examples = require('../examples');
+const highlights = require('../highlights');
+
+/* JSON-Beispiel aus highlights.js mit Datei im Temp-Ordner statt auf dem Schreibtisch. */
+function onTemp(list) {
+  const ex = list.find(h => h.example && h.example.file === 'json.jsx');
+  const needle = 'Folder.desktop + "/settings.json"';
+  if (!ex || !ex.example.code.includes(needle))
+    return 'throw new Error("highlights.js: ' + needle.replace(/"/g, '\\"') + ' nicht gefunden — cases.js anpassen");';
+  return ex.example.code.split(needle).join('Folder.temp + "/live-json-example.json"');
+}
 
 /* Wie run.js an ein Objekt kommt, um requires zu prüfen (ExtendScript). */
 const SAMPLES = {
@@ -623,6 +633,25 @@ const cases = [
       es: { unsetRead: 'threw', afterSet: 'x', nothing: 'rejected', tableUnset: '' },
       uxp: { unsetRead: 'threw', afterSet: 'x', nothing: 'rejected', tableUnset: '' }
     }
+  },
+
+  {
+    id: 'json-example',
+    title: 'highlights.js JSON example reads, changes and writes a settings file',
+    claim: 'Das JSON-Beispiel auf whatsnew.html: zweimal ausgeführt steht runs auf 2, ' +
+      'die Datei ist eingerückt und die Schlüssel kommen alphabetisch sortiert zurück.',
+    where: 'highlights.js JSON_JSX; render.js whatsnewPage',
+    requires: ['22.0'],
+    es: `
+      var __file = File(Folder.temp + "/live-json-example.json");
+      if (__file.exists) __file.remove();
+      var __src = ${JSON.stringify(onTemp(highlights.indesign['2027']))};
+      eval(__src); eval(__src);
+      __file.encoding = "UTF-8"; __file.open("r"); var __txt = __file.read(); __file.close(); __file.remove();
+      var __keys = [], __m, __re = /^ {4}"(\\w+)"/gm;
+      while ((__m = __re.exec(__txt))) __keys.push(__m[1]);
+      return { runs: /"runs": 2\\b/.test(__txt), keys: __keys.join() };`,
+    expect: { es: { runs: true, keys: 'lastRun,runs' } }
   }
 ];
 

@@ -2,11 +2,11 @@
   "indesign": "22.0.0.104",
   "name": "Adobe InDesign",
   "progId": "InDesign.Application.2027",
-  "date": "2026-11-10T08:51:31.071Z",
+  "date": "2026-11-10T09:28:05.686Z",
   "node": "v24.11.1",
   "partial": false,
   "summary": {
-    "PASS": 51,
+    "PASS": 52,
     "FAIL": 0,
     "ERROR": 0,
     "n/a": 0,
@@ -532,6 +532,21 @@
           "nothing": "rejected",
           "tableUnset": ""
         }
+      }
+    },
+    {
+      "id": "json-example",
+      "title": "highlights.js JSON example reads, changes and writes a settings file",
+      "where": "highlights.js JSON_JSX; render.js whatsnewPage",
+      "es": {
+        "status": "PASS",
+        "value": {
+          "runs": true,
+          "keys": "lastRun,runs"
+        }
+      },
+      "uxp": {
+        "status": "—"
       }
     }
   ]

@@ -9,6 +9,9 @@
             übernehmen
      refs   'Klasse' oder 'Klasse.member'; build.js warnt, wenn einer ins
             Leere zeigt
+     example  optional { file, code }: Codeblock wie auf der Übersichtsseite.
+            Jedes Beispiel braucht einen Fall in live/cases.js, der genau
+            diesen Code ausführt.
 
    Nur, was ein Skript betrifft. Funktionen ohne Spur im Objektmodell
    (Bedienfelder, Plattformen) gehören nicht hierher.
@@ -16,6 +19,40 @@
    2026 ist nur Probelauf-Material (build/products-dryrun.js): veröffentlicht
    wird die Seite erst ab 2027 mit 2026 als Vorversion. */
 'use strict';
+
+/* Einstellungen in einer JSON-Datei lesen, ändern, zurückschreiben. Die
+   beiden Helfer übersetzen zwischen Adobes Paar-Form und normalen Objekten.
+   In InDesign 2027 (22.0) gelaufen: live/cases.js json-example. */
+const JSON_JSX = [
+  '// Objects come as ["__jsonObject__", [[key, value], ...]], arrays as arrays.',
+  'function toObject(v) {',
+  '  if (!(v instanceof Array)) return v;',
+  '  var r = [], i;',
+  '  if (v[0] === "__jsonObject__") {',
+  '    r = {};',
+  '    for (i = 0; i < v[1].length; i++) r[v[1][i][0]] = toObject(v[1][i][1]);',
+  '  } else {',
+  '    for (i = 0; i < v.length; i++) r.push(toObject(v[i]));',
+  '  }',
+  '  return r;',
+  '}',
+  'function toPairs(v) {',
+  '  if (v === null || typeof v !== "object") return v;',
+  '  var r = [], k;',
+  '  if (v instanceof Array) {',
+  '    for (k = 0; k < v.length; k++) r.push(toPairs(v[k]));',
+  '    return r;',
+  '  }',
+  '  for (k in v) if (v.hasOwnProperty(k)) r.push([k, toPairs(v[k])]);',
+  '  return ["__jsonObject__", r];',
+  '}',
+  '',
+  'var file = File(Folder.desktop + "/settings.json");',
+  'var settings = file.exists ? toObject(app.parseJsonFile(file.fsName)) : { runs: 0 };',
+  'settings.runs++;',
+  'settings.lastRun = new Date().toString();',
+  'app.writeJsonFile(file.fsName, toPairs(settings), true); // true: indented'
+].join('\n');
 
 module.exports = {
   indesign: {
@@ -43,10 +80,12 @@ module.exports = {
       {
         title: 'JSON in ExtendScript',
         text: 'The application can read and write JSON — from a string or a file — without a ' +
-          'polyfill. The parsed result comes as [key, value] pairs, not as a plain object. ' +
-          'ExtendScript only; UXP has JSON built in.',
+          'polyfill. An object comes as ["__jsonObject__", [[key, value], …]], not as a plain ' +
+          'object, and the write methods accept only that shape; keys come back sorted ' +
+          'alphabetically. ExtendScript only; UXP has JSON built in.',
         refs: ['Application.parseJson', 'Application.parseJsonFile', 'Application.stringifyJson',
-          'Application.writeJsonFile']
+          'Application.writeJsonFile'],
+        example: { file: 'json.jsx', code: JSON_JSX }
       },
       {
         title: 'Generative AI',
