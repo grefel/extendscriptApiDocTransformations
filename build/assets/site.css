@@ -557,8 +557,16 @@ kbd {
   box-shadow: inset 2px 0 0 var(--accent)
 }
 
+/* Badge neben dem Namen, nicht darin: die Ellipse schnitte ihn sonst ab. */
+.side a .wnn {
+  flex: none;
+  margin: 0 0 0 -2px;
+  align-self: center
+}
+
 .side a i {
   flex: none;
+  margin-left: auto;
   font-style: normal;
   color: var(--dim);
   font-size: 10px

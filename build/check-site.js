@@ -1532,19 +1532,23 @@ const check = (name, got, want) => {
     ID_OBJECTS);
 
   /* --- What's new ---
-     Gibt es nur, wenn products.js für InDesign eine Vorversion nennt — im
-     Probelauf (build/products-dryrun.js) immer. Jeder Link muss auf eine
-     vorhandene Seite und, mit Anker, auf ein vorhandenes Sprungziel zeigen. */
-  const WN = path.join(SITE, 'indesign/whatsnew.html');
+     Je Produkt, für das products.js eine Vorversion nennt. Fehlt sie bei
+     InDesign, meldet das SKIP (Probelauf: build/products-dryrun.js). Jeder
+     Link muss auf eine vorhandene Seite und, mit Anker, auf ein vorhandenes
+     Sprungziel zeigen. */
+  for (const slug of ['indesign', 'indesign-server', 'illustrator', 'photoshop', 'bridge']) {
+  const W = 'What’s new ' + slug + ': ';
+  const WN = path.join(SITE, slug, 'whatsnew.html');
   if (!fs.existsSync(WN)) {
-    results.push('SKIP What’s new: keine Vorversion in products.js (Probelauf: build/products-dryrun.js)');
+    if (slug === 'indesign')
+      results.push('SKIP ' + W + 'keine Vorversion in products.js (Probelauf: build/products-dryrun.js)');
   } else {
     const wn = fs.readFileSync(WN, 'utf8');
     const main = wn.slice(wn.indexOf('<div class="dmain">'), wn.indexOf('<footer>'));
-    check('What’s new: Überschrift', /<h1>What’s new in /.test(main), true);
-    check('What’s new: Canonical', /rel="canonical" href="[^"]*\/indesign\/whatsnew\.html"/.test(wn), true);
-    check('What’s new: verlinkt von der Übersicht',
-      /href="whatsnew\.html"/.test(fs.readFileSync(path.join(SITE, 'indesign/index.html'), 'utf8')), true);
+    check(W + 'Überschrift', /<h1>What’s new in /.test(main), true);
+    check(W + 'Canonical', wn.includes('/' + slug + '/whatsnew.html"') && /rel="canonical"/.test(wn), true);
+    check(W + 'verlinkt von der Übersicht',
+      /href="whatsnew\.html"/.test(fs.readFileSync(path.join(SITE, slug, 'index.html'), 'utf8')), true);
     const ids = new Map();
     const idsOf = file => {
       if (!ids.has(file)) ids.set(file, fs.existsSync(file)
@@ -1556,21 +1560,21 @@ const check = (name, got, want) => {
     const links = [...main.matchAll(/(?<![-\w])href="([^"#]+)(?:#([^"]*))?"/g)]
       .filter(m => !/^[a-z]+:/i.test(m[1]));
     const broken = links.filter(([, file, anchor]) => {
-      const set = idsOf(path.join(SITE, 'indesign', file));
+      const set = idsOf(path.join(SITE, slug, file));
       return !set || (anchor && !set.has(anchor.replace(/&amp;/g, '&')));
     }).map(m => m[1] + (m[2] ? '#' + m[2] : ''));
-    check('What’s new: ' + links.length + ' Links, alle Ziele vorhanden', broken.slice(0, 3).join(' ') || 'ok', 'ok');
+    check(W + '' + links.length + ' Links, alle Ziele vorhanden', broken.slice(0, 3).join(' ') || 'ok', 'ok');
     const man = JSON.parse(fs.readFileSync(path.join(SITE, 'manifest.json'), 'utf8'));
-    check('What’s new: whatsnew.md im Manifest',
-      man.targets.find(t => t.slug === 'indesign').files.some(x => x.path === 'indesign/whatsnew.md'), true);
-    check('What’s new: in llms.txt genannt',
-      /whatsnew\.md/.test(fs.readFileSync(path.join(SITE, 'indesign/llms.txt'), 'utf8')), true);
-    check('What’s new: Markdown-Zwilling beginnt mit Überschrift',
-      /^# What’s new in /.test(fs.readFileSync(path.join(SITE, 'indesign/whatsnew.md'), 'utf8')), true);
+    check(W + 'whatsnew.md im Manifest',
+      man.targets.find(t => t.slug === slug).files.some(x => x.path === slug + '/whatsnew.md'), true);
+    check(W + 'in llms.txt genannt',
+      /whatsnew\.md/.test(fs.readFileSync(path.join(SITE, slug, 'llms.txt'), 'utf8')), true);
+    check(W + 'Markdown-Zwilling beginnt mit Überschrift',
+      /^# What’s new in /.test(fs.readFileSync(path.join(SITE, slug, 'whatsnew.md'), 'utf8')), true);
 
     /* Badges (render.js wnb): jeder steht in einer Zeile, auf die whatsnew.html
        verweist, und jedes neue Objekt der Seitenleiste trägt einen im Kopf. */
-    const idDir = path.join(SITE, 'indesign');
+    const idDir = path.join(SITE, slug);
     let badges = 0;
     const stray = [];
     for (const f of fs.readdirSync(idDir).filter(f => f.endsWith('.html') && f !== 'whatsnew.html')) {
@@ -1588,15 +1592,16 @@ const check = (name, got, want) => {
         if (!id || !main.includes('href="' + f + '#' + id + '"')) stray.push(f + '#' + id);
       }
     }
-    check('What’s new: Badges auf den Objektseiten vorhanden', badges > 0, true);
-    check('What’s new: ' + badges + ' Badges, jeder auf whatsnew.html verlinkt', stray.slice(0, 3).join(' ') || 'ok', 'ok');
+    check(W + 'Badges auf den Objektseiten vorhanden', badges > 0, true);
+    check(W + '' + badges + ' Badges, jeder auf whatsnew.html verlinkt', stray.slice(0, 3).join(' ') || 'ok', 'ok');
     const nav = JSON.parse(fs.readFileSync(path.join(idDir, 'nav.js'), 'utf8').replace(/^window\.__NAV=|;\s*$/g, ''));
     const navNew = nav.filter(x => x[3]).map(x => x[0]);
-    check('What’s new: neue Objekte in der Seitenleiste tragen den Badge im Kopf',
+    check(W + 'neue Objekte in der Seitenleiste tragen den Badge im Kopf',
       navNew.length > 0 && navNew.every(n => /<div class="kind">(?:(?!<\/div>)[\s\S])*class="wnb new"/.test(
         fs.readFileSync(path.join(idDir, (n === 'Index' ? 'Index_' : n) + '.html'), 'utf8'))), true);
   }
-  const md = fs.readFileSync(path.join(SITE, 'indesign/Rectangle.md'), 'utf8');
+  }
+  const md =fs.readFileSync(path.join(SITE, 'indesign/Rectangle.md'), 'utf8');
   check('Markdown nennt Art und Version', /^# Rectangle\n\n> Object · InDesign/.test(md), true);
   check('Markdown ist deutlich kleiner als die Seite',
     Buffer.byteLength(md) * 2 < fs.statSync(path.join(SITE, 'indesign/Rectangle.html')).size,

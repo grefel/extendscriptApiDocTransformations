@@ -4,7 +4,7 @@ Einziger Schritt vom Adobe-Objektmodell zur fertigen Website.
 **Weder oXygen noch Java noch Saxon werden gebraucht.**
 
 ```
-sourceXML/*.xml → build/ (Node) → site/   2.686 Seiten
+sourceXML/*.xml → build/ (Node) → site/   2.694 Seiten
 ```
 
 ## Benutzung
@@ -768,7 +768,7 @@ in der Wirklichkeit falsch — deshalb läuft die Gegenprobe über http.
 |---|---|
 | `indesign` | 1.101 |
 | `indesign-server` | 966 |
-| `illustrator` | 292 |
+| `illustrator` | 299 |
 | `photoshop` | 226 |
 | `bridge` | 37 |
 | `javascript` | 22 |
@@ -805,7 +805,7 @@ liest den Titel des ersten `<map>`:
 |---|---|---|
 | Adobe InDesign 2027 (22.0.0.104) Object Model | `indesign-22.0.0.104.xml` | `2027` |
 | Adobe InDesign Server 2025 (20.5.0.49) Object Model | `indesign-server-20.5.0.49.xml` | `2025` |
-| Adobe Illustrator 29 Type Library | `illustrator-29.xml` | `29` |
+| Adobe Illustrator 31 Type Library | `illustrator-31.xml` | `31` |
 | Adobe Photoshop CC 2015.5 Object Library | `photoshop-2015.5.xml` | `2015` |
 | Adobe Bridge 2021 Object Model | `bridge-2021.xml` | `2021` |
 

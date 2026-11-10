@@ -57,6 +57,53 @@ const JSON_JSX = [
 ].join('\n');
 
 module.exports = {
+  /* In Illustrator 2027 (31.0.0) per COM geprüft (exportFile, exportForScreens,
+     exportAsFormat, listStyles, View.rotate/rotateAngle). Begriffe noch nicht
+     mit Adobes Hilfeseiten abgeglichen. */
+  illustrator: {
+    '31': [
+      {
+        title: 'WebP and AVIF export',
+        text: 'Export and Export for Screens know WebP and AVIF, each with its own options ' +
+          'object, and exportAsFormat() writes any format listed in ExportFileType. In 31.0 ' +
+          'only WebP works from a script; every AVIF export fails with an internal error.',
+        refs: ['ExportOptionsWebP', 'ExportOptionsAVIF', 'ExportForScreensOptionsWebP',
+          'ExportForScreensOptionsAVIF', 'ExportType.WEBP', 'ExportType.AVIF',
+          'ExportForScreensType.SE_WEBP', 'ExportForScreensType.SE_AVIF',
+          'Document.exportAsFormat', 'ExportFileType']
+      },
+      {
+        title: 'List styles',
+        text: 'Documents carry list styles, and a paragraph can take one together with its ' +
+          'tier (level). The predefined styles report internal names such as ' +
+          'kPredefinedBulletListStyleTag.',
+        refs: ['ListStyle', 'ListStyles', 'Document.listStyles', 'ParagraphAttributes.listStyle',
+          'ParagraphAttributes.listStyleTier']
+      },
+      {
+        title: 'View rotation renamed',
+        text: 'View.rotate is now View.rotateAngle. An old script that sets rotate keeps ' +
+          'running without an error but no longer rotates the view.',
+        refs: ['View.rotateAngle']
+      },
+      {
+        title: '9-slice scaling for symbols',
+        text: 'A symbol can be created with 9-slice scaling guides, and its center slice can ' +
+          'be read and set by symbol index.',
+        refs: ['Symbols.addWith9SliceScaling', 'Document.getSymbol9SliceGrid',
+          'Document.setSymbol9SliceGrid', 'Document.isSymbolGuidesEnabled',
+          'Document.openSymbolInIsolationMode']
+      },
+      {
+        title: 'Reading the workspace state',
+        text: 'Many new methods report what the user sees — grid, guides, rulers, screen, view ' +
+          'and preview mode, isolation and smart edit mode — and a few change it.',
+        refs: ['Document.isGridVisible', 'Document.isRulerVisible', 'Document.getScreenMode',
+          'Document.getViewMode', 'Document.getPreviewMode', 'View.setScreenMode',
+          'Document.isolateSelectedArt', 'Document.exitIsolationMode']
+      }
+    ]
+  },
   indesign: {
     '2027': [
       {

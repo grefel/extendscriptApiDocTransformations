@@ -36,6 +36,26 @@ const byName = {
        undefined. */
     text: 'Not reachable in UXP — app.scriptArgs is undefined there. Read ' +
       'arguments from require("uxp").script.args.'
+  },
+  /* In Illustrator 2027 (31.0.0) geprüft: exportFile() und exportForScreens()
+     mit AVIF scheitern, mit und ohne Optionen; WebP geht auf beiden Wegen. */
+  ExportOptionsAVIF: {
+    products: ['illustrator'],
+    text: 'AVIF export fails from a script in Illustrator 31.0 with “Internal error”, with or ' +
+      'without options, and reading a property of a new ExportOptionsAVIF throws “The ' +
+      'property was not initialized”. WebP export works.'
+  },
+  ExportForScreensOptionsAVIF: {
+    products: ['illustrator'],
+    text: 'exportForScreens() with ExportForScreensType.SE_AVIF fails in Illustrator 31.0 with ' +
+      '“Internal error”. SE_WEBP works.'
+  },
+  ListStyle: {
+    products: ['illustrator'],
+    /* In Illustrator 2027 (31.0.0): elf vordefinierte Listenstile in einem neuen Dokument. */
+    text: 'The predefined list styles report internal names such as ' +
+      'kPredefinedBulletListStyleTag, not the names shown in the panel. Pick them by index ' +
+      'or by that internal name.'
   }
 };
 
@@ -86,6 +106,13 @@ const byMember = {
     runtime: 'es',
     text: 'Fails with “Invalid object for this request.” in InDesign 2027 (22.0) — scripts ' +
       'cannot add GenAI models.'
+  },
+  'View.rotateAngle': {
+    products: ['illustrator'],
+    /* In Illustrator 2027 (31.0) geprüft: rotate gibt es nicht mehr, eine
+       Zuweisung legt nur eine JavaScript-Property an. */
+    text: 'Called rotate up to Illustrator 29. Setting view.rotate now raises no error but ' +
+      'changes nothing — ExtendScript just adds a plain property.'
   },
   'TableStyle.tableSummary': {
     products: ['indesign'],

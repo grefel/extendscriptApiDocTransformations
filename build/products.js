@@ -47,7 +47,10 @@ module.exports = [
   {
     slug: 'illustrator',
     label: 'Illustrator',
-    src: 'sourceXML/illustrator-29.xml'
+    versions: [
+      { key: '31', src: 'sourceXML/illustrator-31.xml' },
+      { key: '29', src: 'sourceXML/illustrator-29.xml' }
+    ]
   },
   {
     slug: 'photoshop',

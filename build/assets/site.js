@@ -492,8 +492,8 @@
       const n = q ? hit.length + ' <span class="of">/ ' + all.length + '</span>' : all.length;
       return `<div class="h">${title} · ${n}</div>` + hit.map(([nm, k, cnt, neu]) =>
         `<a href="${esc(page(nm))}" class="${nm === CURRENT ? 'on' : ''}${
-          k === 2 ? ' e' : k === 1 ? ' co' : ''}"${neu ? ' title="New in this version"' : ''}><span>${esc(nm)}${
-          neu ? '<b class="wnn">new</b>' : ''}</span><i>${
+          k === 2 ? ' e' : k === 1 ? ' co' : ''}"${neu ? ' title="New in this version"' : ''}><span>${esc(nm)}</span>${
+          neu ? '<b class="wnn">new</b>' : ''}<i>${
           k === 2 ? 'enum' : k === 1 ? 'coll' : cnt}</i></a>`).join('');
     };
     list.innerHTML = vis.length
