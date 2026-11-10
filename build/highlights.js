@@ -21,18 +21,21 @@ module.exports = {
   indesign: {
     '2027': [
       {
-        title: 'Table summaries and alt text',
-        text: 'Tables and table styles carry an accessibility summary; preferences control the ' +
-          'AI tag on generated summaries and the alt text icons in the layout.',
+        title: 'Table summaries and Check Document',
+        text: 'Tables and table styles carry a table summary for accessibility — Check Document ' +
+          'looks for missing table summaries and alt text before export. Preferences set ' +
+          'whether Check Document runs on export, whether generated table summaries get an ' +
+          'AI tag, and whether alt text icons show in the layout.',
         refs: ['Table.tableSummary', 'TableStyle.tableSummary',
-          'GeneralPreference.addAITagToTableSummary', 'ViewPreference.showAltTextIcon',
-          'Application.checkDocumentOnExportPreference']
+          'Application.checkDocumentOnExportPreference',
+          'GeneralPreference.addAITagToTableSummary', 'ViewPreference.showAltTextIcon']
       },
       {
-        title: 'Grammar check',
+        title: 'Grammar and copy suggestions',
         text: 'Every story and text range can check its grammar, report the issues as a ' +
-          'JSON string and apply the suggested fixes. Called on a document, the methods ' +
-          'cover every story. Grammar suggestions are available for English text only.',
+          'JSON string and apply the suggested fixes; called on a document, the methods ' +
+          'cover every story. Only for English (International) and English (North America). ' +
+          'The two preferences are Enable Grammar Check and Enable Copy Suggestion.',
         refs: ['Story.checkGrammar', 'Story.getGrammarIssues', 'Story.applyGrammarFix',
           'Story.applyAllGrammarFixes', 'Story.requestGrammarCheck',
           'Application.grammarCheckPreference', 'Application.copySuggestionsPreference']
