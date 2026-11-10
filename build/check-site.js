@@ -1595,6 +1595,16 @@ const check = (name, got, want) => {
       }
     }
     check(W + 'Badges auf den Objektseiten vorhanden', badges > 0, true);
+    /* Dieselben Marken für Agenten: je Badge ein status in api.json und ein
+       „New in"/„Changed in" im Markdown-Zwilling. */
+    const api = JSON.parse(fs.readFileSync(path.join(idDir, 'api.json'), 'utf8'));
+    const apiMarks = api.objects.reduce((n, o) => n + (o.status ? 1 : 0) +
+      ['properties', 'events', 'methods'].reduce((k, f) => k + o[f].filter(x => x.status).length, 0), 0);
+    check(W + 'api.json: so viele status wie Badges', apiMarks, badges);
+    check(W + 'api.json nennt die Vorversion', typeof api.comparedWith === 'string' && api.changesPage === 'whatsnew.md', true);
+    const mdMarks = fs.readdirSync(idDir).filter(f => f.endsWith('.md') && f !== 'whatsnew.md' && f !== 'uxp.md')
+      .reduce((n, f) => n + (fs.readFileSync(path.join(idDir, f), 'utf8').match(/ _(?:New|Changed) in |^_(?:New|Changed) in | · New in /gm) || []).length, 0);
+    check(W + 'Markdown: so viele Marken wie Badges', mdMarks, badges);
     check(W + '' + badges + ' Badges, jeder auf whatsnew.html verlinkt', stray.slice(0, 3).join(' ') || 'ok', 'ok');
     const nav = JSON.parse(fs.readFileSync(path.join(idDir, 'nav.js'), 'utf8').replace(/^window\.__NAV=|;\s*$/g, ''));
     const navNew = nav.filter(x => x[3]).map(x => x[0]);

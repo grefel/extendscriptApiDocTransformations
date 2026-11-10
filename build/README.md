@@ -934,6 +934,14 @@ Listenansicht übernimmt ihn. Weil der Memberfilter den Text der Namenszelle
 liest, zeigt `new` im Filter genau die neuen Member. Den Weg „changed" deckt
 nur ein Probelauf 2025 → 2026 ab; 2027 bringt ausschließlich Neues.
 
+Für Agenten dieselben Marken (`marksFor()` in `agents.js`): im
+Markdown-Zwilling „New in InDesign 2027" im Kopf neuer Objekte und
+`_New in …_` bzw. `_Changed in …: …_` am Ende der Memberbeschreibung; in
+`api.json` oben `comparedWith` und `changesPage`, an Objekten und Membern
+`status` (`new`, oder `changed` mit `changes`). Neue Felder, `formatVersion`
+bleibt 2. `llms.txt` erklärt beides. `check-site` prüft, dass HTML-Badges,
+Markdown-Marken und `status` gleich viele sind.
+
 **Am Release-Tag:** Abschnitt Breaking Zeile für Zeile lesen und Auffälliges
 in der Roh-XML nachsehen. Eine Umbenennung erscheint als Entfernen plus
 Hinzufügen.

@@ -277,11 +277,13 @@ for (const t of targets) {
   for (const c of t.data.classes)
     write(t.slug + '/' + pageOf(c.n).replace(/\.html$/, '.md'),
       agents.markdown(c, {
-        kind: kindOf(c), element: elementOf(c), T, target: t, version: t.data.version, rt
+        kind: kindOf(c), element: elementOf(c), T, target: t, version: t.data.version, rt,
+        whatsnew: t.whatsnew
       }));
 
   keep(t, 'api.json', agents.apiJson(t, t.data.classes, {
-    kindOf, elementOf, T, version: t.data.version, generated: t.data.generated, rt
+    kindOf, elementOf, T, version: t.data.version, generated: t.data.generated, rt,
+    whatsnew: t.whatsnew
   }));
 
   /* Die .d.ts eines Produkts ist in sich geschlossen: das Produkt plus Core

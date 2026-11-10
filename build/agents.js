@@ -502,12 +502,31 @@ const mdEsc = s => String(s == null ? '' : s).replace(/\|/g, '\\|').replace(/\s+
 const mdNotes = ns => ns.map(n => ' **' + (RUNTIME_NAME[n.runtime] || 'Note') + ':** ' +
   mdEsc(n.text)).join('');
 
+/* What's-new-Marken (whatsnew.js marks) für ein Objekt, wie die Badges auf
+   der Seite: isNew, und je Member 'p-name'/'e-name'/'m-name' → { op, why }.
+   Ohne Vorversion liefert es nichts. */
+function marksFor(whatsnew, c) {
+  const mk = whatsnew && whatsnew.w.marks && whatsnew.w.marks.get(c.n);
+  const to = whatsnew ? whatsnew.to.name : '';
+  return {
+    isNew: !!(mk && mk.isNew),
+    to,
+    member: k => (mk && mk.members.get(k)) || null
+  };
+}
+
+/* Kursiver Zusatz am Ende einer Beschreibung, wie „ExtendScript only". */
+const mdMark = (x, to) => !x ? '' : x.op === 'new' ? ' _New in ' + to + '._'
+  : ' _Changed in ' + to + ': ' + mdEsc(x.why.join('; ')) + '._';
+
 function markdown(c, ctx) {
   const { kind, element, T, target, version, rt } = ctx;
+  const wn = marksFor(ctx.whatsnew, c);
   const L = [];
   L.push('# ' + c.n);
   L.push('');
-  L.push('> ' + kind + (element ? ' of ' + element : '') + ' · ' + target.label + ' · ' + version);
+  L.push('> ' + kind + (element ? ' of ' + element : '') + ' · ' + target.label + ' · ' + version +
+    (wn.isNew ? ' · New in ' + wn.to : ''));
   L.push('');
   if (c.d) L.push(mdEsc(c.d), '');
   for (const n of rt.notes(c.n, kind)) L.push(mdNotes([n]).trim(), '');
@@ -530,6 +549,7 @@ function markdown(c, ctx) {
         cell(typed(p, rt.member(c.n, 'p', p))) +
         (p.v ? ' = `' + mdEsc(p.v) + '`' : '') + ' | ' + p.rw + ' | ' + mdEsc(p.d) +
         (rt.gone(c.n, p.n) ? ' _ExtendScript only — not available in UXP._' : '') +
+        mdMark(wn.member('p-' + p.n), wn.to) +
         mdNotes(rt.memberNotes(c.n, p.n)) + ' |');
     L.push('');
   }
@@ -538,7 +558,8 @@ function markdown(c, ctx) {
     L.push('| Name | Description |');
     L.push('| --- | --- |');
     for (const e of c.ev) L.push('| `' + c.n + '.' + e.n + '` | ' + mdEsc(e.d) +
-      (rt.gone(c.n, e.n) ? ' _ExtendScript only — not available in UXP._' : '') + ' |');
+      (rt.gone(c.n, e.n) ? ' _ExtendScript only — not available in UXP._' : '') +
+      mdMark(wn.member('e-' + e.n), wn.to) + ' |');
     L.push('');
   }
   if (c.m.length) {
@@ -550,6 +571,8 @@ function markdown(c, ctx) {
         (m.r && m.r.length ? typed(ret, rt.member(c.n, 'r', m)) : '`void`'));
       L.push('');
       if (rt.member(c.n, 'm', m)) L.push('_ExtendScript only — not available in UXP._', '');
+      const mm = mdMark(wn.member('m-' + m.n), wn.to);
+      if (mm) L.push(mm.trim(), '');
       if (m.d) L.push(mdEsc(m.d) + mdNotes(rt.memberNotes(c.n, m.n)), '');
       if (m.a.length) {
         L.push('| Parameter | Type | Description |');
@@ -574,7 +597,9 @@ function markdown(c, ctx) {
 
      1  ohne Angabe: Index hiess "Index_", kein page, static, uxp, runtimes
      2  Index heisst Index, page nennt die Datei; static an Methoden;
-        runtimes, uxp und notes */
+        runtimes, uxp und notes; seit 2027 (ohne Erhöhung) comparedWith
+        oben sowie status ("new"/"changed") und changes an Objekten und
+        Membern, wenn es eine Vorversion gibt */
 const FORMAT_VERSION = 2;
 
 /* Ausgeschriebene Feldnamen statt der internen Kuerzel: die Datei ist fuer
@@ -598,11 +623,18 @@ function apiJson(target, classes, ctx) {
     if (ns && ns.length) o.notes = notesOf(ns);
     return o;
   };
+  /* status wie die Badges: "new", oder "changed" mit changes (Texte wie auf
+     whatsnew.html). Fehlt ohne Vorversion. */
+  const statusOf = x => !x ? {} : x.op === 'new' ? { status: 'new' } : { status: 'changed', changes: x.why.slice() };
+  const wnAll = ctx.whatsnew;
   return JSON.stringify({
     formatVersion: FORMAT_VERSION,
     product: target.label,
     slug: target.slug,
     version, generated,
+    /* Vorversion, gegen die status gilt; Einzelheiten in whatsnew.md. */
+    ...(wnAll ? { comparedWith: wnAll.from.name + (wnAll.from.build ? ' (' + wnAll.from.build + ')' : ''),
+      changesPage: 'whatsnew.md' } : {}),
     /* Welche Laufzeiten dieses Modell beschreibt. Mit "uxp" tragen
        abweichende Member ein Feld uxp. */
     runtimes: rt.on ? ['extendscript', 'uxp'] : ['extendscript'],
@@ -616,15 +648,17 @@ function apiJson(target, classes, ctx) {
       /* page: Dateiname relativ zum Ziel. Er folgt nicht immer dem Namen —
          Index liegt als Index_.html neben index.html. */
       const o = { name: c.n, page: pageOf(c.n), kind: kindOf(c), description: c.d || '' };
+      const wn = marksFor(wnAll, c);
+      if (wn.isNew) o.status = 'new';
       const ns = rt.notes(c.n, kindOf(c));
       if (ns.length) o.notes = notesOf(ns);
       if (c.sup) o.extends = c.sup;
       const el = elementOf(c);
       if (el) o.elementType = el;
       o.properties = c.p.map(p => Object.assign(mem(p, rt.member(c.n, 'p', p), rt.memberNotes(c.n, p.n)),
-        rt.gone(c.n, p.n) ? { uxp: { available: false } } : {}));
+        rt.gone(c.n, p.n) ? { uxp: { available: false } } : {}, statusOf(wn.member('p-' + p.n))));
       o.events = c.ev.map(e => Object.assign({ name: e.n, description: e.d || '' },
-        rt.gone(c.n, e.n) ? { uxp: { available: false } } : {}));
+        rt.gone(c.n, e.n) ? { uxp: { available: false } } : {}, statusOf(wn.member('e-' + e.n))));
       o.methods = c.m.map(m => {
         const gone = rt.member(c.n, 'm', m);
         const ret = rt.member(c.n, 'r', m);
@@ -635,6 +669,7 @@ function apiJson(target, classes, ctx) {
           gone ? { uxp: { available: false } }
             : ret ? { uxp: { returns: uxpType(T, m.r, m.rarr, false, ret) } } : {},
           { description: m.d || '' },
+          statusOf(wn.member('m-' + m.n)),
           ns.length ? { notes: notesOf(ns) } : {},
           { parameters: m.a.map(a => mem(a, rt.member(c.n, 'a', a, m.n))) });
       });
@@ -915,7 +950,9 @@ function llmsProduct(t, classes, kindOf) {
   if (t.whatsnew)
     L.push('- [whatsnew.md](' + BASE + t.slug + '/whatsnew.md): what changed since ' +
       t.whatsnew.from.name + ' — new objects and members, and what can break existing ' +
-      'scripts. Read it before upgrading a script.');
+      'scripts. Read it before upgrading a script. The object Markdown files say “New in” or ' +
+      '“Changed in” at the member, and api.json carries `status` (`new`, or `changed` with ' +
+      '`changes`).');
   L.push('- [index.html](' + BASE + t.slug + '/index.html): every object, linked.');
   L.push('');
   L.push('## Objects');
