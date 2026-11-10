@@ -234,9 +234,12 @@ for (const t of targets) {
     keep(t, 'whatsnew.md', whatsnew.markdown(t.whatsnew.w, Object.assign({ label: t.label }, t.whatsnew)));
   }
 
+  /* Je Objekt [Name, Art, Memberzahl, neu seit versions[1]] — site.js buildNav. */
+  const marks = t.whatsnew ? t.whatsnew.w.marks : null;
   write(t.slug + '/nav.js', 'window.__NAV=' + JSON.stringify(t.data.classes.map(c => [
     c.n, c.enum ? 2 : d.isCollection(c) ? 1 : 0,
-    c.enum ? 0 : c.p.length + c.ev.length + c.m.length
+    c.enum ? 0 : c.p.length + c.ev.length + c.m.length,
+    marks && marks.get(c.n) && marks.get(c.n).isNew ? 1 : 0
   ])) + ';');
 
   const index = [];

@@ -342,7 +342,10 @@
         '<div class="cols">' + items.map(el => {
           const name = (el.querySelector('.cpx, td.n, .id') || el).textContent.trim()
             .replace(/\(.*$/, '');
-          return `<a href="#${esc(el.id)}">${esc(name)}${suffix}${typVon(el)}</a>`;
+          /* Badge aus der Tabelle mitnehmen (render.js wnb). */
+          const wb = el.querySelector('.wnb');
+          return `<a href="#${esc(el.id)}">${esc(name)}${suffix}${
+            wb ? ` <b class="wnb ${esc(wb.classList[1])}">${esc(wb.textContent)}</b>` : ''}${typVon(el)}</a>`;
         }).join('') + '</div>';
     };
     box.innerHTML = teil('Properties', 'tbody tr[id^="p-"]', '')
@@ -487,9 +490,10 @@
       /* Beim Filtern beide Zahlen zeigen — eine kurze Liste soll sich
          selbst erklaeren, ohne dass man das Eingabefeld absucht. */
       const n = q ? hit.length + ' <span class="of">/ ' + all.length + '</span>' : all.length;
-      return `<div class="h">${title} · ${n}</div>` + hit.map(([nm, k, cnt]) =>
+      return `<div class="h">${title} · ${n}</div>` + hit.map(([nm, k, cnt, neu]) =>
         `<a href="${esc(page(nm))}" class="${nm === CURRENT ? 'on' : ''}${
-          k === 2 ? ' e' : k === 1 ? ' co' : ''}"><span>${esc(nm)}</span><i>${
+          k === 2 ? ' e' : k === 1 ? ' co' : ''}"${neu ? ' title="New in this version"' : ''}><span>${esc(nm)}${
+          neu ? '<b class="wnn">new</b>' : ''}</span><i>${
           k === 2 ? 'enum' : k === 1 ? 'coll' : cnt}</i></a>`).join('');
     };
     list.innerHTML = vis.length

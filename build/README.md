@@ -894,7 +894,18 @@ Ohne Vorversion meldet es `SKIP`; geprüft wird dann mit dem Probelauf.
 Neuerung Titel, ein, zwei Sätze in eigenen Worten und Verweise auf Objekte
 und Member. Nur, was im Objektmodell ankommt. Ein Verweis, den es in der
 neuen Version nicht gibt, ergibt beim Bauen eine Warnung. Die Einträge für
-2026 sind nur Probelauf-Material.
+2026 sind nur Probelauf-Material. Optional `points` (Liste, `…` wird Code)
+und `example` (`{ file, code }`, Codeblock wie auf der Übersichtsseite);
+beides braucht einen Fall in `live/cases.js`, der es belegt.
+
+**Badges** auf den Objektseiten kommen aus demselben Diff (`marks` in
+`whatsnew.js`): „new" am Kopf neuer Objekte und an neuen Membern, „changed"
+an geänderten Membern mit der Änderung im `title`. Minor (Beschreibung,
+Parametername) bekommt keinen. Jeder Badge verweist auf `whatsnew.html`; neue
+Objekte tragen ihn auch in der Seitenleiste (viertes Feld in `nav.js`) und die
+Listenansicht übernimmt ihn. Weil der Memberfilter den Text der Namenszelle
+liest, zeigt `new` im Filter genau die neuen Member. Den Weg „changed" deckt
+nur ein Probelauf 2025 → 2026 ab; 2027 bringt ausschließlich Neues.
 
 **Am Release-Tag:** Abschnitt Breaking Zeile für Zeile lesen und Auffälliges
 in der Roh-XML nachsehen. Eine Umbenennung erscheint als Entfernen plus

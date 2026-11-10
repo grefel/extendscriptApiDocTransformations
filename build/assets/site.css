@@ -2413,6 +2413,36 @@ h3.wnobj {
   overflow-wrap: anywhere
 }
 
+/* What's-new-Badges auf den Objektseiten (render.js wnb), in der Listen-
+   ansicht und in der Seitenleiste (site.js). Gleiche Form wie .stat. */
+.wnb, .wnn {
+  font: 600 9.5px var(--mono);
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  padding: 0 3px;
+  margin-left: 5px;
+  text-decoration: none;
+  vertical-align: 1px;
+  white-space: nowrap
+}
+
+.wnb.new, .wnn {
+  color: var(--accent)
+}
+
+.kind .wnb {
+  text-transform: none;
+  letter-spacing: 0
+}
+
+.wnb.changed {
+  color: var(--warn)
+}
+
+a.wnb:hover {
+  background: var(--panel)
+}
+
 .wnhl .pts {
   margin: 6px 0 0;
   padding-left: 20px

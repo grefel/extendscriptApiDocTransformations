@@ -216,6 +216,21 @@ function group(raw) {
   const all = [...groups.values()];
   const minorOp = c => c.op === 'desc' || c.op === 'param-renamed';
 
+  /* Badges auf den Objektseiten (render.js): je Objekt, ob es neu ist, und je
+     Member ('p-name', 'e-name', 'm-name') neu oder geändert samt Texten.
+     Minor bleibt ohne Badge, Entferntes steht nicht mehr auf der Seite. */
+  const marks = new Map();
+  const mark = n => marks.get(n) || marks.set(n, { isNew: false, members: new Map() }).get(n);
+  for (const o of added) mark(o.n).isNew = true;
+  const PRE = { property: 'p', value: 'p', event: 'e', method: 'm' };
+  for (const c of changes) {
+    if (!PRE[c.kind] || c.op === 'removed' || minorOp(c)) continue;
+    const ms = mark(c.cls).members, k = PRE[c.kind] + '-' + c.member;
+    if (c.op === 'added') { ms.set(k, { op: 'new' }); continue; }
+    const cur = ms.get(k) || { op: 'changed', why: [] };
+    if (cur.op === 'changed') { cur.why.push(phrase(c)); ms.set(k, cur); }
+  }
+
   const breaking = all.filter(c => c.breaking);
   const minor = all.filter(c => !c.breaking && minorOp(c));
   const rest = all.filter(c => !c.breaking && !minorOp(c));
@@ -230,7 +245,7 @@ function group(raw) {
   const touched = new Set(changes.filter(c => c.op !== 'desc').map(c => c.cls));
   return {
     from: raw.from, to: raw.to,
-    newObjects, removed, breaking, wide, minor,
+    newObjects, removed, breaking, wide, minor, marks,
     byObject: [...byObject].sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0),
     counts: {
       added: added.length,

@@ -1567,6 +1567,34 @@ const check = (name, got, want) => {
       /whatsnew\.md/.test(fs.readFileSync(path.join(SITE, 'indesign/llms.txt'), 'utf8')), true);
     check('What’s new: Markdown-Zwilling beginnt mit Überschrift',
       /^# What’s new in /.test(fs.readFileSync(path.join(SITE, 'indesign/whatsnew.md'), 'utf8')), true);
+
+    /* Badges (render.js wnb): jeder steht in einer Zeile, auf die whatsnew.html
+       verweist, und jedes neue Objekt der Seitenleiste trägt einen im Kopf. */
+    const idDir = path.join(SITE, 'indesign');
+    let badges = 0;
+    const stray = [];
+    for (const f of fs.readdirSync(idDir).filter(f => f.endsWith('.html') && f !== 'whatsnew.html')) {
+      const html = fs.readFileSync(path.join(idDir, f), 'utf8');
+      if (!html.includes('class="wnb ')) continue;
+      const body = html.slice(html.indexOf('<div class="dmain">'));
+      for (const m of body.matchAll(/class="wnb (?:new|changed)"/g)) {
+        badges++;
+        const before = body.slice(0, m.index);
+        if (/<div class="kind">(?:(?!<\/div>)[\s\S])*$/.test(before)) {
+          if (!main.includes('href="' + f + '"')) stray.push(f);
+          continue;
+        }
+        const id = (/^ id="([pem]-[^"]+)"/.exec(before.slice(before.lastIndexOf(' id="'))) || [])[1];
+        if (!id || !main.includes('href="' + f + '#' + id + '"')) stray.push(f + '#' + id);
+      }
+    }
+    check('What’s new: Badges auf den Objektseiten vorhanden', badges > 0, true);
+    check('What’s new: ' + badges + ' Badges, jeder auf whatsnew.html verlinkt', stray.slice(0, 3).join(' ') || 'ok', 'ok');
+    const nav = JSON.parse(fs.readFileSync(path.join(idDir, 'nav.js'), 'utf8').replace(/^window\.__NAV=|;\s*$/g, ''));
+    const navNew = nav.filter(x => x[3]).map(x => x[0]);
+    check('What’s new: neue Objekte in der Seitenleiste tragen den Badge im Kopf',
+      navNew.length > 0 && navNew.every(n => /<div class="kind">(?:(?!<\/div>)[\s\S])*class="wnb new"/.test(
+        fs.readFileSync(path.join(idDir, (n === 'Index' ? 'Index_' : n) + '.html'), 'utf8'))), true);
   }
   const md = fs.readFileSync(path.join(SITE, 'indesign/Rectangle.md'), 'utf8');
   check('Markdown nennt Art und Version', /^# Rectangle\n\n> Object · InDesign/.test(md), true);

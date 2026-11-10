@@ -219,8 +219,20 @@ function make(data, d, ctx) {
       <p class="hint">${hint}</p><div class="revbox">${items}</div></section>`;
   }
 
+  /* What's-new-Badges (whatsnew.js marks): versions[0] gegen versions[1].
+     Verweisen auf whatsnew.html; der Titel nennt die Änderung. */
+  const wn = ctx.whatsnew && ctx.whatsnew.w.marks ? ctx.whatsnew : null;
+  const wnb = (op, title) =>
+    `<a class="wnb ${op}" href="whatsnew.html" title="${esc(title)}">${op}</a>`;
+
   function page(c) {
     const el = isCollection(c) ? elementOf(c) : null;
+    const mk = wn && wn.w.marks.get(c.n);
+    const badge = k => {
+      const x = mk && mk.members.get(k);
+      return !x ? '' : x.op === 'new' ? wnb('new', 'New in ' + wn.to.name)
+        : wnb('changed', 'Changed in ' + wn.to.name + ': ' + x.why.join('; '));
+    };
     const oo = objectOf.get(c.n) || [], po = paramOf.get(c.n) || [], rb = returnedBy.get(c.n) || [];
     const label = c.enum ? 'Values' : 'Properties';
     const what = c.enum ? 'an ' + esc(c.n) + ' value' : 'a ' + esc(c.n);
@@ -230,7 +242,8 @@ function make(data, d, ctx) {
        die Hierarchie. Die Flaeche neben dem Titel stand sonst leer, und die
        Hierarchie schob die Tabellen nach unten. */
     let kopf = `<div class="kind">${kindOf(c)}${
-      el && known(el) ? ` <span class="of">of</span> ${link(el)}` : ''}</div>
+      el && known(el) ? ` <span class="of">of</span> ${link(el)}` : ''}${
+      mk && mk.isNew ? ' ' + wnb('new', 'New in ' + wn.to.name) : ''}</div>
       <h1>${esc(c.n)}</h1>
       <p class="lede">${esc(c.d)}</p>`;
     const anc = chain(c);
@@ -312,7 +325,7 @@ function make(data, d, ctx) {
       for (const p of c.p) {
         const clip = (c.enum || p.st) ? c.n + '.' + p.n : p.n;
         h += `<tr id="p-${esc(p.n)}"${rt.gone(c.n, p.n) ? ' data-uxp="hide"' : ''}><td class="n">${copyable(clip, esc(p.n))}${
-          p.st ? '<span class="stat">static</span>' : ''}</td>
+          p.st ? '<span class="stat">static</span>' : ''}${badge('p-' + p.n)}</td>
           <td class="t">${typeList(p.t, p.arr, rt.member(c.n, 'p', p)) || '<span class="none">—</span>'}${
             p.v ? ` <span class="lit">= ${esc(p.v)}</span>` : ''}${extras(p)}${inlineEnum(p.t)}</td>
           <td class="a ${p.rw === 'readonly' ? 'ro' : 'rw'}" title="${esc(p.rw)}">${esc(p.rw)}</td>
@@ -325,7 +338,7 @@ function make(data, d, ctx) {
       h += `<section data-sec="e"><h2 class="sechead" id="events">Events</h2>
         <table><thead><tr><th class="c-n">Name</th><th>Description</th></tr></thead><tbody>`;
       for (const e of c.ev)
-        h += `<tr id="e-${esc(e.n)}"${rt.gone(c.n, e.n) ? ' data-uxp="hide"' : ''}><td class="n ev">${copyable(c.n + '.' + e.n, esc(e.n))}</td>
+        h += `<tr id="e-${esc(e.n)}"${rt.gone(c.n, e.n) ? ' data-uxp="hide"' : ''}><td class="n ev">${copyable(c.n + '.' + e.n, esc(e.n))}${badge('e-' + e.n)}</td>
           <td class="d">${esc(e.d)}</td></tr>`;
       h += '</tbody></table></section>';
     }
@@ -338,7 +351,7 @@ function make(data, d, ctx) {
         const esOnlyMethod = !!rt.member(c.n, 'm', m);
         h += `<article class="mem" id="m-${esc(m.n)}" data-uxp="${esOnlyMethod ? 'hide' : ''}">
           <div class="top1"><span class="id">${copyable((m.st ? c.n + '.' : '') + m.n + '()', sig)}${
-            m.st ? '<span class="stat">static</span>' : ''}</span>
+            m.st ? '<span class="stat">static</span>' : ''}${badge('m-' + m.n)}</span>
             <span class="ret">→ ${typeList(m.r, m.rarr, rt.member(c.n, 'r', m)) || '<b>void</b>'}</span></div>
           <p class="desc">${esc(m.d)}${memberNote(c.n, m.n)}</p>`;
         if (m.a.length) {
